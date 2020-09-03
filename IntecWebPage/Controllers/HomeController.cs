@@ -15,16 +15,32 @@ namespace IntecWebPage.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
+        }
+
+        public ActionResult SuccessStories()
+        {
+            return View("Success-stories");
+        }
+        
+        public ActionResult Services()
+        {
+            return View();
+        }
+
+        public ActionResult Blog()
+        {
+            return View();
+        }
+
+        public ActionResult BlogSingle()
+        {
+            return View("Blog-single");
         }
     }
 }
