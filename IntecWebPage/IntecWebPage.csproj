@@ -166,6 +166,7 @@
     <Content Include="images\bg_1.jpg" />
     <Content Include="images\bg_2.jpg" />
     <Content Include="images\bg_3.jpg" />
+    <Content Include="images\logo.png" />
     <Content Include="images\image_1.jpg" />
     <Content Include="images\image_2.jpg" />
     <Content Include="images\image_3.jpg" />
