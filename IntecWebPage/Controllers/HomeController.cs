@@ -42,5 +42,10 @@ namespace IntecWebPage.Controllers
         {
             return View("Blog-single");
         }
+
+        public ActionResult Programe()
+        {
+            return View();
+        }
     }
 }

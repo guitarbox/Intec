@@ -219,6 +219,10 @@
     <Content Include="css\bootstrap\.DS_Store" />
     <Content Include="css\css\.DS_Store" />
     <Content Include="js\.DS_Store" />
+    <Content Include="Docs\abc_revisiones_periodicas.pdf" />
+    <Content Include="Docs\CERTIFICADO ONAC 20-OIN-006.pdf" />
+    <Content Include="Docs\POLITICA DE CALIDAD.docx" />
+    <Content Include="Docs\TRATAMIENTO DE DATOS PERSONALES.docx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\google-map.js" />
     <Content Include="Scripts\jquery-3.2.1.min.js" />
@@ -249,6 +253,7 @@
     <None Include="Views\Home\Contact.cshtml" />
     <None Include="Views\Home\Index.cshtml" />
     <None Include="Views\Home\Main.cshtml" />
+    <Content Include="Views\Home\Programe.cshtml" />
     <None Include="Views\Home\Services.cshtml" />
     <None Include="Views\Home\Success-stories.cshtml" />
     <Content Include="Web.config" />
