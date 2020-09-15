@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DB_A66D31_intratecPrbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Paises">
+    <Key>
+      <PropertyRef Name="IdPais" />
+    </Key>
+    <Property Name="IdPais" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Pais" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="CodigoPais" Type="nvarchar" MaxLength="5" Nullable="false" />
+    <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+    <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
+    <Property Name="FechaModificacion" Type="datetime" />
+    <Property Name="IdUsuarioModificacion" Type="int" />
+  </EntityType>
+  <EntityType Name="SolicitudesProgramacionVisitas">
+    <Key>
+      <PropertyRef Name="IdSolicitudProgramacion" />
+    </Key>
+    <Property Name="IdSolicitudProgramacion" Type="int" Nullable="false" />
+    <Property Name="Nombre" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Telefono" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Direccion" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="IdPais" Type="int" Nullable="false" />
+    <Property Name="Departamento" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Ciudad" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Uso" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="NombreContacto" Type="nvarchar" MaxLength="150" />
+    <Property Name="TelefonoContacto" Type="nvarchar" MaxLength="150" />
+    <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+    <Property Name="ip" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="city" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="country" Type="nvarchar" MaxLength="150" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_SolicitudesProgramacionVisitas_Paises">
+    <End Role="Paises" Type="Self.Paises" Multiplicity="1" />
+    <End Role="SolicitudesProgramacionVisitas" Type="Self.SolicitudesProgramacionVisitas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Paises">
+        <PropertyRef Name="IdPais" />
+      </Principal>
+      <Dependent Role="SolicitudesProgramacionVisitas">
+        <PropertyRef Name="IdPais" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DB_A66D31_intratecPrbModelStoreContainer">
+    <EntitySet Name="Paises" EntityType="Self.Paises" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SolicitudesProgramacionVisitas" EntityType="Self.SolicitudesProgramacionVisitas" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_SolicitudesProgramacionVisitas_Paises" Association="Self.FK_SolicitudesProgramacionVisitas_Paises">
+      <End Role="Paises" EntitySet="Paises" />
+      <End Role="SolicitudesProgramacionVisitas" EntitySet="SolicitudesProgramacionVisitas" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

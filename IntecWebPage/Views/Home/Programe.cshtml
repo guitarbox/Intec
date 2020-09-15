@@ -3,7 +3,37 @@
     ViewBag.Title = "programeSuVisita";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script>
+    var _ipInfo;
 
+    $(document).ready(() => {
+        $.getJSON('https://ipapi.co/json/', function (data) {
+            console.log(JSON.stringify(data, null, 2));
+            _ipInfo = data;
+        });
+    });
+
+    function Programar() {
+        var obj = {
+            Nombre: $("#Nombre").val(),
+            Telefono: $("#Telefono").val(),
+            Direccion: $("#Direccion").val(),
+            Uso: $("#Uso").val(),
+            NombreContacto: $("#NombreContacto").val(),
+            TelefonoContacto: $("#TelefonoContacto").val()
+        }
+        LimpiarCampos();
+    }
+
+    function LimpiarCampos() {
+        $("#Nombre").val('');
+        $("#Telefono").val('');
+        $("#Direccion").val('');
+        $("#Uso").val('');
+        $("#NombreContacto").val('');
+        $("#TelefonoContacto").val('');
+    }
+</script>
 <section class="hero-wrap hero-wrap-2" style="background-image: url('../images/bg_2.jpg');" data-stellar-background-ratio="0.5">
     <div class="overlay"></div>
     <div class="container">
@@ -29,56 +59,56 @@
                                 <div id="form-message-success" class="mb-4">
                                      Your message was sent, thank you!
                                 </div>*@
-                                <form method="POST" id="contactForm" name="contactForm" class="contactForm">
+                                <div>
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="label" for="name">Nombre completo</label>
-                                                <input type="text" class="form-control" name="name" id="name" placeholder="Nombre">
+                                                <input type="text" class="form-control" name="Nombre" id="Nombre" placeholder="Su Nombre">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="label" for="Phone">Teléfono</label>
-                                                <input type="email" class="form-control" name="Phone" id="Phone" placeholder="Teléfono">
+                                                <input type="text" class="form-control" name="Telefono" id="Telefono" placeholder="Su Teléfono">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="label" for="address">Dirección</label>
-                                                <input type="text" class="form-control" name="address" id="address" placeholder="Dirección">
+                                                <input type="text" class="form-control" name="Direccion" id="Direccion" placeholder="Su Dirección">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="label" for="use">Uso</label>
-                                                <select class="form-control" id="use">
-                                                    <option>Seleccione</option>
-                                                    <option>Residencial</option>
-                                                    <option>Comercial</option>
+                                                <select class="form-control" id="Uso">
+                                                    <option value="">Seleccione...</option>
+                                                    <option value="Residencial">Residencial</option>
+                                                    <option value="Comercial">Comercial</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="label" for="contName">Persona de contacto</label>
-                                                <input type="text" class="form-control" name="contName" id="contName" placeholder="Nombre">
+                                                <input type="text" class="form-control" name="NombreContacto" id="NombreContacto" placeholder="Nombre Cont.">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="label" for="contTel">teléfono persona de contacto</label>
-                                                <input type="text" class="form-control" name="contTel" id="contTel" placeholder="Teléfono">
+                                                <input type="text" class="form-control" name="TelefonoContacto" id="TelefonoContacto" placeholder="Teléfono Cont.">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <input type="submit" value="Enviar solicitud" class="btn btn-primary">
+                                            <input type="button" value="Programr Visita" class="btn btn-primary" onclick="Programar();">
                                             <div class="submitting"></div>
                                         </div>
                                     </div>
-                                </form>
+                                </div>
                             </div>
                         </div>
                     </div>

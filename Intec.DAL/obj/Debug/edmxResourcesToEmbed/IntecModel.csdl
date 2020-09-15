@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DB_A66D31_intratecPrbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="DB_A66D31_intratecPrbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Paises" EntityType="DB_A66D31_intratecPrbModel.Paises" />
+    <EntitySet Name="SolicitudesProgramacionVisitas" EntityType="DB_A66D31_intratecPrbModel.SolicitudesProgramacionVisitas" />
+    <AssociationSet Name="FK_SolicitudesProgramacionVisitas_Paises" Association="DB_A66D31_intratecPrbModel.FK_SolicitudesProgramacionVisitas_Paises">
+      <End Role="Paises" EntitySet="Paises" />
+      <End Role="SolicitudesProgramacionVisitas" EntitySet="SolicitudesProgramacionVisitas" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Paises">
+    <Key>
+      <PropertyRef Name="IdPais" />
+    </Key>
+    <Property Name="IdPais" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Pais" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="CodigoPais" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
+    <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+    <Property Name="IdUsuarioModificacion" Type="Int32" />
+    <NavigationProperty Name="SolicitudesProgramacionVisitas" Relationship="DB_A66D31_intratecPrbModel.FK_SolicitudesProgramacionVisitas_Paises" FromRole="Paises" ToRole="SolicitudesProgramacionVisitas" />
+  </EntityType>
+  <EntityType Name="SolicitudesProgramacionVisitas">
+    <Key>
+      <PropertyRef Name="IdSolicitudProgramacion" />
+    </Key>
+    <Property Name="IdSolicitudProgramacion" Type="Int32" Nullable="false" />
+    <Property Name="Nombre" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Telefono" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Direccion" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="IdPais" Type="Int32" Nullable="false" />
+    <Property Name="Departamento" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Ciudad" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Uso" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="NombreContacto" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="TelefonoContacto" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ip" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="city" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="country" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Paises" Relationship="DB_A66D31_intratecPrbModel.FK_SolicitudesProgramacionVisitas_Paises" FromRole="SolicitudesProgramacionVisitas" ToRole="Paises" />
+  </EntityType>
+  <Association Name="FK_SolicitudesProgramacionVisitas_Paises">
+    <End Type="DB_A66D31_intratecPrbModel.Paises" Role="Paises" Multiplicity="1" />
+    <End Type="DB_A66D31_intratecPrbModel.SolicitudesProgramacionVisitas" Role="SolicitudesProgramacionVisitas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Paises">
+        <PropertyRef Name="IdPais" />
+      </Principal>
+      <Dependent Role="SolicitudesProgramacionVisitas">
+        <PropertyRef Name="IdPais" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

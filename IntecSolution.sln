@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.29926.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntecWebPage", "IntecWebPage\IntecWebPage.csproj", "{021279B5-84B1-4AEA-8B49-220B615DC9C2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intec.DAL", "Intec.DAL\Intec.DAL.csproj", "{06D084B1-8FB8-406B-AB6F-918ADF61A687}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{EB5DF1C5-1B7F-4B72-AF2D-54256C37F4C4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{021279B5-84B1-4AEA-8B49-220B615DC9C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{021279B5-84B1-4AEA-8B49-220B615DC9C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{021279B5-84B1-4AEA-8B49-220B615DC9C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{06D084B1-8FB8-406B-AB6F-918ADF61A687}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{06D084B1-8FB8-406B-AB6F-918ADF61A687}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{06D084B1-8FB8-406B-AB6F-918ADF61A687}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{06D084B1-8FB8-406B-AB6F-918ADF61A687}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB5DF1C5-1B7F-4B72-AF2D-54256C37F4C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB5DF1C5-1B7F-4B72-AF2D-54256C37F4C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB5DF1C5-1B7F-4B72-AF2D-54256C37F4C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB5DF1C5-1B7F-4B72-AF2D-54256C37F4C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

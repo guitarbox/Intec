@@ -1,0 +1,13 @@
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\Test\bin\Debug\Test.exe.config
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\Test\bin\Debug\Test.exe
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\Test\bin\Debug\Test.pdb
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\Test\bin\Debug\Intec.DAL.dll
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\Test\bin\Debug\EntityFramework.dll
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\Test\bin\Debug\Intec.DAL.pdb
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\Test\bin\Debug\Intec.DAL.dll.config
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\Test\bin\Debug\EntityFramework.xml
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\Test\obj\Debug\Test.csprojAssemblyReference.cache
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\Test\obj\Debug\Test.csproj.CoreCompileInputs.cache
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\Test\obj\Debug\Test.csproj.CopyComplete
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\Test\obj\Debug\Test.exe
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\Test\obj\Debug\Test.pdb
