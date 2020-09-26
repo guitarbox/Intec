@@ -47,5 +47,15 @@ namespace IntecWebPage.Controllers
         {
             return View();
         }
+
+        public ActionResult OrgDeInspeccion()
+        {
+            return View();
+        }
+
+        public ActionResult UniDeProyectos()
+        {
+            return View();
+        }
     }
 }

@@ -53,11 +53,19 @@
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="fa fa-bars"></span> Menu
             </button>
-            <div class="collapse navbar-collapse" id="ftco-nav">
+            <div class="collapse navbar-collapse dropdown" id="ftco-nav">
                 <ul class="navbar-nav m-auto">
                     <li class="nav-item"><a href="../Home/Index" class="nav-link">Inicio</a></li>
                     <li class="nav-item"><a href="../Home/Programe" class="nav-link">Programe su visita</a></li>
-                    @*<li class="nav-item"><a href="../Home/About" class="nav-link">Nosotros</a></li>*@
+                    <li class="nav-item dropdown"><a href="../Home/About" class="nav-link dropdown-toggle" data-toggle="collapse dropdown" aria-haspopup="true" aria-expanded="false">Nosotros</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="../Home/OrgDeinspeccion">Organismo de inspección</a>
+                            <a class="dropdown-item" href="../Home/UniDeProyectos">Unidad de proyectos</a>
+                        </div>
+                        @*<div class="dropdown-menu">
+            <a href="../Home/OrgDeinspeccion" class="nav-link">Organismo de inspección</a>
+        </div>*@
+                    </li>
                     @*<li class="nav-item"><a href="../Home/Services" class="nav-link">Servicios</a></li>*@
                     @*<li class="nav-item"><a href="../Home/SuccessStories" class="nav-link">Stories</a></li>*@
                     @*<li class="nav-item"><a href="../Home/Blog" class="nav-link">Blog</a></li>*@

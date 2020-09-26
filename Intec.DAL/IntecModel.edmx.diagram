@@ -8,6 +8,13 @@
         <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.Paises" Width="1.5" PointX="0.75" PointY="1.75" />
         <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.SolicitudesProgramacionVisitas" Width="1.5" PointX="3" PointY="1" />
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_SolicitudesProgramacionVisitas_Paises" />
+        <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.Ciudades" Width="1.5" PointX="0.75" PointY="9.625" />
+        <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.Departamentos" Width="1.5" PointX="0.75" PointY="6.5" />
+        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_SolicitudesProgramacionVisitas_Ciudades" />
+        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_SolicitudesProgramacionVisitas_Departamentos" />
+        <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.sysdiagrams" Width="1.5" PointX="5.375" PointY="0.75" />
+        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Ciudades_Departamentos" />
+        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Departamentos_Paises" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

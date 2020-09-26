@@ -19,6 +19,9 @@
             Telefono: $("#Telefono").val(),
             Direccion: $("#Direccion").val(),
             Uso: $("#Uso").val(),
+            Departamento: $("#Departamento").val(),
+            Ciudad: $("#Ciudad").val(),
+            NumeroCuenta: $("#NumeroCuenta").val(),
             NombreContacto: $("#NombreContacto").val(),
             TelefonoContacto: $("#TelefonoContacto").val()
         }
@@ -30,6 +33,9 @@
         $("#Telefono").val('');
         $("#Direccion").val('');
         $("#Uso").val('');
+        $("#Departamento").val('');
+        $("#Ciudad").val('');
+        $("#NumeroCuenta").val('');
         $("#NombreContacto").val('');
         $("#TelefonoContacto").val('');
     }
@@ -39,7 +45,7 @@
     <div class="container">
         <div class="row no-gutters slider-text align-items-end">
             <div class="col-md-9 ftco-animate pb-5">
-                <p class="breadcrumbs mb-2"><span class="mr-2"><a href="index.html">Home <i class="ion-ios-arrow-forward"></i></a></span> <span>Programe su visita<i class="ion-ios-arrow-forward"></i></span></p>
+                <p class="breadcrumbs mb-2"><span class="mr-2"><a href="index.html">Inicio <i class="ion-ios-arrow-forward"></i></a></span> <span>Programe su visita<i class="ion-ios-arrow-forward"></i></span></p>
                 <h1 class="mb-0 bread">Programar visitas</h1>
             </div>
         </div>
@@ -63,25 +69,25 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="label" for="name">Nombre completo</label>
+                                                <label class="label" for="Nombre">Nombre completo</label>
                                                 <input type="text" class="form-control" name="Nombre" id="Nombre" placeholder="Su Nombre">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="label" for="Phone">Teléfono</label>
+                                                <label class="label" for="Telefono">Teléfono</label>
                                                 <input type="text" class="form-control" name="Telefono" id="Telefono" placeholder="Su Teléfono">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="label" for="address">Dirección</label>
+                                                <label class="label" for="Direccion">Dirección</label>
                                                 <input type="text" class="form-control" name="Direccion" id="Direccion" placeholder="Su Dirección">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="label" for="use">Uso</label>
+                                                <label class="label" for="Uso">Uso</label>
                                                 <select class="form-control" id="Uso">
                                                     <option value="">Seleccione...</option>
                                                     <option value="Residencial">Residencial</option>
@@ -91,13 +97,31 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="label" for="contName">Persona de contacto</label>
+                                                <label class="label" for="Departamento">Departamento</label>
+                                                <input type="text" class="form-control" name="Departamento" id="Departamento" placeholder="Su Departamento">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="label" for="Ciudad">Ciudad</label>
+                                                <input type="text" class="form-control" name="Ciudad" id="Ciudad" placeholder="Su Ciudad">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="label" for="NumeroCuenta">Número de cuenta</label>
+                                                <input type="text" class="form-control" name="NumeroCuenta" id="NumeroCuenta" placeholder="Su Número de cuenta">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="label" for="NombreContacto">Persona de contacto</label>
                                                 <input type="text" class="form-control" name="NombreContacto" id="NombreContacto" placeholder="Nombre Cont.">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="label" for="contTel">teléfono persona de contacto</label>
+                                                <label class="label" for="TelefonoContacto">teléfono persona de contacto</label>
                                                 <input type="text" class="form-control" name="TelefonoContacto" id="TelefonoContacto" placeholder="Teléfono Cont.">
                                             </div>
                                         </div>

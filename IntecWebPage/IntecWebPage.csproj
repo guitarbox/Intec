@@ -167,6 +167,9 @@
     <Content Include="images\bg_2.jpg" />
     <Content Include="images\bg_3.jpg" />
     <Content Include="images\CREG.jpg" />
+    <Content Include="images\eng3.jpg" />
+    <Content Include="images\Ing1.jpg" />
+    <Content Include="images\Ing2.jpg" />
     <Content Include="images\logo.png" />
     <Content Include="images\image_1.jpg" />
     <Content Include="images\image_2.jpg" />
@@ -175,6 +178,7 @@
     <Content Include="images\image_5.jpg" />
     <Content Include="images\image_6.jpg" />
     <Content Include="images\loc.png" />
+    <Content Include="images\Obra1.jpg" />
     <Content Include="images\ONAC.jpg" />
     <Content Include="images\person_1.jpg" />
     <Content Include="images\person_2.jpg" />
@@ -256,6 +260,7 @@
     <None Include="Views\Home\Index.cshtml" />
     <None Include="Views\Home\Main.cshtml" />
     <Content Include="Views\Home\Programe.cshtml" />
+    <Content Include="Views\Home\OrgDeInspeccion.cshtml" />
     <None Include="Views\Home\Services.cshtml" />
     <None Include="Views\Home\Success-stories.cshtml" />
     <Content Include="Web.config" />
@@ -360,6 +365,7 @@
     <Content Include="scss\bootstrap\_variables.scss" />
     <Content Include="scss\style.scss" />
     <Content Include="Views\Home\View.cshtml" />
+    <Content Include="Views\Home\UniDeProyectos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

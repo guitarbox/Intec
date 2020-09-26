@@ -11,3 +11,16 @@ D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\Test\obj\Debug
 D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\Test\obj\Debug\Test.csproj.CopyComplete
 D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\Test\obj\Debug\Test.exe
 D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\Test\obj\Debug\Test.pdb
+C:\Users\Ideapad\Desktop\Alitan\Interius\!ntec\Intec Solution\Test\bin\Debug\Test.exe.config
+C:\Users\Ideapad\Desktop\Alitan\Interius\!ntec\Intec Solution\Test\bin\Debug\Test.exe
+C:\Users\Ideapad\Desktop\Alitan\Interius\!ntec\Intec Solution\Test\bin\Debug\Test.pdb
+C:\Users\Ideapad\Desktop\Alitan\Interius\!ntec\Intec Solution\Test\bin\Debug\Intec.DAL.dll
+C:\Users\Ideapad\Desktop\Alitan\Interius\!ntec\Intec Solution\Test\bin\Debug\EntityFramework.dll
+C:\Users\Ideapad\Desktop\Alitan\Interius\!ntec\Intec Solution\Test\bin\Debug\Intec.DAL.pdb
+C:\Users\Ideapad\Desktop\Alitan\Interius\!ntec\Intec Solution\Test\bin\Debug\Intec.DAL.dll.config
+C:\Users\Ideapad\Desktop\Alitan\Interius\!ntec\Intec Solution\Test\bin\Debug\EntityFramework.xml
+C:\Users\Ideapad\Desktop\Alitan\Interius\!ntec\Intec Solution\Test\obj\Debug\Test.csprojAssemblyReference.cache
+C:\Users\Ideapad\Desktop\Alitan\Interius\!ntec\Intec Solution\Test\obj\Debug\Test.csproj.CoreCompileInputs.cache
+C:\Users\Ideapad\Desktop\Alitan\Interius\!ntec\Intec Solution\Test\obj\Debug\Test.csproj.CopyComplete
+C:\Users\Ideapad\Desktop\Alitan\Interius\!ntec\Intec Solution\Test\obj\Debug\Test.exe
+C:\Users\Ideapad\Desktop\Alitan\Interius\!ntec\Intec Solution\Test\obj\Debug\Test.pdb

@@ -7,6 +7,21 @@
       <End Role="Paises" EntitySet="Paises" />
       <End Role="SolicitudesProgramacionVisitas" EntitySet="SolicitudesProgramacionVisitas" />
     </AssociationSet>
+    <EntitySet Name="Ciudades" EntityType="DB_A66D31_intratecPrbModel.Ciudades" />
+    <EntitySet Name="Departamentos" EntityType="DB_A66D31_intratecPrbModel.Departamentos" />
+    <EntitySet Name="sysdiagrams" EntityType="DB_A66D31_intratecPrbModel.sysdiagrams" />
+    <AssociationSet Name="FK_Ciudades_Departamentos" Association="DB_A66D31_intratecPrbModel.FK_Ciudades_Departamentos">
+      <End Role="Departamentos" EntitySet="Departamentos" />
+      <End Role="Ciudades" EntitySet="Ciudades" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SolicitudesProgramacionVisitas_Ciudades" Association="DB_A66D31_intratecPrbModel.FK_SolicitudesProgramacionVisitas_Ciudades">
+      <End Role="Ciudades" EntitySet="Ciudades" />
+      <End Role="SolicitudesProgramacionVisitas" EntitySet="SolicitudesProgramacionVisitas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Departamentos_Paises" Association="DB_A66D31_intratecPrbModel.FK_Departamentos_Paises">
+      <End Role="Paises" EntitySet="Paises" />
+      <End Role="Departamentos" EntitySet="Departamentos" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Paises">
     <Key>
@@ -20,6 +35,7 @@
     <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
     <Property Name="IdUsuarioModificacion" Type="Int32" />
     <NavigationProperty Name="SolicitudesProgramacionVisitas" Relationship="DB_A66D31_intratecPrbModel.FK_SolicitudesProgramacionVisitas_Paises" FromRole="Paises" ToRole="SolicitudesProgramacionVisitas" />
+    <NavigationProperty Name="Departamentos" Relationship="DB_A66D31_intratecPrbModel.FK_Departamentos_Paises" FromRole="Paises" ToRole="Departamentos" />
   </EntityType>
   <EntityType Name="SolicitudesProgramacionVisitas">
     <Key>
@@ -40,6 +56,8 @@
     <Property Name="city" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
     <Property Name="country" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Paises" Relationship="DB_A66D31_intratecPrbModel.FK_SolicitudesProgramacionVisitas_Paises" FromRole="SolicitudesProgramacionVisitas" ToRole="Paises" />
+    <Property Name="IdCiudad" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Ciudades" Relationship="DB_A66D31_intratecPrbModel.FK_SolicitudesProgramacionVisitas_Ciudades" FromRole="SolicitudesProgramacionVisitas" ToRole="Ciudades" />
   </EntityType>
   <Association Name="FK_SolicitudesProgramacionVisitas_Paises">
     <End Type="DB_A66D31_intratecPrbModel.Paises" Role="Paises" Multiplicity="1" />
@@ -49,6 +67,80 @@
         <PropertyRef Name="IdPais" />
       </Principal>
       <Dependent Role="SolicitudesProgramacionVisitas">
+        <PropertyRef Name="IdPais" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Ciudades">
+    <Key>
+      <PropertyRef Name="IdCiudad" />
+    </Key>
+    <Property Name="IdCiudad" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IdDepartamento" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+    <Property Name="Ciudad" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
+    <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+    <Property Name="IdUsuarioModificacion" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Departamentos" Relationship="DB_A66D31_intratecPrbModel.FK_Ciudades_Departamentos" FromRole="Ciudades" ToRole="Departamentos" />
+    <NavigationProperty Name="SolicitudesProgramacionVisitas" Relationship="DB_A66D31_intratecPrbModel.FK_SolicitudesProgramacionVisitas_Ciudades" FromRole="Ciudades" ToRole="SolicitudesProgramacionVisitas" />
+  </EntityType>
+  <EntityType Name="Departamentos">
+    <Key>
+      <PropertyRef Name="IdDepartamento" />
+    </Key>
+    <Property Name="IdDepartamento" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+    <Property Name="IdPais" Type="Int32" Nullable="false" />
+    <Property Name="Departamento" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
+    <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+    <Property Name="IdUsuarioModificacion" Type="Int32" />
+    <NavigationProperty Name="Ciudades" Relationship="DB_A66D31_intratecPrbModel.FK_Ciudades_Departamentos" FromRole="Departamentos" ToRole="Ciudades" />
+    <NavigationProperty Name="Paises" Relationship="DB_A66D31_intratecPrbModel.FK_Departamentos_Paises" FromRole="Departamentos" ToRole="Paises" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_Ciudades_Departamentos">
+    <End Type="DB_A66D31_intratecPrbModel.Departamentos" Role="Departamentos" Multiplicity="1" />
+    <End Type="DB_A66D31_intratecPrbModel.Ciudades" Role="Ciudades" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Departamentos">
+        <PropertyRef Name="IdDepartamento" />
+      </Principal>
+      <Dependent Role="Ciudades">
+        <PropertyRef Name="IdDepartamento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SolicitudesProgramacionVisitas_Ciudades">
+    <End Type="DB_A66D31_intratecPrbModel.Ciudades" Role="Ciudades" Multiplicity="1" />
+    <End Type="DB_A66D31_intratecPrbModel.SolicitudesProgramacionVisitas" Role="SolicitudesProgramacionVisitas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ciudades">
+        <PropertyRef Name="IdCiudad" />
+      </Principal>
+      <Dependent Role="SolicitudesProgramacionVisitas">
+        <PropertyRef Name="IdCiudad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Departamentos_Paises">
+    <End Type="DB_A66D31_intratecPrbModel.Paises" Role="Paises" Multiplicity="1" />
+    <End Type="DB_A66D31_intratecPrbModel.Departamentos" Role="Departamentos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Paises">
+        <PropertyRef Name="IdPais" />
+      </Principal>
+      <Dependent Role="Departamentos">
         <PropertyRef Name="IdPais" />
       </Dependent>
     </ReferentialConstraint>

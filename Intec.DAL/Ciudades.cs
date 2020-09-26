@@ -12,26 +12,24 @@ namespace Intec.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Paises
+    public partial class Ciudades
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Paises()
+        public Ciudades()
         {
             this.SolicitudesProgramacionVisitas = new HashSet<SolicitudesProgramacionVisitas>();
-            this.Departamentos = new HashSet<Departamentos>();
         }
     
-        public int IdPais { get; set; }
-        public string Pais { get; set; }
-        public string CodigoPais { get; set; }
+        public string IdCiudad { get; set; }
+        public string IdDepartamento { get; set; }
+        public string Ciudad { get; set; }
         public System.DateTime FechaCreacion { get; set; }
         public int IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaModificacion { get; set; }
-        public Nullable<int> IdUsuarioModificacion { get; set; }
+        public int IdUsuarioModificacion { get; set; }
     
+        public virtual Departamentos Departamentos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SolicitudesProgramacionVisitas> SolicitudesProgramacionVisitas { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Departamentos> Departamentos { get; set; }
     }
 }
