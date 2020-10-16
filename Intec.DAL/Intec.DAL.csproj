@@ -51,67 +51,65 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Ciudades.cs">
-      <DependentUpon>IntecModel.tt</DependentUpon>
+      <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Class1.cs" />
     <Compile Include="Departamentos.cs">
-      <DependentUpon>IntecModel.tt</DependentUpon>
+      <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="IntecModel.Context.cs">
+    <Compile Include="IntratecModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>IntecModel.Context.tt</DependentUpon>
+      <DependentUpon>IntratecModel.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="IntecModel.cs">
+    <Compile Include="IntratecModel.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>IntecModel.tt</DependentUpon>
+      <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="IntecModel.Designer.cs">
+    <Compile Include="IntratecModel.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>IntecModel.edmx</DependentUpon>
+      <DependentUpon>IntratecModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Paises.cs">
-      <DependentUpon>IntecModel.tt</DependentUpon>
+      <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SolicitudesProgramacionVisitas.cs">
-      <DependentUpon>IntecModel.tt</DependentUpon>
+      <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
     <Compile Include="sysdiagrams.cs">
-      <DependentUpon>IntecModel.tt</DependentUpon>
+      <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="TE\Administracion.cs" />
     <Compile Include="TE\SolicitudesProgramacionVIsitasTE.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="IntecModel.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>IntecModel.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="App.Config" />
-    <None Include="IntecModel.edmx.diagram">
-      <DependentUpon>IntecModel.edmx</DependentUpon>
+    <EntityDeploy Include="IntratecModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>IntratecModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="IntratecModel.edmx.diagram">
+      <DependentUpon>IntratecModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="IntecModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>IntecModel.Context.cs</LastGenOutput>
-      <DependentUpon>IntecModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="IntecModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>IntecModel.edmx</DependentUpon>
-      <LastGenOutput>IntecModel.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="IntratecModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>IntratecModel.edmx</DependentUpon>
+      <LastGenOutput>IntratecModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="IntratecModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>IntratecModel.edmx</DependentUpon>
+      <LastGenOutput>IntratecModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

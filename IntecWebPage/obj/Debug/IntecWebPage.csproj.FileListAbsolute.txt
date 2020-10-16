@@ -156,3 +156,13 @@ C:\Users\Ideapad\Desktop\Alitan\Interius\!ntec\Intec Solution\IntecWebPage\obj\D
 C:\Users\Ideapad\Desktop\Alitan\Interius\!ntec\Intec Solution\IntecWebPage\obj\Debug\IntecWebPage.csproj.CopyComplete
 C:\Users\Ideapad\Desktop\Alitan\Interius\!ntec\Intec Solution\IntecWebPage\obj\Debug\IntecWebPage.dll
 C:\Users\Ideapad\Desktop\Alitan\Interius\!ntec\Intec Solution\IntecWebPage\obj\Debug\IntecWebPage.pdb
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\IntecWebPage\bin\Intec.BL.dll
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\IntecWebPage\bin\AutoMapper.dll
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\IntecWebPage\bin\Intec.DAL.dll
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\IntecWebPage\bin\EntityFramework.dll
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\IntecWebPage\bin\Intec.BL.pdb
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\IntecWebPage\bin\AutoMapper.pdb
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\IntecWebPage\bin\AutoMapper.xml
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\IntecWebPage\bin\Intec.DAL.pdb
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\IntecWebPage\bin\Intec.DAL.dll.config
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\IntecWebPage\bin\EntityFramework.xml

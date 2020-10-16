@@ -3,7 +3,7 @@
     ViewBag.Title = "programeSuVisita";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<script>
+    <script>
     var _ipInfo;
 
     $(document).ready(() => {
@@ -11,7 +11,27 @@
             console.log(JSON.stringify(data, null, 2));
             _ipInfo = data;
         });
+
+        _peticionAjax('@Url.Action("ObtenerDepartamentos", "Home")', '', true,
+            response => {
+                $("#Departamento").empty()
+                $("#Departamento").append('<option value="">Seleccione...</option>');
+                response.data.forEach(element => {
+                    $("#Departamento").append('<option value="' + element.IdDepartamento + '">' + element.Departamento + '</option>');
+                });
+            });
     });
+
+    function CargarCiudades() {
+        _peticionAjax('@Url.Action("ObtenerCiudades", "Home")', JSON.stringify({ IdDepartamento: $('#Departamento').val() }), true,
+            response => {
+                $("#Ciudad").empty()
+                $("#Ciudad").append('<option value="">Seleccione...</option>');
+                response.data.forEach(element => {
+                    $("#Ciudad").append('<option value="' + element.IdCiudad + '">' + element.Ciudad  + '</option>');
+                });
+            });
+    }
 
     function Programar() {
         var obj = {
@@ -20,12 +40,20 @@
             Direccion: $("#Direccion").val(),
             Uso: $("#Uso").val(),
             Departamento: $("#Departamento").val(),
-            Ciudad: $("#Ciudad").val(),
+            IdCiudad: $("#Ciudad").val(),
             NumeroCuenta: $("#NumeroCuenta").val(),
             NombreContacto: $("#NombreContacto").val(),
-            TelefonoContacto: $("#TelefonoContacto").val()
+            TelefonoContacto: $("#TelefonoContacto").val(),
+            ip: _ipInfo.ip,
+            city: _ipInfo.city,
+            country: _ipInfo.country
         }
-        LimpiarCampos();
+        _peticionAjax('@Url.Action("IngresarSolicitudVisita","Home")', JSON.stringify({ Solicitud: obj }), true,
+            response => {
+                LimpiarCampos();
+                alert('OK');
+            }
+        );
     }
 
     function LimpiarCampos() {
@@ -39,7 +67,7 @@
         $("#NombreContacto").val('');
         $("#TelefonoContacto").val('');
     }
-</script>
+    </script>
 <section class="hero-wrap hero-wrap-2" style="background-image: url('../images/bg_2.jpg');" data-stellar-background-ratio="0.5">
     <div class="overlay"></div>
     <div class="container">
@@ -98,13 +126,15 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="label" for="Departamento">Departamento</label>
-                                                <input type="text" class="form-control" name="Departamento" id="Departamento" placeholder="Su Departamento">
+                                                <select class="form-control" name="Departamento" id="Departamento" onchange="CargarCiudades()"></select>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="label" for="Ciudad">Ciudad</label>
-                                                <input type="text" class="form-control" name="Ciudad" id="Ciudad" placeholder="Su Ciudad">
+                                                <select class="form-control" name="Ciudad" id="Ciudad">
+                                                    <option value="">Seleccione...</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="col-md-6">

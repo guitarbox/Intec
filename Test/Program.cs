@@ -13,7 +13,7 @@ namespace Test
             List < Intec.DAL.SolicitudesProgramacionVisitas > solicitudes = new Intec.DAL.TE.SolicitudesProgramacionVIsitasTE().ConsultarSolicitudes();
             foreach (Intec.DAL.SolicitudesProgramacionVisitas solicitud in solicitudes)
             {
-                Console.WriteLine($"{solicitud.Nombre} {solicitud.Paises.CodigoPais}");
+                //Console.WriteLine($"{solicitud.Nombre} {solicitud.Paises.CodigoPais}");
             }
             Console.ReadKey();
         }

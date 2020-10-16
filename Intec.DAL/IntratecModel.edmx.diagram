@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2a44f5ae462548488e81dc726cf05437" Name="Diagram1">
+        <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.Ciudades" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.Departamentos" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.Paises" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.SolicitudesProgramacionVisitas" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Ciudades_Departamentos" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_SolicitudesProgramacionVisitas_Ciudades" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Departamentos_Paises" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

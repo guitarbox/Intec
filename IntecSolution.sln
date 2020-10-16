@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intec.DAL", "Intec.DAL\Inte
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", "{EB5DF1C5-1B7F-4B72-AF2D-54256C37F4C4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intec.BL", "Intec.BL\Intec.BL.csproj", "{995DB154-D4E0-42DD-ABCB-2BD0A0330259}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{EB5DF1C5-1B7F-4B72-AF2D-54256C37F4C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EB5DF1C5-1B7F-4B72-AF2D-54256C37F4C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EB5DF1C5-1B7F-4B72-AF2D-54256C37F4C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{995DB154-D4E0-42DD-ABCB-2BD0A0330259}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{995DB154-D4E0-42DD-ABCB-2BD0A0330259}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{995DB154-D4E0-42DD-ABCB-2BD0A0330259}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{995DB154-D4E0-42DD-ABCB-2BD0A0330259}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
