@@ -3,6 +3,48 @@
     ViewBag.Title = "View";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<script>
+    var _ipInfo;
+
+    $(document).ready(() => {
+        $.getJSON('https://ipapi.co/json/', function (data) {
+            console.log(JSON.stringify(data, null, 2));
+            _ipInfo = data;
+        });        
+    });
+
+    function EnviarSolicitud() {
+        var Solicitud = {
+            PQRA: $("#PQRA").is(':checked'),
+            NombreCompleto: $("#name").val(),
+            Direccion: $("#address").val(),
+            Email: $("#email").val(),
+            Telefono: $("#Phone").val(),
+            Mensaje: $("#message").val(),
+            ip: _ipInfo.ip,
+            city: _ipInfo.city,
+            country: _ipInfo.country
+        };
+
+        if (Solicitud.NombreCompleto == '' || Solicitud.Direccion == '' || Solicitud.Email == '' || Solicitud.Telefono == '' || Solicitud.Mensaje == '') {
+            swal("Intec SAS!", "Los campos con (*) son de obligatorio diligenciamiento.", "error");
+        }
+        else {
+            _peticionAjax('@Url.Action("IngresarSolicitudContactenos", "Home")', JSON.stringify({ Solicitud }), true,
+                response => {
+                    swal("Intec SAS!", "Recibimos su solicitud con éxito.", "success");
+                    $("#PQRA").prop('checked', false);
+                    $("#name").val('');
+                    $("#address").val('');
+                    $("#email").val('');
+                    $("#Phone").val('');
+                    $("#message").val('');
+                }
+            );
+        }
+    }
+</script>
 <section class="hero-wrap hero-wrap-2" style="background-image: url('../images/bg_2.jpg');" data-stellar-background-ratio="0.5">
     <div class="overlay"></div>
     <div class="container">
@@ -38,37 +80,37 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="label" for="name">Nombre completo</label>
+                                                <label class="label" for="name">Nombre completo (*)</label>
                                                 <input type="text" class="form-control" name="name" id="name" placeholder="Nombre">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="label" for="address">Dirección</label>
+                                                <label class="label" for="address">Dirección (*)</label>
                                                 <input type="text" class="form-control" name="address" id="address" placeholder="Dirección">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="label" for="email">Correo electrónico</label>
+                                                <label class="label" for="email">Correo electrónico (*)</label>
                                                 <input type="email" class="form-control" name="email" id="email" placeholder="Email">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="label" for="Phone">Teléfono</label>
-                                                <input type="email" class="form-control" name="Phone" id="Phone" placeholder="Teléfono">
+                                                <label class="label" for="Phone">Teléfono (*)</label>
+                                                <input type="text" class="form-control" name="Phone" id="Phone" placeholder="Teléfono">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label class="label" for="#">Mensaje</label>
+                                                <label class="label" for="#">Mensaje (*)</label>
                                                 <textarea name="message" class="form-control" id="message" cols="30" rows="4" placeholder="Escriba aquí su mensaje"></textarea>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <input type="submit" value="Enviar" class="btn btn-primary">
+                                                <input type="button" value="Enviar" class="btn btn-primary" onclick="EnviarSolicitud();">
                                                 <div class="submitting"></div>
                                             </div>
                                         </div>

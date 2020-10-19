@@ -41,6 +41,22 @@
           <Property Name="FechaModificacion" Type="datetime" />
           <Property Name="IdUsuarioModificacion" Type="int" />
         </EntityType>
+        <EntityType Name="SolicitudContactenos">
+          <Key>
+            <PropertyRef Name="IdSolicitudContactenos" />
+          </Key>
+          <Property Name="IdSolicitudContactenos" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PQRA" Type="bit" Nullable="false" />
+          <Property Name="NombreCompleto" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Direccion" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Telefono" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Mensaje" Type="nvarchar" MaxLength="2000" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="ip" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="city" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="country" Type="nvarchar" MaxLength="150" Nullable="false" />
+        </EntityType>
         <EntityType Name="SolicitudesProgramacionVisitas">
           <Key>
             <PropertyRef Name="IdSolicitudProgramacion" />
@@ -108,6 +124,7 @@
           <EntitySet Name="Ciudades" EntityType="Self.Ciudades" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Departamentos" EntityType="Self.Departamentos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Paises" EntityType="Self.Paises" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SolicitudContactenos" EntityType="Self.SolicitudContactenos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SolicitudesProgramacionVisitas" EntityType="Self.SolicitudesProgramacionVisitas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Ciudades_Departamentos" Association="Self.FK_Ciudades_Departamentos">
@@ -250,7 +267,24 @@
             <End Role="Paises" EntitySet="Paises" />
             <End Role="Departamentos" EntitySet="Departamentos" />
           </AssociationSet>
+          <EntitySet Name="SolicitudContactenos" EntityType="DB_A66D31_intratecPrbModel.SolicitudContactenos" />
         </EntityContainer>
+        <EntityType Name="SolicitudContactenos">
+          <Key>
+            <PropertyRef Name="IdSolicitudContactenos" />
+          </Key>
+          <Property Name="IdSolicitudContactenos" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PQRA" Type="Boolean" Nullable="false" />
+          <Property Name="NombreCompleto" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Direccion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Telefono" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Mensaje" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ip" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="city" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="country" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -322,6 +356,23 @@
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="version" ColumnName="version" />
                 <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SolicitudContactenos">
+            <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.SolicitudContactenos">
+              <MappingFragment StoreEntitySet="SolicitudContactenos">
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="ip" ColumnName="ip" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="Mensaje" ColumnName="Mensaje" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="NombreCompleto" ColumnName="NombreCompleto" />
+                <ScalarProperty Name="PQRA" ColumnName="PQRA" />
+                <ScalarProperty Name="IdSolicitudContactenos" ColumnName="IdSolicitudContactenos" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

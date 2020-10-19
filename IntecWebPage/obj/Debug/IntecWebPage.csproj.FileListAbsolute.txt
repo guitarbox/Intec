@@ -166,3 +166,10 @@ D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\IntecWebPage\b
 D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\IntecWebPage\bin\Intec.DAL.pdb
 D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\IntecWebPage\bin\Intec.DAL.dll.config
 D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\IntecWebPage\bin\EntityFramework.xml
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\IntecWebPage\bin\es\System.Web.Helpers.resources.dll
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\IntecWebPage\bin\es\System.Web.Mvc.resources.dll
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\IntecWebPage\bin\es\System.Web.Optimization.resources.dll
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\IntecWebPage\bin\es\System.Web.Razor.resources.dll
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\IntecWebPage\bin\es\System.Web.WebPages.resources.dll
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\IntecWebPage\bin\es\System.Web.WebPages.Deployment.resources.dll
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\IntecWebPage\bin\es\System.Web.WebPages.Razor.resources.dll

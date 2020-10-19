@@ -36,6 +36,22 @@
     <Property Name="FechaModificacion" Type="datetime" />
     <Property Name="IdUsuarioModificacion" Type="int" />
   </EntityType>
+  <EntityType Name="SolicitudContactenos">
+    <Key>
+      <PropertyRef Name="IdSolicitudContactenos" />
+    </Key>
+    <Property Name="IdSolicitudContactenos" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PQRA" Type="bit" Nullable="false" />
+    <Property Name="NombreCompleto" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Direccion" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Telefono" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Mensaje" Type="nvarchar" MaxLength="2000" Nullable="false" />
+    <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+    <Property Name="ip" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="city" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="country" Type="nvarchar" MaxLength="150" Nullable="false" />
+  </EntityType>
   <EntityType Name="SolicitudesProgramacionVisitas">
     <Key>
       <PropertyRef Name="IdSolicitudProgramacion" />
@@ -103,6 +119,7 @@
     <EntitySet Name="Ciudades" EntityType="Self.Ciudades" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Departamentos" EntityType="Self.Departamentos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Paises" EntityType="Self.Paises" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SolicitudContactenos" EntityType="Self.SolicitudContactenos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SolicitudesProgramacionVisitas" EntityType="Self.SolicitudesProgramacionVisitas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_Ciudades_Departamentos" Association="Self.FK_Ciudades_Departamentos">

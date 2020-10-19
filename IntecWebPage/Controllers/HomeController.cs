@@ -103,5 +103,12 @@ namespace IntecWebPage.Controllers
             SetDicRta("", 0, false, "", Intec.BL.BE.SolicitudesProgramacionVisitasBE._duration);
             return Json(ansDic);
         }
+
+        public JsonResult IngresarSolicitudContactenos(Intec.BL.DTO.SolicitudContactenos Solicitud)
+        {
+            new Intec.BL.BE.SolicitudContactenosBE().IngresarSolicitudContactenos(Solicitud);
+            SetDicRta("", 0, false, "", Intec.BL.BE.SolicitudContactenosBE._duration);
+            return Json(ansDic);
+        }
     }
 }

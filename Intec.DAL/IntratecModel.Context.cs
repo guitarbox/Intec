@@ -30,5 +30,6 @@ namespace Intec.DAL
         public virtual DbSet<Paises> Paises { get; set; }
         public virtual DbSet<SolicitudesProgramacionVisitas> SolicitudesProgramacionVisitas { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<SolicitudContactenos> SolicitudContactenos { get; set; }
     }
 }

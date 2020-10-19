@@ -48,12 +48,19 @@
             city: _ipInfo.city,
             country: _ipInfo.country
         }
-        _peticionAjax('@Url.Action("IngresarSolicitudVisita","Home")', JSON.stringify({ Solicitud: obj }), true,
-            response => {
-                LimpiarCampos();
-                alert('OK');
-            }
-        );
+
+        if (obj.Nombre == '' || obj.Telefono == '' || obj.Direccion == '' || obj.Uso == '' || obj.Departamento == '' || obj.IdCiudad == '' || obj.NumeroCuenta == '' || obj.NombreContacto == '' || obj.TelefonoContacto == '') {
+            swal("Intec SAS!", "Los campos con (*) son de obligatorio diligenciamiento.", "error");
+        }
+        else {
+            _peticionAjax('@Url.Action("IngresarSolicitudVisita","Home")', JSON.stringify({ Solicitud: obj }), true,
+                response => {
+                    LimpiarCampos();
+                    swal("Intec SAS!", "Solicitud de programación de visita recibida. Uno de nuestros agentes se comunicará con usted pronto.", "success");
+                    //alert('OK');
+                }
+            );
+        }
     }
 
     function LimpiarCampos() {
@@ -97,25 +104,25 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="label" for="Nombre">Nombre completo</label>
+                                                <label class="label" for="Nombre">Nombre completo (*)</label>
                                                 <input type="text" class="form-control" name="Nombre" id="Nombre" placeholder="Su Nombre">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="label" for="Telefono">Teléfono</label>
+                                                <label class="label" for="Telefono">Teléfono (*)</label>
                                                 <input type="text" class="form-control" name="Telefono" id="Telefono" placeholder="Su Teléfono">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="label" for="Direccion">Dirección</label>
+                                                <label class="label" for="Direccion">Dirección (*)</label>
                                                 <input type="text" class="form-control" name="Direccion" id="Direccion" placeholder="Su Dirección">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="label" for="Uso">Uso</label>
+                                                <label class="label" for="Uso">Uso (*)</label>
                                                 <select class="form-control" id="Uso">
                                                     <option value="">Seleccione...</option>
                                                     <option value="Residencial">Residencial</option>
@@ -125,13 +132,13 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="label" for="Departamento">Departamento</label>
+                                                <label class="label" for="Departamento">Departamento (*)</label>
                                                 <select class="form-control" name="Departamento" id="Departamento" onchange="CargarCiudades()"></select>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="label" for="Ciudad">Ciudad</label>
+                                                <label class="label" for="Ciudad">Ciudad (*)</label>
                                                 <select class="form-control" name="Ciudad" id="Ciudad">
                                                     <option value="">Seleccione...</option>
                                                 </select>
@@ -139,26 +146,26 @@
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="label" for="NumeroCuenta">Número de cuenta</label>
+                                                <label class="label" for="NumeroCuenta">Número de cuenta (*)</label>
                                                 <input type="text" class="form-control" name="NumeroCuenta" id="NumeroCuenta" placeholder="Su Número de cuenta">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="label" for="NombreContacto">Persona de contacto</label>
+                                                <label class="label" for="NombreContacto">Persona de contacto (*)</label>
                                                 <input type="text" class="form-control" name="NombreContacto" id="NombreContacto" placeholder="Nombre Cont.">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="label" for="TelefonoContacto">teléfono persona de contacto</label>
+                                                <label class="label" for="TelefonoContacto">teléfono persona de contacto (*)</label>
                                                 <input type="text" class="form-control" name="TelefonoContacto" id="TelefonoContacto" placeholder="Teléfono Cont.">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <input type="button" value="Programr Visita" class="btn btn-primary" onclick="Programar();">
+                                            <input type="button" value="Programar Visita" class="btn btn-primary" onclick="Programar();">
                                             <div class="submitting"></div>
                                         </div>
                                     </div>

@@ -36,5 +36,19 @@ namespace Intec.BL.MapperConfig
             }
         }
 
+        public static AutoMapper.IMapper MapperContactenos
+        {
+            get
+            {
+                var config = new AutoMapper.MapperConfiguration(cfg => {
+
+                    //DAL
+                    cfg.CreateMap<DTO.SolicitudContactenos, DAL.SolicitudContactenos>();
+                });
+
+                return config.CreateMapper();
+            }
+        }
+
     }
 }

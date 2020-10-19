@@ -50,11 +50,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BE\AdministracionBE.cs" />
+    <Compile Include="BE\SolicitudContactenosBE.cs" />
     <Compile Include="BE\SolicitudesProgramacionVisitasBE.cs" />
     <Compile Include="BE\_beDefault.cs" />
     <Compile Include="DTO\Ciudades.cs" />
     <Compile Include="DTO\Departamentos.cs" />
     <Compile Include="DTO\Paises.cs" />
+    <Compile Include="DTO\SolicitudContactenos.cs" />
     <Compile Include="DTO\SolicitudesProgramacionVisitas.cs" />
     <Compile Include="MapperConfig\Config.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
