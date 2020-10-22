@@ -3,27 +3,56 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class= "container">
-    <div class="row text-center">
-        <div class="col bg-success mx-auto">
-            <div class="form-group">
-                <img src="~/Images/logo.png" alt="Logo !ntec" width="200" height="150" />
-                <h1 class="h2">Inicio de sesión</h1>
+<script>
+    var _ipInfo;
+
+    $(document).ready(() => {
+        $.getJSON('https://ipapi.co/json/', function (data) {
+            console.log(JSON.stringify(data, null, 2));
+            _ipInfo = data;
+        });
+
+        _peticionAjax('@Url.Action("ObtenerUsuario", "Home")', '', true,
+            response => {
+                $("#Departamento").empty()
+                $("#Departamento").append('<option value="">Seleccione...</option>');
+                response.data.forEach(element => {
+                    $("#Departamento").append('<option value="' + element.IdDepartamento + '">' + element.Departamento + '</option>');
+                });
+            });
+    });
+    function Comparar() {
+        var obj = {
+            User: $("#User").val(),
+            Password: $("#Password").val(),
+        }
+</script>
+
+
+<div class="container">
+    <div class="row d-flex justify-content-center">
+        <div class="col-11 col-sm-9 d-flex justify-content-center bg-light mb-5 mt-5 rounded">
+            <div class="bg-light w-75 mt-5">
+                <form class="">
+                    <h1 class="h2 mt-4 text-primary">ACCOUNT LOGIN</h1>
+                    <div class="form-group mt-5 text-left">
+                        <label for="user">USERNAME</label>
+                        <input id="user" class="form-control" type="text" name="user">
+                    </div>
+                    <div class="form-group mt-4 text-left">
+                        <label for="password">PASSWORD</label>
+                        <input id="password" class="form-control" type="password" name="password">
+                    </div>
+                    <div class="row justify-content-between pl-3 pr-3 mt-4">
+                        <div class="form-check">
+                            <input id="forgot" class="form-check-input" type="checkbox" name="forgot" value="true">
+                            <label for="forgot" class="form-check-label">Remember me</label>
+                        </div>
+                        <a href="#">Forgot pasword?</a>
+                    </div>
+                    <input type="button" value="LOG IN" class="btn btn-primary w-100 mt-5 mb-5" onclick="Comparar();">
+                </form>
             </div>
-            <form method="post" id="contactForm" name="contactForm" class="contactForm">
-                <div class="form-group">
-                    <label for="user">Usuario</label>
-                    <input type="text" name="user" id="user" class="form-control" placeholder="Ingrese su usuario" />
-                </div>
-                <div class="form-group">
-                    <label for="password">Contarseña</label>
-                    <input type="password" name="password" id="password" class="form-control" placeholder="Ingrese su contraseña" />
-                </div>
-                <div>
-                    <a href="#"><p>He olvidado mi usuario y/o contraseña</p></a>
-                </div>
-                <button class="btn btn-success">Inicio</button>
-            </form>
         </div>
     </div>
 </div>

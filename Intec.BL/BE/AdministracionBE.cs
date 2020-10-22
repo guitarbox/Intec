@@ -22,5 +22,6 @@ namespace Intec.BL.BE
         {
             return MapperConfig.Config.MapperAdministracion.Map<List<DTO.Ciudades>>(new DAL.TE.Administracion().ObtenerCiudades(IdDepartamento));
         }
+
     }
 }

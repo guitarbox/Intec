@@ -147,13 +147,12 @@
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\bootstrap\bootstrap-grid.css" />
     <Content Include="css\bootstrap\bootstrap-reboot.css" />
-    <Content Include="css\css\bootstrap-reboot.css" />
     <Content Include="css\css\mixins\_text-hide.css" />
     <Content Include="css\flaticon.css" />
     <Content Include="css\magnific-popup.css" />
     <Content Include="css\owl.carousel.min.css" />
     <Content Include="css\owl.theme.default.min.css" />
-    <Content Include="css\style.css" />
+    <Content Include="css\styles.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -177,7 +176,6 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="css\.DS_Store" />
     <Content Include="css\bootstrap\.DS_Store" />
-    <Content Include="css\css\.DS_Store" />
     <Content Include="js\.DS_Store" />
     <Content Include="Content\.DS_Store" />
     <Content Include="Content\bootstrap\.DS_Store" />

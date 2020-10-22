@@ -37,5 +37,6 @@ namespace Intec.DAL.TE
             }
             return res;
         }
-    }
+
+    }   //Aquí iba las 2 var
 }

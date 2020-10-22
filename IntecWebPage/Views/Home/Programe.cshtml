@@ -12,7 +12,7 @@
             _ipInfo = data;
         });
 
-        _peticionAjax('@Url.Action("ObtenerDepartamentos", "Home")', '', true,
+        _peticionAjax('@Url.Action("ObtenerUsuario", "Home")', '', true,
             response => {
                 $("#Departamento").empty()
                 $("#Departamento").append('<option value="">Seleccione...</option>');

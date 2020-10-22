@@ -72,6 +72,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IntratecModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="LogIn.cs">
+      <DependentUpon>IntratecModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Paises.cs">
       <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
@@ -86,6 +89,7 @@
       <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TE\Administracion.cs" />
+    <Compile Include="TE\UsuarioTE.cs" />
     <Compile Include="TE\SolicitudContactenosTE.cs" />
     <Compile Include="TE\SolicitudesProgramacionVIsitasTE.cs" />
   </ItemGroup>
