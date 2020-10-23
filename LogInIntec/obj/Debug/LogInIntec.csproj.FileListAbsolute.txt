@@ -342,3 +342,13 @@ C:\Users\Ideapad\Desktop\Intec\Intec\LogInIntec\obj\Debug\LogInIntec.csproj.Core
 C:\Users\Ideapad\Desktop\Intec\Intec\LogInIntec\obj\Debug\LogInIntec.csproj.CopyComplete
 C:\Users\Ideapad\Desktop\Intec\Intec\LogInIntec\obj\Debug\LogInIntec.dll
 C:\Users\Ideapad\Desktop\Intec\Intec\LogInIntec\obj\Debug\LogInIntec.pdb
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\LogInIntec\bin\Intec.BL.dll
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\LogInIntec\bin\AutoMapper.dll
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\LogInIntec\bin\Intec.DAL.dll
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\LogInIntec\bin\EntityFramework.dll
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\LogInIntec\bin\Intec.BL.pdb
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\LogInIntec\bin\AutoMapper.pdb
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\LogInIntec\bin\AutoMapper.xml
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\LogInIntec\bin\Intec.DAL.pdb
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\LogInIntec\bin\Intec.DAL.dll.config
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\LogInIntec\bin\EntityFramework.xml

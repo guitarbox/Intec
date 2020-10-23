@@ -54,10 +54,8 @@ namespace Intec.BL.MapperConfig
         {
             get
             {
-                var config = new AutoMapper.MapperConfiguration(cfg => {
-
-                    //DAL
-                    cfg.CreateMap<DTO.IngresoUsuario, DAL.IngresoUsuario>();
+                var config = new AutoMapper.MapperConfiguration(cfg => {                    
+                    cfg.CreateMap<DAL.Usuarios, DTO.Usuarios>();
                 });
 
                 return config.CreateMapper();

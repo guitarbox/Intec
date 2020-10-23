@@ -7,7 +7,7 @@ using System.Web.Security;
 
 namespace LogInIntec.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : DefaultController
     {
         public ActionResult Index()
         {
@@ -29,7 +29,7 @@ namespace LogInIntec.Controllers
         }
         public JsonResult ObtenerUsuario(string User, string Pass)
         {
-            List<Intec.BL.DTO.IngresoUsuario> Usuario = new List<Intec.BL.DTO.IngresoUsuario>();
+            List<Intec.BL.DTO.Usuarios> Usuario = new List<Intec.BL.DTO.Usuarios>();
             bool error = false;
             string errorMessage = string.Empty;
             try
@@ -42,7 +42,7 @@ namespace LogInIntec.Controllers
                 errorMessage = ex.Message;
             }
 
-            SetDicRta(User, User.Count, error, errorMessage, Intec.BL.BE.UsuarioBE._duration);
+            SetDicRta(Usuario, Usuario.Count, error, errorMessage, Intec.BL.BE.UsuarioBE._duration);
             return Json(ansDic);
         }
 

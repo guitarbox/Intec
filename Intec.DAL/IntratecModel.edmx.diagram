@@ -14,7 +14,7 @@
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_SolicitudesProgramacionVisitas_Ciudades" ManuallyRouted="false" />
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Departamentos_Paises" ManuallyRouted="false" />
         <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.SolicitudContactenos" Width="1.5" PointX="3.375" PointY="5.75" />
-        <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.LogIn" Width="1.5" PointX="5.75" PointY="5.75" />
+        <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.Usuarios" Width="1.5" PointX="5.375" PointY="5.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

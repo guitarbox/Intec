@@ -29,14 +29,6 @@
           <Property Name="FechaModificacion" Type="datetime" />
           <Property Name="IdUsuarioModificacion" Type="int" />
         </EntityType>
-        <EntityType Name="LogIn">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="User" Type="nvarchar" MaxLength="20" />
-          <Property Name="Password" Type="nvarchar" MaxLength="20" />
-        </EntityType>
         <EntityType Name="Paises">
           <Key>
             <PropertyRef Name="IdPais" />
@@ -92,6 +84,14 @@
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User" Type="nvarchar" MaxLength="20" />
+          <Property Name="Password" Type="nvarchar" MaxLength="20" />
+        </EntityType>
         <Association Name="FK_Ciudades_Departamentos">
           <End Role="Departamentos" Type="Self.Departamentos" Multiplicity="1" />
           <End Role="Ciudades" Type="Self.Ciudades" Multiplicity="*" />
@@ -131,11 +131,11 @@
         <EntityContainer Name="DB_A66D31_intratecPrbModelStoreContainer">
           <EntitySet Name="Ciudades" EntityType="Self.Ciudades" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Departamentos" EntityType="Self.Departamentos" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="LogIn" EntityType="Self.LogIn" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Paises" EntityType="Self.Paises" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SolicitudContactenos" EntityType="Self.SolicitudContactenos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SolicitudesProgramacionVisitas" EntityType="Self.SolicitudesProgramacionVisitas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Ciudades_Departamentos" Association="Self.FK_Ciudades_Departamentos">
             <End Role="Departamentos" EntitySet="Departamentos" />
             <End Role="Ciudades" EntitySet="Ciudades" />
@@ -277,7 +277,7 @@
             <End Role="Departamentos" EntitySet="Departamentos" />
           </AssociationSet>
           <EntitySet Name="SolicitudContactenos" EntityType="DB_A66D31_intratecPrbModel.SolicitudContactenos" />
-          <EntitySet Name="LogIn" EntityType="DB_A66D31_intratecPrbModel.LogIn" />
+          <EntitySet Name="Usuarios" EntityType="DB_A66D31_intratecPrbModel.Usuarios" />
         </EntityContainer>
         <EntityType Name="SolicitudContactenos">
           <Key>
@@ -295,7 +295,7 @@
           <Property Name="city" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="country" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="LogIn">
+        <EntityType Name="Usuarios">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -394,9 +394,9 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="LogIn">
-            <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.LogIn">
-              <MappingFragment StoreEntitySet="LogIn">
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="User" ColumnName="User" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
