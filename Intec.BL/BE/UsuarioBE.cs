@@ -8,9 +8,9 @@ namespace Intec.BL.BE
 {
     public class UsuarioBE : _beDefault
     {
-        public List<DTO.Usuarios> ObtenerUsuario(string User, string Pass)
+        public List<DTO.Usuario> ObtenerUsuario(string User, string Pass)
         {
-            return MapperConfig.Config.MapperUsuario.Map<List<DTO.Usuarios>>(new DAL.TE.UsuariosTE().ObtenerUsuario(User, Pass));
+            return MapperConfig.Config.MapperUsuario.Map<List<DTO.Usuario>>(new DAL.TE.UsuariosTE().ObtenerUsuario(User, Pass));
         }
     }
 }

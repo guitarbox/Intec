@@ -3,41 +3,32 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<script>
-    var _ipInfo;
+    <script>
+        var _ipInfo;
 
-    $(document).ready(() => {
-        $.getJSON('https://ipapi.co/json/', function (data) {
-            console.log(JSON.stringify(data, null, 2));
-            _ipInfo = data;
+        $(document).ready(() => {            
         });
 
-        _peticionAjax('@Url.Action("ObtenerUsuario", "Home")', JSON.stringify({ IdDepartamento: $('#User').val() }), true,
-            response => {
-            response => {
-                $("#User").empty()
-                $("#User").append('<option value="">Seleccione...</option>');
-                response.data.forEach(element => {
-                    $("#User").append('<option value="' + element.IdDepartamento + '">' + element.Departamento + '</option>');
-                });
-            });
-    });
-    function Comparar() {
-        var obj = {
-            User: $("#User").val(),
-            Password: $("#Password").val()
+        function Comparar() {            
+            _peticionAjax(
+                '@Url.Action("ObtenerUsuario", "Home")', //url
+                JSON.stringify(
+                    {
+                        User: $("[name='user']").val(),
+                        Pass: $("#password").val()
+                    }
+                ), //parámetros
+                true, //naturaleza: asíncrono o síncrono
+                HacerCuandoResponda //Qué hace cuando resuelva
+                );
         }
 
-        if (obj.User == User || obj.Password == Password) {
-            alert('Usuario encontrado');
+        function HacerCuandoResponda(response) {
+            if (response.data.length > 0) alert('Bienvenido');
+            else alert('Usuario no registrado');
         }
-        else {
-            alert('Usuario no encontrado')
-                }
-            );
-        }
-        }
-</script>
+        
+    </script>
 
 
 <div class="container">
@@ -61,7 +52,7 @@
                         </div>
                         <a href="#">Forgot pasword?</a>
                     </div>
-                    <input type="button" value="LOG IN" class="btn btn-primary w-100 mt-5 mb-5" onclick="Comparar();">
+                    <input id="btn" type="button" value="LOG IN" class="btn btn-primary w-100 mt-5 mb-5" onclick="Comparar();">
                 </form>
             </div>
         </div>

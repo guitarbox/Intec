@@ -10,17 +10,17 @@ namespace Intec.BL.BE
     {
         public List<DTO.Paises> ObtenerPaises()
         {
-            return MapperConfig.Config.MapperAdministracion.Map<List<DTO.Paises>>(new DAL.TE.Administracion().ObtenerPaises());
+            return MapperConfig.Config.MapperAdministracion.Map<List<DTO.Paises>>(new DAL.TE.AdministracionTE().ObtenerPaises());
         }
 
         public List<DTO.Departamentos> ObtenerDepartamentos(int IdPais)
         {
-            return MapperConfig.Config.MapperAdministracion.Map<List<DTO.Departamentos>>(new DAL.TE.Administracion().ObtenerDepartamentos(IdPais));
+            return MapperConfig.Config.MapperAdministracion.Map<List<DTO.Departamentos>>(new DAL.TE.AdministracionTE().ObtenerDepartamentos(IdPais));
         }
 
         public List<DTO.Ciudades> ObtenerCiudades(string IdDepartamento)
         {
-            return MapperConfig.Config.MapperAdministracion.Map<List<DTO.Ciudades>>(new DAL.TE.Administracion().ObtenerCiudades(IdDepartamento));
+            return MapperConfig.Config.MapperAdministracion.Map<List<DTO.Ciudades>>(new DAL.TE.AdministracionTE().ObtenerCiudades(IdDepartamento));
         }
 
     }

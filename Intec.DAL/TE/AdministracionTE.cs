@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Intec.DAL.TE
 {
-    public class Administracion
+    public class AdministracionTE
     {
         public List<Paises> ObtenerPaises()
         {
