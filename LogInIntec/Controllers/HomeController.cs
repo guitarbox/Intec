@@ -29,7 +29,7 @@ namespace LogInIntec.Controllers
         }
         public JsonResult ObtenerUsuario(string User, string Pass)
         {
-            List<Intec.BL.DTO.Usuario> Usuario = new List<Intec.BL.DTO.Usuario>();
+            List<Intec.BL.DTO.IngresoUsuario> Usuario = new List<Intec.BL.DTO.IngresoUsuario>();
             bool error = false;
             string errorMessage = string.Empty;
             try

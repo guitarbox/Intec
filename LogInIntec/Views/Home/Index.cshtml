@@ -12,19 +12,30 @@
             _ipInfo = data;
         });
 
-        _peticionAjax('@Url.Action("ObtenerUsuario", "Home")', '', true,
+        _peticionAjax('@Url.Action("ObtenerUsuario", "Home")', JSON.stringify({ IdDepartamento: $('#User').val() }), true,
             response => {
-                $("#Departamento").empty()
-                $("#Departamento").append('<option value="">Seleccione...</option>');
+            response => {
+                $("#User").empty()
+                $("#User").append('<option value="">Seleccione...</option>');
                 response.data.forEach(element => {
-                    $("#Departamento").append('<option value="' + element.IdDepartamento + '">' + element.Departamento + '</option>');
+                    $("#User").append('<option value="' + element.IdDepartamento + '">' + element.Departamento + '</option>');
                 });
             });
     });
     function Comparar() {
         var obj = {
             User: $("#User").val(),
-            Password: $("#Password").val(),
+            Password: $("#Password").val()
+        }
+
+        if (obj.User == User || obj.Password == Password) {
+            alert('Usuario encontrado');
+        }
+        else {
+            alert('Usuario no encontrado')
+                }
+            );
+        }
         }
 </script>
 
