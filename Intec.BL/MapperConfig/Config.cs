@@ -60,6 +60,7 @@ namespace Intec.BL.MapperConfig
 
                 return config.CreateMapper();
             }
+
         }
 
     }

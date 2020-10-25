@@ -12,5 +12,9 @@ namespace Intec.BL.BE
         {
             return MapperConfig.Config.MapperUsuario.Map<List<DTO.Usuario>>(new DAL.TE.UsuariosTE().ObtenerUsuario(User, Pass));
         }
+        public List<DTO.Usuario> CrearUsuario()
+        {
+            return MapperConfig.Config.MapperUsuario.Map<List<DTO.Usuario>>(new DAL.TE.UsuariosTE().CrearUsuario());
+        }
     }
 }

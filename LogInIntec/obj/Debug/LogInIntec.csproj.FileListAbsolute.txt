@@ -352,3 +352,13 @@ D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\LogInIntec\bin
 D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\LogInIntec\bin\Intec.DAL.pdb
 D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\LogInIntec\bin\Intec.DAL.dll.config
 D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\LogInIntec\bin\EntityFramework.xml
+C:\Users\Ideapad\Desktop\Intec\Intec\LogInIntec\bin\Intec.BL.dll
+C:\Users\Ideapad\Desktop\Intec\Intec\LogInIntec\bin\AutoMapper.dll
+C:\Users\Ideapad\Desktop\Intec\Intec\LogInIntec\bin\Intec.DAL.dll
+C:\Users\Ideapad\Desktop\Intec\Intec\LogInIntec\bin\EntityFramework.dll
+C:\Users\Ideapad\Desktop\Intec\Intec\LogInIntec\bin\Intec.BL.pdb
+C:\Users\Ideapad\Desktop\Intec\Intec\LogInIntec\bin\AutoMapper.pdb
+C:\Users\Ideapad\Desktop\Intec\Intec\LogInIntec\bin\AutoMapper.xml
+C:\Users\Ideapad\Desktop\Intec\Intec\LogInIntec\bin\Intec.DAL.pdb
+C:\Users\Ideapad\Desktop\Intec\Intec\LogInIntec\bin\Intec.DAL.dll.config
+C:\Users\Ideapad\Desktop\Intec\Intec\LogInIntec\bin\EntityFramework.xml

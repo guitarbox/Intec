@@ -3,13 +3,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-    <script>
+<script>
         var _ipInfo;
 
-        $(document).ready(() => {            
+        $(document).ready(() => {
         });
 
-        function Comparar() {            
+        function Comparar() {
             _peticionAjax(
                 '@Url.Action("ObtenerUsuario", "Home")', //url
                 JSON.stringify(
@@ -27,8 +27,25 @@
             if (response.data.length > 0) alert('Bienvenido');
             else alert('Usuario no registrado');
         }
-        
-    </script>
+
+        function CrearUsuario() {
+             _peticionAjax(
+                '@Url.Action("CrearUsuario", "Home")', //url
+                JSON.stringify(
+                    {
+                        User: $("[name='user']").val(),
+                        Pass: $("#password").val()
+                    }
+                ), //parámetros
+                true, //naturaleza: asíncrono o síncrono
+                 HacerCuandoResponda_2//Qué hace cuando resuelva
+                );
+         }
+        function HacerCuandoResponda_2(response) {
+            if (response.data.length > 0) alert('Se pudo');
+            else alert('No se pudo'); //Wil Está al reves??
+        }
+</script>
 
 
 <div class="container">
@@ -53,6 +70,7 @@
                         <a href="#">Forgot pasword?</a>
                     </div>
                     <input id="btn" type="button" value="LOG IN" class="btn btn-primary w-100 mt-5 mb-5" onclick="Comparar();">
+                    <input id="btn" type="button" value="NUEVO USUARIO" class="btn btn-secondary w-100 mt-5 mb-5" onclick="CrearUsuario();">
                 </form>
             </div>
         </div>

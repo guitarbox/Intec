@@ -17,5 +17,24 @@ namespace Intec.DAL.TE
             }
             return res;
         }
+
+        public List<Usuarios> CrearUsuario()
+        {
+            List<Usuarios> ans = new List<Usuarios>();
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                Usuarios Usua = new Usuarios()
+                {
+                    User = "Samir",
+                    Password = "12345"
+                };
+
+                ctx.Usuarios.Add(Usua);
+                ctx.SaveChanges();
+            }
+            return ans;
+
+        }
     }
+
 }
