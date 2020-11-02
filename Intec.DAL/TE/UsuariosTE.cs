@@ -25,8 +25,8 @@ namespace Intec.DAL.TE
             {
                 Usuarios Usua = new Usuarios()
                 {
-                    User = "Samir",
-                    Password = "12345"
+                    User = "Prueba",
+                    Password = "4321"
                 };
 
                 ctx.Usuarios.Add(Usua);
