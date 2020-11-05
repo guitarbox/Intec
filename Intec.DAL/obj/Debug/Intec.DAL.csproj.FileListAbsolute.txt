@@ -34,3 +34,7 @@ C:\Users\Ideapad\Desktop\Intec\Intec\Intec.DAL\obj\Debug\Intec.DAL.csproj.CoreCo
 C:\Users\Ideapad\Desktop\Intec\Intec\Intec.DAL\obj\Debug\Intec.DAL.csproj.CopyComplete
 C:\Users\Ideapad\Desktop\Intec\Intec\Intec.DAL\obj\Debug\Intec.DAL.dll
 C:\Users\Ideapad\Desktop\Intec\Intec\Intec.DAL\obj\Debug\Intec.DAL.pdb
+C:\Users\Ideapad\Desktop\Intec Back Up\Intec\Intec.DAL\obj\Debug\Intec.DAL.csprojAssemblyReference.cache
+C:\Users\Ideapad\Desktop\Intec Back Up\Intec\Intec.DAL\obj\Debug\Intec.DAL.csproj.CoreCompileInputs.cache
+C:\Users\Ideapad\Desktop\Intec Back Up\Intec\Intec.DAL\obj\Debug\Intec.DAL.dll
+C:\Users\Ideapad\Desktop\Intec Back Up\Intec\Intec.DAL\obj\Debug\Intec.DAL.pdb

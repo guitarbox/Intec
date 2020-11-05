@@ -125,6 +125,11 @@
     </AssociationSet>
     <EntitySet Name="SolicitudContactenos" EntityType="DB_A66D31_intratecPrbModel.SolicitudContactenos" />
     <EntitySet Name="Usuarios" EntityType="DB_A66D31_intratecPrbModel.Usuarios" />
+    <EntitySet Name="TiposIdentificacion" EntityType="DB_A66D31_intratecPrbModel.TiposIdentificacion" />
+    <AssociationSet Name="FK_Usuarios_TiposIdentificacion" Association="DB_A66D31_intratecPrbModel.FK_Usuarios_TiposIdentificacion">
+      <End Role="TiposIdentificacion" EntitySet="TiposIdentificacion" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="SolicitudContactenos">
     <Key>
@@ -145,9 +150,49 @@
   <EntityType Name="Usuarios">
     <Key>
       <PropertyRef Name="Id" />
+      <PropertyRef Name="IdUsuario" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="User" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="User" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IdUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Nombres" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Apellidos" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Direccion" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Telefono" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IdTipoIdentificacion" Type="Int32" Nullable="false" />
+    <Property Name="NumeroIdentificacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IdPaisOrigen" Type="Int32" Nullable="false" />
+    <Property Name="FechaUltimoInicioSesion" Type="DateTime" Precision="3" />
+    <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
+    <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+    <Property Name="IdUsuarioModificacion" Type="Int32" />
+    <NavigationProperty Name="TiposIdentificacion" Relationship="DB_A66D31_intratecPrbModel.FK_Usuarios_TiposIdentificacion" FromRole="Usuarios" ToRole="TiposIdentificacion" />
   </EntityType>
+  <EntityType Name="TiposIdentificacion">
+    <Key>
+      <PropertyRef Name="IdTipoIdentificacion" />
+    </Key>
+    <Property Name="IdTipoIdentificacion" Type="Int32" Nullable="false" />
+    <Property Name="TipoIdentificacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Abreviatura" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="true" />
+    <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
+    <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+    <Property Name="IdUsuarioModificacion" Type="Int32" />
+    <NavigationProperty Name="Usuarios" Relationship="DB_A66D31_intratecPrbModel.FK_Usuarios_TiposIdentificacion" FromRole="TiposIdentificacion" ToRole="Usuarios" />
+  </EntityType>
+  <Association Name="FK_Usuarios_TiposIdentificacion">
+    <End Type="DB_A66D31_intratecPrbModel.TiposIdentificacion" Role="TiposIdentificacion" Multiplicity="1" />
+    <End Type="DB_A66D31_intratecPrbModel.Usuarios" Role="Usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TiposIdentificacion">
+        <PropertyRef Name="IdTipoIdentificacion" />
+      </Principal>
+      <Dependent Role="Usuarios">
+        <PropertyRef Name="IdTipoIdentificacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

@@ -89,6 +89,9 @@
     <Compile Include="TE\UsuariosTE.cs" />
     <Compile Include="TE\SolicitudContactenosTE.cs" />
     <Compile Include="TE\SolicitudesProgramacionVIsitasTE.cs" />
+    <Compile Include="TiposIdentificacion.cs">
+      <DependentUpon>IntratecModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Usuarios.cs">
       <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>

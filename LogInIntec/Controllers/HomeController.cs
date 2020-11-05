@@ -14,6 +14,10 @@ namespace LogInIntec.Controllers
             return View();
         }
 
+        public ActionResult NuevoRegistro()
+        {
+            return View();
+        }
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -27,6 +31,9 @@ namespace LogInIntec.Controllers
 
             return View();
         }
+
+
+
         public JsonResult ObtenerUsuario(string User, string Pass)
         {
             List<Intec.BL.DTO.Usuario> Usuario = new List<Intec.BL.DTO.Usuario>();

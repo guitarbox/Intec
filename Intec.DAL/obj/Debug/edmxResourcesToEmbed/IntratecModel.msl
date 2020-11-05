@@ -89,9 +89,34 @@
     <EntitySetMapping Name="Usuarios">
       <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.Usuarios">
         <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+          <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+          <ScalarProperty Name="FechaUltimoInicioSesion" ColumnName="FechaUltimoInicioSesion" />
+          <ScalarProperty Name="IdPaisOrigen" ColumnName="IdPaisOrigen" />
+          <ScalarProperty Name="NumeroIdentificacion" ColumnName="NumeroIdentificacion" />
+          <ScalarProperty Name="IdTipoIdentificacion" ColumnName="IdTipoIdentificacion" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+          <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+          <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="User" ColumnName="User" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TiposIdentificacion">
+      <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.TiposIdentificacion">
+        <MappingFragment StoreEntitySet="TiposIdentificacion">
+          <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+          <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+          <ScalarProperty Name="Abreviatura" ColumnName="Abreviatura" />
+          <ScalarProperty Name="TipoIdentificacion" ColumnName="TipoIdentificacion" />
+          <ScalarProperty Name="IdTipoIdentificacion" ColumnName="IdTipoIdentificacion" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

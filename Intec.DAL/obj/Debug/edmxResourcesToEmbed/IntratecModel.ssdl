@@ -79,13 +79,37 @@
     <Property Name="version" Type="int" />
     <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
+  <EntityType Name="TiposIdentificacion">
+    <Key>
+      <PropertyRef Name="IdTipoIdentificacion" />
+    </Key>
+    <Property Name="IdTipoIdentificacion" Type="int" Nullable="false" />
+    <Property Name="TipoIdentificacion" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Abreviatura" Type="nvarchar" MaxLength="4" Nullable="false" />
+    <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+    <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
+    <Property Name="FechaModificacion" Type="datetime" />
+    <Property Name="IdUsuarioModificacion" Type="int" />
+  </EntityType>
   <EntityType Name="Usuarios">
     <Key>
-      <PropertyRef Name="Id" />
+      <PropertyRef Name="IdUsuario" />
     </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="User" Type="nvarchar" MaxLength="20" />
-    <Property Name="Password" Type="nvarchar" MaxLength="20" />
+    <Property Name="IdUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nombres" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Apellidos" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Direccion" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Telefono" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IdTipoIdentificacion" Type="int" Nullable="false" />
+    <Property Name="NumeroIdentificacion" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IdPaisOrigen" Type="int" Nullable="false" />
+    <Property Name="User" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="FechaUltimoInicioSesion" Type="datetime" />
+    <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+    <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
+    <Property Name="FechaModificacion" Type="datetime" />
+    <Property Name="IdUsuarioModificacion" Type="int" />
   </EntityType>
   <Association Name="FK_Ciudades_Departamentos">
     <End Role="Departamentos" Type="Self.Departamentos" Multiplicity="1" />
@@ -123,6 +147,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Usuarios_TiposIdentificacion">
+    <End Role="TiposIdentificacion" Type="Self.TiposIdentificacion" Multiplicity="1" />
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TiposIdentificacion">
+        <PropertyRef Name="IdTipoIdentificacion" />
+      </Principal>
+      <Dependent Role="Usuarios">
+        <PropertyRef Name="IdTipoIdentificacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="DB_A66D31_intratecPrbModelStoreContainer">
     <EntitySet Name="Ciudades" EntityType="Self.Ciudades" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Departamentos" EntityType="Self.Departamentos" Schema="dbo" store:Type="Tables" />
@@ -130,6 +166,7 @@
     <EntitySet Name="SolicitudContactenos" EntityType="Self.SolicitudContactenos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SolicitudesProgramacionVisitas" EntityType="Self.SolicitudesProgramacionVisitas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TiposIdentificacion" EntityType="Self.TiposIdentificacion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_Ciudades_Departamentos" Association="Self.FK_Ciudades_Departamentos">
       <End Role="Departamentos" EntitySet="Departamentos" />
@@ -142,6 +179,10 @@
     <AssociationSet Name="FK_SolicitudesProgramacionVisitas_Ciudades" Association="Self.FK_SolicitudesProgramacionVisitas_Ciudades">
       <End Role="Ciudades" EntitySet="Ciudades" />
       <End Role="SolicitudesProgramacionVisitas" EntitySet="SolicitudesProgramacionVisitas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Usuarios_TiposIdentificacion" Association="Self.FK_Usuarios_TiposIdentificacion">
+      <End Role="TiposIdentificacion" EntitySet="TiposIdentificacion" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
     </AssociationSet>
   </EntityContainer>
 </Schema>
