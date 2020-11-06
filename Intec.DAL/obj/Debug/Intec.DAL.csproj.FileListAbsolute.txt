@@ -38,3 +38,11 @@ C:\Users\Ideapad\Desktop\Intec Back Up\Intec\Intec.DAL\obj\Debug\Intec.DAL.cspro
 C:\Users\Ideapad\Desktop\Intec Back Up\Intec\Intec.DAL\obj\Debug\Intec.DAL.csproj.CoreCompileInputs.cache
 C:\Users\Ideapad\Desktop\Intec Back Up\Intec\Intec.DAL\obj\Debug\Intec.DAL.dll
 C:\Users\Ideapad\Desktop\Intec Back Up\Intec\Intec.DAL\obj\Debug\Intec.DAL.pdb
+C:\Users\Ideapad\Desktop\Intec Back Up\Intec\Intec.DAL\bin\Debug\Intec.DAL.dll.config
+C:\Users\Ideapad\Desktop\Intec Back Up\Intec\Intec.DAL\bin\Debug\Intec.DAL.dll
+C:\Users\Ideapad\Desktop\Intec Back Up\Intec\Intec.DAL\bin\Debug\Intec.DAL.pdb
+C:\Users\Ideapad\Desktop\Intec Back Up\Intec\Intec.DAL\bin\Debug\EntityFramework.dll
+C:\Users\Ideapad\Desktop\Intec Back Up\Intec\Intec.DAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Ideapad\Desktop\Intec Back Up\Intec\Intec.DAL\bin\Debug\EntityFramework.xml
+C:\Users\Ideapad\Desktop\Intec Back Up\Intec\Intec.DAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Ideapad\Desktop\Intec Back Up\Intec\Intec.DAL\obj\Debug\Intec.DAL.csproj.CopyComplete

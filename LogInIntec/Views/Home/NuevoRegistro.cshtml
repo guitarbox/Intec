@@ -12,51 +12,25 @@
     
     
     <script>
-            $(document).ready(() => {
+        $(document).ready(() => {
+            _peticionAjax('../Home/ObtenerTiposIdentificacion', '', true, response => {
+                $("#TipoDocumento").empty();
+                response.data.forEach(tipo => {
+                    $("#TipoDocumento").append('<option value="' + tipo.IdTipoIdentificacion + '">' + tipo.Abreviatura + '</option>')
+                });
             });
-
-            function CrearUsuario() {
-             _peticionAjax(
-                '@Url.Action("CrearUsuario", "Home")', //url
-                JSON.stringify(
-                    {
-                        User: $("[name='user']").val(),
-                        Pass: $("#password").val()
-                    }
-                ), //parámetros
-                true, //naturaleza: asíncrono o síncrono
-                 HacerCuandoResponda_2//Qué hace cuando resuelva
-                );
-            }
-
-            function HacerCuandoResponda_2(response) {
-                if (response.data.length > 0) alert('No se pudo');
-                else alert('Se pudo'); //Wil Está al reves??
-        }
-
-        @*const btn = document.getElementById(Button);
-        btn.addEventListener("click", CrearUsuario, true);*@
-
-    </script>
-    <script>
-        const nombres = document.getElementById(NameReg);
-        const apellidos = document.getElementById(LastNameReg);
-        const usuario = document.getElementById(User2);
-        const direccion = document.getElementById(Adress);
-        const telefono = document.getElementById(Phone);
-        const abreviatura = document.getElementById(Abrevia);
-        const numeroIdent = document.getElementById(Ident);
-        const contra = document.getElementById(Password);
-        const datos = nombres, apellidos, usuario, direccion, telefono, abreviatura, telefono, numeroIdent, contra;
-        const formu = document.getElementById(form);
-
-        if (datos.value === null || datos.value === '') {
-            alert("Datos incorrectos")
-        }
-
-        formu.addEventListener('submit', function (enviar) {
-            enviar.preventDefault;
         });
+
+        $(document).ready(() => {
+            _peticionAjax('../Home/ObtenerPaises', '', true, response => {
+                $("#pais").empty();
+                response.data.forEach(tipo => {
+                    $("#pais").append('<option value="' + tipo.IdPais + '">' + tipo.Pais + '</option>')
+                });
+            });
+        });
+
+
     </script>
 </head>
 <body>
@@ -76,9 +50,11 @@
                                 <input id="Phone" class="form-control" type="text" name="Phone">
                                 <label for="User2">Nombre usuario</label>
                                 <input id="User2" class="form-control" type="text" name="User2">
-                                <label for="User2">Tipo Documento</label>
+                                <label for="TipoDocumento">Tipo Documento</label>
                                 <select id="TipoDocumento" class="form-control">
-                                    
+                                </select>
+                                <label for="pais">Pais</label>
+                                <select id="pais" class="form-control">
                                 </select>
                             </div>
                             <div class="col-md-6">

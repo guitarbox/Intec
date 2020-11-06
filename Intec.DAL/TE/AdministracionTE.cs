@@ -38,5 +38,15 @@ namespace Intec.DAL.TE
             return res;
         }
 
+        public List<TiposIdentificacion> ObtenerTiposIdentificacion()
+        {
+            List<TiposIdentificacion> res = new List<TiposIdentificacion>();
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                res = ctx.TiposIdentificacion.ToList();
+            }
+            return res;
+        }
+
     } 
 }

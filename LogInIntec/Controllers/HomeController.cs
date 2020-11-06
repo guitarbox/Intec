@@ -71,5 +71,43 @@ namespace LogInIntec.Controllers
             return Json(ansDic);
         }
 
+        public JsonResult ObtenerTiposIdentificacion()
+        {
+            List<Intec.BL.DTO.TipoIdentificacion> tiposId = new List<Intec.BL.DTO.TipoIdentificacion>();
+            bool error = false;
+            string errorMessage = string.Empty;
+            try
+            {
+                tiposId = new Intec.BL.BE.AdministracionBE().ObtenerTiposIdentificacion();
+            }
+            catch (Exception ex)
+            {
+                error = true;
+                errorMessage = ex.Message;
+            }
+
+            SetDicRta(tiposId, tiposId.Count, error, errorMessage, Intec.BL.BE.AdministracionBE._duration);
+            return Json(ansDic);
+        }
+
+        public JsonResult ObtenerPaises()
+        {
+            List<Intec.BL.DTO.Paises> paises = new List<Intec.BL.DTO.Paises>();
+            bool error = false;
+            string errorMessage = string.Empty;
+            try
+            {
+                paises = new Intec.BL.BE.AdministracionBE().ObtenerPaises();
+            }
+            catch (Exception ex)
+            {
+                error = true;
+                errorMessage = ex.Message;
+            }
+
+            SetDicRta(paises, paises.Count, error, errorMessage, Intec.BL.BE.AdministracionBE._duration);
+            return Json(ansDic);
+        }
+
     }
 }

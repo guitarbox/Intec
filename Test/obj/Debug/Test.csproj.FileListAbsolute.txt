@@ -24,3 +24,16 @@ C:\Users\Ideapad\Desktop\Alitan\Interius\!ntec\Intec Solution\Test\obj\Debug\Tes
 C:\Users\Ideapad\Desktop\Alitan\Interius\!ntec\Intec Solution\Test\obj\Debug\Test.csproj.CopyComplete
 C:\Users\Ideapad\Desktop\Alitan\Interius\!ntec\Intec Solution\Test\obj\Debug\Test.exe
 C:\Users\Ideapad\Desktop\Alitan\Interius\!ntec\Intec Solution\Test\obj\Debug\Test.pdb
+C:\Users\Ideapad\Desktop\Intec Back Up\Intec\Test\bin\Debug\Test.exe.config
+C:\Users\Ideapad\Desktop\Intec Back Up\Intec\Test\bin\Debug\Test.exe
+C:\Users\Ideapad\Desktop\Intec Back Up\Intec\Test\bin\Debug\Test.pdb
+C:\Users\Ideapad\Desktop\Intec Back Up\Intec\Test\bin\Debug\Intec.DAL.dll
+C:\Users\Ideapad\Desktop\Intec Back Up\Intec\Test\bin\Debug\EntityFramework.dll
+C:\Users\Ideapad\Desktop\Intec Back Up\Intec\Test\bin\Debug\Intec.DAL.pdb
+C:\Users\Ideapad\Desktop\Intec Back Up\Intec\Test\bin\Debug\Intec.DAL.dll.config
+C:\Users\Ideapad\Desktop\Intec Back Up\Intec\Test\bin\Debug\EntityFramework.xml
+C:\Users\Ideapad\Desktop\Intec Back Up\Intec\Test\obj\Debug\Test.csprojAssemblyReference.cache
+C:\Users\Ideapad\Desktop\Intec Back Up\Intec\Test\obj\Debug\Test.csproj.CoreCompileInputs.cache
+C:\Users\Ideapad\Desktop\Intec Back Up\Intec\Test\obj\Debug\Test.csproj.CopyComplete
+C:\Users\Ideapad\Desktop\Intec Back Up\Intec\Test\obj\Debug\Test.exe
+C:\Users\Ideapad\Desktop\Intec Back Up\Intec\Test\obj\Debug\Test.pdb

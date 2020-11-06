@@ -16,6 +16,8 @@ namespace Intec.BL.MapperConfig
                     cfg.CreateMap<DAL.Paises, DTO.Paises>();
                     cfg.CreateMap<DAL.Departamentos, DTO.Departamentos>();
                     cfg.CreateMap<DAL.Ciudades, DTO.Ciudades>();
+                    cfg.CreateMap<DAL.TiposIdentificacion, DTO.TipoIdentificacion>()
+                    .ForMember(dest => dest.TipoIdentificacionDescripcion, opt => opt.MapFrom(s => s.TipoIdentificacion));
                 });
 
                 return config.CreateMapper();

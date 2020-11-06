@@ -28,3 +28,18 @@ C:\Users\Ideapad\Desktop\Intec\Intec\Intec.BL\obj\Debug\Intec.BL.csproj.CoreComp
 C:\Users\Ideapad\Desktop\Intec\Intec\Intec.BL\obj\Debug\Intec.BL.csproj.CopyComplete
 C:\Users\Ideapad\Desktop\Intec\Intec\Intec.BL\obj\Debug\Intec.BL.dll
 C:\Users\Ideapad\Desktop\Intec\Intec\Intec.BL\obj\Debug\Intec.BL.pdb
+C:\Users\Ideapad\Desktop\Intec Back Up\Intec\Intec.BL\bin\Debug\Intec.BL.dll
+C:\Users\Ideapad\Desktop\Intec Back Up\Intec\Intec.BL\bin\Debug\Intec.BL.pdb
+C:\Users\Ideapad\Desktop\Intec Back Up\Intec\Intec.BL\bin\Debug\Intec.DAL.dll
+C:\Users\Ideapad\Desktop\Intec Back Up\Intec\Intec.BL\bin\Debug\EntityFramework.dll
+C:\Users\Ideapad\Desktop\Intec Back Up\Intec\Intec.BL\bin\Debug\Intec.DAL.pdb
+C:\Users\Ideapad\Desktop\Intec Back Up\Intec\Intec.BL\bin\Debug\Intec.DAL.dll.config
+C:\Users\Ideapad\Desktop\Intec Back Up\Intec\Intec.BL\bin\Debug\AutoMapper.pdb
+C:\Users\Ideapad\Desktop\Intec Back Up\Intec\Intec.BL\bin\Debug\AutoMapper.xml
+C:\Users\Ideapad\Desktop\Intec Back Up\Intec\Intec.BL\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Ideapad\Desktop\Intec Back Up\Intec\Intec.BL\bin\Debug\EntityFramework.xml
+C:\Users\Ideapad\Desktop\Intec Back Up\Intec\Intec.BL\obj\Debug\Intec.BL.csprojAssemblyReference.cache
+C:\Users\Ideapad\Desktop\Intec Back Up\Intec\Intec.BL\obj\Debug\Intec.BL.csproj.CoreCompileInputs.cache
+C:\Users\Ideapad\Desktop\Intec Back Up\Intec\Intec.BL\obj\Debug\Intec.BL.csproj.CopyComplete
+C:\Users\Ideapad\Desktop\Intec Back Up\Intec\Intec.BL\obj\Debug\Intec.BL.dll
+C:\Users\Ideapad\Desktop\Intec Back Up\Intec\Intec.BL\obj\Debug\Intec.BL.pdb
