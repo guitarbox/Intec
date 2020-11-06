@@ -318,8 +318,8 @@
             <End Role="Departamentos" EntitySet="Departamentos" />
           </AssociationSet>
           <EntitySet Name="SolicitudContactenos" EntityType="DB_A66D31_intratecPrbModel.SolicitudContactenos" />
-          <EntitySet Name="Usuarios" EntityType="DB_A66D31_intratecPrbModel.Usuarios" />
           <EntitySet Name="TiposIdentificacion" EntityType="DB_A66D31_intratecPrbModel.TiposIdentificacion" />
+          <EntitySet Name="Usuarios" EntityType="DB_A66D31_intratecPrbModel.Usuarios" />
           <AssociationSet Name="FK_Usuarios_TiposIdentificacion" Association="DB_A66D31_intratecPrbModel.FK_Usuarios_TiposIdentificacion">
             <End Role="TiposIdentificacion" EntitySet="TiposIdentificacion" />
             <End Role="Usuarios" EntitySet="Usuarios" />
@@ -341,29 +341,6 @@
           <Property Name="city" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="country" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="Usuarios">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="IdUsuario" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="User" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IdUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombres" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Apellidos" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Direccion" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Name="Telefono" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IdTipoIdentificacion" Type="Int32" Nullable="false" />
-          <Property Name="NumeroIdentificacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IdPaisOrigen" Type="Int32" Nullable="false" />
-          <Property Name="FechaUltimoInicioSesion" Type="DateTime" Precision="3" />
-          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
-          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioModificacion" Type="Int32" />
-          <NavigationProperty Name="TiposIdentificacion" Relationship="DB_A66D31_intratecPrbModel.FK_Usuarios_TiposIdentificacion" FromRole="Usuarios" ToRole="TiposIdentificacion" />
-        </EntityType>
         <EntityType Name="TiposIdentificacion">
           <Key>
             <PropertyRef Name="IdTipoIdentificacion" />
@@ -376,6 +353,27 @@
           <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
           <Property Name="IdUsuarioModificacion" Type="Int32" />
           <NavigationProperty Name="Usuarios" Relationship="DB_A66D31_intratecPrbModel.FK_Usuarios_TiposIdentificacion" FromRole="TiposIdentificacion" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombres" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Apellidos" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Direccion" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Telefono" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IdTipoIdentificacion" Type="Int32" Nullable="false" />
+          <Property Name="NumeroIdentificacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IdPaisOrigen" Type="Int32" Nullable="false" />
+          <Property Name="User" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="FechaUltimoInicioSesion" Type="DateTime" Precision="3" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioModificacion" Type="Int32" />
+          <NavigationProperty Name="TiposIdentificacion" Relationship="DB_A66D31_intratecPrbModel.FK_Usuarios_TiposIdentificacion" FromRole="Usuarios" ToRole="TiposIdentificacion" />
         </EntityType>
         <Association Name="FK_Usuarios_TiposIdentificacion">
           <End Type="DB_A66D31_intratecPrbModel.TiposIdentificacion" Role="TiposIdentificacion" Multiplicity="1" />
@@ -480,27 +478,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Usuarios">
-            <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.Usuarios">
-              <MappingFragment StoreEntitySet="Usuarios">
-                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
-                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
-                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-                <ScalarProperty Name="FechaUltimoInicioSesion" ColumnName="FechaUltimoInicioSesion" />
-                <ScalarProperty Name="IdPaisOrigen" ColumnName="IdPaisOrigen" />
-                <ScalarProperty Name="NumeroIdentificacion" ColumnName="NumeroIdentificacion" />
-                <ScalarProperty Name="IdTipoIdentificacion" ColumnName="IdTipoIdentificacion" />
-                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
-                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
-                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
-                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
-                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="User" ColumnName="User" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TiposIdentificacion">
             <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.TiposIdentificacion">
               <MappingFragment StoreEntitySet="TiposIdentificacion">
@@ -511,6 +488,27 @@
                 <ScalarProperty Name="Abreviatura" ColumnName="Abreviatura" />
                 <ScalarProperty Name="TipoIdentificacion" ColumnName="TipoIdentificacion" />
                 <ScalarProperty Name="IdTipoIdentificacion" ColumnName="IdTipoIdentificacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="FechaUltimoInicioSesion" ColumnName="FechaUltimoInicioSesion" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="User" ColumnName="User" />
+                <ScalarProperty Name="IdPaisOrigen" ColumnName="IdPaisOrigen" />
+                <ScalarProperty Name="NumeroIdentificacion" ColumnName="NumeroIdentificacion" />
+                <ScalarProperty Name="IdTipoIdentificacion" ColumnName="IdTipoIdentificacion" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

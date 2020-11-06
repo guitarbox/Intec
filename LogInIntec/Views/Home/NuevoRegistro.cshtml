@@ -67,70 +67,34 @@
                 <div class="bg-light mt-5">
                     <h1 class="h2 mt-4 text-primary">Registro de usuario</h1>
                     <form id="form">
-                        <div class="col-md-6">
-                            <div class="form-group mt-4 text-left">
+                        <div class="row">
+                            <div class="col-md-6">
+
                                 <label for="NameReg">Nombres</label>
                                 <input id="NameReg" class="form-control" type="text" name="NameReg">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group mt-4 text-left">
-                                <label for="LastNameReg">Apellidos</label>
-                                <input id="LastNameReg" class="form-control" type="text" name="LastNameReg">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group mt-4 text-left">
-                                <label for="User2">Nombre usuario</label>
-                                <input id="User2" class="form-control" type="text" name="User2">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group mt-4 text-left">
-                                <label for="Address">Dirección</label>
-                                <input id="Adress" class="form-control" type="text" name="Adress">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group mt-4 text-left">
                                 <label for="Phone">Telefono</label>
                                 <input id="Phone" class="form-control" type="text" name="Phone">
+                                <label for="User2">Nombre usuario</label>
+                                <input id="User2" class="form-control" type="text" name="User2">
+                                <label for="User2">Tipo Documento</label>
+                                <select id="TipoDocumento" class="form-control">
+                                    
+                                </select>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <select id="Abrevia" class="custom-select">
-                                <option>Tipo de documento de identidad...</option>
-                                <option>CC</option>
-                                <option>CE</option>
-                                <option>PEP</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group mt-4 text-left">
+                            <div class="col-md-6">
+                                <label for="LastNameReg">Apellidos</label>
+                                <input id="LastNameReg" class="form-control" type="text" name="LastNameReg">
+                                <label for="Address">Dirección</label>
+                                <input id="Adress" class="form-control" type="text" name="Adress">
+                                <label for="Password">Contraseña</label>
+                                <input id="Password" class="form-control" type="password" name="Password">
                                 <label for="Ident">Número de documento de identidad</label>
                                 <input id="Ident" class="form-control" type="text" name="Ident">
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-group mt-4 text-left">
-                                <label for="Password">Contraseña</label>
-                                <input id="Password" class="form-control" type="password" name="Password">
-                            </div>
+                        <div style="text-align:center">
+                            <input id="Button" type="button" value="Crear usuario" class="btn btn-primary w-75 mt-5 mb-5" onclick="CrearUsuario()">
                         </div>
-                        <div class="row justify-content-between pl-3 pr-3 mt-4">
-                            <div class="form-check">
-                                <input id="forgot" class="form-check-input" type="checkbox" name="forgot" value="true">
-                                <label for="forgot" class="form-check-label">Remember me</label>
-                            </div>
-                            <a href="#">Forgot pasword?</a>
-                        </div>
-                        <div>
-                            <a href="~/Views/Home/Index.cshtml">Nuevo usuario</a>
-                        </div>
-                        <input id="Button" type="button" value="Crear usuario" class="btn btn-primary w-75 mt-5 mb-5" onclick="CrearUsuario()">
-
-
-                        <input type="submit" value="enviar" />
                     </form>
                 </div>
             </div>

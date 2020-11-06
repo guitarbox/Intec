@@ -52,22 +52,22 @@ namespace LogInIntec.Controllers
             SetDicRta(Usuario, Usuario.Count, error, errorMessage, Intec.BL.BE.UsuarioBE._duration);
             return Json(ansDic);
         }
-        public JsonResult CrearUsuario()
-        {
-            List<Intec.BL.DTO.Usuario> Usuario = new List<Intec.BL.DTO.Usuario>();
+        
+        public JsonResult CrearUsuario(Intec.BL.DTO.Usuario UsuarioCrear)
+        {            
             bool error = false;
             string errorMessage = string.Empty;
             try
             {
-                Usuario = new Intec.BL.BE.UsuarioBE().CrearUsuario();
+                new Intec.BL.BE.UsuarioBE().CrearUsuario(UsuarioCrear);
             }
             catch (Exception ex)
             {
                 error = true;
                 errorMessage = ex.Message;
-            }
+            }            
 
-            SetDicRta(Usuario, Usuario.Count, error, errorMessage, Intec.BL.BE.UsuarioBE._duration);
+            SetDicRta("", 0, error, errorMessage, Intec.BL.BE.UsuarioBE._duration);
             return Json(ansDic);
         }
 

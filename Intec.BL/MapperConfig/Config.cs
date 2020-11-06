@@ -56,6 +56,12 @@ namespace Intec.BL.MapperConfig
             {
                 var config = new AutoMapper.MapperConfiguration(cfg => {                    
                     cfg.CreateMap<DAL.Usuarios, DTO.Usuario>();
+                    cfg.CreateMap<DAL.TiposIdentificacion, DTO.TipoIdentificacion>()
+                    .ForMember(dest => dest.TipoIdentificacionDescripcion, opt => opt.MapFrom(s=>s.TipoIdentificacion));
+
+                    //DAL
+                    cfg.CreateMap<DTO.Usuario, DAL.Usuarios>()
+                    .ForMember(dest => dest.TiposIdentificacion, opt => opt.Ignore());                    
                 });
 
                 return config.CreateMapper();

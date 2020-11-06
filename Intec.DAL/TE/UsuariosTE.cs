@@ -18,18 +18,22 @@ namespace Intec.DAL.TE
             return res;
         }
 
-        public List<Usuarios> CrearUsuario()
-        {
-            List<Usuarios> ans = new List<Usuarios>();
+        public void CrearUsuario(Usuarios UsuarioCrear)
+        {            
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
-                
-                res2 = ctx.Usuarios.Where(c => c.NameReg.Equals(Usuario) && c.Password.Equals(Pass)).ToList();
-                ctx.Usuarios.Add(res2);
-                ctx.SaveChanges();
+                int us = ctx.Usuarios.Where(u => u.NumeroIdentificacion.Equals(UsuarioCrear.NumeroIdentificacion)).ToList().Count;
+                if(us == 0)
+                {
+                    UsuarioCrear.FechaCreacion = DateTime.Now;                    
+                    ctx.Usuarios.Add(UsuarioCrear);
+                    ctx.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception($"Ya existe un Usuario con Número de Identificación {UsuarioCrear.NumeroIdentificacion}");
+                }
             }
-            return ans;
-
         }
     }
 
