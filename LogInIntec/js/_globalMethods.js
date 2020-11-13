@@ -1,5 +1,4 @@
 ﻿function _peticionAjax(urlServicio, parametros, async, onContinue) {
-    debugger;
     var rta = "";
 
     if (async !== null && async !== undefined && async) {

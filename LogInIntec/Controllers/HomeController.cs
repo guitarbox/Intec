@@ -55,19 +55,8 @@ namespace LogInIntec.Controllers
         
         public JsonResult CrearUsuario(Intec.BL.DTO.Usuario UsuarioCrear)
         {            
-            bool error = false;
-            string errorMessage = string.Empty;
-            try
-            {
-                new Intec.BL.BE.UsuarioBE().CrearUsuario(UsuarioCrear);
-            }
-            catch (Exception ex)
-            {
-                error = true;
-                errorMessage = ex.Message;
-            }            
-
-            SetDicRta("", 0, error, errorMessage, Intec.BL.BE.UsuarioBE._duration);
+            new Intec.BL.BE.UsuarioBE().IngresarUsuario(UsuarioCrear);   
+            SetDicRta("", 0, false, "", Intec.BL.BE.UsuarioBE._duration);
             return Json(ansDic);
         }
 

@@ -176,7 +176,6 @@
     <Property Name="Password" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="FechaUltimoInicioSesion" Type="DateTime" Precision="3" />
     <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
     <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
     <Property Name="IdUsuarioModificacion" Type="Int32" />
     <NavigationProperty Name="TiposIdentificacion" Relationship="DB_A66D31_intratecPrbModel.FK_Usuarios_TiposIdentificacion" FromRole="Usuarios" ToRole="TiposIdentificacion" />

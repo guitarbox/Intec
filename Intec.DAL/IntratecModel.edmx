@@ -112,7 +112,6 @@
           <Property Name="Password" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="FechaUltimoInicioSesion" Type="datetime" />
           <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
-          <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
           <Property Name="FechaModificacion" Type="datetime" />
           <Property Name="IdUsuarioModificacion" Type="int" />
         </EntityType>
@@ -370,7 +369,6 @@
           <Property Name="Password" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="FechaUltimoInicioSesion" Type="DateTime" Precision="3" />
           <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
           <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
           <Property Name="IdUsuarioModificacion" Type="Int32" />
           <NavigationProperty Name="TiposIdentificacion" Relationship="DB_A66D31_intratecPrbModel.FK_Usuarios_TiposIdentificacion" FromRole="Usuarios" ToRole="TiposIdentificacion" />
@@ -496,7 +494,6 @@
               <MappingFragment StoreEntitySet="Usuarios">
                 <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
                 <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
                 <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
                 <ScalarProperty Name="FechaUltimoInicioSesion" ColumnName="FechaUltimoInicioSesion" />
                 <ScalarProperty Name="Password" ColumnName="Password" />

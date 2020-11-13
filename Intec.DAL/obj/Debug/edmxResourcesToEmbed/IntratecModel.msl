@@ -104,7 +104,6 @@
         <MappingFragment StoreEntitySet="Usuarios">
           <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
           <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-          <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
           <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
           <ScalarProperty Name="FechaUltimoInicioSesion" ColumnName="FechaUltimoInicioSesion" />
           <ScalarProperty Name="Password" ColumnName="Password" />

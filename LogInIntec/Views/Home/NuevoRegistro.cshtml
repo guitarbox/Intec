@@ -14,24 +14,61 @@
     <script>
         $(document).ready(() => {
             _peticionAjax('../Home/ObtenerTiposIdentificacion', '', true, response => {
-                $("#TipoDocumento").empty();
+                $("#TipoIdentificacion").empty();
                 response.data.forEach(tipo => {
-                    $("#TipoDocumento").append('<option value="' + tipo.IdTipoIdentificacion + '">' + tipo.Abreviatura + '</option>')
+                    $("#TipoIdentificacion").append('<option value="' + tipo.IdTipoIdentificacion + '">' + tipo.Abreviatura + '</option>')
                 });
             });
         });
 
         $(document).ready(() => {
             _peticionAjax('../Home/ObtenerPaises', '', true, response => {
-                $("#pais").empty();
+                $("#Pais").empty();
                 response.data.forEach(tipo => {
-                    $("#pais").append('<option value="' + tipo.IdPais + '">' + tipo.Pais + '</option>')
+                    $("#Pais").append('<option value="' + tipo.IdPais + '">' + tipo.Pais + '</option>')
                 });
             });
         });
 
+    function CrearUsuario() {
+        var obj = {
+            Nombres: $("#Nombres").val(),
+            Apellidos: $("#Apellidos").val(),
+            Telefono: $("#Telefono").val(),
+            User: $("#User").val(),
+            IdTipoIdentificacion: $("#TipoIdentificacion").val(),
+            IdPaisOrigen: $("#Pais").val(),
+            Direccion: $("#Direccion").val(),
+            Password: $("#Password").val(),
+            NumeroIdentificacion: $("#NumeroIdentificacion").val()
+        }
 
+        if (obj.Nombres == '' || obj.Apellidos == '' || obj.Direccion == '' || obj.User == '' || obj.TipoIdentificacion == '' || obj.Pais == '' || obj.Direccion == '' || obj.Password == '' || obj.NumeroIdentificacion == '') {
+            alert('Los campos con * son obligatorios');
+        }
+        else {
+            _peticionAjax('@Url.Action("CrearUsuario", "Home")', JSON.stringify({ Solicitud: obj }), true,
+                response => {
+                    LimpiarCampos();
+                    alert('Usuario creado');
+                }
+            );
+        }
+    }
+
+    function LimpiarCampos() {
+        $("#Nombres").val('');
+        $("#Apellidos").val('');
+        $("#Telefono").val('');
+        $("#User").val('');
+        $("#TipoIdentificacion").val('');
+        $("#Pais").val('');
+        $("#Direccion").val('');
+        $("#Password").val('');
+        $("#NumeroIdentificacion").val('');
+    }
     </script>
+
 </head>
 <body>
 
@@ -44,28 +81,28 @@
                         <div class="row">
                             <div class="col-md-6">
 
-                                <label for="NameReg">Nombres</label>
-                                <input id="NameReg" class="form-control" type="text" name="NameReg">
-                                <label for="Phone">Telefono</label>
-                                <input id="Phone" class="form-control" type="text" name="Phone">
-                                <label for="User2">Nombre usuario</label>
-                                <input id="User2" class="form-control" type="text" name="User2">
-                                <label for="TipoDocumento">Tipo Documento</label>
-                                <select id="TipoDocumento" class="form-control">
+                                <label for="Nombres">Nombres</label>
+                                <input id="Nombres" class="form-control" type="text" name="Nombres">
+                                <label for="Telefono">Telefono</label>
+                                <input id="Telefono" class="form-control" type="text" name="Telefono">
+                                <label for="User">Nombre usuario</label>
+                                <input id="User" class="form-control" type="text" name="User">
+                                <label for="TipoIdentificacion">Tipo Documento</label>
+                                <select id="TipoIdentificacion" class="form-control">
                                 </select>
-                                <label for="pais">Pais</label>
-                                <select id="pais" class="form-control">
+                                <label for="Pais">Pais</label>
+                                <select id="Pais" class="form-control">
                                 </select>
                             </div>
                             <div class="col-md-6">
-                                <label for="LastNameReg">Apellidos</label>
-                                <input id="LastNameReg" class="form-control" type="text" name="LastNameReg">
-                                <label for="Address">Dirección</label>
-                                <input id="Adress" class="form-control" type="text" name="Adress">
+                                <label for="Apellidos">Apellidos</label>
+                                <input id="Apellidos" class="form-control" type="text" name="Apellidos">
+                                <label for="Direccion">Dirección</label>
+                                <input id="Direccion" class="form-control" type="text" name="Direccion">
                                 <label for="Password">Contraseña</label>
                                 <input id="Password" class="form-control" type="password" name="Password">
-                                <label for="Ident">Número de documento de identidad</label>
-                                <input id="Ident" class="form-control" type="text" name="Ident">
+                                <label for="NumeroIdentificacion">Número de documento de identidad</label>
+                                <input id="NumeroIdentificacion" class="form-control" type="text" name="NumeroIdentificacion">
                             </div>
                         </div>
                         <div style="text-align:center">

@@ -107,7 +107,6 @@
     <Property Name="Password" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="FechaUltimoInicioSesion" Type="datetime" />
     <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
-    <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
     <Property Name="FechaModificacion" Type="datetime" />
     <Property Name="IdUsuarioModificacion" Type="int" />
   </EntityType>
