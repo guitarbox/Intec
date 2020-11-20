@@ -47,7 +47,7 @@
             alert('Los campos con * son obligatorios');
         }
         else {
-            _peticionAjax('@Url.Action("CrearUsuario", "Home")', JSON.stringify({ Solicitud: obj }), true,
+            _peticionAjax('@Url.Action("CrearUsuario", "Home")', JSON.stringify({ UsuarioCrear: obj }), true,
                 response => {
                     LimpiarCampos();
                     alert('Usuario creado');
