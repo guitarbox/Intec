@@ -12,6 +12,30 @@
     <Property Name="FechaModificacion" Type="datetime" />
     <Property Name="IdUsuarioModificacion" Type="int" />
   </EntityType>
+  <EntityType Name="Clientes">
+    <Key>
+      <PropertyRef Name="IdCliente" />
+    </Key>
+    <Property Name="IdCliente" Type="int" Nullable="false" />
+    <Property Name="NumeroDeIdentificacion" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IdTipoDocumento" Type="int" Nullable="false" />
+    <Property Name="Nombres" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Apellidos" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="TelefonoFijo" Type="nvarchar" MaxLength="15" />
+    <Property Name="TelefonoCel1" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="TelefonoCel2" Type="nvarchar" MaxLength="15" />
+    <Property Name="Direccion" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IdCiudad" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IdUso" Type="int" Nullable="false" />
+    <Property Name="Foto" Type="nvarchar" MaxLength="250" />
+    <Property Name="Email1" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email2" Type="nvarchar" MaxLength="50" />
+    <Property Name="IdTipoPersona" Type="int" Nullable="false" />
+    <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+    <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
+    <Property Name="FechaModificacion" Type="datetime" />
+    <Property Name="IdUsuarioModificacion" Type="int" />
+  </EntityType>
   <EntityType Name="Departamentos">
     <Key>
       <PropertyRef Name="IdDepartamento" />
@@ -24,6 +48,29 @@
     <Property Name="FechaModificacion" Type="datetime" />
     <Property Name="IdUsuarioModificacion" Type="int" />
   </EntityType>
+  <EntityType Name="Menus">
+    <Key>
+      <PropertyRef Name="IdMenu" />
+    </Key>
+    <Property Name="IdMenu" Type="int" Nullable="false" />
+    <Property Name="IdMenuPadre" Type="int" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="300" Nullable="false" />
+    <Property Name="Label" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Url" Type="nvarchar" MaxLength="100" />
+    <Property Name="Icono" Type="nvarchar" MaxLength="100" />
+    <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+    <Property Name="IdUsuarioCreacion" Type="int" />
+    <Property Name="FechaModificacion" Type="datetime" />
+    <Property Name="IdUsuarioModificacion" Type="int" />
+  </EntityType>
+  <EntityType Name="MenusRol">
+    <Key>
+      <PropertyRef Name="IdRol" />
+      <PropertyRef Name="IdMenu" />
+    </Key>
+    <Property Name="IdRol" Type="int" Nullable="false" />
+    <Property Name="IdMenu" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="Paises">
     <Key>
       <PropertyRef Name="IdPais" />
@@ -33,6 +80,30 @@
     <Property Name="CodigoPais" Type="nvarchar" MaxLength="5" Nullable="false" />
     <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
     <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
+    <Property Name="FechaModificacion" Type="datetime" />
+    <Property Name="IdUsuarioModificacion" Type="int" />
+  </EntityType>
+  <EntityType Name="Propiedades">
+    <Key>
+      <PropertyRef Name="IdPropiedades" />
+    </Key>
+    <Property Name="IdPropiedades" Type="int" Nullable="false" />
+    <Property Name="IdCliente" Type="int" Nullable="false" />
+    <Property Name="Direccion" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IdUso" Type="int" Nullable="false" />
+    <Property Name="Telefono" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="Foto" Type="nvarchar" MaxLength="250" />
+    <Property Name="Observaciones" Type="nvarchar" MaxLength="1500" />
+    <Property Name="IdTipoPropiedad" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="IdRol" />
+    </Key>
+    <Property Name="IdRol" Type="int" Nullable="false" />
+    <Property Name="Rol" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+    <Property Name="IdUsuarioCreacion" Type="int" />
     <Property Name="FechaModificacion" Type="datetime" />
     <Property Name="IdUsuarioModificacion" Type="int" />
   </EntityType>
@@ -69,15 +140,17 @@
     <Property Name="city" Type="nvarchar" MaxLength="150" Nullable="false" />
     <Property Name="country" Type="nvarchar" MaxLength="150" Nullable="false" />
   </EntityType>
-  <EntityType Name="sysdiagrams">
+  <EntityType Name="TiposDocumento">
     <Key>
-      <PropertyRef Name="diagram_id" />
+      <PropertyRef Name="IdTipoDocumento" />
     </Key>
-    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-    <Property Name="principal_id" Type="int" Nullable="false" />
-    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="version" Type="int" />
-    <Property Name="definition" Type="varbinary(max)" />
+    <Property Name="IdTipoDocumento" Type="int" Nullable="false" />
+    <Property Name="TipoDocumento" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CodigoTipoDocumento" Type="nvarchar" MaxLength="50" />
+    <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+    <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
+    <Property Name="FechaModificacion" Type="datetime" />
+    <Property Name="IdUsuarioModificacion" Type="int" />
   </EntityType>
   <EntityType Name="TiposIdentificacion">
     <Key>
@@ -86,6 +159,40 @@
     <Property Name="IdTipoIdentificacion" Type="int" Nullable="false" />
     <Property Name="TipoIdentificacion" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Abreviatura" Type="nvarchar" MaxLength="4" Nullable="false" />
+    <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+    <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
+    <Property Name="FechaModificacion" Type="datetime" />
+    <Property Name="IdUsuarioModificacion" Type="int" />
+  </EntityType>
+  <EntityType Name="TiposPersona">
+    <Key>
+      <PropertyRef Name="IdTipoPersona" />
+    </Key>
+    <Property Name="IdTipoPersona" Type="int" Nullable="false" />
+    <Property Name="TipoPersona" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CodigoTipoPersona" Type="nvarchar" MaxLength="50" />
+    <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+    <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
+    <Property Name="FechaModificacion" Type="datetime" />
+    <Property Name="IdUsuarioModificacion" Type="int" />
+  </EntityType>
+  <EntityType Name="TiposPropiedades">
+    <Key>
+      <PropertyRef Name="IdTipoPropiedad" />
+    </Key>
+    <Property Name="IdTipoPropiedad" Type="int" Nullable="false" />
+    <Property Name="TipoPropiedad" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+    <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
+    <Property Name="FechaModificacion" Type="datetime" />
+    <Property Name="IdUsuarioModificacion" Type="int" />
+  </EntityType>
+  <EntityType Name="UsosPropiedades">
+    <Key>
+      <PropertyRef Name="IdUso" />
+    </Key>
+    <Property Name="IdUso" Type="int" Nullable="false" />
+    <Property Name="Uso" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
     <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
     <Property Name="FechaModificacion" Type="datetime" />
@@ -100,15 +207,17 @@
     <Property Name="Apellidos" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="Direccion" Type="nvarchar" MaxLength="150" Nullable="false" />
     <Property Name="Telefono" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IdCiudadDomicilio" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="IdTipoIdentificacion" Type="int" Nullable="false" />
     <Property Name="NumeroIdentificacion" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="IdPaisOrigen" Type="int" Nullable="false" />
-    <Property Name="User" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="Password" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="FechaUltimoInicioSesion" Type="datetime" />
     <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+    <Property Name="IdUsuarioCreacion" Type="int" />
     <Property Name="FechaModificacion" Type="datetime" />
     <Property Name="IdUsuarioModificacion" Type="int" />
+    <Property Name="IdRol" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="FK_Ciudades_Departamentos">
     <End Role="Departamentos" Type="Self.Departamentos" Multiplicity="1" />
@@ -119,6 +228,30 @@
       </Principal>
       <Dependent Role="Ciudades">
         <PropertyRef Name="IdDepartamento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Clientes_TiposDocumento">
+    <End Role="TiposDocumento" Type="Self.TiposDocumento" Multiplicity="1" />
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TiposDocumento">
+        <PropertyRef Name="IdTipoDocumento" />
+      </Principal>
+      <Dependent Role="Clientes">
+        <PropertyRef Name="IdTipoDocumento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Clientes_TiposPersona">
+    <End Role="TiposPersona" Type="Self.TiposPersona" Multiplicity="1" />
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TiposPersona">
+        <PropertyRef Name="IdTipoPersona" />
+      </Principal>
+      <Dependent Role="Clientes">
+        <PropertyRef Name="IdTipoPersona" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -134,6 +267,78 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Menus_Menus">
+    <End Role="Menus" Type="Self.Menus" Multiplicity="0..1" />
+    <End Role="Menus1" Type="Self.Menus" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Menus">
+        <PropertyRef Name="IdMenu" />
+      </Principal>
+      <Dependent Role="Menus1">
+        <PropertyRef Name="IdMenuPadre" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MenusRol_Menus">
+    <End Role="Menus" Type="Self.Menus" Multiplicity="1" />
+    <End Role="MenusRol" Type="Self.MenusRol" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Menus">
+        <PropertyRef Name="IdMenu" />
+      </Principal>
+      <Dependent Role="MenusRol">
+        <PropertyRef Name="IdMenu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MenusRol_Roles1">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+    <End Role="MenusRol" Type="Self.MenusRol" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="IdRol" />
+      </Principal>
+      <Dependent Role="MenusRol">
+        <PropertyRef Name="IdRol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Propiedades_Clientes">
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+    <End Role="Propiedades" Type="Self.Propiedades" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clientes">
+        <PropertyRef Name="IdCliente" />
+      </Principal>
+      <Dependent Role="Propiedades">
+        <PropertyRef Name="IdCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Propiedades_TiposPropiedades">
+    <End Role="TiposPropiedades" Type="Self.TiposPropiedades" Multiplicity="1" />
+    <End Role="Propiedades" Type="Self.Propiedades" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TiposPropiedades">
+        <PropertyRef Name="IdTipoPropiedad" />
+      </Principal>
+      <Dependent Role="Propiedades">
+        <PropertyRef Name="IdTipoPropiedad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Propiedades_UsosPropiedades">
+    <End Role="UsosPropiedades" Type="Self.UsosPropiedades" Multiplicity="1" />
+    <End Role="Propiedades" Type="Self.Propiedades" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UsosPropiedades">
+        <PropertyRef Name="IdUso" />
+      </Principal>
+      <Dependent Role="Propiedades">
+        <PropertyRef Name="IdUso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_SolicitudesProgramacionVisitas_Ciudades">
     <End Role="Ciudades" Type="Self.Ciudades" Multiplicity="1" />
     <End Role="SolicitudesProgramacionVisitas" Type="Self.SolicitudesProgramacionVisitas" Multiplicity="*" />
@@ -143,6 +348,30 @@
       </Principal>
       <Dependent Role="SolicitudesProgramacionVisitas">
         <PropertyRef Name="IdCiudad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Usuarios_Ciudades">
+    <End Role="Ciudades" Type="Self.Ciudades" Multiplicity="1" />
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ciudades">
+        <PropertyRef Name="IdCiudad" />
+      </Principal>
+      <Dependent Role="Usuarios">
+        <PropertyRef Name="IdCiudadDomicilio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Usuarios_Roles">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="IdRol" />
+      </Principal>
+      <Dependent Role="Usuarios">
+        <PropertyRef Name="IdRol" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -160,24 +389,72 @@
   </Association>
   <EntityContainer Name="DB_A66D31_intratecPrbModelStoreContainer">
     <EntitySet Name="Ciudades" EntityType="Self.Ciudades" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Departamentos" EntityType="Self.Departamentos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Menus" EntityType="Self.Menus" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MenusRol" EntityType="Self.MenusRol" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Paises" EntityType="Self.Paises" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Propiedades" EntityType="Self.Propiedades" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SolicitudContactenos" EntityType="Self.SolicitudContactenos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SolicitudesProgramacionVisitas" EntityType="Self.SolicitudesProgramacionVisitas" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TiposDocumento" EntityType="Self.TiposDocumento" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TiposIdentificacion" EntityType="Self.TiposIdentificacion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TiposPersona" EntityType="Self.TiposPersona" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TiposPropiedades" EntityType="Self.TiposPropiedades" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UsosPropiedades" EntityType="Self.UsosPropiedades" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_Ciudades_Departamentos" Association="Self.FK_Ciudades_Departamentos">
       <End Role="Departamentos" EntitySet="Departamentos" />
       <End Role="Ciudades" EntitySet="Ciudades" />
     </AssociationSet>
+    <AssociationSet Name="FK_Clientes_TiposDocumento" Association="Self.FK_Clientes_TiposDocumento">
+      <End Role="TiposDocumento" EntitySet="TiposDocumento" />
+      <End Role="Clientes" EntitySet="Clientes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Clientes_TiposPersona" Association="Self.FK_Clientes_TiposPersona">
+      <End Role="TiposPersona" EntitySet="TiposPersona" />
+      <End Role="Clientes" EntitySet="Clientes" />
+    </AssociationSet>
     <AssociationSet Name="FK_Departamentos_Paises" Association="Self.FK_Departamentos_Paises">
       <End Role="Paises" EntitySet="Paises" />
       <End Role="Departamentos" EntitySet="Departamentos" />
     </AssociationSet>
+    <AssociationSet Name="FK_Menus_Menus" Association="Self.FK_Menus_Menus">
+      <End Role="Menus" EntitySet="Menus" />
+      <End Role="Menus1" EntitySet="Menus" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MenusRol_Menus" Association="Self.FK_MenusRol_Menus">
+      <End Role="Menus" EntitySet="Menus" />
+      <End Role="MenusRol" EntitySet="MenusRol" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MenusRol_Roles1" Association="Self.FK_MenusRol_Roles1">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="MenusRol" EntitySet="MenusRol" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Propiedades_Clientes" Association="Self.FK_Propiedades_Clientes">
+      <End Role="Clientes" EntitySet="Clientes" />
+      <End Role="Propiedades" EntitySet="Propiedades" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Propiedades_TiposPropiedades" Association="Self.FK_Propiedades_TiposPropiedades">
+      <End Role="TiposPropiedades" EntitySet="TiposPropiedades" />
+      <End Role="Propiedades" EntitySet="Propiedades" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Propiedades_UsosPropiedades" Association="Self.FK_Propiedades_UsosPropiedades">
+      <End Role="UsosPropiedades" EntitySet="UsosPropiedades" />
+      <End Role="Propiedades" EntitySet="Propiedades" />
+    </AssociationSet>
     <AssociationSet Name="FK_SolicitudesProgramacionVisitas_Ciudades" Association="Self.FK_SolicitudesProgramacionVisitas_Ciudades">
       <End Role="Ciudades" EntitySet="Ciudades" />
       <End Role="SolicitudesProgramacionVisitas" EntitySet="SolicitudesProgramacionVisitas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Usuarios_Ciudades" Association="Self.FK_Usuarios_Ciudades">
+      <End Role="Ciudades" EntitySet="Ciudades" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Usuarios_Roles" Association="Self.FK_Usuarios_Roles">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Usuarios" EntitySet="Usuarios" />
     </AssociationSet>
     <AssociationSet Name="FK_Usuarios_TiposIdentificacion" Association="Self.FK_Usuarios_TiposIdentificacion">
       <End Role="TiposIdentificacion" EntitySet="TiposIdentificacion" />

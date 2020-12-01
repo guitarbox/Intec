@@ -14,7 +14,7 @@ namespace Intec.DAL.TE
             List<Usuarios> res = new List<Usuarios>();
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
-                res = ctx.Usuarios.Where(c => c.User.Equals(Usuario) && c.Password.Equals(Pass)).ToList();
+                //res = ctx.Usuarios.Where(c => c.User.Equals(Usuario) && c.Password.Equals(Pass)).ToList();
             }
             return res;
         }

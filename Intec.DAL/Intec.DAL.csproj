@@ -54,6 +54,9 @@
       <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Class1.cs" />
+    <Compile Include="Clientes.cs">
+      <DependentUpon>IntratecModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Departamentos.cs">
       <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
@@ -72,24 +75,42 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IntratecModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Menus.cs">
+      <DependentUpon>IntratecModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Paises.cs">
       <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Propiedades.cs">
+      <DependentUpon>IntratecModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Roles.cs">
+      <DependentUpon>IntratecModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="SolicitudContactenos.cs">
       <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
     <Compile Include="SolicitudesProgramacionVisitas.cs">
       <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="sysdiagrams.cs">
-      <DependentUpon>IntratecModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="TE\AdministracionTE.cs" />
     <Compile Include="TE\UsuariosTE.cs" />
     <Compile Include="TE\SolicitudContactenosTE.cs" />
     <Compile Include="TE\SolicitudesProgramacionVIsitasTE.cs" />
+    <Compile Include="TiposDocumento.cs">
+      <DependentUpon>IntratecModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="TiposIdentificacion.cs">
+      <DependentUpon>IntratecModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TiposPersona.cs">
+      <DependentUpon>IntratecModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TiposPropiedades.cs">
+      <DependentUpon>IntratecModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UsosPropiedades.cs">
       <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Usuarios.cs">

@@ -12,18 +12,19 @@ namespace Intec.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class SolicitudContactenos
+    public partial class Propiedades
     {
-        public int IdSolicitudContactenos { get; set; }
-        public bool PQRA { get; set; }
-        public string NombreCompleto { get; set; }
+        public int IdPropiedades { get; set; }
+        public int IdCliente { get; set; }
         public string Direccion { get; set; }
-        public string Email { get; set; }
+        public int IdUso { get; set; }
         public string Telefono { get; set; }
-        public string Mensaje { get; set; }
-        public System.DateTime FechaCreacion { get; set; }
-        public string ip { get; set; }
-        public string city { get; set; }
-        public string country { get; set; }
+        public string Foto { get; set; }
+        public string Observaciones { get; set; }
+        public int IdTipoPropiedad { get; set; }
+    
+        public virtual Clientes Clientes { get; set; }
+        public virtual TiposPropiedades TiposPropiedades { get; set; }
+        public virtual UsosPropiedades UsosPropiedades { get; set; }
     }
 }
