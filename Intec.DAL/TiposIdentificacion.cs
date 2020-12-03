@@ -18,6 +18,7 @@ namespace Intec.DAL
         public TiposIdentificacion()
         {
             this.Usuarios = new HashSet<Usuarios>();
+            this.Clientes = new HashSet<Clientes>();
         }
     
         public int IdTipoIdentificacion { get; set; }
@@ -27,8 +28,11 @@ namespace Intec.DAL
         public int IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaModificacion { get; set; }
         public Nullable<int> IdUsuarioModificacion { get; set; }
+        public Nullable<int> CodigoTipoIdFiscal { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Usuarios> Usuarios { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Clientes> Clientes { get; set; }
     }
 }

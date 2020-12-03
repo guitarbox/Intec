@@ -21,9 +21,9 @@
           <Key>
             <PropertyRef Name="IdCliente" />
           </Key>
-          <Property Name="IdCliente" Type="int" Nullable="false" />
-          <Property Name="NumeroDeIdentificacion" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="IdTipoDocumento" Type="int" Nullable="false" />
+          <Property Name="IdCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NumeroIdentificacion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdTipoIdentificacion" Type="int" Nullable="false" />
           <Property Name="Nombres" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Apellidos" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="TelefonoFijo" Type="nvarchar" MaxLength="15" />
@@ -145,18 +145,6 @@
           <Property Name="city" Type="nvarchar" MaxLength="150" Nullable="false" />
           <Property Name="country" Type="nvarchar" MaxLength="150" Nullable="false" />
         </EntityType>
-        <EntityType Name="TiposDocumento">
-          <Key>
-            <PropertyRef Name="IdTipoDocumento" />
-          </Key>
-          <Property Name="IdTipoDocumento" Type="int" Nullable="false" />
-          <Property Name="TipoDocumento" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="CodigoTipoDocumento" Type="nvarchar" MaxLength="50" />
-          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
-          <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
-          <Property Name="FechaModificacion" Type="datetime" />
-          <Property Name="IdUsuarioModificacion" Type="int" />
-        </EntityType>
         <EntityType Name="TiposIdentificacion">
           <Key>
             <PropertyRef Name="IdTipoIdentificacion" />
@@ -164,6 +152,7 @@
           <Property Name="IdTipoIdentificacion" Type="int" Nullable="false" />
           <Property Name="TipoIdentificacion" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Abreviatura" Type="nvarchar" MaxLength="4" Nullable="false" />
+          <Property Name="CodigoTipoIdFiscal" Type="int" />
           <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
           <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
           <Property Name="FechaModificacion" Type="datetime" />
@@ -237,14 +226,14 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Clientes_TiposDocumento">
-          <End Role="TiposDocumento" Type="Self.TiposDocumento" Multiplicity="1" />
+          <End Role="TiposIdentificacion" Type="Self.TiposIdentificacion" Multiplicity="1" />
           <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="TiposDocumento">
-              <PropertyRef Name="IdTipoDocumento" />
+            <Principal Role="TiposIdentificacion">
+              <PropertyRef Name="IdTipoIdentificacion" />
             </Principal>
             <Dependent Role="Clientes">
-              <PropertyRef Name="IdTipoDocumento" />
+              <PropertyRef Name="IdTipoIdentificacion" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -392,6 +381,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="uspConsultaGralCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NumeroIdentificacion" Type="nvarchar" Mode="In" />
+          <Parameter Name="Nombres" Type="nvarchar" Mode="In" />
+          <Parameter Name="Direccion" Type="nvarchar" Mode="In" />
+          <Parameter Name="NroTelefonico" Type="nvarchar" Mode="In" />
+          <Parameter Name="TieneVisitaProgramada" Type="bit" Mode="In" />
+        </Function>
         <EntityContainer Name="DB_A66D31_intratecPrbModelStoreContainer">
           <EntitySet Name="Ciudades" EntityType="Self.Ciudades" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
@@ -403,7 +399,6 @@
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SolicitudContactenos" EntityType="Self.SolicitudContactenos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SolicitudesProgramacionVisitas" EntityType="Self.SolicitudesProgramacionVisitas" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TiposDocumento" EntityType="Self.TiposDocumento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TiposIdentificacion" EntityType="Self.TiposIdentificacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TiposPersona" EntityType="Self.TiposPersona" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TiposPropiedades" EntityType="Self.TiposPropiedades" Schema="dbo" store:Type="Tables" />
@@ -414,7 +409,7 @@
             <End Role="Ciudades" EntitySet="Ciudades" />
           </AssociationSet>
           <AssociationSet Name="FK_Clientes_TiposDocumento" Association="Self.FK_Clientes_TiposDocumento">
-            <End Role="TiposDocumento" EntitySet="TiposDocumento" />
+            <End Role="TiposIdentificacion" EntitySet="TiposIdentificacion" />
             <End Role="Clientes" EntitySet="Clientes" />
           </AssociationSet>
           <AssociationSet Name="FK_Clientes_TiposPersona" Association="Self.FK_Clientes_TiposPersona">
@@ -538,6 +533,17 @@
             <End Role="Menus" EntitySet="Menus" />
             <End Role="Roles" EntitySet="Roles" />
           </AssociationSet>
+          <AssociationSet Name="FK_Clientes_TiposDocumento1" Association="DB_A66D31_intratecPrbModel.FK_Clientes_TiposDocumento1">
+            <End Role="TiposIdentificacion" EntitySet="TiposIdentificacion" />
+            <End Role="Clientes" EntitySet="Clientes" />
+          </AssociationSet>
+          <FunctionImport Name="uspConsultaGralCliente" ReturnType="Collection(DB_A66D31_intratecPrbModel.uspConsultaGralCliente_Result)">
+            <Parameter Name="NumeroIdentificacion" Mode="In" Type="String" />
+            <Parameter Name="Nombres" Mode="In" Type="String" />
+            <Parameter Name="Direccion" Mode="In" Type="String" />
+            <Parameter Name="NroTelefonico" Mode="In" Type="String" />
+            <Parameter Name="TieneVisitaProgramada" Mode="In" Type="Boolean" />
+          </FunctionImport>
         </EntityContainer>
         <EntityType Name="Ciudades">
           <Key>
@@ -580,6 +586,9 @@
           <NavigationProperty Name="TiposDocumento" Relationship="DB_A66D31_intratecPrbModel.FK_Clientes_TiposDocumento" FromRole="Clientes" ToRole="TiposDocumento" />
           <NavigationProperty Name="TiposPersona" Relationship="DB_A66D31_intratecPrbModel.FK_Clientes_TiposPersona" FromRole="Clientes" ToRole="TiposPersona" />
           <NavigationProperty Name="Propiedades" Relationship="DB_A66D31_intratecPrbModel.FK_Propiedades_Clientes" FromRole="Clientes" ToRole="Propiedades" />
+          <Property Name="NumeroIdentificacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IdTipoIdentificacion" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TiposIdentificacion" Relationship="DB_A66D31_intratecPrbModel.FK_Clientes_TiposDocumento1" FromRole="Clientes" ToRole="TiposIdentificacion" />
         </EntityType>
         <EntityType Name="Departamentos">
           <Key>
@@ -714,6 +723,8 @@
           <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
           <Property Name="IdUsuarioModificacion" Type="Int32" />
           <NavigationProperty Name="Usuarios" Relationship="DB_A66D31_intratecPrbModel.FK_Usuarios_TiposIdentificacion" FromRole="TiposIdentificacion" ToRole="Usuarios" />
+          <Property Name="CodigoTipoIdFiscal" Type="Int32" />
+          <NavigationProperty Name="Clientes" Relationship="DB_A66D31_intratecPrbModel.FK_Clientes_TiposDocumento1" FromRole="TiposIdentificacion" ToRole="Clientes" />
         </EntityType>
         <EntityType Name="TiposPersona">
           <Key>
@@ -924,6 +935,34 @@
           <End Type="DB_A66D31_intratecPrbModel.Menus" Role="Menus" Multiplicity="*" />
           <End Type="DB_A66D31_intratecPrbModel.Roles" Role="Roles" Multiplicity="*" />
         </Association>
+        <Association Name="FK_Clientes_TiposDocumento1">
+          <End Type="DB_A66D31_intratecPrbModel.TiposIdentificacion" Role="TiposIdentificacion" Multiplicity="1" />
+          <End Type="DB_A66D31_intratecPrbModel.Clientes" Role="Clientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposIdentificacion">
+              <PropertyRef Name="IdTipoIdentificacion" />
+            </Principal>
+            <Dependent Role="Clientes">
+              <PropertyRef Name="IdTipoIdentificacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="uspConsultaGralCliente_Result">
+          <Property Type="Int32" Name="IdCliente" Nullable="false" />
+          <Property Type="String" Name="NumeroIdentificacion" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Abreviatura" Nullable="false" MaxLength="4" />
+          <Property Type="String" Name="Nombres" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Apellidos" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="TelefonoFijo" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="TelefonoCel1" Nullable="false" MaxLength="15" />
+          <Property Type="String" Name="TelefonoCel2" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Direccion" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Ciudad" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Uso" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Email1" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Email2" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TipoPersona" Nullable="false" MaxLength="50" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -946,6 +985,8 @@
           <EntitySetMapping Name="Clientes">
             <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.Clientes">
               <MappingFragment StoreEntitySet="Clientes">
+                <ScalarProperty Name="IdTipoIdentificacion" ColumnName="IdTipoIdentificacion" />
+                <ScalarProperty Name="NumeroIdentificacion" ColumnName="NumeroIdentificacion" />
                 <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
                 <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
                 <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
@@ -962,8 +1003,6 @@
                 <ScalarProperty Name="TelefonoFijo" ColumnName="TelefonoFijo" />
                 <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
                 <ScalarProperty Name="Nombres" ColumnName="Nombres" />
-                <ScalarProperty Name="IdTipoDocumento" ColumnName="IdTipoDocumento" />
-                <ScalarProperty Name="NumeroDeIdentificacion" ColumnName="NumeroDeIdentificacion" />
                 <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1071,22 +1110,10 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TiposDocumento">
-            <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.TiposDocumento">
-              <MappingFragment StoreEntitySet="TiposDocumento">
-                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
-                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
-                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-                <ScalarProperty Name="CodigoTipoDocumento" ColumnName="CodigoTipoDocumento" />
-                <ScalarProperty Name="TipoDocumento" ColumnName="TipoDocumento" />
-                <ScalarProperty Name="IdTipoDocumento" ColumnName="IdTipoDocumento" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="TiposIdentificacion">
             <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.TiposIdentificacion">
               <MappingFragment StoreEntitySet="TiposIdentificacion">
+                <ScalarProperty Name="CodigoTipoIdFiscal" ColumnName="CodigoTipoIdFiscal" />
                 <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
                 <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
                 <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
@@ -1164,6 +1191,26 @@
               <ScalarProperty Name="IdMenu" ColumnName="IdMenu" />
             </EndProperty>
           </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="uspConsultaGralCliente" FunctionName="DB_A66D31_intratecPrbModel.Store.uspConsultaGralCliente">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB_A66D31_intratecPrbModel.uspConsultaGralCliente_Result">
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="NumeroIdentificacion" ColumnName="NumeroIdentificacion" />
+                <ScalarProperty Name="Abreviatura" ColumnName="Abreviatura" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="TelefonoFijo" ColumnName="TelefonoFijo" />
+                <ScalarProperty Name="TelefonoCel1" ColumnName="TelefonoCel1" />
+                <ScalarProperty Name="TelefonoCel2" ColumnName="TelefonoCel2" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="Uso" ColumnName="Uso" />
+                <ScalarProperty Name="Email1" ColumnName="Email1" />
+                <ScalarProperty Name="Email2" ColumnName="Email2" />
+                <ScalarProperty Name="TipoPersona" ColumnName="TipoPersona" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

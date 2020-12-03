@@ -95,6 +95,7 @@
       <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TE\AdministracionTE.cs" />
+    <Compile Include="TE\ClientesTE.cs" />
     <Compile Include="TE\UsuariosTE.cs" />
     <Compile Include="TE\SolicitudContactenosTE.cs" />
     <Compile Include="TE\SolicitudesProgramacionVIsitasTE.cs" />
@@ -111,6 +112,9 @@
       <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
     <Compile Include="UsosPropiedades.cs">
+      <DependentUpon>IntratecModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="uspConsultaGralCliente_Result.cs">
       <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Usuarios.cs">

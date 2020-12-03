@@ -33,6 +33,7 @@
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Usuarios_Roles" />
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Usuarios_TiposIdentificacion" />
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.MenusRol" />
+        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Clientes_TiposDocumento1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

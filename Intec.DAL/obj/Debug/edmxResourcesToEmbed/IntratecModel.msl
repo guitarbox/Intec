@@ -17,6 +17,8 @@
     <EntitySetMapping Name="Clientes">
       <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.Clientes">
         <MappingFragment StoreEntitySet="Clientes">
+          <ScalarProperty Name="IdTipoIdentificacion" ColumnName="IdTipoIdentificacion" />
+          <ScalarProperty Name="NumeroIdentificacion" ColumnName="NumeroIdentificacion" />
           <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
           <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
           <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
@@ -33,8 +35,6 @@
           <ScalarProperty Name="TelefonoFijo" ColumnName="TelefonoFijo" />
           <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
           <ScalarProperty Name="Nombres" ColumnName="Nombres" />
-          <ScalarProperty Name="IdTipoDocumento" ColumnName="IdTipoDocumento" />
-          <ScalarProperty Name="NumeroDeIdentificacion" ColumnName="NumeroDeIdentificacion" />
           <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -142,22 +142,10 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="TiposDocumento">
-      <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.TiposDocumento">
-        <MappingFragment StoreEntitySet="TiposDocumento">
-          <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
-          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-          <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
-          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-          <ScalarProperty Name="CodigoTipoDocumento" ColumnName="CodigoTipoDocumento" />
-          <ScalarProperty Name="TipoDocumento" ColumnName="TipoDocumento" />
-          <ScalarProperty Name="IdTipoDocumento" ColumnName="IdTipoDocumento" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="TiposIdentificacion">
       <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.TiposIdentificacion">
         <MappingFragment StoreEntitySet="TiposIdentificacion">
+          <ScalarProperty Name="CodigoTipoIdFiscal" ColumnName="CodigoTipoIdFiscal" />
           <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
           <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
           <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
@@ -235,5 +223,25 @@
         <ScalarProperty Name="IdMenu" ColumnName="IdMenu" />
       </EndProperty>
     </AssociationSetMapping>
+    <FunctionImportMapping FunctionImportName="uspConsultaGralCliente" FunctionName="DB_A66D31_intratecPrbModel.Store.uspConsultaGralCliente">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DB_A66D31_intratecPrbModel.uspConsultaGralCliente_Result">
+          <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+          <ScalarProperty Name="NumeroIdentificacion" ColumnName="NumeroIdentificacion" />
+          <ScalarProperty Name="Abreviatura" ColumnName="Abreviatura" />
+          <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+          <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+          <ScalarProperty Name="TelefonoFijo" ColumnName="TelefonoFijo" />
+          <ScalarProperty Name="TelefonoCel1" ColumnName="TelefonoCel1" />
+          <ScalarProperty Name="TelefonoCel2" ColumnName="TelefonoCel2" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+          <ScalarProperty Name="Uso" ColumnName="Uso" />
+          <ScalarProperty Name="Email1" ColumnName="Email1" />
+          <ScalarProperty Name="Email2" ColumnName="Email2" />
+          <ScalarProperty Name="TipoPersona" ColumnName="TipoPersona" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

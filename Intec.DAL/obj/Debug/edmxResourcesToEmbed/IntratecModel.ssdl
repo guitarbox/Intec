@@ -16,9 +16,9 @@
     <Key>
       <PropertyRef Name="IdCliente" />
     </Key>
-    <Property Name="IdCliente" Type="int" Nullable="false" />
-    <Property Name="NumeroDeIdentificacion" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="IdTipoDocumento" Type="int" Nullable="false" />
+    <Property Name="IdCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NumeroIdentificacion" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IdTipoIdentificacion" Type="int" Nullable="false" />
     <Property Name="Nombres" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Apellidos" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="TelefonoFijo" Type="nvarchar" MaxLength="15" />
@@ -140,18 +140,6 @@
     <Property Name="city" Type="nvarchar" MaxLength="150" Nullable="false" />
     <Property Name="country" Type="nvarchar" MaxLength="150" Nullable="false" />
   </EntityType>
-  <EntityType Name="TiposDocumento">
-    <Key>
-      <PropertyRef Name="IdTipoDocumento" />
-    </Key>
-    <Property Name="IdTipoDocumento" Type="int" Nullable="false" />
-    <Property Name="TipoDocumento" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="CodigoTipoDocumento" Type="nvarchar" MaxLength="50" />
-    <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
-    <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
-    <Property Name="FechaModificacion" Type="datetime" />
-    <Property Name="IdUsuarioModificacion" Type="int" />
-  </EntityType>
   <EntityType Name="TiposIdentificacion">
     <Key>
       <PropertyRef Name="IdTipoIdentificacion" />
@@ -159,6 +147,7 @@
     <Property Name="IdTipoIdentificacion" Type="int" Nullable="false" />
     <Property Name="TipoIdentificacion" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Abreviatura" Type="nvarchar" MaxLength="4" Nullable="false" />
+    <Property Name="CodigoTipoIdFiscal" Type="int" />
     <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
     <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
     <Property Name="FechaModificacion" Type="datetime" />
@@ -232,14 +221,14 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Clientes_TiposDocumento">
-    <End Role="TiposDocumento" Type="Self.TiposDocumento" Multiplicity="1" />
+    <End Role="TiposIdentificacion" Type="Self.TiposIdentificacion" Multiplicity="1" />
     <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="TiposDocumento">
-        <PropertyRef Name="IdTipoDocumento" />
+      <Principal Role="TiposIdentificacion">
+        <PropertyRef Name="IdTipoIdentificacion" />
       </Principal>
       <Dependent Role="Clientes">
-        <PropertyRef Name="IdTipoDocumento" />
+        <PropertyRef Name="IdTipoIdentificacion" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -387,6 +376,13 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="uspConsultaGralCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="NumeroIdentificacion" Type="nvarchar" Mode="In" />
+    <Parameter Name="Nombres" Type="nvarchar" Mode="In" />
+    <Parameter Name="Direccion" Type="nvarchar" Mode="In" />
+    <Parameter Name="NroTelefonico" Type="nvarchar" Mode="In" />
+    <Parameter Name="TieneVisitaProgramada" Type="bit" Mode="In" />
+  </Function>
   <EntityContainer Name="DB_A66D31_intratecPrbModelStoreContainer">
     <EntitySet Name="Ciudades" EntityType="Self.Ciudades" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
@@ -398,7 +394,6 @@
     <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SolicitudContactenos" EntityType="Self.SolicitudContactenos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SolicitudesProgramacionVisitas" EntityType="Self.SolicitudesProgramacionVisitas" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="TiposDocumento" EntityType="Self.TiposDocumento" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TiposIdentificacion" EntityType="Self.TiposIdentificacion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TiposPersona" EntityType="Self.TiposPersona" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TiposPropiedades" EntityType="Self.TiposPropiedades" Schema="dbo" store:Type="Tables" />
@@ -409,7 +404,7 @@
       <End Role="Ciudades" EntitySet="Ciudades" />
     </AssociationSet>
     <AssociationSet Name="FK_Clientes_TiposDocumento" Association="Self.FK_Clientes_TiposDocumento">
-      <End Role="TiposDocumento" EntitySet="TiposDocumento" />
+      <End Role="TiposIdentificacion" EntitySet="TiposIdentificacion" />
       <End Role="Clientes" EntitySet="Clientes" />
     </AssociationSet>
     <AssociationSet Name="FK_Clientes_TiposPersona" Association="Self.FK_Clientes_TiposPersona">

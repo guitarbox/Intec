@@ -39,10 +39,13 @@ namespace Intec.DAL
         public int IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaModificacion { get; set; }
         public Nullable<int> IdUsuarioModificacion { get; set; }
+        public string NumeroIdentificacion { get; set; }
+        public int IdTipoIdentificacion { get; set; }
     
         public virtual TiposDocumento TiposDocumento { get; set; }
         public virtual TiposPersona TiposPersona { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Propiedades> Propiedades { get; set; }
+        public virtual TiposIdentificacion TiposIdentificacion { get; set; }
     }
 }
