@@ -4,13 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="2a44f5ae462548488e81dc726cf05437" Name="Diagram1" ZoomLevel="64">
+      <Diagram DiagramId="2a44f5ae462548488e81dc726cf05437" Name="Diagram1" ZoomLevel="57">
         <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.Ciudades" Width="1.5" PointX="5.25" PointY="5.25" />
         <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.Clientes" Width="1.5" PointX="13" PointY="11" />
         <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.Departamentos" Width="1.5" PointX="3" PointY="5.25" />
         <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.Menus" Width="1.5" PointX="6" PointY="9.25" />
         <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.Paises" Width="1.5" PointX="0.75" PointY="5.375" />
-        <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.Propiedades" Width="1.5" PointX="15.25" PointY="12.125" />
         <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.Roles" Width="1.5" PointX="8.25" PointY="0.75" />
         <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.SolicitudContactenos" Width="1.5" PointX="0.75" PointY="9.75" />
         <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.SolicitudesProgramacionVisitas" Width="1.5" PointX="7.5" PointY="4.875" />
@@ -25,15 +24,16 @@
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Usuarios_Ciudades" />
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Clientes_TiposDocumento" />
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Clientes_TiposPersona" />
-        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Propiedades_Clientes" />
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Departamentos_Paises" />
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Menus_Menus" />
-        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Propiedades_TiposPropiedades" />
-        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Propiedades_UsosPropiedades" />
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Usuarios_Roles" />
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Usuarios_TiposIdentificacion" />
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.MenusRol" />
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Clientes_TiposDocumento1" />
+        <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.Propiedades" Width="1.5" PointX="16.5" PointY="12.375" />
+        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Propiedades_Clientes" />
+        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Propiedades_TiposPropiedades" />
+        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Propiedades_UsosPropiedades" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
