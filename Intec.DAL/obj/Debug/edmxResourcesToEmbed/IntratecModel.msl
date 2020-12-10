@@ -81,20 +81,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Propiedades">
-      <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.Propiedades">
-        <MappingFragment StoreEntitySet="Propiedades">
-          <ScalarProperty Name="IdTipoPropiedad" ColumnName="IdTipoPropiedad" />
-          <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
-          <ScalarProperty Name="Foto" ColumnName="Foto" />
-          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
-          <ScalarProperty Name="IdUso" ColumnName="IdUso" />
-          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
-          <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
-          <ScalarProperty Name="IdPropiedades" ColumnName="IdPropiedades" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Roles">
       <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.Roles">
         <MappingFragment StoreEntitySet="Roles">
@@ -243,5 +229,23 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <EntitySetMapping Name="Propiedades">
+      <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.Propiedades">
+        <MappingFragment StoreEntitySet="Propiedades">
+          <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+          <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+          <ScalarProperty Name="IdTipoPropiedad" ColumnName="IdTipoPropiedad" />
+          <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+          <ScalarProperty Name="Foto" ColumnName="Foto" />
+          <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+          <ScalarProperty Name="IdUso" ColumnName="IdUso" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+          <ScalarProperty Name="IdPropiedades" ColumnName="IdPropiedades" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
