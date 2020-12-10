@@ -2,14 +2,12 @@
 <Schema Namespace="DB_A66D31_intratecPrbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityContainer Name="DB_A66D31_intratecPrbEntities1" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Ciudades" EntityType="DB_A66D31_intratecPrbModel.Ciudades" />
-    <EntitySet Name="Clientes" EntityType="DB_A66D31_intratecPrbModel.Clientes" />
     <EntitySet Name="Departamentos" EntityType="DB_A66D31_intratecPrbModel.Departamentos" />
     <EntitySet Name="Menus" EntityType="DB_A66D31_intratecPrbModel.Menus" />
     <EntitySet Name="Paises" EntityType="DB_A66D31_intratecPrbModel.Paises" />
     <EntitySet Name="Roles" EntityType="DB_A66D31_intratecPrbModel.Roles" />
     <EntitySet Name="SolicitudContactenos" EntityType="DB_A66D31_intratecPrbModel.SolicitudContactenos" />
     <EntitySet Name="SolicitudesProgramacionVisitas" EntityType="DB_A66D31_intratecPrbModel.SolicitudesProgramacionVisitas" />
-    <EntitySet Name="TiposDocumento" EntityType="DB_A66D31_intratecPrbModel.TiposDocumento" />
     <EntitySet Name="TiposIdentificacion" EntityType="DB_A66D31_intratecPrbModel.TiposIdentificacion" />
     <EntitySet Name="TiposPersona" EntityType="DB_A66D31_intratecPrbModel.TiposPersona" />
     <EntitySet Name="TiposPropiedades" EntityType="DB_A66D31_intratecPrbModel.TiposPropiedades" />
@@ -26,14 +24,6 @@
     <AssociationSet Name="FK_Usuarios_Ciudades" Association="DB_A66D31_intratecPrbModel.FK_Usuarios_Ciudades">
       <End Role="Ciudades" EntitySet="Ciudades" />
       <End Role="Usuarios" EntitySet="Usuarios" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Clientes_TiposDocumento" Association="DB_A66D31_intratecPrbModel.FK_Clientes_TiposDocumento">
-      <End Role="TiposDocumento" EntitySet="TiposDocumento" />
-      <End Role="Clientes" EntitySet="Clientes" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Clientes_TiposPersona" Association="DB_A66D31_intratecPrbModel.FK_Clientes_TiposPersona">
-      <End Role="TiposPersona" EntitySet="TiposPersona" />
-      <End Role="Clientes" EntitySet="Clientes" />
     </AssociationSet>
     <AssociationSet Name="FK_Departamentos_Paises" Association="DB_A66D31_intratecPrbModel.FK_Departamentos_Paises">
       <End Role="Paises" EntitySet="Paises" />
@@ -55,10 +45,6 @@
       <End Role="Menus" EntitySet="Menus" />
       <End Role="Roles" EntitySet="Roles" />
     </AssociationSet>
-    <AssociationSet Name="FK_Clientes_TiposDocumento1" Association="DB_A66D31_intratecPrbModel.FK_Clientes_TiposDocumento1">
-      <End Role="TiposIdentificacion" EntitySet="TiposIdentificacion" />
-      <End Role="Clientes" EntitySet="Clientes" />
-    </AssociationSet>
     <FunctionImport Name="uspConsultaGralCliente" ReturnType="Collection(DB_A66D31_intratecPrbModel.uspConsultaGralCliente_Result)">
       <Parameter Name="NumeroIdentificacion" Mode="In" Type="String" />
       <Parameter Name="Nombres" Mode="In" Type="String" />
@@ -67,16 +53,25 @@
       <Parameter Name="TieneVisitaProgramada" Mode="In" Type="Boolean" />
     </FunctionImport>
     <EntitySet Name="Propiedades" EntityType="DB_A66D31_intratecPrbModel.Propiedades" />
-    <AssociationSet Name="FK_Propiedades_Clientes" Association="DB_A66D31_intratecPrbModel.FK_Propiedades_Clientes">
-      <End Role="Clientes" EntitySet="Clientes" />
-      <End Role="Propiedades" EntitySet="Propiedades" />
-    </AssociationSet>
     <AssociationSet Name="FK_Propiedades_TiposPropiedades" Association="DB_A66D31_intratecPrbModel.FK_Propiedades_TiposPropiedades">
       <End Role="TiposPropiedades" EntitySet="TiposPropiedades" />
       <End Role="Propiedades" EntitySet="Propiedades" />
     </AssociationSet>
     <AssociationSet Name="FK_Propiedades_UsosPropiedades" Association="DB_A66D31_intratecPrbModel.FK_Propiedades_UsosPropiedades">
       <End Role="UsosPropiedades" EntitySet="UsosPropiedades" />
+      <End Role="Propiedades" EntitySet="Propiedades" />
+    </AssociationSet>
+    <EntitySet Name="Clientes" EntityType="DB_A66D31_intratecPrbModel.Clientes" />
+    <AssociationSet Name="FK_Clientes_TiposDocumento" Association="DB_A66D31_intratecPrbModel.FK_Clientes_TiposDocumento">
+      <End Role="TiposIdentificacion" EntitySet="TiposIdentificacion" />
+      <End Role="Clientes" EntitySet="Clientes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Clientes_TiposPersona" Association="DB_A66D31_intratecPrbModel.FK_Clientes_TiposPersona">
+      <End Role="TiposPersona" EntitySet="TiposPersona" />
+      <End Role="Clientes" EntitySet="Clientes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Propiedades_Clientes" Association="DB_A66D31_intratecPrbModel.FK_Propiedades_Clientes">
+      <End Role="Clientes" EntitySet="Clientes" />
       <End Role="Propiedades" EntitySet="Propiedades" />
     </AssociationSet>
   </EntityContainer>
@@ -94,36 +89,6 @@
     <NavigationProperty Name="Departamentos" Relationship="DB_A66D31_intratecPrbModel.FK_Ciudades_Departamentos" FromRole="Ciudades" ToRole="Departamentos" />
     <NavigationProperty Name="SolicitudesProgramacionVisitas" Relationship="DB_A66D31_intratecPrbModel.FK_SolicitudesProgramacionVisitas_Ciudades" FromRole="Ciudades" ToRole="SolicitudesProgramacionVisitas" />
     <NavigationProperty Name="Usuarios" Relationship="DB_A66D31_intratecPrbModel.FK_Usuarios_Ciudades" FromRole="Ciudades" ToRole="Usuarios" />
-  </EntityType>
-  <EntityType Name="Clientes">
-    <Key>
-      <PropertyRef Name="IdCliente" />
-    </Key>
-    <Property Name="IdCliente" Type="Int32" Nullable="false" />
-    <Property Name="NumeroDeIdentificacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="IdTipoDocumento" Type="Int32" Nullable="false" />
-    <Property Name="Nombres" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Apellidos" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="TelefonoFijo" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-    <Property Name="TelefonoCel1" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
-    <Property Name="TelefonoCel2" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-    <Property Name="Direccion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="IdCiudad" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="IdUso" Type="Int32" Nullable="false" />
-    <Property Name="Foto" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-    <Property Name="Email1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Email2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="IdTipoPersona" Type="Int32" Nullable="false" />
-    <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
-    <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-    <Property Name="IdUsuarioModificacion" Type="Int32" />
-    <NavigationProperty Name="TiposDocumento" Relationship="DB_A66D31_intratecPrbModel.FK_Clientes_TiposDocumento" FromRole="Clientes" ToRole="TiposDocumento" />
-    <NavigationProperty Name="TiposPersona" Relationship="DB_A66D31_intratecPrbModel.FK_Clientes_TiposPersona" FromRole="Clientes" ToRole="TiposPersona" />
-    <Property Name="NumeroIdentificacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="IdTipoIdentificacion" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="TiposIdentificacion" Relationship="DB_A66D31_intratecPrbModel.FK_Clientes_TiposDocumento1" FromRole="Clientes" ToRole="TiposIdentificacion" />
-    <NavigationProperty Name="Propiedades" Relationship="DB_A66D31_intratecPrbModel.FK_Propiedades_Clientes" FromRole="Clientes" ToRole="Propiedades" />
   </EntityType>
   <EntityType Name="Departamentos">
     <Key>
@@ -217,19 +182,6 @@
     <Property Name="country" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Ciudades" Relationship="DB_A66D31_intratecPrbModel.FK_SolicitudesProgramacionVisitas_Ciudades" FromRole="SolicitudesProgramacionVisitas" ToRole="Ciudades" />
   </EntityType>
-  <EntityType Name="TiposDocumento">
-    <Key>
-      <PropertyRef Name="IdTipoDocumento" />
-    </Key>
-    <Property Name="IdTipoDocumento" Type="Int32" Nullable="false" />
-    <Property Name="TipoDocumento" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="CodigoTipoDocumento" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
-    <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-    <Property Name="IdUsuarioModificacion" Type="Int32" />
-    <NavigationProperty Name="Clientes" Relationship="DB_A66D31_intratecPrbModel.FK_Clientes_TiposDocumento" FromRole="TiposDocumento" ToRole="Clientes" />
-  </EntityType>
   <EntityType Name="TiposIdentificacion">
     <Key>
       <PropertyRef Name="IdTipoIdentificacion" />
@@ -243,7 +195,7 @@
     <Property Name="IdUsuarioModificacion" Type="Int32" />
     <NavigationProperty Name="Usuarios" Relationship="DB_A66D31_intratecPrbModel.FK_Usuarios_TiposIdentificacion" FromRole="TiposIdentificacion" ToRole="Usuarios" />
     <Property Name="CodigoTipoIdFiscal" Type="Int32" />
-    <NavigationProperty Name="Clientes" Relationship="DB_A66D31_intratecPrbModel.FK_Clientes_TiposDocumento1" FromRole="TiposIdentificacion" ToRole="Clientes" />
+    <NavigationProperty Name="Clientes" Relationship="DB_A66D31_intratecPrbModel.FK_Clientes_TiposDocumento" FromRole="TiposIdentificacion" ToRole="Clientes" />
   </EntityType>
   <EntityType Name="TiposPersona">
     <Key>
@@ -342,30 +294,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Clientes_TiposDocumento">
-    <End Type="DB_A66D31_intratecPrbModel.TiposDocumento" Role="TiposDocumento" Multiplicity="1" />
-    <End Type="DB_A66D31_intratecPrbModel.Clientes" Role="Clientes" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TiposDocumento">
-        <PropertyRef Name="IdTipoDocumento" />
-      </Principal>
-      <Dependent Role="Clientes">
-        <PropertyRef Name="IdTipoDocumento" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Clientes_TiposPersona">
-    <End Type="DB_A66D31_intratecPrbModel.TiposPersona" Role="TiposPersona" Multiplicity="1" />
-    <End Type="DB_A66D31_intratecPrbModel.Clientes" Role="Clientes" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TiposPersona">
-        <PropertyRef Name="IdTipoPersona" />
-      </Principal>
-      <Dependent Role="Clientes">
-        <PropertyRef Name="IdTipoPersona" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Departamentos_Paises">
     <End Type="DB_A66D31_intratecPrbModel.Paises" Role="Paises" Multiplicity="1" />
     <End Type="DB_A66D31_intratecPrbModel.Departamentos" Role="Departamentos" Multiplicity="*" />
@@ -418,18 +346,6 @@
     <End Type="DB_A66D31_intratecPrbModel.Menus" Role="Menus" Multiplicity="*" />
     <End Type="DB_A66D31_intratecPrbModel.Roles" Role="Roles" Multiplicity="*" />
   </Association>
-  <Association Name="FK_Clientes_TiposDocumento1">
-    <End Type="DB_A66D31_intratecPrbModel.TiposIdentificacion" Role="TiposIdentificacion" Multiplicity="1" />
-    <End Type="DB_A66D31_intratecPrbModel.Clientes" Role="Clientes" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TiposIdentificacion">
-        <PropertyRef Name="IdTipoIdentificacion" />
-      </Principal>
-      <Dependent Role="Clientes">
-        <PropertyRef Name="IdTipoIdentificacion" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <ComplexType Name="uspConsultaGralCliente_Result">
     <Property Type="Int32" Name="IdCliente" Nullable="false" />
     <Property Type="String" Name="NumeroIdentificacion" Nullable="false" MaxLength="50" />
@@ -462,22 +378,10 @@
     <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
     <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
     <Property Name="IdUsuarioModificacion" Type="Int32" />
-    <NavigationProperty Name="Clientes" Relationship="DB_A66D31_intratecPrbModel.FK_Propiedades_Clientes" FromRole="Propiedades" ToRole="Clientes" />
     <NavigationProperty Name="TiposPropiedades" Relationship="DB_A66D31_intratecPrbModel.FK_Propiedades_TiposPropiedades" FromRole="Propiedades" ToRole="TiposPropiedades" />
     <NavigationProperty Name="UsosPropiedades" Relationship="DB_A66D31_intratecPrbModel.FK_Propiedades_UsosPropiedades" FromRole="Propiedades" ToRole="UsosPropiedades" />
+    <NavigationProperty Name="Clientes" Relationship="DB_A66D31_intratecPrbModel.FK_Propiedades_Clientes" FromRole="Propiedades" ToRole="Clientes" />
   </EntityType>
-  <Association Name="FK_Propiedades_Clientes">
-    <End Type="DB_A66D31_intratecPrbModel.Clientes" Role="Clientes" Multiplicity="1" />
-    <End Type="DB_A66D31_intratecPrbModel.Propiedades" Role="Propiedades" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Clientes">
-        <PropertyRef Name="IdCliente" />
-      </Principal>
-      <Dependent Role="Propiedades">
-        <PropertyRef Name="IdCliente" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_Propiedades_TiposPropiedades">
     <End Type="DB_A66D31_intratecPrbModel.TiposPropiedades" Role="TiposPropiedades" Multiplicity="1" />
     <End Type="DB_A66D31_intratecPrbModel.Propiedades" Role="Propiedades" Multiplicity="*" />
@@ -499,6 +403,69 @@
       </Principal>
       <Dependent Role="Propiedades">
         <PropertyRef Name="IdUso" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Clientes">
+    <Key>
+      <PropertyRef Name="IdCliente" />
+    </Key>
+    <Property Name="IdCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NumeroIdentificacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IdTipoIdentificacion" Type="Int32" Nullable="false" />
+    <Property Name="Nombres" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Apellidos" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="TelefonoFijo" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="TelefonoCel1" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="TelefonoCel2" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="Direccion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IdCiudad" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IdUso" Type="Int32" Nullable="false" />
+    <Property Name="Foto" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Email1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Email2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IdTipoPersona" Type="Int32" Nullable="false" />
+    <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
+    <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+    <Property Name="IdUsuarioModificacion" Type="Int32" />
+    <NavigationProperty Name="TiposIdentificacion" Relationship="DB_A66D31_intratecPrbModel.FK_Clientes_TiposDocumento" FromRole="Clientes" ToRole="TiposIdentificacion" />
+    <NavigationProperty Name="TiposPersona" Relationship="DB_A66D31_intratecPrbModel.FK_Clientes_TiposPersona" FromRole="Clientes" ToRole="TiposPersona" />
+    <NavigationProperty Name="Propiedades" Relationship="DB_A66D31_intratecPrbModel.FK_Propiedades_Clientes" FromRole="Clientes" ToRole="Propiedades" />
+  </EntityType>
+  <Association Name="FK_Clientes_TiposDocumento">
+    <End Type="DB_A66D31_intratecPrbModel.TiposIdentificacion" Role="TiposIdentificacion" Multiplicity="1" />
+    <End Type="DB_A66D31_intratecPrbModel.Clientes" Role="Clientes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TiposIdentificacion">
+        <PropertyRef Name="IdTipoIdentificacion" />
+      </Principal>
+      <Dependent Role="Clientes">
+        <PropertyRef Name="IdTipoIdentificacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Clientes_TiposPersona">
+    <End Type="DB_A66D31_intratecPrbModel.TiposPersona" Role="TiposPersona" Multiplicity="1" />
+    <End Type="DB_A66D31_intratecPrbModel.Clientes" Role="Clientes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TiposPersona">
+        <PropertyRef Name="IdTipoPersona" />
+      </Principal>
+      <Dependent Role="Clientes">
+        <PropertyRef Name="IdTipoPersona" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Propiedades_Clientes">
+    <End Type="DB_A66D31_intratecPrbModel.Clientes" Role="Clientes" Multiplicity="1" />
+    <End Type="DB_A66D31_intratecPrbModel.Propiedades" Role="Propiedades" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clientes">
+        <PropertyRef Name="IdCliente" />
+      </Principal>
+      <Dependent Role="Propiedades">
+        <PropertyRef Name="IdCliente" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

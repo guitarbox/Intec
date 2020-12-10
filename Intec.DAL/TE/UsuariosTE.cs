@@ -37,6 +37,19 @@ namespace Intec.DAL.TE
 
             }
         }
+    
+        /**
+         * 
+         */
+        public List<Usuarios> GetUsuariosByIdRol(int IdRol)
+        {
+            List<Usuarios> res = new List<Usuarios>();
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                res = ctx.Usuarios.Where(u => u.IdRol == IdRol).ToList();
+            }
+            return res;
+        }
     }
 
 }

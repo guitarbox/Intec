@@ -33,8 +33,7 @@ namespace Intec.DAL.TE
                 res = ctx.Clientes.Where(c => c.IdCliente == IdCliente).FirstOrDefault();
                 if (res != null)
                 {
-                    res.Propiedades.ToList();
-                    ctx.Entry(res).Reference(r => r.TiposDocumento).Load();
+                    res.Propiedades.ToList();                    
                     ctx.Entry(res).Reference(r => r.TiposIdentificacion).Load();
                     ctx.Entry(res).Reference(r => r.TiposPersona).Load();
                 }                
@@ -51,23 +50,28 @@ namespace Intec.DAL.TE
             {
                 Clientes clienteAModificar = ctx.Clientes.Where(c => c.IdCliente == Cliente.IdCliente).FirstOrDefault();
 
-                clienteAModificar.Nombres = Cliente.Nombres;
-                clienteAModificar.Apellidos = Cliente.Apellidos;
-                clienteAModificar.TelefonoFijo = Cliente.TelefonoFijo;
-                clienteAModificar.TelefonoCel1 = Cliente.TelefonoCel1;
-                clienteAModificar.TelefonoCel2 = Cliente.TelefonoCel2;
-                clienteAModificar.Direccion = Cliente.Direccion;
-                clienteAModificar.IdCiudad = Cliente.IdCiudad;
-                clienteAModificar.IdUso = Cliente.IdUso;
-                clienteAModificar.Foto = Cliente.Foto;
-                clienteAModificar.Email1 = Cliente.Email1;
-                clienteAModificar.Email2 = Cliente.Email2;
-                clienteAModificar.IdTipoPersona = Cliente.IdTipoPersona;
-                
-                clienteAModificar.FechaModificacion = DateTime.Now;
-                clienteAModificar.IdUsuarioModificacion = IdUsuarioModificacion;
+                if (clienteAModificar != null)
+                {
+                    clienteAModificar.Nombres = Cliente.Nombres;
+                    clienteAModificar.Apellidos = Cliente.Apellidos;
+                    clienteAModificar.TelefonoFijo = Cliente.TelefonoFijo;
+                    clienteAModificar.TelefonoCel1 = Cliente.TelefonoCel1;
+                    clienteAModificar.TelefonoCel2 = Cliente.TelefonoCel2;
+                    clienteAModificar.Direccion = Cliente.Direccion;
+                    clienteAModificar.IdCiudad = Cliente.IdCiudad;
+                    clienteAModificar.IdUso = Cliente.IdUso;
+                    clienteAModificar.Foto = Cliente.Foto;
+                    clienteAModificar.Email1 = Cliente.Email1;
+                    clienteAModificar.Email2 = Cliente.Email2;
+                    clienteAModificar.IdTipoPersona = Cliente.IdTipoPersona;
 
-                ctx.SaveChanges();
+                    clienteAModificar.FechaModificacion = DateTime.Now;
+                    clienteAModificar.IdUsuarioModificacion = IdUsuarioModificacion;
+
+                    ctx.SaveChanges();
+                }
+                else
+                    throw new Exception("No existe cliente");
             }
         }
 

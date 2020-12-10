@@ -87,7 +87,7 @@
     <Key>
       <PropertyRef Name="IdPropiedades" />
     </Key>
-    <Property Name="IdPropiedades" Type="int" Nullable="false" />
+    <Property Name="IdPropiedades" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdCliente" Type="int" Nullable="false" />
     <Property Name="Direccion" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="IdUso" Type="int" Nullable="false" />
