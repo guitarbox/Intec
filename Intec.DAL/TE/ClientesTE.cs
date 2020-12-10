@@ -88,9 +88,24 @@ namespace Intec.DAL.TE
         /**
          * 5) 
          */
-        public void EditarPropiedad()
+        public void EditarPropiedad(Propiedades propiedad, int IdUsuarioModificacion)
         {
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                Propiedades PropiedadModificar = ctx.Propiedades.Where(c => c.IdPropiedades == propiedad.IdPropiedades).FirstOrDefault();
 
+                PropiedadModificar.Direccion = propiedad.Direccion;
+                PropiedadModificar.IdUso = propiedad.IdUso;
+                PropiedadModificar.Telefono = propiedad.Telefono;
+                PropiedadModificar.Foto = propiedad.Foto;
+                PropiedadModificar.Observaciones = propiedad.Observaciones;
+                PropiedadModificar.IdTipoPropiedad = propiedad.IdTipoPropiedad;
+
+                PropiedadModificar.FechaModificacion = DateTime.Now;
+                PropiedadModificar.IdUsuarioModificacion = IdUsuarioModificacion;
+
+                ctx.SaveChanges();
+            }
         }
 
         /**
