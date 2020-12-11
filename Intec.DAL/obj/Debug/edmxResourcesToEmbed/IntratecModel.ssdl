@@ -48,6 +48,36 @@
     <Property Name="FechaModificacion" Type="datetime" />
     <Property Name="IdUsuarioModificacion" Type="int" />
   </EntityType>
+  <EntityType Name="Formatos">
+    <Key>
+      <PropertyRef Name="IdFormato" />
+    </Key>
+    <Property Name="IdFormato" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NroFormato" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Formato" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="ConsecutivoInicial" Type="int" Nullable="false" />
+    <Property Name="ConsecutivoFinal" Type="int" Nullable="false" />
+    <Property Name="Mascara" Type="int" Nullable="false" />
+    <Property Name="Activo" Type="bit" Nullable="false" />
+    <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+    <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
+    <Property Name="FechaModificacion" Type="datetime" />
+    <Property Name="IdUsuarioModificacion" Type="int" />
+  </EntityType>
+  <EntityType Name="KardexPapeleria">
+    <Key>
+      <PropertyRef Name="IdEntradaPapeleria" />
+    </Key>
+    <Property Name="IdEntradaPapeleria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdTipoMovimiento" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="IdFormato" Type="int" Nullable="false" />
+    <Property Name="IdInspector" Type="int" />
+    <Property Name="ConsecutivoInicial" Type="int" Nullable="false" />
+    <Property Name="ConsecutivoFinal" Type="int" Nullable="false" />
+    <Property Name="Observaciones" Type="nvarchar" MaxLength="1000" />
+    <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+    <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="Menus">
     <Key>
       <PropertyRef Name="IdMenu" />
@@ -157,6 +187,13 @@
     <Property Name="FechaModificacion" Type="datetime" />
     <Property Name="IdUsuarioModificacion" Type="int" />
   </EntityType>
+  <EntityType Name="TiposMovimientoKardex">
+    <Key>
+      <PropertyRef Name="IdTipoMovimiento" />
+    </Key>
+    <Property Name="IdTipoMovimiento" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="TipoMovimiento" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
   <EntityType Name="TiposPersona">
     <Key>
       <PropertyRef Name="IdTipoPersona" />
@@ -257,6 +294,42 @@
       </Principal>
       <Dependent Role="Departamentos">
         <PropertyRef Name="IdPais" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KardexPapeleria_Formatos">
+    <End Role="Formatos" Type="Self.Formatos" Multiplicity="1" />
+    <End Role="KardexPapeleria" Type="Self.KardexPapeleria" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Formatos">
+        <PropertyRef Name="IdFormato" />
+      </Principal>
+      <Dependent Role="KardexPapeleria">
+        <PropertyRef Name="IdFormato" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KardexPapeleria_TiposMovimientoKardex">
+    <End Role="TiposMovimientoKardex" Type="Self.TiposMovimientoKardex" Multiplicity="1" />
+    <End Role="KardexPapeleria" Type="Self.KardexPapeleria" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TiposMovimientoKardex">
+        <PropertyRef Name="IdTipoMovimiento" />
+      </Principal>
+      <Dependent Role="KardexPapeleria">
+        <PropertyRef Name="IdTipoMovimiento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_KardexPapeleria_Usuarios">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+    <End Role="KardexPapeleria" Type="Self.KardexPapeleria" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="KardexPapeleria">
+        <PropertyRef Name="IdInspector" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -391,6 +464,8 @@
     <EntitySet Name="Ciudades" EntityType="Self.Ciudades" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Departamentos" EntityType="Self.Departamentos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Formatos" EntityType="Self.Formatos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="KardexPapeleria" EntityType="Self.KardexPapeleria" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Menus" EntityType="Self.Menus" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MenusRol" EntityType="Self.MenusRol" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Paises" EntityType="Self.Paises" Schema="dbo" store:Type="Tables" />
@@ -399,6 +474,7 @@
     <EntitySet Name="SolicitudContactenos" EntityType="Self.SolicitudContactenos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SolicitudesProgramacionVisitas" EntityType="Self.SolicitudesProgramacionVisitas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TiposIdentificacion" EntityType="Self.TiposIdentificacion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TiposMovimientoKardex" EntityType="Self.TiposMovimientoKardex" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TiposPersona" EntityType="Self.TiposPersona" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TiposPropiedades" EntityType="Self.TiposPropiedades" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UsosPropiedades" EntityType="Self.UsosPropiedades" Schema="dbo" store:Type="Tables" />
@@ -418,6 +494,18 @@
     <AssociationSet Name="FK_Departamentos_Paises" Association="Self.FK_Departamentos_Paises">
       <End Role="Paises" EntitySet="Paises" />
       <End Role="Departamentos" EntitySet="Departamentos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KardexPapeleria_Formatos" Association="Self.FK_KardexPapeleria_Formatos">
+      <End Role="Formatos" EntitySet="Formatos" />
+      <End Role="KardexPapeleria" EntitySet="KardexPapeleria" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KardexPapeleria_TiposMovimientoKardex" Association="Self.FK_KardexPapeleria_TiposMovimientoKardex">
+      <End Role="TiposMovimientoKardex" EntitySet="TiposMovimientoKardex" />
+      <End Role="KardexPapeleria" EntitySet="KardexPapeleria" />
+    </AssociationSet>
+    <AssociationSet Name="FK_KardexPapeleria_Usuarios" Association="Self.FK_KardexPapeleria_Usuarios">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="KardexPapeleria" EntitySet="KardexPapeleria" />
     </AssociationSet>
     <AssociationSet Name="FK_Menus_Menus" Association="Self.FK_Menus_Menus">
       <End Role="Menus" EntitySet="Menus" />

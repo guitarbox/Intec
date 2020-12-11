@@ -41,6 +41,9 @@ namespace Intec.DAL
         public virtual DbSet<Usuarios> Usuarios { get; set; }
         public virtual DbSet<Propiedades> Propiedades { get; set; }
         public virtual DbSet<Clientes> Clientes { get; set; }
+        public virtual DbSet<Formatos> Formatos { get; set; }
+        public virtual DbSet<KardexPapeleria> KardexPapeleria { get; set; }
+        public virtual DbSet<TiposMovimientoKardex> TiposMovimientoKardex { get; set; }
     
         public virtual ObjectResult<uspConsultaGralCliente_Result> uspConsultaGralCliente(string numeroIdentificacion, string nombres, string direccion, string nroTelefonico, Nullable<bool> tieneVisitaProgramada)
         {

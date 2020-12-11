@@ -12,34 +12,26 @@ namespace Intec.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Usuarios
+    public partial class Formatos
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Usuarios()
+        public Formatos()
         {
             this.KardexPapeleria = new HashSet<KardexPapeleria>();
         }
     
-        public int IdUsuario { get; set; }
-        public string Nombres { get; set; }
-        public string Apellidos { get; set; }
-        public string Direccion { get; set; }
-        public string Telefono { get; set; }
-        public string IdCiudadDomicilio { get; set; }
-        public int IdTipoIdentificacion { get; set; }
-        public string NumeroIdentificacion { get; set; }
-        public int IdPaisOrigen { get; set; }
-        public string Password { get; set; }
-        public Nullable<System.DateTime> FechaUltimoInicioSesion { get; set; }
+        public int IdFormato { get; set; }
+        public string NroFormato { get; set; }
+        public string Formato { get; set; }
+        public int ConsecutivoInicial { get; set; }
+        public int ConsecutivoFinal { get; set; }
+        public int Mascara { get; set; }
+        public bool Activo { get; set; }
         public System.DateTime FechaCreacion { get; set; }
-        public Nullable<int> IdUsuarioCreacion { get; set; }
+        public int IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaModificacion { get; set; }
         public Nullable<int> IdUsuarioModificacion { get; set; }
-        public int IdRol { get; set; }
     
-        public virtual Ciudades Ciudades { get; set; }
-        public virtual Roles Roles { get; set; }
-        public virtual TiposIdentificacion TiposIdentificacion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<KardexPapeleria> KardexPapeleria { get; set; }
     }
