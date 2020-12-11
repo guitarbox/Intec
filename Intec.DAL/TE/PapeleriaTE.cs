@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,14 +37,14 @@ namespace Intec.DAL.TE
             }
 
 
-          
+
         }
 
         public List<Formatos> ConsultarFormatos()
         {
             List<Formatos> res = new List<Formatos>();
 
-            using(var ctx = new DB_A66D31_intratecPrbEntities1())
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
                 res = ctx.Formatos.ToList();
             }
@@ -52,8 +53,33 @@ namespace Intec.DAL.TE
 
         }
 
+        public Formatos ConsultarFormatos(int IdFormato)
+        {
+            Formatos res = new Formatos();
+
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                res = ctx.Formatos.Where(f=>f.IdFormato == IdFormato).FirstOrDefault();
+            }
+
+            return res;
+        }
+
+        public void EliminarFormato(int IdFormato)
+        {
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                Formatos formatoAEliminar = ctx.Formatos.Where(f => f.IdFormato == IdFormato).FirstOrDefault();
+                if (formatoAEliminar.KardexPapeleria.Count == 0)
+                {
+                    ctx.Formatos.Remove(formatoAEliminar);
+                    ctx.SaveChanges();
+                }
+                else
+                    throw new Exception("No se puede eliminar el formato, tiene movimientos.");
+            }
+        }
+        
         //Kárdex, solo tendrá insert
-
-
-
     }
+}
