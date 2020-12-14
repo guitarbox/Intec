@@ -12,20 +12,17 @@ namespace Intec.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class KardexPapeleria
+    public partial class TramiteAsignacionConsecutivoInspector
     {
-        public int IdEntradaPapeleria { get; set; }
-        public string IdTipoMovimiento { get; set; }
         public int IdFormato { get; set; }
-        public Nullable<int> IdInspector { get; set; }
-        public int ConsecutivoInicial { get; set; }
-        public int ConsecutivoFinal { get; set; }
-        public string Observaciones { get; set; }
+        public int IdInspector { get; set; }
+        public int Consecutivo { get; set; }
+        public int Secuencia { get; set; }
+        public string Tramite { get; set; }
         public System.DateTime FechaCreacion { get; set; }
         public int IdUsuarioCreacion { get; set; }
     
         public virtual Formatos Formatos { get; set; }
-        public virtual TiposMovimientoKardex TiposMovimientoKardex { get; set; }
         public virtual Usuarios Usuarios { get; set; }
     }
 }

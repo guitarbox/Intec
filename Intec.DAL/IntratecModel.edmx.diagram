@@ -33,11 +33,14 @@
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Clientes_TiposPersona" />
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Propiedades_Clientes" />
         <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.Formatos" Width="1.5" PointX="10.5" PointY="0.75" />
-        <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.KardexPapeleria" Width="1.5" PointX="12.75" PointY="5.875" />
-        <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.TiposMovimientoKardex" Width="1.5" PointX="10.5" PointY="10.875" />
-        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_KardexPapeleria_Formatos" />
-        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_KardexPapeleria_TiposMovimientoKardex" />
-        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_KardexPapeleria_Usuarios" />
+        <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.ConsecutivosInspectores" Width="1.5" PointX="15.75" PointY="3.5" />
+        <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.EstadosConsecutivosInspector" Width="1.5" PointX="13.5" PointY="18.25" />
+        <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.TramiteAsignacionConsecutivoInspector" Width="1.5" PointX="12.75" PointY="1.75" />
+        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_ConsecutivosInspectores_EstadosConsecutivosInspector" />
+        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_ConsecutivosInspectores_EstadosConsecutivosInspector1" />
+        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_ConsecutivosInspectores_Usuarios" />
+        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_TramiteAsignacionConsecutivoInspector_Formatos" />
+        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_TramiteAsignacionConsecutivoInspector_Usuarios" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

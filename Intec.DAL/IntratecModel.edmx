@@ -41,6 +41,22 @@
           <Property Name="FechaModificacion" Type="datetime" />
           <Property Name="IdUsuarioModificacion" Type="int" />
         </EntityType>
+        <EntityType Name="ConsecutivosInspectores">
+          <Key>
+            <PropertyRef Name="IdFormato" />
+            <PropertyRef Name="IdInspector" />
+            <PropertyRef Name="Consecutivo" />
+          </Key>
+          <Property Name="IdFormato" Type="int" Nullable="false" />
+          <Property Name="IdInspector" Type="int" Nullable="false" />
+          <Property Name="Consecutivo" Type="int" Nullable="false" />
+          <Property Name="IdEstadoConsecutivoInspector" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="IdVisita" Type="nvarchar" MaxLength="50" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
+          <Property Name="FechaModificacion" Type="datetime" />
+          <Property Name="IdUsuarioModificacion" Type="int" />
+        </EntityType>
         <EntityType Name="Departamentos">
           <Key>
             <PropertyRef Name="IdDepartamento" />
@@ -52,6 +68,15 @@
           <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
           <Property Name="FechaModificacion" Type="datetime" />
           <Property Name="IdUsuarioModificacion" Type="int" />
+        </EntityType>
+        <EntityType Name="EstadosConsecutivosInspector">
+          <Key>
+            <PropertyRef Name="IdEstadoConsecutivoInspector" />
+          </Key>
+          <Property Name="IdEstadoConsecutivoInspector" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="EstadoConsecutivoInspector" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Formatos">
           <Key>
@@ -68,20 +93,6 @@
           <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
           <Property Name="FechaModificacion" Type="datetime" />
           <Property Name="IdUsuarioModificacion" Type="int" />
-        </EntityType>
-        <EntityType Name="KardexPapeleria">
-          <Key>
-            <PropertyRef Name="IdEntradaPapeleria" />
-          </Key>
-          <Property Name="IdEntradaPapeleria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="IdTipoMovimiento" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="IdFormato" Type="int" Nullable="false" />
-          <Property Name="IdInspector" Type="int" />
-          <Property Name="ConsecutivoInicial" Type="int" Nullable="false" />
-          <Property Name="ConsecutivoFinal" Type="int" Nullable="false" />
-          <Property Name="Observaciones" Type="nvarchar" MaxLength="1000" />
-          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
-          <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Menus">
           <Key>
@@ -192,13 +203,6 @@
           <Property Name="FechaModificacion" Type="datetime" />
           <Property Name="IdUsuarioModificacion" Type="int" />
         </EntityType>
-        <EntityType Name="TiposMovimientoKardex">
-          <Key>
-            <PropertyRef Name="IdTipoMovimiento" />
-          </Key>
-          <Property Name="IdTipoMovimiento" Type="nvarchar" MaxLength="10" Nullable="false" />
-          <Property Name="TipoMovimiento" Type="nvarchar" MaxLength="50" Nullable="false" />
-        </EntityType>
         <EntityType Name="TiposPersona">
           <Key>
             <PropertyRef Name="IdTipoPersona" />
@@ -221,6 +225,21 @@
           <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
           <Property Name="FechaModificacion" Type="datetime" />
           <Property Name="IdUsuarioModificacion" Type="int" />
+        </EntityType>
+        <EntityType Name="TramiteAsignacionConsecutivoInspector">
+          <Key>
+            <PropertyRef Name="IdFormato" />
+            <PropertyRef Name="IdInspector" />
+            <PropertyRef Name="Consecutivo" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdFormato" Type="int" Nullable="false" />
+          <Property Name="IdInspector" Type="int" Nullable="false" />
+          <Property Name="Consecutivo" Type="int" Nullable="false" />
+          <Property Name="Secuencia" Type="int" Nullable="false" />
+          <Property Name="Tramite" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="UsosPropiedades">
           <Key>
@@ -290,6 +309,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ConsecutivosInspectores_EstadosConsecutivosInspector">
+          <End Role="Formatos" Type="Self.Formatos" Multiplicity="1" />
+          <End Role="ConsecutivosInspectores" Type="Self.ConsecutivosInspectores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Formatos">
+              <PropertyRef Name="IdFormato" />
+            </Principal>
+            <Dependent Role="ConsecutivosInspectores">
+              <PropertyRef Name="IdFormato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ConsecutivosInspectores_EstadosConsecutivosInspector1">
+          <End Role="EstadosConsecutivosInspector" Type="Self.EstadosConsecutivosInspector" Multiplicity="1" />
+          <End Role="ConsecutivosInspectores" Type="Self.ConsecutivosInspectores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EstadosConsecutivosInspector">
+              <PropertyRef Name="IdEstadoConsecutivoInspector" />
+            </Principal>
+            <Dependent Role="ConsecutivosInspectores">
+              <PropertyRef Name="IdEstadoConsecutivoInspector" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ConsecutivosInspectores_Usuarios">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="ConsecutivosInspectores" Type="Self.ConsecutivosInspectores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="ConsecutivosInspectores">
+              <PropertyRef Name="IdInspector" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Departamentos_Paises">
           <End Role="Paises" Type="Self.Paises" Multiplicity="1" />
           <End Role="Departamentos" Type="Self.Departamentos" Multiplicity="*" />
@@ -299,42 +354,6 @@
             </Principal>
             <Dependent Role="Departamentos">
               <PropertyRef Name="IdPais" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_KardexPapeleria_Formatos">
-          <End Role="Formatos" Type="Self.Formatos" Multiplicity="1" />
-          <End Role="KardexPapeleria" Type="Self.KardexPapeleria" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Formatos">
-              <PropertyRef Name="IdFormato" />
-            </Principal>
-            <Dependent Role="KardexPapeleria">
-              <PropertyRef Name="IdFormato" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_KardexPapeleria_TiposMovimientoKardex">
-          <End Role="TiposMovimientoKardex" Type="Self.TiposMovimientoKardex" Multiplicity="1" />
-          <End Role="KardexPapeleria" Type="Self.KardexPapeleria" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TiposMovimientoKardex">
-              <PropertyRef Name="IdTipoMovimiento" />
-            </Principal>
-            <Dependent Role="KardexPapeleria">
-              <PropertyRef Name="IdTipoMovimiento" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_KardexPapeleria_Usuarios">
-          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
-          <End Role="KardexPapeleria" Type="Self.KardexPapeleria" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuarios">
-              <PropertyRef Name="IdUsuario" />
-            </Principal>
-            <Dependent Role="KardexPapeleria">
-              <PropertyRef Name="IdInspector" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -422,6 +441,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TramiteAsignacionConsecutivoInspector_Formatos">
+          <End Role="Formatos" Type="Self.Formatos" Multiplicity="1" />
+          <End Role="TramiteAsignacionConsecutivoInspector" Type="Self.TramiteAsignacionConsecutivoInspector" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Formatos">
+              <PropertyRef Name="IdFormato" />
+            </Principal>
+            <Dependent Role="TramiteAsignacionConsecutivoInspector">
+              <PropertyRef Name="IdFormato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TramiteAsignacionConsecutivoInspector_Usuarios">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="TramiteAsignacionConsecutivoInspector" Type="Self.TramiteAsignacionConsecutivoInspector" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="TramiteAsignacionConsecutivoInspector">
+              <PropertyRef Name="IdInspector" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Usuarios_Ciudades">
           <End Role="Ciudades" Type="Self.Ciudades" Multiplicity="1" />
           <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
@@ -468,9 +511,10 @@
         <EntityContainer Name="DB_A66D31_intratecPrbModelStoreContainer">
           <EntitySet Name="Ciudades" EntityType="Self.Ciudades" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ConsecutivosInspectores" EntityType="Self.ConsecutivosInspectores" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Departamentos" EntityType="Self.Departamentos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EstadosConsecutivosInspector" EntityType="Self.EstadosConsecutivosInspector" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Formatos" EntityType="Self.Formatos" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="KardexPapeleria" EntityType="Self.KardexPapeleria" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Menus" EntityType="Self.Menus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MenusRol" EntityType="Self.MenusRol" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Paises" EntityType="Self.Paises" Schema="dbo" store:Type="Tables" />
@@ -479,9 +523,9 @@
           <EntitySet Name="SolicitudContactenos" EntityType="Self.SolicitudContactenos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SolicitudesProgramacionVisitas" EntityType="Self.SolicitudesProgramacionVisitas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TiposIdentificacion" EntityType="Self.TiposIdentificacion" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TiposMovimientoKardex" EntityType="Self.TiposMovimientoKardex" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TiposPersona" EntityType="Self.TiposPersona" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TiposPropiedades" EntityType="Self.TiposPropiedades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TramiteAsignacionConsecutivoInspector" EntityType="Self.TramiteAsignacionConsecutivoInspector" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UsosPropiedades" EntityType="Self.UsosPropiedades" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Ciudades_Departamentos" Association="Self.FK_Ciudades_Departamentos">
@@ -496,21 +540,21 @@
             <End Role="TiposPersona" EntitySet="TiposPersona" />
             <End Role="Clientes" EntitySet="Clientes" />
           </AssociationSet>
+          <AssociationSet Name="FK_ConsecutivosInspectores_EstadosConsecutivosInspector" Association="Self.FK_ConsecutivosInspectores_EstadosConsecutivosInspector">
+            <End Role="Formatos" EntitySet="Formatos" />
+            <End Role="ConsecutivosInspectores" EntitySet="ConsecutivosInspectores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ConsecutivosInspectores_EstadosConsecutivosInspector1" Association="Self.FK_ConsecutivosInspectores_EstadosConsecutivosInspector1">
+            <End Role="EstadosConsecutivosInspector" EntitySet="EstadosConsecutivosInspector" />
+            <End Role="ConsecutivosInspectores" EntitySet="ConsecutivosInspectores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ConsecutivosInspectores_Usuarios" Association="Self.FK_ConsecutivosInspectores_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="ConsecutivosInspectores" EntitySet="ConsecutivosInspectores" />
+          </AssociationSet>
           <AssociationSet Name="FK_Departamentos_Paises" Association="Self.FK_Departamentos_Paises">
             <End Role="Paises" EntitySet="Paises" />
             <End Role="Departamentos" EntitySet="Departamentos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_KardexPapeleria_Formatos" Association="Self.FK_KardexPapeleria_Formatos">
-            <End Role="Formatos" EntitySet="Formatos" />
-            <End Role="KardexPapeleria" EntitySet="KardexPapeleria" />
-          </AssociationSet>
-          <AssociationSet Name="FK_KardexPapeleria_TiposMovimientoKardex" Association="Self.FK_KardexPapeleria_TiposMovimientoKardex">
-            <End Role="TiposMovimientoKardex" EntitySet="TiposMovimientoKardex" />
-            <End Role="KardexPapeleria" EntitySet="KardexPapeleria" />
-          </AssociationSet>
-          <AssociationSet Name="FK_KardexPapeleria_Usuarios" Association="Self.FK_KardexPapeleria_Usuarios">
-            <End Role="Usuarios" EntitySet="Usuarios" />
-            <End Role="KardexPapeleria" EntitySet="KardexPapeleria" />
           </AssociationSet>
           <AssociationSet Name="FK_Menus_Menus" Association="Self.FK_Menus_Menus">
             <End Role="Menus" EntitySet="Menus" />
@@ -539,6 +583,14 @@
           <AssociationSet Name="FK_SolicitudesProgramacionVisitas_Ciudades" Association="Self.FK_SolicitudesProgramacionVisitas_Ciudades">
             <End Role="Ciudades" EntitySet="Ciudades" />
             <End Role="SolicitudesProgramacionVisitas" EntitySet="SolicitudesProgramacionVisitas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TramiteAsignacionConsecutivoInspector_Formatos" Association="Self.FK_TramiteAsignacionConsecutivoInspector_Formatos">
+            <End Role="Formatos" EntitySet="Formatos" />
+            <End Role="TramiteAsignacionConsecutivoInspector" EntitySet="TramiteAsignacionConsecutivoInspector" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TramiteAsignacionConsecutivoInspector_Usuarios" Association="Self.FK_TramiteAsignacionConsecutivoInspector_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="TramiteAsignacionConsecutivoInspector" EntitySet="TramiteAsignacionConsecutivoInspector" />
           </AssociationSet>
           <AssociationSet Name="FK_Usuarios_Ciudades" Association="Self.FK_Usuarios_Ciudades">
             <End Role="Ciudades" EntitySet="Ciudades" />
@@ -632,19 +684,28 @@
             <End Role="Propiedades" EntitySet="Propiedades" />
           </AssociationSet>
           <EntitySet Name="Formatos" EntityType="DB_A66D31_intratecPrbModel.Formatos" />
-          <EntitySet Name="KardexPapeleria" EntityType="DB_A66D31_intratecPrbModel.KardexPapeleria" />
-          <EntitySet Name="TiposMovimientoKardex" EntityType="DB_A66D31_intratecPrbModel.TiposMovimientoKardex" />
-          <AssociationSet Name="FK_KardexPapeleria_Formatos" Association="DB_A66D31_intratecPrbModel.FK_KardexPapeleria_Formatos">
+          <EntitySet Name="ConsecutivosInspectores" EntityType="DB_A66D31_intratecPrbModel.ConsecutivosInspectores" />
+          <EntitySet Name="EstadosConsecutivosInspector" EntityType="DB_A66D31_intratecPrbModel.EstadosConsecutivosInspector" />
+          <EntitySet Name="TramiteAsignacionConsecutivoInspector" EntityType="DB_A66D31_intratecPrbModel.TramiteAsignacionConsecutivoInspector" />
+          <AssociationSet Name="FK_ConsecutivosInspectores_EstadosConsecutivosInspector" Association="DB_A66D31_intratecPrbModel.FK_ConsecutivosInspectores_EstadosConsecutivosInspector">
             <End Role="Formatos" EntitySet="Formatos" />
-            <End Role="KardexPapeleria" EntitySet="KardexPapeleria" />
+            <End Role="ConsecutivosInspectores" EntitySet="ConsecutivosInspectores" />
           </AssociationSet>
-          <AssociationSet Name="FK_KardexPapeleria_TiposMovimientoKardex" Association="DB_A66D31_intratecPrbModel.FK_KardexPapeleria_TiposMovimientoKardex">
-            <End Role="TiposMovimientoKardex" EntitySet="TiposMovimientoKardex" />
-            <End Role="KardexPapeleria" EntitySet="KardexPapeleria" />
+          <AssociationSet Name="FK_ConsecutivosInspectores_EstadosConsecutivosInspector1" Association="DB_A66D31_intratecPrbModel.FK_ConsecutivosInspectores_EstadosConsecutivosInspector1">
+            <End Role="EstadosConsecutivosInspector" EntitySet="EstadosConsecutivosInspector" />
+            <End Role="ConsecutivosInspectores" EntitySet="ConsecutivosInspectores" />
           </AssociationSet>
-          <AssociationSet Name="FK_KardexPapeleria_Usuarios" Association="DB_A66D31_intratecPrbModel.FK_KardexPapeleria_Usuarios">
+          <AssociationSet Name="FK_ConsecutivosInspectores_Usuarios" Association="DB_A66D31_intratecPrbModel.FK_ConsecutivosInspectores_Usuarios">
             <End Role="Usuarios" EntitySet="Usuarios" />
-            <End Role="KardexPapeleria" EntitySet="KardexPapeleria" />
+            <End Role="ConsecutivosInspectores" EntitySet="ConsecutivosInspectores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TramiteAsignacionConsecutivoInspector_Formatos" Association="DB_A66D31_intratecPrbModel.FK_TramiteAsignacionConsecutivoInspector_Formatos">
+            <End Role="Formatos" EntitySet="Formatos" />
+            <End Role="TramiteAsignacionConsecutivoInspector" EntitySet="TramiteAsignacionConsecutivoInspector" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TramiteAsignacionConsecutivoInspector_Usuarios" Association="DB_A66D31_intratecPrbModel.FK_TramiteAsignacionConsecutivoInspector_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="TramiteAsignacionConsecutivoInspector" EntitySet="TramiteAsignacionConsecutivoInspector" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Ciudades">
@@ -829,7 +890,8 @@
           <NavigationProperty Name="Ciudades" Relationship="DB_A66D31_intratecPrbModel.FK_Usuarios_Ciudades" FromRole="Usuarios" ToRole="Ciudades" />
           <NavigationProperty Name="Roles" Relationship="DB_A66D31_intratecPrbModel.FK_Usuarios_Roles" FromRole="Usuarios" ToRole="Roles" />
           <NavigationProperty Name="TiposIdentificacion" Relationship="DB_A66D31_intratecPrbModel.FK_Usuarios_TiposIdentificacion" FromRole="Usuarios" ToRole="TiposIdentificacion" />
-          <NavigationProperty Name="KardexPapeleria" Relationship="DB_A66D31_intratecPrbModel.FK_KardexPapeleria_Usuarios" FromRole="Usuarios" ToRole="KardexPapeleria" />
+          <NavigationProperty Name="ConsecutivosInspectores" Relationship="DB_A66D31_intratecPrbModel.FK_ConsecutivosInspectores_Usuarios" FromRole="Usuarios" ToRole="ConsecutivosInspectores" />
+          <NavigationProperty Name="TramiteAsignacionConsecutivoInspector" Relationship="DB_A66D31_intratecPrbModel.FK_TramiteAsignacionConsecutivoInspector_Usuarios" FromRole="Usuarios" ToRole="TramiteAsignacionConsecutivoInspector" />
         </EntityType>
         <Association Name="FK_Ciudades_Departamentos">
           <End Type="DB_A66D31_intratecPrbModel.Departamentos" Role="Departamentos" Multiplicity="1" />
@@ -1057,65 +1119,111 @@
           <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
           <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
           <Property Name="IdUsuarioModificacion" Type="Int32" />
-          <NavigationProperty Name="KardexPapeleria" Relationship="DB_A66D31_intratecPrbModel.FK_KardexPapeleria_Formatos" FromRole="Formatos" ToRole="KardexPapeleria" />
+          <NavigationProperty Name="ConsecutivosInspectores" Relationship="DB_A66D31_intratecPrbModel.FK_ConsecutivosInspectores_EstadosConsecutivosInspector" FromRole="Formatos" ToRole="ConsecutivosInspectores" />
+          <NavigationProperty Name="TramiteAsignacionConsecutivoInspector" Relationship="DB_A66D31_intratecPrbModel.FK_TramiteAsignacionConsecutivoInspector_Formatos" FromRole="Formatos" ToRole="TramiteAsignacionConsecutivoInspector" />
         </EntityType>
-        <EntityType Name="KardexPapeleria">
+        <EntityType Name="ConsecutivosInspectores">
           <Key>
-            <PropertyRef Name="IdEntradaPapeleria" />
+            <PropertyRef Name="IdFormato" />
+            <PropertyRef Name="IdInspector" />
+            <PropertyRef Name="Consecutivo" />
           </Key>
-          <Property Name="IdEntradaPapeleria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdTipoMovimiento" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="IdFormato" Type="Int32" Nullable="false" />
-          <Property Name="IdInspector" Type="Int32" />
-          <Property Name="ConsecutivoInicial" Type="Int32" Nullable="false" />
-          <Property Name="ConsecutivoFinal" Type="Int32" Nullable="false" />
-          <Property Name="Observaciones" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="IdInspector" Type="Int32" Nullable="false" />
+          <Property Name="Consecutivo" Type="Int32" Nullable="false" />
+          <Property Name="IdEstadoConsecutivoInspector" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="IdVisita" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Formatos" Relationship="DB_A66D31_intratecPrbModel.FK_KardexPapeleria_Formatos" FromRole="KardexPapeleria" ToRole="Formatos" />
-          <NavigationProperty Name="TiposMovimientoKardex" Relationship="DB_A66D31_intratecPrbModel.FK_KardexPapeleria_TiposMovimientoKardex" FromRole="KardexPapeleria" ToRole="TiposMovimientoKardex" />
-          <NavigationProperty Name="Usuarios" Relationship="DB_A66D31_intratecPrbModel.FK_KardexPapeleria_Usuarios" FromRole="KardexPapeleria" ToRole="Usuarios" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioModificacion" Type="Int32" />
+          <NavigationProperty Name="Formatos" Relationship="DB_A66D31_intratecPrbModel.FK_ConsecutivosInspectores_EstadosConsecutivosInspector" FromRole="ConsecutivosInspectores" ToRole="Formatos" />
+          <NavigationProperty Name="EstadosConsecutivosInspector" Relationship="DB_A66D31_intratecPrbModel.FK_ConsecutivosInspectores_EstadosConsecutivosInspector1" FromRole="ConsecutivosInspectores" ToRole="EstadosConsecutivosInspector" />
+          <NavigationProperty Name="Usuarios" Relationship="DB_A66D31_intratecPrbModel.FK_ConsecutivosInspectores_Usuarios" FromRole="ConsecutivosInspectores" ToRole="Usuarios" />
         </EntityType>
-        <EntityType Name="TiposMovimientoKardex">
+        <EntityType Name="EstadosConsecutivosInspector">
           <Key>
-            <PropertyRef Name="IdTipoMovimiento" />
+            <PropertyRef Name="IdEstadoConsecutivoInspector" />
           </Key>
-          <Property Name="IdTipoMovimiento" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="TipoMovimiento" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="KardexPapeleria" Relationship="DB_A66D31_intratecPrbModel.FK_KardexPapeleria_TiposMovimientoKardex" FromRole="TiposMovimientoKardex" ToRole="KardexPapeleria" />
+          <Property Name="IdEstadoConsecutivoInspector" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="EstadoConsecutivoInspector" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ConsecutivosInspectores" Relationship="DB_A66D31_intratecPrbModel.FK_ConsecutivosInspectores_EstadosConsecutivosInspector1" FromRole="EstadosConsecutivosInspector" ToRole="ConsecutivosInspectores" />
         </EntityType>
-        <Association Name="FK_KardexPapeleria_Formatos">
+        <EntityType Name="TramiteAsignacionConsecutivoInspector">
+          <Key>
+            <PropertyRef Name="IdFormato" />
+            <PropertyRef Name="IdInspector" />
+            <PropertyRef Name="Consecutivo" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdFormato" Type="Int32" Nullable="false" />
+          <Property Name="IdInspector" Type="Int32" Nullable="false" />
+          <Property Name="Consecutivo" Type="Int32" Nullable="false" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="Tramite" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Formatos" Relationship="DB_A66D31_intratecPrbModel.FK_TramiteAsignacionConsecutivoInspector_Formatos" FromRole="TramiteAsignacionConsecutivoInspector" ToRole="Formatos" />
+          <NavigationProperty Name="Usuarios" Relationship="DB_A66D31_intratecPrbModel.FK_TramiteAsignacionConsecutivoInspector_Usuarios" FromRole="TramiteAsignacionConsecutivoInspector" ToRole="Usuarios" />
+        </EntityType>
+        <Association Name="FK_ConsecutivosInspectores_EstadosConsecutivosInspector">
           <End Type="DB_A66D31_intratecPrbModel.Formatos" Role="Formatos" Multiplicity="1" />
-          <End Type="DB_A66D31_intratecPrbModel.KardexPapeleria" Role="KardexPapeleria" Multiplicity="*" />
+          <End Type="DB_A66D31_intratecPrbModel.ConsecutivosInspectores" Role="ConsecutivosInspectores" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Formatos">
               <PropertyRef Name="IdFormato" />
             </Principal>
-            <Dependent Role="KardexPapeleria">
+            <Dependent Role="ConsecutivosInspectores">
               <PropertyRef Name="IdFormato" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_KardexPapeleria_TiposMovimientoKardex">
-          <End Type="DB_A66D31_intratecPrbModel.TiposMovimientoKardex" Role="TiposMovimientoKardex" Multiplicity="1" />
-          <End Type="DB_A66D31_intratecPrbModel.KardexPapeleria" Role="KardexPapeleria" Multiplicity="*" />
+        <Association Name="FK_ConsecutivosInspectores_EstadosConsecutivosInspector1">
+          <End Type="DB_A66D31_intratecPrbModel.EstadosConsecutivosInspector" Role="EstadosConsecutivosInspector" Multiplicity="1" />
+          <End Type="DB_A66D31_intratecPrbModel.ConsecutivosInspectores" Role="ConsecutivosInspectores" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="TiposMovimientoKardex">
-              <PropertyRef Name="IdTipoMovimiento" />
+            <Principal Role="EstadosConsecutivosInspector">
+              <PropertyRef Name="IdEstadoConsecutivoInspector" />
             </Principal>
-            <Dependent Role="KardexPapeleria">
-              <PropertyRef Name="IdTipoMovimiento" />
+            <Dependent Role="ConsecutivosInspectores">
+              <PropertyRef Name="IdEstadoConsecutivoInspector" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_KardexPapeleria_Usuarios">
-          <End Type="DB_A66D31_intratecPrbModel.Usuarios" Role="Usuarios" Multiplicity="0..1" />
-          <End Type="DB_A66D31_intratecPrbModel.KardexPapeleria" Role="KardexPapeleria" Multiplicity="*" />
+        <Association Name="FK_ConsecutivosInspectores_Usuarios">
+          <End Type="DB_A66D31_intratecPrbModel.Usuarios" Role="Usuarios" Multiplicity="1" />
+          <End Type="DB_A66D31_intratecPrbModel.ConsecutivosInspectores" Role="ConsecutivosInspectores" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuarios">
               <PropertyRef Name="IdUsuario" />
             </Principal>
-            <Dependent Role="KardexPapeleria">
+            <Dependent Role="ConsecutivosInspectores">
+              <PropertyRef Name="IdInspector" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TramiteAsignacionConsecutivoInspector_Formatos">
+          <End Type="DB_A66D31_intratecPrbModel.Formatos" Role="Formatos" Multiplicity="1" />
+          <End Type="DB_A66D31_intratecPrbModel.TramiteAsignacionConsecutivoInspector" Role="TramiteAsignacionConsecutivoInspector" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Formatos">
+              <PropertyRef Name="IdFormato" />
+            </Principal>
+            <Dependent Role="TramiteAsignacionConsecutivoInspector">
+              <PropertyRef Name="IdFormato" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TramiteAsignacionConsecutivoInspector_Usuarios">
+          <End Type="DB_A66D31_intratecPrbModel.Usuarios" Role="Usuarios" Multiplicity="1" />
+          <End Type="DB_A66D31_intratecPrbModel.TramiteAsignacionConsecutivoInspector" Role="TramiteAsignacionConsecutivoInspector" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="TramiteAsignacionConsecutivoInspector">
               <PropertyRef Name="IdInspector" />
             </Dependent>
           </ReferentialConstraint>
@@ -1389,26 +1497,41 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="KardexPapeleria">
-            <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.KardexPapeleria">
-              <MappingFragment StoreEntitySet="KardexPapeleria">
+          <EntitySetMapping Name="ConsecutivosInspectores">
+            <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.ConsecutivosInspectores">
+              <MappingFragment StoreEntitySet="ConsecutivosInspectores">
+                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
                 <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
                 <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
-                <ScalarProperty Name="ConsecutivoFinal" ColumnName="ConsecutivoFinal" />
-                <ScalarProperty Name="ConsecutivoInicial" ColumnName="ConsecutivoInicial" />
+                <ScalarProperty Name="IdVisita" ColumnName="IdVisita" />
+                <ScalarProperty Name="IdEstadoConsecutivoInspector" ColumnName="IdEstadoConsecutivoInspector" />
+                <ScalarProperty Name="Consecutivo" ColumnName="Consecutivo" />
                 <ScalarProperty Name="IdInspector" ColumnName="IdInspector" />
                 <ScalarProperty Name="IdFormato" ColumnName="IdFormato" />
-                <ScalarProperty Name="IdTipoMovimiento" ColumnName="IdTipoMovimiento" />
-                <ScalarProperty Name="IdEntradaPapeleria" ColumnName="IdEntradaPapeleria" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="TiposMovimientoKardex">
-            <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.TiposMovimientoKardex">
-              <MappingFragment StoreEntitySet="TiposMovimientoKardex">
-                <ScalarProperty Name="TipoMovimiento" ColumnName="TipoMovimiento" />
-                <ScalarProperty Name="IdTipoMovimiento" ColumnName="IdTipoMovimiento" />
+          <EntitySetMapping Name="EstadosConsecutivosInspector">
+            <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.EstadosConsecutivosInspector">
+              <MappingFragment StoreEntitySet="EstadosConsecutivosInspector">
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="EstadoConsecutivoInspector" ColumnName="EstadoConsecutivoInspector" />
+                <ScalarProperty Name="IdEstadoConsecutivoInspector" ColumnName="IdEstadoConsecutivoInspector" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TramiteAsignacionConsecutivoInspector">
+            <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.TramiteAsignacionConsecutivoInspector">
+              <MappingFragment StoreEntitySet="TramiteAsignacionConsecutivoInspector">
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="Tramite" ColumnName="Tramite" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="Consecutivo" ColumnName="Consecutivo" />
+                <ScalarProperty Name="IdInspector" ColumnName="IdInspector" />
+                <ScalarProperty Name="IdFormato" ColumnName="IdFormato" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

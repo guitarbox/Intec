@@ -70,7 +70,7 @@ namespace Intec.DAL.TE
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
                 Formatos formatoAEliminar = ctx.Formatos.Where(f => f.IdFormato == IdFormato).FirstOrDefault();
-                if (formatoAEliminar.KardexPapeleria.Count == 0)
+                if (formatoAEliminar.ConsecutivosInspectores.Count == 0)
                 {
                     ctx.Formatos.Remove(formatoAEliminar);
                     ctx.SaveChanges();

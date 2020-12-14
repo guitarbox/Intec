@@ -17,7 +17,8 @@ namespace Intec.DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Formatos()
         {
-            this.KardexPapeleria = new HashSet<KardexPapeleria>();
+            this.ConsecutivosInspectores = new HashSet<ConsecutivosInspectores>();
+            this.TramiteAsignacionConsecutivoInspector = new HashSet<TramiteAsignacionConsecutivoInspector>();
         }
     
         public int IdFormato { get; set; }
@@ -33,6 +34,8 @@ namespace Intec.DAL
         public Nullable<int> IdUsuarioModificacion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<KardexPapeleria> KardexPapeleria { get; set; }
+        public virtual ICollection<ConsecutivosInspectores> ConsecutivosInspectores { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TramiteAsignacionConsecutivoInspector> TramiteAsignacionConsecutivoInspector { get; set; }
     }
 }

@@ -264,26 +264,41 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="KardexPapeleria">
-      <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.KardexPapeleria">
-        <MappingFragment StoreEntitySet="KardexPapeleria">
+    <EntitySetMapping Name="ConsecutivosInspectores">
+      <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.ConsecutivosInspectores">
+        <MappingFragment StoreEntitySet="ConsecutivosInspectores">
+          <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
           <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
           <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-          <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
-          <ScalarProperty Name="ConsecutivoFinal" ColumnName="ConsecutivoFinal" />
-          <ScalarProperty Name="ConsecutivoInicial" ColumnName="ConsecutivoInicial" />
+          <ScalarProperty Name="IdVisita" ColumnName="IdVisita" />
+          <ScalarProperty Name="IdEstadoConsecutivoInspector" ColumnName="IdEstadoConsecutivoInspector" />
+          <ScalarProperty Name="Consecutivo" ColumnName="Consecutivo" />
           <ScalarProperty Name="IdInspector" ColumnName="IdInspector" />
           <ScalarProperty Name="IdFormato" ColumnName="IdFormato" />
-          <ScalarProperty Name="IdTipoMovimiento" ColumnName="IdTipoMovimiento" />
-          <ScalarProperty Name="IdEntradaPapeleria" ColumnName="IdEntradaPapeleria" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="TiposMovimientoKardex">
-      <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.TiposMovimientoKardex">
-        <MappingFragment StoreEntitySet="TiposMovimientoKardex">
-          <ScalarProperty Name="TipoMovimiento" ColumnName="TipoMovimiento" />
-          <ScalarProperty Name="IdTipoMovimiento" ColumnName="IdTipoMovimiento" />
+    <EntitySetMapping Name="EstadosConsecutivosInspector">
+      <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.EstadosConsecutivosInspector">
+        <MappingFragment StoreEntitySet="EstadosConsecutivosInspector">
+          <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+          <ScalarProperty Name="EstadoConsecutivoInspector" ColumnName="EstadoConsecutivoInspector" />
+          <ScalarProperty Name="IdEstadoConsecutivoInspector" ColumnName="IdEstadoConsecutivoInspector" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TramiteAsignacionConsecutivoInspector">
+      <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.TramiteAsignacionConsecutivoInspector">
+        <MappingFragment StoreEntitySet="TramiteAsignacionConsecutivoInspector">
+          <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+          <ScalarProperty Name="Tramite" ColumnName="Tramite" />
+          <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+          <ScalarProperty Name="Consecutivo" ColumnName="Consecutivo" />
+          <ScalarProperty Name="IdInspector" ColumnName="IdInspector" />
+          <ScalarProperty Name="IdFormato" ColumnName="IdFormato" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

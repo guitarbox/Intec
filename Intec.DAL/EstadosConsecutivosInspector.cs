@@ -12,18 +12,20 @@ namespace Intec.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class TiposMovimientoKardex
+    public partial class EstadosConsecutivosInspector
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TiposMovimientoKardex()
+        public EstadosConsecutivosInspector()
         {
-            this.KardexPapeleria = new HashSet<KardexPapeleria>();
+            this.ConsecutivosInspectores = new HashSet<ConsecutivosInspectores>();
         }
     
-        public string IdTipoMovimiento { get; set; }
-        public string TipoMovimiento { get; set; }
+        public string IdEstadoConsecutivoInspector { get; set; }
+        public string EstadoConsecutivoInspector { get; set; }
+        public System.DateTime FechaCreacion { get; set; }
+        public int IdUsuarioCreacion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<KardexPapeleria> KardexPapeleria { get; set; }
+        public virtual ICollection<ConsecutivosInspectores> ConsecutivosInspectores { get; set; }
     }
 }

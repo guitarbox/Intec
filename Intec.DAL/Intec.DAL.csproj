@@ -57,7 +57,13 @@
     <Compile Include="Clientes.cs">
       <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ConsecutivosInspectores.cs">
+      <DependentUpon>IntratecModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Departamentos.cs">
+      <DependentUpon>IntratecModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EstadosConsecutivosInspector.cs">
       <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Formatos.cs">
@@ -77,9 +83,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IntratecModel.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="KardexPapeleria.cs">
-      <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Menus.cs">
       <DependentUpon>IntratecModel.tt</DependentUpon>
@@ -109,13 +112,13 @@
     <Compile Include="TiposIdentificacion.cs">
       <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="TiposMovimientoKardex.cs">
-      <DependentUpon>IntratecModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="TiposPersona.cs">
       <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TiposPropiedades.cs">
+      <DependentUpon>IntratecModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TramiteAsignacionConsecutivoInspector.cs">
       <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
     <Compile Include="UsosPropiedades.cs">
