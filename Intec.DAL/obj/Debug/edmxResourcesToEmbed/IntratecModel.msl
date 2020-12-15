@@ -292,6 +292,7 @@
     <EntitySetMapping Name="TramiteAsignacionConsecutivoInspector">
       <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.TramiteAsignacionConsecutivoInspector">
         <MappingFragment StoreEntitySet="TramiteAsignacionConsecutivoInspector">
+          <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
           <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
           <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
           <ScalarProperty Name="Tramite" ColumnName="Tramite" />

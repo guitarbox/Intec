@@ -21,6 +21,7 @@ namespace Intec.DAL
         public string Tramite { get; set; }
         public System.DateTime FechaCreacion { get; set; }
         public int IdUsuarioCreacion { get; set; }
+        public string Observaciones { get; set; }
     
         public virtual Formatos Formatos { get; set; }
         public virtual Usuarios Usuarios { get; set; }

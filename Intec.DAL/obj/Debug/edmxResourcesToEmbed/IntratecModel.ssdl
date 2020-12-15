@@ -233,6 +233,7 @@
     <Property Name="Consecutivo" Type="int" Nullable="false" />
     <Property Name="Secuencia" Type="int" Nullable="false" />
     <Property Name="Tramite" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Observaciones" Type="nvarchar" MaxLength="1500" />
     <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
     <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
   </EntityType>

@@ -558,6 +558,7 @@
     <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Formatos" Relationship="DB_A66D31_intratecPrbModel.FK_TramiteAsignacionConsecutivoInspector_Formatos" FromRole="TramiteAsignacionConsecutivoInspector" ToRole="Formatos" />
     <NavigationProperty Name="Usuarios" Relationship="DB_A66D31_intratecPrbModel.FK_TramiteAsignacionConsecutivoInspector_Usuarios" FromRole="TramiteAsignacionConsecutivoInspector" ToRole="Usuarios" />
+    <Property Name="Observaciones" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
   </EntityType>
   <Association Name="FK_ConsecutivosInspectores_EstadosConsecutivosInspector">
     <End Type="DB_A66D31_intratecPrbModel.Formatos" Role="Formatos" Multiplicity="1" />
