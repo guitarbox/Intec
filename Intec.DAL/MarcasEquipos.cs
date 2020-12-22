@@ -12,30 +12,22 @@ namespace Intec.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class Ciudades
+    public partial class MarcasEquipos
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Ciudades()
+        public MarcasEquipos()
         {
-            this.SolicitudesProgramacionVisitas = new HashSet<SolicitudesProgramacionVisitas>();
-            this.Usuarios = new HashSet<Usuarios>();
-            this.Clientes = new HashSet<Clientes>();
+            this.Equipos = new HashSet<Equipos>();
         }
     
-        public string IdCiudad { get; set; }
-        public string IdDepartamento { get; set; }
-        public string Ciudad { get; set; }
+        public int IdMarcaEquipo { get; set; }
+        public string MarcaEquipo { get; set; }
         public System.DateTime FechaCreacion { get; set; }
         public int IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaModificacion { get; set; }
         public Nullable<int> IdUsuarioModificacion { get; set; }
     
-        public virtual Departamentos Departamentos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SolicitudesProgramacionVisitas> SolicitudesProgramacionVisitas { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Usuarios> Usuarios { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Clientes> Clientes { get; set; }
+        public virtual ICollection<Equipos> Equipos { get; set; }
     }
 }

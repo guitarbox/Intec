@@ -17,15 +17,14 @@ namespace Intec.DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Formatos()
         {
-            this.ConsecutivosInspectores = new HashSet<ConsecutivosInspectores>();
-            this.TramiteAsignacionConsecutivoInspector = new HashSet<TramiteAsignacionConsecutivoInspector>();
+            this.ConsecutivosFormatos = new HashSet<ConsecutivosFormatos>();
+            this.TramiteConsecutivoFormato = new HashSet<TramiteConsecutivoFormato>();
         }
     
         public int IdFormato { get; set; }
         public string NroFormato { get; set; }
         public string Formato { get; set; }
-        public int ConsecutivoInicial { get; set; }
-        public int ConsecutivoFinal { get; set; }
+        public string Separador { get; set; }
         public int Mascara { get; set; }
         public bool Activo { get; set; }
         public System.DateTime FechaCreacion { get; set; }
@@ -34,8 +33,8 @@ namespace Intec.DAL
         public Nullable<int> IdUsuarioModificacion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ConsecutivosInspectores> ConsecutivosInspectores { get; set; }
+        public virtual ICollection<ConsecutivosFormatos> ConsecutivosFormatos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TramiteAsignacionConsecutivoInspector> TramiteAsignacionConsecutivoInspector { get; set; }
+        public virtual ICollection<TramiteConsecutivoFormato> TramiteConsecutivoFormato { get; set; }
     }
 }

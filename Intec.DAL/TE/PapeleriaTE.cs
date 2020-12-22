@@ -71,7 +71,7 @@ namespace Intec.DAL.TE
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
                 Formatos formatoAEliminar = ctx.Formatos.Where(f => f.IdFormato == IdFormato).FirstOrDefault();
-                if (formatoAEliminar.ConsecutivosInspectores.Count == 0)
+                if (formatoAEliminar.ConsecutivosFormatos.Count == 0)
                 {
                     ctx.Formatos.Remove(formatoAEliminar);
                     ctx.SaveChanges();
@@ -92,7 +92,7 @@ namespace Intec.DAL.TE
                 //Acá validamos que todos los consecutivos estén disponibles, o sea, que no se los hayan asignado a ningún inspector
                 for (int i = ConsecutivoInicial; i <= ConsecutivoFinal; i++)
                 {
-                    if (ctx.ConsecutivosInspectores.Where(c => c.IdFormato == IdFormato && c.Consecutivo == i).FirstOrDefault() != null)
+                    if (ctx.ConsecutivosFormatos.Where(c => c.IdFormato == IdFormato && c.Consecutivo == i && !c.IdEstadoConsecutivoInspector.Equals("B")).FirstOrDefault() != null)
                     {
                         throw new Exception($"El consecutivo {i} del formato {IdFormato} ya ha sido asignado a un inspector");
                     }
@@ -100,7 +100,7 @@ namespace Intec.DAL.TE
                 
                 for (int i = ConsecutivoInicial; i <= ConsecutivoFinal; i++)
                 {
-                    ctx.ConsecutivosInspectores.Add(new ConsecutivosInspectores() { 
+                    ctx.ConsecutivosFormatos.Add(new ConsecutivosFormatos() { 
                         IdFormato = IdFormato,
                         IdInspector = IdInspector,
                         Consecutivo = i,
@@ -112,12 +112,12 @@ namespace Intec.DAL.TE
                     int sec = 0;
                     try
                     {
-                        sec = ctx.TramiteAsignacionConsecutivoInspector.Where(t => t.IdFormato == IdFormato && t.Consecutivo == i).Count();
+                        sec = ctx.TramiteConsecutivoFormato.Where(t => t.IdFormato == IdFormato && t.Consecutivo == i).Count();
                     }
                     catch { }
                     sec += 1;
 
-                    ctx.TramiteAsignacionConsecutivoInspector.Add(new TramiteAsignacionConsecutivoInspector() {
+                    ctx.TramiteConsecutivoFormato.Add(new TramiteConsecutivoFormato() {
                         IdFormato = IdFormato,
                         IdInspector = IdInspector,
                         Consecutivo = i,
@@ -126,6 +126,55 @@ namespace Intec.DAL.TE
                         IdUsuarioCreacion = IdUsuarioAsigna, 
                         Secuencia = sec, 
                         Observaciones = "Asignación inicial de Consecutivo"
+                    });
+                    ctx.SaveChanges();
+                }
+            }
+        }
+    
+        //Ingresar consecutivos a bodega
+        public void IngresarConsecutivosFormatoBodega(int IdFormato, int ConsecutivoInicial, int ConsecutivoFinal, int IdUsuarioAsigna)
+        {
+            string estadoConsecutivo = "B";
+            string tramite = "BODEGA";
+
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {                
+                //Acá validamos que todos los consecutivos estén disponibles, o sea, que no se los hayan asignado a ningún inspector
+                for (int i = ConsecutivoInicial; i <= ConsecutivoFinal; i++)
+                {
+                    if (ctx.ConsecutivosFormatos.Where(c => c.IdFormato == IdFormato && c.Consecutivo == i).FirstOrDefault() != null)
+                    {
+                        throw new Exception($"El consecutivo {i} del formato {IdFormato} ya había sido ingresado");
+                    }
+                }
+                
+                for (int i = ConsecutivoInicial; i <= ConsecutivoFinal; i++)
+                {
+                    ctx.ConsecutivosFormatos.Add(new ConsecutivosFormatos() { 
+                        IdFormato = IdFormato,                        
+                        Consecutivo = i,
+                        IdEstadoConsecutivoInspector = estadoConsecutivo,
+                        FechaCreacion = DateTime.Now,
+                        IdUsuarioCreacion = IdUsuarioAsigna
+                    });                    
+
+                    int sec = 0;
+                    try
+                    {
+                        sec = ctx.TramiteConsecutivoFormato.Where(t => t.IdFormato == IdFormato && t.Consecutivo == i).Count();
+                    }
+                    catch { }
+                    sec += 1;
+
+                    ctx.TramiteConsecutivoFormato.Add(new TramiteConsecutivoFormato() {
+                        IdFormato = IdFormato,                        
+                        Consecutivo = i,
+                        Tramite = tramite,
+                        FechaCreacion = DateTime.Now,
+                        IdUsuarioCreacion = IdUsuarioAsigna, 
+                        Secuencia = sec, 
+                        Observaciones = "Ingreso a bodega del Consecutivo."
                     });
                     ctx.SaveChanges();
                 }
@@ -148,7 +197,7 @@ namespace Intec.DAL.TE
             {
                 foreach (int i in Consecutivos)                
                 {
-                    ConsecutivosInspectores con = ctx.ConsecutivosInspectores.Where(c=>c.IdFormato == IdFormato && c.Consecutivo == i).FirstOrDefault();
+                    ConsecutivosFormatos con = ctx.ConsecutivosFormatos.Where(c=>c.IdFormato == IdFormato && c.Consecutivo == i).FirstOrDefault();
                     if (con != null)
                     {
                         //Si es rechazo el consecutivo se debe liberar
@@ -161,18 +210,18 @@ namespace Intec.DAL.TE
                         }
                         else
                         {
-                            ctx.ConsecutivosInspectores.Remove(con);
+                            ctx.ConsecutivosFormatos.Remove(con);
                         }
 
                         int sec = 0;
                         try
                         {
-                            sec = ctx.TramiteAsignacionConsecutivoInspector.Where(t => t.IdFormato == IdFormato && t.Consecutivo == i).Count();
+                            sec = ctx.TramiteConsecutivoFormato.Where(t => t.IdFormato == IdFormato && t.Consecutivo == i).Count();
                         }
                         catch { }
                         sec += 1;
 
-                        ctx.TramiteAsignacionConsecutivoInspector.Add(new TramiteAsignacionConsecutivoInspector()
+                        ctx.TramiteConsecutivoFormato.Add(new TramiteConsecutivoFormato()
                         {
                             IdFormato = IdFormato,
                             IdInspector = IdUsuarioActualiza,

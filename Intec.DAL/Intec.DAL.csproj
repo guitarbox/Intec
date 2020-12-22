@@ -50,6 +50,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CalibracionesEquipos.cs">
+      <DependentUpon>IntratecModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ciudades.cs">
       <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
@@ -57,10 +60,13 @@
     <Compile Include="Clientes.cs">
       <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ConsecutivosInspectores.cs">
+    <Compile Include="ConsecutivosFormatos.cs">
       <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Departamentos.cs">
+      <DependentUpon>IntratecModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Equipos.cs">
       <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
     <Compile Include="EstadosConsecutivosInspector.cs">
@@ -83,6 +89,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IntratecModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="MarcasEquipos.cs">
+      <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Menus.cs">
       <DependentUpon>IntratecModel.tt</DependentUpon>
@@ -109,6 +118,9 @@
     <Compile Include="TE\UsuariosTE.cs" />
     <Compile Include="TE\SolicitudContactenosTE.cs" />
     <Compile Include="TE\SolicitudesProgramacionVIsitasTE.cs" />
+    <Compile Include="TiposEquipo.cs">
+      <DependentUpon>IntratecModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="TiposIdentificacion.cs">
       <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
@@ -118,7 +130,10 @@
     <Compile Include="TiposPropiedades.cs">
       <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="TramiteAsignacionConsecutivoInspector.cs">
+    <Compile Include="TramiteConsecutivoFormato.cs">
+      <DependentUpon>IntratecModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TramitesEquipo.cs">
       <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
     <Compile Include="UsosPropiedades.cs">
@@ -128,6 +143,12 @@
       <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Usuarios.cs">
+      <DependentUpon>IntratecModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UsuariosEquipos.cs">
+      <DependentUpon>IntratecModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="VerificacionesLabEquipos.cs">
       <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>

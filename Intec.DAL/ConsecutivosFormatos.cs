@@ -12,11 +12,11 @@ namespace Intec.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class ConsecutivosInspectores
+    public partial class ConsecutivosFormatos
     {
         public int IdFormato { get; set; }
-        public int IdInspector { get; set; }
         public int Consecutivo { get; set; }
+        public Nullable<int> IdInspector { get; set; }
         public string IdEstadoConsecutivoInspector { get; set; }
         public string IdVisita { get; set; }
         public System.DateTime FechaCreacion { get; set; }

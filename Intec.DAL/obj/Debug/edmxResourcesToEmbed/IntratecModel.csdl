@@ -74,29 +74,72 @@
       <End Role="Clientes" EntitySet="Clientes" />
       <End Role="Propiedades" EntitySet="Propiedades" />
     </AssociationSet>
-    <EntitySet Name="Formatos" EntityType="DB_A66D31_intratecPrbModel.Formatos" />
-    <EntitySet Name="ConsecutivosInspectores" EntityType="DB_A66D31_intratecPrbModel.ConsecutivosInspectores" />
     <EntitySet Name="EstadosConsecutivosInspector" EntityType="DB_A66D31_intratecPrbModel.EstadosConsecutivosInspector" />
-    <EntitySet Name="TramiteAsignacionConsecutivoInspector" EntityType="DB_A66D31_intratecPrbModel.TramiteAsignacionConsecutivoInspector" />
+    <EntitySet Name="ConsecutivosFormatos" EntityType="DB_A66D31_intratecPrbModel.ConsecutivosFormatos" />
+    <EntitySet Name="Formatos" EntityType="DB_A66D31_intratecPrbModel.Formatos" />
     <AssociationSet Name="FK_ConsecutivosInspectores_EstadosConsecutivosInspector" Association="DB_A66D31_intratecPrbModel.FK_ConsecutivosInspectores_EstadosConsecutivosInspector">
       <End Role="Formatos" EntitySet="Formatos" />
-      <End Role="ConsecutivosInspectores" EntitySet="ConsecutivosInspectores" />
+      <End Role="ConsecutivosFormatos" EntitySet="ConsecutivosFormatos" />
     </AssociationSet>
     <AssociationSet Name="FK_ConsecutivosInspectores_EstadosConsecutivosInspector1" Association="DB_A66D31_intratecPrbModel.FK_ConsecutivosInspectores_EstadosConsecutivosInspector1">
       <End Role="EstadosConsecutivosInspector" EntitySet="EstadosConsecutivosInspector" />
-      <End Role="ConsecutivosInspectores" EntitySet="ConsecutivosInspectores" />
+      <End Role="ConsecutivosFormatos" EntitySet="ConsecutivosFormatos" />
     </AssociationSet>
     <AssociationSet Name="FK_ConsecutivosInspectores_Usuarios" Association="DB_A66D31_intratecPrbModel.FK_ConsecutivosInspectores_Usuarios">
       <End Role="Usuarios" EntitySet="Usuarios" />
-      <End Role="ConsecutivosInspectores" EntitySet="ConsecutivosInspectores" />
+      <End Role="ConsecutivosFormatos" EntitySet="ConsecutivosFormatos" />
     </AssociationSet>
+    <EntitySet Name="TramiteConsecutivoFormato" EntityType="DB_A66D31_intratecPrbModel.TramiteConsecutivoFormato" />
     <AssociationSet Name="FK_TramiteAsignacionConsecutivoInspector_Formatos" Association="DB_A66D31_intratecPrbModel.FK_TramiteAsignacionConsecutivoInspector_Formatos">
       <End Role="Formatos" EntitySet="Formatos" />
-      <End Role="TramiteAsignacionConsecutivoInspector" EntitySet="TramiteAsignacionConsecutivoInspector" />
+      <End Role="TramiteConsecutivoFormato" EntitySet="TramiteConsecutivoFormato" />
     </AssociationSet>
     <AssociationSet Name="FK_TramiteAsignacionConsecutivoInspector_Usuarios" Association="DB_A66D31_intratecPrbModel.FK_TramiteAsignacionConsecutivoInspector_Usuarios">
       <End Role="Usuarios" EntitySet="Usuarios" />
-      <End Role="TramiteAsignacionConsecutivoInspector" EntitySet="TramiteAsignacionConsecutivoInspector" />
+      <End Role="TramiteConsecutivoFormato" EntitySet="TramiteConsecutivoFormato" />
+    </AssociationSet>
+    <EntitySet Name="CalibracionesEquipos" EntityType="DB_A66D31_intratecPrbModel.CalibracionesEquipos" />
+    <EntitySet Name="Equipos" EntityType="DB_A66D31_intratecPrbModel.Equipos" />
+    <EntitySet Name="MarcasEquipos" EntityType="DB_A66D31_intratecPrbModel.MarcasEquipos" />
+    <EntitySet Name="TiposEquipo" EntityType="DB_A66D31_intratecPrbModel.TiposEquipo" />
+    <EntitySet Name="TramitesEquipo" EntityType="DB_A66D31_intratecPrbModel.TramitesEquipo" />
+    <EntitySet Name="VerificacionesLabEquipos" EntityType="DB_A66D31_intratecPrbModel.VerificacionesLabEquipos" />
+    <EntitySet Name="UsuariosEquipos" EntityType="DB_A66D31_intratecPrbModel.UsuariosEquipos" />
+    <AssociationSet Name="FK_CalibracionesEquipos_Equipos" Association="DB_A66D31_intratecPrbModel.FK_CalibracionesEquipos_Equipos">
+      <End Role="Equipos" EntitySet="Equipos" />
+      <End Role="CalibracionesEquipos" EntitySet="CalibracionesEquipos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Clientes_Ciudades" Association="DB_A66D31_intratecPrbModel.FK_Clientes_Ciudades">
+      <End Role="Ciudades" EntitySet="Ciudades" />
+      <End Role="Clientes" EntitySet="Clientes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Equipos_MarcasEquipos" Association="DB_A66D31_intratecPrbModel.FK_Equipos_MarcasEquipos">
+      <End Role="MarcasEquipos" EntitySet="MarcasEquipos" />
+      <End Role="Equipos" EntitySet="Equipos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Equipos_TiposEquipo" Association="DB_A66D31_intratecPrbModel.FK_Equipos_TiposEquipo">
+      <End Role="TiposEquipo" EntitySet="TiposEquipo" />
+      <End Role="Equipos" EntitySet="Equipos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TramitesEquipo_Equipos" Association="DB_A66D31_intratecPrbModel.FK_TramitesEquipo_Equipos">
+      <End Role="Equipos" EntitySet="Equipos" />
+      <End Role="TramitesEquipo" EntitySet="TramitesEquipo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UsuariosEquipos_Equipos" Association="DB_A66D31_intratecPrbModel.FK_UsuariosEquipos_Equipos">
+      <End Role="Equipos" EntitySet="Equipos" />
+      <End Role="UsuariosEquipos" EntitySet="UsuariosEquipos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VerificacionesLabEquipos_Equipos" Association="DB_A66D31_intratecPrbModel.FK_VerificacionesLabEquipos_Equipos">
+      <End Role="Equipos" EntitySet="Equipos" />
+      <End Role="VerificacionesLabEquipos" EntitySet="VerificacionesLabEquipos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TramitesEquipo_Usuarios" Association="DB_A66D31_intratecPrbModel.FK_TramitesEquipo_Usuarios">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="TramitesEquipo" EntitySet="TramitesEquipo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UsuariosEquipos_Usuarios" Association="DB_A66D31_intratecPrbModel.FK_UsuariosEquipos_Usuarios">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="UsuariosEquipos" EntitySet="UsuariosEquipos" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Ciudades">
@@ -113,6 +156,7 @@
     <NavigationProperty Name="Departamentos" Relationship="DB_A66D31_intratecPrbModel.FK_Ciudades_Departamentos" FromRole="Ciudades" ToRole="Departamentos" />
     <NavigationProperty Name="SolicitudesProgramacionVisitas" Relationship="DB_A66D31_intratecPrbModel.FK_SolicitudesProgramacionVisitas_Ciudades" FromRole="Ciudades" ToRole="SolicitudesProgramacionVisitas" />
     <NavigationProperty Name="Usuarios" Relationship="DB_A66D31_intratecPrbModel.FK_Usuarios_Ciudades" FromRole="Ciudades" ToRole="Usuarios" />
+    <NavigationProperty Name="Clientes" Relationship="DB_A66D31_intratecPrbModel.FK_Clientes_Ciudades" FromRole="Ciudades" ToRole="Clientes" />
   </EntityType>
   <EntityType Name="Departamentos">
     <Key>
@@ -281,8 +325,10 @@
     <NavigationProperty Name="Ciudades" Relationship="DB_A66D31_intratecPrbModel.FK_Usuarios_Ciudades" FromRole="Usuarios" ToRole="Ciudades" />
     <NavigationProperty Name="Roles" Relationship="DB_A66D31_intratecPrbModel.FK_Usuarios_Roles" FromRole="Usuarios" ToRole="Roles" />
     <NavigationProperty Name="TiposIdentificacion" Relationship="DB_A66D31_intratecPrbModel.FK_Usuarios_TiposIdentificacion" FromRole="Usuarios" ToRole="TiposIdentificacion" />
-    <NavigationProperty Name="ConsecutivosInspectores" Relationship="DB_A66D31_intratecPrbModel.FK_ConsecutivosInspectores_Usuarios" FromRole="Usuarios" ToRole="ConsecutivosInspectores" />
-    <NavigationProperty Name="TramiteAsignacionConsecutivoInspector" Relationship="DB_A66D31_intratecPrbModel.FK_TramiteAsignacionConsecutivoInspector_Usuarios" FromRole="Usuarios" ToRole="TramiteAsignacionConsecutivoInspector" />
+    <NavigationProperty Name="ConsecutivosFormatos" Relationship="DB_A66D31_intratecPrbModel.FK_ConsecutivosInspectores_Usuarios" FromRole="Usuarios" ToRole="ConsecutivosFormatos" />
+    <NavigationProperty Name="TramiteConsecutivoFormato" Relationship="DB_A66D31_intratecPrbModel.FK_TramiteAsignacionConsecutivoInspector_Usuarios" FromRole="Usuarios" ToRole="TramiteConsecutivoFormato" />
+    <NavigationProperty Name="TramitesEquipo" Relationship="DB_A66D31_intratecPrbModel.FK_TramitesEquipo_Usuarios" FromRole="Usuarios" ToRole="TramitesEquipo" />
+    <NavigationProperty Name="UsuariosEquipos" Relationship="DB_A66D31_intratecPrbModel.FK_UsuariosEquipos_Usuarios" FromRole="Usuarios" ToRole="UsuariosEquipos" />
   </EntityType>
   <Association Name="FK_Ciudades_Departamentos">
     <End Type="DB_A66D31_intratecPrbModel.Departamentos" Role="Departamentos" Multiplicity="1" />
@@ -458,6 +504,7 @@
     <NavigationProperty Name="TiposIdentificacion" Relationship="DB_A66D31_intratecPrbModel.FK_Clientes_TiposDocumento" FromRole="Clientes" ToRole="TiposIdentificacion" />
     <NavigationProperty Name="TiposPersona" Relationship="DB_A66D31_intratecPrbModel.FK_Clientes_TiposPersona" FromRole="Clientes" ToRole="TiposPersona" />
     <NavigationProperty Name="Propiedades" Relationship="DB_A66D31_intratecPrbModel.FK_Propiedades_Clientes" FromRole="Clientes" ToRole="Propiedades" />
+    <NavigationProperty Name="Ciudades" Relationship="DB_A66D31_intratecPrbModel.FK_Clientes_Ciudades" FromRole="Clientes" ToRole="Ciudades" />
   </EntityType>
   <Association Name="FK_Clientes_TiposDocumento">
     <End Type="DB_A66D31_intratecPrbModel.TiposIdentificacion" Role="TiposIdentificacion" Multiplicity="1" />
@@ -495,43 +542,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityType Name="Formatos">
-    <Key>
-      <PropertyRef Name="IdFormato" />
-    </Key>
-    <Property Name="IdFormato" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="NroFormato" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="Formato" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-    <Property Name="ConsecutivoInicial" Type="Int32" Nullable="false" />
-    <Property Name="ConsecutivoFinal" Type="Int32" Nullable="false" />
-    <Property Name="Mascara" Type="Int32" Nullable="false" />
-    <Property Name="Activo" Type="Boolean" Nullable="false" />
-    <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
-    <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-    <Property Name="IdUsuarioModificacion" Type="Int32" />
-    <NavigationProperty Name="ConsecutivosInspectores" Relationship="DB_A66D31_intratecPrbModel.FK_ConsecutivosInspectores_EstadosConsecutivosInspector" FromRole="Formatos" ToRole="ConsecutivosInspectores" />
-    <NavigationProperty Name="TramiteAsignacionConsecutivoInspector" Relationship="DB_A66D31_intratecPrbModel.FK_TramiteAsignacionConsecutivoInspector_Formatos" FromRole="Formatos" ToRole="TramiteAsignacionConsecutivoInspector" />
-  </EntityType>
-  <EntityType Name="ConsecutivosInspectores">
-    <Key>
-      <PropertyRef Name="IdFormato" />
-      <PropertyRef Name="IdInspector" />
-      <PropertyRef Name="Consecutivo" />
-    </Key>
-    <Property Name="IdFormato" Type="Int32" Nullable="false" />
-    <Property Name="IdInspector" Type="Int32" Nullable="false" />
-    <Property Name="Consecutivo" Type="Int32" Nullable="false" />
-    <Property Name="IdEstadoConsecutivoInspector" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
-    <Property Name="IdVisita" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
-    <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-    <Property Name="IdUsuarioModificacion" Type="Int32" />
-    <NavigationProperty Name="Formatos" Relationship="DB_A66D31_intratecPrbModel.FK_ConsecutivosInspectores_EstadosConsecutivosInspector" FromRole="ConsecutivosInspectores" ToRole="Formatos" />
-    <NavigationProperty Name="EstadosConsecutivosInspector" Relationship="DB_A66D31_intratecPrbModel.FK_ConsecutivosInspectores_EstadosConsecutivosInspector1" FromRole="ConsecutivosInspectores" ToRole="EstadosConsecutivosInspector" />
-    <NavigationProperty Name="Usuarios" Relationship="DB_A66D31_intratecPrbModel.FK_ConsecutivosInspectores_Usuarios" FromRole="ConsecutivosInspectores" ToRole="Usuarios" />
-  </EntityType>
   <EntityType Name="EstadosConsecutivosInspector">
     <Key>
       <PropertyRef Name="IdEstadoConsecutivoInspector" />
@@ -540,9 +550,80 @@
     <Property Name="EstadoConsecutivoInspector" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="ConsecutivosInspectores" Relationship="DB_A66D31_intratecPrbModel.FK_ConsecutivosInspectores_EstadosConsecutivosInspector1" FromRole="EstadosConsecutivosInspector" ToRole="ConsecutivosInspectores" />
+    <NavigationProperty Name="ConsecutivosFormatos" Relationship="DB_A66D31_intratecPrbModel.FK_ConsecutivosInspectores_EstadosConsecutivosInspector1" FromRole="EstadosConsecutivosInspector" ToRole="ConsecutivosFormatos" />
   </EntityType>
-  <EntityType Name="TramiteAsignacionConsecutivoInspector">
+  <EntityType Name="ConsecutivosFormatos">
+    <Key>
+      <PropertyRef Name="IdFormato" />
+      <PropertyRef Name="Consecutivo" />
+    </Key>
+    <Property Name="IdFormato" Type="Int32" Nullable="false" />
+    <Property Name="Consecutivo" Type="Int32" Nullable="false" />
+    <Property Name="IdInspector" Type="Int32" />
+    <Property Name="IdEstadoConsecutivoInspector" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="IdVisita" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
+    <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+    <Property Name="IdUsuarioModificacion" Type="Int32" />
+    <NavigationProperty Name="Formatos" Relationship="DB_A66D31_intratecPrbModel.FK_ConsecutivosInspectores_EstadosConsecutivosInspector" FromRole="ConsecutivosFormatos" ToRole="Formatos" />
+    <NavigationProperty Name="EstadosConsecutivosInspector" Relationship="DB_A66D31_intratecPrbModel.FK_ConsecutivosInspectores_EstadosConsecutivosInspector1" FromRole="ConsecutivosFormatos" ToRole="EstadosConsecutivosInspector" />
+    <NavigationProperty Name="Usuarios" Relationship="DB_A66D31_intratecPrbModel.FK_ConsecutivosInspectores_Usuarios" FromRole="ConsecutivosFormatos" ToRole="Usuarios" />
+  </EntityType>
+  <EntityType Name="Formatos">
+    <Key>
+      <PropertyRef Name="IdFormato" />
+    </Key>
+    <Property Name="IdFormato" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NroFormato" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Formato" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="Separador" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <Property Name="Mascara" Type="Int32" Nullable="false" />
+    <Property Name="Activo" Type="Boolean" Nullable="false" />
+    <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
+    <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+    <Property Name="IdUsuarioModificacion" Type="Int32" />
+    <NavigationProperty Name="ConsecutivosFormatos" Relationship="DB_A66D31_intratecPrbModel.FK_ConsecutivosInspectores_EstadosConsecutivosInspector" FromRole="Formatos" ToRole="ConsecutivosFormatos" />
+    <NavigationProperty Name="TramiteConsecutivoFormato" Relationship="DB_A66D31_intratecPrbModel.FK_TramiteAsignacionConsecutivoInspector_Formatos" FromRole="Formatos" ToRole="TramiteConsecutivoFormato" />
+  </EntityType>
+  <Association Name="FK_ConsecutivosInspectores_EstadosConsecutivosInspector">
+    <End Type="DB_A66D31_intratecPrbModel.Formatos" Role="Formatos" Multiplicity="1" />
+    <End Type="DB_A66D31_intratecPrbModel.ConsecutivosFormatos" Role="ConsecutivosFormatos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Formatos">
+        <PropertyRef Name="IdFormato" />
+      </Principal>
+      <Dependent Role="ConsecutivosFormatos">
+        <PropertyRef Name="IdFormato" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ConsecutivosInspectores_EstadosConsecutivosInspector1">
+    <End Type="DB_A66D31_intratecPrbModel.EstadosConsecutivosInspector" Role="EstadosConsecutivosInspector" Multiplicity="1" />
+    <End Type="DB_A66D31_intratecPrbModel.ConsecutivosFormatos" Role="ConsecutivosFormatos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstadosConsecutivosInspector">
+        <PropertyRef Name="IdEstadoConsecutivoInspector" />
+      </Principal>
+      <Dependent Role="ConsecutivosFormatos">
+        <PropertyRef Name="IdEstadoConsecutivoInspector" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ConsecutivosInspectores_Usuarios">
+    <End Type="DB_A66D31_intratecPrbModel.Usuarios" Role="Usuarios" Multiplicity="0..1" />
+    <End Type="DB_A66D31_intratecPrbModel.ConsecutivosFormatos" Role="ConsecutivosFormatos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="ConsecutivosFormatos">
+        <PropertyRef Name="IdInspector" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="TramiteConsecutivoFormato">
     <Key>
       <PropertyRef Name="IdFormato" />
       <PropertyRef Name="IdInspector" />
@@ -554,68 +635,250 @@
     <Property Name="Consecutivo" Type="Int32" Nullable="false" />
     <Property Name="Secuencia" Type="Int32" Nullable="false" />
     <Property Name="Tramite" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Observaciones" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
     <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Formatos" Relationship="DB_A66D31_intratecPrbModel.FK_TramiteAsignacionConsecutivoInspector_Formatos" FromRole="TramiteAsignacionConsecutivoInspector" ToRole="Formatos" />
-    <NavigationProperty Name="Usuarios" Relationship="DB_A66D31_intratecPrbModel.FK_TramiteAsignacionConsecutivoInspector_Usuarios" FromRole="TramiteAsignacionConsecutivoInspector" ToRole="Usuarios" />
-    <Property Name="Observaciones" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Formatos" Relationship="DB_A66D31_intratecPrbModel.FK_TramiteAsignacionConsecutivoInspector_Formatos" FromRole="TramiteConsecutivoFormato" ToRole="Formatos" />
+    <NavigationProperty Name="Usuarios" Relationship="DB_A66D31_intratecPrbModel.FK_TramiteAsignacionConsecutivoInspector_Usuarios" FromRole="TramiteConsecutivoFormato" ToRole="Usuarios" />
   </EntityType>
-  <Association Name="FK_ConsecutivosInspectores_EstadosConsecutivosInspector">
-    <End Type="DB_A66D31_intratecPrbModel.Formatos" Role="Formatos" Multiplicity="1" />
-    <End Type="DB_A66D31_intratecPrbModel.ConsecutivosInspectores" Role="ConsecutivosInspectores" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Formatos">
-        <PropertyRef Name="IdFormato" />
-      </Principal>
-      <Dependent Role="ConsecutivosInspectores">
-        <PropertyRef Name="IdFormato" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ConsecutivosInspectores_EstadosConsecutivosInspector1">
-    <End Type="DB_A66D31_intratecPrbModel.EstadosConsecutivosInspector" Role="EstadosConsecutivosInspector" Multiplicity="1" />
-    <End Type="DB_A66D31_intratecPrbModel.ConsecutivosInspectores" Role="ConsecutivosInspectores" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="EstadosConsecutivosInspector">
-        <PropertyRef Name="IdEstadoConsecutivoInspector" />
-      </Principal>
-      <Dependent Role="ConsecutivosInspectores">
-        <PropertyRef Name="IdEstadoConsecutivoInspector" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_ConsecutivosInspectores_Usuarios">
-    <End Type="DB_A66D31_intratecPrbModel.Usuarios" Role="Usuarios" Multiplicity="1" />
-    <End Type="DB_A66D31_intratecPrbModel.ConsecutivosInspectores" Role="ConsecutivosInspectores" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Usuarios">
-        <PropertyRef Name="IdUsuario" />
-      </Principal>
-      <Dependent Role="ConsecutivosInspectores">
-        <PropertyRef Name="IdInspector" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_TramiteAsignacionConsecutivoInspector_Formatos">
     <End Type="DB_A66D31_intratecPrbModel.Formatos" Role="Formatos" Multiplicity="1" />
-    <End Type="DB_A66D31_intratecPrbModel.TramiteAsignacionConsecutivoInspector" Role="TramiteAsignacionConsecutivoInspector" Multiplicity="*" />
+    <End Type="DB_A66D31_intratecPrbModel.TramiteConsecutivoFormato" Role="TramiteConsecutivoFormato" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Formatos">
         <PropertyRef Name="IdFormato" />
       </Principal>
-      <Dependent Role="TramiteAsignacionConsecutivoInspector">
+      <Dependent Role="TramiteConsecutivoFormato">
         <PropertyRef Name="IdFormato" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_TramiteAsignacionConsecutivoInspector_Usuarios">
     <End Type="DB_A66D31_intratecPrbModel.Usuarios" Role="Usuarios" Multiplicity="1" />
-    <End Type="DB_A66D31_intratecPrbModel.TramiteAsignacionConsecutivoInspector" Role="TramiteAsignacionConsecutivoInspector" Multiplicity="*" />
+    <End Type="DB_A66D31_intratecPrbModel.TramiteConsecutivoFormato" Role="TramiteConsecutivoFormato" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Usuarios">
         <PropertyRef Name="IdUsuario" />
       </Principal>
-      <Dependent Role="TramiteAsignacionConsecutivoInspector">
+      <Dependent Role="TramiteConsecutivoFormato">
+        <PropertyRef Name="IdInspector" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="CalibracionesEquipos">
+    <Key>
+      <PropertyRef Name="IdEquipo" />
+      <PropertyRef Name="Secuencia" />
+    </Key>
+    <Property Name="IdEquipo" Type="Int32" Nullable="false" />
+    <Property Name="Secuencia" Type="Int32" Nullable="false" />
+    <Property Name="FechaCalibracion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Laboratorio" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Observaciones" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
+    <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+    <Property Name="IdUsuarioModificacion" Type="Int32" />
+    <NavigationProperty Name="Equipos" Relationship="DB_A66D31_intratecPrbModel.FK_CalibracionesEquipos_Equipos" FromRole="CalibracionesEquipos" ToRole="Equipos" />
+  </EntityType>
+  <EntityType Name="Equipos">
+    <Key>
+      <PropertyRef Name="IdEquipo" />
+    </Key>
+    <Property Name="IdEquipo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Area" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="SerieIDInterno" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IdTipoEquipo" Type="Int32" Nullable="false" />
+    <Property Name="IdMarcaEquipo" Type="Int32" Nullable="false" />
+    <Property Name="Modelo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="RangoMedicion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Tolerancia" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Calibrado" Type="Boolean" Nullable="false" />
+    <Property Name="FechaUltimaCalibracion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="FechaProximaCalibracion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="FechaUltimaVerificacionLaboratorio" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PeriodoCalibracion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PeriodoVerificacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FechaProximoMantenimiento" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="CalibracionesEquipos" Relationship="DB_A66D31_intratecPrbModel.FK_CalibracionesEquipos_Equipos" FromRole="Equipos" ToRole="CalibracionesEquipos" />
+    <NavigationProperty Name="MarcasEquipos" Relationship="DB_A66D31_intratecPrbModel.FK_Equipos_MarcasEquipos" FromRole="Equipos" ToRole="MarcasEquipos" />
+    <NavigationProperty Name="TiposEquipo" Relationship="DB_A66D31_intratecPrbModel.FK_Equipos_TiposEquipo" FromRole="Equipos" ToRole="TiposEquipo" />
+    <NavigationProperty Name="TramitesEquipo" Relationship="DB_A66D31_intratecPrbModel.FK_TramitesEquipo_Equipos" FromRole="Equipos" ToRole="TramitesEquipo" />
+    <NavigationProperty Name="UsuariosEquipos" Relationship="DB_A66D31_intratecPrbModel.FK_UsuariosEquipos_Equipos" FromRole="Equipos" ToRole="UsuariosEquipos" />
+    <NavigationProperty Name="VerificacionesLabEquipos" Relationship="DB_A66D31_intratecPrbModel.FK_VerificacionesLabEquipos_Equipos" FromRole="Equipos" ToRole="VerificacionesLabEquipos" />
+  </EntityType>
+  <EntityType Name="MarcasEquipos">
+    <Key>
+      <PropertyRef Name="IdMarcaEquipo" />
+    </Key>
+    <Property Name="IdMarcaEquipo" Type="Int32" Nullable="false" />
+    <Property Name="MarcaEquipo" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
+    <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+    <Property Name="IdUsuarioModificacion" Type="Int32" />
+    <NavigationProperty Name="Equipos" Relationship="DB_A66D31_intratecPrbModel.FK_Equipos_MarcasEquipos" FromRole="MarcasEquipos" ToRole="Equipos" />
+  </EntityType>
+  <EntityType Name="TiposEquipo">
+    <Key>
+      <PropertyRef Name="IdTipoEquipo" />
+    </Key>
+    <Property Name="IdTipoEquipo" Type="Int32" Nullable="false" />
+    <Property Name="TipoEquipo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
+    <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+    <Property Name="IdUsuarioModificacion" Type="Int32" />
+    <NavigationProperty Name="Equipos" Relationship="DB_A66D31_intratecPrbModel.FK_Equipos_TiposEquipo" FromRole="TiposEquipo" ToRole="Equipos" />
+  </EntityType>
+  <EntityType Name="TramitesEquipo">
+    <Key>
+      <PropertyRef Name="IdEquipo" />
+      <PropertyRef Name="Secuencia" />
+    </Key>
+    <Property Name="IdEquipo" Type="Int32" Nullable="false" />
+    <Property Name="Secuencia" Type="Int32" Nullable="false" />
+    <Property Name="Observaciones" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="IdInspector" Type="Int32" />
+    <Property Name="Tramite" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Equipos" Relationship="DB_A66D31_intratecPrbModel.FK_TramitesEquipo_Equipos" FromRole="TramitesEquipo" ToRole="Equipos" />
+    <NavigationProperty Name="Usuarios" Relationship="DB_A66D31_intratecPrbModel.FK_TramitesEquipo_Usuarios" FromRole="TramitesEquipo" ToRole="Usuarios" />
+  </EntityType>
+  <EntityType Name="VerificacionesLabEquipos">
+    <Key>
+      <PropertyRef Name="IdEquipo" />
+      <PropertyRef Name="Secuencia" />
+    </Key>
+    <Property Name="IdEquipo" Type="Int32" Nullable="false" />
+    <Property Name="Secuencia" Type="Int32" Nullable="false" />
+    <Property Name="FechaVerificacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="NroCertificado" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Laboratorio" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Observaciones" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
+    <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+    <Property Name="IdUsuarioModificacion" Type="Int32" />
+    <NavigationProperty Name="Equipos" Relationship="DB_A66D31_intratecPrbModel.FK_VerificacionesLabEquipos_Equipos" FromRole="VerificacionesLabEquipos" ToRole="Equipos" />
+  </EntityType>
+  <EntityType Name="UsuariosEquipos">
+    <Key>
+      <PropertyRef Name="IdInspector" />
+      <PropertyRef Name="IdEquipo" />
+      <PropertyRef Name="FechaAsignacion" />
+    </Key>
+    <Property Name="IdInspector" Type="Int32" Nullable="false" />
+    <Property Name="IdEquipo" Type="Int32" Nullable="false" />
+    <Property Name="FechaAsignacion" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Equipos" Relationship="DB_A66D31_intratecPrbModel.FK_UsuariosEquipos_Equipos" FromRole="UsuariosEquipos" ToRole="Equipos" />
+    <NavigationProperty Name="Usuarios" Relationship="DB_A66D31_intratecPrbModel.FK_UsuariosEquipos_Usuarios" FromRole="UsuariosEquipos" ToRole="Usuarios" />
+  </EntityType>
+  <Association Name="FK_CalibracionesEquipos_Equipos">
+    <End Type="DB_A66D31_intratecPrbModel.Equipos" Role="Equipos" Multiplicity="1" />
+    <End Type="DB_A66D31_intratecPrbModel.CalibracionesEquipos" Role="CalibracionesEquipos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Equipos">
+        <PropertyRef Name="IdEquipo" />
+      </Principal>
+      <Dependent Role="CalibracionesEquipos">
+        <PropertyRef Name="IdEquipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Clientes_Ciudades">
+    <End Type="DB_A66D31_intratecPrbModel.Ciudades" Role="Ciudades" Multiplicity="1" />
+    <End Type="DB_A66D31_intratecPrbModel.Clientes" Role="Clientes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ciudades">
+        <PropertyRef Name="IdCiudad" />
+      </Principal>
+      <Dependent Role="Clientes">
+        <PropertyRef Name="IdCiudad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Equipos_MarcasEquipos">
+    <End Type="DB_A66D31_intratecPrbModel.MarcasEquipos" Role="MarcasEquipos" Multiplicity="1" />
+    <End Type="DB_A66D31_intratecPrbModel.Equipos" Role="Equipos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MarcasEquipos">
+        <PropertyRef Name="IdMarcaEquipo" />
+      </Principal>
+      <Dependent Role="Equipos">
+        <PropertyRef Name="IdMarcaEquipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Equipos_TiposEquipo">
+    <End Type="DB_A66D31_intratecPrbModel.TiposEquipo" Role="TiposEquipo" Multiplicity="1" />
+    <End Type="DB_A66D31_intratecPrbModel.Equipos" Role="Equipos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TiposEquipo">
+        <PropertyRef Name="IdTipoEquipo" />
+      </Principal>
+      <Dependent Role="Equipos">
+        <PropertyRef Name="IdTipoEquipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TramitesEquipo_Equipos">
+    <End Type="DB_A66D31_intratecPrbModel.Equipos" Role="Equipos" Multiplicity="1" />
+    <End Type="DB_A66D31_intratecPrbModel.TramitesEquipo" Role="TramitesEquipo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Equipos">
+        <PropertyRef Name="IdEquipo" />
+      </Principal>
+      <Dependent Role="TramitesEquipo">
+        <PropertyRef Name="IdEquipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UsuariosEquipos_Equipos">
+    <End Type="DB_A66D31_intratecPrbModel.Equipos" Role="Equipos" Multiplicity="1" />
+    <End Type="DB_A66D31_intratecPrbModel.UsuariosEquipos" Role="UsuariosEquipos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Equipos">
+        <PropertyRef Name="IdEquipo" />
+      </Principal>
+      <Dependent Role="UsuariosEquipos">
+        <PropertyRef Name="IdEquipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VerificacionesLabEquipos_Equipos">
+    <End Type="DB_A66D31_intratecPrbModel.Equipos" Role="Equipos" Multiplicity="1" />
+    <End Type="DB_A66D31_intratecPrbModel.VerificacionesLabEquipos" Role="VerificacionesLabEquipos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Equipos">
+        <PropertyRef Name="IdEquipo" />
+      </Principal>
+      <Dependent Role="VerificacionesLabEquipos">
+        <PropertyRef Name="IdEquipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TramitesEquipo_Usuarios">
+    <End Type="DB_A66D31_intratecPrbModel.Usuarios" Role="Usuarios" Multiplicity="0..1" />
+    <End Type="DB_A66D31_intratecPrbModel.TramitesEquipo" Role="TramitesEquipo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="TramitesEquipo">
+        <PropertyRef Name="IdInspector" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UsuariosEquipos_Usuarios">
+    <End Type="DB_A66D31_intratecPrbModel.Usuarios" Role="Usuarios" Multiplicity="1" />
+    <End Type="DB_A66D31_intratecPrbModel.UsuariosEquipos" Role="UsuariosEquipos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="UsuariosEquipos">
         <PropertyRef Name="IdInspector" />
       </Dependent>
     </ReferentialConstraint>

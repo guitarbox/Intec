@@ -44,5 +44,6 @@ namespace Intec.DAL
         public virtual TiposPersona TiposPersona { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Propiedades> Propiedades { get; set; }
+        public virtual Ciudades Ciudades { get; set; }
     }
 }

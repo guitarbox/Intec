@@ -17,8 +17,10 @@ namespace Intec.DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Usuarios()
         {
-            this.ConsecutivosInspectores = new HashSet<ConsecutivosInspectores>();
-            this.TramiteAsignacionConsecutivoInspector = new HashSet<TramiteAsignacionConsecutivoInspector>();
+            this.ConsecutivosFormatos = new HashSet<ConsecutivosFormatos>();
+            this.TramiteConsecutivoFormato = new HashSet<TramiteConsecutivoFormato>();
+            this.TramitesEquipo = new HashSet<TramitesEquipo>();
+            this.UsuariosEquipos = new HashSet<UsuariosEquipos>();
         }
     
         public int IdUsuario { get; set; }
@@ -42,8 +44,12 @@ namespace Intec.DAL
         public virtual Roles Roles { get; set; }
         public virtual TiposIdentificacion TiposIdentificacion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ConsecutivosInspectores> ConsecutivosInspectores { get; set; }
+        public virtual ICollection<ConsecutivosFormatos> ConsecutivosFormatos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TramiteAsignacionConsecutivoInspector> TramiteAsignacionConsecutivoInspector { get; set; }
+        public virtual ICollection<TramiteConsecutivoFormato> TramiteConsecutivoFormato { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TramitesEquipo> TramitesEquipo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UsuariosEquipos> UsuariosEquipos { get; set; }
     }
 }

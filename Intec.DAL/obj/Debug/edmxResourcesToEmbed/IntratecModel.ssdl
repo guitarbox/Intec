@@ -1,5 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="DB_A66D31_intratecPrbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CalibracionesEquipos">
+    <Key>
+      <PropertyRef Name="IdEquipo" />
+      <PropertyRef Name="Secuencia" />
+    </Key>
+    <Property Name="IdEquipo" Type="int" Nullable="false" />
+    <Property Name="Secuencia" Type="int" Nullable="false" />
+    <Property Name="FechaCalibracion" Type="datetime" Nullable="false" />
+    <Property Name="Laboratorio" Type="nchar" MaxLength="10" />
+    <Property Name="Observaciones" Type="nvarchar" MaxLength="1000" />
+    <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+    <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
+    <Property Name="FechaModificacion" Type="datetime" />
+    <Property Name="IdUsuarioModificacion" Type="int" />
+  </EntityType>
   <EntityType Name="Ciudades">
     <Key>
       <PropertyRef Name="IdCiudad" />
@@ -36,15 +51,14 @@
     <Property Name="FechaModificacion" Type="datetime" />
     <Property Name="IdUsuarioModificacion" Type="int" />
   </EntityType>
-  <EntityType Name="ConsecutivosInspectores">
+  <EntityType Name="ConsecutivosFormatos">
     <Key>
       <PropertyRef Name="IdFormato" />
-      <PropertyRef Name="IdInspector" />
       <PropertyRef Name="Consecutivo" />
     </Key>
     <Property Name="IdFormato" Type="int" Nullable="false" />
-    <Property Name="IdInspector" Type="int" Nullable="false" />
     <Property Name="Consecutivo" Type="int" Nullable="false" />
+    <Property Name="IdInspector" Type="int" />
     <Property Name="IdEstadoConsecutivoInspector" Type="nvarchar" MaxLength="1" Nullable="false" />
     <Property Name="IdVisita" Type="nvarchar" MaxLength="50" />
     <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
@@ -64,6 +78,26 @@
     <Property Name="FechaModificacion" Type="datetime" />
     <Property Name="IdUsuarioModificacion" Type="int" />
   </EntityType>
+  <EntityType Name="Equipos">
+    <Key>
+      <PropertyRef Name="IdEquipo" />
+    </Key>
+    <Property Name="IdEquipo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Area" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="SerieIDInterno" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IdTipoEquipo" Type="int" Nullable="false" />
+    <Property Name="IdMarcaEquipo" Type="int" Nullable="false" />
+    <Property Name="Modelo" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="RangoMedicion" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Tolerancia" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Calibrado" Type="bit" Nullable="false" />
+    <Property Name="FechaUltimaCalibracion" Type="datetime" Nullable="false" />
+    <Property Name="FechaProximaCalibracion" Type="datetime" Nullable="false" />
+    <Property Name="FechaUltimaVerificacionLaboratorio" Type="datetime" Nullable="false" />
+    <Property Name="PeriodoCalibracion" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PeriodoVerificacion" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="FechaProximoMantenimiento" Type="datetime" Nullable="false" />
+  </EntityType>
   <EntityType Name="EstadosConsecutivosInspector">
     <Key>
       <PropertyRef Name="IdEstadoConsecutivoInspector" />
@@ -80,10 +114,20 @@
     <Property Name="IdFormato" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="NroFormato" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Formato" Type="nvarchar" MaxLength="150" Nullable="false" />
-    <Property Name="ConsecutivoInicial" Type="int" Nullable="false" />
-    <Property Name="ConsecutivoFinal" Type="int" Nullable="false" />
+    <Property Name="Separador" Type="nvarchar" MaxLength="1" />
     <Property Name="Mascara" Type="int" Nullable="false" />
     <Property Name="Activo" Type="bit" Nullable="false" />
+    <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+    <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
+    <Property Name="FechaModificacion" Type="datetime" />
+    <Property Name="IdUsuarioModificacion" Type="int" />
+  </EntityType>
+  <EntityType Name="MarcasEquipos">
+    <Key>
+      <PropertyRef Name="IdMarcaEquipo" />
+    </Key>
+    <Property Name="IdMarcaEquipo" Type="int" Nullable="false" />
+    <Property Name="MarcaEquipo" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
     <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
     <Property Name="FechaModificacion" Type="datetime" />
@@ -185,6 +229,17 @@
     <Property Name="city" Type="nvarchar" MaxLength="150" Nullable="false" />
     <Property Name="country" Type="nvarchar" MaxLength="150" Nullable="false" />
   </EntityType>
+  <EntityType Name="TiposEquipo">
+    <Key>
+      <PropertyRef Name="IdTipoEquipo" />
+    </Key>
+    <Property Name="IdTipoEquipo" Type="int" Nullable="false" />
+    <Property Name="TipoEquipo" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+    <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
+    <Property Name="FechaModificacion" Type="datetime" />
+    <Property Name="IdUsuarioModificacion" Type="int" />
+  </EntityType>
   <EntityType Name="TiposIdentificacion">
     <Key>
       <PropertyRef Name="IdTipoIdentificacion" />
@@ -221,7 +276,7 @@
     <Property Name="FechaModificacion" Type="datetime" />
     <Property Name="IdUsuarioModificacion" Type="int" />
   </EntityType>
-  <EntityType Name="TramiteAsignacionConsecutivoInspector">
+  <EntityType Name="TramiteConsecutivoFormato">
     <Key>
       <PropertyRef Name="IdFormato" />
       <PropertyRef Name="IdInspector" />
@@ -234,6 +289,19 @@
     <Property Name="Secuencia" Type="int" Nullable="false" />
     <Property Name="Tramite" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="Observaciones" Type="nvarchar" MaxLength="1500" />
+    <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+    <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TramitesEquipo">
+    <Key>
+      <PropertyRef Name="IdEquipo" />
+      <PropertyRef Name="Secuencia" />
+    </Key>
+    <Property Name="IdEquipo" Type="int" Nullable="false" />
+    <Property Name="Secuencia" Type="int" Nullable="false" />
+    <Property Name="Observaciones" Type="nvarchar" MaxLength="1000" />
+    <Property Name="IdInspector" Type="int" />
+    <Property Name="Tramite" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
     <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
   </EntityType>
@@ -269,6 +337,46 @@
     <Property Name="IdUsuarioModificacion" Type="int" />
     <Property Name="IdRol" Type="int" Nullable="false" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_A66D31_intratec.dbo.UsuariosEquipos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="UsuariosEquipos">
+    <Key>
+      <PropertyRef Name="IdInspector" />
+      <PropertyRef Name="IdEquipo" />
+      <PropertyRef Name="FechaAsignacion" />
+    </Key>
+    <Property Name="IdInspector" Type="int" Nullable="false" />
+    <Property Name="IdEquipo" Type="int" Nullable="false" />
+    <Property Name="FechaAsignacion" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VerificacionesLabEquipos">
+    <Key>
+      <PropertyRef Name="IdEquipo" />
+      <PropertyRef Name="Secuencia" />
+    </Key>
+    <Property Name="IdEquipo" Type="int" Nullable="false" />
+    <Property Name="Secuencia" Type="int" Nullable="false" />
+    <Property Name="FechaVerificacion" Type="datetime" Nullable="false" />
+    <Property Name="NroCertificado" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Laboratorio" Type="nchar" MaxLength="10" />
+    <Property Name="Observaciones" Type="nvarchar" MaxLength="1000" />
+    <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+    <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
+    <Property Name="FechaModificacion" Type="datetime" />
+    <Property Name="IdUsuarioModificacion" Type="int" />
+  </EntityType>
+  <Association Name="FK_CalibracionesEquipos_Equipos">
+    <End Role="Equipos" Type="Self.Equipos" Multiplicity="1" />
+    <End Role="CalibracionesEquipos" Type="Self.CalibracionesEquipos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Equipos">
+        <PropertyRef Name="IdEquipo" />
+      </Principal>
+      <Dependent Role="CalibracionesEquipos">
+        <PropertyRef Name="IdEquipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Ciudades_Departamentos">
     <End Role="Departamentos" Type="Self.Departamentos" Multiplicity="1" />
     <End Role="Ciudades" Type="Self.Ciudades" Multiplicity="*" />
@@ -278,6 +386,18 @@
       </Principal>
       <Dependent Role="Ciudades">
         <PropertyRef Name="IdDepartamento" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Clientes_Ciudades">
+    <End Role="Ciudades" Type="Self.Ciudades" Multiplicity="1" />
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ciudades">
+        <PropertyRef Name="IdCiudad" />
+      </Principal>
+      <Dependent Role="Clientes">
+        <PropertyRef Name="IdCiudad" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -307,36 +427,36 @@
   </Association>
   <Association Name="FK_ConsecutivosInspectores_EstadosConsecutivosInspector">
     <End Role="Formatos" Type="Self.Formatos" Multiplicity="1" />
-    <End Role="ConsecutivosInspectores" Type="Self.ConsecutivosInspectores" Multiplicity="*" />
+    <End Role="ConsecutivosFormatos" Type="Self.ConsecutivosFormatos" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Formatos">
         <PropertyRef Name="IdFormato" />
       </Principal>
-      <Dependent Role="ConsecutivosInspectores">
+      <Dependent Role="ConsecutivosFormatos">
         <PropertyRef Name="IdFormato" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ConsecutivosInspectores_EstadosConsecutivosInspector1">
     <End Role="EstadosConsecutivosInspector" Type="Self.EstadosConsecutivosInspector" Multiplicity="1" />
-    <End Role="ConsecutivosInspectores" Type="Self.ConsecutivosInspectores" Multiplicity="*" />
+    <End Role="ConsecutivosFormatos" Type="Self.ConsecutivosFormatos" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="EstadosConsecutivosInspector">
         <PropertyRef Name="IdEstadoConsecutivoInspector" />
       </Principal>
-      <Dependent Role="ConsecutivosInspectores">
+      <Dependent Role="ConsecutivosFormatos">
         <PropertyRef Name="IdEstadoConsecutivoInspector" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ConsecutivosInspectores_Usuarios">
-    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
-    <End Role="ConsecutivosInspectores" Type="Self.ConsecutivosInspectores" Multiplicity="*" />
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+    <End Role="ConsecutivosFormatos" Type="Self.ConsecutivosFormatos" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Usuarios">
         <PropertyRef Name="IdUsuario" />
       </Principal>
-      <Dependent Role="ConsecutivosInspectores">
+      <Dependent Role="ConsecutivosFormatos">
         <PropertyRef Name="IdInspector" />
       </Dependent>
     </ReferentialConstraint>
@@ -350,6 +470,30 @@
       </Principal>
       <Dependent Role="Departamentos">
         <PropertyRef Name="IdPais" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Equipos_MarcasEquipos">
+    <End Role="MarcasEquipos" Type="Self.MarcasEquipos" Multiplicity="1" />
+    <End Role="Equipos" Type="Self.Equipos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MarcasEquipos">
+        <PropertyRef Name="IdMarcaEquipo" />
+      </Principal>
+      <Dependent Role="Equipos">
+        <PropertyRef Name="IdMarcaEquipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Equipos_TiposEquipo">
+    <End Role="TiposEquipo" Type="Self.TiposEquipo" Multiplicity="1" />
+    <End Role="Equipos" Type="Self.Equipos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TiposEquipo">
+        <PropertyRef Name="IdTipoEquipo" />
+      </Principal>
+      <Dependent Role="Equipos">
+        <PropertyRef Name="IdTipoEquipo" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -439,24 +583,48 @@
   </Association>
   <Association Name="FK_TramiteAsignacionConsecutivoInspector_Formatos">
     <End Role="Formatos" Type="Self.Formatos" Multiplicity="1" />
-    <End Role="TramiteAsignacionConsecutivoInspector" Type="Self.TramiteAsignacionConsecutivoInspector" Multiplicity="*" />
+    <End Role="TramiteConsecutivoFormato" Type="Self.TramiteConsecutivoFormato" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Formatos">
         <PropertyRef Name="IdFormato" />
       </Principal>
-      <Dependent Role="TramiteAsignacionConsecutivoInspector">
+      <Dependent Role="TramiteConsecutivoFormato">
         <PropertyRef Name="IdFormato" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_TramiteAsignacionConsecutivoInspector_Usuarios">
     <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
-    <End Role="TramiteAsignacionConsecutivoInspector" Type="Self.TramiteAsignacionConsecutivoInspector" Multiplicity="*" />
+    <End Role="TramiteConsecutivoFormato" Type="Self.TramiteConsecutivoFormato" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Usuarios">
         <PropertyRef Name="IdUsuario" />
       </Principal>
-      <Dependent Role="TramiteAsignacionConsecutivoInspector">
+      <Dependent Role="TramiteConsecutivoFormato">
+        <PropertyRef Name="IdInspector" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TramitesEquipo_Equipos">
+    <End Role="Equipos" Type="Self.Equipos" Multiplicity="1" />
+    <End Role="TramitesEquipo" Type="Self.TramitesEquipo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Equipos">
+        <PropertyRef Name="IdEquipo" />
+      </Principal>
+      <Dependent Role="TramitesEquipo">
+        <PropertyRef Name="IdEquipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TramitesEquipo_Usuarios">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+    <End Role="TramitesEquipo" Type="Self.TramitesEquipo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="TramitesEquipo">
         <PropertyRef Name="IdInspector" />
       </Dependent>
     </ReferentialConstraint>
@@ -497,6 +665,42 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_UsuariosEquipos_Equipos">
+    <End Role="Equipos" Type="Self.Equipos" Multiplicity="1" />
+    <End Role="UsuariosEquipos" Type="Self.UsuariosEquipos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Equipos">
+        <PropertyRef Name="IdEquipo" />
+      </Principal>
+      <Dependent Role="UsuariosEquipos">
+        <PropertyRef Name="IdEquipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UsuariosEquipos_Usuarios">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+    <End Role="UsuariosEquipos" Type="Self.UsuariosEquipos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="UsuariosEquipos">
+        <PropertyRef Name="IdInspector" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VerificacionesLabEquipos_Equipos">
+    <End Role="Equipos" Type="Self.Equipos" Multiplicity="1" />
+    <End Role="VerificacionesLabEquipos" Type="Self.VerificacionesLabEquipos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Equipos">
+        <PropertyRef Name="IdEquipo" />
+      </Principal>
+      <Dependent Role="VerificacionesLabEquipos">
+        <PropertyRef Name="IdEquipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Function Name="uspConsultaGralCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="NumeroIdentificacion" Type="nvarchar" Mode="In" />
     <Parameter Name="Nombres" Type="nvarchar" Mode="In" />
@@ -505,12 +709,15 @@
     <Parameter Name="TieneVisitaProgramada" Type="bit" Mode="In" />
   </Function>
   <EntityContainer Name="DB_A66D31_intratecPrbModelStoreContainer">
+    <EntitySet Name="CalibracionesEquipos" EntityType="Self.CalibracionesEquipos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ciudades" EntityType="Self.Ciudades" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="ConsecutivosInspectores" EntityType="Self.ConsecutivosInspectores" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ConsecutivosFormatos" EntityType="Self.ConsecutivosFormatos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Departamentos" EntityType="Self.Departamentos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Equipos" EntityType="Self.Equipos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EstadosConsecutivosInspector" EntityType="Self.EstadosConsecutivosInspector" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Formatos" EntityType="Self.Formatos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MarcasEquipos" EntityType="Self.MarcasEquipos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Menus" EntityType="Self.Menus" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MenusRol" EntityType="Self.MenusRol" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Paises" EntityType="Self.Paises" Schema="dbo" store:Type="Tables" />
@@ -518,15 +725,33 @@
     <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SolicitudContactenos" EntityType="Self.SolicitudContactenos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SolicitudesProgramacionVisitas" EntityType="Self.SolicitudesProgramacionVisitas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TiposEquipo" EntityType="Self.TiposEquipo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TiposIdentificacion" EntityType="Self.TiposIdentificacion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TiposPersona" EntityType="Self.TiposPersona" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TiposPropiedades" EntityType="Self.TiposPropiedades" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="TramiteAsignacionConsecutivoInspector" EntityType="Self.TramiteAsignacionConsecutivoInspector" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TramiteConsecutivoFormato" EntityType="Self.TramiteConsecutivoFormato" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TramitesEquipo" EntityType="Self.TramitesEquipo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UsosPropiedades" EntityType="Self.UsosPropiedades" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="VerificacionesLabEquipos" EntityType="Self.VerificacionesLabEquipos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UsuariosEquipos" EntityType="Self.UsuariosEquipos" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [UsuariosEquipos].[IdInspector] AS [IdInspector], 
+    [UsuariosEquipos].[IdEquipo] AS [IdEquipo], 
+    [UsuariosEquipos].[FechaAsignacion] AS [FechaAsignacion]
+    FROM [dbo].[UsuariosEquipos] AS [UsuariosEquipos]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_CalibracionesEquipos_Equipos" Association="Self.FK_CalibracionesEquipos_Equipos">
+      <End Role="Equipos" EntitySet="Equipos" />
+      <End Role="CalibracionesEquipos" EntitySet="CalibracionesEquipos" />
+    </AssociationSet>
     <AssociationSet Name="FK_Ciudades_Departamentos" Association="Self.FK_Ciudades_Departamentos">
       <End Role="Departamentos" EntitySet="Departamentos" />
       <End Role="Ciudades" EntitySet="Ciudades" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Clientes_Ciudades" Association="Self.FK_Clientes_Ciudades">
+      <End Role="Ciudades" EntitySet="Ciudades" />
+      <End Role="Clientes" EntitySet="Clientes" />
     </AssociationSet>
     <AssociationSet Name="FK_Clientes_TiposDocumento" Association="Self.FK_Clientes_TiposDocumento">
       <End Role="TiposIdentificacion" EntitySet="TiposIdentificacion" />
@@ -538,19 +763,27 @@
     </AssociationSet>
     <AssociationSet Name="FK_ConsecutivosInspectores_EstadosConsecutivosInspector" Association="Self.FK_ConsecutivosInspectores_EstadosConsecutivosInspector">
       <End Role="Formatos" EntitySet="Formatos" />
-      <End Role="ConsecutivosInspectores" EntitySet="ConsecutivosInspectores" />
+      <End Role="ConsecutivosFormatos" EntitySet="ConsecutivosFormatos" />
     </AssociationSet>
     <AssociationSet Name="FK_ConsecutivosInspectores_EstadosConsecutivosInspector1" Association="Self.FK_ConsecutivosInspectores_EstadosConsecutivosInspector1">
       <End Role="EstadosConsecutivosInspector" EntitySet="EstadosConsecutivosInspector" />
-      <End Role="ConsecutivosInspectores" EntitySet="ConsecutivosInspectores" />
+      <End Role="ConsecutivosFormatos" EntitySet="ConsecutivosFormatos" />
     </AssociationSet>
     <AssociationSet Name="FK_ConsecutivosInspectores_Usuarios" Association="Self.FK_ConsecutivosInspectores_Usuarios">
       <End Role="Usuarios" EntitySet="Usuarios" />
-      <End Role="ConsecutivosInspectores" EntitySet="ConsecutivosInspectores" />
+      <End Role="ConsecutivosFormatos" EntitySet="ConsecutivosFormatos" />
     </AssociationSet>
     <AssociationSet Name="FK_Departamentos_Paises" Association="Self.FK_Departamentos_Paises">
       <End Role="Paises" EntitySet="Paises" />
       <End Role="Departamentos" EntitySet="Departamentos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Equipos_MarcasEquipos" Association="Self.FK_Equipos_MarcasEquipos">
+      <End Role="MarcasEquipos" EntitySet="MarcasEquipos" />
+      <End Role="Equipos" EntitySet="Equipos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Equipos_TiposEquipo" Association="Self.FK_Equipos_TiposEquipo">
+      <End Role="TiposEquipo" EntitySet="TiposEquipo" />
+      <End Role="Equipos" EntitySet="Equipos" />
     </AssociationSet>
     <AssociationSet Name="FK_Menus_Menus" Association="Self.FK_Menus_Menus">
       <End Role="Menus" EntitySet="Menus" />
@@ -582,11 +815,19 @@
     </AssociationSet>
     <AssociationSet Name="FK_TramiteAsignacionConsecutivoInspector_Formatos" Association="Self.FK_TramiteAsignacionConsecutivoInspector_Formatos">
       <End Role="Formatos" EntitySet="Formatos" />
-      <End Role="TramiteAsignacionConsecutivoInspector" EntitySet="TramiteAsignacionConsecutivoInspector" />
+      <End Role="TramiteConsecutivoFormato" EntitySet="TramiteConsecutivoFormato" />
     </AssociationSet>
     <AssociationSet Name="FK_TramiteAsignacionConsecutivoInspector_Usuarios" Association="Self.FK_TramiteAsignacionConsecutivoInspector_Usuarios">
       <End Role="Usuarios" EntitySet="Usuarios" />
-      <End Role="TramiteAsignacionConsecutivoInspector" EntitySet="TramiteAsignacionConsecutivoInspector" />
+      <End Role="TramiteConsecutivoFormato" EntitySet="TramiteConsecutivoFormato" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TramitesEquipo_Equipos" Association="Self.FK_TramitesEquipo_Equipos">
+      <End Role="Equipos" EntitySet="Equipos" />
+      <End Role="TramitesEquipo" EntitySet="TramitesEquipo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TramitesEquipo_Usuarios" Association="Self.FK_TramitesEquipo_Usuarios">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="TramitesEquipo" EntitySet="TramitesEquipo" />
     </AssociationSet>
     <AssociationSet Name="FK_Usuarios_Ciudades" Association="Self.FK_Usuarios_Ciudades">
       <End Role="Ciudades" EntitySet="Ciudades" />
@@ -599,6 +840,18 @@
     <AssociationSet Name="FK_Usuarios_TiposIdentificacion" Association="Self.FK_Usuarios_TiposIdentificacion">
       <End Role="TiposIdentificacion" EntitySet="TiposIdentificacion" />
       <End Role="Usuarios" EntitySet="Usuarios" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UsuariosEquipos_Equipos" Association="Self.FK_UsuariosEquipos_Equipos">
+      <End Role="Equipos" EntitySet="Equipos" />
+      <End Role="UsuariosEquipos" EntitySet="UsuariosEquipos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UsuariosEquipos_Usuarios" Association="Self.FK_UsuariosEquipos_Usuarios">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="UsuariosEquipos" EntitySet="UsuariosEquipos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VerificacionesLabEquipos_Equipos" Association="Self.FK_VerificacionesLabEquipos_Equipos">
+      <End Role="Equipos" EntitySet="Equipos" />
+      <End Role="VerificacionesLabEquipos" EntitySet="VerificacionesLabEquipos" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

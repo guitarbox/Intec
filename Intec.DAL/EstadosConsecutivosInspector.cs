@@ -17,7 +17,7 @@ namespace Intec.DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public EstadosConsecutivosInspector()
         {
-            this.ConsecutivosInspectores = new HashSet<ConsecutivosInspectores>();
+            this.ConsecutivosFormatos = new HashSet<ConsecutivosFormatos>();
         }
     
         public string IdEstadoConsecutivoInspector { get; set; }
@@ -26,6 +26,6 @@ namespace Intec.DAL
         public int IdUsuarioCreacion { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ConsecutivosInspectores> ConsecutivosInspectores { get; set; }
+        public virtual ICollection<ConsecutivosFormatos> ConsecutivosFormatos { get; set; }
     }
 }
