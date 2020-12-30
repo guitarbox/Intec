@@ -101,6 +101,10 @@
           <Property Name="FechaUltimaVerificacionLaboratorio" Type="datetime" Nullable="false" />
           <Property Name="PeriodoCalibracion" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="PeriodoVerificacion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
+          <Property Name="FechaModificacion" Type="datetime" />
+          <Property Name="IdUsuarioModificacion" Type="int" />
           <Property Name="FechaProximoMantenimiento" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="EstadosConsecutivosInspector">
@@ -342,16 +346,15 @@
           <Property Name="IdUsuarioModificacion" Type="int" />
           <Property Name="IdRol" Type="int" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'DB_A66D31_intratec.dbo.UsuariosEquipos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="UsuariosEquipos">
           <Key>
             <PropertyRef Name="IdInspector" />
             <PropertyRef Name="IdEquipo" />
-            <PropertyRef Name="FechaAsignacion" />
           </Key>
           <Property Name="IdInspector" Type="int" Nullable="false" />
           <Property Name="IdEquipo" Type="int" Nullable="false" />
+          <Property Name="Estado" Type="nvarchar" MaxLength="1" Nullable="false" />
+          <Property Name="IdUsuarioAsigna" Type="int" Nullable="false" />
           <Property Name="FechaAsignacion" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="VerificacionesLabEquipos">
@@ -738,14 +741,8 @@ warning 6002: The table/view 'DB_A66D31_intratec.dbo.UsuariosEquipos' does not h
           <EntitySet Name="TramitesEquipo" EntityType="Self.TramitesEquipo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UsosPropiedades" EntityType="Self.UsosPropiedades" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UsuariosEquipos" EntityType="Self.UsuariosEquipos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VerificacionesLabEquipos" EntityType="Self.VerificacionesLabEquipos" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UsuariosEquipos" EntityType="Self.UsuariosEquipos" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [UsuariosEquipos].[IdInspector] AS [IdInspector], 
-    [UsuariosEquipos].[IdEquipo] AS [IdEquipo], 
-    [UsuariosEquipos].[FechaAsignacion] AS [FechaAsignacion]
-    FROM [dbo].[UsuariosEquipos] AS [UsuariosEquipos]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_CalibracionesEquipos_Equipos" Association="Self.FK_CalibracionesEquipos_Equipos">
             <End Role="Equipos" EntitySet="Equipos" />
             <End Role="CalibracionesEquipos" EntitySet="CalibracionesEquipos" />
@@ -1569,6 +1566,10 @@ warning 6002: The table/view 'DB_A66D31_intratec.dbo.UsuariosEquipos' does not h
           <NavigationProperty Name="TramitesEquipo" Relationship="DB_A66D31_intratecPrbModel.FK_TramitesEquipo_Equipos" FromRole="Equipos" ToRole="TramitesEquipo" />
           <NavigationProperty Name="UsuariosEquipos" Relationship="DB_A66D31_intratecPrbModel.FK_UsuariosEquipos_Equipos" FromRole="Equipos" ToRole="UsuariosEquipos" />
           <NavigationProperty Name="VerificacionesLabEquipos" Relationship="DB_A66D31_intratecPrbModel.FK_VerificacionesLabEquipos_Equipos" FromRole="Equipos" ToRole="VerificacionesLabEquipos" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioModificacion" Type="Int32" />
         </EntityType>
         <EntityType Name="MarcasEquipos">
           <Key>
@@ -1631,12 +1632,15 @@ warning 6002: The table/view 'DB_A66D31_intratec.dbo.UsuariosEquipos' does not h
             <PropertyRef Name="IdInspector" />
             <PropertyRef Name="IdEquipo" />
             <PropertyRef Name="FechaAsignacion" />
+            <PropertyRef Name="IdUsuarioAsigna" />
           </Key>
           <Property Name="IdInspector" Type="Int32" Nullable="false" />
           <Property Name="IdEquipo" Type="Int32" Nullable="false" />
           <Property Name="FechaAsignacion" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Equipos" Relationship="DB_A66D31_intratecPrbModel.FK_UsuariosEquipos_Equipos" FromRole="UsuariosEquipos" ToRole="Equipos" />
           <NavigationProperty Name="Usuarios" Relationship="DB_A66D31_intratecPrbModel.FK_UsuariosEquipos_Usuarios" FromRole="UsuariosEquipos" ToRole="Usuarios" />
+          <Property Name="IdUsuarioAsigna" Type="Int32" Nullable="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_CalibracionesEquipos_Equipos">
           <End Type="DB_A66D31_intratecPrbModel.Equipos" Role="Equipos" Multiplicity="1" />
@@ -2071,6 +2075,10 @@ warning 6002: The table/view 'DB_A66D31_intratec.dbo.UsuariosEquipos' does not h
           <EntitySetMapping Name="Equipos">
             <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.Equipos">
               <MappingFragment StoreEntitySet="Equipos">
+                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
                 <ScalarProperty Name="FechaProximoMantenimiento" ColumnName="FechaProximoMantenimiento" />
                 <ScalarProperty Name="PeriodoVerificacion" ColumnName="PeriodoVerificacion" />
                 <ScalarProperty Name="PeriodoCalibracion" ColumnName="PeriodoCalibracion" />
@@ -2145,6 +2153,8 @@ warning 6002: The table/view 'DB_A66D31_intratec.dbo.UsuariosEquipos' does not h
           <EntitySetMapping Name="UsuariosEquipos">
             <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.UsuariosEquipos">
               <MappingFragment StoreEntitySet="UsuariosEquipos">
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="IdUsuarioAsigna" ColumnName="IdUsuarioAsigna" />
                 <ScalarProperty Name="FechaAsignacion" ColumnName="FechaAsignacion" />
                 <ScalarProperty Name="IdEquipo" ColumnName="IdEquipo" />
                 <ScalarProperty Name="IdInspector" ColumnName="IdInspector" />

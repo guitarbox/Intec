@@ -48,5 +48,10 @@ namespace Intec.DAL.TE
             return res;
         }
 
+        //Marcas
+        //TODO
+
+        //Tipos de Equipo
+        //TODO
     } 
 }

@@ -320,6 +320,10 @@
     <EntitySetMapping Name="Equipos">
       <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.Equipos">
         <MappingFragment StoreEntitySet="Equipos">
+          <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+          <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
           <ScalarProperty Name="FechaProximoMantenimiento" ColumnName="FechaProximoMantenimiento" />
           <ScalarProperty Name="PeriodoVerificacion" ColumnName="PeriodoVerificacion" />
           <ScalarProperty Name="PeriodoCalibracion" ColumnName="PeriodoCalibracion" />
@@ -394,6 +398,7 @@
     <EntitySetMapping Name="UsuariosEquipos">
       <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.UsuariosEquipos">
         <MappingFragment StoreEntitySet="UsuariosEquipos">
+          <ScalarProperty Name="IdUsuarioAsigna" ColumnName="IdUsuarioAsigna" />
           <ScalarProperty Name="FechaAsignacion" ColumnName="FechaAsignacion" />
           <ScalarProperty Name="IdEquipo" ColumnName="IdEquipo" />
           <ScalarProperty Name="IdInspector" ColumnName="IdInspector" />

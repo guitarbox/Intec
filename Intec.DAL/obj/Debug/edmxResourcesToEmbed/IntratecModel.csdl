@@ -706,6 +706,10 @@
     <NavigationProperty Name="TramitesEquipo" Relationship="DB_A66D31_intratecPrbModel.FK_TramitesEquipo_Equipos" FromRole="Equipos" ToRole="TramitesEquipo" />
     <NavigationProperty Name="UsuariosEquipos" Relationship="DB_A66D31_intratecPrbModel.FK_UsuariosEquipos_Equipos" FromRole="Equipos" ToRole="UsuariosEquipos" />
     <NavigationProperty Name="VerificacionesLabEquipos" Relationship="DB_A66D31_intratecPrbModel.FK_VerificacionesLabEquipos_Equipos" FromRole="Equipos" ToRole="VerificacionesLabEquipos" />
+    <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
+    <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+    <Property Name="IdUsuarioModificacion" Type="Int32" />
   </EntityType>
   <EntityType Name="MarcasEquipos">
     <Key>
@@ -768,12 +772,14 @@
       <PropertyRef Name="IdInspector" />
       <PropertyRef Name="IdEquipo" />
       <PropertyRef Name="FechaAsignacion" />
+      <PropertyRef Name="IdUsuarioAsigna" />
     </Key>
     <Property Name="IdInspector" Type="Int32" Nullable="false" />
     <Property Name="IdEquipo" Type="Int32" Nullable="false" />
     <Property Name="FechaAsignacion" Type="DateTime" Nullable="false" Precision="3" />
     <NavigationProperty Name="Equipos" Relationship="DB_A66D31_intratecPrbModel.FK_UsuariosEquipos_Equipos" FromRole="UsuariosEquipos" ToRole="Equipos" />
     <NavigationProperty Name="Usuarios" Relationship="DB_A66D31_intratecPrbModel.FK_UsuariosEquipos_Usuarios" FromRole="UsuariosEquipos" ToRole="Usuarios" />
+    <Property Name="IdUsuarioAsigna" Type="Int32" Nullable="false" />
   </EntityType>
   <Association Name="FK_CalibracionesEquipos_Equipos">
     <End Type="DB_A66D31_intratecPrbModel.Equipos" Role="Equipos" Multiplicity="1" />

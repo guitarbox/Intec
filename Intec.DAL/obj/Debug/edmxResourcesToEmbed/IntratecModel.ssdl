@@ -96,6 +96,10 @@
     <Property Name="FechaUltimaVerificacionLaboratorio" Type="datetime" Nullable="false" />
     <Property Name="PeriodoCalibracion" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="PeriodoVerificacion" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+    <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
+    <Property Name="FechaModificacion" Type="datetime" />
+    <Property Name="IdUsuarioModificacion" Type="int" />
     <Property Name="FechaProximoMantenimiento" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="EstadosConsecutivosInspector">
@@ -343,10 +347,12 @@ warning 6002: The table/view 'DB_A66D31_intratec.dbo.UsuariosEquipos' does not h
     <Key>
       <PropertyRef Name="IdInspector" />
       <PropertyRef Name="IdEquipo" />
+      <PropertyRef Name="IdUsuarioAsigna" />
       <PropertyRef Name="FechaAsignacion" />
     </Key>
     <Property Name="IdInspector" Type="int" Nullable="false" />
     <Property Name="IdEquipo" Type="int" Nullable="false" />
+    <Property Name="IdUsuarioAsigna" Type="int" Nullable="false" />
     <Property Name="FechaAsignacion" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="VerificacionesLabEquipos">
@@ -738,6 +744,7 @@ warning 6002: The table/view 'DB_A66D31_intratec.dbo.UsuariosEquipos' does not h
       <DefiningQuery>SELECT 
     [UsuariosEquipos].[IdInspector] AS [IdInspector], 
     [UsuariosEquipos].[IdEquipo] AS [IdEquipo], 
+    [UsuariosEquipos].[IdUsuarioAsigna] AS [IdUsuarioAsigna], 
     [UsuariosEquipos].[FechaAsignacion] AS [FechaAsignacion]
     FROM [dbo].[UsuariosEquipos] AS [UsuariosEquipos]</DefiningQuery>
     </EntitySet>

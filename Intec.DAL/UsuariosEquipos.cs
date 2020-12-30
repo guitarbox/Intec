@@ -17,6 +17,8 @@ namespace Intec.DAL
         public int IdInspector { get; set; }
         public int IdEquipo { get; set; }
         public System.DateTime FechaAsignacion { get; set; }
+        public int IdUsuarioAsigna { get; set; }
+        public string Estado { get; set; }
     
         public virtual Equipos Equipos { get; set; }
         public virtual Usuarios Usuarios { get; set; }

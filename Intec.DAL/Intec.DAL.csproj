@@ -114,6 +114,7 @@
     </Compile>
     <Compile Include="TE\AdministracionTE.cs" />
     <Compile Include="TE\ClientesTE.cs" />
+    <Compile Include="TE\EquiposTE.cs" />
     <Compile Include="TE\PapeleriaTE.cs" />
     <Compile Include="TE\UsuariosTE.cs" />
     <Compile Include="TE\SolicitudContactenosTE.cs" />
