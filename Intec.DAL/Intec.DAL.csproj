@@ -90,6 +90,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IntratecModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="KardexPapeleria.cs">
+      <DependentUpon>IntratecModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="MarcasEquipos.cs">
       <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
@@ -123,6 +126,9 @@
       <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TiposIdentificacion.cs">
+      <DependentUpon>IntratecModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TiposMovimientoKardex.cs">
       <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
     <Compile Include="TiposPersona.cs">

@@ -96,6 +96,23 @@ namespace Intec.DAL.TE
         /**
          * 5) 
          */
+        public Propiedades ConsultaDetalladaPropiedad(int IdPropiedades)
+        {
+            Propiedades res = null;
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                res = ctx.Propiedades.Where(c => c.IdPropiedades == IdPropiedades).FirstOrDefault();
+                if (res != null)
+                {
+                    res.ToString();
+                }
+                else
+                {
+                    throw new Exception($"No existe una propiedad con ID {IdPropiedades}");
+                }
+            }
+            return res;
+        }
         public void EditarPropiedad(Propiedades propiedad, int IdUsuarioModificacion)
         {
             using (var ctx = new DB_A66D31_intratecPrbEntities1())

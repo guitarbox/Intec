@@ -16,13 +16,71 @@ namespace Test
             //1.
 
             //var res = PClientesTE.ConsultaGralClientes("", "", "", "", false);
+
             // Resultado OK, testeado con los 4 filtros
 
             //2.
 
-            var res = PClientesTE.ConsultaDetalladaClientes(4);
-            //NOK
-            
+            //var res = PClientesTE.ConsultaDetalladaClientes(3);
+
+            //Resultado OK, id`s 3 y 4, Excepción OK
+
+            //3. 
+            //res.TelefonoFijo = "5709148";
+            //PClientesTE.EditarClientes(res, 2);
+
+            //Resultado OK, No logré testear la excepción ya que entra la del #2 al no encontrar IdCliente.
+
+            //4.
+            //Propiedades PropiedadCrear = new Propiedades()
+            //{
+            //    IdCliente = 3,
+            //    Direccion = "Cra 12 # 54 - 48",
+            //    IdUso = 1,
+            //    Telefono = "1234567",
+            //    Foto = "",
+            //    Observaciones = "Esto es una observación",
+            //    IdTipoPropiedad = 1,
+            //    IdUsuarioCreacion = 2,
+
+            //};
+
+            //new Intec.DAL.TE.ClientesTE().CrearPropiedad(PropiedadCrear);
+
+            //Resultado OK
+
+            //5.
+            //var res = PClientesTE.ConsultaDetalladaPropiedad(4);
+            //res.Observaciones = "Esto es un edit de la observación 2";
+            //PClientesTE.EditarPropiedad(res, 2);
+
+            //6.
+            //PClientesTE.EliminarPropiedad(3);
+
+            //Resultado OK, Eliminada Propiedad ID 3, Excpeción ok
+
+            //7.
+            //Clientes ClienteCrear = new Clientes()
+            //{
+            //    NumeroIdentificacion = "1026451697",
+            //    IdTipoIdentificacion = 1,
+            //    Nombres = "Estefany",
+            //    Apellidos = "Cubillos",
+            //    TelefonoFijo = "57091165",
+            //    TelefonoCel1 = "3151234569",
+            //    TelefonoCel2 = "3107894561",
+            //    Direccion = "Cra 23 # 48 - 78",
+            //    IdCiudad = "05001",
+            //    Foto = "",
+            //    Email1 = "Estefany12345@live.com",
+            //    IdTipoPersona = 1,
+            //    IdUso = 1,
+            //    IdUsuarioCreacion = 2,
+            //};
+
+            //PClientesTE.CrearCliente(ClienteCrear);
+
+            //Resultado OK, cliente cerado, excepción numero y tipo de documento ok 
         }
 
         static void Main20(string[] args)

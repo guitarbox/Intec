@@ -131,6 +131,20 @@
           <Property Name="FechaModificacion" Type="datetime" />
           <Property Name="IdUsuarioModificacion" Type="int" />
         </EntityType>
+        <EntityType Name="KardexPapeleria">
+          <Key>
+            <PropertyRef Name="IdEntradaPapeleria" />
+          </Key>
+          <Property Name="IdEntradaPapeleria" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdTipoMovimiento" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="IdFormato" Type="int" Nullable="false" />
+          <Property Name="IdInspector" Type="int" />
+          <Property Name="ConsecutivoInicial" Type="int" Nullable="false" />
+          <Property Name="ConsecutivoFinal" Type="int" Nullable="false" />
+          <Property Name="Observaciones" Type="nvarchar" MaxLength="1000" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="MarcasEquipos">
           <Key>
             <PropertyRef Name="IdMarcaEquipo" />
@@ -261,6 +275,13 @@
           <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
           <Property Name="FechaModificacion" Type="datetime" />
           <Property Name="IdUsuarioModificacion" Type="int" />
+        </EntityType>
+        <EntityType Name="TiposMovimientoKardex">
+          <Key>
+            <PropertyRef Name="IdTipoMovimiento" />
+          </Key>
+          <Property Name="IdTipoMovimiento" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="TipoMovimiento" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="TiposPersona">
           <Key>
@@ -505,6 +526,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_KardexPapeleria_TiposMovimientoKardex">
+          <End Role="TiposMovimientoKardex" Type="Self.TiposMovimientoKardex" Multiplicity="1" />
+          <End Role="KardexPapeleria" Type="Self.KardexPapeleria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposMovimientoKardex">
+              <PropertyRef Name="IdTipoMovimiento" />
+            </Principal>
+            <Dependent Role="KardexPapeleria">
+              <PropertyRef Name="IdTipoMovimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KardexPapeleria_Usuarios">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+          <End Role="KardexPapeleria" Type="Self.KardexPapeleria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="KardexPapeleria">
+              <PropertyRef Name="IdInspector" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Menus_Menus">
           <End Role="Menus" Type="Self.Menus" Multiplicity="0..1" />
           <End Role="Menus1" Type="Self.Menus" Multiplicity="*" />
@@ -725,6 +770,7 @@
           <EntitySet Name="Equipos" EntityType="Self.Equipos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EstadosConsecutivosInspector" EntityType="Self.EstadosConsecutivosInspector" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Formatos" EntityType="Self.Formatos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KardexPapeleria" EntityType="Self.KardexPapeleria" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MarcasEquipos" EntityType="Self.MarcasEquipos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Menus" EntityType="Self.Menus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MenusRol" EntityType="Self.MenusRol" Schema="dbo" store:Type="Tables" />
@@ -735,6 +781,7 @@
           <EntitySet Name="SolicitudesProgramacionVisitas" EntityType="Self.SolicitudesProgramacionVisitas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TiposEquipo" EntityType="Self.TiposEquipo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TiposIdentificacion" EntityType="Self.TiposIdentificacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TiposMovimientoKardex" EntityType="Self.TiposMovimientoKardex" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TiposPersona" EntityType="Self.TiposPersona" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TiposPropiedades" EntityType="Self.TiposPropiedades" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TramiteConsecutivoFormato" EntityType="Self.TramiteConsecutivoFormato" Schema="dbo" store:Type="Tables" />
@@ -786,6 +833,14 @@
           <AssociationSet Name="FK_Equipos_TiposEquipo" Association="Self.FK_Equipos_TiposEquipo">
             <End Role="TiposEquipo" EntitySet="TiposEquipo" />
             <End Role="Equipos" EntitySet="Equipos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KardexPapeleria_TiposMovimientoKardex" Association="Self.FK_KardexPapeleria_TiposMovimientoKardex">
+            <End Role="TiposMovimientoKardex" EntitySet="TiposMovimientoKardex" />
+            <End Role="KardexPapeleria" EntitySet="KardexPapeleria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KardexPapeleria_Usuarios" Association="Self.FK_KardexPapeleria_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="KardexPapeleria" EntitySet="KardexPapeleria" />
           </AssociationSet>
           <AssociationSet Name="FK_Menus_Menus" Association="Self.FK_Menus_Menus">
             <End Role="Menus" EntitySet="Menus" />
@@ -964,7 +1019,6 @@
           <EntitySet Name="TiposEquipo" EntityType="DB_A66D31_intratecPrbModel.TiposEquipo" />
           <EntitySet Name="TramitesEquipo" EntityType="DB_A66D31_intratecPrbModel.TramitesEquipo" />
           <EntitySet Name="VerificacionesLabEquipos" EntityType="DB_A66D31_intratecPrbModel.VerificacionesLabEquipos" />
-          <EntitySet Name="UsuariosEquipos" EntityType="DB_A66D31_intratecPrbModel.UsuariosEquipos" />
           <AssociationSet Name="FK_CalibracionesEquipos_Equipos" Association="DB_A66D31_intratecPrbModel.FK_CalibracionesEquipos_Equipos">
             <End Role="Equipos" EntitySet="Equipos" />
             <End Role="CalibracionesEquipos" EntitySet="CalibracionesEquipos" />
@@ -985,10 +1039,6 @@
             <End Role="Equipos" EntitySet="Equipos" />
             <End Role="TramitesEquipo" EntitySet="TramitesEquipo" />
           </AssociationSet>
-          <AssociationSet Name="FK_UsuariosEquipos_Equipos" Association="DB_A66D31_intratecPrbModel.FK_UsuariosEquipos_Equipos">
-            <End Role="Equipos" EntitySet="Equipos" />
-            <End Role="UsuariosEquipos" EntitySet="UsuariosEquipos" />
-          </AssociationSet>
           <AssociationSet Name="FK_VerificacionesLabEquipos_Equipos" Association="DB_A66D31_intratecPrbModel.FK_VerificacionesLabEquipos_Equipos">
             <End Role="Equipos" EntitySet="Equipos" />
             <End Role="VerificacionesLabEquipos" EntitySet="VerificacionesLabEquipos" />
@@ -996,6 +1046,21 @@
           <AssociationSet Name="FK_TramitesEquipo_Usuarios" Association="DB_A66D31_intratecPrbModel.FK_TramitesEquipo_Usuarios">
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="TramitesEquipo" EntitySet="TramitesEquipo" />
+          </AssociationSet>
+          <EntitySet Name="KardexPapeleria" EntityType="DB_A66D31_intratecPrbModel.KardexPapeleria" />
+          <EntitySet Name="TiposMovimientoKardex" EntityType="DB_A66D31_intratecPrbModel.TiposMovimientoKardex" />
+          <EntitySet Name="UsuariosEquipos" EntityType="DB_A66D31_intratecPrbModel.UsuariosEquipos" />
+          <AssociationSet Name="FK_UsuariosEquipos_Equipos" Association="DB_A66D31_intratecPrbModel.FK_UsuariosEquipos_Equipos">
+            <End Role="Equipos" EntitySet="Equipos" />
+            <End Role="UsuariosEquipos" EntitySet="UsuariosEquipos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KardexPapeleria_TiposMovimientoKardex" Association="DB_A66D31_intratecPrbModel.FK_KardexPapeleria_TiposMovimientoKardex">
+            <End Role="TiposMovimientoKardex" EntitySet="TiposMovimientoKardex" />
+            <End Role="KardexPapeleria" EntitySet="KardexPapeleria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KardexPapeleria_Usuarios" Association="DB_A66D31_intratecPrbModel.FK_KardexPapeleria_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="KardexPapeleria" EntitySet="KardexPapeleria" />
           </AssociationSet>
           <AssociationSet Name="FK_UsuariosEquipos_Usuarios" Association="DB_A66D31_intratecPrbModel.FK_UsuariosEquipos_Usuarios">
             <End Role="Usuarios" EntitySet="Usuarios" />
@@ -1188,6 +1253,7 @@
           <NavigationProperty Name="ConsecutivosFormatos" Relationship="DB_A66D31_intratecPrbModel.FK_ConsecutivosInspectores_Usuarios" FromRole="Usuarios" ToRole="ConsecutivosFormatos" />
           <NavigationProperty Name="TramiteConsecutivoFormato" Relationship="DB_A66D31_intratecPrbModel.FK_TramiteAsignacionConsecutivoInspector_Usuarios" FromRole="Usuarios" ToRole="TramiteConsecutivoFormato" />
           <NavigationProperty Name="TramitesEquipo" Relationship="DB_A66D31_intratecPrbModel.FK_TramitesEquipo_Usuarios" FromRole="Usuarios" ToRole="TramitesEquipo" />
+          <NavigationProperty Name="KardexPapeleria" Relationship="DB_A66D31_intratecPrbModel.FK_KardexPapeleria_Usuarios" FromRole="Usuarios" ToRole="KardexPapeleria" />
           <NavigationProperty Name="UsuariosEquipos" Relationship="DB_A66D31_intratecPrbModel.FK_UsuariosEquipos_Usuarios" FromRole="Usuarios" ToRole="UsuariosEquipos" />
         </EntityType>
         <Association Name="FK_Ciudades_Departamentos">
@@ -1564,12 +1630,12 @@
           <NavigationProperty Name="MarcasEquipos" Relationship="DB_A66D31_intratecPrbModel.FK_Equipos_MarcasEquipos" FromRole="Equipos" ToRole="MarcasEquipos" />
           <NavigationProperty Name="TiposEquipo" Relationship="DB_A66D31_intratecPrbModel.FK_Equipos_TiposEquipo" FromRole="Equipos" ToRole="TiposEquipo" />
           <NavigationProperty Name="TramitesEquipo" Relationship="DB_A66D31_intratecPrbModel.FK_TramitesEquipo_Equipos" FromRole="Equipos" ToRole="TramitesEquipo" />
-          <NavigationProperty Name="UsuariosEquipos" Relationship="DB_A66D31_intratecPrbModel.FK_UsuariosEquipos_Equipos" FromRole="Equipos" ToRole="UsuariosEquipos" />
           <NavigationProperty Name="VerificacionesLabEquipos" Relationship="DB_A66D31_intratecPrbModel.FK_VerificacionesLabEquipos_Equipos" FromRole="Equipos" ToRole="VerificacionesLabEquipos" />
           <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
           <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
           <Property Name="IdUsuarioModificacion" Type="Int32" />
+          <NavigationProperty Name="UsuariosEquipos" Relationship="DB_A66D31_intratecPrbModel.FK_UsuariosEquipos_Equipos" FromRole="Equipos" ToRole="UsuariosEquipos" />
         </EntityType>
         <EntityType Name="MarcasEquipos">
           <Key>
@@ -1626,21 +1692,6 @@
           <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
           <Property Name="IdUsuarioModificacion" Type="Int32" />
           <NavigationProperty Name="Equipos" Relationship="DB_A66D31_intratecPrbModel.FK_VerificacionesLabEquipos_Equipos" FromRole="VerificacionesLabEquipos" ToRole="Equipos" />
-        </EntityType>
-        <EntityType Name="UsuariosEquipos">
-          <Key>
-            <PropertyRef Name="IdInspector" />
-            <PropertyRef Name="IdEquipo" />
-            <PropertyRef Name="FechaAsignacion" />
-            <PropertyRef Name="IdUsuarioAsigna" />
-          </Key>
-          <Property Name="IdInspector" Type="Int32" Nullable="false" />
-          <Property Name="IdEquipo" Type="Int32" Nullable="false" />
-          <Property Name="FechaAsignacion" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Equipos" Relationship="DB_A66D31_intratecPrbModel.FK_UsuariosEquipos_Equipos" FromRole="UsuariosEquipos" ToRole="Equipos" />
-          <NavigationProperty Name="Usuarios" Relationship="DB_A66D31_intratecPrbModel.FK_UsuariosEquipos_Usuarios" FromRole="UsuariosEquipos" ToRole="Usuarios" />
-          <Property Name="IdUsuarioAsigna" Type="Int32" Nullable="false" />
-          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_CalibracionesEquipos_Equipos">
           <End Type="DB_A66D31_intratecPrbModel.Equipos" Role="Equipos" Multiplicity="1" />
@@ -1702,18 +1753,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_UsuariosEquipos_Equipos">
-          <End Type="DB_A66D31_intratecPrbModel.Equipos" Role="Equipos" Multiplicity="1" />
-          <End Type="DB_A66D31_intratecPrbModel.UsuariosEquipos" Role="UsuariosEquipos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Equipos">
-              <PropertyRef Name="IdEquipo" />
-            </Principal>
-            <Dependent Role="UsuariosEquipos">
-              <PropertyRef Name="IdEquipo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_VerificacionesLabEquipos_Equipos">
           <End Type="DB_A66D31_intratecPrbModel.Equipos" Role="Equipos" Multiplicity="1" />
           <End Type="DB_A66D31_intratecPrbModel.VerificacionesLabEquipos" Role="VerificacionesLabEquipos" Multiplicity="*" />
@@ -1734,6 +1773,79 @@
               <PropertyRef Name="IdUsuario" />
             </Principal>
             <Dependent Role="TramitesEquipo">
+              <PropertyRef Name="IdInspector" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="KardexPapeleria">
+          <Key>
+            <PropertyRef Name="IdEntradaPapeleria" />
+          </Key>
+          <Property Name="IdEntradaPapeleria" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdTipoMovimiento" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="IdFormato" Type="Int32" Nullable="false" />
+          <Property Name="IdInspector" Type="Int32" />
+          <Property Name="ConsecutivoInicial" Type="Int32" Nullable="false" />
+          <Property Name="ConsecutivoFinal" Type="Int32" Nullable="false" />
+          <Property Name="Observaciones" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TiposMovimientoKardex" Relationship="DB_A66D31_intratecPrbModel.FK_KardexPapeleria_TiposMovimientoKardex" FromRole="KardexPapeleria" ToRole="TiposMovimientoKardex" />
+          <NavigationProperty Name="Usuarios" Relationship="DB_A66D31_intratecPrbModel.FK_KardexPapeleria_Usuarios" FromRole="KardexPapeleria" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="TiposMovimientoKardex">
+          <Key>
+            <PropertyRef Name="IdTipoMovimiento" />
+          </Key>
+          <Property Name="IdTipoMovimiento" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="TipoMovimiento" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="KardexPapeleria" Relationship="DB_A66D31_intratecPrbModel.FK_KardexPapeleria_TiposMovimientoKardex" FromRole="TiposMovimientoKardex" ToRole="KardexPapeleria" />
+        </EntityType>
+        <EntityType Name="UsuariosEquipos">
+          <Key>
+            <PropertyRef Name="IdInspector" />
+            <PropertyRef Name="IdEquipo" />
+          </Key>
+          <Property Name="IdInspector" Type="Int32" Nullable="false" />
+          <Property Name="IdEquipo" Type="Int32" Nullable="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
+          <Property Name="IdUsuarioAsigna" Type="Int32" Nullable="false" />
+          <Property Name="FechaAsignacion" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Equipos" Relationship="DB_A66D31_intratecPrbModel.FK_UsuariosEquipos_Equipos" FromRole="UsuariosEquipos" ToRole="Equipos" />
+          <NavigationProperty Name="Usuarios" Relationship="DB_A66D31_intratecPrbModel.FK_UsuariosEquipos_Usuarios" FromRole="UsuariosEquipos" ToRole="Usuarios" />
+        </EntityType>
+        <Association Name="FK_UsuariosEquipos_Equipos">
+          <End Type="DB_A66D31_intratecPrbModel.Equipos" Role="Equipos" Multiplicity="1" />
+          <End Type="DB_A66D31_intratecPrbModel.UsuariosEquipos" Role="UsuariosEquipos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipos">
+              <PropertyRef Name="IdEquipo" />
+            </Principal>
+            <Dependent Role="UsuariosEquipos">
+              <PropertyRef Name="IdEquipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KardexPapeleria_TiposMovimientoKardex">
+          <End Type="DB_A66D31_intratecPrbModel.TiposMovimientoKardex" Role="TiposMovimientoKardex" Multiplicity="1" />
+          <End Type="DB_A66D31_intratecPrbModel.KardexPapeleria" Role="KardexPapeleria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposMovimientoKardex">
+              <PropertyRef Name="IdTipoMovimiento" />
+            </Principal>
+            <Dependent Role="KardexPapeleria">
+              <PropertyRef Name="IdTipoMovimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KardexPapeleria_Usuarios">
+          <End Type="DB_A66D31_intratecPrbModel.Usuarios" Role="Usuarios" Multiplicity="0..1" />
+          <End Type="DB_A66D31_intratecPrbModel.KardexPapeleria" Role="KardexPapeleria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="KardexPapeleria">
               <PropertyRef Name="IdInspector" />
             </Dependent>
           </ReferentialConstraint>
@@ -2150,12 +2262,35 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="KardexPapeleria">
+            <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.KardexPapeleria">
+              <MappingFragment StoreEntitySet="KardexPapeleria">
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="ConsecutivoFinal" ColumnName="ConsecutivoFinal" />
+                <ScalarProperty Name="ConsecutivoInicial" ColumnName="ConsecutivoInicial" />
+                <ScalarProperty Name="IdInspector" ColumnName="IdInspector" />
+                <ScalarProperty Name="IdFormato" ColumnName="IdFormato" />
+                <ScalarProperty Name="IdTipoMovimiento" ColumnName="IdTipoMovimiento" />
+                <ScalarProperty Name="IdEntradaPapeleria" ColumnName="IdEntradaPapeleria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TiposMovimientoKardex">
+            <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.TiposMovimientoKardex">
+              <MappingFragment StoreEntitySet="TiposMovimientoKardex">
+                <ScalarProperty Name="TipoMovimiento" ColumnName="TipoMovimiento" />
+                <ScalarProperty Name="IdTipoMovimiento" ColumnName="IdTipoMovimiento" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="UsuariosEquipos">
             <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.UsuariosEquipos">
               <MappingFragment StoreEntitySet="UsuariosEquipos">
-                <ScalarProperty Name="Estado" ColumnName="Estado" />
-                <ScalarProperty Name="IdUsuarioAsigna" ColumnName="IdUsuarioAsigna" />
                 <ScalarProperty Name="FechaAsignacion" ColumnName="FechaAsignacion" />
+                <ScalarProperty Name="IdUsuarioAsigna" ColumnName="IdUsuarioAsigna" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="IdEquipo" ColumnName="IdEquipo" />
                 <ScalarProperty Name="IdInspector" ColumnName="IdInspector" />
               </MappingFragment>
