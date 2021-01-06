@@ -780,6 +780,7 @@
     <NavigationProperty Name="Equipos" Relationship="DB_A66D31_intratecPrbModel.FK_UsuariosEquipos_Equipos" FromRole="UsuariosEquipos" ToRole="Equipos" />
     <NavigationProperty Name="Usuarios" Relationship="DB_A66D31_intratecPrbModel.FK_UsuariosEquipos_Usuarios" FromRole="UsuariosEquipos" ToRole="Usuarios" />
     <Property Name="IdUsuarioAsigna" Type="Int32" Nullable="false" />
+    <Property Name="Estado" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="true" />
   </EntityType>
   <Association Name="FK_CalibracionesEquipos_Equipos">
     <End Type="DB_A66D31_intratecPrbModel.Equipos" Role="Equipos" Multiplicity="1" />

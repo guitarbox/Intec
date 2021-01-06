@@ -341,17 +341,14 @@
     <Property Name="IdUsuarioModificacion" Type="int" />
     <Property Name="IdRol" Type="int" Nullable="false" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'DB_A66D31_intratec.dbo.UsuariosEquipos' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="UsuariosEquipos">
     <Key>
       <PropertyRef Name="IdInspector" />
       <PropertyRef Name="IdEquipo" />
-      <PropertyRef Name="IdUsuarioAsigna" />
-      <PropertyRef Name="FechaAsignacion" />
     </Key>
     <Property Name="IdInspector" Type="int" Nullable="false" />
     <Property Name="IdEquipo" Type="int" Nullable="false" />
+    <Property Name="Estado" Type="nvarchar" MaxLength="1" Nullable="false" />
     <Property Name="IdUsuarioAsigna" Type="int" Nullable="false" />
     <Property Name="FechaAsignacion" Type="datetime" Nullable="false" />
   </EntityType>
@@ -739,15 +736,8 @@ warning 6002: The table/view 'DB_A66D31_intratec.dbo.UsuariosEquipos' does not h
     <EntitySet Name="TramitesEquipo" EntityType="Self.TramitesEquipo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UsosPropiedades" EntityType="Self.UsosPropiedades" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UsuariosEquipos" EntityType="Self.UsuariosEquipos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="VerificacionesLabEquipos" EntityType="Self.VerificacionesLabEquipos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="UsuariosEquipos" EntityType="Self.UsuariosEquipos" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [UsuariosEquipos].[IdInspector] AS [IdInspector], 
-    [UsuariosEquipos].[IdEquipo] AS [IdEquipo], 
-    [UsuariosEquipos].[IdUsuarioAsigna] AS [IdUsuarioAsigna], 
-    [UsuariosEquipos].[FechaAsignacion] AS [FechaAsignacion]
-    FROM [dbo].[UsuariosEquipos] AS [UsuariosEquipos]</DefiningQuery>
-    </EntitySet>
     <AssociationSet Name="FK_CalibracionesEquipos_Equipos" Association="Self.FK_CalibracionesEquipos_Equipos">
       <End Role="Equipos" EntitySet="Equipos" />
       <End Role="CalibracionesEquipos" EntitySet="CalibracionesEquipos" />

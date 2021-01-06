@@ -114,6 +114,25 @@ namespace Intec.DAL.TE
         }
 
         //5. Ingresar Verificaciones LAB
+        public void IngresarVerificacionLAB(VerificacionesLabEquipos Verificacion)
+        {
+            using(var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                Verificacion.FechaCreacion = DateTime.Now;                
+                ctx.VerificacionesLabEquipos.Add(Verificacion);
+                ctx.SaveChanges();
+            }
+        }
+
         //6. Ingresar Calibraciones Equipos
+        public void IngresarCalibracionEq(CalibracionesEquipos Calibracion)
+        {
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                Calibracion.FechaCreacion = DateTime.Now;
+                ctx.CalibracionesEquipos.Add(Calibracion);
+                ctx.SaveChanges();
+            }
+        }
     }
 }

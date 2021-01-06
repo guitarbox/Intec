@@ -398,6 +398,7 @@
     <EntitySetMapping Name="UsuariosEquipos">
       <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.UsuariosEquipos">
         <MappingFragment StoreEntitySet="UsuariosEquipos">
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
           <ScalarProperty Name="IdUsuarioAsigna" ColumnName="IdUsuarioAsigna" />
           <ScalarProperty Name="FechaAsignacion" ColumnName="FechaAsignacion" />
           <ScalarProperty Name="IdEquipo" ColumnName="IdEquipo" />
