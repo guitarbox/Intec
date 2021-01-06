@@ -36,6 +36,10 @@ namespace Intec.DAL.TE
                     res.Propiedades.ToList();                    
                     ctx.Entry(res).Reference(r => r.TiposIdentificacion).Load();
                     ctx.Entry(res).Reference(r => r.TiposPersona).Load();
+                }
+                else
+                {
+                    throw new Exception($"No existe cliente con ID {IdCliente}");
                 }                
             }
             return res;

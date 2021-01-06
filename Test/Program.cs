@@ -9,13 +9,23 @@ namespace Test
 {
     class Program
     {
-        static void Main1(string[] args)
+        static void Main(string[] args)
         {
+            Intec.DAL.TE.ClientesTE PClientesTE = new Intec.DAL.TE.ClientesTE();
             //Test Clientes
+            //1.
+
+            //var res = PClientesTE.ConsultaGralClientes("", "", "", "", false);
+            // Resultado OK, testeado con los 4 filtros
+
+            //2.
+
+            var res = PClientesTE.ConsultaDetalladaClientes(4);
+            //NOK
             
         }
 
-        static void Main(string[] args)
+        static void Main20(string[] args)
         {
             //Test Papelería
             //1. 
