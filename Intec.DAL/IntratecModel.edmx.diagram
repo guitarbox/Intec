@@ -47,15 +47,19 @@
         <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.TiposEquipo" Width="1.5" PointX="0.75" PointY="19.875" />
         <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.TramitesEquipo" Width="1.5" PointX="16.125" PointY="17.625" />
         <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.VerificacionesLabEquipos" Width="1.5" PointX="5.25" PointY="23.875" />
-        <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.UsuariosEquipos" Width="1.5" PointX="13.125" PointY="8" />
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_CalibracionesEquipos_Equipos" />
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Clientes_Ciudades" />
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Equipos_MarcasEquipos" />
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Equipos_TiposEquipo" />
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_TramitesEquipo_Equipos" />
-        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_UsuariosEquipos_Equipos" />
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_VerificacionesLabEquipos_Equipos" />
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_TramitesEquipo_Usuarios" />
+        <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.KardexPapeleria" Width="1.5" PointX="15.75" PointY="5" />
+        <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.TiposMovimientoKardex" Width="1.5" PointX="13.5" PointY="0.75" />
+        <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.UsuariosEquipos" Width="1.5" PointX="12.75" PointY="8.5" />
+        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_UsuariosEquipos_Equipos" />
+        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_KardexPapeleria_TiposMovimientoKardex" />
+        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_KardexPapeleria_Usuarios" />
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_UsuariosEquipos_Usuarios" />
       </Diagram>
     </edmx:Diagrams>

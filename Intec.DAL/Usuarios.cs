@@ -20,6 +20,7 @@ namespace Intec.DAL
             this.ConsecutivosFormatos = new HashSet<ConsecutivosFormatos>();
             this.TramiteConsecutivoFormato = new HashSet<TramiteConsecutivoFormato>();
             this.TramitesEquipo = new HashSet<TramitesEquipo>();
+            this.KardexPapeleria = new HashSet<KardexPapeleria>();
             this.UsuariosEquipos = new HashSet<UsuariosEquipos>();
         }
     
@@ -49,6 +50,8 @@ namespace Intec.DAL
         public virtual ICollection<TramiteConsecutivoFormato> TramiteConsecutivoFormato { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TramitesEquipo> TramitesEquipo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<KardexPapeleria> KardexPapeleria { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UsuariosEquipos> UsuariosEquipos { get; set; }
     }
