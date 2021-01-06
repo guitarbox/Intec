@@ -10,7 +10,7 @@ namespace Intec.DAL.TE
 {
     public class PapeleriaTE
     {
-        //CRUD Formatos, pero el delete no debe permitir eliminar formatos que hayan sido asignados,
+        //1. CRUD Formatos, pero el delete no debe permitir eliminar formatos que hayan sido asignados,
         public void CrearFormato(Formatos FormatoCrear)
         {
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
@@ -21,6 +21,7 @@ namespace Intec.DAL.TE
             }
         }
 
+        //2.
         public void EditarFormato(Formatos Formato, int IdUsuarioModificacion)
         {
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
@@ -41,6 +42,7 @@ namespace Intec.DAL.TE
 
         }
 
+        //3.
         public List<Formatos> ConsultarFormatos()
         {
             List<Formatos> res = new List<Formatos>();
@@ -53,7 +55,8 @@ namespace Intec.DAL.TE
             return res;
 
         }
-
+    
+        //4.
         public Formatos ConsultarFormato(int IdFormato)
         {
             Formatos res = new Formatos();
@@ -66,6 +69,7 @@ namespace Intec.DAL.TE
             return res;
         }
 
+        //5.
         public void EliminarFormato(int IdFormato)
         {
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
@@ -81,7 +85,7 @@ namespace Intec.DAL.TE
             }
         }
 
-        //Asignación de consecutivos a inspectores
+        //6. Asignación de consecutivos a inspectores
         public void AsignarRangoConsecutivosFormatoInspector(int IdFormato, int IdInspector, int ConsecutivoInicial, int ConsecutivoFinal, int IdUsuarioAsigna)
         {
             string estadoConsecutivo = "P";
@@ -92,7 +96,7 @@ namespace Intec.DAL.TE
                 //Acá validamos que todos los consecutivos estén disponibles, o sea, que no se los hayan asignado a ningún inspector
                 for (int i = ConsecutivoInicial; i <= ConsecutivoFinal; i++)
                 {
-                    if (ctx.ConsecutivosFormatos.Where(c => c.IdFormato == IdFormato && c.Consecutivo == i && !c.IdEstadoConsecutivoInspector.Equals("B")).FirstOrDefault() != null)
+                    if (ctx.ConsecutivosFormatos.Where(c => c.IdFormato == IdFormato && c.Consecutivo == i && (!c.IdEstadoConsecutivoInspector.Equals("B") && !c.IdEstadoConsecutivoInspector.Equals("R")) ).FirstOrDefault() != null)
                     {
                         throw new Exception($"El consecutivo {i} del formato {IdFormato} ya ha sido asignado a un inspector");
                     }
@@ -100,14 +104,11 @@ namespace Intec.DAL.TE
                 
                 for (int i = ConsecutivoInicial; i <= ConsecutivoFinal; i++)
                 {
-                    ctx.ConsecutivosFormatos.Add(new ConsecutivosFormatos() { 
-                        IdFormato = IdFormato,
-                        IdInspector = IdInspector,
-                        Consecutivo = i,
-                        IdEstadoConsecutivoInspector = estadoConsecutivo,
-                        FechaCreacion = DateTime.Now,
-                        IdUsuarioCreacion = IdUsuarioAsigna
-                    });                    
+                    ConsecutivosFormatos con = ctx.ConsecutivosFormatos.Where(c => c.Consecutivo == i).FirstOrDefault();
+                    con.IdInspector = IdInspector;
+                    con.IdEstadoConsecutivoInspector = estadoConsecutivo;
+                    con.FechaModificacion = DateTime.Now;
+                    con.IdUsuarioModificacion = IdUsuarioAsigna;                    
 
                     int sec = 0;
                     try
@@ -132,7 +133,7 @@ namespace Intec.DAL.TE
             }
         }
     
-        //Ingresar consecutivos a bodega
+        //7. Ingresar consecutivos a bodega
         public void IngresarConsecutivosFormatoBodega(int IdFormato, int ConsecutivoInicial, int ConsecutivoFinal, int IdUsuarioAsigna)
         {
             string estadoConsecutivo = "B";
@@ -181,7 +182,7 @@ namespace Intec.DAL.TE
             }
         }
     
-        //Actualizar estado Consecutivo: Aplica para aceptación, rechazo y anulación. Permite actualizar más de un consecutivo.
+        //8. Actualizar estado Consecutivo: Aplica para aceptación, rechazo y anulación. Permite actualizar más de un consecutivo.
         public void ActualizarEstadoConsecutivo(int IdFormato, List<int> Consecutivos, string IdEstado, int IdUsuarioActualiza, string Observaciones)
         {            
             string tramite = string.Empty;
@@ -206,11 +207,13 @@ namespace Intec.DAL.TE
                             con.IdEstadoConsecutivoInspector = IdEstado;
                             con.FechaModificacion = DateTime.Now;
                             con.IdUsuarioModificacion = IdUsuarioActualiza;
-
                         }
                         else
                         {
-                            ctx.ConsecutivosFormatos.Remove(con);
+                            con.IdInspector = null;
+                            con.IdEstadoConsecutivoInspector = IdEstado;
+                            con.FechaModificacion = DateTime.Now;
+                            con.IdUsuarioModificacion = IdUsuarioActualiza;
                         }
 
                         int sec = 0;

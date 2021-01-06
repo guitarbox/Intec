@@ -32,12 +32,12 @@ namespace Intec.DAL
         public string RangoMedicion { get; set; }
         public string Tolerancia { get; set; }
         public bool Calibrado { get; set; }
-        public System.DateTime FechaUltimaCalibracion { get; set; }
-        public System.DateTime FechaProximaCalibracion { get; set; }
-        public System.DateTime FechaUltimaVerificacionLaboratorio { get; set; }
+        public Nullable<System.DateTime> FechaUltimaCalibracion { get; set; }
+        public Nullable<System.DateTime> FechaProximaCalibracion { get; set; }
+        public Nullable<System.DateTime> FechaUltimaVerificacionLaboratorio { get; set; }
         public string PeriodoCalibracion { get; set; }
         public string PeriodoVerificacion { get; set; }
-        public System.DateTime FechaProximoMantenimiento { get; set; }
+        public Nullable<System.DateTime> FechaProximoMantenimiento { get; set; }
         public System.DateTime FechaCreacion { get; set; }
         public int IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaModificacion { get; set; }

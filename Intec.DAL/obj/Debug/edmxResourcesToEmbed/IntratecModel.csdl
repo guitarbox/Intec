@@ -694,12 +694,12 @@
     <Property Name="RangoMedicion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Tolerancia" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="Calibrado" Type="Boolean" Nullable="false" />
-    <Property Name="FechaUltimaCalibracion" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="FechaProximaCalibracion" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="FechaUltimaVerificacionLaboratorio" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="FechaUltimaCalibracion" Type="DateTime" Precision="3" />
+    <Property Name="FechaProximaCalibracion" Type="DateTime" Precision="3" />
+    <Property Name="FechaUltimaVerificacionLaboratorio" Type="DateTime" Precision="3" />
     <Property Name="PeriodoCalibracion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="PeriodoVerificacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="FechaProximoMantenimiento" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="FechaProximoMantenimiento" Type="DateTime" Precision="3" />
     <NavigationProperty Name="CalibracionesEquipos" Relationship="DB_A66D31_intratecPrbModel.FK_CalibracionesEquipos_Equipos" FromRole="Equipos" ToRole="CalibracionesEquipos" />
     <NavigationProperty Name="MarcasEquipos" Relationship="DB_A66D31_intratecPrbModel.FK_Equipos_MarcasEquipos" FromRole="Equipos" ToRole="MarcasEquipos" />
     <NavigationProperty Name="TiposEquipo" Relationship="DB_A66D31_intratecPrbModel.FK_Equipos_TiposEquipo" FromRole="Equipos" ToRole="TiposEquipo" />

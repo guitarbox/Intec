@@ -96,16 +96,16 @@
           <Property Name="RangoMedicion" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Tolerancia" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Calibrado" Type="bit" Nullable="false" />
-          <Property Name="FechaUltimaCalibracion" Type="datetime" Nullable="false" />
-          <Property Name="FechaProximaCalibracion" Type="datetime" Nullable="false" />
-          <Property Name="FechaUltimaVerificacionLaboratorio" Type="datetime" Nullable="false" />
+          <Property Name="FechaUltimaCalibracion" Type="datetime" />
+          <Property Name="FechaProximaCalibracion" Type="datetime" />
+          <Property Name="FechaUltimaVerificacionLaboratorio" Type="datetime" />
           <Property Name="PeriodoCalibracion" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="PeriodoVerificacion" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
           <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
           <Property Name="FechaModificacion" Type="datetime" />
           <Property Name="IdUsuarioModificacion" Type="int" />
-          <Property Name="FechaProximoMantenimiento" Type="datetime" Nullable="false" />
+          <Property Name="FechaProximoMantenimiento" Type="datetime" />
         </EntityType>
         <EntityType Name="EstadosConsecutivosInspector">
           <Key>
@@ -1554,12 +1554,12 @@
           <Property Name="RangoMedicion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Tolerancia" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Calibrado" Type="Boolean" Nullable="false" />
-          <Property Name="FechaUltimaCalibracion" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="FechaProximaCalibracion" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="FechaUltimaVerificacionLaboratorio" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaUltimaCalibracion" Type="DateTime" Precision="3" />
+          <Property Name="FechaProximaCalibracion" Type="DateTime" Precision="3" />
+          <Property Name="FechaUltimaVerificacionLaboratorio" Type="DateTime" Precision="3" />
           <Property Name="PeriodoCalibracion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PeriodoVerificacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="FechaProximoMantenimiento" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FechaProximoMantenimiento" Type="DateTime" Precision="3" />
           <NavigationProperty Name="CalibracionesEquipos" Relationship="DB_A66D31_intratecPrbModel.FK_CalibracionesEquipos_Equipos" FromRole="Equipos" ToRole="CalibracionesEquipos" />
           <NavigationProperty Name="MarcasEquipos" Relationship="DB_A66D31_intratecPrbModel.FK_Equipos_MarcasEquipos" FromRole="Equipos" ToRole="MarcasEquipos" />
           <NavigationProperty Name="TiposEquipo" Relationship="DB_A66D31_intratecPrbModel.FK_Equipos_TiposEquipo" FromRole="Equipos" ToRole="TiposEquipo" />

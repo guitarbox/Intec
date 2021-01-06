@@ -91,16 +91,16 @@
     <Property Name="RangoMedicion" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Tolerancia" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="Calibrado" Type="bit" Nullable="false" />
-    <Property Name="FechaUltimaCalibracion" Type="datetime" Nullable="false" />
-    <Property Name="FechaProximaCalibracion" Type="datetime" Nullable="false" />
-    <Property Name="FechaUltimaVerificacionLaboratorio" Type="datetime" Nullable="false" />
+    <Property Name="FechaUltimaCalibracion" Type="datetime" />
+    <Property Name="FechaProximaCalibracion" Type="datetime" />
+    <Property Name="FechaUltimaVerificacionLaboratorio" Type="datetime" />
     <Property Name="PeriodoCalibracion" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="PeriodoVerificacion" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
     <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
     <Property Name="FechaModificacion" Type="datetime" />
     <Property Name="IdUsuarioModificacion" Type="int" />
-    <Property Name="FechaProximoMantenimiento" Type="datetime" Nullable="false" />
+    <Property Name="FechaProximoMantenimiento" Type="datetime" />
   </EntityType>
   <EntityType Name="EstadosConsecutivosInspector">
     <Key>
