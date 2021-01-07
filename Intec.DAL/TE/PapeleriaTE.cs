@@ -22,6 +22,7 @@ namespace Intec.DAL.TE
         }
 
         //2.
+
         public void EditarFormato(Formatos Formato, int IdUsuarioModificacion)
         {
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
@@ -37,8 +38,6 @@ namespace Intec.DAL.TE
 
                 ctx.SaveChanges();
             }
-
-
 
         }
 
@@ -81,7 +80,7 @@ namespace Intec.DAL.TE
                     ctx.SaveChanges();
                 }
                 else
-                    throw new Exception("No se puede eliminar el formato, tiene movimientos.");
+                    throw new Exception($"No se puede eliminar el formato con ID {IdFormato}, tiene movimientos.");
             }
         }
 

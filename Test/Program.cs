@@ -9,7 +9,7 @@ namespace Test
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main1(string[] args)
         {
             Intec.DAL.TE.ClientesTE PClientesTE = new Intec.DAL.TE.ClientesTE();
             //Test Clientes
@@ -41,7 +41,7 @@ namespace Test
             //    Foto = "",
             //    Observaciones = "Esto es una observación",
             //    IdTipoPropiedad = 1,
-            //    IdUsuarioCreacion = 2,
+            //    IdUsuarioCreacion = 2
 
             //};
 
@@ -75,7 +75,7 @@ namespace Test
             //    Email1 = "Estefany12345@live.com",
             //    IdTipoPersona = 1,
             //    IdUso = 1,
-            //    IdUsuarioCreacion = 2,
+            //    IdUsuarioCreacion = 2
             //};
 
             //PClientesTE.CrearCliente(ClienteCrear);
@@ -83,14 +83,55 @@ namespace Test
             //Resultado OK, cliente cerado, excepción numero y tipo de documento ok 
         }
 
-        static void Main20(string[] args)
+        static void Main(string[] args)
         {
+            Intec.DAL.TE.PapeleriaTE PPapeleriaTE = new Intec.DAL.TE.PapeleriaTE();
             //Test Papelería
             //1. 
-            Formatos formatoCrear = new Formatos() { };
-            new Intec.DAL.TE.PapeleriaTE().CrearFormato(formatoCrear);
-            //Resultado: OK / NOK: bla bla bla
 
+            //Formatos formatoCrear = new Formatos()
+            //{
+            //    NroFormato = "FTOP-01",
+            //    Formato = "Prueba Asignacion",
+            //    Mascara = 4,
+            //    Activo = true,
+            //    IdUsuarioCreacion = 2
+            //};
+
+            //PPapeleriaTE.CrearFormato(formatoCrear);
+
+            //Resultado OK
+
+            //4.
+
+            //var res = PPapeleriaTE.ConsultarFormato(6);
+
+            //Resultado Ok
+
+            //2.
+
+            //res.Formato = "Prueba Edit 3";
+            //PPapeleriaTE.EditarFormato(res, 2);
+
+            // Resultado OK
+
+            //3.
+
+            //var res = PPapeleriaTE.ConsultarFormatos();
+
+            //Resultado OK
+
+            //5.
+
+            //PPapeleriaTE.EliminarFormato(6);
+
+            //Resultado OK, eliminado ID 7, Excepción OK no permite eliminar ID 6
+
+            //6.
+
+            PPapeleriaTE.AsignarRangoConsecutivosFormatoInspector(8, 1, 3000, 3999, 2);
+
+            // Resultado: prueba con "B" Y "R" lanza excepción,  
 
         }
     }
