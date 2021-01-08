@@ -14,6 +14,12 @@ namespace Intec.DAL
     
     public partial class Propiedades
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Propiedades()
+        {
+            this.Visitas = new HashSet<Visitas>();
+        }
+    
         public int IdPropiedades { get; set; }
         public int IdCliente { get; set; }
         public string Direccion { get; set; }
@@ -30,5 +36,7 @@ namespace Intec.DAL
         public virtual TiposPropiedades TiposPropiedades { get; set; }
         public virtual UsosPropiedades UsosPropiedades { get; set; }
         public virtual Clientes Clientes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Visitas> Visitas { get; set; }
     }
 }

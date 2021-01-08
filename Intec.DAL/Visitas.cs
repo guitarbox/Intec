@@ -32,6 +32,12 @@ namespace Intec.DAL
         public Nullable<int> IdInspector { get; set; }
         public string ObservacionesVisita { get; set; }
         public string IdEstadoVisitas { get; set; }
+        public int IdPropiedad { get; set; }
+        public string OrigenVisita { get; set; }
+        public System.DateTime FechaCreacion { get; set; }
+        public Nullable<int> IdUsuarioCreacion { get; set; }
+        public Nullable<System.DateTime> FechaModificacion { get; set; }
+        public Nullable<int> IdUsuarioModificacion { get; set; }
     
         public virtual Ciudades Ciudades { get; set; }
         public virtual Clientes Clientes { get; set; }
@@ -44,6 +50,7 @@ namespace Intec.DAL
         public virtual ICollection<FotosVisita> FotosVisita { get; set; }
         public virtual SolicitudesProgramacionVisitas SolicitudesProgramacionVisitas { get; set; }
         public virtual Usuarios Usuarios { get; set; }
+        public virtual Propiedades Propiedades { get; set; }
         public virtual Zonas Zonas { get; set; }
     }
 }

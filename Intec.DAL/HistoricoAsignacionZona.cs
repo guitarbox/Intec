@@ -14,14 +14,17 @@ namespace Intec.DAL
     
     public partial class HistoricoAsignacionZona
     {
-        public Nullable<int> IdInspector { get; set; }
-        public Nullable<int> IdZona { get; set; }
-        public Nullable<int> IdCiudad { get; set; }
+        public int IdInspector { get; set; }
+        public int IdZona { get; set; }
+        public string IdCiudad { get; set; }
+        public int Secuencia { get; set; }
         public Nullable<System.DateTime> FechaInicio { get; set; }
         public Nullable<System.DateTime> FechaFin { get; set; }
         public System.DateTime FechaCreacion { get; set; }
         public int IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaModificacion { get; set; }
         public Nullable<int> IdUsuarioModificacion { get; set; }
+    
+        public virtual Zonas Zonas { get; set; }
     }
 }

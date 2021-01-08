@@ -17,6 +17,7 @@ namespace Intec.DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Zonas()
         {
+            this.HistoricoAsignacionZona = new HashSet<HistoricoAsignacionZona>();
             this.Visitas = new HashSet<Visitas>();
         }
     
@@ -34,6 +35,8 @@ namespace Intec.DAL
         public Nullable<int> IdUsuarioModificacion { get; set; }
     
         public virtual Ciudades Ciudades { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<HistoricoAsignacionZona> HistoricoAsignacionZona { get; set; }
         public virtual Usuarios Usuarios { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Visitas> Visitas { get; set; }

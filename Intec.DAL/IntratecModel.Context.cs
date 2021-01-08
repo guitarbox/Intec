@@ -59,8 +59,8 @@ namespace Intec.DAL
         public virtual DbSet<FotosVisita> FotosVisita { get; set; }
         public virtual DbSet<TramiteConsecutivoFormato> TramiteConsecutivoFormato { get; set; }
         public virtual DbSet<Visitas> Visitas { get; set; }
-        public virtual DbSet<Zonas> Zonas { get; set; }
         public virtual DbSet<HistoricoAsignacionZona> HistoricoAsignacionZona { get; set; }
+        public virtual DbSet<Zonas> Zonas { get; set; }
     
         public virtual ObjectResult<uspConsultaGralCliente_Result> uspConsultaGralCliente(string numeroIdentificacion, string nombres, string direccion, string nroTelefonico, Nullable<bool> tieneVisitaProgramada)
         {
