@@ -15,7 +15,7 @@ namespace Test
             //Test Clientes
             //1.
 
-            //var res = PClientesTE.ConsultaGralClientes("", "", "", "", false);
+            //var res = PClientesTE.ConsultaGralClientes("1030", "", "", "", false);
 
             // Resultado OK, testeado con los 4 filtros
 
@@ -83,7 +83,7 @@ namespace Test
             //Resultado OK, cliente cerado, excepción numero y tipo de documento ok 
         }
 
-        static void Main(string[] args)
+        static void Main2(string[] args)
         {
             Intec.DAL.TE.PapeleriaTE PPapeleriaTE = new Intec.DAL.TE.PapeleriaTE();
             //Test Papelería
@@ -129,13 +129,163 @@ namespace Test
 
             //6.
 
-            //PPapeleriaTE.AsignarRangoConsecutivosFormatoInspector(8, 3, 0, 3, 2);
+            //PPapeleriaTE.AsignarRangoConsecutivosFormatoInspector(8, 3, 12, 12, 2);
 
-            // Resultado: En espera
+            // Resultado OK, Excepción OK
 
             //7.
 
-            PPapeleriaTE.IngresarConsecutivosFormatoBodega(8, 1, 100, 2);
+            //PPapeleriaTE.IngresarConsecutivosFormatoBodega(8, 85, 100, 2);
+
+            // Resultado OK, Excepción OK
+
+            //8.
+
+            //PPapeleriaTE.ActualizarEstadoConsecutivo(8, new List<int>() {6}, "X", 3, "Cambio a estado Anulacion");
+
+            // Resultado OK, posible incosistencia columna IdInspector tablas TramiteConsecutivo y ConsecutivosFormato, Excepción OK
         }
+
+        static void Main3(string[] args)
+        {
+            Intec.DAL.TE.EquiposTE PEquiposTE = new Intec.DAL.TE.EquiposTE();
+            //1.
+
+            //var res = PEquiposTE.ObtenerEquipos(1, 1, "02");
+
+            //Resultado OK, Excepción OK
+
+            //1.1
+
+            //var res = PEquiposTE.ObtenerEquipos(2);
+
+            //Resultado OK
+
+            //2.
+
+            //Equipos EquiposCrear = new Equipos
+            //{
+            //    Area = "Area1",
+            //    SerieIDInterno = "EQ-005",
+            //    IdTipoEquipo = 1,
+            //    IdMarcaEquipo = 1,
+            //    Modelo = "Modelo 02",
+            //    RangoMedicion = "0 - 1000",
+            //    Tolerancia = "10",
+            //    Calibrado = true,
+            //    PeriodoCalibracion = "120",
+            //    PeriodoVerificacion = "60",
+            //    IdUsuarioCreacion = 2
+
+            //};
+
+            //PEquiposTE.AgregarEquipo(EquiposCrear);
+
+            //Resultado OK
+
+            //3.
+
+            //PEquiposTE.EliminarEquipo(4);
+
+            //Resultado OK, ID 4 eliminado
+
+            //4.
+
+            //PEquiposTE.TramitarEquipoInspector(3, 3, 2, "ASIGNACION", "Prueba validación");
+
+            // Resultado OK
+
+            //5.
+
+            //VerificacionesLabEquipos VEquipos = new VerificacionesLabEquipos()
+            //{
+            //    IdEquipo = 5,
+            //    Secuencia = 1,
+            //    FechaVerificacion = DateTime.Today,
+            //    NroCertificado = "0001",
+            //    Laboratorio = "QWERTY",
+            //    Observaciones = "Prueba ingreso verificación LAB",
+            //    IdUsuarioCreacion = 2
+            //};
+
+            //PEquiposTE.IngresarVerificacionLAB(VEquipos);
+
+            //Resultado OK, Secuencia?, Falta validación
+
+            //6.
+
+            //CalibracionesEquipos CEquipos = new CalibracionesEquipos()
+            //{
+            //    IdEquipo = 3,
+            //    Secuencia = 1,
+            //    FechaCalibracion = DateTime.Today,
+            //    Laboratorio = "ABCDE",
+            //    Observaciones = "Prueba ingreso calibración equipos",
+            //    IdUsuarioCreacion = 2
+            //};
+
+            //PEquiposTE.IngresarCalibracionEq(CEquipos);
+
+            //Resultado OK, Secuencia?, Falta validación
+
+        }
+
+        static void Main(string[] args)
+        {
+            Intec.DAL.TE.AdministracionTE PAdministracionTE = new Intec.DAL.TE.AdministracionTE();
+
+            //1.
+
+            //MarcasEquipos MEquipos = new MarcasEquipos()
+            //{
+            //    IdMarcaEquipo = 3,
+            //    MarcaEquipo = "Bauker",
+            //    IdUsuarioCreacion = 2
+            //};
+
+            //PAdministracionTE.CrearMarca(MEquipos);
+
+            //Resultado OK
+
+            //2.
+
+            //PAdministracionTE.EliminarMarca(3);
+
+            //Resultado OK, Eliminado ID 3
+
+            //3.
+
+            //var res = PAdministracionTE.ConsultarMarcas();
+
+            //Resultado OK
+
+            //1.
+
+            //TiposEquipo PTiposEquipo = new TiposEquipo()
+            //{
+            //    IdTipoEquipo = 3,
+            //    TipoEquipo = "Corte",
+            //    IdUsuarioCreacion = 2
+            //};
+
+            //PAdministracionTE.CrearTipoEquipo(PTiposEquipo);
+
+            //Resultado OK
+
+            //2
+
+            //PAdministracionTE.EliminarTipoEquipo(2);
+
+            //Resultado OK, Eliminado ID 2
+
+            //3
+
+            //var res = PAdministracionTE.ConsultaTipoEquipo();
+
+            //Resultado OK
+
+        }
+
+
     }
 }

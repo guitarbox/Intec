@@ -40,9 +40,18 @@ namespace Intec.DAL.TE
         {
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
-                Equipo.FechaCreacion = DateTime.Now;
-                ctx.Equipos.Add(Equipo);
-                ctx.SaveChanges();
+                int us = ctx.Equipos.Where(u => u.SerieIDInterno == Equipo.SerieIDInterno).ToList().Count;
+                if (us == 0)
+                {
+                    Equipo.FechaCreacion = DateTime.Now;
+                    ctx.Equipos.Add(Equipo);
+                    ctx.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception($"Ya existe un equipo con Id interno {Equipo.SerieIDInterno}");
+                }
+                    
             }
         }
 
@@ -51,7 +60,7 @@ namespace Intec.DAL.TE
         {
             using(var ctx = new DB_A66D31_intratecPrbEntities1())
             {
-                if (ctx.UsuariosEquipos.Where(ue => ue.IdEquipo == IdEquipo).FirstOrDefault() == null)
+                if (ctx.UsuariosEquipos.Where(ue => ue.IdEquipo == IdEquipo).FirstOrDefault() == null) //Qué hace ese null?
                 {
                     ctx.Equipos.Remove(ctx.Equipos.Where(e => e.IdEquipo == IdEquipo).FirstOrDefault());
                     ctx.SaveChanges();

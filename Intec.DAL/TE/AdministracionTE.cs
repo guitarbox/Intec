@@ -49,9 +49,98 @@ namespace Intec.DAL.TE
         }
 
         //Marcas
-        //TODO
+
+        //1.
+        public void CrearMarca(MarcasEquipos MarcaCrear)
+        {
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                MarcaCrear.FechaCreacion = DateTime.Now;
+                ctx.MarcasEquipos.Add(MarcaCrear);
+                ctx.SaveChanges();
+            }
+        }
+
+        //2.
+        public void EliminarMarca(int IdMarca)
+        {
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                MarcasEquipos MarcaEliminar = ctx.MarcasEquipos.Where(u => u.IdMarcaEquipo == IdMarca).FirstOrDefault();
+                if (MarcaEliminar != null)
+                {
+                    ctx.MarcasEquipos.Remove(MarcaEliminar);
+                    ctx.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception($"No existe una Marca con ID {IdMarca}");
+                }
+
+            }
+        }
+
+        //3.
+        public List<MarcasEquipos> ConsultarMarcas()
+        {
+            List<MarcasEquipos> res = new List<MarcasEquipos>();
+
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                res = ctx.MarcasEquipos.ToList();
+            }
+
+            return res;
+
+        }
+
 
         //Tipos de Equipo
-        //TODO
+
+        //1.
+        public void CrearTipoEquipo(TiposEquipo TipoEqupioCrear)
+        {
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                TipoEqupioCrear.FechaCreacion = DateTime.Now;
+                ctx.TiposEquipo.Add(TipoEqupioCrear);
+                ctx.SaveChanges();
+            }
+        }
+
+        //2.
+        public void EliminarTipoEquipo(int IdTipoEquipo)
+        {
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                TiposEquipo TipoEquipoEliminar = ctx.TiposEquipo.Where(u => u.IdTipoEquipo == IdTipoEquipo).FirstOrDefault();
+                if (TipoEquipoEliminar != null)
+                {
+                    ctx.TiposEquipo.Remove(TipoEquipoEliminar);
+                    ctx.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception($"No existe una Tipo de equipo con ID {IdTipoEquipo}");
+                }
+
+            }
+        }
+
+        //3.
+        public List<TiposEquipo> ConsultaTipoEquipo()
+        {
+            List<TiposEquipo> res = new List<TiposEquipo>();
+
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                res = ctx.TiposEquipo.ToList();
+            }
+
+            return res;
+
+        }
+
+
     } 
 }

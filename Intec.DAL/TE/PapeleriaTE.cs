@@ -145,7 +145,7 @@ namespace Intec.DAL.TE
                 {
                     if (ctx.ConsecutivosFormatos.Where(c => c.IdFormato == IdFormato && c.Consecutivo == i).FirstOrDefault() != null)
                     {
-                        throw new Exception($"El consecutivo {i} del formato {IdFormato} ya ha sido ingresado");
+                        throw new Exception($"El consecutivo {i} del formato con Id {IdFormato} ya ha sido ingresado");
                     }
                 }
                 
