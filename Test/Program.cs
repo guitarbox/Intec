@@ -129,10 +129,13 @@ namespace Test
 
             //6.
 
-            PPapeleriaTE.AsignarRangoConsecutivosFormatoInspector(8, 1, 3000, 3999, 2);
+            //PPapeleriaTE.AsignarRangoConsecutivosFormatoInspector(8, 3, 0, 3, 2);
 
-            // Resultado: prueba con "B" Y "R" lanza excepción,  
+            // Resultado: En espera
 
+            //7.
+
+            PPapeleriaTE.IngresarConsecutivosFormatoBodega(8, 1, 100, 2);
         }
     }
 }
