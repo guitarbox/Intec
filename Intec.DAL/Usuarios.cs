@@ -18,10 +18,12 @@ namespace Intec.DAL
         public Usuarios()
         {
             this.ConsecutivosFormatos = new HashSet<ConsecutivosFormatos>();
-            this.TramiteConsecutivoFormato = new HashSet<TramiteConsecutivoFormato>();
             this.TramitesEquipo = new HashSet<TramitesEquipo>();
             this.KardexPapeleria = new HashSet<KardexPapeleria>();
             this.UsuariosEquipos = new HashSet<UsuariosEquipos>();
+            this.TramiteConsecutivoFormato = new HashSet<TramiteConsecutivoFormato>();
+            this.Visitas = new HashSet<Visitas>();
+            this.Zonas = new HashSet<Zonas>();
         }
     
         public int IdUsuario { get; set; }
@@ -47,12 +49,16 @@ namespace Intec.DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ConsecutivosFormatos> ConsecutivosFormatos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TramiteConsecutivoFormato> TramiteConsecutivoFormato { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TramitesEquipo> TramitesEquipo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<KardexPapeleria> KardexPapeleria { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UsuariosEquipos> UsuariosEquipos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TramiteConsecutivoFormato> TramiteConsecutivoFormato { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Visitas> Visitas { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Zonas> Zonas { get; set; }
     }
 }

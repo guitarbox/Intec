@@ -69,10 +69,25 @@
     <Compile Include="Equipos.cs">
       <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EquiposVisita.cs">
+      <DependentUpon>IntratecModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="EstadosConsecutivosInspector.cs">
       <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="EstadosVisita.cs">
+      <DependentUpon>IntratecModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Formatos.cs">
+      <DependentUpon>IntratecModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FormatosVisita.cs">
+      <DependentUpon>IntratecModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FotosVisita.cs">
+      <DependentUpon>IntratecModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HistoricoAsignacionZona.cs">
       <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
     <Compile Include="IntratecModel.Context.cs">
@@ -156,6 +171,12 @@
       <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
     <Compile Include="VerificacionesLabEquipos.cs">
+      <DependentUpon>IntratecModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Visitas.cs">
+      <DependentUpon>IntratecModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Zonas.cs">
       <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
   </ItemGroup>

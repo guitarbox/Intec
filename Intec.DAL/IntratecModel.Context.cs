@@ -44,7 +44,6 @@ namespace Intec.DAL
         public virtual DbSet<EstadosConsecutivosInspector> EstadosConsecutivosInspector { get; set; }
         public virtual DbSet<ConsecutivosFormatos> ConsecutivosFormatos { get; set; }
         public virtual DbSet<Formatos> Formatos { get; set; }
-        public virtual DbSet<TramiteConsecutivoFormato> TramiteConsecutivoFormato { get; set; }
         public virtual DbSet<CalibracionesEquipos> CalibracionesEquipos { get; set; }
         public virtual DbSet<Equipos> Equipos { get; set; }
         public virtual DbSet<MarcasEquipos> MarcasEquipos { get; set; }
@@ -54,6 +53,14 @@ namespace Intec.DAL
         public virtual DbSet<KardexPapeleria> KardexPapeleria { get; set; }
         public virtual DbSet<TiposMovimientoKardex> TiposMovimientoKardex { get; set; }
         public virtual DbSet<UsuariosEquipos> UsuariosEquipos { get; set; }
+        public virtual DbSet<EquiposVisita> EquiposVisita { get; set; }
+        public virtual DbSet<EstadosVisita> EstadosVisita { get; set; }
+        public virtual DbSet<FormatosVisita> FormatosVisita { get; set; }
+        public virtual DbSet<FotosVisita> FotosVisita { get; set; }
+        public virtual DbSet<TramiteConsecutivoFormato> TramiteConsecutivoFormato { get; set; }
+        public virtual DbSet<Visitas> Visitas { get; set; }
+        public virtual DbSet<Zonas> Zonas { get; set; }
+        public virtual DbSet<HistoricoAsignacionZona> HistoricoAsignacionZona { get; set; }
     
         public virtual ObjectResult<uspConsultaGralCliente_Result> uspConsultaGralCliente(string numeroIdentificacion, string nombres, string direccion, string nroTelefonico, Nullable<bool> tieneVisitaProgramada)
         {

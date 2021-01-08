@@ -21,6 +21,7 @@ namespace Intec.DAL
             this.TramitesEquipo = new HashSet<TramitesEquipo>();
             this.VerificacionesLabEquipos = new HashSet<VerificacionesLabEquipos>();
             this.UsuariosEquipos = new HashSet<UsuariosEquipos>();
+            this.EquiposVisita = new HashSet<EquiposVisita>();
         }
     
         public int IdEquipo { get; set; }
@@ -53,5 +54,7 @@ namespace Intec.DAL
         public virtual ICollection<VerificacionesLabEquipos> VerificacionesLabEquipos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UsuariosEquipos> UsuariosEquipos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EquiposVisita> EquiposVisita { get; set; }
     }
 }

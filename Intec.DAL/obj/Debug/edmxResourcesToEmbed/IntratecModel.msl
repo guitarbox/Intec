@@ -288,20 +288,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="TramiteConsecutivoFormato">
-      <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.TramiteConsecutivoFormato">
-        <MappingFragment StoreEntitySet="TramiteConsecutivoFormato">
-          <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
-          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-          <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
-          <ScalarProperty Name="Tramite" ColumnName="Tramite" />
-          <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
-          <ScalarProperty Name="Consecutivo" ColumnName="Consecutivo" />
-          <ScalarProperty Name="IdInspector" ColumnName="IdInspector" />
-          <ScalarProperty Name="IdFormato" ColumnName="IdFormato" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="CalibracionesEquipos">
       <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.CalibracionesEquipos">
         <MappingFragment StoreEntitySet="CalibracionesEquipos">
@@ -425,6 +411,107 @@
           <ScalarProperty Name="IdUsuarioAsigna" ColumnName="IdUsuarioAsigna" />
           <ScalarProperty Name="Estado" ColumnName="Estado" />
           <ScalarProperty Name="IdEquipo" ColumnName="IdEquipo" />
+          <ScalarProperty Name="IdInspector" ColumnName="IdInspector" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EquiposVisita">
+      <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.EquiposVisita">
+        <MappingFragment StoreEntitySet="EquiposVisita">
+          <ScalarProperty Name="IdEquipo" ColumnName="IdEquipo" />
+          <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+          <ScalarProperty Name="IdVisita" ColumnName="IdVisita" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EstadosVisita">
+      <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.EstadosVisita">
+        <MappingFragment StoreEntitySet="EstadosVisita">
+          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+          <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+          <ScalarProperty Name="EstadoVisita" ColumnName="EstadoVisita" />
+          <ScalarProperty Name="IdEstadoVisita" ColumnName="IdEstadoVisita" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FormatosVisita">
+      <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.FormatosVisita">
+        <MappingFragment StoreEntitySet="FormatosVisita">
+          <ScalarProperty Name="Consecutivo" ColumnName="Consecutivo" />
+          <ScalarProperty Name="IdFormato" ColumnName="IdFormato" />
+          <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+          <ScalarProperty Name="IdVisita" ColumnName="IdVisita" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FotosVisita">
+      <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.FotosVisita">
+        <MappingFragment StoreEntitySet="FotosVisita">
+          <ScalarProperty Name="Path" ColumnName="Path" />
+          <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+          <ScalarProperty Name="IdVisita" ColumnName="IdVisita" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TramiteConsecutivoFormato">
+      <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.TramiteConsecutivoFormato">
+        <MappingFragment StoreEntitySet="TramiteConsecutivoFormato">
+          <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+          <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+          <ScalarProperty Name="Tramite" ColumnName="Tramite" />
+          <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+          <ScalarProperty Name="Consecutivo" ColumnName="Consecutivo" />
+          <ScalarProperty Name="IdInspector" ColumnName="IdInspector" />
+          <ScalarProperty Name="IdFormato" ColumnName="IdFormato" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Visitas">
+      <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.Visitas">
+        <MappingFragment StoreEntitySet="Visitas">
+          <ScalarProperty Name="IdEstadoVisitas" ColumnName="IdEstadoVisitas" />
+          <ScalarProperty Name="ObservacionesVisita" ColumnName="ObservacionesVisita" />
+          <ScalarProperty Name="IdInspector" ColumnName="IdInspector" />
+          <ScalarProperty Name="FechaVisita" ColumnName="FechaVisita" />
+          <ScalarProperty Name="IdCiudad" ColumnName="IdCiudad" />
+          <ScalarProperty Name="IdZona" ColumnName="IdZona" />
+          <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+          <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+          <ScalarProperty Name="IdSolicitudProgramacion" ColumnName="IdSolicitudProgramacion" />
+          <ScalarProperty Name="IdVisita" ColumnName="IdVisita" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Zonas">
+      <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.Zonas">
+        <MappingFragment StoreEntitySet="Zonas">
+          <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+          <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+          <ScalarProperty Name="IdInspector" ColumnName="IdInspector" />
+          <ScalarProperty Name="pc_dab" ColumnName="pc_dab" />
+          <ScalarProperty Name="pc_iab" ColumnName="pc_iab" />
+          <ScalarProperty Name="pc_da" ColumnName="pc_da" />
+          <ScalarProperty Name="pc_ia" ColumnName="pc_ia" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="IdCiudad" ColumnName="IdCiudad" />
+          <ScalarProperty Name="IdZona" ColumnName="IdZona" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HistoricoAsignacionZona">
+      <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.HistoricoAsignacionZona">
+        <MappingFragment StoreEntitySet="HistoricoAsignacionZona">
+          <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+          <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+          <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+          <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+          <ScalarProperty Name="IdCiudad" ColumnName="IdCiudad" />
+          <ScalarProperty Name="IdZona" ColumnName="IdZona" />
           <ScalarProperty Name="IdInspector" ColumnName="IdInspector" />
         </MappingFragment>
       </EntityTypeMapping>

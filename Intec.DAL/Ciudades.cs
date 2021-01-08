@@ -20,6 +20,8 @@ namespace Intec.DAL
             this.SolicitudesProgramacionVisitas = new HashSet<SolicitudesProgramacionVisitas>();
             this.Usuarios = new HashSet<Usuarios>();
             this.Clientes = new HashSet<Clientes>();
+            this.Visitas = new HashSet<Visitas>();
+            this.Zonas = new HashSet<Zonas>();
         }
     
         public string IdCiudad { get; set; }
@@ -37,5 +39,9 @@ namespace Intec.DAL
         public virtual ICollection<Usuarios> Usuarios { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Clientes> Clientes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Visitas> Visitas { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Zonas> Zonas { get; set; }
     }
 }

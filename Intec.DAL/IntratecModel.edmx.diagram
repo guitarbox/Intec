@@ -38,9 +38,6 @@
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_ConsecutivosInspectores_EstadosConsecutivosInspector" />
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_ConsecutivosInspectores_EstadosConsecutivosInspector1" />
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_ConsecutivosInspectores_Usuarios" />
-        <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.TramiteConsecutivoFormato" Width="1.5" PointX="12.75" PointY="3.625" />
-        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_TramiteAsignacionConsecutivoInspector_Formatos" />
-        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_TramiteAsignacionConsecutivoInspector_Usuarios" />
         <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.CalibracionesEquipos" Width="1.5" PointX="5.25" PointY="27.75" />
         <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.Equipos" Width="1.5" PointX="3" PointY="18.5" />
         <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.MarcasEquipos" Width="1.5" PointX="0.75" PointY="15.875" />
@@ -61,6 +58,29 @@
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_KardexPapeleria_TiposMovimientoKardex" />
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_KardexPapeleria_Usuarios" />
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_UsuariosEquipos_Usuarios" />
+        <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.EquiposVisita" Width="1.5" PointX="20.625" PointY="14.625" />
+        <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.EstadosVisita" Width="1.5" PointX="16.125" PointY="22.625" />
+        <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.FormatosVisita" Width="1.5" PointX="20.625" PointY="8.375" />
+        <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.FotosVisita" Width="1.5" PointX="20.625" PointY="5.75" />
+        <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.TramiteConsecutivoFormato" Width="1.5" PointX="13.125" PointY="5.375" />
+        <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.Visitas" Width="1.5" PointX="18.375" PointY="7.375" />
+        <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.Zonas" Width="1.5" PointX="16.125" PointY="0.75" />
+        <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.HistoricoAsignacionZona" Width="1.5" PointX="0.75" PointY="2.125" />
+        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Visitas_Ciudades" />
+        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Zonas_Ciudades" />
+        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Visitas_Clientes" />
+        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_FormatosVisita_ConsecutivosFormatos" />
+        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_EquiposVisita_Equipos" />
+        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_EquiposVisita_Visitas" />
+        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Visitas_EstadosVisita" />
+        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_TramiteAsignacionConsecutivoInspector_Formatos" />
+        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_FormatosVisita_Visitas" />
+        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_FotosVisita_Visitas" />
+        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Visitas_SolicitudesProgramacionVisitas" />
+        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_TramiteAsignacionConsecutivoInspector_Usuarios" />
+        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Visitas_Usuarios" />
+        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Zonas_Usuarios" />
+        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Visitas_Zonas" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

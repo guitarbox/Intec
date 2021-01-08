@@ -12,18 +12,16 @@ namespace Intec.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class TramiteConsecutivoFormato
+    public partial class HistoricoAsignacionZona
     {
-        public int IdFormato { get; set; }
         public Nullable<int> IdInspector { get; set; }
-        public int Consecutivo { get; set; }
-        public int Secuencia { get; set; }
-        public string Tramite { get; set; }
-        public string Observaciones { get; set; }
+        public Nullable<int> IdZona { get; set; }
+        public Nullable<int> IdCiudad { get; set; }
+        public Nullable<System.DateTime> FechaInicio { get; set; }
+        public Nullable<System.DateTime> FechaFin { get; set; }
         public System.DateTime FechaCreacion { get; set; }
         public int IdUsuarioCreacion { get; set; }
-    
-        public virtual Formatos Formatos { get; set; }
-        public virtual Usuarios Usuarios { get; set; }
+        public Nullable<System.DateTime> FechaModificacion { get; set; }
+        public Nullable<int> IdUsuarioModificacion { get; set; }
     }
 }

@@ -102,6 +102,16 @@
     <Property Name="IdUsuarioModificacion" Type="int" />
     <Property Name="FechaProximoMantenimiento" Type="datetime" />
   </EntityType>
+  <EntityType Name="EquiposVisita">
+    <Key>
+      <PropertyRef Name="IdVisita" />
+      <PropertyRef Name="Secuencia" />
+      <PropertyRef Name="IdEquipo" />
+    </Key>
+    <Property Name="IdVisita" Type="int" Nullable="false" />
+    <Property Name="Secuencia" Type="int" Nullable="false" />
+    <Property Name="IdEquipo" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="EstadosConsecutivosInspector">
     <Key>
       <PropertyRef Name="IdEstadoConsecutivoInspector" />
@@ -110,6 +120,15 @@
     <Property Name="EstadoConsecutivoInspector" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
     <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="EstadosVisita">
+    <Key>
+      <PropertyRef Name="IdEstadoVisita" />
+    </Key>
+    <Property Name="IdEstadoVisita" Type="nvarchar" MaxLength="1" Nullable="false" />
+    <Property Name="EstadoVisita" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
+    <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="Formatos">
     <Key>
@@ -121,6 +140,44 @@
     <Property Name="Separador" Type="nvarchar" MaxLength="1" />
     <Property Name="Mascara" Type="int" Nullable="false" />
     <Property Name="Activo" Type="bit" Nullable="false" />
+    <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+    <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
+    <Property Name="FechaModificacion" Type="datetime" />
+    <Property Name="IdUsuarioModificacion" Type="int" />
+  </EntityType>
+  <EntityType Name="FormatosVisita">
+    <Key>
+      <PropertyRef Name="IdVisita" />
+      <PropertyRef Name="Secuencia" />
+      <PropertyRef Name="IdFormato" />
+      <PropertyRef Name="Consecutivo" />
+    </Key>
+    <Property Name="IdVisita" Type="int" Nullable="false" />
+    <Property Name="Secuencia" Type="int" Nullable="false" />
+    <Property Name="IdFormato" Type="int" Nullable="false" />
+    <Property Name="Consecutivo" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FotosVisita">
+    <Key>
+      <PropertyRef Name="IdVisita" />
+      <PropertyRef Name="Secuencia" />
+    </Key>
+    <Property Name="IdVisita" Type="int" Nullable="false" />
+    <Property Name="Secuencia" Type="int" Nullable="false" />
+    <Property Name="Path" Type="nvarchar" MaxLength="200" Nullable="false" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'DB_A66D31_intratec.dbo.HistoricoAsignacionZona' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="HistoricoAsignacionZona">
+    <Key>
+      <PropertyRef Name="FechaCreacion" />
+      <PropertyRef Name="IdUsuarioCreacion" />
+    </Key>
+    <Property Name="IdInspector" Type="int" />
+    <Property Name="IdZona" Type="int" />
+    <Property Name="IdCiudad" Type="int" />
+    <Property Name="FechaInicio" Type="datetime" />
+    <Property Name="FechaFin" Type="datetime" />
     <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
     <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
     <Property Name="FechaModificacion" Type="datetime" />
@@ -304,12 +361,11 @@
   <EntityType Name="TramiteConsecutivoFormato">
     <Key>
       <PropertyRef Name="IdFormato" />
-      <PropertyRef Name="IdInspector" />
       <PropertyRef Name="Consecutivo" />
       <PropertyRef Name="Secuencia" />
     </Key>
     <Property Name="IdFormato" Type="int" Nullable="false" />
-    <Property Name="IdInspector" Type="int" Nullable="false" />
+    <Property Name="IdInspector" Type="int" />
     <Property Name="Consecutivo" Type="int" Nullable="false" />
     <Property Name="Secuencia" Type="int" Nullable="false" />
     <Property Name="Tramite" Type="nvarchar" MaxLength="20" Nullable="false" />
@@ -384,6 +440,39 @@
     <Property Name="NroCertificado" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Laboratorio" Type="nchar" MaxLength="10" />
     <Property Name="Observaciones" Type="nvarchar" MaxLength="1000" />
+    <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+    <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
+    <Property Name="FechaModificacion" Type="datetime" />
+    <Property Name="IdUsuarioModificacion" Type="int" />
+  </EntityType>
+  <EntityType Name="Visitas">
+    <Key>
+      <PropertyRef Name="IdVisita" />
+    </Key>
+    <Property Name="IdVisita" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdSolicitudProgramacion" Type="int" />
+    <Property Name="IdCliente" Type="int" Nullable="false" />
+    <Property Name="Direccion" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IdZona" Type="int" Nullable="false" />
+    <Property Name="IdCiudad" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="FechaVisita" Type="datetime" Nullable="false" />
+    <Property Name="IdInspector" Type="int" />
+    <Property Name="ObservacionesVisita" Type="nvarchar" MaxLength="1000" />
+    <Property Name="IdEstadoVisitas" Type="nvarchar" MaxLength="1" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Zonas">
+    <Key>
+      <PropertyRef Name="IdZona" />
+      <PropertyRef Name="IdCiudad" />
+    </Key>
+    <Property Name="IdZona" Type="int" Nullable="false" />
+    <Property Name="IdCiudad" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
+    <Property Name="pc_ia" Type="nvarchar" MaxLength="50" />
+    <Property Name="pc_da" Type="nvarchar" MaxLength="50" />
+    <Property Name="pc_iab" Type="nvarchar" MaxLength="50" />
+    <Property Name="pc_dab" Type="nvarchar" MaxLength="50" />
+    <Property Name="IdInspector" Type="int" Nullable="false" />
     <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
     <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
     <Property Name="FechaModificacion" Type="datetime" />
@@ -521,6 +610,68 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_EquiposVisita_Equipos">
+    <End Role="Equipos" Type="Self.Equipos" Multiplicity="1" />
+    <End Role="EquiposVisita" Type="Self.EquiposVisita" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Equipos">
+        <PropertyRef Name="IdEquipo" />
+      </Principal>
+      <Dependent Role="EquiposVisita">
+        <PropertyRef Name="IdEquipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_EquiposVisita_Visitas">
+    <End Role="Visitas" Type="Self.Visitas" Multiplicity="1" />
+    <End Role="EquiposVisita" Type="Self.EquiposVisita" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Visitas">
+        <PropertyRef Name="IdVisita" />
+      </Principal>
+      <Dependent Role="EquiposVisita">
+        <PropertyRef Name="IdVisita" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FormatosVisita_ConsecutivosFormatos">
+    <End Role="ConsecutivosFormatos" Type="Self.ConsecutivosFormatos" Multiplicity="1" />
+    <End Role="FormatosVisita" Type="Self.FormatosVisita" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ConsecutivosFormatos">
+        <PropertyRef Name="IdFormato" />
+        <PropertyRef Name="Consecutivo" />
+      </Principal>
+      <Dependent Role="FormatosVisita">
+        <PropertyRef Name="IdFormato" />
+        <PropertyRef Name="Consecutivo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FormatosVisita_Visitas">
+    <End Role="Visitas" Type="Self.Visitas" Multiplicity="1" />
+    <End Role="FormatosVisita" Type="Self.FormatosVisita" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Visitas">
+        <PropertyRef Name="IdVisita" />
+      </Principal>
+      <Dependent Role="FormatosVisita">
+        <PropertyRef Name="IdVisita" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FotosVisita_Visitas">
+    <End Role="Visitas" Type="Self.Visitas" Multiplicity="1" />
+    <End Role="FotosVisita" Type="Self.FotosVisita" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Visitas">
+        <PropertyRef Name="IdVisita" />
+      </Principal>
+      <Dependent Role="FotosVisita">
+        <PropertyRef Name="IdVisita" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_KardexPapeleria_TiposMovimientoKardex">
     <End Role="TiposMovimientoKardex" Type="Self.TiposMovimientoKardex" Multiplicity="1" />
     <End Role="KardexPapeleria" Type="Self.KardexPapeleria" Multiplicity="*" />
@@ -642,7 +793,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_TramiteAsignacionConsecutivoInspector_Usuarios">
-    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
     <End Role="TramiteConsecutivoFormato" Type="Self.TramiteConsecutivoFormato" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Usuarios">
@@ -749,6 +900,104 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Visitas_Ciudades">
+    <End Role="Ciudades" Type="Self.Ciudades" Multiplicity="1" />
+    <End Role="Visitas" Type="Self.Visitas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ciudades">
+        <PropertyRef Name="IdCiudad" />
+      </Principal>
+      <Dependent Role="Visitas">
+        <PropertyRef Name="IdCiudad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Visitas_Clientes">
+    <End Role="Clientes" Type="Self.Clientes" Multiplicity="1" />
+    <End Role="Visitas" Type="Self.Visitas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clientes">
+        <PropertyRef Name="IdCliente" />
+      </Principal>
+      <Dependent Role="Visitas">
+        <PropertyRef Name="IdCliente" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Visitas_EstadosVisita">
+    <End Role="EstadosVisita" Type="Self.EstadosVisita" Multiplicity="1" />
+    <End Role="Visitas" Type="Self.Visitas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="EstadosVisita">
+        <PropertyRef Name="IdEstadoVisita" />
+      </Principal>
+      <Dependent Role="Visitas">
+        <PropertyRef Name="IdEstadoVisitas" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Visitas_SolicitudesProgramacionVisitas">
+    <End Role="SolicitudesProgramacionVisitas" Type="Self.SolicitudesProgramacionVisitas" Multiplicity="0..1" />
+    <End Role="Visitas" Type="Self.Visitas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SolicitudesProgramacionVisitas">
+        <PropertyRef Name="IdSolicitudProgramacion" />
+      </Principal>
+      <Dependent Role="Visitas">
+        <PropertyRef Name="IdSolicitudProgramacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Visitas_Usuarios">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+    <End Role="Visitas" Type="Self.Visitas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="Visitas">
+        <PropertyRef Name="IdInspector" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Visitas_Zonas">
+    <End Role="Zonas" Type="Self.Zonas" Multiplicity="1" />
+    <End Role="Visitas" Type="Self.Visitas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Zonas">
+        <PropertyRef Name="IdZona" />
+        <PropertyRef Name="IdCiudad" />
+      </Principal>
+      <Dependent Role="Visitas">
+        <PropertyRef Name="IdZona" />
+        <PropertyRef Name="IdCiudad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Zonas_Ciudades">
+    <End Role="Ciudades" Type="Self.Ciudades" Multiplicity="1" />
+    <End Role="Zonas" Type="Self.Zonas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ciudades">
+        <PropertyRef Name="IdCiudad" />
+      </Principal>
+      <Dependent Role="Zonas">
+        <PropertyRef Name="IdCiudad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Zonas_Usuarios">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+    <End Role="Zonas" Type="Self.Zonas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="Zonas">
+        <PropertyRef Name="IdInspector" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Function Name="uspConsultaGralCliente" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="NumeroIdentificacion" Type="nvarchar" Mode="In" />
     <Parameter Name="Nombres" Type="nvarchar" Mode="In" />
@@ -763,8 +1012,12 @@
     <EntitySet Name="ConsecutivosFormatos" EntityType="Self.ConsecutivosFormatos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Departamentos" EntityType="Self.Departamentos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Equipos" EntityType="Self.Equipos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EquiposVisita" EntityType="Self.EquiposVisita" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="EstadosConsecutivosInspector" EntityType="Self.EstadosConsecutivosInspector" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EstadosVisita" EntityType="Self.EstadosVisita" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Formatos" EntityType="Self.Formatos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FormatosVisita" EntityType="Self.FormatosVisita" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FotosVisita" EntityType="Self.FotosVisita" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="KardexPapeleria" EntityType="Self.KardexPapeleria" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MarcasEquipos" EntityType="Self.MarcasEquipos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Menus" EntityType="Self.Menus" Schema="dbo" store:Type="Tables" />
@@ -785,6 +1038,21 @@
     <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UsuariosEquipos" EntityType="Self.UsuariosEquipos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="VerificacionesLabEquipos" EntityType="Self.VerificacionesLabEquipos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Visitas" EntityType="Self.Visitas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Zonas" EntityType="Self.Zonas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HistoricoAsignacionZona" EntityType="Self.HistoricoAsignacionZona" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [HistoricoAsignacionZona].[IdInspector] AS [IdInspector], 
+    [HistoricoAsignacionZona].[IdZona] AS [IdZona], 
+    [HistoricoAsignacionZona].[IdCiudad] AS [IdCiudad], 
+    [HistoricoAsignacionZona].[FechaInicio] AS [FechaInicio], 
+    [HistoricoAsignacionZona].[FechaFin] AS [FechaFin], 
+    [HistoricoAsignacionZona].[FechaCreacion] AS [FechaCreacion], 
+    [HistoricoAsignacionZona].[IdUsuarioCreacion] AS [IdUsuarioCreacion], 
+    [HistoricoAsignacionZona].[FechaModificacion] AS [FechaModificacion], 
+    [HistoricoAsignacionZona].[IdUsuarioModificacion] AS [IdUsuarioModificacion]
+    FROM [dbo].[HistoricoAsignacionZona] AS [HistoricoAsignacionZona]</DefiningQuery>
+    </EntitySet>
     <AssociationSet Name="FK_CalibracionesEquipos_Equipos" Association="Self.FK_CalibracionesEquipos_Equipos">
       <End Role="Equipos" EntitySet="Equipos" />
       <End Role="CalibracionesEquipos" EntitySet="CalibracionesEquipos" />
@@ -828,6 +1096,26 @@
     <AssociationSet Name="FK_Equipos_TiposEquipo" Association="Self.FK_Equipos_TiposEquipo">
       <End Role="TiposEquipo" EntitySet="TiposEquipo" />
       <End Role="Equipos" EntitySet="Equipos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EquiposVisita_Equipos" Association="Self.FK_EquiposVisita_Equipos">
+      <End Role="Equipos" EntitySet="Equipos" />
+      <End Role="EquiposVisita" EntitySet="EquiposVisita" />
+    </AssociationSet>
+    <AssociationSet Name="FK_EquiposVisita_Visitas" Association="Self.FK_EquiposVisita_Visitas">
+      <End Role="Visitas" EntitySet="Visitas" />
+      <End Role="EquiposVisita" EntitySet="EquiposVisita" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FormatosVisita_ConsecutivosFormatos" Association="Self.FK_FormatosVisita_ConsecutivosFormatos">
+      <End Role="ConsecutivosFormatos" EntitySet="ConsecutivosFormatos" />
+      <End Role="FormatosVisita" EntitySet="FormatosVisita" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FormatosVisita_Visitas" Association="Self.FK_FormatosVisita_Visitas">
+      <End Role="Visitas" EntitySet="Visitas" />
+      <End Role="FormatosVisita" EntitySet="FormatosVisita" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FotosVisita_Visitas" Association="Self.FK_FotosVisita_Visitas">
+      <End Role="Visitas" EntitySet="Visitas" />
+      <End Role="FotosVisita" EntitySet="FotosVisita" />
     </AssociationSet>
     <AssociationSet Name="FK_KardexPapeleria_TiposMovimientoKardex" Association="Self.FK_KardexPapeleria_TiposMovimientoKardex">
       <End Role="TiposMovimientoKardex" EntitySet="TiposMovimientoKardex" />
@@ -904,6 +1192,38 @@
     <AssociationSet Name="FK_VerificacionesLabEquipos_Equipos" Association="Self.FK_VerificacionesLabEquipos_Equipos">
       <End Role="Equipos" EntitySet="Equipos" />
       <End Role="VerificacionesLabEquipos" EntitySet="VerificacionesLabEquipos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Visitas_Ciudades" Association="Self.FK_Visitas_Ciudades">
+      <End Role="Ciudades" EntitySet="Ciudades" />
+      <End Role="Visitas" EntitySet="Visitas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Visitas_Clientes" Association="Self.FK_Visitas_Clientes">
+      <End Role="Clientes" EntitySet="Clientes" />
+      <End Role="Visitas" EntitySet="Visitas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Visitas_EstadosVisita" Association="Self.FK_Visitas_EstadosVisita">
+      <End Role="EstadosVisita" EntitySet="EstadosVisita" />
+      <End Role="Visitas" EntitySet="Visitas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Visitas_SolicitudesProgramacionVisitas" Association="Self.FK_Visitas_SolicitudesProgramacionVisitas">
+      <End Role="SolicitudesProgramacionVisitas" EntitySet="SolicitudesProgramacionVisitas" />
+      <End Role="Visitas" EntitySet="Visitas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Visitas_Usuarios" Association="Self.FK_Visitas_Usuarios">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Visitas" EntitySet="Visitas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Visitas_Zonas" Association="Self.FK_Visitas_Zonas">
+      <End Role="Zonas" EntitySet="Zonas" />
+      <End Role="Visitas" EntitySet="Visitas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Zonas_Ciudades" Association="Self.FK_Zonas_Ciudades">
+      <End Role="Ciudades" EntitySet="Ciudades" />
+      <End Role="Zonas" EntitySet="Zonas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Zonas_Usuarios" Association="Self.FK_Zonas_Usuarios">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Zonas" EntitySet="Zonas" />
     </AssociationSet>
   </EntityContainer>
 </Schema>
