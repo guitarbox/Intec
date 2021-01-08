@@ -127,7 +127,12 @@ namespace Intec.DAL.TE
         {
             using(var ctx = new DB_A66D31_intratecPrbEntities1())
             {
-                Verificacion.FechaCreacion = DateTime.Now;                
+                int sec = 0;
+                try { ctx.VerificacionesLabEquipos.Where(v=>v.IdEquipo == Verificacion.IdEquipo).Count(); } catch { }
+                sec += 1;
+
+                Verificacion.FechaCreacion = DateTime.Now;
+                Verificacion.Secuencia = sec;
                 ctx.VerificacionesLabEquipos.Add(Verificacion);
                 ctx.SaveChanges();
             }
@@ -138,7 +143,12 @@ namespace Intec.DAL.TE
         {
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
+                int sec = 0;
+                try { ctx.CalibracionesEquipos.Where(v => v.IdEquipo == Calibracion.IdEquipo).Count(); } catch { }
+                sec += 1;
+
                 Calibracion.FechaCreacion = DateTime.Now;
+                Calibracion.Secuencia = sec;
                 ctx.CalibracionesEquipos.Add(Calibracion);
                 ctx.SaveChanges();
             }

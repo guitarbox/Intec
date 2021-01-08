@@ -28,15 +28,19 @@ namespace Intec.DAL.TE
             return res;
         }
 
+        #region CRUD Ciudades
         public List<Ciudades> ObtenerCiudades(string IdDepartamento)
         {
             List<Ciudades> res = new List<Ciudades>();
-            using(var ctx = new DB_A66D31_intratecPrbEntities1())
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
                 res = ctx.Ciudades.Where(c => c.IdDepartamento.Equals(IdDepartamento)).ToList();
             }
             return res;
         }
+        //Crear
+        //Editar
+        #endregion
 
         public List<TiposIdentificacion> ObtenerTiposIdentificacion()
         {
@@ -141,6 +145,12 @@ namespace Intec.DAL.TE
 
         }
 
-
-    } 
+        //Ciudades
+        //Departamentos
+        //Paises
+        //TiposIdentificación
+        //TiposPersona
+        //TiposPropiedades
+        //UsosPropiedades        
+    }
 }
