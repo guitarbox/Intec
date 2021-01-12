@@ -8,15 +8,88 @@ namespace Intec.DAL.TE
 {
     public class AdministracionTE
     {
+        #region  CRUD Paises
+
+        //Crear
+
+        public void CrearPais(Paises PaisCrear)
+        {
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                PaisCrear.FechaCreacion = DateTime.Now;
+                ctx.Paises.Add(PaisCrear);
+                ctx.SaveChanges();
+            }
+        }
+
+        //Obtener
+
         public List<Paises> ObtenerPaises()
         {
             List<Paises> res = new List<Paises>();
-            using(var ctx = new DB_A66D31_intratecPrbEntities1())
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
                 res = ctx.Paises.ToList();
             }
             return res;
         }
+
+        //Editar
+
+        public void EditarPais(Paises Pais, int IdUsuarioModificacion)
+        {
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                Paises PaisEditar = ctx.Paises.Where(c => c.IdPais == Pais.IdPais).FirstOrDefault();
+
+                PaisEditar.CodigoPais = Pais.CodigoPais;
+                PaisEditar.Pais = Pais.Pais;
+
+                PaisEditar.FechaModificacion = DateTime.Now;
+                PaisEditar.IdUsuarioModificacion = IdUsuarioModificacion;
+
+                ctx.SaveChanges();
+            }
+
+        }
+
+        //Eliminar
+
+        public void EliminarPais(int IdPais)
+        {
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                Paises PaisEliminar = ctx.Paises.Where(u => u.IdPais == IdPais).FirstOrDefault();
+                if (PaisEliminar != null)
+                {
+                    ctx.Paises.Remove(PaisEliminar);
+                    ctx.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception($"No existe un País con ID {IdPais}");
+                }
+
+            }
+        }
+
+        #endregion
+
+        #region CRUD Departamentos
+
+        //Crear
+
+        public void CrearDepartamento(Departamentos DepartamentoCrear)
+        {
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                DepartamentoCrear.FechaCreacion = DateTime.Now;
+                ctx.Departamentos.Add(DepartamentoCrear);
+                ctx.SaveChanges();
+            }
+        }
+
+        //Obtener
 
         public List<Departamentos> ObtenerDepartamentos(int IdPais)
         {
@@ -28,7 +101,62 @@ namespace Intec.DAL.TE
             return res;
         }
 
+        //Editar
+
+        public void EditarDepartamento(Departamentos Departamento, int IdUsuarioModificacion)
+        {
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                Departamentos DepartamentoEditar = ctx.Departamentos.Where(c => c.IdDepartamento == Departamento.IdDepartamento).FirstOrDefault();
+
+                DepartamentoEditar.Departamento = Departamento.Departamento;
+
+                DepartamentoEditar.FechaModificacion = DateTime.Now;
+                DepartamentoEditar.IdUsuarioModificacion = IdUsuarioModificacion;
+
+                ctx.SaveChanges();
+            }
+
+        }
+
+        //Eliminar, preguntar si argumento es ID departamento o Pais
+
+        public void EliminarDepartamento(string IdDepartamento)
+        {
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                Departamentos DepartamentoEliminar = ctx.Departamentos.Where(u => u.IdDepartamento == IdDepartamento).FirstOrDefault();
+                if (DepartamentoEliminar != null)
+                {
+                    ctx.Departamentos.Remove(DepartamentoEliminar);
+                    ctx.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception($"No existe un Depatamento con ID {IdDepartamento}");
+                }
+
+            }
+        }
+
+        #endregion
+
         #region CRUD Ciudades
+
+        //Crear
+
+        public void CrearCiudad(Ciudades CiudadCrear)
+        {
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                CiudadCrear.FechaCreacion = DateTime.Now;
+                ctx.Ciudades.Add(CiudadCrear);
+                ctx.SaveChanges();
+            }
+        }
+
+        //Obtener
+
         public List<Ciudades> ObtenerCiudades(string IdDepartamento)
         {
             List<Ciudades> res = new List<Ciudades>();
@@ -38,9 +166,62 @@ namespace Intec.DAL.TE
             }
             return res;
         }
-        //Crear
+
         //Editar
+
+        public void EditarCiudad(Ciudades Ciudad, int IdUsuarioModificacion)
+        {
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                Ciudades CiudadEditar = ctx.Ciudades.Where(c => c.IdCiudad == Ciudad.IdCiudad).FirstOrDefault();
+
+                CiudadEditar.Ciudad = Ciudad.Ciudad ;
+
+                CiudadEditar.FechaModificacion = DateTime.Now;
+                CiudadEditar.IdUsuarioModificacion = IdUsuarioModificacion;
+
+                ctx.SaveChanges();
+            }
+
+        }
+
+        //Eliminar, preguntar argumento
+
+        public void EliminarCiudad(string IdCiudad)
+        {
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                Ciudades CiudadEliminar = ctx.Ciudades.Where(u => u.IdCiudad == IdCiudad).FirstOrDefault();
+                if (CiudadEliminar != null)
+                {
+                    ctx.Ciudades.Remove(CiudadEliminar);
+                    ctx.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception($"No existe una Ciudad con ID {IdCiudad}");
+                }
+
+            }
+        }
+
         #endregion
+
+        #region CRUD TiposIdentificacion
+
+        //Crear
+
+        public void CrearTipoIdentificacion(TiposIdentificacion TipoIdentificacionCrear)
+        {
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                TipoIdentificacionCrear.FechaCreacion = DateTime.Now;
+                ctx.TiposIdentificacion.Add(TipoIdentificacionCrear);
+                ctx.SaveChanges();
+            }
+        }
+
+        //Obtener
 
         public List<TiposIdentificacion> ObtenerTiposIdentificacion()
         {
@@ -52,10 +233,52 @@ namespace Intec.DAL.TE
             return res;
         }
 
-        //Marcas
+        //Editar
 
-        //1.
-        public void CrearMarca(MarcasEquipos MarcaCrear)
+        public void EditarTipoIdentificacion(TiposIdentificacion TipoIdentificacion, int IdUsuarioModificacion)
+        {
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                TiposIdentificacion TipoIdentificacionEditar = ctx.TiposIdentificacion.Where(c => c.IdTipoIdentificacion == TipoIdentificacion.IdTipoIdentificacion).FirstOrDefault();
+
+                TipoIdentificacionEditar.Abreviatura = TipoIdentificacion.Abreviatura;
+                TipoIdentificacionEditar.TipoIdentificacion = TipoIdentificacion.TipoIdentificacion;
+                TipoIdentificacionEditar.CodigoTipoIdFiscal = TipoIdentificacion.CodigoTipoIdFiscal; //Se puede editar?
+
+                TipoIdentificacionEditar.FechaModificacion = DateTime.Now;
+                TipoIdentificacionEditar.IdUsuarioModificacion = IdUsuarioModificacion;
+
+                ctx.SaveChanges();
+            }
+
+        }
+
+        //Eliminar
+
+        public void EliminarTipoIdentificacion(int IdTipoIdentificacion)
+        {
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                TiposIdentificacion TipoIdentificacionEliminar = ctx.TiposIdentificacion.Where(u => u.IdTipoIdentificacion == IdTipoIdentificacion).FirstOrDefault();
+                if (TipoIdentificacionEliminar != null)
+                {
+                    ctx.TiposIdentificacion.Remove(TipoIdentificacionEliminar);
+                    ctx.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception($"No existe un tipo de identificación con ID {IdTipoIdentificacion}");
+                }
+
+            }
+        }
+
+        #endregion
+
+        #region CRUD MarcasEquipos
+
+        //Crear
+        public void CrearMarcaEquipos(MarcasEquipos MarcaCrear)
         {
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
@@ -65,8 +288,40 @@ namespace Intec.DAL.TE
             }
         }
 
-        //2.
-        public void EliminarMarca(int IdMarca)
+        //Obtener
+        public List<MarcasEquipos> ConsultarMarcasEquipos()
+        {
+            List<MarcasEquipos> res = new List<MarcasEquipos>();
+
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                res = ctx.MarcasEquipos.ToList();
+            }
+
+            return res;
+
+        }
+
+        //Editar
+
+        public void EditarMarcaEquipo(MarcasEquipos MarcaEquipo, int IdUsuarioModificacion)
+        {
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                MarcasEquipos MarcaEquipoEditar = ctx.MarcasEquipos.Where(c => c.IdMarcaEquipo == MarcaEquipo.IdMarcaEquipo).FirstOrDefault();
+
+                MarcaEquipoEditar.MarcaEquipo = MarcaEquipo.MarcaEquipo;
+
+                MarcaEquipoEditar.FechaModificacion = DateTime.Now;
+                MarcaEquipoEditar.IdUsuarioModificacion = IdUsuarioModificacion;
+
+                ctx.SaveChanges();
+            }
+
+        }
+
+        //Eliminar
+        public void EliminarMarcaEquipo(int IdMarca)
         {
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
@@ -84,24 +339,11 @@ namespace Intec.DAL.TE
             }
         }
 
-        //3.
-        public List<MarcasEquipos> ConsultarMarcas()
-        {
-            List<MarcasEquipos> res = new List<MarcasEquipos>();
+        #endregion
 
-            using (var ctx = new DB_A66D31_intratecPrbEntities1())
-            {
-                res = ctx.MarcasEquipos.ToList();
-            }
+        #region CRUD TiposEquipos
 
-            return res;
-
-        }
-
-
-        //Tipos de Equipo
-
-        //1.
+        //Crear
         public void CrearTipoEquipo(TiposEquipo TipoEqupioCrear)
         {
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
@@ -112,26 +354,7 @@ namespace Intec.DAL.TE
             }
         }
 
-        //2.
-        public void EliminarTipoEquipo(int IdTipoEquipo)
-        {
-            using (var ctx = new DB_A66D31_intratecPrbEntities1())
-            {
-                TiposEquipo TipoEquipoEliminar = ctx.TiposEquipo.Where(u => u.IdTipoEquipo == IdTipoEquipo).FirstOrDefault();
-                if (TipoEquipoEliminar != null)
-                {
-                    ctx.TiposEquipo.Remove(TipoEquipoEliminar);
-                    ctx.SaveChanges();
-                }
-                else
-                {
-                    throw new Exception($"No existe una Tipo de equipo con ID {IdTipoEquipo}");
-                }
-
-            }
-        }
-
-        //3.
+        //Obtener
         public List<TiposEquipo> ConsultaTipoEquipo()
         {
             List<TiposEquipo> res = new List<TiposEquipo>();
@@ -145,12 +368,243 @@ namespace Intec.DAL.TE
 
         }
 
-        //Ciudades
-        //Departamentos
-        //Paises
-        //TiposIdentificación
-        //TiposPersona
-        //TiposPropiedades
-        //UsosPropiedades        
+        //Editar
+
+        public void EditarTipoEquipo(TiposEquipo TipoEquipo, int IdUsuarioModificacion)
+        {
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                TiposEquipo TipoEquipoEditar = ctx.TiposEquipo.Where(c => c.IdTipoEquipo == TipoEquipo.IdTipoEquipo).FirstOrDefault();
+
+                TipoEquipoEditar.TipoEquipo = TipoEquipo.TipoEquipo;
+
+                TipoEquipoEditar.FechaModificacion = DateTime.Now;
+                TipoEquipoEditar.IdUsuarioModificacion = IdUsuarioModificacion;
+
+                ctx.SaveChanges();
+            }
+
+        }
+
+        //Eliminar
+        public void EliminarTipoEquipo(int IdTipoEquipo)
+        {
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                TiposEquipo TipoEquipoEliminar = ctx.TiposEquipo.Where(u => u.IdTipoEquipo == IdTipoEquipo).FirstOrDefault();
+                if (TipoEquipoEliminar != null)
+                {
+                    ctx.TiposEquipo.Remove(TipoEquipoEliminar);
+                    ctx.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception($"No existe un tipo de equipo con ID {IdTipoEquipo}");
+                }
+
+            }
+        }
+
+        #endregion
+
+        #region CRUD TiposPersona
+
+        //Crear
+
+        public void CrearTipoPersona(TiposPersona TipoPersonaCrear)
+        {
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                TipoPersonaCrear.FechaCreacion = DateTime.Now;
+                ctx.TiposPersona.Add(TipoPersonaCrear);
+                ctx.SaveChanges();
+            }
+        }
+
+        //Obtener
+
+        public List<TiposPersona> ConsultarTiposPersona()
+        {
+            List<TiposPersona> res = new List<TiposPersona>();
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                res = ctx.TiposPersona.ToList();
+            }
+            return res;
+        }
+
+        //Editar
+
+        public void EditarTipoPersona(TiposPersona TipoPersona, int IdUsuarioModificacion)
+        {
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                TiposPersona TipoPersonaEditar = ctx.TiposPersona.Where(c => c.IdTipoPersona == TipoPersona.IdTipoPersona).FirstOrDefault();
+
+                TipoPersonaEditar.TipoPersona = TipoPersona.TipoPersona;
+                TipoPersonaEditar.CodigoTipoPersona = TipoPersona.CodigoTipoPersona;
+
+                TipoPersonaEditar.FechaModificacion = DateTime.Now;
+                TipoPersonaEditar.IdUsuarioModificacion = IdUsuarioModificacion;
+
+                ctx.SaveChanges();
+            }
+
+        }
+
+        //Eliminar
+
+        public void EliminarTipoPersona(int IdTipoPersona)
+        {
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                TiposPersona TipoPersonaEliminar = ctx.TiposPersona.Where(u => u.IdTipoPersona == IdTipoPersona).FirstOrDefault();
+                if (TipoPersonaEliminar != null)
+                {
+                    ctx.TiposPersona.Remove(TipoPersonaEliminar);
+                    ctx.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception($"No existe un tipo de persona con ID {IdTipoPersona}");
+                }
+
+            }
+        }
+
+        #endregion
+
+        #region CRUD TiposPropiedades
+
+        //Crear
+
+        public void CrearTipoPropiedad(TiposPropiedades TipoPropieadaCrear)
+        {
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                TipoPropieadaCrear.FechaCreacion = DateTime.Now;
+                ctx.TiposPropiedades.Add(TipoPropieadaCrear);
+                ctx.SaveChanges();
+            }
+        }
+
+        //Obtener
+
+        public List<TiposPropiedades> ConsultarTiposPropiedades()
+        {
+            List<TiposPropiedades> res = new List<TiposPropiedades>();
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                res = ctx.TiposPropiedades.ToList();
+            }
+            return res;
+        }
+
+        //Editar
+
+        public void EditarTipoPropiedad(TiposPropiedades TipoPropiedad, int IdUsuarioModificacion)
+        {
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                TiposPropiedades TipoPropiedadEditar = ctx.TiposPropiedades.Where(c => c.IdTipoPropiedad == TipoPropiedad.IdTipoPropiedad).FirstOrDefault();
+
+                TipoPropiedadEditar.TipoPropiedad = TipoPropiedad.TipoPropiedad;
+
+                TipoPropiedadEditar.FechaModificacion = DateTime.Now;
+                TipoPropiedadEditar.IdUsuarioModificacion = IdUsuarioModificacion;
+
+                ctx.SaveChanges();
+            }
+
+        }
+
+        //Eliminar
+
+        public void EliminarTipoPropiedad(int IdTipoPropiedad)
+        {
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                TiposPropiedades TipoPropiedadEliminar = ctx.TiposPropiedades.Where(u => u.IdTipoPropiedad == IdTipoPropiedad).FirstOrDefault();
+                if (TipoPropiedadEliminar != null)
+                {
+                    ctx.TiposPropiedades.Remove(TipoPropiedadEliminar);
+                    ctx.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception($"No existe un tipo de propiedad con ID {IdTipoPropiedad}");
+                }
+
+            }
+        }
+
+        #endregion
+
+        #region CRUD UsosPropiedades
+
+        //Crear
+
+        public void CrearUsoPropiedad(UsosPropiedades UsoPropiedadCrear)
+        {
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                UsoPropiedadCrear.FechaCreacion = DateTime.Now;
+                ctx.UsosPropiedades.Add(UsoPropiedadCrear);
+                ctx.SaveChanges();
+            }
+        }
+
+        //Obtener
+
+        public List<UsosPropiedades> ConsultarUsosPropiedades()
+        {
+            List<UsosPropiedades> res = new List<UsosPropiedades>();
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                res = ctx.UsosPropiedades.ToList();
+            }
+            return res;
+        }
+
+        //Editar
+
+        public void EditarUsoPropiedad(UsosPropiedades UsoPropiedad, int IdUsuarioModificacion)
+        {
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                UsosPropiedades UsoPropiedadEditar = ctx.UsosPropiedades.Where(c => c.IdUso == UsoPropiedad.IdUso).FirstOrDefault();
+
+                UsoPropiedadEditar.Uso = UsoPropiedad.Uso;
+
+                UsoPropiedadEditar.FechaModificacion = DateTime.Now;
+                UsoPropiedadEditar.IdUsuarioModificacion = IdUsuarioModificacion;
+
+                ctx.SaveChanges();
+            }
+
+        }
+
+        //Eliminar
+
+        public void EliminarUsoPropiedad(int IdUso)
+        {
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                UsosPropiedades UsoPropiedadEliminar = ctx.UsosPropiedades.Where(u => u.IdUso == IdUso).FirstOrDefault();
+                if (UsoPropiedadEliminar != null)
+                {
+                    ctx.UsosPropiedades.Remove(UsoPropiedadEliminar);
+                    ctx.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception($"No existe un uso de propiedad con ID {IdUso}");
+                }
+
+            }
+        }
+
+        #endregion
+
     }
 }
