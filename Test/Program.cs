@@ -243,19 +243,19 @@ namespace Test
             //    IdUsuarioCreacion = 2
             //};
 
-            //PAdministracionTE.CrearMarca(MEquipos);
+            //PAdministracionTE.CrearMarcaEquipos(MEquipos);
 
             //Resultado OK
 
             //2.
 
-            //PAdministracionTE.EliminarMarca(3);
+            //PAdministracionTE.EliminarMarcaEquipo(3);
 
             //Resultado OK, Eliminado ID 3
 
             //3.
 
-            //var res = PAdministracionTE.ConsultarMarcas();
+            //var res = PAdministracionTE.ConsultarMarcasEquipos();
 
             //Resultado OK
 
