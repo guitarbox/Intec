@@ -55,14 +55,18 @@ namespace Intec.DAL.TE
 
         //Eliminar
 
-        public void EliminarPais(int IdPais)
+        public void EliminarPais(int IdPais, int IdUsuarioModificacion)
         {
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
                 Paises PaisEliminar = ctx.Paises.Where(u => u.IdPais == IdPais).FirstOrDefault();
                 if (PaisEliminar != null)
                 {
-                    ctx.Paises.Remove(PaisEliminar);
+                    PaisEliminar.Activo = false;
+
+                    PaisEliminar.FechaModificacion = DateTime.Now;
+                    PaisEliminar.IdUsuarioModificacion = IdUsuarioModificacion;
+
                     ctx.SaveChanges();
                 }
                 else
@@ -119,16 +123,20 @@ namespace Intec.DAL.TE
 
         }
 
-        //Eliminar, preguntar si argumento es ID departamento o Pais
+        //Eliminar
 
-        public void EliminarDepartamento(string IdDepartamento)
+        public void EliminarDepartamento(string IdDepartamento, int IdUsuarioModificacion)
         {
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
                 Departamentos DepartamentoEliminar = ctx.Departamentos.Where(u => u.IdDepartamento == IdDepartamento).FirstOrDefault();
                 if (DepartamentoEliminar != null)
                 {
-                    ctx.Departamentos.Remove(DepartamentoEliminar);
+                    DepartamentoEliminar.Activo = false;
+
+                    DepartamentoEliminar.FechaModificacion = DateTime.Now;
+                    DepartamentoEliminar.IdUsuarioModificacion = IdUsuarioModificacion;
+
                     ctx.SaveChanges();
                 }
                 else
@@ -187,14 +195,18 @@ namespace Intec.DAL.TE
 
         //Eliminar, preguntar argumento
 
-        public void EliminarCiudad(string IdCiudad)
+        public void EliminarCiudad(string IdCiudad, int IdUsuarioModificacion)
         {
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
                 Ciudades CiudadEliminar = ctx.Ciudades.Where(u => u.IdCiudad == IdCiudad).FirstOrDefault();
                 if (CiudadEliminar != null)
                 {
-                    ctx.Ciudades.Remove(CiudadEliminar);
+                    CiudadEliminar.Activo = false;
+
+                    CiudadEliminar.FechaModificacion = DateTime.Now;
+                    CiudadEliminar.IdUsuarioModificacion = IdUsuarioModificacion;
+
                     ctx.SaveChanges();
                 }
                 else
@@ -243,7 +255,6 @@ namespace Intec.DAL.TE
 
                 TipoIdentificacionEditar.Abreviatura = TipoIdentificacion.Abreviatura;
                 TipoIdentificacionEditar.TipoIdentificacion = TipoIdentificacion.TipoIdentificacion;
-                TipoIdentificacionEditar.CodigoTipoIdFiscal = TipoIdentificacion.CodigoTipoIdFiscal; //Se puede editar?
 
                 TipoIdentificacionEditar.FechaModificacion = DateTime.Now;
                 TipoIdentificacionEditar.IdUsuarioModificacion = IdUsuarioModificacion;
@@ -255,14 +266,18 @@ namespace Intec.DAL.TE
 
         //Eliminar
 
-        public void EliminarTipoIdentificacion(int IdTipoIdentificacion)
+        public void EliminarTipoIdentificacion(int IdTipoIdentificacion, int IdUsuarioModificacion)
         {
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
                 TiposIdentificacion TipoIdentificacionEliminar = ctx.TiposIdentificacion.Where(u => u.IdTipoIdentificacion == IdTipoIdentificacion).FirstOrDefault();
                 if (TipoIdentificacionEliminar != null)
                 {
-                    ctx.TiposIdentificacion.Remove(TipoIdentificacionEliminar);
+                    TipoIdentificacionEliminar.Activo = false;
+
+                    TipoIdentificacionEliminar.FechaModificacion = DateTime.Now;
+                    TipoIdentificacionEliminar.IdUsuarioModificacion = IdUsuarioModificacion;
+
                     ctx.SaveChanges();
                 }
                 else
@@ -321,14 +336,18 @@ namespace Intec.DAL.TE
         }
 
         //Eliminar
-        public void EliminarMarcaEquipo(int IdMarca)
+        public void EliminarMarcaEquipo(int IdMarca, int IdUsuarioModificacion)
         {
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
                 MarcasEquipos MarcaEliminar = ctx.MarcasEquipos.Where(u => u.IdMarcaEquipo == IdMarca).FirstOrDefault();
                 if (MarcaEliminar != null)
                 {
-                    ctx.MarcasEquipos.Remove(MarcaEliminar);
+                    MarcaEliminar.Activo = false;
+
+                    MarcaEliminar.FechaModificacion = DateTime.Now;
+                    MarcaEliminar.IdUsuarioModificacion = IdUsuarioModificacion;
+
                     ctx.SaveChanges();
                 }
                 else
@@ -341,7 +360,7 @@ namespace Intec.DAL.TE
 
         #endregion
 
-        #region CRUD TiposEquipos
+        #region CRUD TiposEquipo
 
         //Crear
         public void CrearTipoEquipo(TiposEquipo TipoEqupioCrear)
@@ -387,14 +406,18 @@ namespace Intec.DAL.TE
         }
 
         //Eliminar
-        public void EliminarTipoEquipo(int IdTipoEquipo)
+        public void EliminarTipoEquipo(int IdTipoEquipo, int IdUsuarioModificacion)
         {
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
                 TiposEquipo TipoEquipoEliminar = ctx.TiposEquipo.Where(u => u.IdTipoEquipo == IdTipoEquipo).FirstOrDefault();
                 if (TipoEquipoEliminar != null)
                 {
-                    ctx.TiposEquipo.Remove(TipoEquipoEliminar);
+                    TipoEquipoEliminar.Activo = false;
+
+                    TipoEquipoEliminar.FechaModificacion = DateTime.Now;
+                    TipoEquipoEliminar.IdUsuarioModificacion = IdUsuarioModificacion;
+
                     ctx.SaveChanges();
                 }
                 else
@@ -454,14 +477,18 @@ namespace Intec.DAL.TE
 
         //Eliminar
 
-        public void EliminarTipoPersona(int IdTipoPersona)
+        public void EliminarTipoPersona(int IdTipoPersona, int IdUsuarioModificacion)
         {
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
                 TiposPersona TipoPersonaEliminar = ctx.TiposPersona.Where(u => u.IdTipoPersona == IdTipoPersona).FirstOrDefault();
                 if (TipoPersonaEliminar != null)
                 {
-                    ctx.TiposPersona.Remove(TipoPersonaEliminar);
+                    TipoPersonaEliminar.Activo = false;
+
+                    TipoPersonaEliminar.FechaModificacion = DateTime.Now;
+                    TipoPersonaEliminar.IdUsuarioModificacion = IdUsuarioModificacion;
+
                     ctx.SaveChanges();
                 }
                 else
@@ -520,14 +547,18 @@ namespace Intec.DAL.TE
 
         //Eliminar
 
-        public void EliminarTipoPropiedad(int IdTipoPropiedad)
+        public void EliminarTipoPropiedad(int IdTipoPropiedad, int IdUsuarioModificacion)
         {
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
                 TiposPropiedades TipoPropiedadEliminar = ctx.TiposPropiedades.Where(u => u.IdTipoPropiedad == IdTipoPropiedad).FirstOrDefault();
                 if (TipoPropiedadEliminar != null)
                 {
-                    ctx.TiposPropiedades.Remove(TipoPropiedadEliminar);
+                    TipoPropiedadEliminar.Activo = false;
+
+                    TipoPropiedadEliminar.FechaModificacion = DateTime.Now;
+                    TipoPropiedadEliminar.IdUsuarioModificacion = IdUsuarioModificacion;
+
                     ctx.SaveChanges();
                 }
                 else
@@ -586,14 +617,18 @@ namespace Intec.DAL.TE
 
         //Eliminar
 
-        public void EliminarUsoPropiedad(int IdUso)
+        public void EliminarUsoPropiedad(int IdUso, int IdUsuarioModificacion)
         {
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
                 UsosPropiedades UsoPropiedadEliminar = ctx.UsosPropiedades.Where(u => u.IdUso == IdUso).FirstOrDefault();
                 if (UsoPropiedadEliminar != null)
                 {
-                    ctx.UsosPropiedades.Remove(UsoPropiedadEliminar);
+                    UsoPropiedadEliminar.Activo = false;
+
+                    UsoPropiedadEliminar.FechaModificacion = DateTime.Now;
+                    UsoPropiedadEliminar.IdUsuarioModificacion = IdUsuarioModificacion;
+
                     ctx.SaveChanges();
                 }
                 else

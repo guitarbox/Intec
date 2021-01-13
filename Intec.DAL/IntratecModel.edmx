@@ -31,6 +31,7 @@
           <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
           <Property Name="FechaModificacion" Type="datetime" />
           <Property Name="IdUsuarioModificacion" Type="int" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Clientes">
           <Key>
@@ -82,6 +83,7 @@
           <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
           <Property Name="FechaModificacion" Type="datetime" />
           <Property Name="IdUsuarioModificacion" Type="int" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Equipos">
           <Key>
@@ -212,6 +214,7 @@
           <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
           <Property Name="FechaModificacion" Type="datetime" />
           <Property Name="IdUsuarioModificacion" Type="int" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Menus">
           <Key>
@@ -247,6 +250,7 @@
           <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
           <Property Name="FechaModificacion" Type="datetime" />
           <Property Name="IdUsuarioModificacion" Type="int" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Propiedades">
           <Key>
@@ -319,6 +323,7 @@
           <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
           <Property Name="FechaModificacion" Type="datetime" />
           <Property Name="IdUsuarioModificacion" Type="int" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="TiposIdentificacion">
           <Key>
@@ -332,6 +337,7 @@
           <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
           <Property Name="FechaModificacion" Type="datetime" />
           <Property Name="IdUsuarioModificacion" Type="int" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="TiposMovimientoKardex">
           <Key>
@@ -351,6 +357,7 @@
           <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
           <Property Name="FechaModificacion" Type="datetime" />
           <Property Name="IdUsuarioModificacion" Type="int" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="TiposPropiedades">
           <Key>
@@ -362,6 +369,7 @@
           <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
           <Property Name="FechaModificacion" Type="datetime" />
           <Property Name="IdUsuarioModificacion" Type="int" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="TramiteConsecutivoFormato">
           <Key>
@@ -401,6 +409,7 @@
           <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
           <Property Name="FechaModificacion" Type="datetime" />
           <Property Name="IdUsuarioModificacion" Type="int" />
+          <Property Name="Activo" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Usuarios">
           <Key>
@@ -1499,6 +1508,7 @@
           <NavigationProperty Name="Clientes" Relationship="DB_A66D31_intratecPrbModel.FK_Clientes_Ciudades" FromRole="Ciudades" ToRole="Clientes" />
           <NavigationProperty Name="Visitas" Relationship="DB_A66D31_intratecPrbModel.FK_Visitas_Ciudades" FromRole="Ciudades" ToRole="Visitas" />
           <NavigationProperty Name="Zonas" Relationship="DB_A66D31_intratecPrbModel.FK_Zonas_Ciudades" FromRole="Ciudades" ToRole="Zonas" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Departamentos">
           <Key>
@@ -1513,6 +1523,7 @@
           <Property Name="IdUsuarioModificacion" Type="Int32" />
           <NavigationProperty Name="Ciudades" Relationship="DB_A66D31_intratecPrbModel.FK_Ciudades_Departamentos" FromRole="Departamentos" ToRole="Ciudades" />
           <NavigationProperty Name="Paises" Relationship="DB_A66D31_intratecPrbModel.FK_Departamentos_Paises" FromRole="Departamentos" ToRole="Paises" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Menus">
           <Key>
@@ -1544,6 +1555,7 @@
           <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
           <Property Name="IdUsuarioModificacion" Type="Int32" />
           <NavigationProperty Name="Departamentos" Relationship="DB_A66D31_intratecPrbModel.FK_Departamentos_Paises" FromRole="Paises" ToRole="Departamentos" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -1607,6 +1619,7 @@
           <NavigationProperty Name="Usuarios" Relationship="DB_A66D31_intratecPrbModel.FK_Usuarios_TiposIdentificacion" FromRole="TiposIdentificacion" ToRole="Usuarios" />
           <Property Name="CodigoTipoIdFiscal" Type="Int32" />
           <NavigationProperty Name="Clientes" Relationship="DB_A66D31_intratecPrbModel.FK_Clientes_TiposDocumento" FromRole="TiposIdentificacion" ToRole="Clientes" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="TiposPersona">
           <Key>
@@ -1620,6 +1633,7 @@
           <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
           <Property Name="IdUsuarioModificacion" Type="Int32" />
           <NavigationProperty Name="Clientes" Relationship="DB_A66D31_intratecPrbModel.FK_Clientes_TiposPersona" FromRole="TiposPersona" ToRole="Clientes" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="TiposPropiedades">
           <Key>
@@ -1632,6 +1646,7 @@
           <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
           <Property Name="IdUsuarioModificacion" Type="Int32" />
           <NavigationProperty Name="Propiedades" Relationship="DB_A66D31_intratecPrbModel.FK_Propiedades_TiposPropiedades" FromRole="TiposPropiedades" ToRole="Propiedades" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="UsosPropiedades">
           <Key>
@@ -1644,6 +1659,7 @@
           <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
           <Property Name="IdUsuarioModificacion" Type="Int32" />
           <NavigationProperty Name="Propiedades" Relationship="DB_A66D31_intratecPrbModel.FK_Propiedades_UsosPropiedades" FromRole="UsosPropiedades" ToRole="Propiedades" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Usuarios">
           <Key>
@@ -2030,6 +2046,7 @@
           <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
           <Property Name="IdUsuarioModificacion" Type="Int32" />
           <NavigationProperty Name="Equipos" Relationship="DB_A66D31_intratecPrbModel.FK_Equipos_MarcasEquipos" FromRole="MarcasEquipos" ToRole="Equipos" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="TiposEquipo">
           <Key>
@@ -2042,6 +2059,7 @@
           <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
           <Property Name="IdUsuarioModificacion" Type="Int32" />
           <NavigationProperty Name="Equipos" Relationship="DB_A66D31_intratecPrbModel.FK_Equipos_TiposEquipo" FromRole="TiposEquipo" ToRole="Equipos" />
+          <Property Name="Activo" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="TramitesEquipo">
           <Key>
@@ -2597,6 +2615,7 @@
           <EntitySetMapping Name="Ciudades">
             <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.Ciudades">
               <MappingFragment StoreEntitySet="Ciudades">
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
                 <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
                 <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
                 <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
@@ -2610,6 +2629,7 @@
           <EntitySetMapping Name="Departamentos">
             <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.Departamentos">
               <MappingFragment StoreEntitySet="Departamentos">
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
                 <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
                 <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
                 <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
@@ -2639,6 +2659,7 @@
           <EntitySetMapping Name="Paises">
             <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.Paises">
               <MappingFragment StoreEntitySet="Paises">
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
                 <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
                 <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
                 <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
@@ -2699,6 +2720,7 @@
           <EntitySetMapping Name="TiposIdentificacion">
             <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.TiposIdentificacion">
               <MappingFragment StoreEntitySet="TiposIdentificacion">
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
                 <ScalarProperty Name="CodigoTipoIdFiscal" ColumnName="CodigoTipoIdFiscal" />
                 <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
                 <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
@@ -2713,6 +2735,7 @@
           <EntitySetMapping Name="TiposPersona">
             <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.TiposPersona">
               <MappingFragment StoreEntitySet="TiposPersona">
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
                 <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
                 <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
                 <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
@@ -2726,6 +2749,7 @@
           <EntitySetMapping Name="TiposPropiedades">
             <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.TiposPropiedades">
               <MappingFragment StoreEntitySet="TiposPropiedades">
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
                 <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
                 <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
                 <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
@@ -2738,6 +2762,7 @@
           <EntitySetMapping Name="UsosPropiedades">
             <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.UsosPropiedades">
               <MappingFragment StoreEntitySet="UsosPropiedades">
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
                 <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
                 <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
                 <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
@@ -2924,6 +2949,7 @@
           <EntitySetMapping Name="MarcasEquipos">
             <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.MarcasEquipos">
               <MappingFragment StoreEntitySet="MarcasEquipos">
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
                 <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
                 <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
                 <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
@@ -2936,6 +2962,7 @@
           <EntitySetMapping Name="TiposEquipo">
             <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.TiposEquipo">
               <MappingFragment StoreEntitySet="TiposEquipo">
+                <ScalarProperty Name="Activo" ColumnName="Activo" />
                 <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
                 <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
                 <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
