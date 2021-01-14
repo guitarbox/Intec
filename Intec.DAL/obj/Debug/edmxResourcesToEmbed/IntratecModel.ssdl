@@ -26,6 +26,7 @@
     <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
     <Property Name="FechaModificacion" Type="datetime" />
     <Property Name="IdUsuarioModificacion" Type="int" />
+    <Property Name="Activo" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Clientes">
     <Key>
@@ -77,6 +78,7 @@
     <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
     <Property Name="FechaModificacion" Type="datetime" />
     <Property Name="IdUsuarioModificacion" Type="int" />
+    <Property Name="Activo" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Equipos">
     <Key>
@@ -166,16 +168,16 @@
     <Property Name="Secuencia" Type="int" Nullable="false" />
     <Property Name="Path" Type="nvarchar" MaxLength="200" Nullable="false" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'DB_A66D31_intratec.dbo.HistoricoAsignacionZona' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="HistoricoAsignacionZona">
     <Key>
-      <PropertyRef Name="FechaCreacion" />
-      <PropertyRef Name="IdUsuarioCreacion" />
+      <PropertyRef Name="IdZona" />
+      <PropertyRef Name="IdCiudad" />
+      <PropertyRef Name="Secuencia" />
     </Key>
-    <Property Name="IdInspector" Type="int" />
-    <Property Name="IdZona" Type="int" />
-    <Property Name="IdCiudad" Type="int" />
+    <Property Name="IdInspector" Type="int" Nullable="false" />
+    <Property Name="IdZona" Type="int" Nullable="false" />
+    <Property Name="IdCiudad" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Secuencia" Type="int" Nullable="false" />
     <Property Name="FechaInicio" Type="datetime" />
     <Property Name="FechaFin" Type="datetime" />
     <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
@@ -207,6 +209,7 @@ warning 6002: The table/view 'DB_A66D31_intratec.dbo.HistoricoAsignacionZona' do
     <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
     <Property Name="FechaModificacion" Type="datetime" />
     <Property Name="IdUsuarioModificacion" Type="int" />
+    <Property Name="Activo" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Menus">
     <Key>
@@ -242,6 +245,7 @@ warning 6002: The table/view 'DB_A66D31_intratec.dbo.HistoricoAsignacionZona' do
     <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
     <Property Name="FechaModificacion" Type="datetime" />
     <Property Name="IdUsuarioModificacion" Type="int" />
+    <Property Name="Activo" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Propiedades">
     <Key>
@@ -314,6 +318,7 @@ warning 6002: The table/view 'DB_A66D31_intratec.dbo.HistoricoAsignacionZona' do
     <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
     <Property Name="FechaModificacion" Type="datetime" />
     <Property Name="IdUsuarioModificacion" Type="int" />
+    <Property Name="Activo" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="TiposIdentificacion">
     <Key>
@@ -327,6 +332,7 @@ warning 6002: The table/view 'DB_A66D31_intratec.dbo.HistoricoAsignacionZona' do
     <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
     <Property Name="FechaModificacion" Type="datetime" />
     <Property Name="IdUsuarioModificacion" Type="int" />
+    <Property Name="Activo" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="TiposMovimientoKardex">
     <Key>
@@ -346,6 +352,7 @@ warning 6002: The table/view 'DB_A66D31_intratec.dbo.HistoricoAsignacionZona' do
     <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
     <Property Name="FechaModificacion" Type="datetime" />
     <Property Name="IdUsuarioModificacion" Type="int" />
+    <Property Name="Activo" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="TiposPropiedades">
     <Key>
@@ -357,6 +364,7 @@ warning 6002: The table/view 'DB_A66D31_intratec.dbo.HistoricoAsignacionZona' do
     <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
     <Property Name="FechaModificacion" Type="datetime" />
     <Property Name="IdUsuarioModificacion" Type="int" />
+    <Property Name="Activo" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="TramiteConsecutivoFormato">
     <Key>
@@ -396,6 +404,7 @@ warning 6002: The table/view 'DB_A66D31_intratec.dbo.HistoricoAsignacionZona' do
     <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
     <Property Name="FechaModificacion" Type="datetime" />
     <Property Name="IdUsuarioModificacion" Type="int" />
+    <Property Name="Activo" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="Usuarios">
     <Key>
@@ -452,6 +461,7 @@ warning 6002: The table/view 'DB_A66D31_intratec.dbo.HistoricoAsignacionZona' do
     <Property Name="IdVisita" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdSolicitudProgramacion" Type="int" />
     <Property Name="IdCliente" Type="int" Nullable="false" />
+    <Property Name="IdPropiedad" Type="int" Nullable="false" />
     <Property Name="Direccion" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="IdZona" Type="int" Nullable="false" />
     <Property Name="IdCiudad" Type="nvarchar" MaxLength="50" Nullable="false" />
@@ -459,6 +469,11 @@ warning 6002: The table/view 'DB_A66D31_intratec.dbo.HistoricoAsignacionZona' do
     <Property Name="IdInspector" Type="int" />
     <Property Name="ObservacionesVisita" Type="nvarchar" MaxLength="1000" />
     <Property Name="IdEstadoVisitas" Type="nvarchar" MaxLength="1" Nullable="false" />
+    <Property Name="OrigenVisita" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+    <Property Name="IdUsuarioCreacion" Type="int" />
+    <Property Name="FechaModificacion" Type="datetime" />
+    <Property Name="IdUsuarioModificacion" Type="int" />
   </EntityType>
   <EntityType Name="Zonas">
     <Key>
@@ -669,6 +684,20 @@ warning 6002: The table/view 'DB_A66D31_intratec.dbo.HistoricoAsignacionZona' do
       </Principal>
       <Dependent Role="FotosVisita">
         <PropertyRef Name="IdVisita" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HistoricoAsignacionZona_Zonas">
+    <End Role="Zonas" Type="Self.Zonas" Multiplicity="1" />
+    <End Role="HistoricoAsignacionZona" Type="Self.HistoricoAsignacionZona" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Zonas">
+        <PropertyRef Name="IdZona" />
+        <PropertyRef Name="IdCiudad" />
+      </Principal>
+      <Dependent Role="HistoricoAsignacionZona">
+        <PropertyRef Name="IdZona" />
+        <PropertyRef Name="IdCiudad" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -936,6 +965,18 @@ warning 6002: The table/view 'DB_A66D31_intratec.dbo.HistoricoAsignacionZona' do
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Visitas_Propiedades">
+    <End Role="Propiedades" Type="Self.Propiedades" Multiplicity="1" />
+    <End Role="Visitas" Type="Self.Visitas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Propiedades">
+        <PropertyRef Name="IdPropiedades" />
+      </Principal>
+      <Dependent Role="Visitas">
+        <PropertyRef Name="IdPropiedad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Visitas_SolicitudesProgramacionVisitas">
     <End Role="SolicitudesProgramacionVisitas" Type="Self.SolicitudesProgramacionVisitas" Multiplicity="0..1" />
     <End Role="Visitas" Type="Self.Visitas" Multiplicity="*" />
@@ -1018,6 +1059,7 @@ warning 6002: The table/view 'DB_A66D31_intratec.dbo.HistoricoAsignacionZona' do
     <EntitySet Name="Formatos" EntityType="Self.Formatos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FormatosVisita" EntityType="Self.FormatosVisita" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FotosVisita" EntityType="Self.FotosVisita" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HistoricoAsignacionZona" EntityType="Self.HistoricoAsignacionZona" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="KardexPapeleria" EntityType="Self.KardexPapeleria" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MarcasEquipos" EntityType="Self.MarcasEquipos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Menus" EntityType="Self.Menus" Schema="dbo" store:Type="Tables" />
@@ -1040,19 +1082,6 @@ warning 6002: The table/view 'DB_A66D31_intratec.dbo.HistoricoAsignacionZona' do
     <EntitySet Name="VerificacionesLabEquipos" EntityType="Self.VerificacionesLabEquipos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Visitas" EntityType="Self.Visitas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Zonas" EntityType="Self.Zonas" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="HistoricoAsignacionZona" EntityType="Self.HistoricoAsignacionZona" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [HistoricoAsignacionZona].[IdInspector] AS [IdInspector], 
-    [HistoricoAsignacionZona].[IdZona] AS [IdZona], 
-    [HistoricoAsignacionZona].[IdCiudad] AS [IdCiudad], 
-    [HistoricoAsignacionZona].[FechaInicio] AS [FechaInicio], 
-    [HistoricoAsignacionZona].[FechaFin] AS [FechaFin], 
-    [HistoricoAsignacionZona].[FechaCreacion] AS [FechaCreacion], 
-    [HistoricoAsignacionZona].[IdUsuarioCreacion] AS [IdUsuarioCreacion], 
-    [HistoricoAsignacionZona].[FechaModificacion] AS [FechaModificacion], 
-    [HistoricoAsignacionZona].[IdUsuarioModificacion] AS [IdUsuarioModificacion]
-    FROM [dbo].[HistoricoAsignacionZona] AS [HistoricoAsignacionZona]</DefiningQuery>
-    </EntitySet>
     <AssociationSet Name="FK_CalibracionesEquipos_Equipos" Association="Self.FK_CalibracionesEquipos_Equipos">
       <End Role="Equipos" EntitySet="Equipos" />
       <End Role="CalibracionesEquipos" EntitySet="CalibracionesEquipos" />
@@ -1116,6 +1145,10 @@ warning 6002: The table/view 'DB_A66D31_intratec.dbo.HistoricoAsignacionZona' do
     <AssociationSet Name="FK_FotosVisita_Visitas" Association="Self.FK_FotosVisita_Visitas">
       <End Role="Visitas" EntitySet="Visitas" />
       <End Role="FotosVisita" EntitySet="FotosVisita" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HistoricoAsignacionZona_Zonas" Association="Self.FK_HistoricoAsignacionZona_Zonas">
+      <End Role="Zonas" EntitySet="Zonas" />
+      <End Role="HistoricoAsignacionZona" EntitySet="HistoricoAsignacionZona" />
     </AssociationSet>
     <AssociationSet Name="FK_KardexPapeleria_TiposMovimientoKardex" Association="Self.FK_KardexPapeleria_TiposMovimientoKardex">
       <End Role="TiposMovimientoKardex" EntitySet="TiposMovimientoKardex" />
@@ -1203,6 +1236,10 @@ warning 6002: The table/view 'DB_A66D31_intratec.dbo.HistoricoAsignacionZona' do
     </AssociationSet>
     <AssociationSet Name="FK_Visitas_EstadosVisita" Association="Self.FK_Visitas_EstadosVisita">
       <End Role="EstadosVisita" EntitySet="EstadosVisita" />
+      <End Role="Visitas" EntitySet="Visitas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Visitas_Propiedades" Association="Self.FK_Visitas_Propiedades">
+      <End Role="Propiedades" EntitySet="Propiedades" />
       <End Role="Visitas" EntitySet="Visitas" />
     </AssociationSet>
     <AssociationSet Name="FK_Visitas_SolicitudesProgramacionVisitas" Association="Self.FK_Visitas_SolicitudesProgramacionVisitas">

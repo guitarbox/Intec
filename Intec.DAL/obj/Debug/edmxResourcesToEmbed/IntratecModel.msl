@@ -4,6 +4,7 @@
     <EntitySetMapping Name="Ciudades">
       <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.Ciudades">
         <MappingFragment StoreEntitySet="Ciudades">
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
           <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
           <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
           <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
@@ -17,6 +18,7 @@
     <EntitySetMapping Name="Departamentos">
       <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.Departamentos">
         <MappingFragment StoreEntitySet="Departamentos">
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
           <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
           <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
           <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
@@ -46,6 +48,7 @@
     <EntitySetMapping Name="Paises">
       <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.Paises">
         <MappingFragment StoreEntitySet="Paises">
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
           <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
           <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
           <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
@@ -106,6 +109,7 @@
     <EntitySetMapping Name="TiposIdentificacion">
       <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.TiposIdentificacion">
         <MappingFragment StoreEntitySet="TiposIdentificacion">
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
           <ScalarProperty Name="CodigoTipoIdFiscal" ColumnName="CodigoTipoIdFiscal" />
           <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
           <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
@@ -120,6 +124,7 @@
     <EntitySetMapping Name="TiposPersona">
       <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.TiposPersona">
         <MappingFragment StoreEntitySet="TiposPersona">
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
           <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
           <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
           <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
@@ -133,6 +138,7 @@
     <EntitySetMapping Name="TiposPropiedades">
       <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.TiposPropiedades">
         <MappingFragment StoreEntitySet="TiposPropiedades">
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
           <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
           <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
           <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
@@ -145,6 +151,7 @@
     <EntitySetMapping Name="UsosPropiedades">
       <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.UsosPropiedades">
         <MappingFragment StoreEntitySet="UsosPropiedades">
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
           <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
           <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
           <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
@@ -331,6 +338,7 @@
     <EntitySetMapping Name="MarcasEquipos">
       <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.MarcasEquipos">
         <MappingFragment StoreEntitySet="MarcasEquipos">
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
           <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
           <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
           <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
@@ -343,6 +351,7 @@
     <EntitySetMapping Name="TiposEquipo">
       <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.TiposEquipo">
         <MappingFragment StoreEntitySet="TiposEquipo">
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
           <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
           <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
           <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
@@ -470,6 +479,12 @@
     <EntitySetMapping Name="Visitas">
       <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.Visitas">
         <MappingFragment StoreEntitySet="Visitas">
+          <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+          <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+          <ScalarProperty Name="OrigenVisita" ColumnName="OrigenVisita" />
+          <ScalarProperty Name="IdPropiedad" ColumnName="IdPropiedad" />
           <ScalarProperty Name="IdEstadoVisitas" ColumnName="IdEstadoVisitas" />
           <ScalarProperty Name="ObservacionesVisita" ColumnName="ObservacionesVisita" />
           <ScalarProperty Name="IdInspector" ColumnName="IdInspector" />
@@ -480,6 +495,22 @@
           <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
           <ScalarProperty Name="IdSolicitudProgramacion" ColumnName="IdSolicitudProgramacion" />
           <ScalarProperty Name="IdVisita" ColumnName="IdVisita" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HistoricoAsignacionZona">
+      <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.HistoricoAsignacionZona">
+        <MappingFragment StoreEntitySet="HistoricoAsignacionZona">
+          <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+          <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+          <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
+          <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
+          <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+          <ScalarProperty Name="IdCiudad" ColumnName="IdCiudad" />
+          <ScalarProperty Name="IdZona" ColumnName="IdZona" />
+          <ScalarProperty Name="IdInspector" ColumnName="IdInspector" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -498,21 +529,6 @@
           <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
           <ScalarProperty Name="IdCiudad" ColumnName="IdCiudad" />
           <ScalarProperty Name="IdZona" ColumnName="IdZona" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="HistoricoAsignacionZona">
-      <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.HistoricoAsignacionZona">
-        <MappingFragment StoreEntitySet="HistoricoAsignacionZona">
-          <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
-          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-          <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
-          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-          <ScalarProperty Name="FechaFin" ColumnName="FechaFin" />
-          <ScalarProperty Name="FechaInicio" ColumnName="FechaInicio" />
-          <ScalarProperty Name="IdCiudad" ColumnName="IdCiudad" />
-          <ScalarProperty Name="IdZona" ColumnName="IdZona" />
-          <ScalarProperty Name="IdInspector" ColumnName="IdInspector" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
