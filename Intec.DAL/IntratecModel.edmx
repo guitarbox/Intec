@@ -492,7 +492,7 @@
           <Property Name="pc_da" Type="nvarchar" MaxLength="50" />
           <Property Name="pc_iab" Type="nvarchar" MaxLength="50" />
           <Property Name="pc_dab" Type="nvarchar" MaxLength="50" />
-          <Property Name="IdInspector" Type="int" Nullable="false" />
+          <Property Name="IdInspector" Type="int" />
           <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
           <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
           <Property Name="FechaModificacion" Type="datetime" />
@@ -1033,7 +1033,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Zonas_Usuarios">
-          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
           <End Role="Zonas" Type="Self.Zonas" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuarios">
@@ -1050,6 +1050,13 @@
           <Parameter Name="Direccion" Type="nvarchar" Mode="In" />
           <Parameter Name="NroTelefonico" Type="nvarchar" Mode="In" />
           <Parameter Name="TieneVisitaProgramada" Type="bit" Mode="In" />
+        </Function>
+        <Function Name="uspConsultarVisitas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FechaInicial" Type="datetime" Mode="In" />
+          <Parameter Name="FechaFinal" Type="datetime" Mode="In" />
+          <Parameter Name="NumeroIdentificacionCliente" Type="nvarchar" Mode="In" />
+          <Parameter Name="IdInspector" Type="int" Mode="In" />
+          <Parameter Name="IdEstadoVisita" Type="nvarchar" Mode="In" />
         </Function>
         <EntityContainer Name="DB_A66D31_intratecPrbModelStoreContainer">
           <EntitySet Name="CalibracionesEquipos" EntityType="Self.CalibracionesEquipos" Schema="dbo" store:Type="Tables" />
@@ -1490,7 +1497,14 @@
             <End Role="Zonas" EntitySet="Zonas" />
             <End Role="Visitas" EntitySet="Visitas" />
           </AssociationSet>
-        </EntityContainer>
+          <FunctionImport Name="uspConsultarVisitas" ReturnType="Collection(DB_A66D31_intratecPrbModel.uspConsultarVisitas_Result)">
+            <Parameter Name="FechaInicial" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaFinal" Mode="In" Type="DateTime" />
+            <Parameter Name="NumeroIdentificacionCliente" Mode="In" Type="String" />
+            <Parameter Name="IdInspector" Mode="In" Type="Int32" />
+            <Parameter Name="IdEstadoVisita" Mode="In" Type="String" />
+          </FunctionImport>
+          </EntityContainer>
         <EntityType Name="Ciudades">
           <Key>
             <PropertyRef Name="IdCiudad" />
@@ -1507,8 +1521,8 @@
           <NavigationProperty Name="Usuarios" Relationship="DB_A66D31_intratecPrbModel.FK_Usuarios_Ciudades" FromRole="Ciudades" ToRole="Usuarios" />
           <NavigationProperty Name="Clientes" Relationship="DB_A66D31_intratecPrbModel.FK_Clientes_Ciudades" FromRole="Ciudades" ToRole="Clientes" />
           <NavigationProperty Name="Visitas" Relationship="DB_A66D31_intratecPrbModel.FK_Visitas_Ciudades" FromRole="Ciudades" ToRole="Visitas" />
-          <NavigationProperty Name="Zonas" Relationship="DB_A66D31_intratecPrbModel.FK_Zonas_Ciudades" FromRole="Ciudades" ToRole="Zonas" />
           <Property Name="Activo" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Zonas" Relationship="DB_A66D31_intratecPrbModel.FK_Zonas_Ciudades" FromRole="Ciudades" ToRole="Zonas" />
         </EntityType>
         <EntityType Name="Departamentos">
           <Key>
@@ -2544,7 +2558,7 @@
           <Property Name="pc_da" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="pc_iab" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="pc_dab" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IdInspector" Type="Int32" Nullable="false" />
+          <Property Name="IdInspector" Type="Int32" />
           <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
           <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
@@ -2581,7 +2595,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Zonas_Usuarios">
-          <End Type="DB_A66D31_intratecPrbModel.Usuarios" Role="Usuarios" Multiplicity="1" />
+          <End Type="DB_A66D31_intratecPrbModel.Usuarios" Role="Usuarios" Multiplicity="0..1" />
           <End Type="DB_A66D31_intratecPrbModel.Zonas" Role="Zonas" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuarios">
@@ -2606,7 +2620,44 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <ComplexType Name="uspConsultarVisitas_Result">
+          <Property Type="Int32" Name="IdVisita" Nullable="false" />
+          <Property Type="Int32" Name="IdSolicitudProgramacion" Nullable="true" />
+          <Property Type="Int32" Name="IdCliente" Nullable="false" />
+          <Property Type="Int32" Name="IdPropiedad" Nullable="false" />
+          <Property Type="String" Name="Direccion" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="IdZona" Nullable="false" />
+          <Property Type="String" Name="IdCiudad" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="FechaVisita" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="IdInspector" Nullable="true" />
+          <Property Type="String" Name="ObservacionesVisita" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="IdEstadoVisitas" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="OrigenVisita" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="FechaCreacion" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="IdUsuarioCreacion" Nullable="true" />
+          <Property Type="DateTime" Name="FechaModificacion" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="IdUsuarioModificacion" Nullable="true" />
+          <Property Type="Int32" Name="IdCliente1" Nullable="true" />
+          <Property Type="String" Name="NumeroIdentificacion" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="IdTipoIdentificacion" Nullable="true" />
+          <Property Type="String" Name="Nombres" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Apellidos" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="TelefonoFijo" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="TelefonoCel1" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="TelefonoCel2" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Direccion1" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="IdCiudad1" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="IdUso" Nullable="true" />
+          <Property Type="String" Name="Foto" Nullable="true" MaxLength="250" />
+          <Property Type="String" Name="Email1" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Email2" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="IdTipoPersona" Nullable="true" />
+          <Property Type="DateTime" Name="FechaCreacion1" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="IdUsuarioCreacion1" Nullable="true" />
+          <Property Type="DateTime" Name="FechaModificacion1" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="IdUsuarioModificacion1" Nullable="true" />
+        </ComplexType>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -3143,6 +3194,47 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="uspConsultarVisitas" FunctionName="DB_A66D31_intratecPrbModel.Store.uspConsultarVisitas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB_A66D31_intratecPrbModel.uspConsultarVisitas_Result">
+                <ScalarProperty Name="IdVisita" ColumnName="IdVisita" />
+                <ScalarProperty Name="IdSolicitudProgramacion" ColumnName="IdSolicitudProgramacion" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="IdPropiedad" ColumnName="IdPropiedad" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="IdZona" ColumnName="IdZona" />
+                <ScalarProperty Name="IdCiudad" ColumnName="IdCiudad" />
+                <ScalarProperty Name="FechaVisita" ColumnName="FechaVisita" />
+                <ScalarProperty Name="IdInspector" ColumnName="IdInspector" />
+                <ScalarProperty Name="ObservacionesVisita" ColumnName="ObservacionesVisita" />
+                <ScalarProperty Name="IdEstadoVisitas" ColumnName="IdEstadoVisitas" />
+                <ScalarProperty Name="OrigenVisita" ColumnName="OrigenVisita" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+                <ScalarProperty Name="IdCliente1" ColumnName="IdCliente1" />
+                <ScalarProperty Name="NumeroIdentificacion" ColumnName="NumeroIdentificacion" />
+                <ScalarProperty Name="IdTipoIdentificacion" ColumnName="IdTipoIdentificacion" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="TelefonoFijo" ColumnName="TelefonoFijo" />
+                <ScalarProperty Name="TelefonoCel1" ColumnName="TelefonoCel1" />
+                <ScalarProperty Name="TelefonoCel2" ColumnName="TelefonoCel2" />
+                <ScalarProperty Name="Direccion1" ColumnName="Direccion1" />
+                <ScalarProperty Name="IdCiudad1" ColumnName="IdCiudad1" />
+                <ScalarProperty Name="IdUso" ColumnName="IdUso" />
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
+                <ScalarProperty Name="Email1" ColumnName="Email1" />
+                <ScalarProperty Name="Email2" ColumnName="Email2" />
+                <ScalarProperty Name="IdTipoPersona" ColumnName="IdTipoPersona" />
+                <ScalarProperty Name="FechaCreacion1" ColumnName="FechaCreacion1" />
+                <ScalarProperty Name="IdUsuarioCreacion1" ColumnName="IdUsuarioCreacion1" />
+                <ScalarProperty Name="FechaModificacion1" ColumnName="FechaModificacion1" />
+                <ScalarProperty Name="IdUsuarioModificacion1" ColumnName="IdUsuarioModificacion1" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

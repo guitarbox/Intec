@@ -165,6 +165,9 @@
     <Compile Include="uspConsultaGralCliente_Result.cs">
       <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="uspConsultarVisitas_Result.cs">
+      <DependentUpon>IntratecModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Usuarios.cs">
       <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>

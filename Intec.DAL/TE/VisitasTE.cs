@@ -10,7 +10,7 @@ namespace Intec.DAL.TE
 {
     public class VisitasTE
     {
-        //ZONAS => Todo lo que tenga que ver con zonas
+        ////**************************************************** ZONAS => Todo lo que tenga que ver con zonas
         //CRUD ZONAS
         public List<Zonas> ObtenerZonas()
         {
@@ -44,15 +44,81 @@ namespace Intec.DAL.TE
         }
 
         //ASignación de zona a inspector, con manejo del histórico
-        public void AsignarZonaInspector(int IdZona, int IdInspector)
+        public void AsignarZonaInspector(int IdZona, string IdCiudad, int IdInspector, int IdUsuarioAsigna)
         {
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
-                Zonas zona = ctx.Zonas.Where(z => z.IdZona == IdZona).FirstOrDefault();
+                Zonas zona = ctx.Zonas.Where(z => z.IdZona == IdZona && z.IdCiudad.Equals(IdCiudad)).FirstOrDefault();
                 if (zona != null)
                 {
-                    zona.IdInspector = IdInspector;
-                    ctx.SaveChanges();
+                    if (zona.IdInspector == null)
+                    {
+                        DateTime now = DateTime.Now;
+                        zona.IdInspector = IdInspector;
+                        zona.IdUsuarioModificacion = IdUsuarioAsigna;
+                        zona.FechaModificacion = now;
+                        ctx.SaveChanges();
+
+                        int sec = ctx.HistoricoAsignacionZona.Where(h => h.IdZona == IdZona && zona.IdCiudad.Equals(IdCiudad)).Count();
+                        sec += 1;
+
+                        ctx.HistoricoAsignacionZona.Add(new HistoricoAsignacionZona()
+                        {
+                            IdZona = IdZona,
+                            IdCiudad = IdCiudad,
+                            IdInspector = IdInspector,
+                            IdUsuarioCreacion = IdUsuarioAsigna,
+                            FechaCreacion = now,
+                            FechaInicio = now,
+                            Secuencia = sec
+                        });
+                        ctx.SaveChanges();
+                    }
+                    else
+                        throw new Exception("No se puede asignar inspector a zona, ésta ya tiene inspector. Intente reasignar inspector.");
+                }
+                else
+                    throw new Exception("No existe la zona");
+            }
+        }
+
+        public void ReAsignarZonaInspector(int IdZona, string IdCiudad, int IdNvoInspector, int IdUsuarioReAsigna)
+        {
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                Zonas zona = ctx.Zonas.Where(z => z.IdZona == IdZona && z.IdCiudad.Equals(IdCiudad)).FirstOrDefault();
+                if (zona != null)
+                {
+                    if (zona.IdInspector != null)
+                    {
+                        DateTime now = DateTime.Now;
+                        zona.IdInspector = IdNvoInspector;
+                        zona.IdUsuarioModificacion = IdUsuarioReAsigna;
+                        zona.FechaModificacion = now;
+                        ctx.SaveChanges();
+
+                        HistoricoAsignacionZona hist = ctx.HistoricoAsignacionZona.Where(h => h.IdZona == IdZona && h.IdCiudad.Equals(IdCiudad) && h.FechaFin == null).FirstOrDefault();
+                        hist.FechaFin = now;
+                        hist.FechaModificacion = now;
+                        hist.IdUsuarioModificacion = IdUsuarioReAsigna;
+                        ctx.SaveChanges();
+
+                        int sec = hist.Secuencia + 1;
+
+                        ctx.HistoricoAsignacionZona.Add(new HistoricoAsignacionZona()
+                        {
+                            IdZona = IdZona,
+                            IdCiudad = IdCiudad,
+                            IdInspector = IdNvoInspector,
+                            IdUsuarioCreacion = IdUsuarioReAsigna,
+                            FechaCreacion = now,
+                            FechaInicio = now,
+                            Secuencia = sec
+                        });
+                        ctx.SaveChanges();
+                    }
+                    else
+                        throw new Exception("No se puede reasignar zona, la zona no tiene inspector.");
                 }
                 else
                     throw new Exception("No existe la zona");
@@ -60,9 +126,9 @@ namespace Intec.DAL.TE
         }
 
         //Reporte zonas y presencia en visitas
-        //TODO
+        //TODO => PENDIENTE
 
-        //VISITAS => Todo lo que tenga que ver con visitas
+        //**************************************************** VISITAS => Todo lo que tenga que ver con visitas
         //Programación Visita
         public void ProgramarVisita(Visitas Visita)
         {
@@ -140,10 +206,43 @@ namespace Intec.DAL.TE
             }
         }
 
-        //Reporte ejecución visitas / Consultar una visita
-        //TODO
+        //Reporte ejecución visitas / Consulta detallada de una visita
+        public Visitas ConsultarVisita(int IdVisita)
+        {
+            Visitas visita = null;
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                visita = ctx.Visitas.Where(v => v.IdVisita == IdVisita).FirstOrDefault();
+                if (visita != null)
+                {
+                    visita.EquiposVisita.ToList();
+                    visita.FotosVisita.ToList();
+                    visita.FormatosVisita.ToList();
+                    if (visita.IdSolicitudProgramacion != null)
+                        ctx.Entry(visita).Reference(r => r.SolicitudesProgramacionVisitas).Load();
+                    ctx.Entry(visita).Reference(r => r.Clientes).Load();
+                    ctx.Entry(visita).Reference(r => r.Propiedades).Load();
+                    ctx.Entry(visita).Reference(r => r.Zonas).Load();
+                    ctx.Entry(visita).Reference(r => r.Ciudades).Load();
+                    ctx.Entry(visita).Reference(r => r.Usuarios).Load();
+                    ctx.Entry(visita).Reference(r => r.EstadosVisita).Load();
+                }
+                else
+                    throw new Exception($"No existe visita con ID {IdVisita}");
+            }
+            return visita;
+        }
 
         //Consulta de visitas (Varios parámetros)
-        //TODO
+        public List<uspConsultarVisitas_Result> ConsultaVisitas(DateTime FechaInicial, DateTime FechaFinal, string NumeroIdentificacionCliente, int IdInspector, string IdEstadoVisita)
+        {
+            List<uspConsultarVisitas_Result> res = new List<uspConsultarVisitas_Result>();
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                FechaFinal = FechaFinal.AddDays(1);
+                ctx.uspConsultarVisitas(FechaInicial, FechaFinal, NumeroIdentificacionCliente, IdInspector, IdEstadoVisita).ToList();
+            }
+            return res;
+        }
     }
 }

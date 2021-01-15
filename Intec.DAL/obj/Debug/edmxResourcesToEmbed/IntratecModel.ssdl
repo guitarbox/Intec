@@ -487,7 +487,7 @@
     <Property Name="pc_da" Type="nvarchar" MaxLength="50" />
     <Property Name="pc_iab" Type="nvarchar" MaxLength="50" />
     <Property Name="pc_dab" Type="nvarchar" MaxLength="50" />
-    <Property Name="IdInspector" Type="int" Nullable="false" />
+    <Property Name="IdInspector" Type="int" />
     <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
     <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
     <Property Name="FechaModificacion" Type="datetime" />
@@ -1028,7 +1028,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Zonas_Usuarios">
-    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
     <End Role="Zonas" Type="Self.Zonas" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Usuarios">
@@ -1045,6 +1045,13 @@
     <Parameter Name="Direccion" Type="nvarchar" Mode="In" />
     <Parameter Name="NroTelefonico" Type="nvarchar" Mode="In" />
     <Parameter Name="TieneVisitaProgramada" Type="bit" Mode="In" />
+  </Function>
+  <Function Name="uspConsultarVisitas" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="FechaInicial" Type="datetime" Mode="In" />
+    <Parameter Name="FechaFinal" Type="datetime" Mode="In" />
+    <Parameter Name="NumeroIdentificacionCliente" Type="nvarchar" Mode="In" />
+    <Parameter Name="IdInspector" Type="int" Mode="In" />
+    <Parameter Name="IdEstadoVisita" Type="nvarchar" Mode="In" />
   </Function>
   <EntityContainer Name="DB_A66D31_intratecPrbModelStoreContainer">
     <EntitySet Name="CalibracionesEquipos" EntityType="Self.CalibracionesEquipos" Schema="dbo" store:Type="Tables" />
