@@ -49,8 +49,8 @@ namespace Intec.DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FotosVisita> FotosVisita { get; set; }
         public virtual SolicitudesProgramacionVisitas SolicitudesProgramacionVisitas { get; set; }
-        public virtual Usuarios Usuarios { get; set; }
         public virtual Propiedades Propiedades { get; set; }
         public virtual Zonas Zonas { get; set; }
+        public virtual Usuarios Usuarios { get; set; }
     }
 }

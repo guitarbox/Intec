@@ -32,8 +32,8 @@ namespace Intec.DAL
     
         public virtual Formatos Formatos { get; set; }
         public virtual EstadosConsecutivosInspector EstadosConsecutivosInspector { get; set; }
-        public virtual Usuarios Usuarios { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FormatosVisita> FormatosVisita { get; set; }
+        public virtual Usuarios Usuarios { get; set; }
     }
 }

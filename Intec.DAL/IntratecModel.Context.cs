@@ -38,7 +38,6 @@ namespace Intec.DAL
         public virtual DbSet<TiposPersona> TiposPersona { get; set; }
         public virtual DbSet<TiposPropiedades> TiposPropiedades { get; set; }
         public virtual DbSet<UsosPropiedades> UsosPropiedades { get; set; }
-        public virtual DbSet<Usuarios> Usuarios { get; set; }
         public virtual DbSet<Propiedades> Propiedades { get; set; }
         public virtual DbSet<Clientes> Clientes { get; set; }
         public virtual DbSet<EstadosConsecutivosInspector> EstadosConsecutivosInspector { get; set; }
@@ -61,6 +60,7 @@ namespace Intec.DAL
         public virtual DbSet<Visitas> Visitas { get; set; }
         public virtual DbSet<HistoricoAsignacionZona> HistoricoAsignacionZona { get; set; }
         public virtual DbSet<Zonas> Zonas { get; set; }
+        public virtual DbSet<Usuarios> Usuarios { get; set; }
     
         public virtual ObjectResult<uspConsultaGralCliente_Result> uspConsultaGralCliente(string numeroIdentificacion, string nombres, string direccion, string nroTelefonico, Nullable<bool> tieneVisitaProgramada)
         {

@@ -18,10 +18,10 @@ namespace Intec.DAL
         public Usuarios()
         {
             this.ConsecutivosFormatos = new HashSet<ConsecutivosFormatos>();
-            this.TramitesEquipo = new HashSet<TramitesEquipo>();
             this.KardexPapeleria = new HashSet<KardexPapeleria>();
-            this.UsuariosEquipos = new HashSet<UsuariosEquipos>();
             this.TramiteConsecutivoFormato = new HashSet<TramiteConsecutivoFormato>();
+            this.TramitesEquipo = new HashSet<TramitesEquipo>();
+            this.UsuariosEquipos = new HashSet<UsuariosEquipos>();
             this.Visitas = new HashSet<Visitas>();
             this.Zonas = new HashSet<Zonas>();
         }
@@ -42,20 +42,22 @@ namespace Intec.DAL
         public Nullable<System.DateTime> FechaModificacion { get; set; }
         public Nullable<int> IdUsuarioModificacion { get; set; }
         public int IdRol { get; set; }
+        public bool Activo { get; set; }
+        public string Foto { get; set; }
     
         public virtual Ciudades Ciudades { get; set; }
-        public virtual Roles Roles { get; set; }
-        public virtual TiposIdentificacion TiposIdentificacion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ConsecutivosFormatos> ConsecutivosFormatos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TramitesEquipo> TramitesEquipo { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<KardexPapeleria> KardexPapeleria { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UsuariosEquipos> UsuariosEquipos { get; set; }
+        public virtual Roles Roles { get; set; }
+        public virtual TiposIdentificacion TiposIdentificacion { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TramiteConsecutivoFormato> TramiteConsecutivoFormato { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TramitesEquipo> TramitesEquipo { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UsuariosEquipos> UsuariosEquipos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Visitas> Visitas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
