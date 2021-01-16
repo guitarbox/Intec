@@ -9,6 +9,7 @@ namespace Test
 {
     class Program
     {
+        #region Test Clientes
         static void Main1(string[] args)
         {
             Intec.DAL.TE.ClientesTE PClientesTE = new Intec.DAL.TE.ClientesTE();
@@ -82,7 +83,9 @@ namespace Test
 
             //Resultado OK, cliente cerado, excepción numero y tipo de documento ok 
         }
+        #endregion
 
+        #region Test Papeleria
         static void Main2(string[] args)
         {
             Intec.DAL.TE.PapeleriaTE PPapeleriaTE = new Intec.DAL.TE.PapeleriaTE();
@@ -145,7 +148,9 @@ namespace Test
 
             // Resultado OK, posible incosistencia columna IdInspector tablas TramiteConsecutivo y ConsecutivosFormato, Excepción OK
         }
+        #endregion
 
+        #region Test Equipos
         static void Main3(string[] args)
         {
             Intec.DAL.TE.EquiposTE PEquiposTE = new Intec.DAL.TE.EquiposTE();
@@ -229,10 +234,177 @@ namespace Test
             //Resultado OK, Secuencia?, Falta validación
 
         }
+        #endregion
 
-        static void Main(string[] args)
+        #region Test Administracion
+        static void Main4(string[] args)
         {
             Intec.DAL.TE.AdministracionTE PAdministracionTE = new Intec.DAL.TE.AdministracionTE();
+
+            //Paises
+
+            //1
+
+            //Paises PaisCrear = new Paises()
+            //{
+            //    IdPais = 4,
+            //    Pais = "Prueba5",
+            //    CodigoPais = "P5",
+            //    IdUsuarioCreacion = 2
+            //};
+
+            //PAdministracionTE.CrearPais(PaisCrear);
+
+            // Resultado OK
+
+            //2
+
+            //var res = PAdministracionTE.ObtenerPaises();
+
+            // Resultado OK
+
+            //3
+
+            //var res = PAdministracionTE.ObtenerPais(0);
+
+            //res.Pais = "Editar1";
+
+            //PAdministracionTE.EditarPais(res, 2);
+
+            //Resultado OK
+
+            //4
+
+            //PAdministracionTE.EliminarPais(4, 2);
+
+            //Resultado OK, Descativados Ids 1, 3 y 4
+
+
+
+
+            //Departamentos
+            //1
+
+            //Departamentos DepartamentoCrear = new Departamentos()
+            //{
+            //    IdDepartamento = "01",
+            //    IdPais = 57,
+            //    Departamento = "Prueba2",
+            //    IdUsuarioCreacion = 2
+            //};
+
+            //PAdministracionTE.CrearDepartamento(DepartamentoCrear);
+
+            //Resultado OK
+
+            //2
+
+            //var res = PAdministracionTE.ObtenerDepartamentos(57);
+
+            //Resultado OK
+
+            //3
+
+            //var res = PAdministracionTE.ObtenerDepartamento("01");
+
+            //res.Departamento = "Editar";
+
+            //PAdministracionTE.EditarDepartamento(res, 2);
+
+            //Resultado OK
+
+            //4
+
+            //PAdministracionTE.EliminarDepartamento("01", 2);
+
+
+
+
+            //Ciudades
+
+            //1
+
+            //Ciudades CiudadCrear = new Ciudades()
+            //{
+            //    IdCiudad = "00002",
+            //    IdDepartamento = "00",
+            //    Ciudad = "Prueba2",
+            //    IdUsuarioCreacion = 2
+            //};
+
+            //PAdministracionTE.CrearCiudad(CiudadCrear);
+
+            // Resultado OK
+
+            //2
+
+            //var res = PAdministracionTE.ObtenerCiudades("05");
+
+            //var res = PAdministracionTE.ObtenerCiudad("00002");
+
+            // Resultado OK
+
+            //3
+
+            //res.Ciudad = "Editar";
+
+            //PAdministracionTE.EditarCiudad(res, 2);
+
+            // Resultado OK
+
+            //4
+
+            //PAdministracionTE.EliminarCiudad("00001", 2);
+
+            // Resultado OK
+
+
+
+
+            //TiposIdentificacion
+
+            //1
+
+            //TiposIdentificacion TipoIdentificacionCrear = new TiposIdentificacion()
+            //{
+            //    IdTipoIdentificacion = 6,
+            //    TipoIdentificacion = "Prueba2",
+            //    Abreviatura = "PR3",
+            //    CodigoTipoIdFiscal = 00,
+            //    IdUsuarioCreacion = 2
+            //};
+
+            //PAdministracionTE.CrearTipoIdentificacion(TipoIdentificacionCrear);
+
+            //Resultado OK, IdTipoIdentificacion no se autoincrementa
+
+            //2
+
+            //var res = PAdministracionTE.ObtenerTiposIdentificacion();
+
+            //var res = PAdministracionTE.ObtenerTipoIdentificacion(5);
+
+            //res.CodigoTipoIdFiscal = 2;
+            //res.Abreviatura = "OK";
+
+            //Resultado OK
+
+            //3
+
+            //PAdministracionTE.EditarTipoIdentificacion(res, 2);
+
+            //Resultado OK
+
+            //4
+
+            //PAdministracionTE.EliminarTipoIdentificacion(4, 2);
+
+            //Resultado OK
+
+
+
+
+            //MarcasEquipos
 
             //1.
 
@@ -245,19 +417,35 @@ namespace Test
 
             //PAdministracionTE.CrearMarcaEquipos(MEquipos);
 
-            //Resultado OK
+            //Resultado OK, IdMarcaEquipo no se autoincrementa
 
             //2.
 
-            //PAdministracionTE.EliminarMarcaEquipo(3);
+            //var res = PAdministracionTE.ObtenerMarcasEquipos();
 
-            //Resultado OK, Eliminado ID 3
+            //var res = PAdministracionTE.ObtenerMarcaEquipo(2);
+
+            //Resultado OK
+
 
             //3.
 
-            //var res = PAdministracionTE.ConsultarMarcasEquipos();
+            //res.MarcaEquipo = "Stanley Editar";
+
+            //PAdministracionTE.EditarMarcaEquipo(res, 2);
 
             //Resultado OK
+
+            //4
+
+            //PAdministracionTE.EliminarMarcaEquipo(2, 2);
+
+            //Resultado OK
+
+
+
+
+            //TiposEquipos
 
             //1.
 
@@ -274,17 +462,267 @@ namespace Test
 
             //2
 
-            //PAdministracionTE.EliminarTipoEquipo(2);
+            //var res = PAdministracionTE.ConsultaTipoEquipo();
 
-            //Resultado OK, Eliminado ID 2
+            //var res = PAdministracionTE.ObtenerTipoEquipo(3);
+
+            //Resultado OK
 
             //3
 
-            //var res = PAdministracionTE.ConsultaTipoEquipo();
+            //res.TipoEquipo = "Corte Editar";
+
+            //PAdministracionTE.EditarTipoEquipo(res, 2);
+
+            //Resultado OK
+
+            //4
+
+            //PAdministracionTE.EliminarTipoEquipo(1, 2);
+
+            //Resultado OK
+
+
+
+
+            //TiposPersona
+
+            //1
+
+            //TiposPersona TipoPersonaCrear = new TiposPersona()
+            //{
+            //    IdTipoPersona = 4,
+            //    TipoPersona = "Prueba2",
+            //    CodigoTipoPersona = "3",
+            //    IdUsuarioCreacion = 2
+            //};
+
+            //PAdministracionTE.CrearTipoPersona(TipoPersonaCrear);
+
+            //Resultado OK, IdTipoPersona no se autoincrementa
+
+            //2
+
+            //var res = PAdministracionTE.ObtenerTiposPersona();
+
+            //var res = PAdministracionTE.ObtenerTipoPersona(3);
+
+            //3
+
+            //res.TipoPersona = "Editar";
+            //res.CodigoTipoPersona = "4";
+
+            //PAdministracionTE.EditarTipoPersona(res, 2);
+
+            //Resultado OK
+
+            //4
+
+            //PAdministracionTE.EliminarTipoPersona(4, 2);
+
+            // Resultado OK
+
+
+
+
+            //TiposPropiedades
+
+            //1
+
+            //TiposPropiedades TipoPropiedadCrear = new TiposPropiedades()
+            //{
+            //    IdTipoPropiedad = 5,
+            //    TipoPropiedad = "Prueba2",
+            //    IdUsuarioCreacion = 2
+            //};
+
+            //PAdministracionTE.CrearTipoPropiedad(TipoPropiedadCrear);
+
+            //Resultado OK, IdTipoPropiedad no se autoincrementa
+
+            //2
+
+            //var res = PAdministracionTE.ObtenerTiposPropiedades();
+
+            //var res = PAdministracionTE.ObtenerTipoPropiedad(4);
+
+            //Resultado OK
+
+            //3
+
+            //res.TipoPropiedad = "Editar";
+
+            //PAdministracionTE.EditarTipoPropiedad(res, 2);
+
+            //Resultado OK
+
+            //4
+
+            //PAdministracionTE.EliminarTipoPropiedad(5, 2);
+
+            //Resultado OK
+
+
+
+
+            //UsosPropiedades
+
+            //1
+
+            //UsosPropiedades UsoPropiedadCrear = new UsosPropiedades()
+            //{
+            //    IdUso = 5,
+            //    Uso = "Prueba3",
+            //    IdUsuarioCreacion = 10
+            //};
+
+            //PAdministracionTE.CrearUsoPropiedad(UsoPropiedadCrear);
+
+            //Resultado OK, IdUso no se autoincrementa, me permite crear con IdUsuarioCreacion 10
+
+            //2
+
+            //var res = PAdministracionTE.ObtenerUsosPropiedades();
+
+            //var res = PAdministracionTE.ObtenerUsoPropieadad(5);
+
+            //Resultado OK
+
+            //3
+
+            //res.Uso = "Editar2";
+
+            //PAdministracionTE.EditarUsoPropiedad(res, 2);
+
+            //Resultado OK
+
+            //4
+
+            //PAdministracionTE.EliminarUsoPropiedad(5, 2);
 
             //Resultado OK
 
         }
+        #endregion
+
+        #region Test Visitas
+
+        static void Main(string[] args)
+        {
+            Intec.DAL.TE.VisitasTE PVisitasTE = new Intec.DAL.TE.VisitasTE();
+
+            //Zonas
+
+            //1
+
+            //Zonas ZonaCraer = new Zonas()
+            //{
+            //    IdZona = 3,
+            //    IdCiudad = "11001",
+            //    Descripcion = "Esta es la creación de otra zona 2",
+            //    IdUsuarioCreacion = 2
+            //};
+
+            //PVisitasTE.CrearZona(ZonaCraer);
+
+            //Resultado OK, IdZona no se autoincrementa
+
+            //2
+
+            //var res = PVisitasTE.ObtenerZonas();
+
+            //3
+
+            //var res = PVisitasTE.ObtenerZona(3);
+
+            //Resultado OK
+
+            //4 AsignarZona
+
+            //PVisitasTE.AsignarZonaInspector(6, "11001", 4, 2);
+
+            //Resultado OK, Falta excpeción para Inspector no existe?
+
+            //5 Reasignar
+
+            //PVisitasTE.ReAsignarZonaInspector(5, "11001", 3, 2);
+
+            //Resultado OK
+
+
+
+            //Visita
+
+            //1
+
+            //Visitas VisitaProgramar = new Visitas()
+            //{
+            //    IdSolicitudProgramacion = 3,
+            //    IdCliente = 3,
+            //    IdPropiedad = 4, 
+            //    Direccion = "Cr 80 C # 42 C 83 Sur",
+            //    IdZona = 1,
+            //    IdCiudad = "11001",
+            //    FechaVisita = DateTime.Today,
+            //    IdInspector = 3,
+            //    ObservacionesVisita = "Esto es una creación",
+            //    IdEstadoVisitas = "P",
+            //    OrigenVisita  = "Sitio Web",
+            //    IdUsuarioCreacion = 2
+            //};
+
+            //PVisitasTE.ProgramarVisita(VisitaProgramar);
+
+            //2
+
+            //PVisitasTE.ReasignacionVisita(2, 5);
+
+            //Fecha modificación y Id? - Cambio de IdEstadoVisitas?
+
+            //3
+
+            //FotosVisita FotoCrear = new FotosVisita()
+            //{
+            //    IdVisita = 2,
+            //    Secuencia = 1,
+            //    Path = "Foto"
+            //};
+
+            //PVisitasTE.AgregarFotoVisita(FotoCrear, 2);
+
+            //Resultado NO OK
+
+            //4
+
+            //Formatos FormatoCrear = new Formatos()
+            //{
+
+            //};
+
+            //PVisitasTE.AgregarFormatoVisita()
+
+            // 5 Equipo
+
+            //6
+
+            //var res = PVisitasTE.ConsultarVisita(2);
+
+            //Ok
+
+            //PVisitasTE.ConsultaVisitas();
+        }
+
+
+        #endregion
+
+
+
+
+
+
+
+
+
 
 
     }

@@ -78,7 +78,7 @@ namespace Intec.DAL.TE
                         throw new Exception("No se puede asignar inspector a zona, ésta ya tiene inspector. Intente reasignar inspector.");
                 }
                 else
-                    throw new Exception("No existe la zona");
+                    throw new Exception($"No existe la zona con ID {IdZona} en la ciudad con ID {IdCiudad}");
             }
         }
 
@@ -157,7 +157,7 @@ namespace Intec.DAL.TE
                         throw new Exception($"No se puede reasignar la visita en el estado {visita.IdEstadoVisitas}");
                 }
                 else
-                    throw new Exception("No se encontró la visita");
+                    throw new Exception($"No se encontró la visita con ID {IdVisita}");
             }
         }
 
