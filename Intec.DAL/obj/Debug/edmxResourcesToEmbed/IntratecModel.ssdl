@@ -427,6 +427,7 @@
     <Property Name="IdUsuarioModificacion" Type="int" />
     <Property Name="IdRol" Type="int" Nullable="false" />
     <Property Name="Activo" Type="bit" Nullable="false" />
+    <Property Name="Foto" Type="nvarchar" MaxLength="150" />
   </EntityType>
   <EntityType Name="UsuariosEquipos">
     <Key>

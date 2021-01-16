@@ -554,6 +554,7 @@
     <EntitySetMapping Name="Usuarios">
       <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.Usuarios">
         <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="Foto" ColumnName="Foto" />
           <ScalarProperty Name="Activo" ColumnName="Activo" />
           <ScalarProperty Name="IdRol" ColumnName="IdRol" />
           <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />

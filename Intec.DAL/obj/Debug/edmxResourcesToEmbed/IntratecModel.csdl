@@ -1248,6 +1248,7 @@
     <Property Name="IdUsuarioModificacion" Type="Int32" />
     <Property Name="IdRol" Type="Int32" Nullable="false" />
     <Property Name="Activo" Type="Boolean" Nullable="false" />
+    <Property Name="Foto" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Ciudades" Relationship="DB_A66D31_intratecPrbModel.FK_Usuarios_Ciudades" FromRole="Usuarios" ToRole="Ciudades" />
     <NavigationProperty Name="ConsecutivosFormatos" Relationship="DB_A66D31_intratecPrbModel.FK_ConsecutivosInspectores_Usuarios" FromRole="Usuarios" ToRole="ConsecutivosFormatos" />
     <NavigationProperty Name="KardexPapeleria" Relationship="DB_A66D31_intratecPrbModel.FK_KardexPapeleria_Usuarios" FromRole="Usuarios" ToRole="KardexPapeleria" />

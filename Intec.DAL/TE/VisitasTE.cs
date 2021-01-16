@@ -168,8 +168,10 @@ namespace Intec.DAL.TE
             {
                 Visitas visita = ctx.Visitas.Where(v => v.IdVisita == IdVisita).FirstOrDefault();
                 if (visita != null)
-                {                    
+                {
+                    Foto.Secuencia = ctx.FotosVisita.Where(fv => fv.IdVisita == Foto.IdVisita).Count() + 1;
                     visita.FotosVisita.Add(Foto);
+                    ctx.SaveChanges();
                 }
                 else
                     throw new Exception("No se encontró la visita");
@@ -184,7 +186,9 @@ namespace Intec.DAL.TE
                 Visitas visita = ctx.Visitas.Where(v => v.IdVisita == IdVisita).FirstOrDefault();
                 if (visita != null)
                 {
+                    Formato.Secuencia = ctx.FormatosVisita.Where(fv => fv.IdVisita == Formato.IdVisita).Count() + 1;
                     visita.FormatosVisita.Add(Formato);
+                    ctx.SaveChanges();
                 }
                 else
                     throw new Exception("No se encontró la visita");
@@ -199,7 +203,9 @@ namespace Intec.DAL.TE
                 Visitas visita = ctx.Visitas.Where(v => v.IdVisita == IdVisita).FirstOrDefault();
                 if (visita != null)
                 {
+                    Equipo.Secuencia = ctx.EquiposVisita.Where(fv => fv.IdVisita == Equipo.IdVisita).Count() + 1;
                     visita.EquiposVisita.Add(Equipo);
+                    ctx.SaveChanges();
                 }
                 else
                     throw new Exception("No se encontró la visita");
