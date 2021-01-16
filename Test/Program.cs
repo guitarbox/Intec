@@ -684,24 +684,37 @@ namespace Test
             //FotosVisita FotoCrear = new FotosVisita()
             //{
             //    IdVisita = 2,
-            //    Secuencia = 1,
-            //    Path = "Foto"
+            //    Path = "RutaFoto"
             //};
 
             //PVisitasTE.AgregarFotoVisita(FotoCrear, 2);
 
-            //Resultado NO OK
+            //Resultado OK
 
             //4
 
-            //Formatos FormatoCrear = new Formatos()
+            //FormatosVisita FormatoCrear = new FormatosVisita()
             //{
-
+            //    IdVisita = 5,
+            //    IdFormato = 8,
+            //    Consecutivo = 15
             //};
 
-            //PVisitasTE.AgregarFormatoVisita()
+            //PVisitasTE.AgregarFormatoVisita(FormatoCrear, 2);
 
-            // 5 Equipo
+            //Resultado OK
+
+            // 5
+
+            //EquiposVisita EquipoVisitaCrear = new EquiposVisita()
+            //{
+            //    IdVisita = 2,
+            //    IdEquipo = 2
+            //};
+
+            //PVisitasTE.AgregarEquipoVisita(EquipoVisitaCrear, 2);
+
+            //Resultado OK
 
             //6
 
@@ -709,7 +722,11 @@ namespace Test
 
             //Ok
 
-            //PVisitasTE.ConsultaVisitas();
+            var res = PVisitasTE.ConsultaVisitas( DateTime.Parse("16/01/2021"), DateTime.Parse("22/01/2021"), "", 2, "" );
+
+            //Id Uso tb Clientes y propieades, SolicitudProgramacionVisitas IP no NULLS
+
+
         }
 
 
