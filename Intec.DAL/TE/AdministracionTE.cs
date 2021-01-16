@@ -17,6 +17,7 @@ namespace Intec.DAL.TE
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
                 PaisCrear.FechaCreacion = DateTime.Now;
+                PaisCrear.Activo = true;
                 ctx.Paises.Add(PaisCrear);
                 ctx.SaveChanges();
             }
@@ -33,6 +34,19 @@ namespace Intec.DAL.TE
             }
             return res;
         }
+
+        public Paises ObtenerPais(int IdPais)
+        {
+            Paises res = new Paises();
+
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                res = ctx.Paises.Where(p => p.IdPais == IdPais).FirstOrDefault();
+            }
+
+            return res;
+        }
+
 
         //Editar
 
@@ -88,6 +102,7 @@ namespace Intec.DAL.TE
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
                 DepartamentoCrear.FechaCreacion = DateTime.Now;
+                DepartamentoCrear.Activo = true;
                 ctx.Departamentos.Add(DepartamentoCrear);
                 ctx.SaveChanges();
             }
@@ -102,6 +117,18 @@ namespace Intec.DAL.TE
             {
                 res = ctx.Departamentos.Where(d => d.IdPais == IdPais).ToList();
             }
+            return res;
+        }
+
+        public Departamentos ObtenerDepartamento(string IdDepartamento) //IdDepartamento es string
+        {
+            Departamentos res = new Departamentos();
+
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                res = ctx.Departamentos.Where(d => d.IdDepartamento == IdDepartamento).FirstOrDefault();
+            }
+
             return res;
         }
 
@@ -158,6 +185,7 @@ namespace Intec.DAL.TE
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
                 CiudadCrear.FechaCreacion = DateTime.Now;
+                CiudadCrear.Activo = true;
                 ctx.Ciudades.Add(CiudadCrear);
                 ctx.SaveChanges();
             }
@@ -172,6 +200,18 @@ namespace Intec.DAL.TE
             {
                 res = ctx.Ciudades.Where(c => c.IdDepartamento.Equals(IdDepartamento)).ToList();
             }
+            return res;
+        }
+
+        public Ciudades ObtenerCiudad(string IdCiudad) // Id ciudad es String
+        {
+            Ciudades res = new Ciudades();
+
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                res = ctx.Ciudades.Where(c => c.IdCiudad == IdCiudad).FirstOrDefault();
+            }
+
             return res;
         }
 
@@ -228,6 +268,7 @@ namespace Intec.DAL.TE
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
                 TipoIdentificacionCrear.FechaCreacion = DateTime.Now;
+                TipoIdentificacionCrear.Activo = true;
                 ctx.TiposIdentificacion.Add(TipoIdentificacionCrear);
                 ctx.SaveChanges();
             }
@@ -242,6 +283,18 @@ namespace Intec.DAL.TE
             {
                 res = ctx.TiposIdentificacion.ToList();
             }
+            return res;
+        }
+
+        public TiposIdentificacion ObtenerTipoIdentificacion(int IdTipoIdentificacion)
+        {
+            TiposIdentificacion res = new TiposIdentificacion();
+
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                res = ctx.TiposIdentificacion.Where(t => t.IdTipoIdentificacion == IdTipoIdentificacion).FirstOrDefault();
+            }
+
             return res;
         }
 
@@ -298,13 +351,14 @@ namespace Intec.DAL.TE
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
                 MarcaCrear.FechaCreacion = DateTime.Now;
+                MarcaCrear.Activo = true;
                 ctx.MarcasEquipos.Add(MarcaCrear);
                 ctx.SaveChanges();
             }
         }
 
         //Obtener
-        public List<MarcasEquipos> ConsultarMarcasEquipos()
+        public List<MarcasEquipos> ObtenerMarcasEquipos()
         {
             List<MarcasEquipos> res = new List<MarcasEquipos>();
 
@@ -314,7 +368,18 @@ namespace Intec.DAL.TE
             }
 
             return res;
+        }
 
+        public MarcasEquipos ObtenerMarcaEquipo(int IdMarcaEquipo)
+        {
+            MarcasEquipos res = new MarcasEquipos();
+
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                res = ctx.MarcasEquipos.Where(m => m.IdMarcaEquipo == IdMarcaEquipo).FirstOrDefault();
+            }
+
+            return res;
         }
 
         //Editar
@@ -368,13 +433,14 @@ namespace Intec.DAL.TE
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
                 TipoEqupioCrear.FechaCreacion = DateTime.Now;
+                TipoEqupioCrear.Activo = true;
                 ctx.TiposEquipo.Add(TipoEqupioCrear);
                 ctx.SaveChanges();
             }
         }
 
         //Obtener
-        public List<TiposEquipo> ConsultaTipoEquipo()
+        public List<TiposEquipo> ObtenerTiposEquipo()
         {
             List<TiposEquipo> res = new List<TiposEquipo>();
 
@@ -384,7 +450,18 @@ namespace Intec.DAL.TE
             }
 
             return res;
+        }
 
+        public TiposEquipo ObtenerTipoEquipo(int IdTipoEquipo)
+        {
+            TiposEquipo res = new TiposEquipo();
+
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                res = ctx.TiposEquipo.Where(t => t.IdTipoEquipo == IdTipoEquipo).FirstOrDefault();
+            }
+
+            return res;
         }
 
         //Editar
@@ -439,6 +516,7 @@ namespace Intec.DAL.TE
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
                 TipoPersonaCrear.FechaCreacion = DateTime.Now;
+                TipoPersonaCrear.Activo = true;
                 ctx.TiposPersona.Add(TipoPersonaCrear);
                 ctx.SaveChanges();
             }
@@ -446,7 +524,7 @@ namespace Intec.DAL.TE
 
         //Obtener
 
-        public List<TiposPersona> ConsultarTiposPersona()
+        public List<TiposPersona> ObtenerTiposPersona()
         {
             List<TiposPersona> res = new List<TiposPersona>();
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
@@ -455,6 +533,19 @@ namespace Intec.DAL.TE
             }
             return res;
         }
+
+        public TiposPersona ObtenerTipoPersona(int IdTipoPersona)
+        {
+            TiposPersona res = new TiposPersona();
+
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                res = ctx.TiposPersona.Where(t => t.IdTipoPersona == IdTipoPersona).FirstOrDefault();
+            }
+
+            return res;
+        }
+
 
         //Editar
 
@@ -510,6 +601,7 @@ namespace Intec.DAL.TE
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
                 TipoPropieadaCrear.FechaCreacion = DateTime.Now;
+                TipoPropieadaCrear.Activo = true;
                 ctx.TiposPropiedades.Add(TipoPropieadaCrear);
                 ctx.SaveChanges();
             }
@@ -517,13 +609,25 @@ namespace Intec.DAL.TE
 
         //Obtener
 
-        public List<TiposPropiedades> ConsultarTiposPropiedades()
+        public List<TiposPropiedades> ObtenerTiposPropiedades()
         {
             List<TiposPropiedades> res = new List<TiposPropiedades>();
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
                 res = ctx.TiposPropiedades.ToList();
             }
+            return res;
+        }
+
+        public TiposPropiedades ObtenerTipoPropiedad(int IdTipoPropiedad)
+        {
+            TiposPropiedades res = new TiposPropiedades();
+
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                res = ctx.TiposPropiedades.Where(t => t.IdTipoPropiedad == IdTipoPropiedad).FirstOrDefault();
+            }
+
             return res;
         }
 
@@ -580,6 +684,7 @@ namespace Intec.DAL.TE
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
                 UsoPropiedadCrear.FechaCreacion = DateTime.Now;
+                UsoPropiedadCrear.Activo = true;
                 ctx.UsosPropiedades.Add(UsoPropiedadCrear);
                 ctx.SaveChanges();
             }
@@ -587,13 +692,25 @@ namespace Intec.DAL.TE
 
         //Obtener
 
-        public List<UsosPropiedades> ConsultarUsosPropiedades()
+        public List<UsosPropiedades> ObtenerUsosPropiedades()
         {
             List<UsosPropiedades> res = new List<UsosPropiedades>();
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
                 res = ctx.UsosPropiedades.ToList();
             }
+            return res;
+        }
+
+        public UsosPropiedades ObtenerUsoPropieadad(int IdUso)
+        {
+            UsosPropiedades res = new UsosPropiedades();
+
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                res = ctx.UsosPropiedades.Where(u => u.IdUso == IdUso).FirstOrDefault();
+            }
+
             return res;
         }
 
