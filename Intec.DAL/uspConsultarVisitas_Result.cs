@@ -29,24 +29,5 @@ namespace Intec.DAL
         public Nullable<int> IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaModificacion { get; set; }
         public Nullable<int> IdUsuarioModificacion { get; set; }
-        public Nullable<int> IdCliente1 { get; set; }
-        public string NumeroIdentificacion { get; set; }
-        public Nullable<int> IdTipoIdentificacion { get; set; }
-        public string Nombres { get; set; }
-        public string Apellidos { get; set; }
-        public string TelefonoFijo { get; set; }
-        public string TelefonoCel1 { get; set; }
-        public string TelefonoCel2 { get; set; }
-        public string Direccion1 { get; set; }
-        public string IdCiudad1 { get; set; }
-        public Nullable<int> IdUso { get; set; }
-        public string Foto { get; set; }
-        public string Email1 { get; set; }
-        public string Email2 { get; set; }
-        public Nullable<int> IdTipoPersona { get; set; }
-        public Nullable<System.DateTime> FechaCreacion1 { get; set; }
-        public Nullable<int> IdUsuarioCreacion1 { get; set; }
-        public Nullable<System.DateTime> FechaModificacion1 { get; set; }
-        public Nullable<int> IdUsuarioModificacion1 { get; set; }
     }
 }

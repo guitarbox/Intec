@@ -177,13 +177,6 @@
       <End Role="Zonas" EntitySet="Zonas" />
       <End Role="Visitas" EntitySet="Visitas" />
     </AssociationSet>
-    <FunctionImport Name="uspConsultarVisitas" ReturnType="Collection(DB_A66D31_intratecPrbModel.uspConsultarVisitas_Result)">
-      <Parameter Name="FechaInicial" Mode="In" Type="DateTime" />
-      <Parameter Name="FechaFinal" Mode="In" Type="DateTime" />
-      <Parameter Name="NumeroIdentificacionCliente" Mode="In" Type="String" />
-      <Parameter Name="IdInspector" Mode="In" Type="Int32" />
-      <Parameter Name="IdEstadoVisita" Mode="In" Type="String" />
-    </FunctionImport>
     <EntitySet Name="Usuarios" EntityType="DB_A66D31_intratecPrbModel.Usuarios" />
     <AssociationSet Name="FK_Usuarios_Ciudades" Association="DB_A66D31_intratecPrbModel.FK_Usuarios_Ciudades">
       <End Role="Ciudades" EntitySet="Ciudades" />
@@ -225,6 +218,13 @@
       <End Role="Usuarios" EntitySet="Usuarios" />
       <End Role="Zonas" EntitySet="Zonas" />
     </AssociationSet>
+    <FunctionImport Name="uspConsultarVisitas" ReturnType="Collection(DB_A66D31_intratecPrbModel.uspConsultarVisitas_Result)">
+      <Parameter Name="FechaInicial" Mode="In" Type="DateTime" />
+      <Parameter Name="FechaFinal" Mode="In" Type="DateTime" />
+      <Parameter Name="NumeroIdentificacionCliente" Mode="In" Type="String" />
+      <Parameter Name="IdInspector" Mode="In" Type="Int32" />
+      <Parameter Name="IdEstadoVisita" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="Ciudades">
     <Key>
@@ -1190,43 +1190,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <ComplexType Name="uspConsultarVisitas_Result">
-    <Property Type="Int32" Name="IdVisita" Nullable="false" />
-    <Property Type="Int32" Name="IdSolicitudProgramacion" Nullable="true" />
-    <Property Type="Int32" Name="IdCliente" Nullable="false" />
-    <Property Type="Int32" Name="IdPropiedad" Nullable="false" />
-    <Property Type="String" Name="Direccion" Nullable="false" MaxLength="50" />
-    <Property Type="Int32" Name="IdZona" Nullable="false" />
-    <Property Type="String" Name="IdCiudad" Nullable="false" MaxLength="50" />
-    <Property Type="DateTime" Name="FechaVisita" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="IdInspector" Nullable="true" />
-    <Property Type="String" Name="ObservacionesVisita" Nullable="true" MaxLength="1000" />
-    <Property Type="String" Name="IdEstadoVisitas" Nullable="false" MaxLength="1" />
-    <Property Type="String" Name="OrigenVisita" Nullable="false" MaxLength="100" />
-    <Property Type="DateTime" Name="FechaCreacion" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="IdUsuarioCreacion" Nullable="true" />
-    <Property Type="DateTime" Name="FechaModificacion" Nullable="true" Precision="23" />
-    <Property Type="Int32" Name="IdUsuarioModificacion" Nullable="true" />
-    <Property Type="Int32" Name="IdCliente1" Nullable="true" />
-    <Property Type="String" Name="NumeroIdentificacion" Nullable="true" MaxLength="50" />
-    <Property Type="Int32" Name="IdTipoIdentificacion" Nullable="true" />
-    <Property Type="String" Name="Nombres" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="Apellidos" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="TelefonoFijo" Nullable="true" MaxLength="15" />
-    <Property Type="String" Name="TelefonoCel1" Nullable="true" MaxLength="15" />
-    <Property Type="String" Name="TelefonoCel2" Nullable="true" MaxLength="15" />
-    <Property Type="String" Name="Direccion1" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="IdCiudad1" Nullable="true" MaxLength="50" />
-    <Property Type="Int32" Name="IdUso" Nullable="true" />
-    <Property Type="String" Name="Foto" Nullable="true" MaxLength="250" />
-    <Property Type="String" Name="Email1" Nullable="true" MaxLength="50" />
-    <Property Type="String" Name="Email2" Nullable="true" MaxLength="50" />
-    <Property Type="Int32" Name="IdTipoPersona" Nullable="true" />
-    <Property Type="DateTime" Name="FechaCreacion1" Nullable="true" Precision="23" />
-    <Property Type="Int32" Name="IdUsuarioCreacion1" Nullable="true" />
-    <Property Type="DateTime" Name="FechaModificacion1" Nullable="true" Precision="23" />
-    <Property Type="Int32" Name="IdUsuarioModificacion1" Nullable="true" />
-  </ComplexType>
   <EntityType Name="Usuarios">
     <Key>
       <PropertyRef Name="IdUsuario" />
@@ -1380,4 +1343,22 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <ComplexType Name="uspConsultarVisitas_Result">
+    <Property Type="Int32" Name="IdVisita" Nullable="false" />
+    <Property Type="Int32" Name="IdSolicitudProgramacion" Nullable="true" />
+    <Property Type="Int32" Name="IdCliente" Nullable="false" />
+    <Property Type="Int32" Name="IdPropiedad" Nullable="false" />
+    <Property Type="String" Name="Direccion" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="IdZona" Nullable="false" />
+    <Property Type="String" Name="IdCiudad" Nullable="false" MaxLength="50" />
+    <Property Type="DateTime" Name="FechaVisita" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="IdInspector" Nullable="true" />
+    <Property Type="String" Name="ObservacionesVisita" Nullable="true" MaxLength="1000" />
+    <Property Type="String" Name="IdEstadoVisitas" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="OrigenVisita" Nullable="false" MaxLength="100" />
+    <Property Type="DateTime" Name="FechaCreacion" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="IdUsuarioCreacion" Nullable="true" />
+    <Property Type="DateTime" Name="FechaModificacion" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="IdUsuarioModificacion" Nullable="true" />
+  </ComplexType>
 </Schema>
