@@ -246,7 +246,7 @@ namespace Intec.DAL.TE
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
                 FechaFinal = FechaFinal.AddDays(1);
-                ctx.uspConsultarVisitas(FechaInicial, FechaFinal, NumeroIdentificacionCliente, IdInspector, IdEstadoVisita).ToList();
+                res = ctx.uspConsultarVisitas(FechaInicial, FechaFinal, NumeroIdentificacionCliente, IdInspector, IdEstadoVisita).ToList();
             }
             return res;
         }
