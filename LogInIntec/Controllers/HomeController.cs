@@ -36,7 +36,7 @@ namespace LogInIntec.Controllers
 
         public JsonResult ObtenerUsuario(string User, string Pass)
         {
-            List<Intec.BL.DTO.Usuario> Usuario = new List<Intec.BL.DTO.Usuario>();
+            List<Intec.BL.DTO.Usuarios> Usuario = new List<Intec.BL.DTO.Usuarios>();
             bool error = false;
             string errorMessage = string.Empty;
             try
@@ -53,7 +53,7 @@ namespace LogInIntec.Controllers
             return Json(ansDic);
         }
         
-        public JsonResult CrearUsuario(Intec.BL.DTO.Usuario UsuarioCrear)
+        public JsonResult CrearUsuario(Intec.BL.DTO.Usuarios UsuarioCrear)
         {            
             new Intec.BL.BE.UsuarioBE().IngresarUsuario(UsuarioCrear);   
             SetDicRta("", 0, false, "", Intec.BL.BE.UsuarioBE._duration);

@@ -6,15 +6,16 @@ using System.Threading.Tasks;
 
 namespace Intec.BL.DTO
 {
-    public class Departamentos
+    public class CalibracionesEquipos
     {
-        public string IdDepartamento { get; set; }
-        public int IdPais { get; set; }
-        public string Departamento { get; set; }
+        public int IdEquipo { get; set; }
+        public int Secuencia { get; set; }
+        public System.DateTime FechaCalibracion { get; set; }
+        public string Laboratorio { get; set; }
+        public string Observaciones { get; set; }
         public System.DateTime FechaCreacion { get; set; }
         public int IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaModificacion { get; set; }
         public Nullable<int> IdUsuarioModificacion { get; set; }
-        public bool Activo { get; set; }
     }
 }

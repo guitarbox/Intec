@@ -722,9 +722,10 @@ namespace Test
 
             //Ok
 
-            var res = PVisitasTE.ConsultaVisitas( DateTime.Parse("16/01/2021"), DateTime.Parse("22/01/2021"), "", 2, "" );
+            var res = PVisitasTE.ConsultaVisitas( DateTime.Parse("21/01/2021"), DateTime.Parse("22/01/2021"), "", 2, "" );
 
-            //Id Uso tb Clientes y propieades, SolicitudProgramacionVisitas IP no NULLS
+            //Id Uso tb Clientes y propieades, SolicitudProgramacionVisitas IP no NULLS, la cédula debeestar completa
+            //Inspector se puede asignar a visita sin importar la ciudad
 
 
         }

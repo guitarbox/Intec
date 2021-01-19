@@ -6,15 +6,17 @@ using System.Threading.Tasks;
 
 namespace Intec.BL.DTO
 {
-    public class Departamentos
+    public class HistoricoAsignacionZona
     {
-        public string IdDepartamento { get; set; }
-        public int IdPais { get; set; }
-        public string Departamento { get; set; }
+        public int IdInspector { get; set; }
+        public int IdZona { get; set; }
+        public string IdCiudad { get; set; }
+        public int Secuencia { get; set; }
+        public Nullable<System.DateTime> FechaInicio { get; set; }
+        public Nullable<System.DateTime> FechaFin { get; set; }
         public System.DateTime FechaCreacion { get; set; }
         public int IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaModificacion { get; set; }
         public Nullable<int> IdUsuarioModificacion { get; set; }
-        public bool Activo { get; set; }
     }
 }

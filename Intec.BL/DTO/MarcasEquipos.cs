@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace Intec.BL.DTO
 {
-    public class Departamentos
+    public class MarcasEquipos
     {
-        public string IdDepartamento { get; set; }
-        public int IdPais { get; set; }
-        public string Departamento { get; set; }
+        public int IdMarcaEquipo { get; set; }
+        public string MarcaEquipo { get; set; }
         public System.DateTime FechaCreacion { get; set; }
         public int IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaModificacion { get; set; }
