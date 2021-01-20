@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,16 +9,24 @@ namespace Intec.BL.BE
 {
     public class UsuarioBE : _beDefault
     {
-        public List<DTO.Usuarios> ObtenerUsuario(string User, string Pass)
+        public int CrearUsuario(DTO.Usuarios UsuarioCrear)
         {
-            return MapperConfig.Config.MapperUsuario.Map<List<DTO.Usuarios>>(new DAL.TE.UsuariosTE().ObtenerUsuario(User, Pass));
+            return new DAL.TE.UsuariosTE().CrearUsuario(MapperConfig.Config.MapperUsuarios.Map<DAL.Usuarios>(UsuarioCrear));
         }
 
-        public void IngresarUsuario(DTO.Usuarios UsuarioCrear)
+        public void NotificarCreacionUsuario(int IdUsuario)
         {
-            Start();
-            new DAL.TE.UsuariosTE().CrearUsuario(MapperConfig.Config.MapperUsuario.Map<DAL.Usuarios>(UsuarioCrear));
-            Finish();
+            //TODO: Acá se notifica al usuario de la creación de su usuario, indicándole qué contraseña tiene incialmente y que debe cambiarla
+        }
+
+        public void SolicitarCambioContrasena(string NumeroIdentificacion, string Email)
+        {
+            //TODO
+        }
+
+        public DTO.Usuarios IniciarSesion(string NumeroIdentificacion, string Pass)
+        {
+            return MapperConfig.Config.MapperUsuarios.Map<DTO.Usuarios>(new DAL.TE.UsuariosTE().IniciarSesion(NumeroIdentificacion, Pass));
         }
     }
 }

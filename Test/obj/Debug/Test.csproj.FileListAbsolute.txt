@@ -50,3 +50,8 @@ C:\Users\Ideapad\Desktop\Intec\Intec\Test\obj\Debug\Test.csproj.CoreCompileInput
 C:\Users\Ideapad\Desktop\Intec\Intec\Test\obj\Debug\Test.csproj.CopyComplete
 C:\Users\Ideapad\Desktop\Intec\Intec\Test\obj\Debug\Test.exe
 C:\Users\Ideapad\Desktop\Intec\Intec\Test\obj\Debug\Test.pdb
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\Test\bin\Debug\Intec.BL.dll
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\Test\bin\Debug\AutoMapper.dll
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\Test\bin\Debug\Intec.BL.pdb
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\Test\bin\Debug\AutoMapper.pdb
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\Test\bin\Debug\AutoMapper.xml

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Intec.DAL;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -27,5 +28,7 @@ namespace Intec.BL.DTO
         public int IdRol { get; set; }
         public bool Activo { get; set; }
         public string Foto { get; set; }
+        public DTO.Roles Roles { get; set; }
+        public DTO.TiposIdentificacion TiposIdentificacion { get; set; }
     }
 }

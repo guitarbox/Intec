@@ -50,6 +50,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Intec.BL\Intec.BL.csproj">
+      <Project>{995db154-d4e0-42dd-abcb-2bd0a0330259}</Project>
+      <Name>Intec.BL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Intec.DAL\Intec.DAL.csproj">
       <Project>{06d084b1-8fb8-406b-ab6f-918adf61a687}</Project>
       <Name>Intec.DAL</Name>

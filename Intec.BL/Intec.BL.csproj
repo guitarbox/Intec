@@ -54,17 +54,44 @@
     <Compile Include="BE\SolicitudContactenosBE.cs" />
     <Compile Include="BE\SolicitudesProgramacionVisitasBE.cs" />
     <Compile Include="BE\_beDefault.cs" />
+    <Compile Include="DTO\CalibracionesEquipos.cs" />
     <Compile Include="DTO\Ciudades.cs" />
-    <Compile Include="DTO\TipoIdentificacion.cs" />
-    <Compile Include="DTO\Usuario.cs" />
+    <Compile Include="DTO\Clientes.cs" />
+    <Compile Include="DTO\ConsecutivosFormatos.cs" />
+    <Compile Include="DTO\Equipos.cs" />
+    <Compile Include="DTO\EquiposVisita.cs" />
+    <Compile Include="DTO\Formatos.cs" />
+    <Compile Include="DTO\FormatosVisita.cs" />
+    <Compile Include="DTO\FotosVisita.cs" />
+    <Compile Include="DTO\HistoricoAsignacionZona.cs" />
+    <Compile Include="DTO\IngresoUsuario.cs" />
+    <Compile Include="DTO\MarcasEquipos.cs" />
+    <Compile Include="DTO\Menus.cs" />
+    <Compile Include="DTO\Propiedades.cs" />
+    <Compile Include="DTO\Roles.cs" />
+    <Compile Include="DTO\TiposEquipo.cs" />
+    <Compile Include="DTO\TiposIdentificacion.cs" />
+    <Compile Include="DTO\TiposPersona.cs" />
+    <Compile Include="DTO\TiposPropiedades.cs" />
+    <Compile Include="DTO\TramiteConsecutivoFormato.cs" />
+    <Compile Include="DTO\UsosPropieades.cs" />
     <Compile Include="DTO\Departamentos.cs" />
     <Compile Include="DTO\Paises.cs" />
     <Compile Include="DTO\SolicitudContactenos.cs" />
     <Compile Include="DTO\SolicitudesProgramacionVisitas.cs" />
+    <Compile Include="DTO\Usuarios.cs" />
+    <Compile Include="DTO\UsuariosEquipos.cs" />
+    <Compile Include="DTO\VerificacionesLabEquipos.cs" />
+    <Compile Include="DTO\Visitas.cs" />
+    <Compile Include="DTO\Zonas.cs" />
     <Compile Include="MapperConfig\Config.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Intec.Common\Intec.Common.csproj">
+      <Project>{f160ebe9-6f93-4b7b-9022-29f3895d01de}</Project>
+      <Name>Intec.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Intec.DAL\Intec.DAL.csproj">
       <Project>{06d084b1-8fb8-406b-ab6f-918adf61a687}</Project>
       <Name>Intec.DAL</Name>

@@ -9,16 +9,19 @@ namespace Intec.DAL.TE
 {
     public class UsuariosTE
     {
-        public void CrearUsuario(Usuarios UsuarioCrear)
+        public int CrearUsuario(Usuarios UsuarioCrear)
         {
+            int res = -1;
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
                 int us = ctx.Usuarios.Where(u => u.NumeroIdentificacion.Equals(UsuarioCrear.NumeroIdentificacion)).ToList().Count;
                 if (us == 0)
                 {
                     UsuarioCrear.FechaCreacion = DateTime.Now;
+                    UsuarioCrear.Activo = true;
                     ctx.Usuarios.Add(UsuarioCrear);
                     ctx.SaveChanges();
+                    res = UsuarioCrear.IdUsuario;
                 }
                 else
                 {
@@ -26,8 +29,9 @@ namespace Intec.DAL.TE
                 }
 
             }
+            return res;
         }
-
+        
         public void InactivarUsuario(int IdUsuario)
         {
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
@@ -46,10 +50,9 @@ namespace Intec.DAL.TE
                 if(res != null)
                 {
                     res.FechaUltimoInicioSesion = DateTime.Now;
-                    ctx.SaveChanges();
-
-                    ctx.Menus.ToList();
+                    ctx.SaveChanges();                    
                     ctx.Entry(res).Reference(u=>u.Roles).Load();
+                    res.Roles.Menus.ToList();
                     ctx.Entry(res).Reference(u=>u.TiposIdentificacion).Load();
                     ctx.Entry(res).Reference(u=>u.Ciudades).Load();                    
                 }
@@ -103,9 +106,6 @@ namespace Intec.DAL.TE
             }
         }
     
-        /**
-         * 
-         */
         public List<Usuarios> GetUsuariosByIdRol(int IdRol)
         {
             List<Usuarios> res = new List<Usuarios>();
@@ -116,5 +116,4 @@ namespace Intec.DAL.TE
             return res;
         }
     }
-
 }

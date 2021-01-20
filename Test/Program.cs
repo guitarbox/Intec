@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,6 +10,25 @@ namespace Test
 {
     class Program
     {
+        static void Main(string[] args) //UsuariosBE
+        {
+            //Intec.BL.DTO.Usuarios usuario = new Intec.BL.BE.UsuarioBE().IniciarSesion("1019032749", "1234");
+            int idUsuarioCreado = new Intec.BL.BE.UsuarioBE().CrearUsuario(new Intec.BL.DTO.Usuarios() {
+                Nombres = "Tatiana",
+                Apellidos = "Muñoz",
+                IdTipoIdentificacion = 1,
+                NumeroIdentificacion = "1019034383",
+                Direccion = "Calle 58b #14a-59",
+                IdCiudadDomicilio = "05001",
+                IdPaisOrigen = 57,
+                IdRol = 1,
+                IdUsuarioCreacion = 1,
+                Password = "1019034382",
+                Telefono = "3125675736",
+                Foto = "Foto"
+            });
+        }
+
         #region Test Clientes
         static void Main1(string[] args)
         {
@@ -607,7 +627,7 @@ namespace Test
 
         #region Test Visitas
 
-        static void Main(string[] args)
+        static void Main5(string[] args)
         {
             Intec.DAL.TE.VisitasTE PVisitasTE = new Intec.DAL.TE.VisitasTE();
 

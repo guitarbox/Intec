@@ -41,7 +41,7 @@ namespace LogInIntec.Controllers
             string errorMessage = string.Empty;
             try
             {
-                Usuario = new Intec.BL.BE.UsuarioBE().ObtenerUsuario(User, Pass);
+                //Usuario = new Intec.BL.BE.UsuarioBE().ObtenerUsuario(User, Pass);
             }
             catch (Exception ex)
             {
@@ -55,19 +55,19 @@ namespace LogInIntec.Controllers
         
         public JsonResult CrearUsuario(Intec.BL.DTO.Usuarios UsuarioCrear)
         {            
-            new Intec.BL.BE.UsuarioBE().IngresarUsuario(UsuarioCrear);   
+            //new Intec.BL.BE.UsuarioBE().IngresarUsuario(UsuarioCrear);   
             SetDicRta("", 0, false, "", Intec.BL.BE.UsuarioBE._duration);
             return Json(ansDic);
         }
 
         public JsonResult ObtenerTiposIdentificacion()
         {
-            List<Intec.BL.DTO.TipoIdentificacion> tiposId = new List<Intec.BL.DTO.TipoIdentificacion>();
+            List<Intec.BL.DTO.TiposIdentificacion> tiposId = new List<Intec.BL.DTO.TiposIdentificacion>();
             bool error = false;
             string errorMessage = string.Empty;
             try
             {
-                tiposId = new Intec.BL.BE.AdministracionBE().ObtenerTiposIdentificacion();
+                //tiposId = new Intec.BL.BE.AdministracionBE().ObtenerTiposIdentificacion();
             }
             catch (Exception ex)
             {

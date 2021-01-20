@@ -210,5 +210,11 @@
       <LastGenOutput>IntratecModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Intec.Common\Intec.Common.csproj">
+      <Project>{f160ebe9-6f93-4b7b-9022-29f3895d01de}</Project>
+      <Name>Intec.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
