@@ -61,6 +61,7 @@ namespace Intec.DAL
         public virtual DbSet<HistoricoAsignacionZona> HistoricoAsignacionZona { get; set; }
         public virtual DbSet<Zonas> Zonas { get; set; }
         public virtual DbSet<Usuarios> Usuarios { get; set; }
+        public virtual DbSet<Parametros> Parametros { get; set; }
     
         public virtual ObjectResult<uspConsultaGralCliente_Result> uspConsultaGralCliente(string numeroIdentificacion, string nombres, string direccion, string nroTelefonico, Nullable<bool> tieneVisitaProgramada)
         {

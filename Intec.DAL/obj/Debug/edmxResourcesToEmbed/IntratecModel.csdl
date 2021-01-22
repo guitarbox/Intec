@@ -225,6 +225,7 @@
       <Parameter Name="IdInspector" Mode="In" Type="Int32" />
       <Parameter Name="IdEstadoVisita" Mode="In" Type="String" />
     </FunctionImport>
+    <EntitySet Name="Parametros" EntityType="DB_A66D31_intratecPrbModel.Parametros" />
   </EntityContainer>
   <EntityType Name="Ciudades">
     <Key>
@@ -1222,6 +1223,8 @@
     <NavigationProperty Name="UsuariosEquipos" Relationship="DB_A66D31_intratecPrbModel.FK_UsuariosEquipos_Usuarios" FromRole="Usuarios" ToRole="UsuariosEquipos" />
     <NavigationProperty Name="Visitas" Relationship="DB_A66D31_intratecPrbModel.FK_Visitas_Usuarios" FromRole="Usuarios" ToRole="Visitas" />
     <NavigationProperty Name="Zonas" Relationship="DB_A66D31_intratecPrbModel.FK_Zonas_Usuarios" FromRole="Usuarios" ToRole="Zonas" />
+    <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="DebeCambiarContrasena" Type="Boolean" Nullable="false" />
   </EntityType>
   <Association Name="FK_Usuarios_Ciudades">
     <End Type="DB_A66D31_intratecPrbModel.Ciudades" Role="Ciudades" Multiplicity="1" />
@@ -1361,4 +1364,14 @@
     <Property Type="DateTime" Name="FechaModificacion" Nullable="true" Precision="23" />
     <Property Type="Int32" Name="IdUsuarioModificacion" Nullable="true" />
   </ComplexType>
+  <EntityType Name="Parametros">
+    <Key>
+      <PropertyRef Name="IdParametro" />
+    </Key>
+    <Property Name="IdParametro" Type="Int32" Nullable="false" />
+    <Property Name="NombreParametro" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DescripcionParametro" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="TipoDato" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ValorParametro" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+  </EntityType>
 </Schema>

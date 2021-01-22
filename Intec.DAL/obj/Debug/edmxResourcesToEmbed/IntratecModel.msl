@@ -513,6 +513,8 @@
     <EntitySetMapping Name="Usuarios">
       <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.Usuarios">
         <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="DebeCambiarContrasena" ColumnName="DebeCambiarContrasena" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Foto" ColumnName="Foto" />
           <ScalarProperty Name="Activo" ColumnName="Activo" />
           <ScalarProperty Name="IdRol" ColumnName="IdRol" />
@@ -556,5 +558,16 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <EntitySetMapping Name="Parametros">
+      <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.Parametros">
+        <MappingFragment StoreEntitySet="Parametros">
+          <ScalarProperty Name="ValorParametro" ColumnName="ValorParametro" />
+          <ScalarProperty Name="TipoDato" ColumnName="TipoDato" />
+          <ScalarProperty Name="DescripcionParametro" ColumnName="DescripcionParametro" />
+          <ScalarProperty Name="NombreParametro" ColumnName="NombreParametro" />
+          <ScalarProperty Name="IdParametro" ColumnName="IdParametro" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

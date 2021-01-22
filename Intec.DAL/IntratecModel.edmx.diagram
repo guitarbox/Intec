@@ -83,6 +83,7 @@
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_UsuariosEquipos_Usuarios" />
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Visitas_Usuarios" />
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Zonas_Usuarios" />
+        <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.Parametros" Width="1.5" PointX="0.75" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

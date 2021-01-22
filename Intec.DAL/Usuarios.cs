@@ -44,6 +44,8 @@ namespace Intec.DAL
         public int IdRol { get; set; }
         public bool Activo { get; set; }
         public string Foto { get; set; }
+        public string Email { get; set; }
+        public bool DebeCambiarContrasena { get; set; }
     
         public virtual Ciudades Ciudades { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

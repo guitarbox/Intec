@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BE\AdministracionBE.cs" />
+    <Compile Include="BE\ParametrosBE.cs" />
     <Compile Include="BE\UsuarioBE.cs" />
     <Compile Include="BE\SolicitudContactenosBE.cs" />
     <Compile Include="BE\SolicitudesProgramacionVisitasBE.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="DTO\IngresoUsuario.cs" />
     <Compile Include="DTO\MarcasEquipos.cs" />
     <Compile Include="DTO\Menus.cs" />
+    <Compile Include="DTO\Parametros.cs" />
     <Compile Include="DTO\Propiedades.cs" />
     <Compile Include="DTO\Roles.cs" />
     <Compile Include="DTO\TiposEquipo.cs" />

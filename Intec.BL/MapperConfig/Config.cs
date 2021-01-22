@@ -79,6 +79,18 @@ namespace Intec.BL.MapperConfig
                 return config.CreateMapper();
             }
         }
+        
+        public static AutoMapper.IMapper MapperParametros
+        {
+            get
+            {
+                var config = new AutoMapper.MapperConfiguration(cfg => {
+                    cfg.CreateMap<DAL.Parametros, DTO.Parametros>();
+                });
+
+                return config.CreateMapper();
+            }
+        }
 
     }
 }

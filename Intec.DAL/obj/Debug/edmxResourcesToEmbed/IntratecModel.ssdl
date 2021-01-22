@@ -247,6 +247,16 @@
     <Property Name="IdUsuarioModificacion" Type="int" />
     <Property Name="Activo" Type="bit" Nullable="false" />
   </EntityType>
+  <EntityType Name="Parametros">
+    <Key>
+      <PropertyRef Name="IdParametro" />
+    </Key>
+    <Property Name="IdParametro" Type="int" Nullable="false" />
+    <Property Name="NombreParametro" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DescripcionParametro" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="TipoDato" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ValorParametro" Type="nvarchar" MaxLength="1000" Nullable="false" />
+  </EntityType>
   <EntityType Name="Propiedades">
     <Key>
       <PropertyRef Name="IdPropiedades" />
@@ -428,6 +438,8 @@
     <Property Name="IdRol" Type="int" Nullable="false" />
     <Property Name="Activo" Type="bit" Nullable="false" />
     <Property Name="Foto" Type="nvarchar" MaxLength="150" />
+    <Property Name="Email" Type="nvarchar" MaxLength="200" />
+    <Property Name="DebeCambiarContrasena" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="UsuariosEquipos">
     <Key>
@@ -1074,6 +1086,7 @@
     <EntitySet Name="Menus" EntityType="Self.Menus" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MenusRol" EntityType="Self.MenusRol" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Paises" EntityType="Self.Paises" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Parametros" EntityType="Self.Parametros" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Propiedades" EntityType="Self.Propiedades" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SolicitudContactenos" EntityType="Self.SolicitudContactenos" Schema="dbo" store:Type="Tables" />

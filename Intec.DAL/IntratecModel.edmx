@@ -252,6 +252,16 @@
           <Property Name="IdUsuarioModificacion" Type="int" />
           <Property Name="Activo" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="Parametros">
+          <Key>
+            <PropertyRef Name="IdParametro" />
+          </Key>
+          <Property Name="IdParametro" Type="int" Nullable="false" />
+          <Property Name="NombreParametro" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DescripcionParametro" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="TipoDato" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ValorParametro" Type="nvarchar" MaxLength="1000" Nullable="false" />
+        </EntityType>
         <EntityType Name="Propiedades">
           <Key>
             <PropertyRef Name="IdPropiedades" />
@@ -433,6 +443,8 @@
           <Property Name="IdRol" Type="int" Nullable="false" />
           <Property Name="Activo" Type="bit" Nullable="false" />
           <Property Name="Foto" Type="nvarchar" MaxLength="150" />
+          <Property Name="Email" Type="nvarchar" MaxLength="200" />
+          <Property Name="DebeCambiarContrasena" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="UsuariosEquipos">
           <Key>
@@ -1079,6 +1091,7 @@
           <EntitySet Name="Menus" EntityType="Self.Menus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MenusRol" EntityType="Self.MenusRol" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Paises" EntityType="Self.Paises" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Parametros" EntityType="Self.Parametros" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Propiedades" EntityType="Self.Propiedades" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SolicitudContactenos" EntityType="Self.SolicitudContactenos" Schema="dbo" store:Type="Tables" />
@@ -1506,6 +1519,7 @@
             <Parameter Name="IdInspector" Mode="In" Type="Int32" />
             <Parameter Name="IdEstadoVisita" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="Parametros" EntityType="DB_A66D31_intratecPrbModel.Parametros" />
           </EntityContainer>
         <EntityType Name="Ciudades">
           <Key>
@@ -2503,6 +2517,8 @@
           <NavigationProperty Name="UsuariosEquipos" Relationship="DB_A66D31_intratecPrbModel.FK_UsuariosEquipos_Usuarios" FromRole="Usuarios" ToRole="UsuariosEquipos" />
           <NavigationProperty Name="Visitas" Relationship="DB_A66D31_intratecPrbModel.FK_Visitas_Usuarios" FromRole="Usuarios" ToRole="Visitas" />
           <NavigationProperty Name="Zonas" Relationship="DB_A66D31_intratecPrbModel.FK_Zonas_Usuarios" FromRole="Usuarios" ToRole="Zonas" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="DebeCambiarContrasena" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK_Usuarios_Ciudades">
           <End Type="DB_A66D31_intratecPrbModel.Ciudades" Role="Ciudades" Multiplicity="1" />
@@ -2642,6 +2658,16 @@
           <Property Type="DateTime" Name="FechaModificacion" Nullable="true" Precision="23" />
           <Property Type="Int32" Name="IdUsuarioModificacion" Nullable="true" />
         </ComplexType>
+        <EntityType Name="Parametros">
+          <Key>
+            <PropertyRef Name="IdParametro" />
+          </Key>
+          <Property Name="IdParametro" Type="Int32" Nullable="false" />
+          <Property Name="NombreParametro" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DescripcionParametro" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="TipoDato" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ValorParametro" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3160,6 +3186,8 @@
           <EntitySetMapping Name="Usuarios">
             <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.Usuarios">
               <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="DebeCambiarContrasena" ColumnName="DebeCambiarContrasena" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Foto" ColumnName="Foto" />
                 <ScalarProperty Name="Activo" ColumnName="Activo" />
                 <ScalarProperty Name="IdRol" ColumnName="IdRol" />
@@ -3203,6 +3231,17 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="Parametros">
+            <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.Parametros">
+              <MappingFragment StoreEntitySet="Parametros">
+                <ScalarProperty Name="ValorParametro" ColumnName="ValorParametro" />
+                <ScalarProperty Name="TipoDato" ColumnName="TipoDato" />
+                <ScalarProperty Name="DescripcionParametro" ColumnName="DescripcionParametro" />
+                <ScalarProperty Name="NombreParametro" ColumnName="NombreParametro" />
+                <ScalarProperty Name="IdParametro" ColumnName="IdParametro" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

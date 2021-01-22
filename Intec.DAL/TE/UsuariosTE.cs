@@ -19,6 +19,7 @@ namespace Intec.DAL.TE
                 {
                     UsuarioCrear.FechaCreacion = DateTime.Now;
                     UsuarioCrear.Activo = true;
+                    UsuarioCrear.DebeCambiarContrasena = true;
                     ctx.Usuarios.Add(UsuarioCrear);
                     ctx.SaveChanges();
                     res = UsuarioCrear.IdUsuario;
@@ -31,7 +32,7 @@ namespace Intec.DAL.TE
             }
             return res;
         }
-        
+
         public void InactivarUsuario(int IdUsuario)
         {
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
@@ -88,17 +89,18 @@ namespace Intec.DAL.TE
             }
         }
         
-        public void ActualizarContrasena(int IdUssuario, string Contrasena)
+        public void ActualizarContrasena(int IdUsuario, string Contrasena)
         {
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
-                Usuarios usuarioModificar = ctx.Usuarios.Where(u => u.IdUsuario == IdUssuario).FirstOrDefault();
+                Usuarios usuarioModificar = ctx.Usuarios.Where(u => u.IdUsuario == IdUsuario).FirstOrDefault();
                 if (usuarioModificar != null)
                 {
                     usuarioModificar.Password = Contrasena;
 
                     usuarioModificar.FechaCreacion = DateTime.Now;
-                    usuarioModificar.IdUsuarioModificacion = IdUssuario;
+                    usuarioModificar.IdUsuarioModificacion = IdUsuario;
+                    usuarioModificar.DebeCambiarContrasena = false;
                     ctx.SaveChanges();
                 }
                 else
@@ -112,6 +114,16 @@ namespace Intec.DAL.TE
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
                 res = ctx.Usuarios.Where(u => u.IdRol == IdRol).ToList();
+            }
+            return res;
+        }
+
+        public Usuarios ConsultarUsuarioParaCambioContrasena(string numeroIdentificacion, string email)
+        {
+            Usuarios res = null;
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                res = ctx.Usuarios.Where(u => u.NumeroIdentificacion.Equals(numeroIdentificacion) && u.Email.Equals(email)).FirstOrDefault();
             }
             return res;
         }
