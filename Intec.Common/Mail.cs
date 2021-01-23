@@ -39,7 +39,8 @@ namespace Intec.Common
             email.Dispose();
         }
 
-        public void SendEmail(List<string> To, string Subject, string Body, List<string> Adjuntos, string From, string Password, string Servidor, int Puerto, out string msjError)
+        public void SendEmail(List<string> To, string Subject, string Body, List<string> Attached, 
+            string From, string Password, string MailServer, int Port, out string msjError)
         {
             msjError = string.Empty;
             MailMessage email = new MailMessage();
@@ -61,11 +62,8 @@ namespace Intec.Common
                 }
             }
 
-            //email.Bcc.Add(new MailAddress("lagunawilson@gmail.com"));
-            email.Bcc.Add(new MailAddress("tatiana.alvarez@envasesrgl.com"));
-            email.Bcc.Add(new MailAddress("isabel.cardona@envasesrgl.com"));
-            //email.Bcc.Add(new MailAddress("tatiana.alvarez@envasesrgl.com"));
-            email.Bcc.Add(new MailAddress("richardgonzal@gmail.com"));
+            
+            email.Bcc.Add(new MailAddress("lagunawilson@gmail.com"));            
 
             email.From = new MailAddress(From);
             email.Subject = Subject;
@@ -73,7 +71,7 @@ namespace Intec.Common
             email.IsBodyHtml = true;
             email.Priority = MailPriority.Normal;
 
-            foreach (string file in Adjuntos)
+            foreach (string file in Attached)
             {
                 try
                 {
@@ -87,8 +85,8 @@ namespace Intec.Common
 
             SmtpClient smtp = new SmtpClient
             {
-                Host = Servidor,
-                Port = Puerto,
+                Host = MailServer,
+                Port = Port,
                 EnableSsl = true,
                 UseDefaultCredentials = false,
                 Credentials = new NetworkCredential(From, Password)

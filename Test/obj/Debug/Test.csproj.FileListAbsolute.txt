@@ -55,3 +55,5 @@ D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\Test\bin\Debug
 D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\Test\bin\Debug\Intec.BL.pdb
 D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\Test\bin\Debug\AutoMapper.pdb
 D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\Test\bin\Debug\AutoMapper.xml
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\Test\bin\Debug\Intec.Common.dll
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\Test\bin\Debug\Intec.Common.pdb

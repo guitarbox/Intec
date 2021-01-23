@@ -365,3 +365,5 @@ C:\Users\Ideapad\Desktop\Intec\Intec\IntecWebPage\obj\Debug\IntecWebPage.csproj.
 C:\Users\Ideapad\Desktop\Intec\Intec\IntecWebPage\obj\Debug\IntecWebPage.csproj.CopyComplete
 C:\Users\Ideapad\Desktop\Intec\Intec\IntecWebPage\obj\Debug\IntecWebPage.dll
 C:\Users\Ideapad\Desktop\Intec\Intec\IntecWebPage\obj\Debug\IntecWebPage.pdb
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\IntecWebPage\bin\Intec.Common.dll
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\IntecWebPage\bin\Intec.Common.pdb

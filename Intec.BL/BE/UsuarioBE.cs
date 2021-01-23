@@ -16,7 +16,16 @@ namespace Intec.BL.BE
 
         public void NotificarCreacionUsuario(int IdUsuario)
         {
-            //TODO: Acá se notifica al usuario de la creación de su usuario, indicándole qué contraseña tiene incialmente y que debe cambiarla
+            DAL.Usuarios resDal = new DAL.TE.UsuariosTE().ConsultarUsuario(IdUsuario);
+            if (resDal != null)
+            {
+                string[] param = BE.ParametrosBE.Parametros.Where(p => p.IdParametro == (int)Common.Enums.Parametros.SEND_MAIL_CONF).FirstOrDefault().ValorParametro.Split(';');
+                //intratec@intecsas.com.co;intr4t3c@;mail.intecsas.com.co;465
+                new Common.Mail().SendEmail(new List<string>() { resDal.Email }, "Creación Usuario - Intratec - IntecSAS",
+                    "", //string Body, //TODO: Acá se notifica al usuario de la creación de su usuario, indicándole qué contraseña tiene incialmente y que debe cambiarla
+                    new List<string>(),
+                    param[0], param[1], param[2], int.Parse(param[3]), out string msjError);
+            }
         }
 
         public void SolicitarCambioContrasena(string NumeroIdentificacion, string Email)
@@ -24,8 +33,12 @@ namespace Intec.BL.BE
             DAL.Usuarios resDal = new DAL.TE.UsuariosTE().ConsultarUsuarioParaCambioContrasena(NumeroIdentificacion, Email);
             if(resDal != null)
             {
-                string param = BE.ParametrosBE.Parametros.Where(p => p.IdParametro == (int)Common.Enums.Parametros.SEND_MAIL_CONF).FirstOrDefault().ValorParametro;
-                //TODO: Acá se debe enviar el link para restaurar la contraseña.
+                string[] param = BE.ParametrosBE.Parametros.Where(p => p.IdParametro == (int)Common.Enums.Parametros.SEND_MAIL_CONF).FirstOrDefault().ValorParametro.Split(';');
+                //intratec@intecsas.com.co;intr4t3c@;mail.intecsas.com.co;465
+                new Common.Mail().SendEmail(new List<string>() { resDal.Email }, "Cambio de Contraseña - Intratec - IntecSAS", 
+                    "", //string Body, //TODO: Acá se debe enviar el link para restaurar la contraseña.
+                    new List<string> (),
+                    param[0], param[1], param[2], int.Parse(param[3]), out string msjError);
             }
         }
 

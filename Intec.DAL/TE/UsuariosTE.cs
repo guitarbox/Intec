@@ -124,6 +124,34 @@ namespace Intec.DAL.TE
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
                 res = ctx.Usuarios.Where(u => u.NumeroIdentificacion.Equals(numeroIdentificacion) && u.Email.Equals(email)).FirstOrDefault();
+                if (res != null)
+                {
+                    res.FechaUltimoInicioSesion = DateTime.Now;
+                    ctx.SaveChanges();
+                    ctx.Entry(res).Reference(u => u.Roles).Load();
+                    res.Roles.Menus.ToList();
+                    ctx.Entry(res).Reference(u => u.TiposIdentificacion).Load();
+                    ctx.Entry(res).Reference(u => u.Ciudades).Load();
+                }
+            }
+            return res;
+        }
+
+        public Usuarios ConsultarUsuario(int IdUsuario)
+        {
+            Usuarios res = null;
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                res = ctx.Usuarios.Where(u => u.IdUsuario == IdUsuario).FirstOrDefault();
+                if (res != null)
+                {
+                    res.FechaUltimoInicioSesion = DateTime.Now;
+                    ctx.SaveChanges();
+                    ctx.Entry(res).Reference(u => u.Roles).Load();
+                    res.Roles.Menus.ToList();
+                    ctx.Entry(res).Reference(u => u.TiposIdentificacion).Load();
+                    ctx.Entry(res).Reference(u => u.Ciudades).Load();
+                }
             }
             return res;
         }

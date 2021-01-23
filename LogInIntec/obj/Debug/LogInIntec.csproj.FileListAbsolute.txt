@@ -458,3 +458,5 @@ C:\Users\Ideapad\Desktop\Intec Back Up\Intec\LogInIntec\obj\Debug\LogInIntec.csp
 C:\Users\Ideapad\Desktop\Intec Back Up\Intec\LogInIntec\obj\Debug\LogInIntec.csproj.CopyComplete
 C:\Users\Ideapad\Desktop\Intec Back Up\Intec\LogInIntec\obj\Debug\LogInIntec.dll
 C:\Users\Ideapad\Desktop\Intec Back Up\Intec\LogInIntec\obj\Debug\LogInIntec.pdb
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\LogInIntec\bin\Intec.Common.dll
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\LogInIntec\bin\Intec.Common.pdb

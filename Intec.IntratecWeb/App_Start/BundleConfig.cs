@@ -24,7 +24,16 @@ namespace Intec.IntratecWeb
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/fontawesome.css",
+                      "~/Content/brands.css",
+                      "~/Content/solid.css",
+                      "~/Content/Site.css",
+                      "~/Content/App.css"
+            ));
+            
+            bundles.Add(new ScriptBundle("~/bundles/App").Include(
+                        "~/Scripts/App/Usuarios.js"
+            ));
         }
     }
 }
