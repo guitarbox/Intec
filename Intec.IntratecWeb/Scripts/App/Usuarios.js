@@ -1,1 +1,4 @@
-﻿//$(document).ready(() => { alert('ok'); });
+﻿$(document).ready(() => {
+    //alert('ok');
+    //swal("Hello world!");
+});

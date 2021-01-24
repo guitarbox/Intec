@@ -11,10 +11,10 @@ using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;
-using Intec.WebAPI.Areas.HelpPage.ModelDescriptions;
-using Intec.WebAPI.Areas.HelpPage.Models;
+using Intec.WebApi.Areas.HelpPage.ModelDescriptions;
+using Intec.WebApi.Areas.HelpPage.Models;
 
-namespace Intec.WebAPI.Areas.HelpPage
+namespace Intec.WebApi.Areas.HelpPage
 {
     public static class HelpPageConfigurationExtensions
     {

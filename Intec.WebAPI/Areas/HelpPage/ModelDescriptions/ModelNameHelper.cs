@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Reflection;
 
-namespace Intec.WebAPI.Areas.HelpPage.ModelDescriptions
+namespace Intec.WebApi.Areas.HelpPage.ModelDescriptions
 {
     internal static class ModelNameHelper
     {

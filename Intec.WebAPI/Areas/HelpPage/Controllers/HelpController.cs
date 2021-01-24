@@ -1,10 +1,10 @@
 using System;
 using System.Web.Http;
 using System.Web.Mvc;
-using Intec.WebAPI.Areas.HelpPage.ModelDescriptions;
-using Intec.WebAPI.Areas.HelpPage.Models;
+using Intec.WebApi.Areas.HelpPage.ModelDescriptions;
+using Intec.WebApi.Areas.HelpPage.Models;
 
-namespace Intec.WebAPI.Areas.HelpPage.Controllers
+namespace Intec.WebApi.Areas.HelpPage.Controllers
 {
     /// <summary>
     /// The controller that will handle requests for the help page.

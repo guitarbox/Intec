@@ -49,14 +49,14 @@ namespace LogInIntec.Controllers
                 errorMessage = ex.Message;
             }
 
-            SetDicRta(Usuario, Usuario.Count, error, errorMessage, Intec.BL.BE.UsuarioBE._duration);
+            SetDicRta(Usuario, Usuario.Count, error, errorMessage, Intec.BL.BE.UsuariosBE._duration);
             return Json(ansDic);
         }
         
         public JsonResult CrearUsuario(Intec.BL.DTO.Usuarios UsuarioCrear)
         {            
             //new Intec.BL.BE.UsuarioBE().IngresarUsuario(UsuarioCrear);   
-            SetDicRta("", 0, false, "", Intec.BL.BE.UsuarioBE._duration);
+            SetDicRta("", 0, false, "", Intec.BL.BE.UsuariosBE._duration);
             return Json(ansDic);
         }
 

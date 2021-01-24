@@ -3,7 +3,7 @@ using System.Text;
 using System.Web;
 using System.Web.Http.Description;
 
-namespace Intec.WebAPI.Areas.HelpPage
+namespace Intec.WebApi.Areas.HelpPage
 {
     public static class ApiDescriptionExtensions
     {

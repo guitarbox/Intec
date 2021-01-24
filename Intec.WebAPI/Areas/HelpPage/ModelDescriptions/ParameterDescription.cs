@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
-namespace Intec.WebAPI.Areas.HelpPage.ModelDescriptions
+namespace Intec.WebApi.Areas.HelpPage.ModelDescriptions
 {
     public class ParameterDescription
     {

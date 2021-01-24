@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Optimization;
 
-namespace Intec.WebAPI
+namespace Intec.WebApi
 {
     public class BundleConfig
     {

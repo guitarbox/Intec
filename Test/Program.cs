@@ -13,7 +13,7 @@ namespace Test
         static void Main(string[] args) //UsuariosBE
         {
             //Intec.BL.DTO.Usuarios usuario = new Intec.BL.BE.UsuarioBE().IniciarSesion("1019032749", "1234");
-            int idUsuarioCreado = new Intec.BL.BE.UsuarioBE().CrearUsuario(new Intec.BL.DTO.Usuarios() {
+            int idUsuarioCreado = new Intec.BL.BE.UsuariosBE().CrearUsuario(new Intec.BL.DTO.Usuarios() {
                 Nombres = "Tatiana",
                 Apellidos = "Muñoz",
                 IdTipoIdentificacion = 1,

@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "LogIn";
+    Layout = "~/Views/Shared/_CleanLayout.cshtml";
+}
+<script>
+    $(document).ready(() => {
+        $("#btnIniciarSesoin_LogIn").click(() => {
+            //$.ajax({
+            //    type: "POST",
+            //    url: 'http://localhost:63440/Usuarios/LogIn', //, 'http://servicios.intecsas.com.co/Usuarios/LogIn', 
+            //    async: true,
+            //    data: JSON.stringify({ NumeroIdentificacion: $('#NumeroIdentificacion_LogIn').val(), Password: $('#Password_LogIn').val() }),
+            //    contentType: "application/json; charset=utf-8",
+            //    dataType: "json",
+            //    crossDomain: true,
+            //    success: function (rta) {
+            //        debugger;
+            //    },
+            //    error: function (xhr, ajaxOptions, thrownError) {
+            //        debugger;
+            //    }
+            //});
+            _peticionAjax('http://localhost:63440/Usuarios/LogIn', 'POST',
+                JSON.stringify({ NumeroIdentificacion: $('#NumeroIdentificacion_LogIn').val(), Password: $('#Password_LogIn').val() }),
+                true, response => {
+                    if (response != null)
+                        swal(response);
+                    else
+                        swal('Usuario y/o Contraseña incorrecto(s)');
+                });
+        });
+    });
+</script>
+<div class="bigContainer">
+    <div class="smallContainer">
+        <img src="../images/logo.png" height="200" width="350"/>
+        <input id="NumeroIdentificacion_LogIn" type="text" placeholder="Número Identificación" />        
+        <input id="Password_LogIn" type="password" placeholder="Contraseña" />        
+        <button id="btnIniciarSesoin_LogIn">Iniciar Sesión</button>
+        <a href="../Usuarios/RecuperarContrasena">Olvidé mi contraseña</a>
+    </div>
+</div>

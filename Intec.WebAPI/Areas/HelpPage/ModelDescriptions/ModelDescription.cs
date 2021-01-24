@@ -1,6 +1,6 @@
 using System;
 
-namespace Intec.WebAPI.Areas.HelpPage.ModelDescriptions
+namespace Intec.WebApi.Areas.HelpPage.ModelDescriptions
 {
     /// <summary>
     /// Describes a type model.

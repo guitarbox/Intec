@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Net.Http.Headers;
 using System.Web.Http.Description;
-using Intec.WebAPI.Areas.HelpPage.ModelDescriptions;
+using Intec.WebApi.Areas.HelpPage.ModelDescriptions;
 
-namespace Intec.WebAPI.Areas.HelpPage.Models
+namespace Intec.WebApi.Areas.HelpPage.Models
 {
     /// <summary>
     /// The model that represents an API displayed on the help page.

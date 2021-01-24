@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Intec.WebAPI")]
+[assembly: AssemblyTitle("Intec.WebApi")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Intec.WebAPI")]
+[assembly: AssemblyProduct("Intec.WebApi")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("f86b10f7-255d-4bdc-9914-e57aa26644da")]
+[assembly: Guid("1538ef3f-9fd7-4cd3-9a8e-a725cf5683b2")]
 
 // Version information for an assembly consists of the following four values:
 //

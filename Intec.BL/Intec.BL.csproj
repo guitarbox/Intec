@@ -51,7 +51,7 @@
   <ItemGroup>
     <Compile Include="BE\AdministracionBE.cs" />
     <Compile Include="BE\ParametrosBE.cs" />
-    <Compile Include="BE\UsuarioBE.cs" />
+    <Compile Include="BE\UsuariosBE.cs" />
     <Compile Include="BE\SolicitudContactenosBE.cs" />
     <Compile Include="BE\SolicitudesProgramacionVisitasBE.cs" />
     <Compile Include="BE\_beDefault.cs" />

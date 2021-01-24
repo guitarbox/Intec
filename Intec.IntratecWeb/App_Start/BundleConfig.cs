@@ -32,6 +32,8 @@ namespace Intec.IntratecWeb
             ));
             
             bundles.Add(new ScriptBundle("~/bundles/App").Include(
+                        "~/Scripts/_globalMethods.js",
+                        "~/Scripts/blockUI.js",
                         "~/Scripts/App/Usuarios.js"
             ));
         }
