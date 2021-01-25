@@ -25,7 +25,7 @@
                 JSON.stringify({ NumeroIdentificacion: $('#NumeroIdentificacion_LogIn').val(), Password: $('#Password_LogIn').val() }),
                 true, response => {
                     if (response != null)
-                        swal(response);
+                        swal(response.Nombres);
                     else
                         swal('Usuario y/o Contraseña incorrecto(s)');
                 });
