@@ -45,3 +45,5 @@ C:\Users\Ideapad\Desktop\Intec Back Up\Intec\Intec.BL\obj\Debug\Intec.BL.dll
 C:\Users\Ideapad\Desktop\Intec Back Up\Intec\Intec.BL\obj\Debug\Intec.BL.pdb
 D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\Intec.BL\bin\Debug\Intec.Common.dll
 D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\Intec.BL\bin\Debug\Intec.Common.pdb
+C:\Users\Ideapad\Desktop\Intec\Intec\Intec.BL\bin\Debug\Intec.Common.dll
+C:\Users\Ideapad\Desktop\Intec\Intec\Intec.BL\bin\Debug\Intec.Common.pdb

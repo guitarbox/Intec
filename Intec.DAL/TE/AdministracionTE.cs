@@ -120,7 +120,7 @@ namespace Intec.DAL.TE
             return res;
         }
 
-        public Departamentos ObtenerDepartamento(string IdDepartamento) //IdDepartamento es string
+        public Departamentos ObtenerDepartamento(string IdDepartamento)
         {
             Departamentos res = new Departamentos();
 
@@ -203,7 +203,7 @@ namespace Intec.DAL.TE
             return res;
         }
 
-        public Ciudades ObtenerCiudad(string IdCiudad) // Id ciudad es String
+        public Ciudades ObtenerCiudad(string IdCiudad)
         {
             Ciudades res = new Ciudades();
 

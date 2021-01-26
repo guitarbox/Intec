@@ -60,7 +60,7 @@ namespace Intec.DAL.TE
         {
             using(var ctx = new DB_A66D31_intratecPrbEntities1())
             {
-                if (ctx.UsuariosEquipos.Where(ue => ue.IdEquipo == IdEquipo).FirstOrDefault() == null) //Qué hace ese null?
+                if (ctx.UsuariosEquipos.Where(ue => ue.IdEquipo == IdEquipo).FirstOrDefault() == null)
                 {
                     ctx.Equipos.Remove(ctx.Equipos.Where(e => e.IdEquipo == IdEquipo).FirstOrDefault());
                     ctx.SaveChanges();
