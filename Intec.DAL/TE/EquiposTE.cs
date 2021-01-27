@@ -24,7 +24,7 @@ namespace Intec.DAL.TE
         }
 
         //1.1 ObtenerUnEquipo
-        public Equipos ObtenerEquipos(int IdEquipo)
+        public Equipos ObtenerEquipo(int IdEquipo)
         {
             Equipos res = new Equipos();
             using (var ctx = new DB_A66D31_intratecPrbEntities1())

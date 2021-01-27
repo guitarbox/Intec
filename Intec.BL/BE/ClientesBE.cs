@@ -24,14 +24,14 @@ namespace Intec.BL.BE
             return new DAL.TE.ClientesTE().ConsultaGralClientes(NumeroIdentificacion, Nombres, Direccion, NroTelefonico, TieneVisitaProgramada);
         }
 
-        public DTO.Clientes ObtenerCliente(int IdCliente)
+        public DTO.Clientes ConsultaDetalladaClientes(int IdCliente)
         {
             return MapperConfig.Config.MapperClientes.Map<DTO.Clientes>(new DAL.TE.ClientesTE().ConsultaDetalladaClientes(IdCliente));
         }
 
         //Editar
 
-        public void EditarCliente(DTO.Clientes Cliente, int IdUsuariomodificacion)
+        public void EditarClientes(DTO.Clientes Cliente, int IdUsuariomodificacion)
         {
             new DAL.TE.ClientesTE().EditarClientes(MapperConfig.Config.MapperClientes.Map<DAL.Clientes>(Cliente), IdUsuariomodificacion);
         }

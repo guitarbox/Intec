@@ -10,10 +10,11 @@ namespace Test
 {
     class Program
     {
-        static void Main(string[] args) //UsuariosBE
+        static void Main6(string[] args) //UsuariosBE
         {
             //Intec.BL.DTO.Usuarios usuario = new Intec.BL.BE.UsuarioBE().IniciarSesion("1019032749", "1234");
-            int idUsuarioCreado = new Intec.BL.BE.UsuariosBE().CrearUsuario(new Intec.BL.DTO.Usuarios() {
+            int idUsuarioCreado = new Intec.BL.BE.UsuariosBE().CrearUsuario(new Intec.BL.DTO.Usuarios()
+            {
                 Nombres = "Tatiana",
                 Apellidos = "Muñoz",
                 IdTipoIdentificacion = 1,
@@ -251,7 +252,7 @@ namespace Test
 
             //PEquiposTE.IngresarCalibracionEq(CEquipos);
 
-            //Resultado OK, Secuencia?, Falta validación
+            //Resultado OK, Falta validación
 
         }
         #endregion
@@ -742,7 +743,7 @@ namespace Test
 
             //Ok
 
-            var res = PVisitasTE.ConsultaVisitas( DateTime.Parse("21/01/2021"), DateTime.Parse("22/01/2021"), "", 2, "" );
+            var res = PVisitasTE.ConsultaVisitas(DateTime.Parse("21/01/2021"), DateTime.Parse("22/01/2021"), "", 2, "");
 
             //Id Uso tb Clientes y propieades, SolicitudProgramacionVisitas IP no NULLS, la cédula debeestar completa
             //Inspector se puede asignar a visita sin importar la ciudad
@@ -753,15 +754,612 @@ namespace Test
 
         #endregion
 
+        #region Test AdministracionBE
+
+        static void Main7(string[] args)
+        {
+            Intec.BL.BE.AdministracionBE TAdministracionBE = new Intec.BL.BE.AdministracionBE();
+
+            //Paises
+
+            //1
+
+            //Intec.BL.DTO.Paises PaisCrear = new Intec.BL.DTO.Paises()
+            //{
+            //    IdPais = 5,
+            //    Pais = "PruebaBE1",
+            //    CodigoPais = "BE1",
+            //    IdUsuarioCreacion = 2
+            //};
+
+            //TAdministracionBE.CrearPais(PaisCrear);
+
+            //Resultado OK
+
+            //2
+
+            //var res = TAdministracionBE.ObtenerPaises();
+
+            //var res = TAdministracionBE.ObtenerPais(5);
+
+            // Resultado OK
+
+            //3
+
+            //res.Pais = "EditarBE1";
+
+            //TAdministracionBE.EditarPais(res, 2);
+
+            //Resultado OK
+
+            //4
+
+            //TAdministracionBE.EliminarPais(5, 2);
+
+            //Resultado OK
+
+
+
+            //Departamentos
+            //1
+
+            //Intec.BL.DTO.Departamentos DepartamentoCrear = new Intec.BL.DTO.Departamentos()
+            //{
+            //    IdDepartamento = "02",
+            //    IdPais = 57,
+            //    Departamento = "PruebaBE1",
+            //    IdUsuarioCreacion = 2
+            //};
+
+            //TAdministracionBE.CrearDepartamento(DepartamentoCrear);
+
+            //Resultado OK
+
+            //2
+
+            //var res = TAdministracionBE.ObtenerDepartamentos(57);
+
+            //var res = TAdministracionBE.ObtenerDepartamento("02");
+
+            //Resultado OK
+
+            //3
+
+
+            //res.Departamento = "EditarBE";
+
+            //TAdministracionBE.EditarDepartamento(res, 2);
+
+            //Resultado OK
+
+            //4
+
+            //TAdministracionBE.EliminarDepartamento("02", 2);
+
+            //Resultado OK
+
+
+
+            //Ciudades
+
+            //1
+
+            //Intec.BL.DTO.Ciudades CiudadCrear = new Intec.BL.DTO.Ciudades()
+            //{
+            //    IdCiudad = "00003",
+            //    IdDepartamento = "01",
+            //    Ciudad = "PruebaBE",
+            //    IdUsuarioCreacion = 2
+            //};
+
+            //TAdministracionBE.CrearCiudad(CiudadCrear);
+
+            // Resultado OK, Se generó ciudad con Departamento inactivo
+
+            //2
+
+            //var res = TAdministracionBE.ObtenerCiudades("05");
+
+            //var res = TAdministracionBE.ObtenerCiudad("00003");
+
+            // Resultado OK
+
+            //3
+
+            //res.Ciudad = "EditarBE";
+
+            //TAdministracionBE.EditarCiudad(res, 2);
+
+            // Resultado OK
+
+            //4
+
+            //TAdministracionBE.EliminarCiudad("00003", 2);
+
+            // Resultado OK
 
 
 
 
+            //TiposIdentificacion
+
+            //1
+
+            //Intec.BL.DTO.TiposIdentificacion TipoIdentificacionCrear = new Intec.BL.DTO.TiposIdentificacion()
+            //{
+            //    IdTipoIdentificacion = 6,
+            //    TipoIdentificacion = "PruebaBE",
+            //    Abreviatura = "BE1",
+            //    CodigoTipoIdFiscal = 00,
+            //    IdUsuarioCreacion = 2
+            //};
+
+            //TAdministracionBE.CrearTipoIdentificacion(TipoIdentificacionCrear);
+
+            //Resultado OK, IdTipoIdentificacion no se autoincrementa
+
+            //2
+
+            //var res = TAdministracionBE.ObtenerTiposIdentificacion();
+
+            //var res = TAdministracionBE.ObtenerTipoIdentificacion(6);
+
+            //res.CodigoTipoIdFiscal = 2;
+            //res.Abreviatura = "OK";
+
+            //Resultado OK
+
+            //3
+
+            //TAdministracionBE.EditarTipoIdentificacion(res, 2);
+
+            //Resultado OK
+
+            //4
+
+            //TAdministracionBE.EliminarTipoIdentificacion(6, 2);
+
+            //Resultado OK
 
 
 
 
+            //MarcasEquipos
 
+            //1.
+
+            //Intec.BL.DTO.MarcasEquipos MEquipos = new Intec.BL.DTO.MarcasEquipos()
+            //{
+            //    IdMarcaEquipo = 3,
+            //    MarcaEquipo = "Bauker",
+            //    IdUsuarioCreacion = 2
+            //};
+
+            //TAdministracionBE.CrearMarcaEquipo(MEquipos);
+
+            //Resultado OK, IdMarcaEquipo no se autoincrementa
+
+            //2.
+
+            //var res = TAdministracionBE.ObtenerMarcasEquipos();
+
+            //var res = TAdministracionBE.ObtenerMarcaEquipo(2);
+
+            //Resultado OK
+
+
+            //3.
+
+            //res.MarcaEquipo = "EditarBE";
+
+            //TAdministracionBE.EditarMarcaEquipo(res, 2);
+
+            //Resultado OK
+
+            //4
+
+            //TAdministracionBE.EliminarMarcaEquipo(3, 2);
+
+            //Resultado OK
+
+
+
+
+            //TiposEquipos
+
+            //1.
+
+            //Intec.BL.DTO.TiposEquipo PTiposEquipo = new Intec.BL.DTO.TiposEquipo()
+            //{
+            //    IdTipoEquipo = 2,
+            //    TipoEquipo = "PruebaBE",
+            //    IdUsuarioCreacion = 2
+            //};
+
+            //TAdministracionBE.CrearTipoEquipo(PTiposEquipo);
+
+            //Resultado OK
+
+            //2
+
+            //var res = TAdministracionBE.ObtenerTiposEquipos();
+
+            //var res1 = TAdministracionBE.ObtenerTipoEquipo(2);
+
+            //Resultado OK
+
+            //3
+
+            //res1.TipoEquipo = "EditarBE";
+
+            //TAdministracionBE.EditarTipoEquipo(res1, 2);
+
+            //Resultado OK
+
+            //4
+
+            //TAdministracionBE.EliminarTipoEquipo(3, 2);
+
+            //Resultado OK
+
+
+
+
+            //TiposPersona
+
+            //1
+
+            //Intec.BL.DTO.TiposPersona TipoPersonaCrear = new Intec.BL.DTO.TiposPersona()
+            //{
+            //    IdTipoPersona = 5,
+            //    TipoPersona = "PruebaBE",
+            //    CodigoTipoPersona = "3",
+            //    IdUsuarioCreacion = 2
+            //};
+
+            //TAdministracionBE.CrearTipoPersona(TipoPersonaCrear);
+
+            //Resultado OK, IdTipoPersona no se autoincrementa
+
+            //2
+
+            //var res = TAdministracionBE.ObtenerTiposPersona();
+
+            //var res1 = TAdministracionBE.ObtenerTipoPersona(5);
+
+            //3
+
+            //res1.TipoPersona = "EditarBE";
+
+            //TAdministracionBE.EditarTipoPersona(res1, 2);
+
+            //Resultado OK
+
+            //4
+
+            //TAdministracionBE.EliminarTipoPersona(5, 2);
+
+            // Resultado OK
+
+
+
+
+            //TiposPropiedades
+
+            //1
+
+            //Intec.BL.DTO.TiposPropiedades TipoPropiedadCrear = new Intec.BL.DTO.TiposPropiedades()
+            //{
+            //    IdTipoPropiedad = 6,
+            //    TipoPropiedad = "PruebaBE",
+            //    IdUsuarioCreacion = 2
+            //};
+
+            //TAdministracionBE.CrearTipoPropiedad(TipoPropiedadCrear);
+
+            //Resultado OK, IdTipoPropiedad no se autoincrementa
+
+            //2
+
+            //var res = TAdministracionBE.ObtenerTiposPropiedades();
+
+            //var res1 = TAdministracionBE.ObtenerTipoPropiedad(5);
+
+            //Resultado OK
+
+            //3
+
+            //res1.TipoPropiedad = "EditarBE";
+
+            //TAdministracionBE.EditarTipoPropiedad(res1, 2);
+
+            //Resultado OK
+
+            //4
+
+            //TAdministracionBE.EliminarTipoPropiedad(4, 2);
+
+            //Resultado OK
+
+
+
+
+            //UsosPropiedades
+
+            //1
+
+            //Intec.BL.DTO.UsosPropiedades UsoPropiedadCrear = new Intec.BL.DTO.UsosPropiedades()
+            //{
+            //    IdUso = 6,
+            //    Uso = "PruebaBE",
+            //    IdUsuarioCreacion = 2
+            //};
+
+            //TAdministracionBE.CrearUsoPropiedad(UsoPropiedadCrear);
+
+            //Resultado OK, IdUso no se autoincrementa, me permite crear con IdUsuarioCreacion 10
+
+            //2
+
+            //var res = TAdministracionBE.ObtenerUsosPropiedades();
+
+            //var res1 = TAdministracionBE.ObtenerUsoPropiedad(4);
+
+            //Resultado OK
+
+            //3
+
+            //res1.Uso = "EditarBE";
+
+            //TAdministracionBE.EditarUsoPropiedad(res1, 2);
+
+            //Resultado OK
+
+            //4
+
+            //TAdministracionBE.EliminarUsoPropiedad(3, 2);
+
+            //Resultado OK
+
+
+        }
+
+        #endregion
+
+        #region Test ClientesBE
+
+        static void Main8(string[] args)
+        {
+
+            Intec.BL.BE.ClientesBE TClientesBE = new Intec.BL.BE.ClientesBE();
+
+            //1.
+
+            //var res = TClientesBE.ConsultaGralClientes("", "cárdenas", "", "", false);
+
+            // Resultado OK, no es case sensitive pero sí requiere tildes
+
+            //2.
+
+            //var res1 = TClientesBE.ConsultaDetalladaClientes(3);
+
+            //Resultado OK
+
+            //3. 
+
+            //res1.TelefonoFijo = "7777777";
+            //TClientesBE.EditarClientes(res1, 2);
+
+            //Resultado OK
+
+            //4.
+            //Intec.BL.DTO.Propiedades PropiedadCrear = new Intec.BL.DTO.Propiedades()
+            //{
+            //    IdCliente = 10,
+            //    Direccion = "Cra 85 # 23 - 78",
+            //    IdUso = 1,
+            //    Telefono = "6543217",
+            //    Foto = "Foto",
+            //    Observaciones = "Esto es una observación",
+            //    IdTipoPropiedad = 2,
+            //    IdUsuarioCreacion = 2
+
+            //};
+
+            //TClientesBE.CrearPropiedad(PropiedadCrear);
+
+            //Resultado OK
+
+            //5.
+
+            //var res = TClientesBE.ConsultaDetalladaPropiedad(4);
+            //res.Observaciones = "Esto es un edit BE";
+            //TClientesBE.EditarPropiedad(res, 2);
+
+            //6.
+
+            //TClientesBE.EliminarPropiedad(9);
+
+            //Resultado OK
+
+            //7.
+            //Intec.BL.DTO.Clientes ClienteCrear = new Intec.BL.DTO.Clientes()
+            //{
+            //    NumeroIdentificacion = "111223365",
+            //    IdTipoIdentificacion = 1,
+            //    Nombres = "BE",
+            //    Apellidos = "test",
+            //    TelefonoFijo = "9876543",
+            //    TelefonoCel1 = "3150000000",
+            //    TelefonoCel2 = "3105555555",
+            //    Direccion = "Cra 41 # 58 - 74",
+            //    IdCiudad = "05001",
+            //    Foto = "",
+            //    Email1 = "qwewqlive.com",
+            //    IdTipoPersona = 1,
+            //    IdUso = 1,
+            //    IdUsuarioCreacion = 2
+            //};
+
+            //TClientesBE.CrearCliente(ClienteCrear);
+
+            //Resultado OK, Correo sin @
+
+        }
+
+        #endregion
+
+        #region Test EquiposBE
+        static void Main9(string[] args)
+        {
+            Intec.BL.BE.EquiposBE PEquiposTE = new Intec.BL.BE.EquiposBE();
+
+            //1.
+
+            //var res = PEquiposTE.ObtenerEquipos(1, 1, "02");
+
+            //Resultado OK
+
+            //1.1
+
+            //var res = PEquiposTE.ObtenerEquipo(2);
+
+            //Resultado OK
+
+            //2.
+
+            //Intec.BL.DTO.Equipos EquiposCrear = new Intec.BL.DTO.Equipos()
+            //{
+            //    Area = "Area2",
+            //    SerieIDInterno = "EQ-006BE",
+            //    IdTipoEquipo = 1,
+            //    IdMarcaEquipo = 1,
+            //    Modelo = "Modelo 02",
+            //    RangoMedicion = "0 - 1000",
+            //    Tolerancia = "10",
+            //    Calibrado = true,
+            //    PeriodoCalibracion = "120",
+            //    PeriodoVerificacion = "60",
+            //    IdUsuarioCreacion = 2
+
+            //};
+
+            //PEquiposTE.AgregarEquipo(EquiposCrear);
+
+            //Resultado OK
+
+            //3.
+
+            //PEquiposTE.EliminarEquipo(6);
+
+            //Resultado OK
+
+            //4.
+
+            //PEquiposTE.TramitarEquipoInspector(7, 3, 2, "ASIGNACION", "Prueba BE");
+
+            // Resultado OK
+
+            //5.
+
+            //Intec.BL.DTO.VerificacionesLabEquipos VEquipos = new Intec.BL.DTO.VerificacionesLabEquipos()
+            //{
+            //    IdEquipo = 1,
+            //    FechaVerificacion = DateTime.Today,
+            //    NroCertificado = "0002",
+            //    Laboratorio = "QWERTY",
+            //    Observaciones = "Prueba ingreso BE2",
+            //    IdUsuarioCreacion = 2
+            //};
+
+            //PEquiposTE.IngresarVerificacionLAB(VEquipos);
+
+            //Resultado OK, Validaciones
+
+            //6.
+
+            //Intec.BL.DTO.CalibracionesEquipos CEquipos = new Intec.BL.DTO.CalibracionesEquipos()
+            //{
+            //    IdEquipo = 7,
+            //    FechaCalibracion = DateTime.Today,
+            //    Laboratorio = "ABCDE",
+            //    Observaciones = "Prueba ingreso BE",
+            //    IdUsuarioCreacion = 2
+            //};
+
+            //PEquiposTE.IngresarCalibracionEq(CEquipos);
+
+            //Resultado OK, Validaciones
+
+        }
+
+        #endregion
+
+        #region Test PapeleriaBE
+        static void Main10(string[] args)
+        {
+            Intec.BL.BE.PapeleriaBE PPapeleriaTE = new Intec.BL.BE.PapeleriaBE();
+            //Test Papelería
+            //1. 
+
+            //Intec.BL.DTO.Formatos formatoCrear = new Intec.BL.DTO.Formatos()
+            //{
+            //    NroFormato = "FTOBE-01",
+            //    Formato = "PruebaBE",
+            //    Mascara = 4,
+            //    Activo = true,
+            //    IdUsuarioCreacion = 2
+            //};
+
+            //PPapeleriaTE.CrearFormato(formatoCrear);
+
+            //Resultado OK
+
+            //4.
+
+            //var res = PPapeleriaTE.ConsultarFormato(8);
+
+            //Resultado Ok
+
+            //2.
+
+            //res.Formato = "Edit BE";
+            //PPapeleriaTE.EditarFormato(res, 2);
+
+            // Resultado OK
+
+            //3.
+
+            //var res = PPapeleriaTE.ConsultarFormatos();
+
+            //Resultado OK
+
+            //5.
+
+            //PPapeleriaTE.EliminarFormato(6);
+
+            //Resultado OK, Como funciona la excepción?
+
+            //6.
+
+            //PPapeleriaTE.AsignarRangoConsecutivosFormatoInspector(8, 3, 15, 16, 2);
+
+            // Resultado OK
+
+            //7.
+
+            //PPapeleriaTE.IngresarConsecutivosFormatoBodega(9, 1, 5, 2);
+
+            // Resultado OK
+
+            //8.
+
+            //PPapeleriaTE.ActualizarEstadoConsecutivo(8, new List<int>() { 15, 16 }, "R", 3, "Cambio a estado BE");
+
+            // Resultado OK, De bodega directo a aceptación
+        }
+
+        #endregion
 
     }
 }

@@ -209,7 +209,7 @@ namespace Intec.BL.BE
 
         public DTO.TiposEquipo ObtenerTipoEquipo(int IdTipoEquipo)
         {
-            return MapperConfig.Config.MapperAdministracion.Map<DTO.TiposEquipo>(new DAL.TE.AdministracionTE().ObtenerTipoPropiedad(IdTipoEquipo));
+            return MapperConfig.Config.MapperAdministracion.Map<DTO.TiposEquipo>(new DAL.TE.AdministracionTE().ObtenerTipoEquipo(IdTipoEquipo));
         }
         //Editar
 

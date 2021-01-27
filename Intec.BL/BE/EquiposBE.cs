@@ -26,7 +26,7 @@ namespace Intec.BL.BE
 
         public DTO.Equipos ObtenerEquipo(int IdEquipo)
         {
-            return MapperConfig.Config.MapperEquipos.Map<DTO.Equipos>(new DAL.TE.EquiposTE().ObtenerEquipos(IdEquipo));
+            return MapperConfig.Config.MapperEquipos.Map<DTO.Equipos>(new DAL.TE.EquiposTE().ObtenerEquipo(IdEquipo));
         }
 
         //Editar no hay
