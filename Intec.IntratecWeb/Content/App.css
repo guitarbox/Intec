@@ -68,3 +68,84 @@
         color: #C5CF31;
         font-weight: bold
     }
+
+/* Styles for Layout*/
+/** {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}*/
+
+.body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+    height: 100vh;
+    flex-flow: column;
+}
+
+.header {
+    color:white;
+    background-color:black;
+    margin: 0;
+    padding: 0px 10px 5px 10px;
+    box-sizing: border-box;
+    height: 5rem;
+    display:flex;
+    justify-content:space-between;
+    align-items:center
+}
+
+.container {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    width:100%;    
+}
+
+/*.content {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;    
+    outline: 1px solid cyan;    
+}*/
+
+.footer {
+    margin: 0;
+    padding: 0 10px 5px 10px;
+    box-sizing: border-box;
+    height: 4rem;
+    margin-top: auto;
+    background-color: #252525;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center
+}
+
+.menu {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    display: flex;
+}
+
+.menu-item {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    flex: 1;
+    outline: 1px solid cyan;
+    line-height: 3rem;
+    text-align: center;
+    transition: flex .5s;
+}
+
+    .menu-item:hover {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        flex: 8;
+    }

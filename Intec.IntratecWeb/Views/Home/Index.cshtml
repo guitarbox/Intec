@@ -2,32 +2,47 @@
     ViewBag.Title = "Home Page";
 }
 <script>
-    $(document).ready(() => { window.location.href = "/Usuarios/LogIn" });
-</script>
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+    var IdMenuPadreSelected = null;
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+    $(document).ready(() => {
+        Abrir(IdMenuPadreSelected);
+    });
+    function Abrir(IdMenu) {
+        if (IdMenu == null) {
+            $("#a_atras").hide();
+            $("#menus").empty();
+            UsuarioSesion.Roles.Menus.filter(m => m.IdMenuPadre == null).forEach(m1 => {
+                $("#menus").append('<div onclick="Abrir(' + m1.IdMenu + ')" style="cursor:pointer; background-color: #C5CF31; color: white; margin:5px; border:2px solid black; border-radius:50px; width:130px;height:130px; display:flex; flex-direction:column; justify-content:center; align-items:center;"><span class="' + m1.Icono + '"></span><br/><p style="font-weight:bold">' + m1.Label + '</p></div>');
+            });
+        }
+        else {
+            if (UsuarioSesion.Roles.Menus.some(m => m.IdMenuPadre == IdMenu)) {
+                IdMenuPadreSelected = IdMenu;
+                $("#a_atras").show();
+                $("#menus").empty();
+                UsuarioSesion.Roles.Menus.filter(m => m.IdMenuPadre == IdMenu).forEach(m1 => {
+                    $("#menus").append('<div onclick="Abrir(' + m1.IdMenu + ')" style="cursor:pointer; background-color: #C5CF31; color: white; margin:5px; border:2px solid black; border-radius:50px; width:130px;height:130px; display:flex; flex-direction:column; justify-content:center; align-items:center;"><span class="' + m1.Icono + '"></span><br/><p style="font-weight:bold">' + m1.Label + '</p></div>');
+                });
+            }
+            else {
+                IdMenuPadreSelected = -1;
+                $("#a_atras").hide();
+                window.location.href = UsuarioSesion.Roles.Menus.filter(m => m.IdMenu == IdMenu)[0].Url;
+            }
+        }
+    }
+    function Atras() {
+        Abrir(UsuarioSesion.Roles.Menus.filter(m => m.IdMenu == IdMenuPadreSelected)[0].IdMenuPadre);   
+    }
+</script>
+<div style="display:flex; flex-direction:column; justify-content:center; align-items:center; height:95vh">
+    <div id="menus" style="display:flex; flex-direction:row; flex-wrap:wrap; justify-content:space-around; align-items:center; width:80%">
+        @*<div style="border:1px solid black; width:100px;height:100px; display:flex; justify-content:center; align-items:center;"><a href="#">Descripcion</a></div>
+            <div style="border:1px solid black; width:100px;height:100px; display:flex; justify-content:center; align-items:center;"><a href="#">Descripcion</a></div>
+            <div style="border:1px solid black; width:100px;height:100px; display:flex; justify-content:center; align-items:center;"><a href="#">Descripcion</a></div>
+            <div style="border:1px solid black; width:100px;height:100px; display:flex; justify-content:center; align-items:center;"><a href="#">Descripcion</a></div>
+            <div style="border:1px solid black; width:100px;height:100px; display:flex; justify-content:center; align-items:center;"><a href="#">Descripcion</a></div>
+            <div style="border:1px solid black; width:100px;height:100px; display:flex; justify-content:center; align-items:center;"><a href="#">Descripcion</a></div>*@
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
+    <a style="color:#8090B5;" id="a_atras" onclick="Atras();"><i class="fas fa-long-arrow-alt-left fa-2x"></i></a>
 </div>
