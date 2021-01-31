@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Intec.BL.DTO
 {
-    public class UsosPropieades
+    public class UsosPropiedades
     {
         public int IdUso { get; set; }
         public string Uso { get; set; }
