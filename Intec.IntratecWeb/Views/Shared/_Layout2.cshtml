@@ -20,20 +20,16 @@
 <body class="body">
     <header class="header">
         <div><img src="../images/logo2.png" /></div>
-        <div style="display:flex; flex-direction:column; justify-content:center; align-items:center">
-            <div id="UsuarioSesion"></div>
-            <div id="Perfil"></div>
-        </div>
+        <div id="UsuarioSesion"></div>
         <div onclick="CerrarSesion();"><i class="fas fa-sign-out-alt fa-2x" style="cursor:pointer"></i></div>
     </header>
     <section class="container">
         @RenderBody()        
     </section>
     <footer class="footer">
-        @*<div style="display:flex; flex-direction:column; justify-content:center; align-items:center">*@
-        <div> Copyright © 2021 Todos los derechos reservados Intec SAS</div>
         <div><label id="hora">HOY</label></div>
-        @*</div>*@
+        <div> Copyright © 2021 Todos los derechos reservados Intec SAS</div>
+        <div id="Perfil"></div>
     </footer>
 </body>
 </html>

@@ -1,5 +1,5 @@
 ﻿body {
-    color: #8090B5
+    color: #808080
 }
 
 /* Styles for CleanLayout*/
@@ -115,12 +115,13 @@
     margin: 0;
     padding: 0 10px 5px 10px;
     box-sizing: border-box;
-    height: 4rem;
+    /*height: 5rem;*/
     margin-top: auto;
     background-color: #252525;
     color: white;
     display: flex;
-    justify-content: space-between;
+    flex-direction:column;
+    justify-content: center;
     align-items: center
 }
 

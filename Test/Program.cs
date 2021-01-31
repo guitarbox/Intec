@@ -10,7 +10,7 @@ namespace Test
 {
     class Program
     {
-        static void Main6(string[] args) //UsuariosBE
+        static void Main(string[] args) //UsuariosBE
         {
             //Intec.BL.DTO.Usuarios usuario = new Intec.BL.BE.UsuarioBE().IniciarSesion("1019032749", "1234");
             int idUsuarioCreado = new Intec.BL.BE.UsuariosBE().CrearUsuario(new Intec.BL.DTO.Usuarios()

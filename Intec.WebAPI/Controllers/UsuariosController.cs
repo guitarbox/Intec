@@ -12,7 +12,7 @@ namespace Intec.WebApi.Controllers
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class UsuariosController : ApiController
     {
-        [Route("Usuarios/LogIn")]
+        [Route("api/Usuarios/LogIn")]
         [HttpPost]
         public Intec.BL.DTO.Usuarios LogIn([FromBody] TokenLogIn Token)
         {

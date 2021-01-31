@@ -11,5 +11,8 @@ var VerbosREST = {
 var URL_SERVICE = 'http://servicios.intecsas.com.co/';
 
 var URI_SERVICE = {
-    LogIn: 'Usuarios/LogIn'
+    //Administracion
+    Parametros: 'api/Parametros',
+    //Usuarios
+    LogIn: 'api/Usuarios/LogIn'
 };
