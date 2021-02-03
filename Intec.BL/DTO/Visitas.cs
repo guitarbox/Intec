@@ -24,5 +24,16 @@ namespace Intec.BL.DTO
         public Nullable<int> IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaModificacion { get; set; }
         public Nullable<int> IdUsuarioModificacion { get; set; }
+
+        public virtual Ciudades Ciudades { get; set; }
+        public virtual Clientes Clientes { get; set; }
+        public virtual ICollection<EquiposVisita> EquiposVisita { get; set; }
+        public virtual EstadosVisita EstadosVisita { get; set; }
+        public virtual ICollection<FormatosVisita> FormatosVisita { get; set; }
+        public virtual ICollection<FotosVisita> FotosVisita { get; set; }
+        public virtual SolicitudesProgramacionVisitas SolicitudesProgramacionVisitas { get; set; }
+        public virtual Propiedades Propiedades { get; set; }
+        public virtual Zonas Zonas { get; set; }
+        public virtual Usuarios Usuarios { get; set; }
     }
 }

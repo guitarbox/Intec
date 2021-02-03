@@ -10,7 +10,7 @@ namespace Test
 {
     class Program
     {
-        static void Main(string[] args) //UsuariosBE
+        static void Main6(string[] args) //UsuariosBE
         {
             //Intec.BL.DTO.Usuarios usuario = new Intec.BL.BE.UsuarioBE().IniciarSesion("1019032749", "1234");
             int idUsuarioCreado = new Intec.BL.BE.UsuariosBE().CrearUsuario(new Intec.BL.DTO.Usuarios()
@@ -745,7 +745,7 @@ namespace Test
 
             var res = PVisitasTE.ConsultaVisitas(DateTime.Parse("21/01/2021"), DateTime.Parse("22/01/2021"), "", 2, "");
 
-            //Id Uso tb Clientes y propieades, SolicitudProgramacionVisitas IP no NULLS, la cédula debeestar completa
+            //Id Uso tb Clientes y propieades, SolicitudProgramacionVisitas IP no NULLS, la cédula debe estar completa
             //Inspector se puede asignar a visita sin importar la ciudad
 
 
@@ -1361,5 +1361,134 @@ namespace Test
 
         #endregion
 
+        #region Test VisitasBE
+
+        static void Main(string[] args)
+        {
+            Intec.BL.BE.VisitasBE PVisitasBE = new Intec.BL.BE.VisitasBE();
+
+            //Zonas
+
+            //1
+
+            //Intec.BL.DTO.Zonas ZonaCraer = new Intec.BL.DTO.Zonas()
+            //{
+            //    IdZona = 6,
+            //    IdCiudad = "11001",
+            //    Descripcion = "Esta es la creación BE",
+            //    IdUsuarioCreacion = 2
+            //};
+
+            //PVisitasBE.CrearZona(ZonaCraer);
+
+            //Resultado OK, IdZona no se autoincrementa
+
+            //2
+
+            //var res = PVisitasBE.ObtenerZonas();
+
+            //3
+
+            //var res = PVisitasBE.ObtenerZona(3);
+
+            //Resultado OK
+
+            //4 AsignarZona
+
+            //PVisitasBE.AsignarZonaInspector(6, "11001", 3, 2);
+
+            //Resultado OK, Falta excpeción para Inspector no existe?
+
+            //5 Reasignar
+
+            //PVisitasBE.ReAsignarZonaInspector(6, "11001", 2, 2);
+
+            //Resultado OK
+
+
+
+            //Visita
+
+            //1
+
+            //Intec.BL.DTO.Visitas VisitaProgramar = new Intec.BL.DTO.Visitas()
+            //{
+            //    IdSolicitudProgramacion = 3,
+            //    IdCliente = 3,
+            //    IdPropiedad = 4,
+            //    Direccion = "Cr 80 C # 42 C 83 Sur",
+            //    IdZona = 1,
+            //    IdCiudad = "11001",
+            //    FechaVisita = DateTime.Today,
+            //    IdInspector = 3,
+            //    ObservacionesVisita = "Esto es una creación BE",
+            //    IdEstadoVisitas = "P",
+            //    OrigenVisita = "Sitio Web",
+            //    IdUsuarioCreacion = 2
+            //};
+
+            //PVisitasBE.ProgramarVisita(VisitaProgramar);
+
+            //Resultado OK, se pueden crear 2 iguales
+
+            //2
+
+            //PVisitasBE.ReasignacionVisita(10, 2);
+
+            //Fecha y Id modificación?
+
+            //3
+
+            //Intec.BL.DTO.FotosVisita FotoCrear = new Intec.BL.DTO.FotosVisita()
+            //{
+            //    IdVisita = 11,
+            //    Path = "RutaFoto"
+            //};
+
+            //PVisitasBE.AgregarFotoVisita(FotoCrear, 2);
+
+            //Resultado OK, pude crear una visita id 11 con argumento 2
+
+            //4
+
+            //Intec.BL.DTO.FormatosVisita FormatoCrear = new Intec.BL.DTO.FormatosVisita()
+            //{
+            //    IdVisita = 11,
+            //    IdFormato = 8,
+            //    Consecutivo = 4
+            //};
+
+            //PVisitasBE.AgregarFormatoVisita(FormatoCrear, 2);
+
+            //Resultado OK
+
+            // 5
+
+            //Intec.BL.DTO.EquiposVisita EquipoVisitaCrear = new Intec.BL.DTO.EquiposVisita()
+            //{
+            //    IdVisita = 11,
+            //    IdEquipo = 2
+            //};
+
+            //PVisitasBE.AgregarEquipoVisita(EquipoVisitaCrear, 11);
+
+            //Resultado OK, Deja duplicar el equipo
+
+            //6
+
+            //var res = PVisitasBE.ConsultarVisita(2);
+
+            //Ok
+
+            var res = PVisitasBE.ConsultaVisitas(DateTime.Parse("02/02/2021"), DateTime.Parse("22/02/2021"), "", 3, "");
+
+            //Id Uso tb Clientes y propieades, SolicitudProgramacionVisitas IP no NULLS, la cédula debeestar completa
+            //Inspector se puede asignar a visita sin importar la ciudad
+
+
+            #endregion
+
+        }
     }
+
 }

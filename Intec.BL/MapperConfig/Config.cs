@@ -112,8 +112,6 @@ namespace Intec.BL.MapperConfig
 
         #endregion
 
-        //No son parte de la tarea
-
         #region Visitas
         public static AutoMapper.IMapper MapperVisitas
         {
@@ -121,6 +119,19 @@ namespace Intec.BL.MapperConfig
             {
                 var config = new AutoMapper.MapperConfiguration(cfg => {
 
+                    cfg.CreateMap<DTO.Zonas, DAL.Zonas>();
+                    cfg.CreateMap<DAL.Zonas, DTO.Zonas>();
+
+                    cfg.CreateMap<DTO.Visitas, DAL.Visitas>();
+                    cfg.CreateMap<DAL.Visitas, DTO.Visitas>();
+
+                    cfg.CreateMap<DTO.FotosVisita, DAL.FotosVisita>();
+                    cfg.CreateMap<DTO.FormatosVisita, DAL.FormatosVisita>();
+                    cfg.CreateMap<DTO.EquiposVisita, DAL.EquiposVisita>();
+
+                    cfg.CreateMap<DAL.uspConsultarVisitas_Result, DTO.uspConsultarVisitas_Result>();
+
+                    cfg.CreateMap<DAL.SolicitudesProgramacionVisitas, DTO.SolicitudesProgramacionVisitas>();
                     //DAL
                     cfg.CreateMap<DTO.SolicitudesProgramacionVisitas, DAL.SolicitudesProgramacionVisitas>();
                 });
@@ -130,6 +141,8 @@ namespace Intec.BL.MapperConfig
         }
 
         #endregion
+
+        //No son parte de la tarea
 
         #region Contactenos
 
