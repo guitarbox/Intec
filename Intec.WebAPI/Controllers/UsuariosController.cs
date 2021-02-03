@@ -18,5 +18,12 @@ namespace Intec.WebApi.Controllers
         {
             return new Intec.BL.BE.UsuariosBE().IniciarSesion(Token.NumeroIdentificacion, Token.Password);
         }
+
+        [Route("api/Usuarios/RecuperarContrasena")]
+        [HttpPost]
+        public bool RecuperarContrasena([FromBody] TokenRecuperarContrasena Token)
+        {
+            return new Intec.BL.BE.UsuariosBE().SolicitarCambioContrasena(Token.NumeroIdentificacion, Token.Email);
+        }
     }
 }

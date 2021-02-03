@@ -28,18 +28,23 @@ namespace Intec.BL.BE
             }
         }
 
-        public void SolicitarCambioContrasena(string NumeroIdentificacion, string Email)
+        public bool SolicitarCambioContrasena(string NumeroIdentificacion, string Email)
         {            
             DAL.Usuarios resDal = new DAL.TE.UsuariosTE().ConsultarUsuarioParaCambioContrasena(NumeroIdentificacion, Email);
-            if(resDal != null)
+            if (resDal != null)
             {
                 string[] param = BE.ParametrosBE.Parametros.Where(p => p.IdParametro == (int)Common.Enums.Parametros.SEND_MAIL_CONF).FirstOrDefault().ValorParametro.Split(';');
-                //intratec@intecsas.com.co;intr4t3c@;mail.intecsas.com.co;465
-                new Common.Mail().SendEmail(new List<string>() { resDal.Email }, "Cambio de Contraseña - Intratec - IntecSAS", 
-                    "", //string Body, //TODO: Acá se debe enviar el link para restaurar la contraseña.
-                    new List<string> (),
-                    param[0], param[1], param[2], int.Parse(param[3]), out string msjError);
+                //intratec@intecsas.com.co;intr4t3c@;mail.intecsas.com.co;25
+
+                //new Common.Mail().SendEmail(new List<string>() { resDal.Email }, "Cambio de Contraseña - Intratec - IntecSAS",
+                //    "<IMG id=\"facebook\" alt=\"facebook\" src=\"cid: facebook\" width=\"24\" height=\"24\">", //string Body, //TODO: Acá se debe enviar el link para restaurar la contraseña.
+                //    new List<string>(),
+                //    param[0], param[1], param[2], int.Parse(param[3]), out string msjError);
+
+                new Common.Mail().sendEmail(param[2], "Cambio de Contraseña - Intratec - IntecSAS", param[0], int.Parse(param[3]), resDal.Email, "");
+                return true;
             }
+            else return false;
         }
 
         public DTO.Usuarios IniciarSesion(string NumeroIdentificacion, string Pass)
