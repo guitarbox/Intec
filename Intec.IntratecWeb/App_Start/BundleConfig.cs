@@ -24,6 +24,7 @@ namespace Intec.IntratecWeb
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/bootstrap-theme.css",
                       "~/Content/fontawesome.css",
                       "~/Content/brands.css",
                       "~/Content/solid.css",
@@ -37,6 +38,8 @@ namespace Intec.IntratecWeb
                         "~/Scripts/blockUI.js",
                         "~/Scripts/App/Usuarios.js"
             ));
+
+            BundleTable.EnableOptimizations = true;
         }
     }
 }

@@ -1,0 +1,21 @@
+﻿
+@{
+    ViewBag.Title = "Parametros";
+    
+}
+<script>
+    $(document).ready(() => {
+        _peticionAjax(URL_SERVICE + URI_SERVICE.Parametros, VerbosREST.GET, '',
+            true, response => {
+                $("#tblParametros").empty();
+                $("#tblParametros").append('<tr><th>Id. Parámetro</th><th>Parámetro</th><th>Descripción</th><th>Tipo Dato</th><th>Valor Parámetro</th></tr>');
+                response.forEach(parametro => {
+                    $("#tblParametros").append('<tr><td>' + parametro.IdParametro + '</td><td>' + parametro.NombreParametro + '</td><td>' + parametro.DescripcionParametro + '</td><td>' + parametro.TipoDato + '</td><td>' + parametro.ValorParametro +'</td></tr>');
+                });
+            });
+    });
+</script>
+<h3 class="text-center" id="title">PARÁMETROS</h3>
+<div style="padding:10px">
+    <table id="tblParametros" class="table table-responsive table-hover table-bordered" style="width:100%"></table>
+</div>

@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Intec.DAL.TE
@@ -47,7 +49,8 @@ namespace Intec.DAL.TE
             Usuarios res = null;
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
-                res = ctx.Usuarios.Where(c => c.NumeroIdentificacion.Equals(NumeroIdentificacion) && c.Password.Equals(Pass) && c.Activo).FirstOrDefault();
+                string pass = Convert.ToBase64String(Encoding.UTF8.GetBytes(Pass));
+                res = ctx.Usuarios.Where(c => c.NumeroIdentificacion.Equals(NumeroIdentificacion) && c.Password.Equals(pass) && c.Activo).FirstOrDefault();
                 if(res != null)
                 {
                     res.FechaUltimoInicioSesion = DateTime.Now;
@@ -88,7 +91,7 @@ namespace Intec.DAL.TE
                     throw new Exception("No existe el usuario");
             }
         }
-        
+
         public void ActualizarContrasena(int IdUsuario, string Contrasena)
         {
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
@@ -96,7 +99,7 @@ namespace Intec.DAL.TE
                 Usuarios usuarioModificar = ctx.Usuarios.Where(u => u.IdUsuario == IdUsuario).FirstOrDefault();
                 if (usuarioModificar != null)
                 {
-                    usuarioModificar.Password = Contrasena;
+                    usuarioModificar.Password = Convert.ToBase64String(Encoding.UTF8.GetBytes(Contrasena));
 
                     usuarioModificar.FechaCreacion = DateTime.Now;
                     usuarioModificar.IdUsuarioModificacion = IdUsuario;
@@ -106,6 +109,29 @@ namespace Intec.DAL.TE
                 else
                     throw new Exception("No existe el usuario");
             }
+        }
+        
+        public bool ActualizarContrasena(string tokenModPass, string Contrasena)
+        {
+            bool res = false;
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                string token = Encoding.UTF8.GetString(Convert.FromBase64String(tokenModPass));
+                Usuarios usuarioModificar = ctx.Usuarios.Where(u => u.tokenCambioContrasena.Equals(token)).FirstOrDefault();
+                if (usuarioModificar != null)
+                {
+                    usuarioModificar.Password = Convert.ToBase64String(Encoding.UTF8.GetBytes(Contrasena));
+
+                    usuarioModificar.FechaCreacion = DateTime.Now;
+                    usuarioModificar.IdUsuarioModificacion = usuarioModificar.IdUsuario;
+                    usuarioModificar.DebeCambiarContrasena = false;
+                    ctx.SaveChanges();
+                    res = true;
+                }
+                else
+                    throw new Exception("Token No válido");
+            }
+            return res;
         }
     
         public List<Usuarios> GetUsuariosByIdRol(int IdRol)
@@ -126,12 +152,13 @@ namespace Intec.DAL.TE
                 res = ctx.Usuarios.Where(u => u.NumeroIdentificacion.Equals(numeroIdentificacion) && u.Email.Equals(email)).FirstOrDefault();
                 if (res != null)
                 {
-                    res.FechaUltimoInicioSesion = DateTime.Now;
+                    res.tokenCambioContrasena = $"{res.NumeroIdentificacion}_{DateTime.Now.Ticks}_{res.Email}_{DateTime.Now.Ticks}";
+                    res.horaTokenCambioContrasena = DateTime.Now;
                     ctx.SaveChanges();
-                    ctx.Entry(res).Reference(u => u.Roles).Load();
-                    res.Roles.Menus.ToList();
-                    ctx.Entry(res).Reference(u => u.TiposIdentificacion).Load();
-                    ctx.Entry(res).Reference(u => u.Ciudades).Load();
+                    //ctx.Entry(res).Reference(u => u.Roles).Load();
+                    //res.Roles.Menus.ToList();
+                    //ctx.Entry(res).Reference(u => u.TiposIdentificacion).Load();
+                    //ctx.Entry(res).Reference(u => u.Ciudades).Load();
                 }
             }
             return res;
@@ -151,6 +178,21 @@ namespace Intec.DAL.TE
                     res.Roles.Menus.ToList();
                     ctx.Entry(res).Reference(u => u.TiposIdentificacion).Load();
                     ctx.Entry(res).Reference(u => u.Ciudades).Load();
+                }
+            }
+            return res;
+        }
+
+        public bool ValidarTokenModPass(string tokenModPass)
+        {
+            bool res = false;
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                string token = Encoding.UTF8.GetString(Convert.FromBase64String(tokenModPass));
+                Usuarios us = ctx.Usuarios.Where(u => u.tokenCambioContrasena.Equals(token)).FirstOrDefault();
+                if(us != null)
+                {
+                    res = true;
                 }
             }
             return res;

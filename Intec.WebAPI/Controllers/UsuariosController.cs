@@ -1,4 +1,5 @@
 ﻿using Intec.WebApi.Models;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,20 @@ namespace Intec.WebApi.Controllers
         public bool RecuperarContrasena([FromBody] TokenRecuperarContrasena Token)
         {
             return new Intec.BL.BE.UsuariosBE().SolicitarCambioContrasena(Token.NumeroIdentificacion, Token.Email);
+        }
+        
+        [Route("api/Usuarios/ValidarTokenModPass")]
+        [HttpPost]
+        public bool ValidarTokenModPass([FromBody] TokenModPass Token)
+        {
+            return new Intec.BL.BE.UsuariosBE().ValidarTokenModPass(Token.Token);
+        }
+        
+        [Route("api/Usuarios/ModificarContrasena")]
+        [HttpPost]
+        public bool ModificarContrasena([FromBody] JObject Token)
+        {
+            return new Intec.BL.BE.UsuariosBE().ActualizarContrasena(Token["token"].ToString(), Token["NuevaContrasena"].ToString());
         }
     }
 }

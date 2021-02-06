@@ -1225,6 +1225,8 @@
     <NavigationProperty Name="Zonas" Relationship="DB_A66D31_intratecPrbModel.FK_Zonas_Usuarios" FromRole="Usuarios" ToRole="Zonas" />
     <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="DebeCambiarContrasena" Type="Boolean" Nullable="false" />
+    <Property Name="tokenCambioContrasena" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="horaTokenCambioContrasena" Type="DateTime" Precision="3" />
   </EntityType>
   <Association Name="FK_Usuarios_Ciudades">
     <End Type="DB_A66D31_intratecPrbModel.Ciudades" Role="Ciudades" Multiplicity="1" />

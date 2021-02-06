@@ -12,8 +12,9 @@ namespace Intec.IntratecWeb.Controllers
         {
             return View();
         }
-        public ActionResult ModificarContrasena()
+        public ActionResult ModificarContrasena(string token)
         {
+            ViewBag.token = token;
             return View();
         }
         public ActionResult RecuperarContrasena()

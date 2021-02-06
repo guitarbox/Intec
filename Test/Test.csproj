@@ -54,10 +54,17 @@
       <Project>{995db154-d4e0-42dd-abcb-2bd0a0330259}</Project>
       <Name>Intec.BL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Intec.Common\Intec.Common.csproj">
+      <Project>{f160ebe9-6f93-4b7b-9022-29f3895d01de}</Project>
+      <Name>Intec.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Intec.DAL\Intec.DAL.csproj">
       <Project>{06d084b1-8fb8-406b-ab6f-918adf61a687}</Project>
       <Name>Intec.DAL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="img\logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

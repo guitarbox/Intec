@@ -33,15 +33,19 @@ namespace Intec.BL.BE
             DAL.Usuarios resDal = new DAL.TE.UsuariosTE().ConsultarUsuarioParaCambioContrasena(NumeroIdentificacion, Email);
             if (resDal != null)
             {
+                string tokenCambioContrasena = Convert.ToBase64String(Encoding.UTF8.GetBytes(resDal.tokenCambioContrasena));
                 string[] param = BE.ParametrosBE.Parametros.Where(p => p.IdParametro == (int)Common.Enums.Parametros.SEND_MAIL_CONF).FirstOrDefault().ValorParametro.Split(';');
                 //intratec@intecsas.com.co;intr4t3c@;mail.intecsas.com.co;25
 
-                //new Common.Mail().SendEmail(new List<string>() { resDal.Email }, "Cambio de Contraseña - Intratec - IntecSAS",
-                //    "<IMG id=\"facebook\" alt=\"facebook\" src=\"cid: facebook\" width=\"24\" height=\"24\">", //string Body, //TODO: Acá se debe enviar el link para restaurar la contraseña.
-                //    new List<string>(),
-                //    param[0], param[1], param[2], int.Parse(param[3]), out string msjError);
+                new Common.Mail().SendEmail(new List<string>() { resDal.Email }, "Cambio de Contraseña - Intratec - IntecSAS",
+                    "<h1>Haz solicitado cambio de contraseña</h1>"
+                    + $"<h3>Accede al siguiente link para cambiarla: <a href=\"http://intratec.intecsas.com.co/Usuarios/ModificarContrasena?token={tokenCambioContrasena}\">Cambiar Contraseña</a></h3>"
+                    + $"<h4>Generado en {DateTime.Now.AddHours(3)}</h4>"
+                    ,new List<string>(),
+                    param[0], param[1], param[2], int.Parse(param[3]), out string msjError);
 
-                new Common.Mail().sendEmail(param[2], "Cambio de Contraseña - Intratec - IntecSAS", param[0], int.Parse(param[3]), resDal.Email, "");
+                if (!string.IsNullOrEmpty(msjError))
+                    return false;                
                 return true;
             }
             else return false;
@@ -55,6 +59,16 @@ namespace Intec.BL.BE
         public void ActualizarContrasena(int IdUsuario, string Contrasena)
         {
             new DAL.TE.UsuariosTE().ActualizarContrasena(IdUsuario, Contrasena);
+        }
+        
+        public bool ActualizarContrasena(string token, string Contrasena)
+        {
+            return new DAL.TE.UsuariosTE().ActualizarContrasena(token, Contrasena);
+        }
+
+        public bool ValidarTokenModPass(string tokenModPass)
+        {
+            return new DAL.TE.UsuariosTE().ValidarTokenModPass(tokenModPass);
         }
     }
 }

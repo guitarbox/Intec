@@ -513,6 +513,8 @@
     <EntitySetMapping Name="Usuarios">
       <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.Usuarios">
         <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="horaTokenCambioContrasena" ColumnName="horaTokenCambioContrasena" />
+          <ScalarProperty Name="tokenCambioContrasena" ColumnName="tokenCambioContrasena" />
           <ScalarProperty Name="DebeCambiarContrasena" ColumnName="DebeCambiarContrasena" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Foto" ColumnName="Foto" />

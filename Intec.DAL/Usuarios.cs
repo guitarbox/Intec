@@ -46,6 +46,8 @@ namespace Intec.DAL
         public string Foto { get; set; }
         public string Email { get; set; }
         public bool DebeCambiarContrasena { get; set; }
+        public string tokenCambioContrasena { get; set; }
+        public Nullable<System.DateTime> horaTokenCambioContrasena { get; set; }
     
         public virtual Ciudades Ciudades { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

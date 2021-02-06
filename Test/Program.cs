@@ -10,6 +10,11 @@ namespace Test
 {
     class Program
     {
+        static void Main(string[] args)
+        {
+            new Intec.Common.Mail().SendEmail(new List<string>() { "lagunawilson@gmail.com" }, "Prueba", "<p>Hola</p>", new List<string>(), "intratec@intecsas.com.co", "intr4t3c@", "mail.intecsas.com.co", 25, out string msjError);
+        }
+            
         static void Main6(string[] args) //UsuariosBE
         {
             //Intec.BL.DTO.Usuarios usuario = new Intec.BL.BE.UsuarioBE().IniciarSesion("1019032749", "1234");
@@ -1363,7 +1368,7 @@ namespace Test
 
         #region Test VisitasBE
 
-        static void Main(string[] args)
+        static void Mainv(string[] args)
         {
             Intec.BL.BE.VisitasBE PVisitasBE = new Intec.BL.BE.VisitasBE();
 

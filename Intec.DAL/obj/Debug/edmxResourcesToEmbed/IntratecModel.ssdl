@@ -440,6 +440,8 @@
     <Property Name="Foto" Type="nvarchar" MaxLength="150" />
     <Property Name="Email" Type="nvarchar" MaxLength="200" />
     <Property Name="DebeCambiarContrasena" Type="bit" Nullable="false" />
+    <Property Name="tokenCambioContrasena" Type="nvarchar" MaxLength="1000" />
+    <Property Name="horaTokenCambioContrasena" Type="datetime" />
   </EntityType>
   <EntityType Name="UsuariosEquipos">
     <Key>

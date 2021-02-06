@@ -445,6 +445,8 @@
           <Property Name="Foto" Type="nvarchar" MaxLength="150" />
           <Property Name="Email" Type="nvarchar" MaxLength="200" />
           <Property Name="DebeCambiarContrasena" Type="bit" Nullable="false" />
+          <Property Name="tokenCambioContrasena" Type="nvarchar" MaxLength="1000" />
+          <Property Name="horaTokenCambioContrasena" Type="datetime" />
         </EntityType>
         <EntityType Name="UsuariosEquipos">
           <Key>
@@ -2519,6 +2521,8 @@
           <NavigationProperty Name="Zonas" Relationship="DB_A66D31_intratecPrbModel.FK_Zonas_Usuarios" FromRole="Usuarios" ToRole="Zonas" />
           <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="DebeCambiarContrasena" Type="Boolean" Nullable="false" />
+          <Property Name="tokenCambioContrasena" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="horaTokenCambioContrasena" Type="DateTime" Precision="3" />
         </EntityType>
         <Association Name="FK_Usuarios_Ciudades">
           <End Type="DB_A66D31_intratecPrbModel.Ciudades" Role="Ciudades" Multiplicity="1" />
@@ -3186,6 +3190,8 @@
           <EntitySetMapping Name="Usuarios">
             <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.Usuarios">
               <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="horaTokenCambioContrasena" ColumnName="horaTokenCambioContrasena" />
+                <ScalarProperty Name="tokenCambioContrasena" ColumnName="tokenCambioContrasena" />
                 <ScalarProperty Name="DebeCambiarContrasena" ColumnName="DebeCambiarContrasena" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Foto" ColumnName="Foto" />
