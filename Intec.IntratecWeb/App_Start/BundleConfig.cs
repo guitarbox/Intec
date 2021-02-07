@@ -28,7 +28,7 @@ namespace Intec.IntratecWeb
                       "~/Content/fontawesome.css",
                       "~/Content/brands.css",
                       "~/Content/solid.css",
-                      "~/Content/Site.css",
+                      //"~/Content/Site.css",
                       "~/Content/App.css"
             ));
             

@@ -156,7 +156,6 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="images\logo.png" />
     <Content Include="images\logo2.png" />
     <Content Include="Scripts\App.js" />
@@ -227,6 +226,7 @@
     <Content Include="Views\Usuarios\ModificarContrasena.cshtml" />
     <Content Include="Views\Administracion\Parametros.cshtml" />
     <Content Include="Views\Shared\_Layout2.cshtml" />
+    <Content Include="Views\Administracion\Paises.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

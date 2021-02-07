@@ -1,6 +1,15 @@
 ﻿body {
-    color: #808080
+    color: #808080;
+    padding-top: 50px;
+    padding-bottom: 20px;
 }
+
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
 
 /* Styles for CleanLayout*/
 .bigContainer {

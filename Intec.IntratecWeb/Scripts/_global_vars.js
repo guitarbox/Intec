@@ -15,6 +15,7 @@ var URL_SERVICE = 'http://servicios.intecsas.com.co/';
 var URI_SERVICE = {
     //Administracion
     Parametros: 'api/Parametros',
+    Paises: 'api/Paises',
     //Usuarios
     LogIn: 'api/Usuarios/LogIn',
     RecuperarContrasena: 'api/Usuarios/RecuperarContrasena',

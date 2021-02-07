@@ -14,7 +14,14 @@ namespace Intec.BL.BE
 
         public void CrearPais(DTO.Paises PaisCrear)
         {
-            new DAL.TE.AdministracionTE().CrearPais(MapperConfig.Config.MapperAdministracion.Map<DAL.Paises>(PaisCrear));
+            try
+            {
+                new DAL.TE.AdministracionTE().CrearPais(MapperConfig.Config.MapperAdministracion.Map<DAL.Paises>(PaisCrear));
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Hubo un error al intentar crear el recurso. Valide que los datos ingresados sean correctos y que los identificadares no se repitan.");
+            }
         }
 
         //Obtener

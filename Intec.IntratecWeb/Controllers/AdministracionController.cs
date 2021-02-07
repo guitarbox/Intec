@@ -8,8 +8,12 @@ namespace Intec.IntratecWeb.Controllers
 {
     public class AdministracionController : Controller
     {
-        // GET: Administracion
         public ActionResult Parametros()
+        {
+            return View();
+        }
+        
+        public ActionResult Paises()
         {
             return View();
         }
