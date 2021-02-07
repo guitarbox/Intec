@@ -40,7 +40,14 @@ namespace Intec.BL.BE
 
         public void EditarPais(DTO.Paises Pais, int IdUsuariomodificacion)
         {
-            new DAL.TE.AdministracionTE().EditarPais(MapperConfig.Config.MapperAdministracion.Map<DAL.Paises>(Pais), IdUsuariomodificacion);
+            if(Pais.CodigoPais.Length <= 5){
+                new DAL.TE.AdministracionTE().EditarPais(MapperConfig.Config.MapperAdministracion.Map<DAL.Paises>(Pais), IdUsuariomodificacion);
+            }
+            else
+            {
+                throw new Exception("El codigo país debe contar con maximo 5 carácteres");
+            }          
+            
         }
 
         //Eliminar

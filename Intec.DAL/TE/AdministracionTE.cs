@@ -56,13 +56,21 @@ namespace Intec.DAL.TE
             {
                 Paises PaisEditar = ctx.Paises.Where(c => c.IdPais == Pais.IdPais).FirstOrDefault();
 
-                PaisEditar.CodigoPais = Pais.CodigoPais;
-                PaisEditar.Pais = Pais.Pais;
+                if(PaisEditar != null)
+                {
+                    PaisEditar.CodigoPais = Pais.CodigoPais;
+                    PaisEditar.Pais = Pais.Pais;
 
-                PaisEditar.FechaModificacion = DateTime.Now;
-                PaisEditar.IdUsuarioModificacion = IdUsuarioModificacion;
+                    PaisEditar.FechaModificacion = DateTime.Now;
+                    PaisEditar.IdUsuarioModificacion = IdUsuarioModificacion;
 
-                ctx.SaveChanges();
+                    ctx.SaveChanges();
+                }
+                else
+                {
+                  
+                }
+               
             }
 
         }

@@ -44,9 +44,24 @@ namespace Intec.WebApi.Controllers
         }
 
         //// PUT: api/Paises/5
-        //public void Put(int id, [FromBody]string value)
-        //{
-        //}
+        public JObject Put(int id,[FromBody] JObject PaisEditarJO)
+        {
+            try
+            {
+                new Intec.BL.BE.AdministracionBE().EditarPais(PaisEditarJO ["Pais"].ToObject<Intec.BL.DTO.Paises>(), int.Parse(PaisEditarJO ["IdUsuarioModificacion"].ToString()));
+            }
+            catch (Exception ex)
+            {
+                error = true;
+                msgError = ex.Message;
+            }
+
+            SetErrorResponse(error);
+            SetMsgErrorResponse(msgError);
+
+            return response;
+
+        }
 
         //// DELETE: api/Paises/5
         //public void Delete(int id)
