@@ -67,12 +67,13 @@ namespace Intec.BL.BE
             new DAL.TE.AdministracionTE().CrearDepartamento(MapperConfig.Config.MapperAdministracion.Map<DAL.Departamentos>(DepartamentoCrear));
         }
 
-        //Obtener
+        //Obtener departamentos por país
         public List<DTO.Departamentos> ObtenerDepartamentos(int IdPais)
         {
             return MapperConfig.Config.MapperAdministracion.Map<List<DTO.Departamentos>>(new DAL.TE.AdministracionTE().ObtenerDepartamentos(IdPais));
         }
 
+        //obtener departamento por id
         public DTO.Departamentos ObtenerDepartamento(string IdDepartamento)
         {
             return MapperConfig.Config.MapperAdministracion.Map<DTO.Departamentos>(new DAL.TE.AdministracionTE().ObtenerDepartamento(IdDepartamento));

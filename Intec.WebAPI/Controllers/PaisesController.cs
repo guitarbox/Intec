@@ -19,6 +19,14 @@ namespace Intec.WebApi.Controllers
             return new Intec.BL.BE.AdministracionBE().ObtenerPaises();
         }
 
+        //GET: api/Pais/5/Departamentos
+        [Route("api/Paises/{id}/Departamentos")]
+        [HttpGet]
+        public List<Departamentos> GetDepartamentos(int id)
+        {
+            return new Intec.BL.BE.AdministracionBE().ObtenerDepartamentos(id);
+        }
+
         // GET: api/Paises/5
         public Paises Get(int id)
         {

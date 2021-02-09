@@ -12,19 +12,19 @@ namespace Intec.WebApi.Controllers
 {
     public class DepartamentosController : DefaultController
     {
-        // GET: api/Departamentos
-        public List<Departamentos> Get(int id)
-        {
-            return new Intec.BL.BE.AdministracionBE().ObtenerDepartamentos(id);
-        }
-
-
-        //// GET: api/Departamentos/5 
-        ///TODO
-        //public Departamentos Get(string id)
+        //// GET: api/Departamentos
+        //public List<Departamentos> Get(int id)
         //{
-        //    return new Intec.BL.BE.AdministracionBE().ObtenerDepartamento(id);
+        //    return new Intec.BL.BE.AdministracionBE().ObtenerDepartamentos(id);
         //}
+
+
+        // GET: api/Departamentos/5 
+        //TODO
+        public Departamentos Get(string id)
+        {
+            return new Intec.BL.BE.AdministracionBE().ObtenerDepartamento(id);
+        }
 
 
         // POST: api/Departamentos

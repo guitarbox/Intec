@@ -16,5 +16,6 @@ namespace Intec.BL.DTO
         public Nullable<System.DateTime> FechaModificacion { get; set; }
         public Nullable<int> IdUsuarioModificacion { get; set; }
         public bool Activo { get; set; }
+        List<Departamentos> Departamentos { get; set; }
     }
 }
