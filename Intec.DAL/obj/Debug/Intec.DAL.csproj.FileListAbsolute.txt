@@ -64,3 +64,17 @@ C:\Users\Ideapad\Desktop\Alitan\Interius\Intec\Intec\Intec.DAL\obj\Debug\Intec.D
 C:\Users\Ideapad\Desktop\Alitan\Interius\Intec\Intec\Intec.DAL\obj\Debug\Intec.DAL.csproj.CopyComplete
 C:\Users\Ideapad\Desktop\Alitan\Interius\Intec\Intec\Intec.DAL\obj\Debug\Intec.DAL.dll
 C:\Users\Ideapad\Desktop\Alitan\Interius\Intec\Intec\Intec.DAL\obj\Debug\Intec.DAL.pdb
+E:\Alan\Interius\Intec\Intec\Intec.DAL\bin\Debug\Intec.DAL.dll.config
+E:\Alan\Interius\Intec\Intec\Intec.DAL\bin\Debug\Intec.DAL.dll
+E:\Alan\Interius\Intec\Intec\Intec.DAL\bin\Debug\Intec.DAL.pdb
+E:\Alan\Interius\Intec\Intec\Intec.DAL\bin\Debug\EntityFramework.dll
+E:\Alan\Interius\Intec\Intec\Intec.DAL\bin\Debug\EntityFramework.SqlServer.dll
+E:\Alan\Interius\Intec\Intec\Intec.DAL\bin\Debug\Intec.Common.dll
+E:\Alan\Interius\Intec\Intec\Intec.DAL\bin\Debug\Intec.Common.pdb
+E:\Alan\Interius\Intec\Intec\Intec.DAL\bin\Debug\EntityFramework.xml
+E:\Alan\Interius\Intec\Intec\Intec.DAL\bin\Debug\EntityFramework.SqlServer.xml
+E:\Alan\Interius\Intec\Intec\Intec.DAL\obj\Debug\Intec.DAL.csprojAssemblyReference.cache
+E:\Alan\Interius\Intec\Intec\Intec.DAL\obj\Debug\Intec.DAL.csproj.CoreCompileInputs.cache
+E:\Alan\Interius\Intec\Intec\Intec.DAL\obj\Debug\Intec.DAL.csproj.CopyComplete
+E:\Alan\Interius\Intec\Intec\Intec.DAL\obj\Debug\Intec.DAL.dll
+E:\Alan\Interius\Intec\Intec\Intec.DAL\obj\Debug\Intec.DAL.pdb

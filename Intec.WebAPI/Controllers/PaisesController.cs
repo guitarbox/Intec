@@ -63,9 +63,24 @@ namespace Intec.WebApi.Controllers
 
         }
 
+
         //// DELETE: api/Paises/5
-        //public void Delete(int id)
-        //{
-        //}
+        public JObject Delete(int id, [FromBody] JObject PaisEditarJO)
+        {
+            try
+            {
+                new Intec.BL.BE.AdministracionBE().EliminarPais(int.Parse(PaisEditarJO["IdPais"].ToString()), int.Parse(PaisEditarJO["IdUsuarioModificacion"].ToString()));
+            }
+            catch (Exception ex)
+            {
+                error = true;
+                msgError = ex.Message;
+            }
+
+            SetErrorResponse(error);
+            SetMsgErrorResponse(msgError);
+
+            return response;
+        }
     }
 }

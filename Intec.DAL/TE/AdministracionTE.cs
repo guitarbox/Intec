@@ -241,7 +241,7 @@ namespace Intec.DAL.TE
 
         }
 
-        //Eliminar, preguntar argumento
+        //Eliminar
 
         public void EliminarCiudad(string IdCiudad, int IdUsuarioModificacion)
         {
