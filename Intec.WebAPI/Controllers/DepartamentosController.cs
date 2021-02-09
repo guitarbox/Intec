@@ -18,6 +18,14 @@ namespace Intec.WebApi.Controllers
         //    return new Intec.BL.BE.AdministracionBE().ObtenerDepartamentos(id);
         //}
 
+        // GET: api/Departamnetos/5/Ciudades
+        [Route("api/Departamentos/{id}/Ciudades")]
+        [HttpGet]
+        public List<Ciudades> GetCiudades(string id)
+        {
+            return new Intec.BL.BE.AdministracionBE().ObtenerCiudades(id);
+        }
+
 
         // GET: api/Departamentos/5 
         //TODO

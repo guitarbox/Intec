@@ -13,17 +13,16 @@ namespace Intec.WebApi.Controllers
     public class CiudadesController : DefaultController
     {
         // GET: api/Ciudades
-        public List<Ciudades> Get(string id)
-        {
-            return new Intec.BL.BE.AdministracionBE().ObtenerCiudades(id);
-        }
+        //public List<Ciudades> Get(string id)
+        //{
+        //    return new Intec.BL.BE.AdministracionBE().ObtenerCiudades(id);
+        //}
 
         // GET: api/Ciudades/5
-        //TODO
-        //public Ciudades Get(string id)
-        //{
-        //    return new Intec.BL.BE.AdministracionBE().ObtenerCiudad(id);
-        //}
+        public Ciudades Get(string id)
+        {
+            return new Intec.BL.BE.AdministracionBE().ObtenerCiudad(id);
+        }
 
         // POST: api/Ciudades
         public JObject Post([FromBody] Intec.BL.DTO.Ciudades Ciudad)
