@@ -104,6 +104,7 @@ namespace Intec.BL.MapperConfig
 
                     cfg.CreateMap<DTO.Propiedades, DAL.Propiedades>();
                     cfg.CreateMap<DAL.Propiedades, DTO.Propiedades>();
+
                 });
 
                 return config.CreateMapper();
