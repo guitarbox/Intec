@@ -162,12 +162,14 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\CiudadesController.cs" />
+    <Compile Include="Controllers\ClientesController.cs" />
     <Compile Include="Controllers\DefaultController.cs" />
     <Compile Include="Controllers\DepartamentosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MarcasEquiposController.cs" />
     <Compile Include="Controllers\PaisesController.cs" />
     <Compile Include="Controllers\ParametrosController.cs" />
+    <Compile Include="Controllers\PropiedadesController.cs" />
     <Compile Include="Controllers\TiposEquipoController.cs" />
     <Compile Include="Controllers\TiposIdentificacionController.cs" />
     <Compile Include="Controllers\TiposPersonaController.cs" />
@@ -175,6 +177,7 @@
     <Compile Include="Controllers\UsosPropiedadesController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\VisitasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -276,6 +279,10 @@
     <ProjectReference Include="..\Intec.Common\Intec.Common.csproj">
       <Project>{f160ebe9-6f93-4b7b-9022-29f3895d01de}</Project>
       <Name>Intec.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Intec.DAL\Intec.DAL.csproj">
+      <Project>{06D084B1-8FB8-406B-AB6F-918ADF61A687}</Project>
+      <Name>Intec.DAL</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
