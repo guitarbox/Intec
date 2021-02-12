@@ -11,6 +11,16 @@ namespace Intec.DAL.TE
 {
     public class UsuariosTE
     {
+        public List<Usuarios> ObtenerUsuarios()
+        {
+            List<Usuarios> res = new List<Usuarios>();
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                res = ctx.Usuarios.ToList();
+            }
+            return res;
+        }        
+
         public int CrearUsuario(Usuarios UsuarioCrear)
         {
             int res = -1;
@@ -34,7 +44,7 @@ namespace Intec.DAL.TE
             }
             return res;
         }
-
+        
         public void InactivarUsuario(int IdUsuario)
         {
             using (var ctx = new DB_A66D31_intratecPrbEntities1())

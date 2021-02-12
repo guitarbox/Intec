@@ -16,7 +16,16 @@ var URI_SERVICE = {
     //Administracion
     Parametros: 'api/Parametros',
     Paises: 'api/Paises',
+    Departamentos: 'api/Departamentos',
+    Ciudades: 'api/Ciudades',
+    TiposIdentificacion: 'api/TiposIdentificacion',
+    MarcasEquipos: 'api/MarcasEquipos',
+    TiposEquipo: 'api/TiposEquipo',
+    TiposPersona: 'api/TiposPersona',
+    TiposPropiedades: 'api/TiposPropiedades',
+    UsosPropiedades: 'api/UsosPropiedades',
     //Usuarios
+    Usuarios: 'api/Usuarios/',
     LogIn: 'api/Usuarios/LogIn',
     RecuperarContrasena: 'api/Usuarios/RecuperarContrasena',
     ValidarTokenModPass: 'api/Usuarios/ValidarTokenModPass',

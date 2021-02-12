@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Intec.BL.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,24 @@ namespace Intec.BL.BE
 {
     public class UsuariosBE : _beDefault
     {
+        public List<DTO.Usuarios> ObtenerUsuarios()
+        {
+            return MapperConfig.Config.MapperUsuariosSimple.Map<List<DTO.Usuarios>>(new DAL.TE.UsuariosTE().ObtenerUsuarios());
+        }
+
+        public Usuarios ConsultarUsuario(int id)
+        {
+            return MapperConfig.Config.MapperUsuarios.Map<DTO.Usuarios>(new DAL.TE.UsuariosTE().ConsultarUsuario(id));
+        }
+
         public int CrearUsuario(DTO.Usuarios UsuarioCrear)
         {
             return new DAL.TE.UsuariosTE().CrearUsuario(MapperConfig.Config.MapperUsuarios.Map<DAL.Usuarios>(UsuarioCrear));
+        }
+
+        public void ActualizarUsuario(Usuarios usuarios, int IdUsuarioModificacion)
+        {
+            new DAL.TE.UsuariosTE().ActualizarUsuario(MapperConfig.Config.MapperUsuarios.Map<DAL.Usuarios>( usuarios), IdUsuarioModificacion); 
         }
 
         public void NotificarCreacionUsuario(int IdUsuario)

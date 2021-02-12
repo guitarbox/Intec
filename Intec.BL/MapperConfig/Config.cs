@@ -193,6 +193,21 @@ namespace Intec.BL.MapperConfig
             }
         }
 
+        public static AutoMapper.IMapper MapperUsuariosSimple
+        {
+            get
+            {
+                var config = new AutoMapper.MapperConfiguration(cfg => {
+                    cfg.CreateMap<DAL.Usuarios, DTO.Usuarios>()
+                    .ForMember(dest => dest.Roles, opt => opt.Ignore())
+                    .ForMember(dest => dest.TiposIdentificacion, opt => opt.Ignore())
+                    ;
+                });
+
+                return config.CreateMapper();
+            }
+        }
+
         #endregion
 
         #region Parametros

@@ -159,3 +159,43 @@ textarea {
         box-sizing: border-box;
         flex: 8;
     }
+
+/* table */
+table > thead > tr > th {
+    background-color: #484141;
+    color: white
+}
+table > tbody > tr > td {
+    background-color: white; /*#C5CF31;*/
+}
+
+/*Botones*/
+.button {
+    margin-top: 5px;
+    /*width: 80%;*/
+    height: 50px;
+    background-color: #C5CF31;
+    border: 1px solid white;
+    border-radius: 5px;
+    color: white
+}
+
+    .button:hover {
+        margin-top: 5px;
+        /*width: 80%;*/
+        height: 50px;
+        background-color: white;
+        border: 1px solid #C5CF31;
+        border-radius: 5px;
+        color: #C5CF31
+    }
+
+    .button:active {
+        margin-top: 5px;
+        /*width: 80%;*/
+        height: 50px;
+        background-color: #0062CC;
+        border: 1px solid #0062CC;
+        border-radius: 5px;
+        color: white
+    }

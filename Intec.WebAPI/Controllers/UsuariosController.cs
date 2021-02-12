@@ -11,8 +11,55 @@ using System.Web.Http.Cors;
 namespace Intec.WebApi.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
-    public class UsuariosController : ApiController
+    public class UsuariosController : DefaultController
     {
+        public List<Intec.BL.DTO.Usuarios> Get()
+        {
+            return new Intec.BL.BE.UsuariosBE().ObtenerUsuarios();
+        }
+        
+        public Intec.BL.DTO.Usuarios Get(int id)
+        {
+            return new Intec.BL.BE.UsuariosBE().ConsultarUsuario(id);
+        }
+
+        public JObject Post([FromBody]Intec.BL.DTO.Usuarios Usuario)
+        {
+            try
+            {
+                new Intec.BL.BE.UsuariosBE().CrearUsuario(Usuario);
+            }
+            catch (Exception ex)
+            {
+                error = true;
+                msgError = ex.Message;
+            }
+
+            SetErrorResponse(error);
+            SetMsgErrorResponse(msgError);
+
+            return response;
+        }
+
+        public JObject Put([FromBody]JObject UsuarioActualizarJO)
+        {
+            try
+            {
+                new Intec.BL.BE.UsuariosBE().ActualizarUsuario(UsuarioActualizarJO["Usuario"].ToObject<Intec.BL.DTO.Usuarios>(), int.Parse(UsuarioActualizarJO["IdUsuarioModificacion"].ToString()));
+            }
+            catch (Exception ex)
+            {
+                error = true;
+                msgError = ex.Message;
+            }
+
+            SetErrorResponse(error);
+            SetMsgErrorResponse(msgError);
+
+            return response;
+        }
+
+        //Rutas adicionales
         [Route("api/Usuarios/LogIn")]
         [HttpPost]
         public Intec.BL.DTO.Usuarios LogIn([FromBody] TokenLogIn Token)

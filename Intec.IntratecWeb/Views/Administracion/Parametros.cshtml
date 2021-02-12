@@ -6,8 +6,7 @@
 <script>
     $(document).ready(() => {
         _peticionAjax(URL_SERVICE + URI_SERVICE.Parametros, VerbosREST.GET, '',
-            true, response => {
-                debugger;                
+            true, response => {          
 
                 var columns = [
                     { data: "IdParametro", title: 'Id. Parámetro' },

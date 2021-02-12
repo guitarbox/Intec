@@ -227,6 +227,7 @@
     <Content Include="Views\Administracion\Parametros.cshtml" />
     <Content Include="Views\Shared\_Layout2.cshtml" />
     <Content Include="Views\Administracion\Paises.cshtml" />
+    <Content Include="Views\Usuarios\Administracion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

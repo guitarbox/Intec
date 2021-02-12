@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "Administracion";
+}
+<script>
+    $(document).ready(() => {
+        _peticionAjax(URL_SERVICE + URI_SERVICE.Usuarios, VerbosREST.GET, '',
+            true, response => {
+                var columns = [
+                    {data: 'IdUsuario' , title:'Id. Usuario'},
+                    { data: 'Nombres' , title:'Nombres'},
+                    { data: 'Apellidos' , title:'Apellidos'},
+                    { data: 'Direccion' , title:'Dirección'},
+                    { data: 'Telefono' , title:'Teléfono'},
+                    //{ data: 'IdCiudadDomicilio' , title:'CiudadDomicilio'},
+                    { data: 'IdTipoIdentificacion' , title:'Tipo Identificación'},
+                    { data: 'NumeroIdentificacion' , title:'Nro. Identificación'},
+                    //{ data: 'IdPaisOrigen' , title:''},
+                    //{ data: 'Password' , title:''},
+                    { data: 'FechaUltimoInicioSesion' , title:'Fec. Últ. Sesión'},
+                    //{ data: 'FechaCreacion' , title:''},
+                    //{ data: 'IdUsuarioCreacion' , title:''},
+                    //{ data: 'FechaModificacion' , title:''},
+                    //{ data: 'IdUsuarioModificacion' , title:''},
+                    //{ data: 'IdRol' , title:''},
+                    { data: 'Activo' , title:'Activo'},
+                    //{ data: 'Foto' , title:''},
+                    {
+                        data: null, render: function (data, type, full, meta) {
+                            return '<a><span class="fa fa-edit"></span></a>';
+                        }
+                    }
+                ];
+
+                $('#tblUsuarios').DataTable({
+                    data: response,
+                    columns: columns,
+                    language: _language_options_table,
+                    //
+                    dom: 'Bfrtip',
+                    buttons: [
+                        //{ extend: 'copy', className: 'btn-info' },
+                        //{ extend: 'csv', className: 'btn-info' },
+                        //{ extend: 'excel', className: 'btn-info', title: 'XLS-File' },
+                        //{ extend: 'pdf', className: 'btn-info', title: $('title').text() },
+                        //{ extend: 'print', className: 'btn-info' }
+                    ]
+                });
+            });
+    });
+</script>
+<h3 class="text-center" id="title">ADMINISTRACIÓN DE USUARIOS</h3>
+<div style="padding:10px">
+    <table id="tblUsuarios" style="width:100%"></table>
+    <br />
+    <button class="button" onclick="alert('En desarrollo'); return false;">Crear Nuevo Usuario</button>
+</div>
+
