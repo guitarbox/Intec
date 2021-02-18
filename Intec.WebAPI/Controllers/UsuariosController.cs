@@ -13,31 +13,54 @@ namespace Intec.WebApi.Controllers
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class UsuariosController : DefaultController
     {
-        public List<Intec.BL.DTO.Usuarios> Get()
+        [HttpPost]
+        [Route("api/Usuarios/ObtenerUsuarios")]
+        public JObject ObtenerUsuarios(JObject Token)
         {
-            return new Intec.BL.BE.UsuariosBE().ObtenerUsuarios();
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+
+            if (validToken)
+                SetDataResponse(new Intec.BL.BE.UsuariosBE().ObtenerUsuarios());
+            return response;
         }
-        
-        public Intec.BL.DTO.Usuarios Get(int id)
+
+        [HttpPost]
+        [Route("api/Usuarios/ObtenerUsuario")]
+        public JObject ObtenerUsuario(JObject Token)
         {
-            return new Intec.BL.BE.UsuariosBE().ConsultarUsuario(id);
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+
+            if (validToken)
+                SetDataResponse(new Intec.BL.BE.UsuariosBE().ConsultarUsuario(Token["idUsuario"].ToObject<int>()));
+
+            return response;
         }
 
-        public JObject Post([FromBody]Intec.BL.DTO.Usuarios Usuario)
+        [HttpPost]
+        [Route("api/Usuarios/CrearUsuario")]
+        public JObject CrearUsuario([FromBody]JObject Token)
         {
-            try
-            {
-                new Intec.BL.BE.UsuariosBE().CrearUsuario(Usuario);
-            }
-            catch (Exception ex)
-            {
-                error = true;
-                msgError = ex.Message;
-            }
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
 
-            SetErrorResponse(error);
-            SetMsgErrorResponse(msgError);
+            if (validToken)
+            {
+                try
+                {
+                    int idUsuarioCreado = new Intec.BL.BE.UsuariosBE().CrearUsuario(Token["usuario"].ToObject<Intec.BL.DTO.Usuarios>());
+                    SetDataResponse(idUsuarioCreado);
+                }
+                catch (Exception ex)
+                {
+                    error = true;
+                    msgError = ex.Message;
+                }
 
+                SetErrorResponse(error);
+                SetMsgErrorResponse(msgError);
+            }
             return response;
         }
 
