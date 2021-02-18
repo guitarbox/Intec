@@ -11,84 +11,103 @@ namespace Intec.WebApi.Controllers
 {
     public class TiposEquipoController : DefaultController
     {
-        // GET: api/TiposEquipo
-        public List<TiposEquipo> Get()
+        [HttpPost]
+        [Route("api/TiposEquipo/ObtenerTiposEquipo")]
+        public JObject ObtenerTiposEquipo([FromBody] JObject Token)
         {
-            return new Intec.BL.BE.AdministracionBE().ObtenerTiposEquipos();
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+
+            if (validToken)
+                SetDataResponse( new Intec.BL.BE.AdministracionBE().ObtenerTiposEquipos());
+            return response;
         }
 
-        //OK
-
-        // GET: api/TiposEquipo/5
-        public TiposEquipo Get(int id)
+        [HttpPost]
+        [Route("api/TiposEquipo/ObtenerTipoEquipo")]
+        public JObject ObtenerTipoEquipo([FromBody] JObject Token)
         {
-            return new Intec.BL.BE.AdministracionBE().ObtenerTipoEquipo(id);
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+
+            if (validToken)
+                SetDataResponse( new Intec.BL.BE.AdministracionBE().ObtenerTipoEquipo(Token["idTipoEquipo"].ToObject<int>()));
+            return response;
         }
 
-        //OK
-
-        // POST: api/TiposEquipo
-        public JObject Post([FromBody] Intec.BL.DTO.TiposEquipo TipoEquipo)
+        [HttpPost]
+        [Route("api/TiposEquipo/CrearTipoEquipo")]
+        public JObject CrearTipoEquipo([FromBody] JObject Token)
         {
-            try
-            {
-                new Intec.BL.BE.AdministracionBE().CrearTipoEquipo(TipoEquipo);
-            }
-            catch (Exception ex)
-            {
-                error = true;
-                msgError = ex.Message;
-            }
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
 
-            SetErrorResponse(error);
-            SetMsgErrorResponse(msgError);
+            if (validToken)
+            {
+                try
+                {
+                    new Intec.BL.BE.AdministracionBE().CrearTipoEquipo(Token["tipoEquipo"].ToObject<Intec.BL.DTO.TiposEquipo>());
+                }
+                catch (Exception ex)
+                {
+                    error = true;
+                    msgError = ex.Message;
+                }
+
+                SetErrorResponse(error);
+                SetMsgErrorResponse(msgError);
+            }
+            return response;
+        }
+
+        [HttpPost]
+        [Route("api/TiposEquipo/ActualizarTipoEquipo")]
+        public JObject ActualizarTipoEquipo([FromBody] JObject Token)
+        {
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+
+            if (validToken) { 
+                try
+                {
+                    new Intec.BL.BE.AdministracionBE().EditarTipoEquipo(Token["tipoEquipo"].ToObject<Intec.BL.DTO.TiposEquipo>(), int.Parse(Token["idUsuarioModificacion"].ToString()));
+                }
+                catch (Exception ex)
+                {
+                    error = true;
+                    msgError = ex.Message;
+                }
+
+                SetErrorResponse(error);
+                SetMsgErrorResponse(msgError);
+            }
 
             return response;
         }
 
-        //OK
-
-        // PUT: api/TiposEquipo/5
-        public JObject Put(int id, [FromBody] JObject TipoEquipoEditarJO)
+        [HttpPost]
+        [Route("api/TiposEquipo/EliminarTipoEquipo")]
+        public JObject EliminarTipoEquipo([FromBody] JObject Token)
         {
-            try
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+
+            if (validToken)
             {
-                new Intec.BL.BE.AdministracionBE().EditarTipoEquipo(TipoEquipoEditarJO["TipoEquipo"].ToObject<Intec.BL.DTO.TiposEquipo>(), int.Parse(TipoEquipoEditarJO["IdUsuarioModificacion"].ToString()));
+                try
+                {
+                    new Intec.BL.BE.AdministracionBE().EliminarTipoEquipo(int.Parse(Token["IdTipoEquipo"].ToString()), int.Parse(Token["IdUsuarioModificacion"].ToString()));
+                }
+                catch (Exception ex)
+                {
+                    error = true;
+                    msgError = ex.Message;
+                }
+
+                SetErrorResponse(error);
+                SetMsgErrorResponse(msgError);
             }
-            catch (Exception ex)
-            {
-                error = true;
-                msgError = ex.Message;
-            }
-
-            SetErrorResponse(error);
-            SetMsgErrorResponse(msgError);
-
-            return response;
-
-        }
-
-        //OK
-
-        // DELETE: api/TiposEquipo/5
-        public JObject Delete(int id, [FromBody] JObject TipoEquipoEliminarJO)
-        {
-            try
-            {
-                new Intec.BL.BE.AdministracionBE().EliminarTipoEquipo(int.Parse(TipoEquipoEliminarJO["IdTipoEquipo"].ToString()), int.Parse(TipoEquipoEliminarJO["IdUsuarioModificacion"].ToString()));
-            }
-            catch (Exception ex)
-            {
-                error = true;
-                msgError = ex.Message;
-            }
-
-            SetErrorResponse(error);
-            SetMsgErrorResponse(msgError);
-
             return response;
         }
-
-        //
     }
 }

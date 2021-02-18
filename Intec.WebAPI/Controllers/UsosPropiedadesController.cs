@@ -6,87 +6,112 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 
 namespace Intec.WebApi.Controllers
 {
     public class UsosPropiedadesController : DefaultController
     {
-        public List<Intec.BL.DTO.UsosPropiedades> Get()
+        [HttpPost]
+        [Route("api/UsosPropiedades/ObtenerUsosPropiedades")]
+        public JObject ObtenerUsosPropiedades([FromBody] JObject Token)
         {
-            return new Intec.BL.BE.AdministracionBE().ObtenerUsosPropiedades();
-        }
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
 
-        // GET: api/UsosPropiedades/5
-        public UsosPropiedades Get(int id)
-        {
-            return new Intec.BL.BE.AdministracionBE().ObtenerUsoPropiedad(id);
-        }
-
-        //OK
-
-        // POST: api/UsosPropiedades
-        public JObject Post([FromBody] Intec.BL.DTO.UsosPropiedades UsoPropiedad)
-        {
-            try
-            {
-                new Intec.BL.BE.AdministracionBE().CrearUsoPropiedad(UsoPropiedad);
-            }
-            catch (Exception ex)
-            {
-                error = true;
-                msgError = ex.Message;
-            }
-
-            SetErrorResponse(error);
-            SetMsgErrorResponse(msgError);
-
+            if (validToken)
+                SetDataResponse( new Intec.BL.BE.AdministracionBE().ObtenerUsosPropiedades());
             return response;
         }
 
-        //OK
-
-        // PUT: api/UsosPropiedades/5
-        public JObject Put(int id, [FromBody] JObject UsoPropiedadEditarJO)
+        [HttpPost]
+        [Route("api/UsosPropiedades/ObtenerUsoPropiedad")]
+        public JObject ObtenerUsoPropiedad([FromBody] JObject Token)
         {
-            try
-            {
-                new Intec.BL.BE.AdministracionBE().EditarUsoPropiedad(UsoPropiedadEditarJO["UsoPropiedad"].ToObject<Intec.BL.DTO.UsosPropiedades>(), int.Parse(UsoPropiedadEditarJO["IdUsuarioModificacion"].ToString()));
-            }
-            catch (Exception ex)
-            {
-                error = true;
-                msgError = ex.Message;
-            }
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
 
-            SetErrorResponse(error);
-            SetMsgErrorResponse(msgError);
+            if (validToken)
+                SetDataResponse( new Intec.BL.BE.AdministracionBE().ObtenerUsoPropiedad(Token["idUsoPropiedad"].ToObject<int>()));
+            return response;
+        }
+
+        [HttpPost]
+        [Route("api/UsosPropiedades/CrearUsoPropiedad")]
+        public JObject CrearUsoPropiedad([FromBody] JObject Token)
+        {
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+
+            if (validToken)
+            {
+                try
+                {
+                    new Intec.BL.BE.AdministracionBE().CrearUsoPropiedad(Token["usoPropiedad"].ToObject<Intec.BL.DTO.UsosPropiedades>());
+                }
+                catch (Exception ex)
+                {
+                    error = true;
+                    msgError = ex.Message;
+                }
+
+                SetErrorResponse(error);
+                SetMsgErrorResponse(msgError);
+            }
+            
+            return response;
+        }
+
+        [HttpPost]
+        [Route("api/UsosPropiedades/ActualizarUsoPropiedad")]
+        public JObject ActualizarUsoPropiedad([FromBody] JObject Token)
+        {
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+
+            if (validToken) { 
+                try
+                {
+                    new Intec.BL.BE.AdministracionBE().EditarUsoPropiedad(Token["usoPropiedad"].ToObject<Intec.BL.DTO.UsosPropiedades>(), int.Parse(Token["idUsuarioModificacion"].ToString()));
+                }
+                catch (Exception ex)
+                {
+                    error = true;
+                    msgError = ex.Message;
+                }
+
+                SetErrorResponse(error);
+                SetMsgErrorResponse(msgError);
+            }
 
             return response;
 
         }
 
-        //OK
-
-        // DELETE: api/UsosPropiedades/5
-        public JObject Delete(int id, [FromBody] JObject UsoPropiedadEliminarJO)
+        [HttpPost]
+        [Route("api/UsosPropiedades/EliminarUsoPropiedad")]
+        public JObject EliminarUsoPropiedad([FromBody] JObject Token)
         {
-            try
-            {
-                new Intec.BL.BE.AdministracionBE().EliminarUsoPropiedad(int.Parse(UsoPropiedadEliminarJO["IdUsoPropiedad"].ToString()), int.Parse(UsoPropiedadEliminarJO["IdUsuarioModificacion"].ToString()));
-            }
-            catch (Exception ex)
-            {
-                error = true;
-                msgError = ex.Message;
-            }
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
 
-            SetErrorResponse(error);
-            SetMsgErrorResponse(msgError);
+            if (validToken)
+            {
+                try
+                {
+                    new Intec.BL.BE.AdministracionBE().EliminarUsoPropiedad(int.Parse(Token["idUsoPropiedad"].ToString()), int.Parse(Token["idUsuarioModificacion"].ToString()));
+                }
+                catch (Exception ex)
+                {
+                    error = true;
+                    msgError = ex.Message;
+                }
 
+                SetErrorResponse(error);
+                SetMsgErrorResponse(msgError);
+            }
             return response;
         }
-
-        //OK
     }
 }
