@@ -19,59 +19,85 @@ namespace Intec.WebApi.Controllers
         //}
 
         // GET: api/Departamnetos/5/Ciudades
-        [Route("api/Departamentos/{id}/Ciudades")]
-        [HttpGet]
-        public List<Ciudades> GetCiudades(string id)
+        [HttpPost]
+        [Route("api/Departamentos/ObtenerCiudades")]
+        public JObject ObtenerCiudades([FromBody] JObject Token)
         {
-            return new Intec.BL.BE.AdministracionBE().ObtenerCiudades(id);
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+
+            if (validToken)
+                SetDataResponse(new Intec.BL.BE.AdministracionBE().ObtenerCiudades(Token["idDepartamento"].ToObject<string>()));
+            return response;
         }
 
 
         // GET: api/Departamentos/5 
         //TODO
-        public Departamentos Get(string id)
+        [HttpPost]
+        [Route("api/Departamentos/ObtenerDepartamento")]
+        public JObject ObtenerDepartamento([FromBody] JObject Token)
         {
-            return new Intec.BL.BE.AdministracionBE().ObtenerDepartamento(id);
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+
+            if (validToken)
+                SetDataResponse(new Intec.BL.BE.AdministracionBE().ObtenerDepartamento(Token["idDepartamento"].ToObject<string>()));
+            return response;
         }
 
 
         // POST: api/Departamentos
-        public JObject Post([FromBody] Intec.BL.DTO.Departamentos Departamento)
+        [HttpPost]
+        [Route("api/Departamentos/CrearDepartamento")]
+        public JObject CrearDepartamento([FromBody] JObject Token)
         {
-            try
-            {
-                new Intec.BL.BE.AdministracionBE().CrearDepartamento(Departamento);
-            }
-            catch (Exception ex)
-            {
-                error = true;
-                msgError = ex.Message;
-            }
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
 
-            SetErrorResponse(error);
-            SetMsgErrorResponse(msgError);
+            if (validToken)
+            {
+                try
+                {
+                    new Intec.BL.BE.AdministracionBE().CrearDepartamento(Token["departamento"].ToObject<Intec.BL.DTO.Departamentos>());
+                }
+                catch (Exception ex)
+                {
+                    error = true;
+                    msgError = ex.Message;
+                }
 
+                SetErrorResponse(error);
+                SetMsgErrorResponse(msgError);
+            }
             return response;
         }
 
         //Resultado OK, me permite generar IdPais 2
 
         //// PUT: api/Departamentos/5
-        public JObject Put(int id, [FromBody] JObject DepartamentoEditarJO)
+        [HttpPost]
+        [Route("api/Departamentos/ActualizarDepartamento")]
+        public JObject ActualizarDepartamento(int id, [FromBody] JObject Token)
         {
-            try
-            {
-                new Intec.BL.BE.AdministracionBE().EditarDepartamento(DepartamentoEditarJO["Departamento"].ToObject<Intec.BL.DTO.Departamentos>(), int.Parse(DepartamentoEditarJO["IdUsuarioModificacion"].ToString()));
-            }
-            catch (Exception ex)
-            {
-                error = true;
-                msgError = ex.Message;
-            }
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
 
-            SetErrorResponse(error);
-            SetMsgErrorResponse(msgError);
+            if (validToken)
+            {
+                try
+                {
+                    new Intec.BL.BE.AdministracionBE().EditarDepartamento(Token["departamento"].ToObject<Intec.BL.DTO.Departamentos>(), int.Parse(Token["idUsuarioModificacion"].ToString()));
+                }
+                catch (Exception ex)
+                {
+                    error = true;
+                    msgError = ex.Message;
+                }
 
+                SetErrorResponse(error);
+                SetMsgErrorResponse(msgError);
+            }
             return response;
 
         }
@@ -79,7 +105,9 @@ namespace Intec.WebApi.Controllers
         //Resultado OK, Me permite cambiar otro registro al de la URL
 
         //// DELETE: api/Departamentos/5
-        public JObject Delete(int id, [FromBody] JObject DepartamentoEliminarJO)
+        [HttpPost]
+        [Route("api/Departamentos/EliminarDepartamento")]
+        public JObject EliminarDepartamento(int id, [FromBody] JObject DepartamentoEliminarJO)
         {
             try
             {

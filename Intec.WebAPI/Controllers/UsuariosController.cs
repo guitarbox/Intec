@@ -15,7 +15,7 @@ namespace Intec.WebApi.Controllers
     {
         [HttpPost]
         [Route("api/Usuarios/ObtenerUsuarios")]
-        public JObject ObtenerUsuarios(JObject Token)
+        public JObject ObtenerUsuarios([FromBody]JObject Token)
         {
             bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
             SetValidTokendResponse(validToken);
@@ -27,7 +27,7 @@ namespace Intec.WebApi.Controllers
 
         [HttpPost]
         [Route("api/Usuarios/ObtenerUsuario")]
-        public JObject ObtenerUsuario(JObject Token)
+        public JObject ObtenerUsuario([FromBody]JObject Token)
         {
             bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
             SetValidTokendResponse(validToken);
@@ -63,21 +63,28 @@ namespace Intec.WebApi.Controllers
             }
             return response;
         }
-
-        public JObject Put([FromBody]JObject UsuarioActualizarJO)
+        [HttpPost]
+        [Route("api/Usuarios/ActualizarUsuario")]
+        public JObject ActualizarUsuario([FromBody]JObject Token)
         {
-            try
-            {
-                new Intec.BL.BE.UsuariosBE().ActualizarUsuario(UsuarioActualizarJO["Usuario"].ToObject<Intec.BL.DTO.Usuarios>(), int.Parse(UsuarioActualizarJO["IdUsuarioModificacion"].ToString()));
-            }
-            catch (Exception ex)
-            {
-                error = true;
-                msgError = ex.Message;
-            }
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
 
-            SetErrorResponse(error);
-            SetMsgErrorResponse(msgError);
+            if (validToken)
+            {
+                try
+                {
+                    new Intec.BL.BE.UsuariosBE().ActualizarUsuario(Token["Usuario"].ToObject<Intec.BL.DTO.Usuarios>(), int.Parse(Token["IdUsuarioModificacion"].ToString()));
+                }
+                catch (Exception ex)
+                {
+                    error = true;
+                    msgError = ex.Message;
+                }
+
+                SetErrorResponse(error);
+                SetMsgErrorResponse(msgError);
+            }
 
             return response;
         }

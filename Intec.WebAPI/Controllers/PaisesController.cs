@@ -13,80 +13,122 @@ namespace Intec.WebApi.Controllers
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class PaisesController : DefaultController
     {
-        // GET: api/Paises
-        public List<Paises> Get()
+        // GET
+        [HttpPost]
+        [Route("api/Paises/ObtenerPaises")]
+        public JObject ObtenerPaises([FromBody]JObject Token)
         {
-            return new Intec.BL.BE.AdministracionBE().ObtenerPaises();
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+            if(validToken)
+                SetDataResponse(new Intec.BL.BE.AdministracionBE().ObtenerPaises());
+            return response;
         }
 
         //GET: api/Pais/5/Departamentos
-        [Route("api/Paises/{id}/Departamentos")]
-        [HttpGet]
-        public List<Departamentos> GetDepartamentos(int id)
+        [HttpPost]
+        [Route("api/Paises/ObtenerDepartamentos")]//Pregunta
+        public JObject ObtenerDepartamentos([FromBody] JObject Token)
         {
-            return new Intec.BL.BE.AdministracionBE().ObtenerDepartamentos(id);
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+
+            if(validToken)
+                SetDataResponse(new Intec.BL.BE.AdministracionBE().ObtenerDepartamentos(Token["idPais"].ToObject<int>()));
+            return response;
         }
 
         // GET: api/Paises/5
-        public Paises Get(int id)
+
+        [HttpPost]
+        [Route("api/Paises/ObtenerPais")]
+        public JObject ObtenerPais([FromBody] JObject Token)
         {
-            return new Intec.BL.BE.AdministracionBE().ObtenerPais(id);
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+
+            if(validToken)
+                SetDataResponse(new Intec.BL.BE.AdministracionBE().ObtenerPais(Token["idPais"].ToObject<int>()));
+            return response;
         }
 
         // POST: api/Paises
-        public JObject Post([FromBody]Intec.BL.DTO.Paises Pais)
+        [HttpPost]
+        [Route("api/Paises/CrearPais")]
+        public JObject CrearPais([FromBody]JObject Token)
         {
-            try
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+            if (validToken)
             {
-                new Intec.BL.BE.AdministracionBE().CrearPais(Pais);
-            }
-            catch (Exception ex) {
-                error = true;
-                msgError = ex.Message;
-            }
+                try
+                {
+                    new Intec.BL.BE.AdministracionBE().CrearPais(Token["pais"].ToObject<Intec.BL.DTO.Paises>());
+                }
+                catch (Exception ex)
+                {
+                    error = true;
+                    msgError = ex.Message;
+                }
 
-            SetErrorResponse(error);
-            SetMsgErrorResponse(msgError);
-
+                SetErrorResponse(error);
+                SetMsgErrorResponse(msgError);
+            }
             return response;
         }
 
         //// PUT: api/Paises/5
-        public JObject Put(int id,[FromBody] JObject PaisEditarJO)
+        [HttpPost]
+        [Route("api/Paises/ActualizarPais")]
+        public JObject ActualizarPais(int id, [FromBody] JObject Token)
         {
-            try
-            {
-                new Intec.BL.BE.AdministracionBE().EditarPais(PaisEditarJO ["Pais"].ToObject<Intec.BL.DTO.Paises>(), int.Parse(PaisEditarJO ["IdUsuarioModificacion"].ToString()));
-            }
-            catch (Exception ex)
-            {
-                error = true;
-                msgError = ex.Message;
-            }
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
 
-            SetErrorResponse(error);
-            SetMsgErrorResponse(msgError);
+            if (validToken)
+            {
+                try
+                {
+                    new Intec.BL.BE.AdministracionBE().EditarPais(Token["pais"].ToObject<Intec.BL.DTO.Paises>(), int.Parse(Token["idUsuarioModificacion"].ToString()));
+                }
+                catch (Exception ex)
+                {
+                    error = true;
+                    msgError = ex.Message;
+                }
 
+                SetErrorResponse(error);
+                SetMsgErrorResponse(msgError);
+            }
             return response;
+        
 
         }
 
 
         //// DELETE: api/Paises/5
-        public JObject Delete(int id, [FromBody] JObject PaisEliminarJO)
+        [HttpPost]
+        [Route("api/Paises/EliminarPais")]
+        public JObject EliminarPais(int id, [FromBody] JObject Token)
         {
-            try
-            {
-                new Intec.BL.BE.AdministracionBE().EliminarPais(int.Parse(PaisEliminarJO["IdPais"].ToString()), int.Parse(PaisEliminarJO["IdUsuarioModificacion"].ToString()));
-            }
-            catch (Exception ex)
-            {
-                error = true;
-                msgError = ex.Message;
-            }
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
 
-            SetErrorResponse(error);
-            SetMsgErrorResponse(msgError);
+            if (validToken)
+            {
+                try
+                {
+                    new Intec.BL.BE.AdministracionBE().EliminarPais(int.Parse(Token["IdPais"].ToString()), int.Parse(Token["IdUsuarioModificacion"].ToString()));
+                }
+                catch (Exception ex)
+                {
+                    error = true;
+                    msgError = ex.Message;
+                }
+
+                SetErrorResponse(error);
+                SetMsgErrorResponse(msgError);
+            }
 
             return response;
         }

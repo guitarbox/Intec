@@ -19,26 +19,41 @@ namespace Intec.WebApi.Controllers
         //}
 
         // GET: api/Ciudades/5
-        public Ciudades Get(string id)
+        [HttpPost]
+        [Route("api/Departamentos/ObtenerCiudad")]
+        public JObject ObtenerCiudad([FromBody] JObject Token)
         {
-            return new Intec.BL.BE.AdministracionBE().ObtenerCiudad(id);
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+
+            if (validToken)
+                SetDataResponse(new Intec.BL.BE.AdministracionBE().ObtenerCiudad(Token["idCiudad"].ToObject<string>()));
+            return response;
         }
 
         // POST: api/Ciudades
-        public JObject Post([FromBody] Intec.BL.DTO.Ciudades Ciudad)
+        [HttpPost]
+        [Route("api/Departamentos/CrearCiudad")]
+        public JObject CrearCiudad([FromBody] JObject Token)
         {
-            try
-            {
-                new Intec.BL.BE.AdministracionBE().CrearCiudad(Ciudad);
-            }
-            catch (Exception ex)
-            {
-                error = true;
-                msgError = ex.Message;
-            }
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
 
-            SetErrorResponse(error);
-            SetMsgErrorResponse(msgError);
+            if (validToken)
+            {
+                try
+                {
+                    new Intec.BL.BE.AdministracionBE().CrearCiudad(Token["ciudad"].ToObject<Intec.BL.DTO.Ciudades>());
+                }
+                catch (Exception ex)
+                {
+                    error = true;
+                    msgError = ex.Message;
+                }
+
+                SetErrorResponse(error);
+                SetMsgErrorResponse(msgError);
+            }
 
             return response;
         }
@@ -46,20 +61,28 @@ namespace Intec.WebApi.Controllers
         //Resultado OK
 
         // PUT: api/Ciudades/5
-        public JObject Put(int id, [FromBody] JObject CiudadEditarJO)
+        [HttpPost]
+        [Route("api/Departamentos/ActualizarCiudad")]
+        public JObject ActualizarCiudad(int id, [FromBody] JObject Token)
         {
-            try
-            {
-                new Intec.BL.BE.AdministracionBE().EditarCiudad(CiudadEditarJO["Ciudad"].ToObject<Intec.BL.DTO.Ciudades>(), int.Parse(CiudadEditarJO["IdUsuarioModificacion"].ToString()));
-            }
-            catch (Exception ex)
-            {
-                error = true;
-                msgError = ex.Message;
-            }
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
 
-            SetErrorResponse(error);
-            SetMsgErrorResponse(msgError);
+            if (validToken)
+            {
+                try
+                {
+                    new Intec.BL.BE.AdministracionBE().EditarCiudad(Token["ciudad"].ToObject<Intec.BL.DTO.Ciudades>(), int.Parse(Token["idUsuarioModificacion"].ToString()));
+                }
+                catch (Exception ex)
+                {
+                    error = true;
+                    msgError = ex.Message;
+                }
+
+                SetErrorResponse(error);
+                SetMsgErrorResponse(msgError);
+            }
 
             return response;
 
@@ -68,21 +91,28 @@ namespace Intec.WebApi.Controllers
         //Resultado OK
 
         // DELETE: api/Ciudades/5
-        public JObject Delete(int id, [FromBody] JObject CiudadEliminarJO)
+        [HttpPost]
+        [Route("api/Departamentos/EliminarCiudad")]
+        public JObject EliminarCiudad(int id, [FromBody] JObject Token)
         {
-            try
-            {
-                new Intec.BL.BE.AdministracionBE().EliminarCiudad((CiudadEliminarJO["IdCiudad"].ToString()), int.Parse(CiudadEliminarJO["IdUsuarioModificacion"].ToString()));
-            }
-            catch (Exception ex)
-            {
-                error = true;
-                msgError = ex.Message;
-            }
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
 
-            SetErrorResponse(error);
-            SetMsgErrorResponse(msgError);
+            if (validToken)
+            {
+                try
+                {
+                    new Intec.BL.BE.AdministracionBE().EliminarCiudad((Token["IdCiudad"].ToString()), int.Parse(Token["IdUsuarioModificacion"].ToString()));
+                }
+                catch (Exception ex)
+                {
+                    error = true;
+                    msgError = ex.Message;
+                }
 
+                SetErrorResponse(error);
+                SetMsgErrorResponse(msgError);
+            }
             return response;
         }
 
