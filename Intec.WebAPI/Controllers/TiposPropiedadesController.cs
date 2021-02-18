@@ -11,82 +11,105 @@ namespace Intec.WebApi.Controllers
 {
     public class TiposPropiedadesController : DefaultController
     {
-        // GET: api/TiposPropiedades
-        public List<TiposPropiedades> Get()
+        [HttpPost]
+        [Route("api/TiposPropiedad/ObtenerTiposPropiedad")]
+        public JObject ObtenerTiposPropiedad([FromBody] JObject Token)
         {
-            return new Intec.BL.BE.AdministracionBE().ObtenerTiposPropiedades();
-        }
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
 
-        // GET: api/TiposPropiedades/5
-        public TiposPropiedades Get(int id)
-        {
-            return new Intec.BL.BE.AdministracionBE().ObtenerTipoPropiedad(id);
-        }
-
-        // OK
-
-        // POST: api/TiposPropiedades
-        public JObject Post([FromBody] Intec.BL.DTO.TiposPropiedades TipoPropiedad)
-        {
-            try
-            {
-                new Intec.BL.BE.AdministracionBE().CrearTipoPropiedad(TipoPropiedad);
-            }
-            catch (Exception ex)
-            {
-                error = true;
-                msgError = ex.Message;
-            }
-
-            SetErrorResponse(error);
-            SetMsgErrorResponse(msgError);
-
+            if (validToken)
+                SetDataResponse( new Intec.BL.BE.AdministracionBE().ObtenerTiposPropiedades());
             return response;
         }
 
-        //OK
-
-        // PUT: api/TiposPropiedades/5
-        public JObject Put(int id, [FromBody] JObject TipoPropiedadEditarJO)
+        [HttpPost]
+        [Route("api/TiposPropiedad/ObtenerTipoPropiedad")]
+        public JObject ObtenerTipoPropiedad([FromBody] JObject Token)
         {
-            try
-            {
-                new Intec.BL.BE.AdministracionBE().EditarTipoPropiedad(TipoPropiedadEditarJO["TipoPropiedad"].ToObject<Intec.BL.DTO.TiposPropiedades>(), int.Parse(TipoPropiedadEditarJO["IdUsuarioModificacion"].ToString()));
-            }
-            catch (Exception ex)
-            {
-                error = true;
-                msgError = ex.Message;
-            }
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
 
-            SetErrorResponse(error);
-            SetMsgErrorResponse(msgError);
+            if (validToken)
+                SetDataResponse( new Intec.BL.BE.AdministracionBE().ObtenerTipoPropiedad(Token["idTipoPropiedad"].ToObject<int>()));
+            return response;
+        }
+
+        [HttpPost]
+        [Route("api/TiposPropiedad/CrearTipoPropiedad")]
+        public JObject CrearTipoPropiedad([FromBody] JObject Token)
+        {
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+
+            if (validToken)
+            {
+                try
+                {
+                    new Intec.BL.BE.AdministracionBE().CrearTipoPropiedad(Token["tipoPropiedad"].ToObject<Intec.BL.DTO.TiposPropiedades>());
+                }
+                catch (Exception ex)
+                {
+                    error = true;
+                    msgError = ex.Message;
+                }
+
+                SetErrorResponse(error);
+                SetMsgErrorResponse(msgError);
+            }
+            return response;
+        }
+
+        [HttpPost]
+        [Route("api/TiposPropiedad/ActualizarTipoPropiedad")]
+        public JObject ActualizarTipoPropiedad([FromBody] JObject Token)
+        {
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+
+            if (validToken)
+            {
+                try
+                {
+                    new Intec.BL.BE.AdministracionBE().EditarTipoPropiedad(Token["tipoPropiedad"].ToObject<Intec.BL.DTO.TiposPropiedades>(), int.Parse(Token["idUsuarioModificacion"].ToString()));
+                }
+                catch (Exception ex)
+                {
+                    error = true;
+                    msgError = ex.Message;
+                }
+
+                SetErrorResponse(error);
+                SetMsgErrorResponse(msgError);
+            }
 
             return response;
 
         }
 
-        //OK
-
-        // DELETE: api/TiposPropiedades/5
-        public JObject Delete(int id, [FromBody] JObject TipoPropiedadEliminarJO)
+        [HttpPost]
+        [Route("api/TiposPropiedad/EliminarTipoPropiedad")]
+        public JObject EliminarTipoPropiedad([FromBody] JObject Token)
         {
-            try
-            {
-                new Intec.BL.BE.AdministracionBE().EliminarTipoPropiedad(int.Parse(TipoPropiedadEliminarJO["IdTipoPropiedad"].ToString()), int.Parse(TipoPropiedadEliminarJO["IdUsuarioModificacion"].ToString()));
-            }
-            catch (Exception ex)
-            {
-                error = true;
-                msgError = ex.Message;
-            }
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
 
-            SetErrorResponse(error);
-            SetMsgErrorResponse(msgError);
+            if (validToken)
+            {
+                try
+                {
+                    new Intec.BL.BE.AdministracionBE().EliminarTipoPropiedad(int.Parse(Token["idTipoPropiedad"].ToString()), int.Parse(Token["idUsuarioModificacion"].ToString()));
+                }
+                catch (Exception ex)
+                {
+                    error = true;
+                    msgError = ex.Message;
+                }
 
+                SetErrorResponse(error);
+                SetMsgErrorResponse(msgError);
+            }
             return response;
         }
-
-        //OK
     }
 }

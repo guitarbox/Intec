@@ -11,84 +11,106 @@ namespace Intec.WebApi.Controllers
 {
     public class MarcasEquiposController : DefaultController
     {
-        // GET: api/MarcasEquipos
-        public List<MarcasEquipos> Get()
+        [HttpPost]
+        [Route("api/MarcasEquipos/ObtenerMarcasEquipos")]
+        public JObject ObtenerMarcasEquipos([FromBody] JObject Token)
         {
-            return new Intec.BL.BE.AdministracionBE().ObtenerMarcasEquipos();
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+
+            if (validToken)
+                SetDataResponse( new Intec.BL.BE.AdministracionBE().ObtenerMarcasEquipos());
+            return response;
         }
 
-        //OK
-
-        // GET: api/MarcasEquipos/5
-        public MarcasEquipos Get(int id)
+        [HttpPost]
+        [Route("api/MarcasEquipos/ObtenerMarcaEquipos")]
+        public JObject ObtenerMarcaEquipos([FromBody] JObject Token)
         {
-            return new Intec.BL.BE.AdministracionBE().ObtenerMarcaEquipo(id);
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+
+            if (validToken)
+                SetDataResponse( new Intec.BL.BE.AdministracionBE().ObtenerMarcaEquipo(Token["idMarcaEquipo"].ToObject<int>()));
+            return response;
         }
 
-        //OK
-
-        // POST: api/MarcasEquipos
-        public JObject Post([FromBody] Intec.BL.DTO.MarcasEquipos MarcaEquipo)
+        [HttpPost]
+        [Route("api/MarcasEquipos/CrearMarcaEquipos")]
+        public JObject CrearMarcaEquipos([FromBody] JObject Token)
         {
-            try
-            {
-                new Intec.BL.BE.AdministracionBE().CrearMarcaEquipo(MarcaEquipo);
-            }
-            catch (Exception ex)
-            {
-                error = true;
-                msgError = ex.Message;
-            }
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
 
-            SetErrorResponse(error);
-            SetMsgErrorResponse(msgError);
+            if (validToken)
+            {
+                try
+                {
+                    new Intec.BL.BE.AdministracionBE().CrearMarcaEquipo(Token["marcaEquipo"].ToObject<Intec.BL.DTO.MarcasEquipos>());
+                }
+                catch (Exception ex)
+                {
+                    error = true;
+                    msgError = ex.Message;
+                }
+
+                SetErrorResponse(error);
+                SetMsgErrorResponse(msgError);
+            }
 
             return response;
         }
 
-        //OK
-
-        // PUT: api/MarcasEquipos/5
-        public JObject Put(int id, [FromBody] JObject MarcaEquipoEditarJO)
+        [HttpPost]
+        [Route("api/MarcasEquipos/ActualizarMarcasEquipos")]
+        public JObject ActualizarMarcasEquipos([FromBody] JObject Token)
         {
-            try
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+
+            if (validToken)
             {
-                new Intec.BL.BE.AdministracionBE().EditarMarcaEquipo(MarcaEquipoEditarJO["MarcaEquipo"].ToObject<Intec.BL.DTO.MarcasEquipos>(), int.Parse(MarcaEquipoEditarJO["IdUsuarioModificacion"].ToString()));
+                try
+                {
+                    new Intec.BL.BE.AdministracionBE().EditarMarcaEquipo(Token["marcaEquipo"].ToObject<Intec.BL.DTO.MarcasEquipos>(), int.Parse(Token["idUsuarioModificacion"].ToString()));
+                }
+                catch (Exception ex)
+                {
+                    error = true;
+                    msgError = ex.Message;
+                }
+
+                SetErrorResponse(error);
+                SetMsgErrorResponse(msgError);
             }
-            catch (Exception ex)
-            {
-                error = true;
-                msgError = ex.Message;
-            }
-
-            SetErrorResponse(error);
-            SetMsgErrorResponse(msgError);
-
-            return response;
-
-        }
-
-        //OK
-
-        // DELETE: api/MarcasEquipos/5
-        public JObject Delete(int id, [FromBody] JObject MarcaEquipoEliminarJO)
-        {
-            try
-            {
-                new Intec.BL.BE.AdministracionBE().EliminarMarcaEquipo(int.Parse(MarcaEquipoEliminarJO["IdMarcaEquipo"].ToString()), int.Parse(MarcaEquipoEliminarJO["IdUsuarioModificacion"].ToString()));
-            }
-            catch (Exception ex)
-            {
-                error = true;
-                msgError = ex.Message;
-            }
-
-            SetErrorResponse(error);
-            SetMsgErrorResponse(msgError);
 
             return response;
         }
 
-        //OK
+        [HttpPost]
+        [Route("api/MarcasEquipos/EliminarMarcaEquipos")]
+        public JObject EliminarMarcaEquipos([FromBody] JObject Token)
+        {
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+
+            if (validToken)
+            {
+                try
+                {
+                    new Intec.BL.BE.AdministracionBE().EliminarMarcaEquipo(int.Parse(Token["idMarcaEquipo"].ToString()), int.Parse(Token["idUsuarioModificacion"].ToString()));
+                }
+                catch (Exception ex)
+                {
+                    error = true;
+                    msgError = ex.Message;
+                }
+
+                SetErrorResponse(error);
+                SetMsgErrorResponse(msgError);
+            }
+
+            return response;
+        }
     }
 }

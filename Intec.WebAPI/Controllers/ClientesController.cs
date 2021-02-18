@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Security.Cryptography;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
@@ -12,68 +13,86 @@ namespace Intec.WebApi.Controllers
 {
     public class ClientesController : DefaultController
     {
-        //GET: api/Clientes
-        public List<Intec.BL.DTO.uspConsultaGralCliente_Result> Get(JObject ClienteConsultarJO)
+        [HttpPost]
+        [Route("api/Clientes/ObtenerClientes")]
+        public JObject ObtenerClientes([FromBody]JObject Token)
         {
-            return new Intec.BL.BE.ClientesBE().ConsultaGralClientes(ClienteConsultarJO["NumeroIdentificacion"].ToString(),
-                ClienteConsultarJO["Nombres"].ToString(),
-                ClienteConsultarJO["Direccion"].ToString(),
-                ClienteConsultarJO["NroTelefonico"].ToString(),
-                Boolean.Parse(ClienteConsultarJO["TieneVisitaProgramada"].ToString()));
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+
+            if (validToken)
+            {
+                SetDataResponse( new Intec.BL.BE.ClientesBE().ConsultaGralClientes(Token["numeroIdentificacion"].ToString(),
+                Token["nombres"].ToString(),
+                Token["direccion"].ToString(),
+                Token["nroTelefonico"].ToString(),
+                Boolean.Parse(Token["tieneVisitaProgramada"].ToString())));
+            }
+            return response;
         }
 
-        //GET: api/Clientes/5
-        public Clientes Get(int id)
+        [HttpPost]
+        [Route("api/Clientes/ObtenerCliente")]
+        public JObject ObtenerCliente([FromBody]JObject Token)
         {
-            return new Intec.BL.BE.ClientesBE().ConsultaDetalladaClientes(id);
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+
+            if (validToken)            
+                SetDataResponse( new Intec.BL.BE.ClientesBE().ConsultaDetalladaClientes(Token["idCliente"].ToObject<int>()));
+            return response;
         }
 
-        //OK
-
-        // POST: api/Clientes
-        public JObject Post([FromBody] Intec.BL.DTO.Clientes ClienteCrear)
+        [HttpPost]
+        [Route("api/Clientes/CrearCliente")]
+        public JObject CrearCliente([FromBody]JObject Token)
         {
-            try
-            {
-                new Intec.BL.BE.ClientesBE().CrearCliente(ClienteCrear);
-            }
-            catch (Exception ex)
-            {
-                error = true;
-                msgError = ex.Message;
-            }
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
 
-            SetErrorResponse(error);
-            SetMsgErrorResponse(msgError);
+            if (validToken)
+            {
+                try
+                {
+                    new Intec.BL.BE.ClientesBE().CrearCliente(Token["cliente"].ToObject<Intec.BL.DTO.Clientes>());
+                }
+                catch (Exception ex)
+                {
+                    error = true;
+                    msgError = ex.Message;
+                }
+
+                SetErrorResponse(error);
+                SetMsgErrorResponse(msgError);
+            }
 
             return response;
         }
 
-        //OK
-
-        // PUT: api/Clientes/5
-        public JObject Put(int id, [FromBody] JObject ClienteEditarJO)
+        [HttpPost]
+        [Route("api/Clientes/ActualizarCliente")]
+        public JObject ActualizarCliente([FromBody]JObject Token)
         {
-            try
-            {
-                new Intec.BL.BE.ClientesBE().EditarClientes(ClienteEditarJO["Cliente"].ToObject<Intec.BL.DTO.Clientes>(), int.Parse(ClienteEditarJO["IdUsuarioModificacion"].ToString()));
-            }
-            catch (Exception ex)
-            {
-                error = true;
-                msgError = ex.Message;
-            }
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
 
-            SetErrorResponse(error);
-            SetMsgErrorResponse(msgError);
+            if (validToken)
+            {
+                try
+                {
+                    new Intec.BL.BE.ClientesBE().EditarClientes(Token["cliente"].ToObject<Intec.BL.DTO.Clientes>(), int.Parse(Token["idUsuarioModificacion"].ToString()));
+                }
+                catch (Exception ex)
+                {
+                    error = true;
+                    msgError = ex.Message;
+                }
 
+                SetErrorResponse(error);
+                SetMsgErrorResponse(msgError);
+            }
             return response;
 
         }
-
-        //OK
-
-        // DELETE: No hay Eliminar
-        
     }
 }
