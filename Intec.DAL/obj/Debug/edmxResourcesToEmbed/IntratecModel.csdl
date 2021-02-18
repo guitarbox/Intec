@@ -1227,6 +1227,9 @@
     <Property Name="DebeCambiarContrasena" Type="Boolean" Nullable="false" />
     <Property Name="tokenCambioContrasena" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
     <Property Name="horaTokenCambioContrasena" Type="DateTime" Precision="3" />
+    <Property Name="tokenSesion" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="horaTokenSesion" Type="DateTime" Precision="3" />
+    <Property Name="FechaNacimiento" Type="DateTime" Precision="0" />
   </EntityType>
   <Association Name="FK_Usuarios_Ciudades">
     <End Type="DB_A66D31_intratecPrbModel.Ciudades" Role="Ciudades" Multiplicity="1" />

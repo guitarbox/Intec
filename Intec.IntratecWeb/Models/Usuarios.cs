@@ -25,6 +25,13 @@ namespace Intec.IntratecWeb.Models
         public int IdRol { get; set; }
         public bool Activo { get; set; }
         public string Foto { get; set; }
+        public string Email { get; set; }
+        public bool DebeCambiarContrasena { get; set; }
+        //public string tokenCambioContrasena { get; set; }
+        //public DateTime? horaTokenCambioContrasena { get; set; }
+        public string tokenSesion { get; set; }
+        public DateTime? horaTokenSesion { get; set; }
+        public DateTime? FechaNacimiento { get; set; }
         public Roles Roles { get; set; }
         public TiposIdentificacion TiposIdentificacion { get; set; }
     }

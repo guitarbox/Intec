@@ -86,5 +86,10 @@ namespace Intec.BL.BE
         {
             return new DAL.TE.UsuariosTE().ValidarTokenModPass(tokenModPass);
         }
+
+        public bool ValidarSessionToken(string token)
+        {
+            return new DAL.TE.UsuariosTE().ValidarSessionToken(token);
+        }
     }
 }

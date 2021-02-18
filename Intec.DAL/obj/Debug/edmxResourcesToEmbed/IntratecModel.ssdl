@@ -428,6 +428,7 @@
     <Property Name="IdCiudadDomicilio" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="IdTipoIdentificacion" Type="int" Nullable="false" />
     <Property Name="NumeroIdentificacion" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="FechaNacimiento" Type="date" />
     <Property Name="IdPaisOrigen" Type="int" Nullable="false" />
     <Property Name="Password" Type="nvarchar" MaxLength="20" Nullable="false" />
     <Property Name="FechaUltimoInicioSesion" Type="datetime" />
@@ -442,6 +443,8 @@
     <Property Name="DebeCambiarContrasena" Type="bit" Nullable="false" />
     <Property Name="tokenCambioContrasena" Type="nvarchar" MaxLength="1000" />
     <Property Name="horaTokenCambioContrasena" Type="datetime" />
+    <Property Name="tokenSesion" Type="nvarchar" MaxLength="1000" />
+    <Property Name="horaTokenSesion" Type="datetime" />
   </EntityType>
   <EntityType Name="UsuariosEquipos">
     <Key>

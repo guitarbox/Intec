@@ -37,5 +37,34 @@ namespace Intec.WebApi.Controllers
                 response.Add("msgError", JToken.FromObject(MsgError));
             }
         }
+        
+        public void SetValidTokendResponse(bool ValidToken)
+        {
+            if (response.ContainsKey("validToken"))
+            {
+                response["validToken"] = ValidToken;
+            }
+            else
+            {
+                response.Add("validToken", JToken.FromObject(ValidToken));
+            }
+        }
+
+        public void SetDataResponse(object Data)
+        {
+            if (response.ContainsKey("data"))
+            {
+                response["data"] = JToken.FromObject(Data);
+            }
+            else
+            {
+                response.Add("data", JToken.FromObject(Data));
+            }
+        }
+
+        public bool ValidateSessionToken(string token)
+        {
+            return new Intec.BL.BE.UsuariosBE().ValidarSessionToken(token);
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Intec.BL.DTO;
+using Microsoft.Ajax.Utilities;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -11,8 +12,7 @@ namespace Intec.WebApi.Controllers
 {
     public class UsosPropiedadesController : DefaultController
     {
-        // GET: api/UsosPropiedades
-        public List<UsosPropiedades> Get()
+        public List<Intec.BL.DTO.UsosPropiedades> Get()
         {
             return new Intec.BL.BE.AdministracionBE().ObtenerUsosPropiedades();
         }

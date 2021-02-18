@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,18 +10,31 @@ using System.Web.Http.Cors;
 namespace Intec.WebApi.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]    
-    public class ParametrosController : ApiController
+    public class ParametrosController : DefaultController
     {
-        [HttpGet]
-        public List<Intec.BL.DTO.Parametros> Get()
+        [HttpPost]
+        [Route("api/Parametros/ObtenerParametros")]
+        public JObject ObtenerParametros([FromBody] JObject Token)
         {
-            return Intec.BL.BE.ParametrosBE.Parametros;
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+
+            if (validToken)
+                SetDataResponse(Intec.BL.BE.ParametrosBE.Parametros);
+            return response;
         }
         
-        [HttpGet]     
-        public Intec.BL.DTO.Parametros Get(int id)
+
+        [HttpPost]
+        [Route("api/Parametros/ObtenerParametro")]
+        public JObject ObtenerParametro([FromBody] JObject Token)
         {
-            return Intec.BL.BE.ParametrosBE.Parametros.Where(p=>p.IdParametro==id).FirstOrDefault();
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+
+            if (validToken)
+                SetDataResponse(Intec.BL.BE.ParametrosBE.Parametros.Where(p => p.IdParametro == Token["idParametro"].ToObject<int>()).FirstOrDefault());
+            return response;            
         }
         
         //[HttpPost]

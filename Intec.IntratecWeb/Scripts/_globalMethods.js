@@ -1,4 +1,4 @@
-﻿function _peticionAjax(urlServicio, verb, parametros, async, onContinue) {
+﻿function _peticionAjax(urlServicio, verb, parametros, async, onContinue) {    
     var rta = "";
 
     if (async !== null && async !== undefined && async) {
@@ -6,7 +6,7 @@
         $.blockUI({
             message: ''
         });
-
+        debugger;
         $.ajax({
             type: verb,
             url: urlServicio,
@@ -36,6 +36,7 @@
         });
     }
     else {
+        debugger;
         $.ajax({
             type: verb,
             url: urlServicio,

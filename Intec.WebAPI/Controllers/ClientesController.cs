@@ -13,14 +13,14 @@ namespace Intec.WebApi.Controllers
     public class ClientesController : DefaultController
     {
         //GET: api/Clientes
-        //public JObject Get(JObject ClienteConsultarJO)
-        //{
-        //    return new Intec.BL.BE.ClientesBE().ConsultaGralClientes(ClienteConsultarJO["NumeroIdentificacion"].ToString(),
-        //        ClienteConsultarJO["Nombres"].ToString(),
-        //        ClienteConsultarJO["Direccion"].ToString(),
-        //        ClienteConsultarJO["NroTelefonico"].ToString(),
-        //        Boolean.Parse(ClienteConsultarJO["TieneVisitaProgramada"].ToString()));
-        //}
+        public List<Intec.BL.DTO.uspConsultaGralCliente_Result> Get(JObject ClienteConsultarJO)
+        {
+            return new Intec.BL.BE.ClientesBE().ConsultaGralClientes(ClienteConsultarJO["NumeroIdentificacion"].ToString(),
+                ClienteConsultarJO["Nombres"].ToString(),
+                ClienteConsultarJO["Direccion"].ToString(),
+                ClienteConsultarJO["NroTelefonico"].ToString(),
+                Boolean.Parse(ClienteConsultarJO["TieneVisitaProgramada"].ToString()));
+        }
 
         //GET: api/Clientes/5
         public Clientes Get(int id)

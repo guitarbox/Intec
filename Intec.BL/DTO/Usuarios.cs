@@ -28,6 +28,14 @@ namespace Intec.BL.DTO
         public int IdRol { get; set; }
         public bool Activo { get; set; }
         public string Foto { get; set; }
+        public string Email { get; set; }
+        public bool DebeCambiarContrasena { get; set; }
+        public string tokenCambioContrasena { get; set; }
+        public DateTime? horaTokenCambioContrasena { get; set; }
+        public string tokenSesion { get; set; }
+        public DateTime? horaTokenSesion { get; set; }
+        public DateTime? FechaNacimiento { get; set; }
+
         public DTO.Roles Roles { get; set; }
         public DTO.TiposIdentificacion TiposIdentificacion { get; set; }
     }

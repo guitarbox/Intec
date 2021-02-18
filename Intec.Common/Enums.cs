@@ -10,7 +10,9 @@ namespace Intec.Common
     {
         public enum Parametros
         {
-            SEND_MAIL_CONF = 1
+            SEND_MAIL_CONF = 1,
+            MINUTES_ALIVE_TOKEN_CHNGPSWD = 2,
+            MINUTES_ALIVE_TOKEN_SESSION = 3
         }
     }
 }

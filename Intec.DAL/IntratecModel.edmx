@@ -433,6 +433,7 @@
           <Property Name="IdCiudadDomicilio" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="IdTipoIdentificacion" Type="int" Nullable="false" />
           <Property Name="NumeroIdentificacion" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaNacimiento" Type="date" />
           <Property Name="IdPaisOrigen" Type="int" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="FechaUltimoInicioSesion" Type="datetime" />
@@ -447,6 +448,8 @@
           <Property Name="DebeCambiarContrasena" Type="bit" Nullable="false" />
           <Property Name="tokenCambioContrasena" Type="nvarchar" MaxLength="1000" />
           <Property Name="horaTokenCambioContrasena" Type="datetime" />
+          <Property Name="tokenSesion" Type="nvarchar" MaxLength="1000" />
+          <Property Name="horaTokenSesion" Type="datetime" />
         </EntityType>
         <EntityType Name="UsuariosEquipos">
           <Key>
@@ -2523,6 +2526,9 @@
           <Property Name="DebeCambiarContrasena" Type="Boolean" Nullable="false" />
           <Property Name="tokenCambioContrasena" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="horaTokenCambioContrasena" Type="DateTime" Precision="3" />
+          <Property Name="tokenSesion" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="horaTokenSesion" Type="DateTime" Precision="3" />
+          <Property Name="FechaNacimiento" Type="DateTime" Precision="0" />
         </EntityType>
         <Association Name="FK_Usuarios_Ciudades">
           <End Type="DB_A66D31_intratecPrbModel.Ciudades" Role="Ciudades" Multiplicity="1" />
@@ -3190,6 +3196,9 @@
           <EntitySetMapping Name="Usuarios">
             <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.Usuarios">
               <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+                <ScalarProperty Name="horaTokenSesion" ColumnName="horaTokenSesion" />
+                <ScalarProperty Name="tokenSesion" ColumnName="tokenSesion" />
                 <ScalarProperty Name="horaTokenCambioContrasena" ColumnName="horaTokenCambioContrasena" />
                 <ScalarProperty Name="tokenCambioContrasena" ColumnName="tokenCambioContrasena" />
                 <ScalarProperty Name="DebeCambiarContrasena" ColumnName="DebeCambiarContrasena" />

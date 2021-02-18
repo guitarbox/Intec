@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,9 @@ namespace Intec.BL.BE
 
         //Obtener
 
-        public List<DAL.uspConsultaGralCliente_Result> ConsultaGralClientes(string NumeroIdentificacion, string Nombres, string Direccion, string NroTelefonico, bool TieneVisitaProgramada)
+        public List<DTO.uspConsultaGralCliente_Result> ConsultaGralClientes(string NumeroIdentificacion, string Nombres, string Direccion, string NroTelefonico, bool TieneVisitaProgramada)
         {
-            return new DAL.TE.ClientesTE().ConsultaGralClientes(NumeroIdentificacion, Nombres, Direccion, NroTelefonico, TieneVisitaProgramada);
+            return MapperConfig.Config.MapperClientes.Map<List<DTO.uspConsultaGralCliente_Result>>( new DAL.TE.ClientesTE().ConsultaGralClientes(NumeroIdentificacion, Nombres, Direccion, NroTelefonico, TieneVisitaProgramada));
         }
 
         public DTO.Clientes ConsultaDetalladaClientes(int IdCliente)

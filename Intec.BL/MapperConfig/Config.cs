@@ -170,7 +170,8 @@ namespace Intec.BL.MapperConfig
             get
             {
                 var config = new AutoMapper.MapperConfiguration(cfg => {
-                    cfg.CreateMap<DAL.Usuarios, DTO.Usuarios>();
+                    cfg.CreateMap<DAL.Usuarios, DTO.Usuarios>()
+                    .ForMember(dest => dest.tokenSesion, opt => opt.MapFrom(src => Convert.ToBase64String(UTF8Encoding.UTF8.GetBytes(src.tokenSesion))));
                     cfg.CreateMap<DAL.Roles, DTO.Roles>();
                     cfg.CreateMap<DAL.Menus, DTO.Menus>();
                     cfg.CreateMap<DAL.TiposIdentificacion, DTO.TiposIdentificacion>();

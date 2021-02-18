@@ -48,6 +48,9 @@ namespace Intec.DAL
         public bool DebeCambiarContrasena { get; set; }
         public string tokenCambioContrasena { get; set; }
         public Nullable<System.DateTime> horaTokenCambioContrasena { get; set; }
+        public string tokenSesion { get; set; }
+        public Nullable<System.DateTime> horaTokenSesion { get; set; }
+        public Nullable<System.DateTime> FechaNacimiento { get; set; }
     
         public virtual Ciudades Ciudades { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

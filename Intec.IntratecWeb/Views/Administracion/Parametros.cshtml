@@ -1,11 +1,12 @@
-﻿
+﻿.
 @{
     ViewBag.Title = "Parametros";
     
 }
 <script>
     $(document).ready(() => {
-        _peticionAjax(URL_SERVICE + URI_SERVICE.Parametros, VerbosREST.GET, '',
+        _peticionAjax(URL_SERVICE + URI_SERVICE.ObtenerParametros, VerbosREST.POST,
+            JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion }),
             true, response => {          
 
                 var columns = [
@@ -23,7 +24,7 @@
                 ];
 
                 $('#tblParametros').DataTable({
-                    data: response,
+                    data: response.data,
                     columns: columns,
                     language: _language_options_table,
                     //

@@ -163,10 +163,12 @@ textarea {
 /* table */
 table > thead > tr > th {
     background-color: #484141;
-    color: white
+    color: white;
+    padding:10px;
 }
 table > tbody > tr > td {
     background-color: white; /*#C5CF31;*/
+    padding: 10px;
 }
 
 /*Botones*/

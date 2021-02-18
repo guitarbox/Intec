@@ -62,23 +62,23 @@ namespace Intec.WebApi.Controllers
         //Rutas adicionales
         [Route("api/Usuarios/LogIn")]
         [HttpPost]
-        public Intec.BL.DTO.Usuarios LogIn([FromBody] TokenLogIn Token)
+        public Intec.BL.DTO.Usuarios LogIn([FromBody] JObject Token)
         {
-            return new Intec.BL.BE.UsuariosBE().IniciarSesion(Token.NumeroIdentificacion, Token.Password);
+            return new Intec.BL.BE.UsuariosBE().IniciarSesion(Token["NumeroIdentificacion"].ToString(), Token["Password"].ToString());
         }
 
         [Route("api/Usuarios/RecuperarContrasena")]
         [HttpPost]
-        public bool RecuperarContrasena([FromBody] TokenRecuperarContrasena Token)
+        public bool RecuperarContrasena([FromBody] JObject Token)
         {
-            return new Intec.BL.BE.UsuariosBE().SolicitarCambioContrasena(Token.NumeroIdentificacion, Token.Email);
+            return new Intec.BL.BE.UsuariosBE().SolicitarCambioContrasena(Token["NumeroIdentificacion"].ToString(), Token["Email"].ToString());
         }
         
         [Route("api/Usuarios/ValidarTokenModPass")]
         [HttpPost]
-        public bool ValidarTokenModPass([FromBody] TokenModPass Token)
+        public bool ValidarTokenModPass([FromBody] JObject Token)
         {
-            return new Intec.BL.BE.UsuariosBE().ValidarTokenModPass(Token.Token);
+            return new Intec.BL.BE.UsuariosBE().ValidarTokenModPass(Token["Token"].ToString());
         }
         
         [Route("api/Usuarios/ModificarContrasena")]

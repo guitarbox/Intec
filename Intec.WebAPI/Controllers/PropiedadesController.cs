@@ -67,7 +67,7 @@ namespace Intec.WebApi.Controllers
         //OK
 
         // DELETE: api/Propiedades/5
-        public void Propiedades Delete(int id, [FromBody])
+        public void Delete(int id)
         {
             {
                 new Intec.BL.BE.ClientesBE().EliminarPropiedad(id);

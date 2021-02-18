@@ -60,10 +60,13 @@ namespace Intec.DAL.TE
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
                 string pass = Convert.ToBase64String(Encoding.UTF8.GetBytes(Pass));
+                string tokenSesion = $"{DateTime.Now.Ticks}{Convert.ToBase64String(UTF8Encoding.UTF8.GetBytes(NumeroIdentificacion))}";
                 res = ctx.Usuarios.Where(c => c.NumeroIdentificacion.Equals(NumeroIdentificacion) && c.Password.Equals(pass) && c.Activo).FirstOrDefault();
                 if(res != null)
                 {
                     res.FechaUltimoInicioSesion = DateTime.Now;
+                    res.tokenSesion = tokenSesion;
+                    res.horaTokenSesion = DateTime.Now;
                     ctx.SaveChanges();                    
                     ctx.Entry(res).Reference(u=>u.Roles).Load();
                     res.Roles.Menus.ToList();
@@ -201,6 +204,21 @@ namespace Intec.DAL.TE
                 string token = Encoding.UTF8.GetString(Convert.FromBase64String(tokenModPass));
                 Usuarios us = ctx.Usuarios.Where(u => u.tokenCambioContrasena.Equals(token)).FirstOrDefault();
                 if(us != null)
+                {
+                    res = true;
+                }
+            }
+            return res;
+        }
+
+        public bool ValidarSessionToken(string sessionToken)
+        {
+            bool res = false;
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                string token = Encoding.UTF8.GetString(Convert.FromBase64String(sessionToken));
+                Usuarios us = ctx.Usuarios.Where(u => u.tokenSesion.Equals(token)).FirstOrDefault();
+                if (us != null)
                 {
                     res = true;
                 }

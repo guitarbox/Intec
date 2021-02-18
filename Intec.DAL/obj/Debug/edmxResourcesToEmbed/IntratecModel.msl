@@ -513,6 +513,9 @@
     <EntitySetMapping Name="Usuarios">
       <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.Usuarios">
         <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="FechaNacimiento" ColumnName="FechaNacimiento" />
+          <ScalarProperty Name="horaTokenSesion" ColumnName="horaTokenSesion" />
+          <ScalarProperty Name="tokenSesion" ColumnName="tokenSesion" />
           <ScalarProperty Name="horaTokenCambioContrasena" ColumnName="horaTokenCambioContrasena" />
           <ScalarProperty Name="tokenCambioContrasena" ColumnName="tokenCambioContrasena" />
           <ScalarProperty Name="DebeCambiarContrasena" ColumnName="DebeCambiarContrasena" />
