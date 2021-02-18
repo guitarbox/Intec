@@ -6,89 +6,111 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using WebGrease.Configuration;
 
 namespace Intec.WebApi.Controllers
 {
     public class TiposIdentificacionController : DefaultController
     {
-        // GET: api/TiposIdentificacion
-        public List<TiposIdentificacion> Get()
+        [HttpPost]
+        [Route("api/TiposIdentificacion/ObtenerTiposIdentificacion")]
+        public JObject ObtenerTiposIdentificacion([FromBody]JObject Token)
         {
-            return new Intec.BL.BE.AdministracionBE().ObtenerTiposIdentificacion();
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+
+            if (validToken)
+                SetDataResponse( new Intec.BL.BE.AdministracionBE().ObtenerTiposIdentificacion());
+            return response;
         }
 
-        //Resultado OK
-
-        // GET: api/TiposIdentificacion/5
-        public TiposIdentificacion Get(int id)
+        [HttpPost]
+        [Route("api/TiposIdentificacion/ObtenerTipoIdentificacion")]
+        public JObject ObtenerTipoIdentificacion([FromBody]JObject Token)
         {
-            return new Intec.BL.BE.AdministracionBE().ObtenerTipoIdentificacion(id);
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+
+            if (validToken)
+                SetDataResponse(new Intec.BL.BE.AdministracionBE().ObtenerTipoIdentificacion(Token["idTipoIdentificacion"].ToObject<int>()));
+            return response;
         }
 
-        //Resultado OK
-
-        // POST: api/TiposIdentificacion
-        public JObject Post([FromBody] Intec.BL.DTO.TiposIdentificacion TipoIdentificacion)
+        [HttpPost]
+        [Route("api/TiposIdentificacion/CrearTipoIdentificacion")]
+        public JObject CrearTipoIdentificacion([FromBody] JObject Token)
         {
-            try
-            {
-                new Intec.BL.BE.AdministracionBE().CrearTipoIdentificacion(TipoIdentificacion);
-            }
-            catch (Exception ex)
-            {
-                error = true;
-                msgError = ex.Message;
-            }
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
 
-            SetErrorResponse(error);
-            SetMsgErrorResponse(msgError);
+            if (validToken)
+            {
+                try
+                {
+                    new Intec.BL.BE.AdministracionBE().CrearTipoIdentificacion(Token["tipoIdentificacion"].ToObject< Intec.BL.DTO.TiposIdentificacion>());
+                }
+                catch (Exception ex)
+                {
+                    error = true;
+                    msgError = ex.Message;
+                }
+                SetErrorResponse(error);
+                SetMsgErrorResponse(msgError);
+            }            
 
             return response;
         }
 
-        //Resultado OK
-
-        // PUT: api/TiposIdentificacion/5
-        public JObject Put(int id, [FromBody] JObject TipoIdentificacionEditarJO)
+        [HttpPost]
+        [Route("api/TiposIdentificacion/ActualizarTipoIdentificacion")]
+        public JObject ActualizarTipoIdentificacion([FromBody] JObject Token)
         {
-            try
-            {
-                new Intec.BL.BE.AdministracionBE().EditarTipoIdentificacion(TipoIdentificacionEditarJO["TipoIdentificacion"].ToObject<Intec.BL.DTO.TiposIdentificacion>(), int.Parse(TipoIdentificacionEditarJO["IdUsuarioModificacion"].ToString()));
-            }
-            catch (Exception ex)
-            {
-                error = true;
-                msgError = ex.Message;
-            }
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
 
-            SetErrorResponse(error);
-            SetMsgErrorResponse(msgError);
+            if (validToken)
+            {
+                try
+                {
+                    new Intec.BL.BE.AdministracionBE().EditarTipoIdentificacion(Token["tipoIdentificacion"].ToObject<Intec.BL.DTO.TiposIdentificacion>(), int.Parse(Token["idUsuarioModificacion"].ToString()));
+                }
+                catch (Exception ex)
+                {
+                    error = true;
+                    msgError = ex.Message;
+                }
+
+                SetErrorResponse(error);
+                SetMsgErrorResponse(msgError);
+            }
 
             return response;
 
         }
 
-        //Resultado OK
-
-        // DELETE: api/TiposIdentificacion/5
-        public JObject Delete(int id, [FromBody] JObject TipoIdentificacionEliminarJO)
+        [HttpPost]
+        [Route("api/TiposIdentificacion/EliminarTipoIdentificacion")]
+        public JObject EliminarTipoIdentificacion([FromBody] JObject Token)
         {
-            try
-            {
-                new Intec.BL.BE.AdministracionBE().EliminarTipoIdentificacion(int.Parse(TipoIdentificacionEliminarJO["IdTipoIdentificacion"].ToString()), int.Parse(TipoIdentificacionEliminarJO["IdUsuarioModificacion"].ToString()));
-            }
-            catch (Exception ex)
-            {
-                error = true;
-                msgError = ex.Message;
-            }
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
 
-            SetErrorResponse(error);
-            SetMsgErrorResponse(msgError);
+            if (validToken)
+            {
+                try
+                {
+                    new Intec.BL.BE.AdministracionBE().EliminarTipoIdentificacion(int.Parse(Token["idTipoIdentificacion"].ToString()), int.Parse(Token["idUsuarioModificacion"].ToString()));
+                }
+                catch (Exception ex)
+                {
+                    error = true;
+                    msgError = ex.Message;
+                }
 
+                SetErrorResponse(error);
+                SetMsgErrorResponse(msgError);
+            }
             return response;
         }
-
-        //Resultado OK, URL
     }
 }
