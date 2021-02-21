@@ -1,0 +1,145 @@
+﻿
+@{
+    ViewBag.Title = "TiposEquipos";
+}
+<script>
+    $(document).ready(() => {
+        ConsultarTiposEquipos();
+    });
+
+    function ConsultarTiposEquipos() {
+        _peticionAjax(URL_SERVICE + URI_SERVICE.ObtenerTiposEquipos, VerbosREST.POST,
+            JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion }),
+            true, response => {
+
+                var columns = [
+                    { data: "IdTipoEquipo", title: 'Id. Tipo Equipo' },
+                    { data: "TipoEquipo", title: 'Tipo Equipo' },
+                    { data: "Activo", title: 'Activo' },
+                    {
+                        data: null, render: function (data, type, full, meta) {
+                            return '<a onclick="AbrirModalEditarRx(\'' + full.IdTipoEquipo + '\');"><span class="fa fa-edit"></span></a>';
+                        }
+                    },
+                    {
+                        data: null, render: function (data, type, full, meta) {
+                            return '<a onclick="EliminarRx(\'' + full.IdTipoEquipo + '\');"><span class="fa fa-trash"></span></a>';
+                        }
+                    }
+                ];
+
+                $("#divTblTiposEquipos").empty();
+                $("#divTblTiposEquipos").append('<table id="tblTiposEquipos" style="width:100%"></table>');
+                $('#tblTiposEquipos').DataTable({
+                    data: response.data,
+                    columns: columns,
+                    language: _language_options_table,
+                    //
+                    dom: 'Bfrtip',
+                    buttons: [
+                        //{ extend: 'copy', className: 'btn-info' },
+                        //{ extend: 'csv', className: 'btn-info' },
+                        //{ extend: 'excel', className: 'btn-info', title: 'XLS-File' },
+                        //{ extend: 'pdf', className: 'btn-info', title: $('title').text() },
+                        //{ extend: 'print', className: 'btn-info' }
+                    ]
+                });
+            });
+    }
+
+    function AbrirModalCrearRx() {
+        _resetGenericModal();
+
+        $("#genericModalHeader").append('<label>Crear Tipo Equipo</label>');
+        $("#genericModalBody").append('<p>Tipo Equipo</p>');
+        $("#genericModalBody").append('<input id="TipoEquipo" type="text" class="form-control" />');        
+        $("#genericModalFooter").append('<button class="button" id="btnCrearTipoEquipo" return false;">Crear</button>');
+        $("#btnCrearTipoEquipo").click(() => {
+            if ($("#TipoEquipo").val() != '') {
+                _peticionAjax(URL_SERVICE + URI_SERVICE.CrearTipoEquipo, VerbosREST.POST,
+                    JSON.stringify({
+                        sessionToken: UsuarioSesion.tokenSesion,
+                        tipoEquipo: {
+                            IdTipoEquipo: $("#IdTipoEquipo").val(),
+                            TipoEquipo: $("#TipoEquipo").val(),                            
+                            IdUsuarioCreacion: UsuarioSesion.IdUsuario,
+                            Activo: true
+                        }
+                    }),
+                    true, response => {
+                        ConsultarTiposEquipos();
+                        _closeGenericModal()
+                    });
+            }
+            else {
+                swal({
+                    text: 'Por favor ingresar el Tipo Equipo para crear.',
+                    title: swalTitle,
+                    icon: "error"
+                });
+            }
+        });
+        _openGenericModal();
+    }
+
+    function AbrirModalEditarRx(IdTipoEquipo) {
+        var rx = $('#tblTiposEquipos').DataTable().data().filter(f => f.IdTipoEquipo == IdTipoEquipo)[0];
+
+        _resetGenericModal();
+
+        $("#genericModalHeader").append('<label>Editar Tipo Equipo</label>');
+        $("#genericModalBody").append('<p>Id. Tipo Equipo</p>');
+        $("#genericModalBody").append('<input id="IdTipoEquipo" type="text" class="form-control" disabled />');
+        $("#IdTipoEquipo").val(rx.IdTipoEquipo);
+        $("#genericModalBody").append('<p>Tipo Equipo</p>');
+        $("#genericModalBody").append('<input id="TipoEquipo" type="text" class="form-control" />');
+        $("#TipoEquipo").val(rx.TipoEquipo);
+        $("#genericModalBody").append('<label>Activo</label><input id="chkActivo" type="checkbox" ' + (rx.Activo == true ? 'checked' : '') + ' />');
+        $("#genericModalFooter").append('<button class="button" id="btnActualizarTipoEquipo" return false;">Actualizar</button>');
+        $("#btnActualizarTipoEquipo").click(() => {
+            if ($("#TipoEquipo").val() != '') {
+                _peticionAjax(URL_SERVICE + URI_SERVICE.ActualizarTipoEquipo, VerbosREST.POST,
+                    JSON.stringify({
+                        sessionToken: UsuarioSesion.tokenSesion,
+                        tipoEquipo: {
+                            IdTipoEquipo: $("#IdTipoEquipo").val(),
+                            TipoEquipo: $("#TipoEquipo").val(),
+                            IdUsuarioModificacion: UsuarioSesion.IdUsuario,
+                            Activo: $("#chkActivo").is(':checked')
+                        },
+                        idUsuarioModificacion: UsuarioSesion.IdUsuario
+                    }),
+                    true, response => {
+                        ConsultarTiposEquipos();
+                        _closeGenericModal();
+                    });
+            }
+            else {
+                swal({
+                    text: 'Por favor ingresar el Tipo Equipos para actualizar.',
+                    title: swalTitle,
+                    icon: "error"
+                });
+            }
+        });
+        _openGenericModal();
+    }
+
+    function EliminarRx(IdTipoEquipo) {
+        _peticionAjax(URL_SERVICE + URI_SERVICE.EliminarTipoEquipo, VerbosREST.POST,
+            JSON.stringify({
+                sessionToken: UsuarioSesion.tokenSesion,
+                idTipoEquipo: IdTipoEquipo,
+                idUsuarioModificacion: UsuarioSesion.IdUsuario
+            }),
+            true, response => {
+                ConsultarTiposEquipos();
+            });
+    }
+</script>
+<h3 class="text-center" id="title">TIPOS EQUIPOS</h3>
+<div style="padding:10px">
+    <div id="divTblTiposEquipos" style="width:100%"></div>
+    <br />
+    <button class="button" onclick="AbrirModalCrearRx(); return false;">Crear Nuevo Tipo Equipo</button>
+</div> 

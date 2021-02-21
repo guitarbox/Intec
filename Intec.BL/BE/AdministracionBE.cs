@@ -30,6 +30,11 @@ namespace Intec.BL.BE
         {
             return MapperConfig.Config.MapperAdministracion.Map<List<DTO.Paises>>(new DAL.TE.AdministracionTE().ObtenerPaises());
         }
+        
+        public List<DTO.Paises> ObtenerPaisesActivos()
+        {
+            return MapperConfig.Config.MapperAdministracion.Map<List<DTO.Paises>>(new DAL.TE.AdministracionTE().ObtenerPaisesActivos());
+        }
 
         public DTO.Paises ObtenerPais(int IdPais)
         {
@@ -72,6 +77,11 @@ namespace Intec.BL.BE
         {
             return MapperConfig.Config.MapperAdministracion.Map<List<DTO.Departamentos>>(new DAL.TE.AdministracionTE().ObtenerDepartamentos(IdPais));
         }
+        
+        public List<DTO.Departamentos> ObtenerDepartamentosActivos(int IdPais)
+        {
+            return MapperConfig.Config.MapperAdministracion.Map<List<DTO.Departamentos>>(new DAL.TE.AdministracionTE().ObtenerDepartamentosActivos(IdPais));
+        }
 
         //obtener departamento por id
         public DTO.Departamentos ObtenerDepartamento(string IdDepartamento)
@@ -110,6 +120,11 @@ namespace Intec.BL.BE
         {
             return MapperConfig.Config.MapperAdministracion.Map<List<DTO.Ciudades>>(new DAL.TE.AdministracionTE().ObtenerCiudades(IdDepartamento));
         }
+        
+        public List<DTO.Ciudades> ObtenerCiudadesActivos(string IdDepartamento)
+        {
+            return MapperConfig.Config.MapperAdministracion.Map<List<DTO.Ciudades>>(new DAL.TE.AdministracionTE().ObtenerCiudadesActivos(IdDepartamento));
+        }
 
         public DTO.Ciudades ObtenerCiudad(string IdCiudad)
         {
@@ -146,6 +161,11 @@ namespace Intec.BL.BE
         public List<DTO.TiposIdentificacion> ObtenerTiposIdentificacion()
         {
             return MapperConfig.Config.MapperAdministracion.Map<List<DTO.TiposIdentificacion>>(new DAL.TE.AdministracionTE().ObtenerTiposIdentificacion());
+        }
+        
+        public List<DTO.TiposIdentificacion> ObtenerTiposIdentificacionActivos()
+        {
+            return MapperConfig.Config.MapperAdministracion.Map<List<DTO.TiposIdentificacion>>(new DAL.TE.AdministracionTE().ObtenerTiposIdentificacionActivos());
         }
 
         public DTO.TiposIdentificacion ObtenerTipoIdentificacion(int IdTipoIdentificacion)
@@ -184,6 +204,11 @@ namespace Intec.BL.BE
         {
             return MapperConfig.Config.MapperAdministracion.Map<List<DTO.MarcasEquipos>>(new DAL.TE.AdministracionTE().ObtenerMarcasEquipos());
         }
+        
+        public List<DTO.MarcasEquipos> ObtenerMarcasEquiposActivos()
+        {
+            return MapperConfig.Config.MapperAdministracion.Map<List<DTO.MarcasEquipos>>(new DAL.TE.AdministracionTE().ObtenerMarcasEquiposActivos());
+        }
 
         public DTO.MarcasEquipos ObtenerMarcaEquipo(int IdMarcaEquipo)
         {
@@ -221,6 +246,11 @@ namespace Intec.BL.BE
         {
             return MapperConfig.Config.MapperAdministracion.Map<List<DTO.TiposEquipo>>(new DAL.TE.AdministracionTE().ObtenerTiposEquipo());
         }
+        
+        public List<DTO.TiposEquipo> ObtenerTiposEquiposActivos()
+        {
+            return MapperConfig.Config.MapperAdministracion.Map<List<DTO.TiposEquipo>>(new DAL.TE.AdministracionTE().ObtenerTiposEquipoActivos());
+        }
 
         public DTO.TiposEquipo ObtenerTipoEquipo(int IdTipoEquipo)
         {
@@ -256,6 +286,11 @@ namespace Intec.BL.BE
         public List<DTO.TiposPersona> ObtenerTiposPersona()
         {
             return MapperConfig.Config.MapperAdministracion.Map<List<DTO.TiposPersona>>(new DAL.TE.AdministracionTE().ObtenerTiposPersona());
+        }
+        
+        public List<DTO.TiposPersona> ObtenerTiposPersonaActivos()
+        {
+            return MapperConfig.Config.MapperAdministracion.Map<List<DTO.TiposPersona>>(new DAL.TE.AdministracionTE().ObtenerTiposPersonaActivos());
         }
 
         public DTO.TiposPersona ObtenerTipoPersona(int IdTipoPersona)
@@ -294,6 +329,11 @@ namespace Intec.BL.BE
         {
             return MapperConfig.Config.MapperAdministracion.Map<List<DTO.TiposPropiedades>>(new DAL.TE.AdministracionTE().ObtenerTiposPropiedades());
         }
+        
+        public List<DTO.TiposPropiedades> ObtenerTiposPropiedadesActivos()
+        {
+            return MapperConfig.Config.MapperAdministracion.Map<List<DTO.TiposPropiedades>>(new DAL.TE.AdministracionTE().ObtenerTiposPropiedadesActivos());
+        }
 
         public DTO.TiposPropiedades ObtenerTipoPropiedad(int IdTipoPropiedad)
         {
@@ -331,6 +371,11 @@ namespace Intec.BL.BE
         public List<DTO.UsosPropiedades> ObtenerUsosPropiedades()
         {
             return MapperConfig.Config.MapperAdministracion.Map<List<DTO.UsosPropiedades>>(new DAL.TE.AdministracionTE().ObtenerUsosPropiedades());
+        }
+        
+        public List<DTO.UsosPropiedades> ObtenerUsosPropiedadesActivos()
+        {
+            return MapperConfig.Config.MapperAdministracion.Map<List<DTO.UsosPropiedades>>(new DAL.TE.AdministracionTE().ObtenerUsosPropiedadesActivos());
         }
 
         public DTO.UsosPropiedades ObtenerUsoPropiedad(int IdUsoPropiedad)

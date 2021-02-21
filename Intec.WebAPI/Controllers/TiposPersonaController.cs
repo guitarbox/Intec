@@ -6,10 +6,12 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using System.Web.UI;
 
 namespace Intec.WebApi.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class TiposPersonaController : DefaultController
     {
         [HttpPost]
@@ -21,6 +23,18 @@ namespace Intec.WebApi.Controllers
 
             if (validToken)
                 SetDataResponse(new Intec.BL.BE.AdministracionBE().ObtenerTiposPersona());
+            return response;
+        }
+        
+        [HttpPost]
+        [Route("api/TiposPersona/ObtenerTiposPersonaActivos")]
+        public JObject ObtenerTiposPersonaActivos([FromBody] JObject Token)
+        {
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+
+            if (validToken)
+                SetDataResponse(new Intec.BL.BE.AdministracionBE().ObtenerTiposPersonaActivos());
             return response;
         }
 
@@ -75,7 +89,7 @@ namespace Intec.WebApi.Controllers
             {
                 try
                 {
-                    new Intec.BL.BE.AdministracionBE().EditarTipoPersona(Token["TipoPersona"].ToObject<Intec.BL.DTO.TiposPersona>(), int.Parse(Token["IdUsuarioModificacion"].ToString()));
+                    new Intec.BL.BE.AdministracionBE().EditarTipoPersona(Token["tipoPersona"].ToObject<Intec.BL.DTO.TiposPersona>(), int.Parse(Token["idUsuarioModificacion"].ToString()));
                 }
                 catch (Exception ex)
                 {
@@ -101,7 +115,7 @@ namespace Intec.WebApi.Controllers
             {
                 try
                 {
-                    new Intec.BL.BE.AdministracionBE().EliminarTipoPersona(int.Parse(Token["IdTipoPersona"].ToString()), int.Parse(Token["IdUsuarioModificacion"].ToString()));
+                    new Intec.BL.BE.AdministracionBE().EliminarTipoPersona(int.Parse(Token["idTipoPersona"].ToString()), int.Parse(Token["idUsuarioModificacion"].ToString()));
                 }
                 catch (Exception ex)
                 {

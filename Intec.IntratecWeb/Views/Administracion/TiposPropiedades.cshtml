@@ -1,0 +1,144 @@
+﻿
+@{
+    ViewBag.Title = "TiposPropiedades";
+}
+<script>
+    $(document).ready(() => {
+        ConsultarTiposPropiedades();
+    });
+
+    function ConsultarTiposPropiedades() {
+        _peticionAjax(URL_SERVICE + URI_SERVICE.ObtenerTiposPropiedad, VerbosREST.POST,
+            JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion }),
+            true, response => {
+
+                var columns = [
+                    { data: "IdTipoPropiedad", title: 'Id. Tipo Propiedad' },
+                    { data: "TipoPropiedad", title: 'Tipo Propiedad' },
+                    { data: "Activo", title: 'Activo' },
+                    {
+                        data: null, render: function (data, type, full, meta) {
+                            return '<a onclick="AbrirModalEditarRx(\'' + full.IdTipoPropiedad + '\');"><span class="fa fa-edit"></span></a>';
+                        }
+                    },
+                    {
+                        data: null, render: function (data, type, full, meta) {
+                            return '<a onclick="EliminarRx(\'' + full.IdTipoPropiedad + '\');"><span class="fa fa-trash"></span></a>';
+                        }
+                    }
+                ];
+
+                $("#divTblTiposPropiedades").empty();
+                $("#divTblTiposPropiedades").append('<table id="tblTiposPropiedades" style="width:100%"></table>');
+                $('#tblTiposPropiedades').DataTable({
+                    data: response.data,
+                    columns: columns,
+                    language: _language_options_table,
+                    //
+                    dom: 'Bfrtip',
+                    buttons: [
+                        //{ extend: 'copy', className: 'btn-info' },
+                        //{ extend: 'csv', className: 'btn-info' },
+                        //{ extend: 'excel', className: 'btn-info', title: 'XLS-File' },
+                        //{ extend: 'pdf', className: 'btn-info', title: $('title').text() },
+                        //{ extend: 'print', className: 'btn-info' }
+                    ]
+                });
+            });
+    }
+
+    function AbrirModalCrearRx() {
+        _resetGenericModal();
+
+        $("#genericModalHeader").append('<label>Crear Tipo Propiedad</label>');
+        $("#genericModalBody").append('<p>Tipo Propiedad</p>');
+        $("#genericModalBody").append('<input id="TipoPropiedad" type="text" class="form-control" />');
+        $("#genericModalFooter").append('<button class="button" id="btnCrearTipoPropiedad" return false;">Crear</button>');
+        $("#btnCrearTipoPropiedad").click(() => {
+            if ($("#TipoPropiedad").val() != '') {
+                _peticionAjax(URL_SERVICE + URI_SERVICE.CrearTipoPropiedad, VerbosREST.POST,
+                    JSON.stringify({
+                        sessionToken: UsuarioSesion.tokenSesion,
+                        tipoPropiedad: {
+                            TipoPropiedad: $("#TipoPropiedad").val(),
+                            IdUsuarioCreacion: UsuarioSesion.IdUsuario,
+                            Activo: true
+                        }
+                    }),
+                    true, response => {
+                        ConsultarTiposPropiedades();
+                        _closeGenericModal()
+                    });
+            }
+            else {
+                swal({
+                    text: 'Por favor ingresar el Tipo de propiedad para crear.',
+                    title: swalTitle,
+                    icon: "error"
+                });
+            }
+        });
+        _openGenericModal();
+    }
+
+    function AbrirModalEditarRx(IdTipoPropiedad) {
+        var rx = $('#tblTiposPropiedades').DataTable().data().filter(f => f.IdTipoPropiedad == IdTipoPropiedad)[0];
+
+        _resetGenericModal();
+
+        $("#genericModalHeader").append('<label>Editar Tipo Propiedad</label>');
+        $("#genericModalBody").append('<p>Id. Tipo Propiedad</p>');
+        $("#genericModalBody").append('<input id="IdTipoPropiedad" type="text" class="form-control" disabled />');
+        $("#IdTipoPropiedad").val(rx.IdTipoPropiedad);
+        $("#genericModalBody").append('<p>Tipo Propiedad</p>');
+        $("#genericModalBody").append('<input id="TipoPropiedad" type="text" class="form-control" />');
+        $("#TipoPropiedad").val(rx.TipoPropiedad);
+        $("#genericModalBody").append('<label>Activo</label><input id="chkActivo" type="checkbox" ' + (rx.Activo == true ? 'checked' : '') + ' />');
+        $("#genericModalFooter").append('<button class="button" id="btnActualizarTipoPropiedad" return false;">Actualizar</button>');
+        $("#btnActualizarTipoPropiedad").click(() => {
+            if ($("#TipoPropiedad").val() != '') {
+                _peticionAjax(URL_SERVICE + URI_SERVICE.ActualizarTipoPropiedad, VerbosREST.POST,
+                    JSON.stringify({
+                        sessionToken: UsuarioSesion.tokenSesion,
+                        tipoPropiedad: {
+                            IdTipoPropiedad: $("#IdTipoPropiedad").val(),
+                            TipoPropiedad: $("#TipoPropiedad").val(),
+                            IdUsuarioModificacion: UsuarioSesion.IdUsuario,
+                            Activo: $("#chkActivo").is(':checked')
+                        },
+                        idUsuarioModificacion: UsuarioSesion.IdUsuario
+                    }),
+                    true, response => {
+                        ConsultarTiposPropiedades();
+                        _closeGenericModal();
+                    });
+            }
+            else {
+                swal({
+                    text: 'Por favor ingresar el Tipo de propiedad para actualizar.',
+                    title: swalTitle,
+                    icon: "error"
+                });
+            }
+        });
+        _openGenericModal();
+    }
+
+    function EliminarRx(IdTipoPropiedad) {
+        _peticionAjax(URL_SERVICE + URI_SERVICE.EliminarTipoPropiedad, VerbosREST.POST,
+            JSON.stringify({
+                sessionToken: UsuarioSesion.tokenSesion,
+                idTipoPropiedad: IdTipoPropiedad,
+                idUsuarioModificacion: UsuarioSesion.IdUsuario
+            }),
+            true, response => {
+                ConsultarTiposPropiedades();
+            });
+    }
+</script>
+<h3 class="text-center" id="title">TIPOS PROPIEDADES</h3>
+<div style="padding:10px">
+    <div id="divTblTiposPropiedades"></div>
+    <br />
+    <button class="button" onclick="AbrirModalCrearRx(); return false;">Crear Nuevo Tipo Propiedad</button>
+</div> 

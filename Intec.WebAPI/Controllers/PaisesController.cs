@@ -12,8 +12,7 @@ namespace Intec.WebApi.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class PaisesController : DefaultController
-    {
-        // GET
+    {        
         [HttpPost]
         [Route("api/Paises/ObtenerPaises")]
         public JObject ObtenerPaises([FromBody]JObject Token)
@@ -22,6 +21,17 @@ namespace Intec.WebApi.Controllers
             SetValidTokendResponse(validToken);
             if(validToken)
                 SetDataResponse(new Intec.BL.BE.AdministracionBE().ObtenerPaises());
+            return response;
+        }
+        
+        [HttpPost]
+        [Route("api/Paises/ObtenerPaisesActivos")]
+        public JObject ObtenerPaisesActivos([FromBody]JObject Token)
+        {
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+            if(validToken)
+                SetDataResponse(new Intec.BL.BE.AdministracionBE().ObtenerPaisesActivos());
             return response;
         }
 

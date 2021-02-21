@@ -15,12 +15,11 @@
                     { data: "DescripcionParametro", title: 'Descripción' },
                     { data: "TipoDato", title: 'Tipo Dato' },
                     { data: "ValorParametro", title: 'Valor Parametro' },
-                    //{
-                    //    data: null, render: function (data, type, full, meta) {
-                    //        var CodigoMedioPago = full.CodigoMedioPago;
-                    //        return '<button class="btn btn-sm ' + (full.Activo == true ? "btn-danger" : "btn-success") + '" onclick="ActivarInactivarMedioPago(\'' + CodigoMedioPago + '\'); return false;"><em class="fa ' + (full.Activo == true ? "fa-times-circle" : "fa-check-circle") + ' fa-fw"></em>' + (full.Activo == true ? "Inactivar" : "Activar") + '</button>';
-                    //    }
-                    //}
+                    {
+                        data: null, render: function (data, type, full, meta) {
+                            return '<a><span class="fa fa-edit"></span></a>';
+                        }
+                    }
                 ];
 
                 $('#tblParametros').DataTable({

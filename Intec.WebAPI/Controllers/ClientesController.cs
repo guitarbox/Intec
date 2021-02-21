@@ -11,6 +11,7 @@ using System.Web.Http.Cors;
 
 namespace Intec.WebApi.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ClientesController : DefaultController
     {
         [HttpPost]

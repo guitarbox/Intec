@@ -34,6 +34,16 @@ namespace Intec.DAL.TE
             }
             return res;
         }
+        
+        public List<Paises> ObtenerPaisesActivos()
+        {
+            List<Paises> res = new List<Paises>();
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                res = ctx.Paises.Where(p=>p.Activo).ToList();
+            }
+            return res;
+        }
 
         public Paises ObtenerPais(int IdPais)
         {
@@ -60,6 +70,7 @@ namespace Intec.DAL.TE
                 {
                     PaisEditar.CodigoPais = Pais.CodigoPais;
                     PaisEditar.Pais = Pais.Pais;
+                    PaisEditar.Activo = Pais.Activo;
 
                     PaisEditar.FechaModificacion = DateTime.Now;
                     PaisEditar.IdUsuarioModificacion = IdUsuarioModificacion;
@@ -127,6 +138,16 @@ namespace Intec.DAL.TE
             }
             return res;
         }
+        
+        public List<Departamentos> ObtenerDepartamentosActivos(int IdPais)
+        {
+            List<Departamentos> res = new List<Departamentos>();
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                res = ctx.Departamentos.Where(d => d.IdPais == IdPais && d.Activo).ToList();
+            }
+            return res;
+        }
 
         public Departamentos ObtenerDepartamento(string IdDepartamento)
         {
@@ -149,6 +170,7 @@ namespace Intec.DAL.TE
                 Departamentos DepartamentoEditar = ctx.Departamentos.Where(c => c.IdDepartamento == Departamento.IdDepartamento).FirstOrDefault();
 
                 DepartamentoEditar.Departamento = Departamento.Departamento;
+                DepartamentoEditar.Activo = Departamento.Activo;
 
                 DepartamentoEditar.FechaModificacion = DateTime.Now;
                 DepartamentoEditar.IdUsuarioModificacion = IdUsuarioModificacion;
@@ -210,6 +232,16 @@ namespace Intec.DAL.TE
             }
             return res;
         }
+        
+        public List<Ciudades> ObtenerCiudadesActivos(string IdDepartamento)
+        {
+            List<Ciudades> res = new List<Ciudades>();
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                res = ctx.Ciudades.Where(c => c.IdDepartamento.Equals(IdDepartamento) && c.Activo).ToList();
+            }
+            return res;
+        }
 
         public Ciudades ObtenerCiudad(string IdCiudad)
         {
@@ -232,6 +264,7 @@ namespace Intec.DAL.TE
                 Ciudades CiudadEditar = ctx.Ciudades.Where(c => c.IdCiudad == Ciudad.IdCiudad).FirstOrDefault();
 
                 CiudadEditar.Ciudad = Ciudad.Ciudad ;
+                CiudadEditar.Activo = Ciudad.Activo;
 
                 CiudadEditar.FechaModificacion = DateTime.Now;
                 CiudadEditar.IdUsuarioModificacion = IdUsuarioModificacion;
@@ -275,10 +308,15 @@ namespace Intec.DAL.TE
         {
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
-                TipoIdentificacionCrear.FechaCreacion = DateTime.Now;
-                TipoIdentificacionCrear.Activo = true;
-                ctx.TiposIdentificacion.Add(TipoIdentificacionCrear);
-                ctx.SaveChanges();
+                if (ctx.TiposIdentificacion.Where(ti => ti.Abreviatura.Equals(TipoIdentificacionCrear.Abreviatura)).FirstOrDefault() == null)
+                {
+                    TipoIdentificacionCrear.FechaCreacion = DateTime.Now;
+                    TipoIdentificacionCrear.Activo = true;
+                    ctx.TiposIdentificacion.Add(TipoIdentificacionCrear);
+                    ctx.SaveChanges();
+                }
+                else
+                    throw new Exception($"Ya existe un Tipo de Identificación con abreviatura {TipoIdentificacionCrear.Abreviatura}");
             }
         }
 
@@ -290,6 +328,16 @@ namespace Intec.DAL.TE
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
                 res = ctx.TiposIdentificacion.ToList();
+            }
+            return res;
+        }
+        
+        public List<TiposIdentificacion> ObtenerTiposIdentificacionActivos()
+        {
+            List<TiposIdentificacion> res = new List<TiposIdentificacion>();
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                res = ctx.TiposIdentificacion.Where(t=>t.Activo).ToList();
             }
             return res;
         }
@@ -313,14 +361,19 @@ namespace Intec.DAL.TE
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
                 TiposIdentificacion TipoIdentificacionEditar = ctx.TiposIdentificacion.Where(c => c.IdTipoIdentificacion == TipoIdentificacion.IdTipoIdentificacion).FirstOrDefault();
+                if (ctx.TiposIdentificacion.Where(ti => ti.Abreviatura.Equals(TipoIdentificacion.Abreviatura) && ti.IdTipoIdentificacion != TipoIdentificacion.IdTipoIdentificacion).FirstOrDefault() == null)
+                {
+                    TipoIdentificacionEditar.Abreviatura = TipoIdentificacion.Abreviatura;
+                    TipoIdentificacionEditar.TipoIdentificacion = TipoIdentificacion.TipoIdentificacion;
+                    TipoIdentificacionEditar.Activo = TipoIdentificacion.Activo;
 
-                TipoIdentificacionEditar.Abreviatura = TipoIdentificacion.Abreviatura;
-                TipoIdentificacionEditar.TipoIdentificacion = TipoIdentificacion.TipoIdentificacion;
+                    TipoIdentificacionEditar.FechaModificacion = DateTime.Now;
+                    TipoIdentificacionEditar.IdUsuarioModificacion = IdUsuarioModificacion;
 
-                TipoIdentificacionEditar.FechaModificacion = DateTime.Now;
-                TipoIdentificacionEditar.IdUsuarioModificacion = IdUsuarioModificacion;
-
-                ctx.SaveChanges();
+                    ctx.SaveChanges();
+                }
+                else
+                    throw new Exception($"Ya existe un Tipo de Identificación con abreviatura {TipoIdentificacion.Abreviatura}");
             }
 
         }
@@ -377,6 +430,18 @@ namespace Intec.DAL.TE
 
             return res;
         }
+        
+        public List<MarcasEquipos> ObtenerMarcasEquiposActivos()
+        {
+            List<MarcasEquipos> res = new List<MarcasEquipos>();
+
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                res = ctx.MarcasEquipos.Where(m=>m.Activo).ToList();
+            }
+
+            return res;
+        }
 
         public MarcasEquipos ObtenerMarcaEquipo(int IdMarcaEquipo)
         {
@@ -399,6 +464,7 @@ namespace Intec.DAL.TE
                 MarcasEquipos MarcaEquipoEditar = ctx.MarcasEquipos.Where(c => c.IdMarcaEquipo == MarcaEquipo.IdMarcaEquipo).FirstOrDefault();
 
                 MarcaEquipoEditar.MarcaEquipo = MarcaEquipo.MarcaEquipo;
+                MarcaEquipoEditar.Activo = MarcaEquipo.Activo;
 
                 MarcaEquipoEditar.FechaModificacion = DateTime.Now;
                 MarcaEquipoEditar.IdUsuarioModificacion = IdUsuarioModificacion;
@@ -459,6 +525,18 @@ namespace Intec.DAL.TE
 
             return res;
         }
+        
+        public List<TiposEquipo> ObtenerTiposEquipoActivos()
+        {
+            List<TiposEquipo> res = new List<TiposEquipo>();
+
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                res = ctx.TiposEquipo.Where(t=>t.Activo).ToList();
+            }
+
+            return res;
+        }
 
         public TiposEquipo ObtenerTipoEquipo(int IdTipoEquipo)
         {
@@ -481,6 +559,7 @@ namespace Intec.DAL.TE
                 TiposEquipo TipoEquipoEditar = ctx.TiposEquipo.Where(c => c.IdTipoEquipo == TipoEquipo.IdTipoEquipo).FirstOrDefault();
 
                 TipoEquipoEditar.TipoEquipo = TipoEquipo.TipoEquipo;
+                TipoEquipoEditar.Activo = TipoEquipo.Activo;
 
                 TipoEquipoEditar.FechaModificacion = DateTime.Now;
                 TipoEquipoEditar.IdUsuarioModificacion = IdUsuarioModificacion;
@@ -541,6 +620,16 @@ namespace Intec.DAL.TE
             }
             return res;
         }
+        
+        public List<TiposPersona> ObtenerTiposPersonaActivos()
+        {
+            List<TiposPersona> res = new List<TiposPersona>();
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                res = ctx.TiposPersona.Where(t=>t.Activo).ToList();
+            }
+            return res;
+        }
 
         public TiposPersona ObtenerTipoPersona(int IdTipoPersona)
         {
@@ -565,6 +654,7 @@ namespace Intec.DAL.TE
 
                 TipoPersonaEditar.TipoPersona = TipoPersona.TipoPersona;
                 TipoPersonaEditar.CodigoTipoPersona = TipoPersona.CodigoTipoPersona;
+                TipoPersonaEditar.Activo = TipoPersona.Activo;
 
                 TipoPersonaEditar.FechaModificacion = DateTime.Now;
                 TipoPersonaEditar.IdUsuarioModificacion = IdUsuarioModificacion;
@@ -626,6 +716,16 @@ namespace Intec.DAL.TE
             }
             return res;
         }
+        
+        public List<TiposPropiedades> ObtenerTiposPropiedadesActivos()
+        {
+            List<TiposPropiedades> res = new List<TiposPropiedades>();
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                res = ctx.TiposPropiedades.Where(t=>t.Activo).ToList();
+            }
+            return res;
+        }
 
         public TiposPropiedades ObtenerTipoPropiedad(int IdTipoPropiedad)
         {
@@ -648,7 +748,7 @@ namespace Intec.DAL.TE
                 TiposPropiedades TipoPropiedadEditar = ctx.TiposPropiedades.Where(c => c.IdTipoPropiedad == TipoPropiedad.IdTipoPropiedad).FirstOrDefault();
 
                 TipoPropiedadEditar.TipoPropiedad = TipoPropiedad.TipoPropiedad;
-
+                TipoPropiedadEditar.Activo = TipoPropiedad.Activo;
                 TipoPropiedadEditar.FechaModificacion = DateTime.Now;
                 TipoPropiedadEditar.IdUsuarioModificacion = IdUsuarioModificacion;
 
@@ -709,6 +809,16 @@ namespace Intec.DAL.TE
             }
             return res;
         }
+        
+        public List<UsosPropiedades> ObtenerUsosPropiedadesActivos()
+        {
+            List<UsosPropiedades> res = new List<UsosPropiedades>();
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                res = ctx.UsosPropiedades.Where(u=>u.Activo).ToList();
+            }
+            return res;
+        }
 
         public UsosPropiedades ObtenerUsoPropieadad(int IdUso)
         {
@@ -731,7 +841,7 @@ namespace Intec.DAL.TE
                 UsosPropiedades UsoPropiedadEditar = ctx.UsosPropiedades.Where(c => c.IdUso == UsoPropiedad.IdUso).FirstOrDefault();
 
                 UsoPropiedadEditar.Uso = UsoPropiedad.Uso;
-
+                UsoPropiedadEditar.Activo = UsoPropiedad.Activo;
                 UsoPropiedadEditar.FechaModificacion = DateTime.Now;
                 UsoPropiedadEditar.IdUsuarioModificacion = IdUsuarioModificacion;
 

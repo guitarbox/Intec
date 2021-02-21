@@ -228,6 +228,12 @@
     <Content Include="Views\Shared\_Layout2.cshtml" />
     <Content Include="Views\Administracion\Paises.cshtml" />
     <Content Include="Views\Usuarios\Administracion.cshtml" />
+    <Content Include="Views\Administracion\TiposPropiedades.cshtml" />
+    <Content Include="Views\Administracion\UsosPropiedades.cshtml" />
+    <Content Include="Views\Administracion\TiposEquipos.cshtml" />
+    <Content Include="Views\Administracion\MarcasEquipos.cshtml" />
+    <Content Include="Views\Administracion\TiposIdentificacion.cshtml" />
+    <Content Include="Views\Administracion\TiposPersona.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

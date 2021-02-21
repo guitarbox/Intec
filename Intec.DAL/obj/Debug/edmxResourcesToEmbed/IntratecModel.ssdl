@@ -203,7 +203,7 @@
     <Key>
       <PropertyRef Name="IdMarcaEquipo" />
     </Key>
-    <Property Name="IdMarcaEquipo" Type="int" Nullable="false" />
+    <Property Name="IdMarcaEquipo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="MarcaEquipo" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
     <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
@@ -322,7 +322,7 @@
     <Key>
       <PropertyRef Name="IdTipoEquipo" />
     </Key>
-    <Property Name="IdTipoEquipo" Type="int" Nullable="false" />
+    <Property Name="IdTipoEquipo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TipoEquipo" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
     <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
@@ -334,7 +334,7 @@
     <Key>
       <PropertyRef Name="IdTipoIdentificacion" />
     </Key>
-    <Property Name="IdTipoIdentificacion" Type="int" Nullable="false" />
+    <Property Name="IdTipoIdentificacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TipoIdentificacion" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Abreviatura" Type="nvarchar" MaxLength="4" Nullable="false" />
     <Property Name="CodigoTipoIdFiscal" Type="int" />
@@ -355,7 +355,7 @@
     <Key>
       <PropertyRef Name="IdTipoPersona" />
     </Key>
-    <Property Name="IdTipoPersona" Type="int" Nullable="false" />
+    <Property Name="IdTipoPersona" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TipoPersona" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="CodigoTipoPersona" Type="nvarchar" MaxLength="50" />
     <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
@@ -368,7 +368,7 @@
     <Key>
       <PropertyRef Name="IdTipoPropiedad" />
     </Key>
-    <Property Name="IdTipoPropiedad" Type="int" Nullable="false" />
+    <Property Name="IdTipoPropiedad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TipoPropiedad" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
     <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
@@ -408,7 +408,7 @@
     <Key>
       <PropertyRef Name="IdUso" />
     </Key>
-    <Property Name="IdUso" Type="int" Nullable="false" />
+    <Property Name="IdUso" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Uso" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
     <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />

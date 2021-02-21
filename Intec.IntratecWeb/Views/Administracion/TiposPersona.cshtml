@@ -1,0 +1,145 @@
+﻿
+@{
+    ViewBag.Title = "TiposPersona";
+}
+
+<script>
+    $(document).ready(() => {
+        ConsultarTiposPersona();
+    });
+
+    function ConsultarTiposPersona() {
+        _peticionAjax(URL_SERVICE + URI_SERVICE.ObtenerTiposPersona, VerbosREST.POST,
+            JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion }),
+            true, response => {
+
+                var columns = [
+                    { data: "IdTipoPersona", title: 'Id. Tipo Persona' },
+                    { data: "TipoPersona", title: 'Tipo Persona' },
+                    { data: "Activo", title: 'Activo' },
+                    {
+                        data: null, render: function (data, type, full, meta) {
+                            return '<a onclick="AbrirModalEditarRx(\'' + full.IdTipoPersona + '\');"><span class="fa fa-edit"></span></a>';
+                        }
+                    },
+                    {
+                        data: null, render: function (data, type, full, meta) {
+                            return '<a onclick="EliminarRx(\'' + full.IdTipoPersona + '\');"><span class="fa fa-trash"></span></a>';
+                        }
+                    }
+                ];
+
+                $("#divTblTiposPersona").empty();
+                $("#divTblTiposPersona").append('<table id="tblTiposPersona" style="width:100%"></table>');
+                $('#tblTiposPersona').DataTable({
+                    data: response.data,
+                    columns: columns,
+                    language: _language_options_table,
+                    //
+                    dom: 'Bfrtip',
+                    buttons: [
+                        //{ extend: 'copy', className: 'btn-info' },
+                        //{ extend: 'csv', className: 'btn-info' },
+                        //{ extend: 'excel', className: 'btn-info', title: 'XLS-File' },
+                        //{ extend: 'pdf', className: 'btn-info', title: $('title').text() },
+                        //{ extend: 'print', className: 'btn-info' }
+                    ]
+                });
+            });
+    }
+
+    function AbrirModalCrearRx() {
+        _resetGenericModal();
+
+        $("#genericModalHeader").append('<label>Crear Tipo Persona</label>');
+        $("#genericModalBody").append('<p>Tipo Persona</p>');
+        $("#genericModalBody").append('<input id="TipoPersona" type="text" class="form-control" />');
+        $("#genericModalFooter").append('<button class="button" id="btnCrearTipoPersona" return false;">Crear</button>');
+        $("#btnCrearTipoPersona").click(() => {
+            if ($("#TipoPropiedad").val() != '') {
+                _peticionAjax(URL_SERVICE + URI_SERVICE.CrearTipoPersona, VerbosREST.POST,
+                    JSON.stringify({
+                        sessionToken: UsuarioSesion.tokenSesion,
+                        tipoPersona: {
+                            TipoPersona: $("#TipoPersona").val(),
+                            IdUsuarioCreacion: UsuarioSesion.IdUsuario,
+                            Activo: true
+                        }
+                    }),
+                    true, response => {
+                        ConsultarTiposPersona();
+                        _closeGenericModal()
+                    });
+            }
+            else {
+                swal({
+                    text: 'Por favor ingresar el Tipo persona para crear.',
+                    title: swalTitle,
+                    icon: "error"
+                });
+            }
+        });
+        _openGenericModal();
+    }
+
+    function AbrirModalEditarRx(IdTipoPersona) {
+        var rx = $('#tblTiposPersona').DataTable().data().filter(f => f.IdTipoPersona == IdTipoPersona)[0];
+
+        _resetGenericModal();
+
+        $("#genericModalHeader").append('<label>Editar Tipo Persona</label>');
+        $("#genericModalBody").append('<p>Id. Tipo Persona</p>');
+        $("#genericModalBody").append('<input id="IdTipoPersona" type="text" class="form-control" disabled />');
+        $("#IdTipoPersona").val(rx.IdTipoPersona);
+        $("#genericModalBody").append('<p>Tipo Persona</p>');
+        $("#genericModalBody").append('<input id="TipoPersona" type="text" class="form-control" />');
+        $("#TipoPersona").val(rx.TipoPersona);
+        $("#genericModalBody").append('<label>Activo</label><input id="chkActivo" type="checkbox" ' + (rx.Activo == true ? 'checked' : '') + ' />');
+        $("#genericModalFooter").append('<button class="button" id="btnActualizarTipoPersona" return false;">Actualizar</button>');
+        $("#btnActualizarTipoPersona").click(() => {
+            if ($("#TipoPersona").val() != '') {
+                _peticionAjax(URL_SERVICE + URI_SERVICE.ActualizarTipoPersona, VerbosREST.POST,
+                    JSON.stringify({
+                        sessionToken: UsuarioSesion.tokenSesion,
+                        tipoPersona: {
+                            IdTipoPersona: $("#IdTipoPersona").val(),
+                            TipoPersona: $("#TipoPersona").val(),
+                            IdUsuarioModificacion: UsuarioSesion.IdUsuario,
+                            Activo: $("#chkActivo").is(':checked')
+                        },
+                        idUsuarioModificacion: UsuarioSesion.IdUsuario
+                    }),
+                    true, response => {
+                        ConsultarTiposPersona();
+                        _closeGenericModal();
+                    });
+            }
+            else {
+                swal({
+                    text: 'Por favor ingresar el Tipo Persona para actualizar.',
+                    title: swalTitle,
+                    icon: "error"
+                });
+            }
+        });
+        _openGenericModal();
+    }
+
+    function EliminarRx(IdTipoPersona) {
+        _peticionAjax(URL_SERVICE + URI_SERVICE.EliminarTipoPersona, VerbosREST.POST,
+            JSON.stringify({
+                sessionToken: UsuarioSesion.tokenSesion,
+                idTipoPersona: IdTipoPersona,
+                idUsuarioModificacion: UsuarioSesion.IdUsuario
+            }),
+            true, response => {
+                ConsultarTiposPersona();
+            });
+    }
+</script>
+<h3 class="text-center" id="title">TIPOS PERSONA</h3>
+<div style="padding:10px">
+    <div id="divTblTiposPersona"></div>
+    <br />
+    <button class="button" onclick="AbrirModalCrearRx(); return false;">Crear Nuevo Tipo Persona</button>
+</div> 

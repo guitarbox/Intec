@@ -1,50 +1,36 @@
 ﻿
 @{
-    ViewBag.Title = "Administrar Usuarios";
+    ViewBag.Title = "MarcasEquipos";
 }
 <script>
     $(document).ready(() => {
-        ConsultarUsuarios();
+        ConsultarMarcasEquipos();
     });
 
-    function ConsultarUsuarios() {
-        _peticionAjax(URL_SERVICE + URI_SERVICE.ObtenerUsuarios, VerbosREST.POST,
+    function ConsultarMarcasEquipos() {
+        _peticionAjax(URL_SERVICE + URI_SERVICE.ObtenerMarcasEquipos, VerbosREST.POST,
             JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion }),
             true, response => {
+
                 var columns = [
-                    { data: 'IdUsuario', title: 'Id. Usuario' },
-                    { data: 'Nombres', title: 'Nombres' },
-                    { data: 'Apellidos', title: 'Apellidos' },
-                    { data: 'Direccion', title: 'Dirección' },
-                    { data: 'Telefono', title: 'Teléfono' },
-                    //{ data: 'IdCiudadDomicilio' , title:'CiudadDomicilio'},
-                    { data: 'IdTipoIdentificacion', title: 'Tipo Identificación' },
-                    { data: 'NumeroIdentificacion', title: 'Nro. Identificación' },
-                    //{ data: 'IdPaisOrigen' , title:''},
-                    //{ data: 'Password' , title:''},
-                    { data: 'FechaUltimoInicioSesion', title: 'Fec. Últ. Sesión' },
-                    //{ data: 'FechaCreacion' , title:''},
-                    //{ data: 'IdUsuarioCreacion' , title:''},
-                    //{ data: 'FechaModificacion' , title:''},
-                    //{ data: 'IdUsuarioModificacion' , title:''},
-                    //{ data: 'IdRol' , title:''},
-                    { data: 'Activo', title: 'Activo' },
-                    //{ data: 'Foto' , title:''},
+                    { data: "IdMarcaEquipo", title: 'Id. Marca Equipo' },
+                    { data: "MarcaEquipo", title: 'Marca Equipo' },
+                    { data: "Activo", title: 'Activo' },
                     {
                         data: null, render: function (data, type, full, meta) {
-                            return '<a onclick="AbrirModalEditarRx(\'' + full.IdUsuario + '\');"><span class="fa fa-edit"></span></a>';
+                            return '<a onclick="AbrirModalEditarRx(\'' + full.IdMarcaEquipo + '\');"><span class="fa fa-edit"></span></a>';
                         }
                     },
-                    //{
-                    //    data: null, render: function (data, type, full, meta) {
-                    //        return '<a onclick="EliminarRx(\'' + full.IdUsuario + '\');"><span class="fa fa-trash"></span></a>';
-                    //    }
-                    //}
+                    {
+                        data: null, render: function (data, type, full, meta) {
+                            return '<a onclick="EliminarRx(\'' + full.IdMarcaEquipo + '\');"><span class="fa fa-trash"></span></a>';
+                        }
+                    }
                 ];
 
-                $("#divTblUsuarios").empty();
-                $("#divTblUsuarios").append('<table id="tblUsuarios" style="width:100%"></table>');
-                $('#tblUsuarios').DataTable({
+                $("#divTblMarcasEquipos").empty();
+                $("#divTblMarcasEquipos").append('<table id="tblMarcasEquipos" style="width:100%"></table>');
+                $('#tblMarcasEquipos').DataTable({
                     data: response.data,
                     columns: columns,
                     language: _language_options_table,
@@ -64,7 +50,7 @@
     function AbrirModalCrearRx() {
         _resetGenericModal();
 
-        $("#genericModalHeader").append('<label>Crear Usuario</label>');
+        $("#genericModalHeader").append('<label>Crear Marca Equipo</label>');
         $("#genericModalBody").append('<p>Marca Equipo</p>');
         $("#genericModalBody").append('<input id="MarcaEquipo" type="text" class="form-control" />');
         $("#genericModalFooter").append('<button class="button" id="btnCrearMarcaEquipo" return false;">Crear</button>');
@@ -96,9 +82,9 @@
         _openGenericModal();
     }
 
-    function AbrirModalEditarRx(IdUsuario) {
-        var rx = $('#tblUsuarios').DataTable().data().filter(f => f.IdUsuario == IdUsuario)[0];
-        
+    function AbrirModalEditarRx(IdMarcaEquipo) {
+        var rx = $('#tblMarcasEquipos').DataTable().data().filter(f => f.IdMarcaEquipo == IdMarcaEquipo)[0];
+
         _resetGenericModal();
 
         $("#genericModalHeader").append('<label>Editar Marca Equipo</label>');
@@ -110,7 +96,7 @@
         $("#MarcaEquipo").val(rx.MarcaEquipo);
         $("#genericModalBody").append('<label>Activo</label><input id="chkActivo" type="checkbox" ' + (rx.Activo == true ? 'checked' : '') + ' />');
         $("#genericModalFooter").append('<button class="button" id="btnActualizarMarcaEquipo" return false;">Actualizar</button>');
-        $("#btnActualizarMarcaEquipo").click(() => {
+        $("#btnActualizarMarcaEquipo").click(() => {            
             if ($("#MarcaEquipo").val() != '') {
                 _peticionAjax(URL_SERVICE + URI_SERVICE.ActualizarMarcaEquipos, VerbosREST.POST,
                     JSON.stringify({
@@ -138,11 +124,22 @@
         });
         _openGenericModal();
     }
-</script>
-<h3 class="text-center" id="title">ADMINISTRACIÓN DE USUARIOS</h3>
-<div style="padding:10px">
-    <div id="divTblUsuarios"></div>
-    <br />
-    <button class="button" onclick="AbrirModalCrearRx(); return false;">Crear Nuevo Usuario</button>
-</div>
 
+    function EliminarRx(IdMarcaEquipo) {
+        _peticionAjax(URL_SERVICE + URI_SERVICE.EliminarMarcaEquipos, VerbosREST.POST,
+            JSON.stringify({
+                sessionToken: UsuarioSesion.tokenSesion,
+                idMarcaEquipo: IdMarcaEquipo,
+                idUsuarioModificacion: UsuarioSesion.IdUsuario
+            }),
+            true, response => {
+                ConsultarMarcasEquipos();
+            });
+    }
+</script>
+<h3 class="text-center" id="title">MARCAS EQUIPOS</h3>
+<div style="padding:10px">
+    <div id="divTblMarcasEquipos" style="width:100%"></div>
+    <br />
+    <button class="button" onclick="AbrirModalCrearRx(); return false;">Crear Nueva Marca</button>
+</div> 

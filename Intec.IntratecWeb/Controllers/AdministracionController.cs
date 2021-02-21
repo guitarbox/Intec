@@ -16,6 +16,36 @@ namespace Intec.IntratecWeb.Controllers
         public ActionResult Paises()
         {
             return View();
+        }        
+
+        public ActionResult TiposPropiedades()
+        {
+            return View();
+        }
+
+        public ActionResult UsosPropiedades()
+        {
+            return View();
+        }
+        
+        public ActionResult TiposEquipos()
+        {
+            return View();
+        }
+
+        public ActionResult MarcasEquipos()
+        {
+            return View();
+        }
+
+        public ActionResult TiposIdentificacion()
+        {
+            return View();
+        }
+        
+        public ActionResult TiposPersona()
+        {
+            return View();
         }
     }
 }

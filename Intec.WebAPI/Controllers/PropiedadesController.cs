@@ -10,6 +10,7 @@ using System.Web.Http.Cors;
 
 namespace Intec.WebApi.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class PropiedadesController : DefaultController
     {
         [HttpPost]
@@ -23,7 +24,7 @@ namespace Intec.WebApi.Controllers
                 SetDataResponse( new Intec.BL.BE.ClientesBE().ConsultaDetalladaPropiedad(Token["idPropiedad"].ToObject<int>()));
             return response;
         }
-
+        
         [HttpPost]
         [Route("api/Propiedades/CrearPropiedad")]
         public JObject CrearPropiedad([FromBody] JObject Token)

@@ -1,0 +1,153 @@
+﻿
+@{
+    ViewBag.Title = "TiposIdentificacion";
+}
+<script>
+    $(document).ready(() => {
+        ConsultarTiposIdentificacion();
+    });
+
+    function ConsultarTiposIdentificacion() {
+        _peticionAjax(URL_SERVICE + URI_SERVICE.ObtenerTiposIdentificacion, VerbosREST.POST,
+            JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion }),
+            true, response => {
+
+                var columns = [
+                    { data: "IdTipoIdentificacion", title: 'Id. Tipo Identificación' },
+                    { data: "TipoIdentificacion", title: 'Tipo Identificación' },
+                    { data: "Abreviatura", title: 'Abreviatura' },
+                    { data: "Activo", title: 'Activo' },
+                    {
+                        data: null, render: function (data, type, full, meta) {
+                            return '<a onclick="AbrirModalEditarRx(\'' + full.IdTipoIdentificacion + '\');"><span class="fa fa-edit"></span></a>';
+                        }
+                    },
+                    {
+                        data: null, render: function (data, type, full, meta) {
+                            return '<a onclick="EliminarRx(\'' + full.IdTipoIdentificacion + '\');"><span class="fa fa-trash"></span></a>';
+                        }
+                    }
+                ];
+
+                $("#divTblTiposIdentificacion").empty();
+                $("#divTblTiposIdentificacion").append('<table id="tblTiposIdentificacion" style="width:100%"></table>');
+                $('#tblTiposIdentificacion').DataTable({
+                    data: response.data,
+                    columns: columns,
+                    language: _language_options_table,
+                    //
+                    dom: 'Bfrtip',
+                    buttons: [
+                        //{ extend: 'copy', className: 'btn-info' },
+                        //{ extend: 'csv', className: 'btn-info' },
+                        //{ extend: 'excel', className: 'btn-info', title: 'XLS-File' },
+                        //{ extend: 'pdf', className: 'btn-info', title: $('title').text() },
+                        //{ extend: 'print', className: 'btn-info' }
+                    ]
+                });
+            });
+    }
+
+    function AbrirModalCrearRx() {
+        _resetGenericModal();
+
+        $("#genericModalHeader").append('<label>Crear Tipo Identificación</label>');
+        $("#genericModalBody").append('<p>Tipo Identificación</p>');
+        $("#genericModalBody").append('<input id="TipoIdentificacion" type="text" class="form-control" />');
+        $("#genericModalBody").append('<p>Abreviatura</p>');
+        $("#genericModalBody").append('<input id="Abreviatura" type="text" class="form-control" />');
+        $("#genericModalFooter").append('<button class="button" id="btnCrearTipoIdentificacion" return false;">Crear</button>');
+        $("#btnCrearTipoIdentificacion").click(() => {
+            if ($("#TipoIdentificacion").val() != '' && $("#Abreviatura").val() != '') {
+                _peticionAjax(URL_SERVICE + URI_SERVICE.CrearTiposIdentificacion, VerbosREST.POST,
+                    JSON.stringify({
+                        sessionToken: UsuarioSesion.tokenSesion,
+                        tipoIdentificacion: {
+                            IdTipoIdentificacion: $("#IdTipoIdentificacion").val(),
+                            TipoIdentificacion: $("#TipoIdentificacion").val(),
+                            Abreviatura: $("#Abreviatura").val(),
+                            IdUsuarioCreacion: UsuarioSesion.IdUsuario,
+                            Activo: true
+                        }
+                    }),
+                    true, response => {
+                        ConsultarTiposIdentificacion();
+                        _closeGenericModal()
+                    });
+            }
+            else {
+                swal({
+                    text: 'Por favor ingresar el Tipo Identificación y la Abreviatura para crear.',
+                    title: swalTitle,
+                    icon: "error"
+                });
+            }
+        });
+        _openGenericModal();
+    }
+
+    function AbrirModalEditarRx(IdTipoIdentificacion) {
+        var rx = $('#tblTiposIdentificacion').DataTable().data().filter(f => f.IdTipoIdentificacion == IdTipoIdentificacion)[0];
+
+        _resetGenericModal();
+
+        $("#genericModalHeader").append('<label>Editar Tipo Identificación</label>');
+        $("#genericModalBody").append('<p>Id. Tipo Identificación</p>');
+        $("#genericModalBody").append('<input id="IdTipoIdentificacion" type="text" class="form-control" disabled />');
+        $("#IdTipoIdentificacion").val(rx.IdTipoIdentificacion);
+        $("#genericModalBody").append('<p>Tipo Identificación</p>');
+        $("#genericModalBody").append('<input id="TipoIdentificacion" type="text" class="form-control" />');
+        $("#TipoIdentificacion").val(rx.TipoIdentificacion);
+        $("#genericModalBody").append('<p>Abreviatura</p>');
+        $("#genericModalBody").append('<input id="Abreviatura" type="text" class="form-control" />');
+        $("#Abreviatura").val(rx.Abreviatura);
+        $("#genericModalBody").append('<label>Activo</label><input id="chkActivo" type="checkbox" ' + (rx.Activo == true ? 'checked' : '') + ' />');
+        $("#genericModalFooter").append('<button class="button" id="btnActualizarTipoIdentificacion" return false;">Actualizar</button>');
+        $("#btnActualizarTipoIdentificacion").click(() => {
+            if ($("#TipoIdentificacion").val() != '') {
+                _peticionAjax(URL_SERVICE + URI_SERVICE.ActualizarTiposIdentificacion, VerbosREST.POST,
+                    JSON.stringify({
+                        sessionToken: UsuarioSesion.tokenSesion,
+                        tipoIdentificacion: {
+                            IdTipoIdentificacion: $("#IdTipoIdentificacion").val(),
+                            TipoIdentificacion: $("#TipoIdentificacion").val(),
+                            Abreviatura: $("#Abreviatura").val(),
+                            IdUsuarioModificacion: UsuarioSesion.IdUsuario,
+                            Activo: $("#chkActivo").is(':checked')
+                        },
+                        idUsuarioModificacion: UsuarioSesion.IdUsuario
+                    }),
+                    true, response => {
+                        ConsultarTiposIdentificacion();
+                        _closeGenericModal();
+                    });
+            }
+            else {
+                swal({
+                    text: 'Por favor ingresar el Tipo Identificación para actualizar.',
+                    title: swalTitle,
+                    icon: "error"
+                });
+            }
+        });
+        _openGenericModal();
+    }
+
+    function EliminarRx(IdTipoIdentificacion) {
+        _peticionAjax(URL_SERVICE + URI_SERVICE.EliminarTiposIdentificacion, VerbosREST.POST,
+            JSON.stringify({
+                sessionToken: UsuarioSesion.tokenSesion,
+                idTipoIdentificacion: IdTipoIdentificacion,
+                idUsuarioModificacion: UsuarioSesion.IdUsuario
+            }),
+            true, response => {
+                ConsultarTiposIdentificacion();
+            });
+    }
+</script>
+<h3 class="text-center" id="title">TIPOS IDENTIFICACIÓN</h3>
+<div style="padding:10px">
+    <div id="divTblTiposIdentificacion"></div>
+    <br />
+    <button class="button" onclick="AbrirModalCrearRx(); return false;">Crear Nuevo Tipo Identificación</button>
+</div> 

@@ -6,9 +6,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace Intec.WebApi.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class TiposPropiedadesController : DefaultController
     {
         [HttpPost]
@@ -20,6 +22,18 @@ namespace Intec.WebApi.Controllers
 
             if (validToken)
                 SetDataResponse( new Intec.BL.BE.AdministracionBE().ObtenerTiposPropiedades());
+            return response;
+        }
+        
+        [HttpPost]
+        [Route("api/TiposPropiedad/ObtenerTiposPropiedadActivos")]
+        public JObject ObtenerTiposPropiedadActivos([FromBody] JObject Token)
+        {
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+
+            if (validToken)
+                SetDataResponse( new Intec.BL.BE.AdministracionBE().ObtenerTiposPropiedadesActivos());
             return response;
         }
 

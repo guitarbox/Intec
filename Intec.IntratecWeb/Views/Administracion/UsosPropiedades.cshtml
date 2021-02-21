@@ -1,0 +1,144 @@
+﻿
+@{
+    ViewBag.Title = "UsosPropiedades";
+}
+<script>
+    $(document).ready(() => {
+        ConsultarUsosPropiedades();
+    });
+
+    function ConsultarUsosPropiedades() {
+        _peticionAjax(URL_SERVICE + URI_SERVICE.ObtenerUsosPropiedades, VerbosREST.POST,
+            JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion }),
+            true, response => {
+
+                var columns = [
+                    { data: "IdUso", title: 'Id. Uso' },
+                    { data: "Uso", title: 'Uso' },
+                    { data: "Activo", title: 'Activo' },
+                    {
+                        data: null, render: function (data, type, full, meta) {
+                            return '<a onclick="AbrirModalEditarRx(\''+full.IdUso+'\');"><span class="fa fa-edit"></span></a>';
+                        }
+                    },
+                    {
+                        data: null, render: function (data, type, full, meta) {
+                            return '<a onclick="EliminarRx(\''+full.IdUso+'\');"><span class="fa fa-trash"></span></a>';
+                        }
+                    }
+                ];
+
+                $('#divTblUsosPropiedades').empty();
+                $('#divTblUsosPropiedades').append('<table id="tblUsosPropiedades" style="width:100%"></table>');
+                $('#tblUsosPropiedades').DataTable({
+                    data: response.data,
+                    columns: columns,
+                    language: _language_options_table,
+                    //
+                    dom: 'Bfrtip',
+                    buttons: [
+                        //{ extend: 'copy', className: 'btn-info' },
+                        //{ extend: 'csv', className: 'btn-info' },
+                        //{ extend: 'excel', className: 'btn-info', title: 'XLS-File' },
+                        //{ extend: 'pdf', className: 'btn-info', title: $('title').text() },
+                        //{ extend: 'print', className: 'btn-info' }
+                    ]
+                });
+            });
+    }
+
+    function AbrirModalCrearRx() {
+        _resetGenericModal();
+
+        $("#genericModalHeader").append('<label>Crear Uso Propiedad</label>');
+        $("#genericModalBody").append('<p>Uso Propiedad</p>');
+        $("#genericModalBody").append('<input id="UsoPropiedad" type="text" class="form-control" />');
+        $("#genericModalFooter").append('<button class="button" id="btnCrearUsoPropiedad" return false;">Crear</button>');
+        $("#btnCrearUsoPropiedad").click(() => {
+            if ($("#UsoPropiedad").val() != '') {
+                _peticionAjax(URL_SERVICE + URI_SERVICE.CrearUsoPropiedad, VerbosREST.POST,
+                    JSON.stringify({
+                        sessionToken: UsuarioSesion.tokenSesion,
+                        usoPropiedad: {
+                            Uso: $("#UsoPropiedad").val(),
+                            IdUsuarioCreacion: UsuarioSesion.IdUsuario,
+                            Activo: true
+                        }
+                    }),
+                    true, response => {
+                        ConsultarUsosPropiedades();
+                        _closeGenericModal()
+                    });
+            }
+            else {
+                swal({
+                    text: 'Por favor ingresar el Uso de propiedad para crear.',
+                    title: swalTitle,
+                    icon: "error"
+                });
+            }
+        });
+        _openGenericModal();
+    }
+
+    function AbrirModalEditarRx(IdUso) {
+        var rx = $('#tblUsosPropiedades').DataTable().data().filter(f => f.IdUso == IdUso)[0];
+
+        _resetGenericModal();
+
+        $("#genericModalHeader").append('<label>Editar Uso Propiedad</label>');
+        $("#genericModalBody").append('<p>Id Uso Propiedad</p>');
+        $("#genericModalBody").append('<input id="IdUsoPropiedad" type="text" class="form-control" disabled />');
+        $("#IdUsoPropiedad").val(rx.IdUso);
+        $("#genericModalBody").append('<p>Uso Propiedad</p>');
+        $("#genericModalBody").append('<input id="UsoPropiedad" type="text" class="form-control" />');
+        $("#UsoPropiedad").val(rx.Uso);
+        $("#genericModalBody").append('<label>Activo</label><input id="chkActivo" type="checkbox" '+(rx.Activo == true ? 'checked' : '')+' />');
+        $("#genericModalFooter").append('<button class="button" id="btnActualizarUsoPropiedad" return false;">Actualizar</button>');
+        $("#btnActualizarUsoPropiedad").click(() => {
+            if ($("#UsoPropiedad").val() != '') {
+                _peticionAjax(URL_SERVICE + URI_SERVICE.ActualizarUsoPropiedad, VerbosREST.POST,
+                    JSON.stringify({
+                        sessionToken: UsuarioSesion.tokenSesion,
+                        usoPropiedad: {
+                            IdUso: $("#IdUsoPropiedad").val(),
+                            Uso: $("#UsoPropiedad").val(),
+                            IdUsuarioModificacion: UsuarioSesion.IdUsuario,
+                            Activo: $("#chkActivo").is(':checked')
+                        },
+                        idUsuarioModificacion: UsuarioSesion.IdUsuario
+                    }),
+                    true, response => {
+                        ConsultarUsosPropiedades();
+                        _closeGenericModal()
+                    });
+            }
+            else {
+                swal({
+                    text: 'Por favor ingresar el Uso de propiedad para actualizar.',
+                    title: swalTitle,
+                    icon: "error"
+                });
+            }
+        });
+        _openGenericModal();
+    }
+
+    function EliminarRx(IdUso) {
+        _peticionAjax(URL_SERVICE + URI_SERVICE.EliminarUsoPropiedad, VerbosREST.POST,
+            JSON.stringify({
+                sessionToken: UsuarioSesion.tokenSesion,
+                idUsoPropiedad: IdUso,
+                idUsuarioModificacion: UsuarioSesion.IdUsuario
+            }),
+            true, response => {
+                ConsultarUsosPropiedades();                
+            });
+    }
+</script>
+<h3 class="text-center" id="title">USOS PROPIEDADES</h3>
+<div style="padding:10px">
+    <div id="divTblUsosPropiedades"></div>
+    <br />
+    <button class="button" onclick="AbrirModalCrearRx();" return false;">Crear Nuevo Uso Propiedad</button>
+</div>

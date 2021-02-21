@@ -8,9 +8,11 @@ using System.Net;
 using System.Net.Http;
 using System.Web;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace Intec.WebApi.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class UsosPropiedadesController : DefaultController
     {
         [HttpPost]
@@ -22,6 +24,18 @@ namespace Intec.WebApi.Controllers
 
             if (validToken)
                 SetDataResponse( new Intec.BL.BE.AdministracionBE().ObtenerUsosPropiedades());
+            return response;
+        }
+        
+        [HttpPost]
+        [Route("api/UsosPropiedades/ObtenerUsosPropiedadesActivos")]
+        public JObject ObtenerUsosPropiedadesActivos([FromBody] JObject Token)
+        {
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+
+            if (validToken)
+                SetDataResponse( new Intec.BL.BE.AdministracionBE().ObtenerUsosPropiedadesActivos());
             return response;
         }
 

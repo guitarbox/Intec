@@ -1,4 +1,5 @@
 ﻿function _peticionAjax(urlServicio, verb, parametros, async, onContinue) {    
+    debugger;
     var rta = "";
 
     if (async !== null && async !== undefined && async) {
@@ -15,15 +16,18 @@
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             crossDomain: true,
-            success: function (rta) {
+            success: function (response) {
+                debugger;
                 $.unblockUI();
 
-                //var json = rta;
-                //if (json.error === true) {
-                //    swal("Error: " + json.errorMessage);
-                //}
-                //else
-                    onContinue(rta);
+                if (response.error === true) {
+                    swal({
+                        text: response.msgError,
+                        title: 'Intratec - Intec SAS',
+                        icon: 'error'
+                    });
+                }
+                else onContinue(response);
             },
             error: function (xhr, ajaxOptions, thrownError) {
                 swal({
@@ -72,13 +76,15 @@ function _peticionAjax_NoLockScreen(urlServicio, verb, parametros, onContinue) {
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         crossDomain: true,
-        success: function (rta) {
-            //var json = rta;
-            //if (json.error === true) {
-            //    alert("Error: " + json.errorMessage);
-            //}
-            //else
-                onContinue(rta);
+        success: function (response) {            
+            if (response.error === true) {
+                swal({
+                    text: response.msgError,
+                    title: 'Intratec - Intec SAS',
+                    icon: 'error'
+                });
+            }
+            else onContinue(response);
 
         },
         error: function (xhr, ajaxOptions, thrownError) {
@@ -91,4 +97,18 @@ function _peticionAjax_NoLockScreen(urlServicio, verb, parametros, onContinue) {
     });
 
     return rta;
+}
+
+function _resetGenericModal() {
+    $("#genericModalHeader").empty();
+    $("#genericModalBody").empty();
+    $("#genericModalFooter").empty();
+}
+
+function _openGenericModal() {
+    $('#genericModal').modal('show');
+}
+
+function _closeGenericModal() {
+    $('#genericModal').modal('hide');
 }

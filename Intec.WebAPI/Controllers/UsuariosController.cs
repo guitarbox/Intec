@@ -63,6 +63,7 @@ namespace Intec.WebApi.Controllers
             }
             return response;
         }
+        
         [HttpPost]
         [Route("api/Usuarios/ActualizarUsuario")]
         public JObject ActualizarUsuario([FromBody]JObject Token)
@@ -74,7 +75,7 @@ namespace Intec.WebApi.Controllers
             {
                 try
                 {
-                    new Intec.BL.BE.UsuariosBE().ActualizarUsuario(Token["Usuario"].ToObject<Intec.BL.DTO.Usuarios>(), int.Parse(Token["IdUsuarioModificacion"].ToString()));
+                    new Intec.BL.BE.UsuariosBE().ActualizarUsuario(Token["usuario"].ToObject<Intec.BL.DTO.Usuarios>(), int.Parse(Token["idUsuarioModificacion"].ToString()));
                 }
                 catch (Exception ex)
                 {

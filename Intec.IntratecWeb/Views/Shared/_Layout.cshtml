@@ -34,7 +34,7 @@
         <div onclick="CerrarSesion();"><i class="fas fa-sign-out-alt fa-2x" style="cursor:pointer"></i></div>
     </header>
     <section class="container">
-        @RenderBody()        
+        @RenderBody()
     </section>
     <footer class="footer">
         @*<div style="display:flex; flex-direction:column; justify-content:center; align-items:center">*@
@@ -42,5 +42,16 @@
         <div><label id="hora">HOY</label></div>
         @*</div>*@
     </footer>
+
+    @* Generic Modal *@
+    <div class="modal fade" id="genericModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" id="genericModalHeader"></div>
+                <div class="modal-body" id="genericModalBody"></div>
+                <div class="modal-footer" id="genericModalFooter"></div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

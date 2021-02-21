@@ -6,9 +6,11 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace Intec.WebApi.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class TiposEquipoController : DefaultController
     {
         [HttpPost]
@@ -20,6 +22,18 @@ namespace Intec.WebApi.Controllers
 
             if (validToken)
                 SetDataResponse( new Intec.BL.BE.AdministracionBE().ObtenerTiposEquipos());
+            return response;
+        }
+        
+        [HttpPost]
+        [Route("api/TiposEquipo/ObtenerTiposEquipoActivos")]
+        public JObject ObtenerTiposEquipoActivos([FromBody] JObject Token)
+        {
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+
+            if (validToken)
+                SetDataResponse( new Intec.BL.BE.AdministracionBE().ObtenerTiposEquiposActivos());
             return response;
         }
 
@@ -96,7 +110,7 @@ namespace Intec.WebApi.Controllers
             {
                 try
                 {
-                    new Intec.BL.BE.AdministracionBE().EliminarTipoEquipo(int.Parse(Token["IdTipoEquipo"].ToString()), int.Parse(Token["IdUsuarioModificacion"].ToString()));
+                    new Intec.BL.BE.AdministracionBE().EliminarTipoEquipo(int.Parse(Token["idTipoEquipo"].ToString()), int.Parse(Token["idUsuarioModificacion"].ToString()));
                 }
                 catch (Exception ex)
                 {

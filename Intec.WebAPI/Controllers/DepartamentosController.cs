@@ -30,6 +30,18 @@ namespace Intec.WebApi.Controllers
                 SetDataResponse(new Intec.BL.BE.AdministracionBE().ObtenerCiudades(Token["idDepartamento"].ToObject<string>()));
             return response;
         }
+        
+        [HttpPost]
+        [Route("api/Departamentos/ObtenerCiudadesActivos")]
+        public JObject ObtenerCiudadesActivos([FromBody] JObject Token)
+        {
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+
+            if (validToken)
+                SetDataResponse(new Intec.BL.BE.AdministracionBE().ObtenerCiudadesActivos(Token["idDepartamento"].ToObject<string>()));
+            return response;
+        }
 
 
         // GET: api/Departamentos/5 
