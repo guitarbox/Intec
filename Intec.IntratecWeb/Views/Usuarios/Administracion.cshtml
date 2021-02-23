@@ -32,7 +32,7 @@
                     //{ data: 'Foto' , title:''},
                     {
                         data: null, render: function (data, type, full, meta) {
-                            return '<a onclick="AbrirModalEditarRx(\'' + full.IdUsuario + '\');"><span class="fa fa-edit"></span></a>';
+                            return '<a onclick="window.location.href = \'../Usuarios/Administrar?iu=' + full.IdUsuario + '\';"><span class="fa fa-edit"></span></a>';
                         }
                     },
                     //{
@@ -64,30 +64,68 @@
     function AbrirModalCrearRx() {
         _resetGenericModal();
 
-        $("#genericModalHeader").append('<label>Crear Usuario</label>');
-        $("#genericModalBody").append('<p>Marca Equipo</p>');
-        $("#genericModalBody").append('<input id="MarcaEquipo" type="text" class="form-control" />');
-        $("#genericModalFooter").append('<button class="button" id="btnCrearMarcaEquipo" return false;">Crear</button>');
-        $("#btnCrearMarcaEquipo").click(() => {
-            if ($("#MarcaEquipo").val() != '') {
-                _peticionAjax(URL_SERVICE + URI_SERVICE.CrearMarcaEquipos, VerbosREST.POST,
-                    JSON.stringify({
-                        sessionToken: UsuarioSesion.tokenSesion,
-                        marcaEquipo: {
-                            IdMarcaEquipo: $("#IdMarcaEquipo").val(),
-                            MarcaEquipo: $("#MarcaEquipo").val(),
-                            IdUsuarioCreacion: UsuarioSesion.IdUsuario,
-                            Activo: true
-                        }
-                    }),
-                    true, response => {
-                        ConsultarMarcasEquipos();
-                        _closeGenericModal()
+        _appendToHeaderGeneriModal('<label>Crear Usuario</label>');
+
+        _appendToBodyGeneriModal('<p>Nombres</p>');
+        _appendToBodyGeneriModal('<input id="Nombres" type="text" class="form-control"/>');
+        _appendToBodyGeneriModal('<p>Apellidos</p>');
+        _appendToBodyGeneriModal('<input id="Apellidos" type="text" class="form-control"/>');
+        _appendToBodyGeneriModal('<p>Dirección</p>');
+        _appendToBodyGeneriModal('<input id="Direccion" type="text" class="form-control"/>');
+        _appendToBodyGeneriModal('<p>Teléfono</p>');
+        _appendToBodyGeneriModal('<input id="Telefono" type="text" class="form-control"/>');
+        _appendToBodyGeneriModal('<p>Tipo Identificación</p>');
+        _appendToBodyGeneriModal('<select id="IdTipoIdentificacion" class="form-control"></select>');
+        _loadSelectTiposIdentificacion($("#IdTipoIdentificacion"));
+        _appendToBodyGeneriModal('<p>Número Identificación</p>');
+        _appendToBodyGeneriModal('<input id="NumeroIdentificacion" type="text" class="form-control"/>');
+        _appendToBodyGeneriModal('<p>Departamento Domicilio</p>');
+        _appendToBodyGeneriModal('<select id="IdDepartamentoDomicilio" class="form-control"></select>');
+        _loadSelectDepartamentos($("#IdDepartamentoDomicilio"), '57');
+        $("#IdDepartamentoDomicilio").change(() => { _loadSelectCiudades($("#IdCiudadDomicilio"), $("#IdDepartamentoDomicilio").val()) });
+        _appendToBodyGeneriModal('<p>Ciudad Domicilio</p>');
+        _appendToBodyGeneriModal('<select id="IdCiudadDomicilio" class="form-control"><option value="">Seleccione...</option></select>');
+        _appendToBodyGeneriModal('<p>País Origen</p>');
+        _appendToBodyGeneriModal('<select id="IdPaisOrigen" class="form-control"></select>');
+        _loadSelectPaises($("#IdPaisOrigen"));
+        _appendToBodyGeneriModal('<p>Rol</p>');
+        _appendToBodyGeneriModal('<select id="IdRol" class="form-control"></select>');
+        _loadSelectRoles($('#IdRol'));
+        _appendToBodyGeneriModal('<p>Email</p>');
+        _appendToBodyGeneriModal('<input id="Email" type="email" class="form-control"/>');
+        _appendToBodyGeneriModal('<p>Fecha de Nacimiento</p>');
+        _appendToBodyGeneriModal('<input id="FechaNacimiento" type="text" class="form-control"/>');
+        $("#FechaNacimiento").datetimepicker({
+            format: "D/M/YYYY"
+        });
+
+        _appendToFooterGeneriModal('<button class="button" id="btnCrearUsuario" return false;">Crear</button>');
+        $("#btnCrearUsuario").click(() => {
+            let resVal = ValidarCamposCreacion();
+
+            if (resVal === '') {
+                let usuario = {
+                    Nombres: $('#Nombres').val(),
+                    Apellidos: $('#Apellidos').val(),
+                    Direccion: $('#Direccion').val(),
+                    Telefono: $('#Telefono').val(),
+                    IdTipoIdentificacion: $('#IdTipoIdentificacion').val(),
+                    NumeroIdentificacion: $('#NumeroIdentificacion').val(),
+                    IdCiudadDomicilio: $('#IdCiudadDomicilio').val(),
+                    IdPaisOrigen: $('#IdPaisOrigen').val(),
+                    IdRol: $('#IdRol').val(),
+                    Email: $('#Email').val(),
+                    FechaNacimientoString: $('#FechaNacimiento').val(),
+                    IdUsuarioCreacion: UsuarioSesion.IdUsuario
+                };
+                _peticionAjax(URL_SERVICE + URI_SERVICE.CrearUsuario, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion, usuario }), true,
+                    response => {
+                        window.location.href = '../Usuarios/Administrar?iu=' + response.data;
                     });
             }
             else {
                 swal({
-                    text: 'Por favor ingresar la Marca para crear.',
+                    text: resVal,
                     title: swalTitle,
                     icon: "error"
                 });
@@ -96,47 +134,21 @@
         _openGenericModal();
     }
 
-    function AbrirModalEditarRx(IdUsuario) {
-        var rx = $('#tblUsuarios').DataTable().data().filter(f => f.IdUsuario == IdUsuario)[0];
+    function ValidarCamposCreacion() {
+        let resVal = "";
         
-        _resetGenericModal();
+        if ($("#Nombres").val() == '') resVal = "El Nombre es Requerido.";
+        else if ($("#Apellidos").val() == '') resVal = "El Apellido es Requerido.";
+        else if ($("#Direccion").val() == '') resVal = "La Dirección es Requerida.";
+        else if ($("#Telefono").val() == '') resVal = "El Teléfono es Requerido.";
+        else if ($("#IdCiudadDomicilio").val() == '') resVal = "La Ciudad de Domicilio es Requerida.";
+        else if ($("#IdTipoIdentificacion").val() == '') resVal = "El Tipo de Identificación es Requerido.";
+        else if ($("#NumeroIdentificacion").val() == '') resVal = "El Número de Identificación es Requerido.";
+        else if ($("#IdPaisOrigen").val() == '') resVal = "El País de origen es Requerido.";
+        else if ($("#IdRol").val() == '') resVal = "El Rol es Requerido.";
+        else if ($("#Email").val() == '') resVal = "El E-Mail es Requerido.";
 
-        $("#genericModalHeader").append('<label>Editar Marca Equipo</label>');
-        $("#genericModalBody").append('<p>Id. Marca Equipo</p>');
-        $("#genericModalBody").append('<input id="IdMarcaEquipo" type="text" class="form-control" disabled />');
-        $("#IdMarcaEquipo").val(rx.IdMarcaEquipo);
-        $("#genericModalBody").append('<p>Marca Equipo</p>');
-        $("#genericModalBody").append('<input id="MarcaEquipo" type="text" class="form-control" />');
-        $("#MarcaEquipo").val(rx.MarcaEquipo);
-        $("#genericModalBody").append('<label>Activo</label><input id="chkActivo" type="checkbox" ' + (rx.Activo == true ? 'checked' : '') + ' />');
-        $("#genericModalFooter").append('<button class="button" id="btnActualizarMarcaEquipo" return false;">Actualizar</button>');
-        $("#btnActualizarMarcaEquipo").click(() => {
-            if ($("#MarcaEquipo").val() != '') {
-                _peticionAjax(URL_SERVICE + URI_SERVICE.ActualizarMarcaEquipos, VerbosREST.POST,
-                    JSON.stringify({
-                        sessionToken: UsuarioSesion.tokenSesion,
-                        marcaEquipo: {
-                            IdMarcaEquipo: $("#IdMarcaEquipo").val(),
-                            MarcaEquipo: $("#MarcaEquipo").val(),
-                            IdUsuarioModificacion: UsuarioSesion.IdUsuario,
-                            Activo: $("#chkActivo").is(':checked')
-                        },
-                        idUsuarioModificacion: UsuarioSesion.IdUsuario
-                    }),
-                    true, response => {
-                        ConsultarMarcasEquipos();
-                        _closeGenericModal();
-                    });
-            }
-            else {
-                swal({
-                    text: 'Por favor ingresar la Marca para actualizar.',
-                    title: swalTitle,
-                    icon: "error"
-                });
-            }
-        });
-        _openGenericModal();
+        return resVal;
     }
 </script>
 <h3 class="text-center" id="title">ADMINISTRACIÓN DE USUARIOS</h3>

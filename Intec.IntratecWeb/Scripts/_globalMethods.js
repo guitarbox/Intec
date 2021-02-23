@@ -99,6 +99,7 @@ function _peticionAjax_NoLockScreen(urlServicio, verb, parametros, onContinue) {
     return rta;
 }
 
+/* Generic Modal Methods */
 function _resetGenericModal() {
     $("#genericModalHeader").empty();
     $("#genericModalBody").empty();
@@ -111,4 +112,63 @@ function _openGenericModal() {
 
 function _closeGenericModal() {
     $('#genericModal').modal('hide');
+}
+
+function _appendToHeaderGeneriModal(element) {
+    $("#genericModalHeader").append(element);
+}
+
+function _appendToBodyGeneriModal(element) {
+    $("#genericModalBody").append(element);
+}
+
+function _appendToFooterGeneriModal(element) {
+    $("#genericModalFooter").append(element);
+}
+/*** Generic Modal Methods ***/
+
+/* Global Select Load*/
+function _loadSelectTiposIdentificacion(element) {
+    element.empty();
+    element.append('<option value="">Seleccione...</option>');
+    let resRequest = _peticionAjax(URL_SERVICE + URI_SERVICE.ObtenerTiposIdentificacionActivos, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion }), false);
+    resRequest.data.forEach(d => {
+        element.append('<option value="' + d.IdTipoIdentificacion + '">' + d.TipoIdentificacion + '</option>');
+    });
+}
+
+function _loadSelectPaises(element) {
+    element.empty();
+    element.append('<option value="">Seleccione...</option>');
+    let resRequest = _peticionAjax(URL_SERVICE + URI_SERVICE.ObtenerPaisesActivos, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion }), false);
+    resRequest.data.forEach(d => {
+        element.append('<option value="' + d.IdPais + '">' + d.Pais + '</option>');
+    });
+}
+
+function _loadSelectRoles(element) {
+    element.empty();
+    element.append('<option value="">Seleccione...</option>');
+    let resRequest = _peticionAjax(URL_SERVICE + URI_SERVICE.ObtenerRoles, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion }), false);
+    resRequest.data.forEach(d => {
+        element.append('<option value="' + d.IdRol + '">' + d.Rol + '</option>');
+    });
+}
+
+function _loadSelectDepartamentos(element, idPais) {
+    element.empty();
+    element.append('<option value="">Seleccione...</option>');
+    let resRequest = _peticionAjax(URL_SERVICE + URI_SERVICE.ObtenerDepartamentosActivos, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion, idPais }), false);
+    resRequest.data.forEach(d => {
+        element.append('<option value="' + d.IdDepartamento + '">' + d.Departamento + '</option>');
+    });
+}
+
+function _loadSelectCiudades(element, idDepartamento) {
+    element.empty();
+    element.append('<option value="">Seleccione...</option>');
+    let resRequest = _peticionAjax(URL_SERVICE + URI_SERVICE.ObtenerCiudadesActivos, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion, idDepartamento }), false);
+    resRequest.data.forEach(d => {
+        element.append('<option value="' + d.IdCiudad + '">' + d.Ciudad+ '</option>');
+    });
 }

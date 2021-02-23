@@ -8,6 +8,13 @@ namespace Intec.BL.BE
 {
     public class AdministracionBE : _beDefault
     {
+        #region Admin
+        public List<DTO.Roles> ObtenerRoles()
+        {
+            return MapperConfig.Config.MapperAdministracion.Map<List<DTO.Roles>>(new DAL.TE.AdministracionTE().ObtenerRoles());
+        }
+        #endregion
+
         #region Paises
 
         //Crear

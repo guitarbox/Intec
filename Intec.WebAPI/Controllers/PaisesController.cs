@@ -48,6 +48,18 @@ namespace Intec.WebApi.Controllers
             return response;
         }
 
+        [HttpPost]
+        [Route("api/Paises/ObtenerDepartamentosActivos")]//Pregunta
+        public JObject ObtenerDepartamentosActivos([FromBody] JObject Token)
+        {
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+
+            if (validToken)
+                SetDataResponse(new Intec.BL.BE.AdministracionBE().ObtenerDepartamentosActivos(Token["idPais"].ToObject<int>()));
+            return response;
+        }
+
         // GET: api/Paises/5
 
         [HttpPost]

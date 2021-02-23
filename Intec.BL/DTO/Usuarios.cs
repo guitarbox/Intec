@@ -35,6 +35,7 @@ namespace Intec.BL.DTO
         public string tokenSesion { get; set; }
         public DateTime? horaTokenSesion { get; set; }
         public DateTime? FechaNacimiento { get; set; }
+        public string FechaNacimientoString { get; set; }
 
         public DTO.Roles Roles { get; set; }
         public DTO.TiposIdentificacion TiposIdentificacion { get; set; }

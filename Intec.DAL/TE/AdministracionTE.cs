@@ -8,6 +8,18 @@ namespace Intec.DAL.TE
 {
     public class AdministracionTE
     {
+        #region Admin
+        public List<Roles> ObtenerRoles()
+        {
+            List<Roles> res = new List<Roles>();
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                res = ctx.Roles.ToList();
+            }
+            return res;
+        }
+        #endregion
+
         #region  CRUD Paises
 
         //Crear

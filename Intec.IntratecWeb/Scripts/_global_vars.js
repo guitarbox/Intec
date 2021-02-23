@@ -9,17 +9,25 @@ var VerbosREST = {
     DELETE: 'DELETE',
 }
 
-//var URL_SERVICE = 'http://localhost:63440/';
-var URL_SERVICE = 'http://servicios.intecsas.com.co/';
+var URL_SERVICE = 'http://localhost:63440/';
+//var URL_SERVICE = 'http://servicios.intecsas.com.co/';
 
 var URI_SERVICE = {
     //--- Administracion ---
+    //Administracion
+    ObtenerRoles: 'api/Administracion/ObtenerRoles',
+
     //Parámetros
     ObtenerParametros: 'api/Parametros/ObtenerParametros',
 
-    Paises: 'api/Paises',
-    Departamentos: 'api/Departamentos',
-    Ciudades: 'api/Ciudades',
+    //Paises
+    ObtenerPaisesActivos: 'api/Paises/ObtenerPaisesActivos',
+
+    //Departamentos
+    ObtenerDepartamentosActivos: 'api/Paises/ObtenerDepartamentosActivos',
+
+    //Ciudades
+    ObtenerCiudadesActivos: 'api/Departamentos/ObtenerCiudadesActivos',
 
     //TiposIdentificacion
     ObtenerTiposIdentificacion: 'api/TiposIdentificacion/ObtenerTiposIdentificacion',
@@ -61,6 +69,7 @@ var URI_SERVICE = {
 
     //Usuarios
     ObtenerUsuarios: 'api/Usuarios/ObtenerUsuarios',
+    CrearUsuario: 'api/Usuarios/CrearUsuario',
 
     LogIn: 'api/Usuarios/LogIn',
     RecuperarContrasena: 'api/Usuarios/RecuperarContrasena',

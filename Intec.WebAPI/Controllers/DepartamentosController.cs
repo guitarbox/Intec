@@ -10,6 +10,7 @@ using System.Web.Http.Cors;
 
 namespace Intec.WebApi.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class DepartamentosController : DefaultController
     {
         //// GET: api/Departamentos
@@ -30,7 +31,7 @@ namespace Intec.WebApi.Controllers
                 SetDataResponse(new Intec.BL.BE.AdministracionBE().ObtenerCiudades(Token["idDepartamento"].ToObject<string>()));
             return response;
         }
-        
+
         [HttpPost]
         [Route("api/Departamentos/ObtenerCiudadesActivos")]
         public JObject ObtenerCiudadesActivos([FromBody] JObject Token)
@@ -43,7 +44,7 @@ namespace Intec.WebApi.Controllers
             return response;
         }
 
-
+        
         // GET: api/Departamentos/5 
         //TODO
         [HttpPost]

@@ -2,6 +2,7 @@
 using Intec.BL.DTO;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,6 +23,7 @@ namespace Intec.BL.BE
 
         public int CrearUsuario(DTO.Usuarios UsuarioCrear)
         {
+            UsuarioCrear.FechaNacimiento = DateTime.Parse(UsuarioCrear.FechaNacimientoString, new CultureInfo("es-Co"));
             return new DAL.TE.UsuariosTE().CrearUsuario(MapperConfig.Config.MapperUsuarios.Map<DAL.Usuarios>(UsuarioCrear));
         }
 

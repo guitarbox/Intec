@@ -42,6 +42,9 @@ namespace Intec.BL.MapperConfig
                     cfg.CreateMap<DTO.UsosPropiedades, DAL.UsosPropiedades>();
                     cfg.CreateMap<DAL.UsosPropiedades, DTO.UsosPropiedades>();
 
+                    cfg.CreateMap<DAL.Roles, DTO.Roles>()
+                    .ForMember(dest => dest.Menus,opt => opt.Ignore());
+
                 });
 
                 return config.CreateMapper();
