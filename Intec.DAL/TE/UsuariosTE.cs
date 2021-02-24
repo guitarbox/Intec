@@ -98,8 +98,10 @@ namespace Intec.DAL.TE
                     usuarioModificar.IdRol = Usuario.IdRol;
                     usuarioModificar.Activo = Usuario.Activo;
                     usuarioModificar.Foto = Usuario.Foto;
+                    usuarioModificar.DebeCambiarContrasena = Usuario.DebeCambiarContrasena;
+                    usuarioModificar.IdPaisOrigen = Usuario.IdPaisOrigen;
 
-                    usuarioModificar.FechaCreacion = DateTime.Now;
+                    usuarioModificar.FechaModificacion = DateTime.Now;
                     usuarioModificar.IdUsuarioModificacion = IdUsuarioModifica;
                     ctx.SaveChanges();
                 }
@@ -188,8 +190,6 @@ namespace Intec.DAL.TE
                 res = ctx.Usuarios.Where(u => u.IdUsuario == IdUsuario).FirstOrDefault();
                 if (res != null)
                 {
-                    res.FechaUltimoInicioSesion = DateTime.Now;
-                    ctx.SaveChanges();
                     ctx.Entry(res).Reference(u => u.Roles).Load();
                     res.Roles.Menus.ToList();
                     ctx.Entry(res).Reference(u => u.TiposIdentificacion).Load();

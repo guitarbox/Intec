@@ -91,7 +91,7 @@ namespace Intec.WebApi.Controllers
         //// PUT: api/Departamentos/5
         [HttpPost]
         [Route("api/Departamentos/ActualizarDepartamento")]
-        public JObject ActualizarDepartamento(int id, [FromBody] JObject Token)
+        public JObject ActualizarDepartamento([FromBody] JObject Token)
         {
             bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
             SetValidTokendResponse(validToken);
@@ -120,11 +120,11 @@ namespace Intec.WebApi.Controllers
         //// DELETE: api/Departamentos/5
         [HttpPost]
         [Route("api/Departamentos/EliminarDepartamento")]
-        public JObject EliminarDepartamento(int id, [FromBody] JObject DepartamentoEliminarJO)
+        public JObject EliminarDepartamento([FromBody] JObject DepartamentoEliminarJO)
         {
             try
             {
-                new Intec.BL.BE.AdministracionBE().EliminarDepartamento((DepartamentoEliminarJO["IdDepartamento"].ToString()), int.Parse(DepartamentoEliminarJO["IdUsuarioModificacion"].ToString()));
+                new Intec.BL.BE.AdministracionBE().EliminarDepartamento((DepartamentoEliminarJO["idDepartamento"].ToString()), int.Parse(DepartamentoEliminarJO["idUsuarioModificacion"].ToString()));
             }
             catch (Exception ex)
             {

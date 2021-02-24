@@ -241,6 +241,8 @@
     <Content Include="Views\Administracion\TiposIdentificacion.cshtml" />
     <Content Include="Views\Administracion\TiposPersona.cshtml" />
     <Content Include="Views\Usuarios\Administrar.cshtml" />
+    <Content Include="Views\Administracion\Departamentos.cshtml" />
+    <Content Include="Views\Administracion\Ciudades.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

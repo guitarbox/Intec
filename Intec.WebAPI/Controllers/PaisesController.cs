@@ -102,7 +102,7 @@ namespace Intec.WebApi.Controllers
         //// PUT: api/Paises/5
         [HttpPost]
         [Route("api/Paises/ActualizarPais")]
-        public JObject ActualizarPais(int id, [FromBody] JObject Token)
+        public JObject ActualizarPais([FromBody] JObject Token)
         {
             bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
             SetValidTokendResponse(validToken);
@@ -131,7 +131,7 @@ namespace Intec.WebApi.Controllers
         //// DELETE: api/Paises/5
         [HttpPost]
         [Route("api/Paises/EliminarPais")]
-        public JObject EliminarPais(int id, [FromBody] JObject Token)
+        public JObject EliminarPais([FromBody] JObject Token)
         {
             bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
             SetValidTokendResponse(validToken);
@@ -140,7 +140,7 @@ namespace Intec.WebApi.Controllers
             {
                 try
                 {
-                    new Intec.BL.BE.AdministracionBE().EliminarPais(int.Parse(Token["IdPais"].ToString()), int.Parse(Token["IdUsuarioModificacion"].ToString()));
+                    new Intec.BL.BE.AdministracionBE().EliminarPais(int.Parse(Token["idPais"].ToString()), int.Parse(Token["idUsuarioModificacion"].ToString()));
                 }
                 catch (Exception ex)
                 {

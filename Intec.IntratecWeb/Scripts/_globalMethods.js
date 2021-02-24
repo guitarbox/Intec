@@ -165,6 +165,7 @@ function _loadSelectDepartamentos(element, idPais) {
 }
 
 function _loadSelectCiudades(element, idDepartamento) {
+    debugger;
     element.empty();
     element.append('<option value="">Seleccione...</option>');
     let resRequest = _peticionAjax(URL_SERVICE + URI_SERVICE.ObtenerCiudadesActivos, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion, idDepartamento }), false);

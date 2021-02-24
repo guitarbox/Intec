@@ -240,7 +240,7 @@ namespace Intec.DAL.TE
             List<Ciudades> res = new List<Ciudades>();
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
-                res = ctx.Ciudades.Where(c => c.IdDepartamento.Equals(IdDepartamento)).ToList();
+                res = ctx.Ciudades.Where(c => string.IsNullOrEmpty(IdDepartamento) || c.IdDepartamento.Equals(IdDepartamento)).ToList();
             }
             return res;
         }
@@ -250,7 +250,7 @@ namespace Intec.DAL.TE
             List<Ciudades> res = new List<Ciudades>();
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
-                res = ctx.Ciudades.Where(c => c.IdDepartamento.Equals(IdDepartamento) && c.Activo).ToList();
+                res = ctx.Ciudades.Where(c => string.IsNullOrEmpty(IdDepartamento) || c.IdDepartamento.Equals(IdDepartamento) && c.Activo).ToList();
             }
             return res;
         }

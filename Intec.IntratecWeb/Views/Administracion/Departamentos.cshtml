@@ -1,0 +1,156 @@
+﻿
+@{
+    ViewBag.Title = "Departamentos";
+}
+<script>
+    var IdPais = -1;
+
+    $(document).ready(() => {
+        IdPais = window.location.href.split('=')[1];
+        ConsultarDepartamentos();
+    });
+
+    function ConsultarDepartamentos() {
+        _peticionAjax(URL_SERVICE + URI_SERVICE.ObtenerDepartamentos, VerbosREST.POST,
+            JSON.stringify({
+                sessionToken: UsuarioSesion.tokenSesion, idPais: IdPais
+            }),
+            true, response => {
+
+                var columns = [
+                    { data: "IdDepartamento", title: 'Id. Departamento' },
+                    { data: "Departamento", title: 'Departamento' },
+                    { data: "Activo", title: 'Activo' },
+                    {
+                        data: null, render: function (data, type, full, meta) {
+                            return '<a onclick="window.location.href = \'../Administracion/Ciudades?id=' + full.IdDepartamento + '\';"><h5>Administrar Ciudades</h5></a>';
+                        }
+                    },
+                    {
+                        data: null, render: function (data, type, full, meta) {
+                            return '<a onclick="AbrirModalEditarRx(\'' + full.IdDepartamento + '\');"><span class="fa fa-edit"></span></a>';
+                        }
+                    },
+                    {
+                        data: null, render: function (data, type, full, meta) {
+                            return '<a onclick="EliminarRx(\'' + full.IdDepartamento + '\');"><span class="fa fa-trash"></span></a>';
+                        }
+                    }
+                ];
+
+                $("#divTblDepartamentos").empty();
+                $("#divTblDepartamentos").append('<table id="tblDepartamentos" style="width:100%"></table>');
+                $('#tblDepartamentos').DataTable({
+                    data: response.data,
+                    columns: columns,
+                    language: _language_options_table,
+                    //
+                    dom: 'Bfrtip',
+                    buttons: [
+                        //{ extend: 'copy', className: 'btn-info' },
+                        //{ extend: 'csv', className: 'btn-info' },
+                        //{ extend: 'excel', className: 'btn-info', title: 'XLS-File' },
+                        //{ extend: 'pdf', className: 'btn-info', title: $('title').text() },
+                        //{ extend: 'print', className: 'btn-info' }
+                    ]
+                });
+            });
+    }
+
+    function AbrirModalCrearRx() {
+        _resetGenericModal();
+
+        $("#genericModalHeader").append('<label>Crear Departamento</label>');
+        $("#genericModalBody").append('<p>Id Departamento</p>');
+        $("#genericModalBody").append('<input id="IdDepartamento" type="numeric" class="form-control" />');
+        $("#genericModalBody").append('<p>Departamento</p>');
+        $("#genericModalBody").append('<input id="Departamento" type="text" class="form-control" />');
+        $("#genericModalFooter").append('<button class="button" id="btnCrearDepartamento" return false;">Crear</button>');
+        $("#btnCrearDepartamento").click(() => {
+            if ($("#IdDepartamento").val() != '' && $("#Departamento").val() != '' ) {
+                _peticionAjax(URL_SERVICE + URI_SERVICE.CrearDepartamento, VerbosREST.POST,
+                    JSON.stringify({
+                        sessionToken: UsuarioSesion.tokenSesion,
+                        departamento: {
+                            IdDepartamento: $("#IdDepartamento").val(),
+                            Departamento: $("#Departamento").val(),
+                            IdPais: IdPais,
+                            IdUsuarioCreacion: UsuarioSesion.IdUsuario,
+                            Activo: true
+                        }
+                    }),
+                    true, response => {
+                        ConsultarDepartamentos();
+                        _closeGenericModal()
+                    });
+            }
+            else {
+                swal({
+                    text: 'Por favor ingresar el IdDepartamento y el Departamento para crear.',
+                    title: swalTitle,
+                    icon: "error"
+                });
+            }
+        });
+        _openGenericModal();
+    }
+
+    function AbrirModalEditarRx(IdDepartamento) {
+        var rx = $('#tblDepartamentos').DataTable().data().filter(f => f.IdDepartamento == IdDepartamento)[0];
+
+        _resetGenericModal();
+
+        $("#genericModalHeader").append('<label>Editar Departamento</label>');
+        $("#genericModalBody").append('<p>Id Departamento</p>');
+        $("#genericModalBody").append('<input id="IdDepartamento" value="' + rx.IdDepartamento + '" type="text" class="form-control" disabled />');
+        $("#genericModalBody").append('<p>Departamento</p>');
+        $("#genericModalBody").append('<input id="Departamento" value="' + rx.Departamento + '" type="text" class="form-control" />');
+        $("#genericModalBody").append('<label>Activo</label><input id="chkActivo" type="checkbox" ' + (rx.Activo == true ? 'checked' : '') + ' />');
+        $("#genericModalFooter").append('<button class="button" id="btnActualizarDepartamento" return false;">Actualizar</button>');
+        $("#btnActualizarDepartamento").click(() => {
+            if ($("#Departamento").val() != '') {
+                _peticionAjax(URL_SERVICE + URI_SERVICE.ActualizarDepartamento, VerbosREST.POST,
+                    JSON.stringify({
+                        sessionToken: UsuarioSesion.tokenSesion,
+                        departamento: {
+                            IdDepartamento: $("#IdDepartamento").val(),
+                            Departamento: $("#Departamento").val(),
+                            IdUsuarioModificacion: UsuarioSesion.IdUsuario,
+                            Activo: $("#chkActivo").is(':checked')
+                        },
+                        idUsuarioModificacion: UsuarioSesion.IdUsuario
+                    }),
+                    true, response => {
+                        ConsultarDepartamentos();
+                        _closeGenericModal();
+                    });
+            }
+            else {
+                swal({
+                    text: 'Por favor ingresar el Departamento para actualizar.',
+                    title: swalTitle,
+                    icon: "error"
+                });
+            }
+        });
+        _openGenericModal();
+    }
+
+    function EliminarRx(IdDepartamento) {
+        _peticionAjax(URL_SERVICE + URI_SERVICE.EliminarDepartamento, VerbosREST.POST,
+            JSON.stringify({
+                sessionToken: UsuarioSesion.tokenSesion,
+                idDepartamento: IdDepartamento,
+                idUsuarioModificacion: UsuarioSesion.IdUsuario
+            }),
+            true, response => {
+                ConsultarDepartamentos();
+            });
+    }
+</script>
+<h3 class="text-center" id="title">PAÍSES</h3>
+<div style="padding:10px">
+    <div id="divTblDepartamentos" style="width:100%"></div>
+    <br />
+    <button class="button" onclick="AbrirModalCrearRx(); return false;">Crear Nuevo Departamento</button>
+</div> 

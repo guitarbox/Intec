@@ -2,6 +2,137 @@
 @{
     ViewBag.Title = "Administrar";
 }
+<script>
+    var usuAdmin = null;
+    $(document).ready(() => {        
+        ConsultarUsuario();
+    });
 
-<h2>Administrar</h2>
+    function ConsultarUsuario() {
+        _peticionAjax(URL_SERVICE + URI_SERVICE.ObtenerUsuario, VerbosREST.POST, JSON.stringify({
+            sessionToken: UsuarioSesion.tokenSesion, idUsuario: window.location.href.split('=')[1]
+        }), true, response => {
+            usuAdmin = response.data;
+            MostrarUsuario();
+        });
+    }
 
+    function MostrarUsuario() {
+        $("#col1").empty();
+        $("#col2").empty();
+        $("#col3").empty();
+
+        $("#IdUsuario").text(`Id. Usuario: ${usuAdmin.IdUsuario}`);
+
+        $("#col1").append('<h5>Tipo Identificación</h5>');
+        $("#col1").append('<select id="IdTipoIdentificacion" class="form-control"> </select>');
+        _loadSelectTiposIdentificacion($("#IdTipoIdentificacion"));
+        $("#IdTipoIdentificacion").val(usuAdmin.IdTipoIdentificacion);
+
+        $("#col1").append('<h5>Número Identificación</h5>');
+        $("#col1").append('<input id="NumeroIdentificacion" type="text" class="form-control" value="' + usuAdmin.NumeroIdentificacion + '" />');
+
+        $("#col1").append('<h5>Nombres</h5>');
+        $("#col1").append('<input id="Nombres" type="text" class="form-control" value="' + usuAdmin.Nombres + '" />');
+
+        $("#col1").append('<h5>Apellidos</h5>');
+        $("#col1").append('<input id="Apellidos" type="text" class="form-control" value="' + usuAdmin.Apellidos + '" />');
+        
+        $("#col1").append('<h5>Dirección</h5>');
+        $("#col1").append('<input id="Direccion" type="text" class="form-control" value="' + usuAdmin.Direccion + '" />');
+
+        $("#col1").append('<h5>Teléfono</h5>');
+        $("#col1").append('<input id="Telefono" type="text" class="form-control" value="' + usuAdmin.Telefono + '" />');
+
+        $("#col1").append('<h5>Email</h5>');
+        $("#col1").append('<input id="Email" type="email" class="form-control" value="' + usuAdmin.Email + '" />');
+
+        //$("#col1").append('<h5>FechaNacimiento</h5>');
+        //$("#col1").append('<input id="FechaNacimiento" type="text" class="form-control" value="' + usuAdmin.FechaNacimientoString + '" />');
+        //$("#FechaNacimiento").datetimepicker({
+        //    format: "D/M/YYYY"
+        //});
+
+        $("#col2").append('<h5>Ciudad Domicilio</h5>');
+        $("#col2").append('<select id="IdCiudadDomicilio" class="form-control" </select>');            
+        _loadSelectCiudades($("#IdCiudadDomicilio"), '');
+        $("#IdCiudadDomicilio").val(usuAdmin.IdCiudadDomicilio);
+
+        $("#col2").append('<h5>Rol </h5>');
+        $("#col2").append('<select id="IdRol" class="form-control" </select>');
+        _loadSelectRoles($("#IdRol"));
+        $("#IdRol").val(usuAdmin.IdRol);
+
+        $("#col2").append('<h5>Activo</h5>');
+        $("#col2").append('<input id="Activo" type="checkbox" ' + (usuAdmin.Activo == true ? 'checked' : '') + ' />');
+
+        //usuAdmin.Foto
+        //$("#col3").append('<h5></h5>');
+        //$("#col3").append('<input id="" type="text" class="form-control" value="' + usuAdmin + '" />');
+
+        $("#col2").append('<h5>Debe Cambiar Contraseña</h5>');
+        $("#col2").append('<input id="DebeCambiarContrasena" type="checkbox" ' + (usuAdmin.DebeCambiarContrasena == true ? 'checked' : '') + ' />');
+
+        $("#col2").append('<h5>País Origen</h5>');
+        $("#col2").append('<select id="IdPaisOrigen" class="form-control"></select>');
+        _loadSelectPaises($("#IdPaisOrigen"));
+        $("#IdPaisOrigen").val(usuAdmin.IdPaisOrigen);
+
+        $("#col3").append('<h5>Fecha Último Inicio Sesión</h5>');
+        $("#col3").append('<input id="FechaUltimoInicioSesion" type="text" class="form-control" value="' + usuAdmin.FechaUltimoInicioSesion + '" disabled />');
+
+        $("#col3").append('<h5>Fecha Creación</h5>');
+        $("#col3").append('<input id="FechaCreacion" type="text" class="form-control" value="' + usuAdmin.FechaCreacion + '" disabled />');
+
+        $("#col3").append('<h5>Usuario Creación</h5>');
+        $("#col3").append('<input id="IdUsuarioCreacion" type="text" class="form-control" value="' + usuAdmin.IdUsuarioCreacion + '" disabled />');
+
+        $("#col3").append('<h5>Fecha Modificación</h5>');
+        $("#col3").append('<input id="FechaModificacion" type="text" class="form-control" value="' + usuAdmin.FechaModificacion + '" disabled />');
+
+        $("#col3").append('<h5>Usuario Modificación</h5>');
+        $("#col3").append('<input id="IdUsuarioModificacion" type="text" class="form-control" value="' + usuAdmin.IdUsuarioModificacion + '" disabled />');
+
+        //usuAdmin.tokenCambioContrasena 
+        $("#col3").append('<h5>Hora Token Cambio Contrasena</h5>');
+        $("#col3").append('<input id="horaTokenCambioContrasena" type="text" class="form-control" value="' + usuAdmin.horaTokenCambioContrasena + '" disabled />');
+
+        //usuAdmin.tokenSesion 
+        //usuAdmin.horaTokenSesion 
+
+        $("#col3").append('<input id="btnActualizar" type="button" class="button" value="Actualizar" />');
+        $("#btnActualizar").click(ActualizarUsuario);
+    }
+
+    function ActualizarUsuario() {
+        usuAdmin.IdTipoIdentificacion = $("#IdTipoIdentificacion").val();
+        usuAdmin.NumeroIdentificacion = $("#NumeroIdentificacion").val();
+        usuAdmin.Nombres = $("#Nombres").val();
+        usuAdmin.Apellidos = $("#Apellidos").val();
+        usuAdmin.Direccion = $("#Direccion").val();
+        usuAdmin.Telefono = $("#Telefono").val();
+        usuAdmin.Email = $("#Email").val();
+        usuAdmin.IdCiudadDomicilio = $("#IdCiudadDomicilio").val();
+        usuAdmin.IdPaisOrigen = $("#IdPaisOrigen").val();
+        usuAdmin.DebeCambiarContrasena = $("#DebeCambiarContrasena").is(':checked');
+        usuAdmin.Activo = $("#Activo").is(':checked');
+        usuAdmin.IdRol = $("#IdRol").val();
+
+        _peticionAjax(URL_SERVICE + URI_SERVICE.ActualizarUsuario, VerbosREST.POST,
+            JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion, usuario: usuAdmin, idUsuarioModificacion: UsuarioSesion.IdUsuario }),
+            true, response => {
+                //ConsultarUsuario();
+            });
+    }
+</script>
+<div style="padding: 0px 20px">
+    <h3>Administrar Usuario</h3>
+    <div class="card">
+        <h4 id="IdUsuario"></h4>
+        <div style="display:grid; grid-template-columns: 33% 34% 33%">
+            <div id="col1"></div>
+            <div id="col2"></div>
+            <div id="col3"></div>
+        </div>
+    </div>
+</div>

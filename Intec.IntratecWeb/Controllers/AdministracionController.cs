@@ -17,6 +17,15 @@ namespace Intec.IntratecWeb.Controllers
         {
             return View();
         }        
+        
+        public ActionResult Departamentos()
+        {
+            return View();
+        }        
+        public ActionResult Ciudades()
+        {
+            return View();
+        }        
 
         public ActionResult TiposPropiedades()
         {

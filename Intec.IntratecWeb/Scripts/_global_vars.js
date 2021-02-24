@@ -21,13 +21,25 @@ var URI_SERVICE = {
     ObtenerParametros: 'api/Parametros/ObtenerParametros',
 
     //Paises
+    ObtenerPaises: 'api/Paises/ObtenerPaises',
     ObtenerPaisesActivos: 'api/Paises/ObtenerPaisesActivos',
+    CrearPais: 'api/Paises/CrearPais',
+    ActualizarPais: 'api/Paises/ActualizarPais',
+    EliminarPais: 'api/Paises/EliminarPais',
 
     //Departamentos
     ObtenerDepartamentosActivos: 'api/Paises/ObtenerDepartamentosActivos',
+    ObtenerDepartamentos: 'api/Paises/ObtenerDepartamentos',
+    CrearDepartamento: 'api/Departamentos/CrearDepartamento',
+    ActualizarDepartamento: 'api/Departamentos/ActualizarDepartamento',
+    EliminarDepartamento: 'api/Departamentos/EliminarDepartamento',
 
     //Ciudades
     ObtenerCiudadesActivos: 'api/Departamentos/ObtenerCiudadesActivos',
+    ObtenerCiudades: 'api/Departamentos/ObtenerCiudades',
+    CrearCiudad: 'api/Ciudades/CrearCiudad',
+    ActualizarCiudad: 'api/Ciudades/ActualizarCiudad',
+    EliminarCiudad: 'api/Ciudades/EliminarCiudad',
 
     //TiposIdentificacion
     ObtenerTiposIdentificacion: 'api/TiposIdentificacion/ObtenerTiposIdentificacion',
@@ -69,7 +81,9 @@ var URI_SERVICE = {
 
     //Usuarios
     ObtenerUsuarios: 'api/Usuarios/ObtenerUsuarios',
+    ObtenerUsuario: 'api/Usuarios/ObtenerUsuario',
     CrearUsuario: 'api/Usuarios/CrearUsuario',
+    ActualizarUsuario: 'api/Usuarios/ActualizarUsuario',
 
     LogIn: 'api/Usuarios/LogIn',
     RecuperarContrasena: 'api/Usuarios/RecuperarContrasena',
