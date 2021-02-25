@@ -88,7 +88,11 @@ var URI_SERVICE = {
     LogIn: 'api/Usuarios/LogIn',
     RecuperarContrasena: 'api/Usuarios/RecuperarContrasena',
     ValidarTokenModPass: 'api/Usuarios/ValidarTokenModPass',
-    ModificarContrasena: 'api/Usuarios/ModificarContrasena'
+    ModificarContrasena: 'api/Usuarios/ModificarContrasena',
+
+    //Clientes
+    ObtenerClientes: 'api/Clientes/ObtenerClientes',
+    CrearClientes: 'api/Clientes/CrearClientes',
 };
 
 var _language_options_table =

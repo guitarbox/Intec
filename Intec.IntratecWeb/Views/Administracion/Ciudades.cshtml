@@ -1,46 +1,41 @@
 ﻿
 @{
-    ViewBag.Title = "Departamentos";
+    ViewBag.Title = "Ciudades";
 }
 <script>
-    var IdPais = -1;
+    var IdDepartamento = -1;
 
     $(document).ready(() => {
-        IdPais = window.location.href.split('=')[1];
-        ConsultarDepartamentos();
+        IdDepartamento = window.location.href.split('=')[1];
+        ConsultarCiudades();
     });
 
-    function ConsultarDepartamentos() {
-        _peticionAjax(URL_SERVICE + URI_SERVICE.ObtenerDepartamentos, VerbosREST.POST,
+    function ConsultarCiudades() {
+        _peticionAjax(URL_SERVICE + URI_SERVICE.ObtenerCiudades, VerbosREST.POST,
             JSON.stringify({
-                sessionToken: UsuarioSesion.tokenSesion, idPais: IdPais
+                sessionToken: UsuarioSesion.tokenSesion, idDepartamento: IdDepartamento
             }),
             true, response => {
 
                 var columns = [
-                    { data: "IdDepartamento", title: 'Id. Departamento' },
-                    { data: "Departamento", title: 'Departamento' },
+                    { data: "IdCiudad", title: 'Id. Ciudad' },
+                    { data: "Ciudad", title: 'Ciudad' },
                     { data: "Activo", title: 'Activo' },
                     {
                         data: null, render: function (data, type, full, meta) {
-                            return '<a onclick="window.location.href = \'../Administracion/Ciudades?id=' + full.IdDepartamento + '\';"><h5>Administrar Ciudades</h5></a>';
+                            return '<a onclick="AbrirModalEditarRx(\'' + full.IdCiudad + '\');"><span class="fa fa-edit"></span></a>';
                         }
                     },
                     {
                         data: null, render: function (data, type, full, meta) {
-                            return '<a onclick="AbrirModalEditarRx(\'' + full.IdDepartamento + '\');"><span class="fa fa-edit"></span></a>';
-                        }
-                    },
-                    {
-                        data: null, render: function (data, type, full, meta) {
-                            return '<a onclick="EliminarRx(\'' + full.IdDepartamento + '\');"><span class="fa fa-trash"></span></a>';
+                            return '<a onclick="EliminarRx(\'' + full.IdCiudad + '\');"><span class="fa fa-trash"></span></a>';
                         }
                     }
                 ];
 
-                $("#divTblDepartamentos").empty();
-                $("#divTblDepartamentos").append('<table id="tblDepartamentos" style="width:100%"></table>');
-                $('#tblDepartamentos').DataTable({
+                $("#divTblCiudads").empty();
+                $("#divTblCiudads").append('<table id="tblCiudads" style="width:100%"></table>');
+                $('#tblCiudads').DataTable({
                     data: response.data,
                     columns: columns,
                     language: _language_options_table,
@@ -60,33 +55,33 @@
     function AbrirModalCrearRx() {
         _resetGenericModal();
 
-        $("#genericModalHeader").append('<label>Crear Departamento</label>');
-        $("#genericModalBody").append('<p>Id Departamento</p>');
-        $("#genericModalBody").append('<input id="IdDepartamento" type="numeric" class="form-control" />');
-        $("#genericModalBody").append('<p>Departamento</p>');
-        $("#genericModalBody").append('<input id="Departamento" type="text" class="form-control" />');
-        $("#genericModalFooter").append('<button class="button" id="btnCrearDepartamento" return false;">Crear</button>');
-        $("#btnCrearDepartamento").click(() => {
-            if ($("#IdDepartamento").val() != '' && $("#Departamento").val() != '' ) {
-                _peticionAjax(URL_SERVICE + URI_SERVICE.CrearDepartamento, VerbosREST.POST,
+        $("#genericModalHeader").append('<label>Crear Ciudad</label>');
+        $("#genericModalBody").append('<p>Id Ciudad</p>');
+        $("#genericModalBody").append('<input id="IdCiudad" type="numeric" class="form-control" />');
+        $("#genericModalBody").append('<p>Ciudad</p>');
+        $("#genericModalBody").append('<input id="Ciudad" type="text" class="form-control" />');
+        $("#genericModalFooter").append('<button class="button" id="btnCrearCiudad" return false;">Crear</button>');
+        $("#btnCrearCiudad").click(() => {
+            if ($("#IdCiudad").val() != '' && $("#Ciudad").val() != '' ) {
+                _peticionAjax(URL_SERVICE + URI_SERVICE.CrearCiudad, VerbosREST.POST,
                     JSON.stringify({
                         sessionToken: UsuarioSesion.tokenSesion,
-                        departamento: {
-                            IdDepartamento: $("#IdDepartamento").val(),
-                            Departamento: $("#Departamento").val(),
-                            IdPais: IdPais,
+                        ciudad: {
+                            IdCiudad: $("#IdCiudad").val(),
+                            Ciudad: $("#Ciudad").val(),
+                            IdDepartamento: IdDepartamento,
                             IdUsuarioCreacion: UsuarioSesion.IdUsuario,
                             Activo: true
                         }
                     }),
                     true, response => {
-                        ConsultarDepartamentos();
+                        ConsultarCiudades();
                         _closeGenericModal()
                     });
             }
             else {
                 swal({
-                    text: 'Por favor ingresar el IdDepartamento y el Departamento para crear.',
+                    text: 'Por favor ingresar el IdCiudad y el Ciudad para crear.',
                     title: swalTitle,
                     icon: "error"
                 });
@@ -95,39 +90,39 @@
         _openGenericModal();
     }
 
-    function AbrirModalEditarRx(IdDepartamento) {
-        var rx = $('#tblDepartamentos').DataTable().data().filter(f => f.IdDepartamento == IdDepartamento)[0];
+    function AbrirModalEditarRx(IdCiudad) {
+        var rx = $('#tblCiudads').DataTable().data().filter(f => f.IdCiudad == IdCiudad)[0];
 
         _resetGenericModal();
 
-        $("#genericModalHeader").append('<label>Editar Departamento</label>');
-        $("#genericModalBody").append('<p>Id Departamento</p>');
-        $("#genericModalBody").append('<input id="IdDepartamento" value="' + rx.IdDepartamento + '" type="text" class="form-control" disabled />');
-        $("#genericModalBody").append('<p>Departamento</p>');
-        $("#genericModalBody").append('<input id="Departamento" value="' + rx.Departamento + '" type="text" class="form-control" />');
+        $("#genericModalHeader").append('<label>Editar Ciudad</label>');
+        $("#genericModalBody").append('<p>Id Ciudad</p>');
+        $("#genericModalBody").append('<input id="IdCiudad" value="' + rx.IdCiudad + '" type="text" class="form-control" disabled />');
+        $("#genericModalBody").append('<p>Ciudad</p>');
+        $("#genericModalBody").append('<input id="Ciudad" value="' + rx.Ciudad + '" type="text" class="form-control" />');
         $("#genericModalBody").append('<label>Activo</label><input id="chkActivo" type="checkbox" ' + (rx.Activo == true ? 'checked' : '') + ' />');
-        $("#genericModalFooter").append('<button class="button" id="btnActualizarDepartamento" return false;">Actualizar</button>');
-        $("#btnActualizarDepartamento").click(() => {
-            if ($("#Departamento").val() != '') {
-                _peticionAjax(URL_SERVICE + URI_SERVICE.ActualizarDepartamento, VerbosREST.POST,
+        $("#genericModalFooter").append('<button class="button" id="btnActualizarCiudad" return false;">Actualizar</button>');
+        $("#btnActualizarCiudad").click(() => {
+            if ($("#Ciudad").val() != '') {
+                _peticionAjax(URL_SERVICE + URI_SERVICE.ActualizarCiudad, VerbosREST.POST,
                     JSON.stringify({
                         sessionToken: UsuarioSesion.tokenSesion,
-                        departamento: {
-                            IdDepartamento: $("#IdDepartamento").val(),
-                            Departamento: $("#Departamento").val(),
+                        ciudad: {
+                            IdCiudad: $("#IdCiudad").val(),
+                            Ciudad: $("#Ciudad").val(),
                             IdUsuarioModificacion: UsuarioSesion.IdUsuario,
                             Activo: $("#chkActivo").is(':checked')
                         },
                         idUsuarioModificacion: UsuarioSesion.IdUsuario
                     }),
                     true, response => {
-                        ConsultarDepartamentos();
+                        ConsultarCiudades();
                         _closeGenericModal();
                     });
             }
             else {
                 swal({
-                    text: 'Por favor ingresar el Departamento para actualizar.',
+                    text: 'Por favor ingresar el Ciudad para actualizar.',
                     title: swalTitle,
                     icon: "error"
                 });
@@ -136,21 +131,21 @@
         _openGenericModal();
     }
 
-    function EliminarRx(IdDepartamento) {
-        _peticionAjax(URL_SERVICE + URI_SERVICE.EliminarDepartamento, VerbosREST.POST,
+    function EliminarRx(IdCiudad) {
+        _peticionAjax(URL_SERVICE + URI_SERVICE.EliminarCiudad, VerbosREST.POST,
             JSON.stringify({
                 sessionToken: UsuarioSesion.tokenSesion,
-                idDepartamento: IdDepartamento,
+                idCiudad: IdCiudad,
                 idUsuarioModificacion: UsuarioSesion.IdUsuario
             }),
             true, response => {
-                ConsultarDepartamentos();
+                ConsultarCiudades();
             });
     }
 </script>
 <h3 class="text-center" id="title">PAÍSES</h3>
 <div style="padding:10px">
-    <div id="divTblDepartamentos" style="width:100%"></div>
+    <div id="divTblCiudads" style="width:100%"></div>
     <br />
-    <button class="button" onclick="AbrirModalCrearRx(); return false;">Crear Nuevo Departamento</button>
+    <button class="button" onclick="AbrirModalCrearRx(); return false;">Crear Nuevo Ciudad</button>
 </div> 

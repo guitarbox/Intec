@@ -1,0 +1,124 @@
+﻿
+@{
+    ViewBag.Title = "Administracion";
+}
+<script>
+    $(document).ready(() => {
+        ConsultarClientes();
+    });
+
+    function ConsultarClientes() {
+        _peticionAjax(URL_SERVICE + URI_SERVICE.ObtenerClientes, VerbosREST.POST,
+            JSON.stringify({
+                sessionToken: UsuarioSesion.tokenSesion,
+                numeroIdentificacion: $("#numeroIdentificacion").val(),
+                nombres: $("#nombres").val(),
+                direccion: $("#direccion").val(),
+                nroTelefonico: $("#nroTelefonico").val(),
+                tieneVisitaProgramada: $("#tieneVisitaProgramada").is(':checked')
+            }),
+            true, response => {
+
+                var columns = [
+                    //{ data: "IdCiudad", title: 'Id. Ciudad' },
+                    { data: "IdCliente", title: 'Id. Cliente' },
+                    { data: "Abreviatura", title: 'Tipo Doc.' },
+                    { data: "NumeroIdentificacion", title: 'Nro. Ident.' },                    
+                    { data: "Nombres", title: 'Nombres' },
+                    { data: "Apellidos", title: 'Apellidos' },
+                    { data: "TelefonoFijo", title: 'Tel. Fijo' },
+                    { data: "TelefonoCel1", title: 'Celular' },
+                    //{ data: "TelefonoCel2", title: '' },
+                    { data: "Direccion", title: 'Dirección' },
+                    { data: "Ciudad", title: 'Ciudad' },
+                    { data: "Uso", title: 'Uso' },
+                    { data: "Email1", title: 'Email' },
+                    //{ data: "Email2", title: '' },
+                    { data: "TipoPersona", title: 'Tipo Persona' },
+                    {
+                        data: null, render: function (data, type, full, meta) {
+                            return '<a onclick="window.location.href = \'../Clientes/Administrar' + full.IdCliente + '\';"><span class="fa fa-cog"></span></a>';
+                        }
+                    }
+                ];
+
+                $("#divTblClientes").empty();
+                $("#divTblClientes").append('<table id="tblClientes" style="width:100%"></table>');
+                $('#tblClientes').DataTable({
+                    data: response.data,
+                    columns: columns,
+                    language: _language_options_table,
+                    //
+                    dom: 'Bfrtip',
+                    buttons: [
+                        //{ extend: 'copy', className: 'btn-info' },
+                        //{ extend: 'csv', className: 'btn-info' },
+                        //{ extend: 'excel', className: 'btn-info', title: 'XLS-File' },
+                        //{ extend: 'pdf', className: 'btn-info', title: $('title').text() },
+                        //{ extend: 'print', className: 'btn-info' }
+                    ]
+                });
+            });
+    }
+
+    function AbrirModalCrearRx() {
+        _resetGenericModal();
+
+        _appendToHeaderGeneriModal('<label>Crear Cliente</label>');
+        _appendToBodyGeneriModal('<p>Tipo Identificación</p>');
+        _appendToBodyGeneriModal('<select id="IdTipoIdentificacion" class="form-control"</p>');
+        _loadSelectTiposIdentificacion($("#IdTipoIdentificacion"));
+        _appendToFooterGeneriModal('<button class="button" id="btnCrear" return false;">Crear</button>');
+        $("#btnCrear").click(() => {
+            if (true) {
+                _peticionAjax(URL_SERVICE + URI_SERVICE.CrearClientes, VerbosREST.POST,
+                    JSON.stringify({
+                        sessionToken: UsuarioSesion.tokenSesion,
+                        cliente: {
+                            //IdCliente: $('#').val(),
+                            NumeroIdentificacion: $('#NumeroIdentificacion').val(),
+                            IdTipoIdentificacion: $('#IdTipoIdentificacion').val(),
+                            Nombres: $('#Nombres').val(),
+                            Apellidos: $('#Apellidos').val(),
+                            TelefonoFijo: $('#TelefonoFijo').val(),
+                            TelefonoCel1: $('#TelefonoCel1').val(),
+                            TelefonoCel2: $('#TelefonoCel2').val(),
+                            Direccion: $('#Direccion').val(),
+                            IdCiudad: $('#IdCiudad').val(),
+                            IdUso: $('#IdUso').val(),
+                            Foto: $('#Foto').val(),
+                            Email1: $('#Email1').val(),
+                            Email2: $('#Email2').val(),
+                            IdTipoPersona: $('#IdTipoPersona').val()
+                        }
+                    }),
+                    true, response => {
+                        ConsultarCiudades();
+                        _closeGenericModal()
+                    });
+            }
+            else {
+                swal({
+                    text: 'Por favor ingresar el IdCiudad y el Ciudad para crear.',
+                    title: swalTitle,
+                    icon: "error"
+                });
+            }
+        });
+        _openGenericModal();
+    }
+</script>
+<h3 class="text-center" id="title">ADMINISTRACIÓN CLIENTES</h3>
+<div style="padding:10px">
+    <div name="filtros" style="width:100%; display:flex; justify-content:space-around;" class="card">
+        <input placeholder="Número Identificación" id="numeroIdentificacion" class="form-control" type="text"/>
+        <input placeholder="Nombres" id="nombres" class="form-control" type="text"/>
+        <input placeholder="Dirección" id="direccion" class="form-control" type="text"/>
+        <input placeholder="Nro. Telefónico" id="nroTelefonico" class="form-control" type="text" />
+        <input id="tieneVisitaProgramada" type="checkbox" hidden/>
+        <span style="margin-left:2px; cursor:pointer" class="fa fa-search fa-2x" onclick="ConsultarClientes();"></span>
+    </div>
+    <div id="divTblClientes" style="width:100%"></div>
+    <br />
+    <button class="button" onclick="AbrirModalCrearRx(); return false;">Crear Nuevo Cliente</button>
+</div>

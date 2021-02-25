@@ -10,6 +10,7 @@ using System.Web.Http.Cors;
 
 namespace Intec.WebApi.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class CiudadesController : DefaultController
     {
         // GET: api/Ciudades
@@ -20,7 +21,7 @@ namespace Intec.WebApi.Controllers
 
         // GET: api/Ciudades/5
         [HttpPost]
-        [Route("api/Departamentos/ObtenerCiudad")]
+        [Route("api/Ciudades/ObtenerCiudad")]
         public JObject ObtenerCiudad([FromBody] JObject Token)
         {
             bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
@@ -33,7 +34,7 @@ namespace Intec.WebApi.Controllers
 
         // POST: api/Ciudades
         [HttpPost]
-        [Route("api/Departamentos/CrearCiudad")]
+        [Route("api/Ciudades/CrearCiudad")]
         public JObject CrearCiudad([FromBody] JObject Token)
         {
             bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
@@ -62,8 +63,8 @@ namespace Intec.WebApi.Controllers
 
         // PUT: api/Ciudades/5
         [HttpPost]
-        [Route("api/Departamentos/ActualizarCiudad")]
-        public JObject ActualizarCiudad(int id, [FromBody] JObject Token)
+        [Route("api/Ciudades/ActualizarCiudad")]
+        public JObject ActualizarCiudad([FromBody] JObject Token)
         {
             bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
             SetValidTokendResponse(validToken);
@@ -92,8 +93,8 @@ namespace Intec.WebApi.Controllers
 
         // DELETE: api/Ciudades/5
         [HttpPost]
-        [Route("api/Departamentos/EliminarCiudad")]
-        public JObject EliminarCiudad(int id, [FromBody] JObject Token)
+        [Route("api/Ciudades/EliminarCiudad")]
+        public JObject EliminarCiudad([FromBody] JObject Token)
         {
             bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
             SetValidTokendResponse(validToken);
@@ -102,7 +103,7 @@ namespace Intec.WebApi.Controllers
             {
                 try
                 {
-                    new Intec.BL.BE.AdministracionBE().EliminarCiudad((Token["IdCiudad"].ToString()), int.Parse(Token["IdUsuarioModificacion"].ToString()));
+                    new Intec.BL.BE.AdministracionBE().EliminarCiudad((Token["idCiudad"].ToString()), int.Parse(Token["idUsuarioModificacion"].ToString()));
                 }
                 catch (Exception ex)
                 {
