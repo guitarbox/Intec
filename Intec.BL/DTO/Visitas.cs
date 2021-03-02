@@ -26,7 +26,7 @@ namespace Intec.BL.DTO
         public Nullable<int> IdUsuarioModificacion { get; set; }
 
         public virtual Ciudades Ciudades { get; set; }
-        public virtual Clientes Clientes { get; set; }
+        //public virtual Clientes Clientes { get; set; }
         public virtual ICollection<EquiposVisita> EquiposVisita { get; set; }
         public virtual EstadosVisita EstadosVisita { get; set; }
         public virtual ICollection<FormatosVisita> FormatosVisita { get; set; }

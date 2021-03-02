@@ -27,5 +27,9 @@ namespace Intec.BL.DTO
         public int IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaModificacion { get; set; }
         public Nullable<int> IdUsuarioModificacion { get; set; }
+        public TiposIdentificacion TiposIdentificacion { get; set; }
+        public TiposPersona TiposPersona { get; set; }
+        public List<Propiedades> Propiedades { get; set; }
+        public List<Visitas> Visitas { get; set; }
     }
 }

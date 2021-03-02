@@ -92,7 +92,8 @@ var URI_SERVICE = {
 
     //Clientes
     ObtenerClientes: 'api/Clientes/ObtenerClientes',
-    CrearClientes: 'api/Clientes/CrearClientes',
+    CrearCliente: 'api/Clientes/CrearCliente',
+    ObtenerCliente: 'api/Clientes/ObtenerCliente',
 };
 
 var _language_options_table =

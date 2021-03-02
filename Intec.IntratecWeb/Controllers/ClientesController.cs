@@ -13,5 +13,10 @@ namespace Intec.IntratecWeb.Controllers
         {
             return View();
         }
+        
+        public ActionResult Administrar(int ic)
+        {
+            return View();
+        }
     }
 }

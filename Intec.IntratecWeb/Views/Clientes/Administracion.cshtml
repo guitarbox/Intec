@@ -2,112 +2,140 @@
 @{
     ViewBag.Title = "Administracion";
 }
-<script>
-    $(document).ready(() => {
-        ConsultarClientes();
-    });
-
-    function ConsultarClientes() {
-        _peticionAjax(URL_SERVICE + URI_SERVICE.ObtenerClientes, VerbosREST.POST,
-            JSON.stringify({
-                sessionToken: UsuarioSesion.tokenSesion,
-                numeroIdentificacion: $("#numeroIdentificacion").val(),
-                nombres: $("#nombres").val(),
-                direccion: $("#direccion").val(),
-                nroTelefonico: $("#nroTelefonico").val(),
-                tieneVisitaProgramada: $("#tieneVisitaProgramada").is(':checked')
-            }),
-            true, response => {
-
-                var columns = [
-                    //{ data: "IdCiudad", title: 'Id. Ciudad' },
-                    { data: "IdCliente", title: 'Id. Cliente' },
-                    { data: "Abreviatura", title: 'Tipo Doc.' },
-                    { data: "NumeroIdentificacion", title: 'Nro. Ident.' },                    
-                    { data: "Nombres", title: 'Nombres' },
-                    { data: "Apellidos", title: 'Apellidos' },
-                    { data: "TelefonoFijo", title: 'Tel. Fijo' },
-                    { data: "TelefonoCel1", title: 'Celular' },
-                    //{ data: "TelefonoCel2", title: '' },
-                    { data: "Direccion", title: 'Dirección' },
-                    { data: "Ciudad", title: 'Ciudad' },
-                    { data: "Uso", title: 'Uso' },
-                    { data: "Email1", title: 'Email' },
-                    //{ data: "Email2", title: '' },
-                    { data: "TipoPersona", title: 'Tipo Persona' },
-                    {
-                        data: null, render: function (data, type, full, meta) {
-                            return '<a onclick="window.location.href = \'../Clientes/Administrar' + full.IdCliente + '\';"><span class="fa fa-cog"></span></a>';
-                        }
-                    }
-                ];
-
-                $("#divTblClientes").empty();
-                $("#divTblClientes").append('<table id="tblClientes" style="width:100%"></table>');
-                $('#tblClientes').DataTable({
-                    data: response.data,
-                    columns: columns,
-                    language: _language_options_table,
-                    //
-                    dom: 'Bfrtip',
-                    buttons: [
-                        //{ extend: 'copy', className: 'btn-info' },
-                        //{ extend: 'csv', className: 'btn-info' },
-                        //{ extend: 'excel', className: 'btn-info', title: 'XLS-File' },
-                        //{ extend: 'pdf', className: 'btn-info', title: $('title').text() },
-                        //{ extend: 'print', className: 'btn-info' }
-                    ]
-                });
-            });
-    }
-
-    function AbrirModalCrearRx() {
-        _resetGenericModal();
-
-        _appendToHeaderGeneriModal('<label>Crear Cliente</label>');
-        _appendToBodyGeneriModal('<p>Tipo Identificación</p>');
-        _appendToBodyGeneriModal('<select id="IdTipoIdentificacion" class="form-control"</p>');
-        _loadSelectTiposIdentificacion($("#IdTipoIdentificacion"));
-        _appendToFooterGeneriModal('<button class="button" id="btnCrear" return false;">Crear</button>');
-        $("#btnCrear").click(() => {
-            if (true) {
-                _peticionAjax(URL_SERVICE + URI_SERVICE.CrearClientes, VerbosREST.POST,
-                    JSON.stringify({
-                        sessionToken: UsuarioSesion.tokenSesion,
-                        cliente: {
-                            //IdCliente: $('#').val(),
-                            NumeroIdentificacion: $('#NumeroIdentificacion').val(),
-                            IdTipoIdentificacion: $('#IdTipoIdentificacion').val(),
-                            Nombres: $('#Nombres').val(),
-                            Apellidos: $('#Apellidos').val(),
-                            TelefonoFijo: $('#TelefonoFijo').val(),
-                            TelefonoCel1: $('#TelefonoCel1').val(),
-                            TelefonoCel2: $('#TelefonoCel2').val(),
-                            Direccion: $('#Direccion').val(),
-                            IdCiudad: $('#IdCiudad').val(),
-                            IdUso: $('#IdUso').val(),
-                            Foto: $('#Foto').val(),
-                            Email1: $('#Email1').val(),
-                            Email2: $('#Email2').val(),
-                            IdTipoPersona: $('#IdTipoPersona').val()
-                        }
-                    }),
-                    true, response => {
-                        ConsultarCiudades();
-                        _closeGenericModal()
-                    });
-            }
-            else {
-                swal({
-                    text: 'Por favor ingresar el IdCiudad y el Ciudad para crear.',
-                    title: swalTitle,
-                    icon: "error"
-                });
-            }
+    <script>
+        $(document).ready(() => {
+            ConsultarClientes();
         });
-        _openGenericModal();
-    }
-</script>
+
+        function ConsultarClientes() {
+            _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.ObtenerClientes, VerbosREST.POST,
+                JSON.stringify({
+                    sessionToken: UsuarioSesion.tokenSesion,
+                    numeroIdentificacion: $("#numeroIdentificacion").val(),
+                    nombres: $("#nombres").val(),
+                    direccion: $("#direccion").val(),
+                    nroTelefonico: $("#nroTelefonico").val(),
+                    tieneVisitaProgramada: $("#tieneVisitaProgramada").is(':checked')
+                }))
+                .then(response => {
+
+                    var columns = [
+                        //{ data: "IdCiudad", title: 'Id. Ciudad' },
+                        { data: "IdCliente", title: 'Id. Cliente' },
+                        { data: "Abreviatura", title: 'Tipo Doc.' },
+                        { data: "NumeroIdentificacion", title: 'Nro. Ident.' },
+                        { data: "Nombres", title: 'Nombres' },
+                        { data: "Apellidos", title: 'Apellidos' },
+                        { data: "TelefonoFijo", title: 'Tel. Fijo' },
+                        { data: "TelefonoCel1", title: 'Celular' },
+                        //{ data: "TelefonoCel2", title: '' },
+                        { data: "Direccion", title: 'Dirección' },
+                        { data: "Ciudad", title: 'Ciudad' },
+                        { data: "Uso", title: 'Uso' },
+                        { data: "Email1", title: 'Email' },
+                        //{ data: "Email2", title: '' },
+                        { data: "TipoPersona", title: 'Tipo Persona' },
+                        {
+                            data: null, render: function (data, type, full, meta) {
+                                return '<a onclick="window.location.href = \'../Clientes/Administrar?ic=' + full.IdCliente + '\';"><span class="fa fa-cog"></span></a>';
+                            }
+                        }
+                    ];
+
+                    $("#divTblClientes").empty();
+                    $("#divTblClientes").append('<table id="tblClientes" style="width:100%"></table>');
+                    $('#tblClientes').DataTable({
+                        data: response.data,
+                        columns: columns,
+                        language: _language_options_table,
+                        //
+                        dom: 'Bfrtip',
+                        buttons: [
+                            //{ extend: 'copy', className: 'btn-info' },
+                            //{ extend: 'csv', className: 'btn-info' },
+                            //{ extend: 'excel', className: 'btn-info', title: 'XLS-File' },
+                            //{ extend: 'pdf', className: 'btn-info', title: $('title').text() },
+                            //{ extend: 'print', className: 'btn-info' }
+                        ]
+                    });
+                });
+        }
+
+        function AbrirModalCrearRx() {
+            _resetGenericModal();
+
+            _appendToHeaderGeneriModal('<label>Crear Cliente</label>');
+            _appendToBodyGeneriModal('<p>Tipo Identificación</p>');
+            _appendToBodyGeneriModal('<select id="IdTipoIdentificacion" class="form-control"></select>');
+            _loadSelectTiposIdentificacion($("#IdTipoIdentificacion"));
+            _appendToBodyGeneriModal('<p>Número Identificación</p>');
+            _appendToBodyGeneriModal('<input type="text" id="NumeroIdentificacion" class="form-control" />');
+            _appendToBodyGeneriModal('<p>Nombres</p>');
+            _appendToBodyGeneriModal('<input type="text" id="Nombres" class="form-control" />');
+            _appendToBodyGeneriModal('<p>Apellidos</p>');
+            _appendToBodyGeneriModal('<input type="text" id="Apellidos" class="form-control" />');
+            _appendToBodyGeneriModal('<p>Teléfono Fijo</p>');
+            _appendToBodyGeneriModal('<input type="text" id="TelefonoFijo" class="form-control" />');
+            _appendToBodyGeneriModal('<p>Celular 1</p>');
+            _appendToBodyGeneriModal('<input type="text" id="TelefonoCel1" class="form-control" />');
+            _appendToBodyGeneriModal('<p>Celular 2</p>');
+            _appendToBodyGeneriModal('<input type="text" id="TelefonoCel2" class="form-control" />');
+            _appendToBodyGeneriModal('<p>Dirección</p>');
+            _appendToBodyGeneriModal('<input type="text" id="Direccion" class="form-control" />');
+            _appendToBodyGeneriModal('<p>Departamento</p>');
+            _appendToBodyGeneriModal('<select id="Departamento" class="form-control"></select>');
+            _loadSelectDepartamentos($("#Departamento"), 57);
+            $("#Departamento").change(() => { _loadSelectCiudades($("#IdCiudad"), $("#Departamento").val()) });
+            _appendToBodyGeneriModal('<p>Ciudad</p>');
+            _appendToBodyGeneriModal('<select id="IdCiudad" class="form-control"><option>Seleccione Departamento...</option></select>');
+            _appendToBodyGeneriModal('<p>Email 1</p>');
+            _appendToBodyGeneriModal('<input type="email" id="Email1" class="form-control" />');
+            _appendToBodyGeneriModal('<p>Email 2</p>');
+            _appendToBodyGeneriModal('<input type="email" id="Email2" class="form-control" />');
+            _appendToBodyGeneriModal('<p>Tipo Persona</p>');
+            _appendToBodyGeneriModal('<select id="IdTipoPersona" class="form-control"></select>');
+            _loadSelectTiposPersona($("#IdTipoPersona"));
+
+            _appendToFooterGeneriModal('<button class="button" id="btnCrear" return false;">Crear</button>');
+            $("#btnCrear").click(() => {
+                if ($('#IdTipoIdentificacion').val() != '' && $('#NumeroIdentificacion').val() != '' && $('#IdTipoPersona').val() != '' && $('#Nombres').val() != '') {
+                    _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.CrearCliente, VerbosREST.POST,
+                        JSON.stringify({
+                            sessionToken: UsuarioSesion.tokenSesion,
+                            cliente: {
+                                //IdCliente: $('#').val(),
+                                NumeroIdentificacion: $('#NumeroIdentificacion').val(),
+                                IdTipoIdentificacion: $('#IdTipoIdentificacion').val(),
+                                Nombres: $('#Nombres').val(),
+                                Apellidos: $('#Apellidos').val(),
+                                TelefonoFijo: $('#TelefonoFijo').val(),
+                                TelefonoCel1: $('#TelefonoCel1').val(),
+                                TelefonoCel2: $('#TelefonoCel2').val(),
+                                Direccion: $('#Direccion').val(),
+                                IdCiudad: $('#IdCiudad').val(),
+                                //IdUso: $('#IdUso').val(),
+                                //Foto: $('#Foto').val(),
+                                Email1: $('#Email1').val(),
+                                Email2: $('#Email2').val(),
+                                IdTipoPersona: $('#IdTipoPersona').val()
+                            }
+                        }))
+                        .then(response => {
+                            ConsultarClientes();
+                            _closeGenericModal();
+                        });
+                }
+                else {
+                    swal({
+                        text: 'Por favor ingresar el Tipo, Número de Identificación, Nombre y Tipo Persona para crear.',
+                        title: swalTitle,
+                        icon: "error"
+                    });
+                }
+            });
+            _openGenericModal();
+        }
+    </script>
 <h3 class="text-center" id="title">ADMINISTRACIÓN CLIENTES</h3>
 <div style="padding:10px">
     <div name="filtros" style="width:100%; display:flex; justify-content:space-around;" class="card">

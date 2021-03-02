@@ -102,13 +102,30 @@ namespace Intec.BL.MapperConfig
             {
                 var config = new AutoMapper.MapperConfiguration(cfg => {
 
-                    cfg.CreateMap<DTO.Clientes, DAL.Clientes>();
                     cfg.CreateMap<DAL.Clientes, DTO.Clientes>();
-
-                    cfg.CreateMap<DTO.Propiedades, DAL.Propiedades>();
                     cfg.CreateMap<DAL.Propiedades, DTO.Propiedades>();
+                    cfg.CreateMap<DAL.Visitas, DTO.Visitas>()
+                        .ForMember(dest => dest.Ciudades, opt => opt.Ignore())
+                        .ForMember(dest => dest.EquiposVisita, opt => opt.Ignore())
+                        .ForMember(dest => dest.EstadosVisita, opt => opt.Ignore())
+                        .ForMember(dest => dest.FormatosVisita, opt => opt.Ignore())
+                        .ForMember(dest => dest.FotosVisita, opt => opt.Ignore())
+                        .ForMember(dest => dest.SolicitudesProgramacionVisitas, opt => opt.Ignore())
+                        .ForMember(dest => dest.Propiedades, opt => opt.Ignore())
+                        .ForMember(dest => dest.Zonas, opt => opt.Ignore())
+                        .ForMember(dest => dest.Usuarios, opt => opt.Ignore())
+                    ;
+
+                    cfg.CreateMap<DAL.TiposIdentificacion, DTO.TiposIdentificacion>();
+                    cfg.CreateMap<DAL.TiposPersona, DTO.TiposPersona>();
+
+                    cfg.CreateMap<DTO.Clientes, DAL.Clientes>();
+                    cfg.CreateMap<DTO.Propiedades, DAL.Propiedades>();
+                    cfg.CreateMap<DTO.Visitas, DAL.Visitas>();                    
                     
                     
+
+
                     cfg.CreateMap<DAL.uspConsultaGralCliente_Result, DTO.uspConsultaGralCliente_Result>();
 
                 });

@@ -33,7 +33,8 @@ namespace Intec.DAL.TE
                 res = ctx.Clientes.Where(c => c.IdCliente == IdCliente).FirstOrDefault();
                 if (res != null)
                 {
-                    res.Propiedades.ToList();                    
+                    res.Propiedades.ToList();
+                    res.Visitas.ToList();
                     ctx.Entry(res).Reference(r => r.TiposIdentificacion).Load();
                     ctx.Entry(res).Reference(r => r.TiposPersona).Load();
                 }
