@@ -94,6 +94,7 @@ var URI_SERVICE = {
     ObtenerClientes: 'api/Clientes/ObtenerClientes',
     CrearCliente: 'api/Clientes/CrearCliente',
     ObtenerCliente: 'api/Clientes/ObtenerCliente',
+    ActualizarCliente: 'api/Clientes/ActualizarCliente'
 };
 
 var _language_options_table =

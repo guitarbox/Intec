@@ -111,15 +111,25 @@ namespace Intec.BL.MapperConfig
                         .ForMember(dest => dest.FormatosVisita, opt => opt.Ignore())
                         .ForMember(dest => dest.FotosVisita, opt => opt.Ignore())
                         .ForMember(dest => dest.SolicitudesProgramacionVisitas, opt => opt.Ignore())
-                        .ForMember(dest => dest.Propiedades, opt => opt.Ignore())
-                        .ForMember(dest => dest.Zonas, opt => opt.Ignore())
-                        .ForMember(dest => dest.Usuarios, opt => opt.Ignore())
+                        .ForMember(dest => dest.Propiedades, opt => opt.Ignore())                        
                     ;
 
                     cfg.CreateMap<DAL.TiposIdentificacion, DTO.TiposIdentificacion>();
                     cfg.CreateMap<DAL.TiposPersona, DTO.TiposPersona>();
+                    cfg.CreateMap<DAL.TiposPropiedades, DTO.TiposPropiedades>();
+                    cfg.CreateMap<DAL.UsosPropiedades, DTO.UsosPropiedades>();
+                    cfg.CreateMap<DAL.Zonas, DTO.Zonas>();
+                    cfg.CreateMap<DAL.Usuarios, DTO.Usuarios>()
+                    .ForMember(dest => dest.TiposIdentificacion ,opt => opt.Ignore())
+                    .ForMember(dest => dest.Roles,opt => opt.Ignore())
+                    ;
 
-                    cfg.CreateMap<DTO.Clientes, DAL.Clientes>();
+                    cfg.CreateMap<DTO.Clientes, DAL.Clientes>()
+                    .ForMember(dest => dest.Propiedades, opt => opt.Ignore())
+                    .ForMember(dest => dest.Visitas, opt => opt.Ignore())
+                    .ForMember(dest => dest.TiposIdentificacion, opt => opt.Ignore())
+                    .ForMember(dest => dest.TiposPersona, opt => opt.Ignore())
+                    ;
                     cfg.CreateMap<DTO.Propiedades, DAL.Propiedades>();
                     cfg.CreateMap<DTO.Visitas, DAL.Visitas>();                    
                     

@@ -5,6 +5,10 @@
 <script>
     var cliente = null;
     $(document).ready(() => {
+        _loadSelectTiposIdentificacion($("#TiposIdentificacion"));
+        _loadSelectTiposPersona($("#TiposPersona"));
+        _loadSelectCiudades($("#IdCiudad"), '');
+
         _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.ObtenerCliente, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion, idCliente: window.location.href.split('=')[1] }))
             .then(response => {
                 cliente = response.data;
@@ -14,17 +18,185 @@
 
     function MostrarCliente() {
         if (cliente != null) {
-            console.log(cliente);
+            //Info General
+            $("#IdCliente").val(cliente.IdCliente);
+            $("#NumeroIdentificacion").val(cliente.NumeroIdentificacion);
+            $("#Nombres").val(cliente.Nombres);
+            $("#Apellidos").val(cliente.Apellidos);
+            $("#TelefonoFijo").val(cliente.TelefonoFijo);
+
+            $("#TelefonoCel1").val(cliente.TelefonoCel1);
+            $("#TelefonoCel2").val(cliente.TelefonoCel2);
+            $("#Direccion").val(cliente.Direccion);
+            $("#IdCiudad").val(cliente.IdCiudad);
+            $("#IdUso").val(cliente.IdUso);
+
+            $("#Foto").val(cliente.Foto);
+            $("#Email1").val(cliente.Email1);
+            $("#Email2").val(cliente.Email2);
+            $("#FechaCreacion").val(cliente.FechaCreacion);
+            $("#IdUsuarioCreacion").val(cliente.IdUsuarioCreacion);
+
+            $("#FechaModificacion").val(cliente.FechaModificacion);
+            $("#IdUsuarioModificacion").val(cliente.IdUsuarioModificacion);
+            $("#TiposIdentificacion").val(cliente.IdTipoIdentificacion);
+            $("#TiposPersona").val(cliente.IdTipoPersona);
+
+            //Propiedades
+            var columns = [
+                { data: "IdPropiedades", title: 'Id. Propiedad' },
+                //{ data: "IdCliente" },
+                { data: "Direccion", title: 'Dirección' },
+                { data: "TiposPropiedades.TipoPropiedad", title: 'Tipo Propiedad' },
+                { data: "UsosPropiedades.Uso", title: 'Uso' },
+                { data: "Telefono", title: 'Teléfono' },
+                //{ data: "Foto",  },
+                { data: "Observaciones", title: 'Observaciones' }
+            ];
+
+            $("#divPropiedades").empty();
+            $("#divPropiedades").append('<table id="Propiedades"></table>');
+            $('#Propiedades').DataTable({
+                data: cliente.Propiedades,
+                columns: columns,
+                language: _language_options_table,
+                //
+                dom: 'Bfrtip',
+                buttons: []
+            });
+            debugger;
+            //Visitas
+            var columnsV = [
+                { data:'IdVisita', title:'Id.Visita'},
+                //{ data:'IdSolicitudProgramacion', title:'Id. Sol. Program.'},
+                //{ data:'IdCliente'},
+                { data:'Direccion', title:'Dirección'},
+                { data:'Zonas.Descripcion', title: 'Id. Zona'},
+                //{ data: 'IdCiudad', title: ''},
+                { data: 'FechaVisita', title: 'Fecha Visita'}, 
+                { data: 'Usuarios.Nombres', title: 'Inspector'},
+                { data: 'ObservacionesVisita', title: 'Observaciones'},
+                { data:'IdEstadoVisitas', title: 'Estado Visita'},
+                //{ data:'IdPropiedad'},
+                //{ data:'OrigenVisita'},
+                {
+                    data: null, render: function (data, type, full, meta) {
+                        return '<a onclick="window.location.href = \'../Visitas/Ver?iv=' + full.IdVisita + '\';"><span class="fa fa-eye"></span></a>';
+                    }
+                }
+            ];
+
+            $("#divVisitas").empty();
+            $("#divVisitas").append('<table id="Visitas"></table>');
+            $('#Visitas').DataTable({
+                data: cliente.Visitas,
+                columns: columnsV,
+                language: _language_options_table,
+                //
+                dom: 'Bfrtip',
+                buttons: []
+            });
         }
+    }
+
+    function Actualizar() {
+        //cliente.IdCliente = $("#IdCliente").val();
+        cliente.NumeroIdentificacion = $("#NumeroIdentificacion").val();
+        cliente.Nombres = $("#Nombres").val();
+        cliente.Apellidos = $("#Apellidos").val();
+        cliente.TelefonoFijo = $("#TelefonoFijo").val();
+
+        cliente.TelefonoCel1 = $("#TelefonoCel1").val();
+        cliente.TelefonoCel2 = $("#TelefonoCel2").val();
+        cliente.Direccion = $("#Direccion").val();
+        cliente.IdCiudad = $("#IdCiudad").val();
+        //cliente.IdUso = $("#IdUso").val();
+
+        //cliente.Foto = $("#Foto").val();
+        cliente.Email1 = $("#Email1").val();
+        cliente.Email2 = $("#Email2").val();
+        cliente.IdTipoIdentificacion = $("#TiposIdentificacion").val();
+        cliente.IdTipoPersona = $("#TiposPersona").val();
+
+        _peticionAjax_NoLockScreen(URL_SERVICE + URI_SERVICE.ActualizarCliente, VerbosREST.POST,
+            JSON.stringify({
+                sessionToken: UsuarioSesion.tokenSesion,
+                cliente,
+                idUsuarioModificacion: UsuarioSesion.IdUsuario
+            })
+        )
+        .then(response => {
+            return _peticionAjax_NoLockScreen(URL_SERVICE + URI_SERVICE.ObtenerCliente, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion, idCliente: window.location.href.split('=')[1] }));
+        })
+        .then(response => {
+            cliente = response.data;
+            MostrarCliente();
+        });
     }
 </script>
 <h3 class="text-center" id="title">ADMINISTRAR CLIENTE</h3>
 <div class="card">
     <h3>Info General</h3>
+    <div style="display:grid; grid-template-columns: 25% 25% 25% 25%">
+        <div>
+            <h5>Id Cliente</h5>
+            <input id="IdCliente" disabled class="form-control" />
+            <h5>Tipo Identificación</h5>
+            <select id="TiposIdentificacion" class="form-control"></select>
+            <h5>Número Identificación</h5>
+            <input id="NumeroIdentificacion" class="form-control" />
+            <h5>Nombres</h5>
+            <input id="Nombres" class="form-control" />
+            <h5>Apellidos</h5>
+            <input id="Apellidos" class="form-control" />            
+        </div>
+        <div>
+            <h5>Tipo Persona</h5>
+            <select id="TiposPersona" class="form-control"></select>
+            <h5>Teléfono Fijo</h5>
+            <input id="TelefonoFijo" class="form-control" />
+            <h5>Teléfono Celular 1</h5>
+            <input id="TelefonoCel1" class="form-control" />
+            <h5>Teléfono Celular 2</h5>
+            <input id="TelefonoCel2" class="form-control" />
+        </div>
+        <div>
+            <h5>Dirección</h5>
+            <input id="Direccion" class="form-control" />
+            <h5>Ciudad</h5>
+            <select id="IdCiudad" class="form-control"></select>
+            @*<h5>Uso</h5>
+        <input id="IdUso" class="form-control" />*@
+            @*<h5>Foto</h5>
+        <input id="Foto" class="form-control" />*@
+            <h5>Email</h5>
+            <input id="Email1" class="form-control" />
+            <h5>Email 2</h5>
+            <input id="Email2" class="form-control" />
+        </div>
+        <div>
+            <h5>Fecha Creación</h5>
+            <input id="FechaCreacion" class="form-control" disabled />
+            <h5>Id. Usuario Creación</h5>
+            <input id="IdUsuarioCreacion" class="form-control" disabled />
+            <h5>Fecha Modificación</h5>
+            <input id="FechaModificacion" class="form-control" disabled />
+            <h5>Id. Usuario Modficacion</h5>
+            <input id="IdUsuarioModificacion" class="form-control" disabled />
+            <input type="button" class="button" value="Actualizar" style="width:100%" onclick="Actualizar();"/>
+        </div>
+    </div>
 </div>
 <div class="card">
     <h3>Propiedades</h3>
+    <div id="divPropiedades"></div>
+    <input type="button" class="button" value="Agregar Propiedad" />
 </div>
+<br />
+<br />
+<br />
 <div class="card">
     <h3>Visitas</h3>
+    <div id="divVisitas"></div>
+    <input type="button" class="button" value="Programar Visita" />
 </div>

@@ -65,38 +65,39 @@
     return rta;
 }
 
-function _peticionAjax_NoLockScreen(urlServicio, verb, parametros, onContinue) {
-    var rta = "";
+function _peticionAjax_NoLockScreen(urlServicio, verb, parametros) {
+    return new Promise((resolve, reject) => {
 
-    $.ajax({
-        type: verb,
-        url: urlServicio,
-        async: true,
-        data: parametros,
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        crossDomain: true,
-        success: function (response) {            
-            if (response.error === true) {
+        $.ajax({
+            type: verb,
+            url: urlServicio,
+            async: true,
+            data: parametros,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            crossDomain: true,
+            success: function (response) {
+                if (response.error === true) {
+                    swal({
+                        text: response.msgError,
+                        title: 'Intratec - Intec SAS',
+                        icon: 'error'
+                    });
+                }
+                else resolve(response);
+
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
                 swal({
-                    text: response.msgError,
+                    text: xhr.responseText,
                     title: 'Intratec - Intec SAS',
                     icon: 'error'
                 });
+                reject(xhr.responseText);
             }
-            else onContinue(response);
+        });
 
-        },
-        error: function (xhr, ajaxOptions, thrownError) {
-            swal({
-                text: xhr.responseText,
-                title: 'Intratec - Intec SAS',
-                icon: 'error'
-            });
-        }
     });
-
-    return rta;
 }
 
 function _peticionAjax_Promise(urlServicio, verb, parametros) {    

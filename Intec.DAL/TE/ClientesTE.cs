@@ -34,7 +34,17 @@ namespace Intec.DAL.TE
                 if (res != null)
                 {
                     res.Propiedades.ToList();
+                    foreach(Propiedades prop in res.Propiedades)
+                    {
+                        ctx.Entry(prop).Reference(r => r.TiposPropiedades).Load();
+                        ctx.Entry(prop).Reference(r => r.UsosPropiedades).Load();
+                    }
                     res.Visitas.ToList();
+                    foreach (Visitas vis in res.Visitas)
+                    {
+                        ctx.Entry(vis).Reference(r => r.Zonas).Load();
+                        ctx.Entry(vis).Reference(r => r.Usuarios).Load();
+                    }
                     ctx.Entry(res).Reference(r => r.TiposIdentificacion).Load();
                     ctx.Entry(res).Reference(r => r.TiposPersona).Load();
                 }
