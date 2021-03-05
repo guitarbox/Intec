@@ -16,3 +16,9 @@ C:\Users\Ideapad\Desktop\Alitan\Interius\Intec\Intec\Intec.Common\obj\Debug\Inte
 C:\Users\Ideapad\Desktop\Alitan\Interius\Intec\Intec\Intec.Common\obj\Debug\Intec.Common.csproj.CoreCompileInputs.cache
 C:\Users\Ideapad\Desktop\Alitan\Interius\Intec\Intec\Intec.Common\obj\Debug\Intec.Common.dll
 C:\Users\Ideapad\Desktop\Alitan\Interius\Intec\Intec\Intec.Common\obj\Debug\Intec.Common.pdb
+C:\Users\alan.sierra\OneDrive\Documentos\Alan\Interius\Intec\Intec.Common\bin\Debug\Intec.Common.dll
+C:\Users\alan.sierra\OneDrive\Documentos\Alan\Interius\Intec\Intec.Common\bin\Debug\Intec.Common.pdb
+C:\Users\alan.sierra\OneDrive\Documentos\Alan\Interius\Intec\Intec.Common\obj\Debug\Intec.Common.csprojAssemblyReference.cache
+C:\Users\alan.sierra\OneDrive\Documentos\Alan\Interius\Intec\Intec.Common\obj\Debug\Intec.Common.csproj.CoreCompileInputs.cache
+C:\Users\alan.sierra\OneDrive\Documentos\Alan\Interius\Intec\Intec.Common\obj\Debug\Intec.Common.dll
+C:\Users\alan.sierra\OneDrive\Documentos\Alan\Interius\Intec\Intec.Common\obj\Debug\Intec.Common.pdb

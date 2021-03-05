@@ -132,6 +132,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AdministracionController.cs" />
     <Compile Include="Controllers\ClientesController.cs" />
+    <Compile Include="Controllers\EquiposController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SessionController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
@@ -256,6 +257,7 @@
     <Content Include="Views\Administracion\Ciudades.cshtml" />
     <Content Include="Views\Clientes\Administracion.cshtml" />
     <Content Include="Views\Clientes\Administrar.cshtml" />
+    <Content Include="Views\Equipos\Administracion.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

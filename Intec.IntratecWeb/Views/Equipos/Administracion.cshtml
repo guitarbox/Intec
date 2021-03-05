@@ -1,0 +1,51 @@
+﻿
+@{
+    ViewBag.Title = "Administracion";
+}
+
+<script>
+    $(document).ready(() => {
+        ConsultarEquipos();
+    });
+
+    function ConsultarEquipos() {
+        _peticionAjax(URL_SERVICE + URI_SERVICE.ObtenerEquipos, VerbosREST.POST,
+            JSON.stringify({
+                   sessionToken: UsuarioSesion.tokenSesion,
+                    IdEquipo: $("#numeroIdentificacion").val(),
+                    nombres: $("#nombres").val(),
+                    direccion: $("#direccion").val(),
+                    nroTelefonico: $("#nroTelefonico").val(),
+                    tieneVisitaProgramada: $("#tieneVisitaProgramada").is(':checked')
+                }))
+                var columns = [
+                    { data: "IdEquipo", title: 'Id. Equipo' },
+                    { data: "Area", title: 'Area' },
+                    { data: "SerieIDInterno", title: 'Serie ID interno' },
+
+            });
+
+            $("#divTblEquipos").empty();
+            $("#divTblEquipos").append('<table id="tblEquipos" style="width:100%"></table>');
+            $('#divTblEquipos').DataTable({
+                data: response.data,
+                columns: columns,
+                language: _language_options_table,
+                //
+                dom: 'Bfrtip',
+                buttons: [
+                    //{ extend: 'copy', className: 'btn-info' },
+                    //{ extend: 'csv', className: 'btn-info' },
+                    //{ extend: 'excel', className: 'btn-info', title: 'XLS-File' },
+                    //{ extend: 'pdf', className: 'btn-info', title: $('title').text() },
+                    //{ extend: 'print', className: 'btn-info' }
+                ]
+            });
+    }
+</script>
+<h3 class="text-center" id="title">EQUIPOS</h3>
+<div style="padding:10px">
+    <div id="divTblEquipos"></div>
+    <br />
+    @*<button class="button" onclick="AbrirModalCrearRx(); return false;">Crear Nuevo Tipo Propiedad</button>*@
+</div>

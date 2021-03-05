@@ -123,8 +123,6 @@ namespace Intec.WebApi.Controllers
                 SetMsgErrorResponse(msgError);
             }
             return response;
-        
-
         }
 
 

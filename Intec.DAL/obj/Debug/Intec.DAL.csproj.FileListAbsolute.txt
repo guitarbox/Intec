@@ -78,3 +78,17 @@ E:\Alan\Interius\Intec\Intec\Intec.DAL\obj\Debug\Intec.DAL.csproj.CoreCompileInp
 E:\Alan\Interius\Intec\Intec\Intec.DAL\obj\Debug\Intec.DAL.csproj.CopyComplete
 E:\Alan\Interius\Intec\Intec\Intec.DAL\obj\Debug\Intec.DAL.dll
 E:\Alan\Interius\Intec\Intec\Intec.DAL\obj\Debug\Intec.DAL.pdb
+C:\Users\alan.sierra\OneDrive\Documentos\Alan\Interius\Intec\Intec.DAL\bin\Debug\Intec.DAL.dll.config
+C:\Users\alan.sierra\OneDrive\Documentos\Alan\Interius\Intec\Intec.DAL\bin\Debug\Intec.DAL.dll
+C:\Users\alan.sierra\OneDrive\Documentos\Alan\Interius\Intec\Intec.DAL\bin\Debug\Intec.DAL.pdb
+C:\Users\alan.sierra\OneDrive\Documentos\Alan\Interius\Intec\Intec.DAL\bin\Debug\EntityFramework.dll
+C:\Users\alan.sierra\OneDrive\Documentos\Alan\Interius\Intec\Intec.DAL\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\alan.sierra\OneDrive\Documentos\Alan\Interius\Intec\Intec.DAL\bin\Debug\Intec.Common.dll
+C:\Users\alan.sierra\OneDrive\Documentos\Alan\Interius\Intec\Intec.DAL\bin\Debug\Intec.Common.pdb
+C:\Users\alan.sierra\OneDrive\Documentos\Alan\Interius\Intec\Intec.DAL\bin\Debug\EntityFramework.xml
+C:\Users\alan.sierra\OneDrive\Documentos\Alan\Interius\Intec\Intec.DAL\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\alan.sierra\OneDrive\Documentos\Alan\Interius\Intec\Intec.DAL\obj\Debug\Intec.DAL.csprojAssemblyReference.cache
+C:\Users\alan.sierra\OneDrive\Documentos\Alan\Interius\Intec\Intec.DAL\obj\Debug\Intec.DAL.csproj.CoreCompileInputs.cache
+C:\Users\alan.sierra\OneDrive\Documentos\Alan\Interius\Intec\Intec.DAL\obj\Debug\Intec.DAL.csproj.CopyComplete
+C:\Users\alan.sierra\OneDrive\Documentos\Alan\Interius\Intec\Intec.DAL\obj\Debug\Intec.DAL.dll
+C:\Users\alan.sierra\OneDrive\Documentos\Alan\Interius\Intec\Intec.DAL\obj\Debug\Intec.DAL.pdb
