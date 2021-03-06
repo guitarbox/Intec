@@ -97,7 +97,12 @@ var URI_SERVICE = {
     ActualizarCliente: 'api/Clientes/ActualizarCliente',
 
     //Equipos
-    ObtenerEquipos: 'api/Equipos/ObtenerEquipos'
+    ObtenerEquipos: 'api/Equipos/ObtenerEquipos',
+    CrearEquipo: 'api/Equipos/CrearEquipo',
+    EliminarEquipo: 'api/Equipos/EliminarEquipo',
+    TramitarEquipoInspector: 'api/Equipos/TramitarEquipoInspector',
+    IngresarVerificacionALaboratorio: 'api/Equipos/IngresarVerificacionALaboratorio',
+    IngresarACalibracionEquipo: 'api/Equipos/IngresarEquipoACalibracion',
 };
 
 var _language_options_table =

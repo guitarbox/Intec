@@ -85,7 +85,7 @@ namespace Intec.WebApi.Controllers
             {
                 try
                 {
-                    new Intec.BL.BE.EquiposBE().TramitarEquipoInspector(int.Parse(Token["idEquipo"].ToString()), 
+                    new Intec.BL.BE.EquiposBE().TramitarEquipoInspector(int.Parse(Token["idEquipo"].ToString()),
                                                                         int.Parse(Token["idInspector"].ToString()),
                                                                         int.Parse(Token["idUsuarioTramita"].ToString()),
                                                                         (Token["tramite"].ToString()),
@@ -102,5 +102,54 @@ namespace Intec.WebApi.Controllers
             }
             return response;
         }
-    }  
+
+        [HttpPost]
+        [Route("api/Equipos/IngresarVerificacionALaboratorio")]
+        public JObject IngresarVerificacionALaboratorio([FromBody]JObject Token)
+        {
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+            if (validToken)
+            {
+                try
+                {
+                    new Intec.BL.BE.EquiposBE().IngresarVerificacionLAB(Token["verificacion"].ToObject<Intec.BL.DTO.VerificacionesLabEquipos>());
+                }
+                catch (Exception ex)
+                {
+                    error = true;
+                    msgError = ex.Message;
+                }
+
+                SetErrorResponse(error);
+                SetMsgErrorResponse(msgError);
+            }
+            return response;
+        }
+
+        [HttpPost]
+        [Route("api/Equipos/IngresarACalibracionEquipo")]
+        public JObject IngresarACalibracionEquipo([FromBody]JObject Token)
+        {
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+            if (validToken)
+            {
+                try
+                {
+                    new Intec.BL.BE.EquiposBE().IngresarCalibracionEq(Token["calibracion"].ToObject<Intec.BL.DTO.CalibracionesEquipos>());
+                }
+                catch (Exception ex)
+                {
+                    error = true;
+                    msgError = ex.Message;
+                }
+
+                SetErrorResponse(error);
+                SetMsgErrorResponse(msgError);
+            }
+            return response;
+        }
+
+    }
 }

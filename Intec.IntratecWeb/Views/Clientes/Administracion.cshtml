@@ -10,7 +10,7 @@
         function ConsultarClientes() {
             _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.ObtenerClientes, VerbosREST.POST,
                 JSON.stringify({
-                    sessionToken: UsuarioSesion.tokenSesion,
+                    sessionToken: UsuarioSesion.tokenSesion,  
                     numeroIdentificacion: $("#numeroIdentificacion").val(),
                     nombres: $("#nombres").val(),
                     direccion: $("#direccion").val(),
