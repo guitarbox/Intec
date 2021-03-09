@@ -27,7 +27,6 @@ namespace Intec.DAL
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Ciudades> Ciudades { get; set; }
         public virtual DbSet<Departamentos> Departamentos { get; set; }
         public virtual DbSet<Menus> Menus { get; set; }
         public virtual DbSet<Paises> Paises { get; set; }
@@ -39,7 +38,6 @@ namespace Intec.DAL
         public virtual DbSet<TiposPropiedades> TiposPropiedades { get; set; }
         public virtual DbSet<UsosPropiedades> UsosPropiedades { get; set; }
         public virtual DbSet<Propiedades> Propiedades { get; set; }
-        public virtual DbSet<Clientes> Clientes { get; set; }
         public virtual DbSet<EstadosConsecutivosInspector> EstadosConsecutivosInspector { get; set; }
         public virtual DbSet<ConsecutivosFormatos> ConsecutivosFormatos { get; set; }
         public virtual DbSet<Formatos> Formatos { get; set; }
@@ -62,6 +60,9 @@ namespace Intec.DAL
         public virtual DbSet<Zonas> Zonas { get; set; }
         public virtual DbSet<Usuarios> Usuarios { get; set; }
         public virtual DbSet<Parametros> Parametros { get; set; }
+        public virtual DbSet<Ciudades> Ciudades { get; set; }
+        public virtual DbSet<Clientes> Clientes { get; set; }
+        public virtual DbSet<Log> Log { get; set; }
     
         public virtual ObjectResult<uspConsultaGralCliente_Result> uspConsultaGralCliente(string numeroIdentificacion, string nombres, string direccion, string nroTelefonico, Nullable<bool> tieneVisitaProgramada)
         {

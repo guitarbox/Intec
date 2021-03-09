@@ -17,11 +17,11 @@ namespace Intec.DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Ciudades()
         {
-            this.SolicitudesProgramacionVisitas = new HashSet<SolicitudesProgramacionVisitas>();
             this.Clientes = new HashSet<Clientes>();
+            this.SolicitudesProgramacionVisitas = new HashSet<SolicitudesProgramacionVisitas>();
+            this.Usuarios = new HashSet<Usuarios>();
             this.Visitas = new HashSet<Visitas>();
             this.Zonas = new HashSet<Zonas>();
-            this.Usuarios = new HashSet<Usuarios>();
         }
     
         public string IdCiudad { get; set; }
@@ -35,14 +35,14 @@ namespace Intec.DAL
     
         public virtual Departamentos Departamentos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Clientes> Clientes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SolicitudesProgramacionVisitas> SolicitudesProgramacionVisitas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Clientes> Clientes { get; set; }
+        public virtual ICollection<Usuarios> Usuarios { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Visitas> Visitas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Zonas> Zonas { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Usuarios> Usuarios { get; set; }
     }
 }

@@ -35,8 +35,8 @@ namespace Intec.DAL
     
         public virtual TiposPropiedades TiposPropiedades { get; set; }
         public virtual UsosPropiedades UsosPropiedades { get; set; }
-        public virtual Clientes Clientes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Visitas> Visitas { get; set; }
+        public virtual Clientes Clientes { get; set; }
     }
 }

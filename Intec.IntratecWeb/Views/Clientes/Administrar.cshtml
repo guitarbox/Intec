@@ -9,12 +9,16 @@
         _loadSelectTiposPersona($("#TiposPersona"));
         _loadSelectCiudades($("#IdCiudad"), '');
 
+        ConsultarCliente();
+    });
+
+    function ConsultarCliente() {
         _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.ObtenerCliente, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion, idCliente: window.location.href.split('=')[1] }))
             .then(response => {
                 cliente = response.data;
                 MostrarCliente();
             });
-    });
+    }
 
     function MostrarCliente() {
         if (cliente != null) {
@@ -51,7 +55,12 @@
                 { data: "UsosPropiedades.Uso", title: 'Uso' },
                 { data: "Telefono", title: 'Teléfono' },
                 //{ data: "Foto",  },
-                { data: "Observaciones", title: 'Observaciones' }
+                { data: "Observaciones", title: 'Observaciones' },
+                {
+                    data: null, render: function (data, type, full, meta) {
+                        return '<a onclick="EliminarPropiedad(' + full.IdPropiedades + ');"><span class="fa fa-trash"></span></a>';
+                    }
+                }
             ];
 
             $("#divPropiedades").empty();
@@ -64,7 +73,7 @@
                 dom: 'Bfrtip',
                 buttons: []
             });
-            debugger;
+            
             //Visitas
             var columnsV = [
                 { data:'IdVisita', title:'Id.Visita'},
@@ -133,6 +142,57 @@
             MostrarCliente();
         });
     }
+
+    function AbrirAgregarPropiedad() {
+        _resetGenericModal();
+        _appendToHeaderGeneriModal('<label>Agregar Propiedad a Cliente</label>');
+
+        _appendToBodyGeneriModal('<h5>Dirección</h5>');
+        _appendToBodyGeneriModal('<input id="DireccionCP" class="form-control" type="text" />');
+        _appendToBodyGeneriModal('<h5>Teléfono</h5>');
+        _appendToBodyGeneriModal('<input id="TelefonoCP" class="form-control" type="text" />');
+        _appendToBodyGeneriModal('<h5>Uso Propiedad</h5>');
+        _appendToBodyGeneriModal('<select id="IdUsoCP" class="form-control"></select>');
+        _loadSelectUsosPropiedad($("#IdUsoCP"));
+        _appendToBodyGeneriModal('<h5>Tipo Propiedad</h5>');
+        _appendToBodyGeneriModal('<select id="IdTipoPropiedadCP" class="form-control"></select>');
+        _loadSelectTiposPropiedad($("#IdTipoPropiedadCP"));
+        //Foto 
+        _appendToBodyGeneriModal('<h5>Observaciones</h5>');
+        _appendToBodyGeneriModal('<textarea id="ObservacionesCP" class="form-control"></textarea>');
+
+        _appendToFooterGeneriModal('<button class="button" id="btnAgregarCP" return false;">Agregar</button>');
+        $("#btnAgregarCP").click(() => {
+            if ($("#IdUsoCP").val() != '' && $("#IdTipoPropiedadCP").val() != '') {
+                _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.CrearPropiedad, VerbosREST.POST, JSON.stringify({
+                    sessionToken: UsuarioSesion.tokenSesion,
+                    propiedad: {
+                        IdCliente: cliente.IdCliente,
+                        Direccion: $("#DireccionCP").val(),
+                        IdUso: $("#IdUsoCP").val(),
+                        Telefono: $("#TelefonoCP").val(),
+                        //Foto: $("#").val(),
+                        Observaciones: $("#ObservacionesCP").val(),
+                        IdTipoPropiedad: $("#IdTipoPropiedadCP").val(),
+                        IdUsuarioCreacion: UsuarioSesion.IdUsuario
+                    }
+                })).then(response => { debugger; _closeGenericModal(); ConsultarCliente(); })
+            }
+            else
+                swal({
+                    text: 'Por favor ingresar el Uso y el Tipo de Propiedad para agregar.',
+                    title: swalTitle,
+                    icon: "error"
+                });
+        });
+
+        _openGenericModal();
+    }
+
+    function EliminarPropiedad(IdPropiedad) {
+        _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.EliminarPropiedad, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion, idPropiedad: IdPropiedad, idUsuarioElimina: UsuarioSesion.IdUsuario }))
+            .then(response => { ConsultarCliente(); });
+    }
 </script>
 <h3 class="text-center" id="title">ADMINISTRAR CLIENTE</h3>
 <div class="card">
@@ -190,7 +250,7 @@
 <div class="card">
     <h3>Propiedades</h3>
     <div id="divPropiedades"></div>
-    <input type="button" class="button" value="Agregar Propiedad" />
+    <input type="button" class="button" value="Agregar Propiedad" onclick="AbrirAgregarPropiedad();" />
 </div>
 <br />
 <br />

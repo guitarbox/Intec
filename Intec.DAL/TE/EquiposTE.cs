@@ -19,6 +19,11 @@ namespace Intec.DAL.TE
             using(var ctx = new DB_A66D31_intratecPrbEntities1())
             {
                 res = ctx.Equipos.Where(e=>(e.SerieIDInterno.Contains(filtro) || e.Modelo.Contains(filtro)) && (IdMarca == -1 || e.IdMarcaEquipo == IdMarca) && (IdTipoEquipo == -1 || e.IdTipoEquipo == IdTipoEquipo)).ToList();
+                foreach(Equipos e in res)
+                {
+                    ctx.Entry(e).Reference(r => r.MarcasEquipos).Load();
+                    ctx.Entry(e).Reference(r => r.TiposEquipo).Load();
+                }
             }
             return res;
         }
@@ -30,6 +35,11 @@ namespace Intec.DAL.TE
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
                 res = ctx.Equipos.Where(e => e.IdEquipo == IdEquipo).FirstOrDefault();
+                res.CalibracionesEquipos.ToList();
+                res.TramitesEquipo.ToList();
+                res.VerificacionesLabEquipos.ToList();
+                ctx.Entry(res).Reference(r => r.MarcasEquipos).Load();
+                ctx.Entry(res).Reference(r => r.TiposEquipo).Load();
                 res.UsuariosEquipos.ToList();
             }
             return res;

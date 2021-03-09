@@ -35,16 +35,16 @@
     <Property Name="IdCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="NumeroIdentificacion" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="IdTipoIdentificacion" Type="int" Nullable="false" />
-    <Property Name="Nombres" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Apellidos" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Nombres" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Apellidos" Type="nvarchar" MaxLength="50" />
     <Property Name="TelefonoFijo" Type="nvarchar" MaxLength="15" />
-    <Property Name="TelefonoCel1" Type="nvarchar" MaxLength="15" Nullable="false" />
+    <Property Name="TelefonoCel1" Type="nvarchar" MaxLength="15" />
     <Property Name="TelefonoCel2" Type="nvarchar" MaxLength="15" />
-    <Property Name="Direccion" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="IdCiudad" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="IdUso" Type="int" Nullable="false" />
+    <Property Name="Direccion" Type="nvarchar" MaxLength="50" />
+    <Property Name="IdCiudad" Type="nvarchar" MaxLength="50" />
+    <Property Name="IdUso" Type="int" />
     <Property Name="Foto" Type="nvarchar" MaxLength="250" />
-    <Property Name="Email1" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email1" Type="nvarchar" MaxLength="50" />
     <Property Name="Email2" Type="nvarchar" MaxLength="50" />
     <Property Name="IdTipoPersona" Type="int" Nullable="false" />
     <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
@@ -198,6 +198,15 @@
     <Property Name="Observaciones" Type="nvarchar" MaxLength="1000" />
     <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
     <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Log">
+    <Key>
+      <PropertyRef Name="IdLog" />
+    </Key>
+    <Property Name="IdLog" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdUsuario" Type="int" Nullable="false" />
+    <Property Name="Observacion" Type="nvarchar" MaxLength="1000" Nullable="false" />
+    <Property Name="FechaLog" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="MarcasEquipos">
     <Key>
@@ -537,7 +546,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Clientes_Ciudades">
-    <End Role="Ciudades" Type="Self.Ciudades" Multiplicity="1" />
+    <End Role="Ciudades" Type="Self.Ciudades" Multiplicity="0..1" />
     <End Role="Clientes" Type="Self.Clientes" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Ciudades">
@@ -1087,6 +1096,7 @@
     <EntitySet Name="FotosVisita" EntityType="Self.FotosVisita" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HistoricoAsignacionZona" EntityType="Self.HistoricoAsignacionZona" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="KardexPapeleria" EntityType="Self.KardexPapeleria" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MarcasEquipos" EntityType="Self.MarcasEquipos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Menus" EntityType="Self.Menus" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MenusRol" EntityType="Self.MenusRol" Schema="dbo" store:Type="Tables" />

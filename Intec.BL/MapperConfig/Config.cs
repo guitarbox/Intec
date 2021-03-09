@@ -61,11 +61,40 @@ namespace Intec.BL.MapperConfig
             {
                 var config = new AutoMapper.MapperConfiguration(cfg => {
 
-                    cfg.CreateMap<DTO.Equipos, DAL.Equipos>();
                     cfg.CreateMap<DAL.Equipos, DTO.Equipos>();
+                    cfg.CreateMap<DAL.CalibracionesEquipos, DTO.CalibracionesEquipos>();
+                    cfg.CreateMap<DAL.VerificacionesLabEquipos, DTO.VerificacionesLabEquipos>();
+                    cfg.CreateMap<DAL.MarcasEquipos, DTO.MarcasEquipos>();
+                    cfg.CreateMap<DAL.TiposEquipo, DTO.TiposEquipo>();
+                    cfg.CreateMap<DAL.TramitesEquipo, DTO.TramitesEquipo>();
 
                     cfg.CreateMap<DTO.VerificacionesLabEquipos, DAL.VerificacionesLabEquipos>();
+                    cfg.CreateMap<DTO.Equipos, DAL.Equipos>();
                     cfg.CreateMap<DTO.CalibracionesEquipos, DAL.CalibracionesEquipos>();
+                    cfg.CreateMap<DTO.MarcasEquipos, DAL.MarcasEquipos>();
+                    cfg.CreateMap<DTO.TiposEquipo, DAL.TiposEquipo>();
+                    cfg.CreateMap<DTO.TramitesEquipo, DAL.TramitesEquipo>();
+
+                });
+
+                return config.CreateMapper();
+            }
+        }
+        
+        public static AutoMapper.IMapper MapperEquiposSimple
+        {
+            get
+            {
+                var config = new AutoMapper.MapperConfiguration(cfg => {
+
+                    cfg.CreateMap<DAL.Equipos, DTO.Equipos>()
+                        .ForMember(dest => dest.CalibracionesEquipos, opt => opt.Ignore())
+                        .ForMember(dest => dest.VerificacionesLabEquipos, opt => opt.Ignore())                        
+                        .ForMember(dest => dest.TramitesEquipo, opt => opt.Ignore())
+                    ;
+
+                    cfg.CreateMap<DAL.MarcasEquipos, DTO.MarcasEquipos>();
+                    cfg.CreateMap<DAL.TiposEquipo, DTO.TiposEquipo>();
 
                 });
 

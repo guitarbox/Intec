@@ -221,4 +221,40 @@ function _loadSelectCiudades(element, idDepartamento) {
         element.append('<option value="' + d.IdCiudad + '">' + d.Ciudad+ '</option>');
     });
 }
+
+function _loadSelectUsosPropiedad(element) {
+    element.empty();
+    element.append('<option value="">Seleccione...</option>');
+    let resRequest = _peticionAjax(URL_SERVICE + URI_SERVICE.ObtenerUsosPropiedadesActivos, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion }), false);
+    resRequest.data.forEach(d => {
+        element.append('<option value="' + d.IdUso + '">' + d.Uso+ '</option>');
+    });
+}
+
+function _loadSelectTiposPropiedad(element) {
+    element.empty();
+    element.append('<option value="">Seleccione...</option>');
+    let resRequest = _peticionAjax(URL_SERVICE + URI_SERVICE.ObtenerTiposPropiedadActivos, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion }), false);
+    resRequest.data.forEach(d => {
+        element.append('<option value="' + d.IdTipoPropiedad + '">' + d.TipoPropiedad+ '</option>');
+    });
+}
+
+function _loadSelectMarcas(element) {
+    element.empty();
+    element.append('<option value="">Seleccione Marca...</option>');
+    let resRequest = _peticionAjax(URL_SERVICE + URI_SERVICE.ObtenerMarcasEquiposActivos, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion }), false);
+    resRequest.data.forEach(d => {
+        element.append('<option value="' + d.IdMarcaEquipo + '">' + d.MarcaEquipo+ '</option>');
+    });
+}
+
+function _loadSelectTipoEquipo(element) {
+    element.empty();
+    element.append('<option value="">Seleccione Tipo Equipo...</option>');
+    let resRequest = _peticionAjax(URL_SERVICE + URI_SERVICE.ObtenerTiposEquipoActivos, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion }), false);
+    resRequest.data.forEach(d => {
+        element.append('<option value="' + d.IdTipoEquipo + '">' + d.TipoEquipo + '</option>');
+    });
+}
 /**************************************************************************************************************************/

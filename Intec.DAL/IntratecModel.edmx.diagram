@@ -5,7 +5,6 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="2a44f5ae462548488e81dc726cf05437" Name="Diagram1" ZoomLevel="57">
-        <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.Ciudades" Width="1.5" PointX="5.25" PointY="5.25" />
         <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.Departamentos" Width="1.5" PointX="3" PointY="5.25" />
         <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.Menus" Width="1.5" PointX="6" PointY="9.25" />
         <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.Paises" Width="1.5" PointX="0.75" PointY="5.375" />
@@ -16,18 +15,12 @@
         <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.TiposPersona" Width="1.5" PointX="10.75" PointY="16.375" />
         <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.TiposPropiedades" Width="1.5" PointX="20.25" PointY="10.125" />
         <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.UsosPropiedades" Width="1.5" PointX="18.375" PointY="16.125" />
-        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Ciudades_Departamentos" />
-        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_SolicitudesProgramacionVisitas_Ciudades" />
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Departamentos_Paises" />
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Menus_Menus" />
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.MenusRol" />
         <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.Propiedades" Width="1.5" PointX="16.5" PointY="12.375" />
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Propiedades_TiposPropiedades" />
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Propiedades_UsosPropiedades" />
-        <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.Clientes" Width="1.5" PointX="13" PointY="11.625" />
-        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Clientes_TiposDocumento" />
-        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Clientes_TiposPersona" />
-        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Propiedades_Clientes" />
         <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.EstadosConsecutivosInspector" Width="1.5" PointX="13.5" PointY="18.25" />
         <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.ConsecutivosFormatos" Width="1.5" PointX="15.75" PointY="8.875" />
         <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.Formatos" Width="1.5" PointX="10.5" PointY="0.75" />
@@ -40,7 +33,6 @@
         <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.TramitesEquipo" Width="1.5" PointX="16.125" PointY="17.625" />
         <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.VerificacionesLabEquipos" Width="1.5" PointX="5.25" PointY="23.875" />
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_CalibracionesEquipos_Equipos" />
-        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Clientes_Ciudades" />
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Equipos_MarcasEquipos" />
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Equipos_TiposEquipo" />
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_TramitesEquipo_Equipos" />
@@ -56,8 +48,6 @@
         <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.FotosVisita" Width="1.5" PointX="20.625" PointY="5.75" />
         <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.TramiteConsecutivoFormato" Width="1.5" PointX="13.125" PointY="5.375" />
         <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.Visitas" Width="1.5" PointX="18.375" PointY="7.375" />
-        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Visitas_Ciudades" />
-        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Visitas_Clientes" />
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_FormatosVisita_ConsecutivosFormatos" />
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_EquiposVisita_Equipos" />
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_EquiposVisita_Visitas" />
@@ -69,11 +59,9 @@
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Visitas_Propiedades" />
         <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.HistoricoAsignacionZona" Width="1.5" PointX="18" PointY="4.625" />
         <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.Zonas" Width="1.5" PointX="15.75" PointY="0.75" />
-        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Zonas_Ciudades" />
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_HistoricoAsignacionZona_Zonas" />
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Visitas_Zonas" />
         <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.Usuarios" Width="1.5" PointX="10.5" PointY="5.5" />
-        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Usuarios_Ciudades" />
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_ConsecutivosInspectores_Usuarios" />
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_KardexPapeleria_Usuarios" />
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Usuarios_Roles" />
@@ -84,6 +72,19 @@
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Visitas_Usuarios" />
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Zonas_Usuarios" />
         <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.Parametros" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.Ciudades" Width="1.5" PointX="5.25" PointY="3.875" />
+        <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.Clientes" Width="1.5" PointX="13" PointY="11.625" />
+        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Ciudades_Departamentos" />
+        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Clientes_Ciudades" />
+        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_SolicitudesProgramacionVisitas_Ciudades" />
+        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Usuarios_Ciudades" />
+        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Visitas_Ciudades" />
+        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Zonas_Ciudades" />
+        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Clientes_TiposDocumento" />
+        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Clientes_TiposPersona" />
+        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Propiedades_Clientes" />
+        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Visitas_Clientes" />
+        <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.Log" Width="1.5" PointX="3.375" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

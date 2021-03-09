@@ -4,16 +4,18 @@
 }
 
 <script>
-    //$(document).ready(() => {
-    //    ConsultarEquipos();
-    //});
+    $(document).ready(() => {
+        _loadSelectMarcas($("#IdMarca"));
+        _loadSelectTipoEquipo($("#IdTipoEquipo"));
+        ConsultarEquipos();
+    });
 
     function ConsultarEquipos() {
         _peticionAjax(URL_SERVICE + URI_SERVICE.ObtenerEquipos, VerbosREST.POST,
             JSON.stringify({ 
                 sessionToken: UsuarioSesion.tokenSesion,
-                IdMarca: $("#IdMarca").val(),
-                idTipoEquipo: $("#IdTipoEquipo").val(),
+                idMarca: $("#IdMarca").val() == '' ? -1 : $("#IdMarca").val(),
+                idTipoEquipo: $("#IdTipoEquipo").val() == '' ? -1 : $("#IdTipoEquipo").val(),
                 filtro: $("#Filtro").val()
             }),
 
@@ -21,15 +23,22 @@
 
                 var columns = [
                     { data: "IdEquipo", title: 'Id. Equipo' },
+                    { data: "TiposEquipo.TipoEquipo", title: 'Tipo Equipo' },
+                    { data: "MarcasEquipos.MarcaEquipo", title: 'Marca Equipo' },
                     { data: "Area", title: 'Area' },
                     { data: "SerieIDInterno", title: 'Serie ID interno' },
                     { data: "Modelo", title: 'Modelo' },
-
+                    { data: "Calibrado", title: 'Calibrado' },
+                    {
+                        data: null, render: function (data, type, full, meta) {
+                            return '<a onclick="window.location.href = \'../Equipos/Administrar?ie=' + full.IdEquipo + '\';"><span class="fa fa-cog"></span></a>';
+                        }
+                    }
                 ];
 
 
-                $("#divtblEquipos").empty();
-                $("#divtblEquipos").append('<table id="tblEquipos" style="width:100%"></table>');
+                $("#divTblEquipos").empty();
+                $("#divTblEquipos").append('<table id="tblEquipos" style="width:100%"></table>');
                 $('#tblEquipos').DataTable({
                     data: response.data,
                     columns: columns,
@@ -47,14 +56,105 @@
             });
 
     }
+
+    function AbrirModalCrearRx() {
+        _resetGenericModal();
+
+        _appendToHeaderGeneriModal('<label>Crear Equipo</label>');
+        _appendToBodyGeneriModal('<p>Área</p>');
+        _appendToBodyGeneriModal('<input type="text" id="Area" class="form-control" />');
+        _appendToBodyGeneriModal('<p>Serie ID. Interno</p>');
+        _appendToBodyGeneriModal('<input type="text" id="SerieIDInterno" class="form-control" />');
+        _appendToBodyGeneriModal('<p>Tipo Equipo</p>');
+        _appendToBodyGeneriModal('<select id="IdTipoEquipoC" class="form-control"></select>');
+        _loadSelectTipoEquipo($("#IdTipoEquipoC"));
+        _appendToBodyGeneriModal('<p>Marca Equipo</p>');
+        _appendToBodyGeneriModal('<select id="IdMarcaEquipoC" class="form-control"></select>');
+        _loadSelectMarcas($("#IdMarcaEquipoC"));
+        _appendToBodyGeneriModal('<p>Modelo</p>');
+        _appendToBodyGeneriModal('<input type="text" id="Modelo" class="form-control" />');
+        _appendToBodyGeneriModal('<p>Rango Medición</p>');
+        _appendToBodyGeneriModal('<input type="text" id="RangoMedicion" class="form-control" />');
+        _appendToBodyGeneriModal('<p>Tolerancia</p>');
+        _appendToBodyGeneriModal('<input type="text" id="Tolerancia" class="form-control" />');
+        _appendToBodyGeneriModal('<p>Calibrado</p>');
+        _appendToBodyGeneriModal('<input type="checkbox" id="Calibrado" />');
+        _appendToBodyGeneriModal('<p>Fecha Última Calibración</p>');
+        _appendToBodyGeneriModal('<input type="text" id="FechaUltimaCalibracion" class="form-control" />');
+        $("#FechaUltimaCalibracion").datetimepicker({
+            format: "D/M/YYYY"
+        });
+        _appendToBodyGeneriModal('<p>Fecha Próxima Calibración</p>');
+        _appendToBodyGeneriModal('<input type="text" id="FechaProximaCalibracion" class="form-control" />');
+        $("#FechaProximaCalibracion").datetimepicker({
+            format: "D/M/YYYY"
+        });
+        _appendToBodyGeneriModal('<p>Fecha Última Verificación Laboratorio</p>');
+        _appendToBodyGeneriModal('<input type="text" id="FechaUltimaVerificacionLaboratorio" class="form-control" />');
+        $("#FechaUltimaVerificacionLaboratorio").datetimepicker({
+            format: "D/M/YYYY"
+        });
+        _appendToBodyGeneriModal('<p>Período de Calibración</p>');
+        _appendToBodyGeneriModal('<input id="PeriodoCalibracion" class="form-control" />');
+        _appendToBodyGeneriModal('<p>Período de Verificación</p>');
+        _appendToBodyGeneriModal('<input id="PeriodoVerificacion" class="form-control" />');
+        _appendToBodyGeneriModal('<p>Fecha Próximo Mantenimiento</p>');
+        _appendToBodyGeneriModal('<input type="text" id="FechaProximoMantenimiento" class="form-control" />');
+        $("#FechaProximoMantenimiento").datetimepicker({
+            format: "D/M/YYYY"
+        });
+        
+
+        _appendToFooterGeneriModal('<button class="button" id="btnCrear" return false;">Crear</button>');
+        $("#btnCrear").click(() => {
+            if ($('#Area').val() != '' && $('#SerieIDInterno').val() != '' && $('#IdTipoEquipoC').val() != '' && $('#IdMarcaEquipoC').val() != '' && $('#Modelo').val() != '' && $('#RangoMedicion').val() != '' && $('#Tolerancia').val() != '') {
+                _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.CrearEquipo, VerbosREST.POST,
+                    JSON.stringify({
+                        sessionToken: UsuarioSesion.tokenSesion,
+                        equipo: {
+                            //IdEquipo 
+                            Area: $("#Area").val(),
+                            SerieIDInterno: $("#SerieIDInterno").val(),
+                            IdTipoEquipo: $("#IdTipoEquipoC").val(),
+                            IdMarcaEquipo: $("#IdMarcaEquipoC").val(),
+                            Modelo: $("#Modelo").val(),
+                            RangoMedicion: $("#RangoMedicion").val(),
+                            Tolerancia: $("#Tolerancia").val(),
+                            Calibrado: $("#Calibrado").is(':checked'),
+                            FechaUltimaCalibracionString: $("#FechaUltimaCalibracion").val(),
+                            FechaProximaCalibracionString: $("#FechaProximaCalibracion").val(),
+                            FechaUltimaVerificacionLaboratorioString: $("#FechaUltimaVerificacionLaboratorio").val(),
+                            PeriodoCalibracion: $("#PeriodoCalibracion").val(),
+                            PeriodoVerificacion: $("#PeriodoVerificacion").val(),
+                            FechaProximoMantenimientoString: $("#FechaProximoMantenimiento").val(),
+                            IdUsuarioCreacion: UsuarioSesion.IdUsuario
+                        }
+                    }))
+                    .then(response => {
+                        ConsultarEquipos();
+                        _closeGenericModal();
+                    });
+            }
+            else {
+                swal({
+                    text: 'Por favor ingresar el Área, SerieIDInterno, TipoEquipo, MarcaEquipo, Modelo, RangoMedicion y Tolerancia para crear.',
+                    title: swalTitle,
+                    icon: "error"
+                });
+            }
+        });
+        _openGenericModal();
+    }
 </script>
 <h3 class="text-center" id="title">EQUIPOS</h3>
 <div style="padding:10px">
     <div name="Contenedor" style="width:100%; display:flex; justify-content:space-around;" class="card">
-        <input placeholder="Id. Marca" id="IdMarca" class="form-control" type="text" />
-        <input placeholder="Id. TipoEquipo" id="IdTipoEquipo" class="form-control" type="text" />
-        <input placeholder="Filtro" id="Filtro" class="form-control" type="text" />
+        <select id="IdMarca" class="form-control"></select>
+        <select id="IdTipoEquipo" class="form-control"></select>
+        <input placeholder="Modelo" id="Filtro" class="form-control" type="text" />
         <span style="margin-left:2px; cursor:pointer" class="fa fa-search fa-2x" onclick="ConsultarEquipos();"></span>
     </div>
-    <div id="tblEquipos" style="width:100%"></div>
+    <div id="divTblEquipos" style="width:100%"></div>
+    <br />
+    <button class="button" onclick="AbrirModalCrearRx(); return false;">Crear Nuevo Equipo</button>
 </div>

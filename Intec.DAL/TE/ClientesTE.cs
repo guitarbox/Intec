@@ -147,15 +147,26 @@ namespace Intec.DAL.TE
         /**
          * 6) 
          */
-        public void EliminarPropiedad(int IdPropiedad)
+        public void EliminarPropiedad(int IdPropiedad, int IdUsuarioElimina)
         {
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
                 Propiedades propEliminar = ctx.Propiedades.Where(u => u.IdPropiedades == IdPropiedad).FirstOrDefault();
                 if (propEliminar != null)
                 {
-                    ctx.Propiedades.Remove(propEliminar);
-                    ctx.SaveChanges();
+                    if (propEliminar.Visitas.Count() == 0)
+                    {
+                        ctx.Log.Add(new Log()
+                        {
+                            IdUsuario = IdUsuarioElimina,
+                            FechaLog = DateTime.Now,
+                            Observacion = $"Usuario {IdUsuarioElimina} elimina la propiedad: {Common.Util.ObjectToJson(new {propEliminar.IdPropiedades, propEliminar.Direccion, propEliminar.Telefono, propEliminar.IdUso, propEliminar.IdTipoPropiedad, propEliminar.IdCliente, propEliminar.IdUsuarioCreacion, propEliminar.FechaCreacion, propEliminar.IdUsuarioModificacion, propEliminar.FechaModificacion})}"
+                        });
+                        ctx.SaveChanges();
+                        ctx.Propiedades.Remove(propEliminar);
+                        ctx.SaveChanges();
+                    }
+                    else throw new Exception("No se puede eliminar propiedades a las que se les haya hecho visitas");
                 }
                 else
                 {

@@ -74,5 +74,30 @@ namespace Intec.WebApi.Controllers
             }
             return response;
         }
+        
+        [HttpPost]
+        [Route("api/Propiedades/EliminarPropiedad")]
+        public JObject EliminarPropiedad([FromBody] JObject Token)
+        {
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+
+            if (validToken)
+            {
+                try
+                {
+                    new Intec.BL.BE.ClientesBE().EliminarPropiedad(int.Parse(Token["idPropiedad"].ToString()), int.Parse(Token["idUsuarioElimina"].ToString()));
+                }
+                catch (Exception ex)
+                {
+                    error = true;
+                    msgError = ex.Message;
+                }
+
+                SetErrorResponse(error);
+                SetMsgErrorResponse(msgError);
+            }
+            return response;
+        }
     }
 }

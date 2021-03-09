@@ -31,7 +31,7 @@ namespace Intec.DAL
         public string TelefonoCel2 { get; set; }
         public string Direccion { get; set; }
         public string IdCiudad { get; set; }
-        public int IdUso { get; set; }
+        public Nullable<int> IdUso { get; set; }
         public string Foto { get; set; }
         public string Email1 { get; set; }
         public string Email2 { get; set; }
@@ -41,11 +41,11 @@ namespace Intec.DAL
         public Nullable<System.DateTime> FechaModificacion { get; set; }
         public Nullable<int> IdUsuarioModificacion { get; set; }
     
+        public virtual Ciudades Ciudades { get; set; }
         public virtual TiposIdentificacion TiposIdentificacion { get; set; }
         public virtual TiposPersona TiposPersona { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Propiedades> Propiedades { get; set; }
-        public virtual Ciudades Ciudades { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Visitas> Visitas { get; set; }
     }

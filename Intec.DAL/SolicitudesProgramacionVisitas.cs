@@ -33,8 +33,8 @@ namespace Intec.DAL
         public string city { get; set; }
         public string country { get; set; }
     
-        public virtual Ciudades Ciudades { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Visitas> Visitas { get; set; }
+        public virtual Ciudades Ciudades { get; set; }
     }
 }

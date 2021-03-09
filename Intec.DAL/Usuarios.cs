@@ -52,7 +52,6 @@ namespace Intec.DAL
         public Nullable<System.DateTime> horaTokenSesion { get; set; }
         public Nullable<System.DateTime> FechaNacimiento { get; set; }
     
-        public virtual Ciudades Ciudades { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ConsecutivosFormatos> ConsecutivosFormatos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -69,5 +68,6 @@ namespace Intec.DAL
         public virtual ICollection<Visitas> Visitas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Zonas> Zonas { get; set; }
+        public virtual Ciudades Ciudades { get; set; }
     }
 }

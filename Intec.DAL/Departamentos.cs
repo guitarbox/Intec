@@ -29,8 +29,8 @@ namespace Intec.DAL
         public Nullable<int> IdUsuarioModificacion { get; set; }
         public bool Activo { get; set; }
     
+        public virtual Paises Paises { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ciudades> Ciudades { get; set; }
-        public virtual Paises Paises { get; set; }
     }
 }

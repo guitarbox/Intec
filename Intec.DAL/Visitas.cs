@@ -39,8 +39,6 @@ namespace Intec.DAL
         public Nullable<System.DateTime> FechaModificacion { get; set; }
         public Nullable<int> IdUsuarioModificacion { get; set; }
     
-        public virtual Ciudades Ciudades { get; set; }
-        public virtual Clientes Clientes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EquiposVisita> EquiposVisita { get; set; }
         public virtual EstadosVisita EstadosVisita { get; set; }
@@ -52,5 +50,7 @@ namespace Intec.DAL
         public virtual Propiedades Propiedades { get; set; }
         public virtual Zonas Zonas { get; set; }
         public virtual Usuarios Usuarios { get; set; }
+        public virtual Ciudades Ciudades { get; set; }
+        public virtual Clientes Clientes { get; set; }
     }
 }

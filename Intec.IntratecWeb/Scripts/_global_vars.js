@@ -9,8 +9,8 @@ var VerbosREST = {
     DELETE: 'DELETE',
 }
 
-var URL_SERVICE = 'http://localhost:63440/';
-//var URL_SERVICE = 'http://servicios.intecsas.com.co/';
+//var URL_SERVICE = 'http://localhost:63440/';
+var URL_SERVICE = 'http://servicios.intecsas.com.co/';
 
 var URI_SERVICE = {
     //--- Administracion ---
@@ -50,12 +50,14 @@ var URI_SERVICE = {
 
     //MarcasEquipos
     ObtenerMarcasEquipos: 'api/MarcasEquipos/ObtenerMarcasEquipos',
+    ObtenerMarcasEquiposActivos: 'api/MarcasEquipos/ObtenerMarcasEquiposActivos',
     CrearMarcaEquipos: 'api/MarcasEquipos/CrearMarcaEquipos',
     ActualizarMarcaEquipos: 'api/MarcasEquipos/ActualizarMarcaEquipos',
     EliminarMarcaEquipos: 'api/MarcasEquipos/EliminarMarcaEquipos',
 
     //TiposEquipo
     ObtenerTiposEquipos: 'api/TiposEquipo/ObtenerTiposEquipo',
+    ObtenerTiposEquipoActivos: 'api/TiposEquipo/ObtenerTiposEquipoActivos',
     CrearTipoEquipo: 'api/TiposEquipo/CrearTipoEquipo',
     ActualizarTipoEquipo: 'api/TiposEquipo/ActualizarTipoEquipo',
     EliminarTipoEquipo: 'api/TiposEquipo/EliminarTipoEquipo',
@@ -69,12 +71,14 @@ var URI_SERVICE = {
 
     //TiposPropiedades
     ObtenerTiposPropiedad: 'api/TiposPropiedad/ObtenerTiposPropiedad',
+    ObtenerTiposPropiedadActivos: 'api/TiposPropiedad/ObtenerTiposPropiedadActivos',
     CrearTipoPropiedad: 'api/TiposPropiedad/CrearTipoPropiedad',
     ActualizarTipoPropiedad: 'api/TiposPropiedad/ActualizarTipoPropiedad',
     EliminarTipoPropiedad: 'api/TiposPropiedad/EliminarTipoPropiedad',
 
     //UsosPropiedades
     ObtenerUsosPropiedades: 'api/UsosPropiedades/ObtenerUsosPropiedades',
+    ObtenerUsosPropiedadesActivos: 'api/UsosPropiedades/ObtenerUsosPropiedadesActivos',
     CrearUsoPropiedad: 'api/UsosPropiedades/CrearUsoPropiedad',
     ActualizarUsoPropiedad: 'api/UsosPropiedades/ActualizarUsoPropiedad',
     EliminarUsoPropiedad: 'api/UsosPropiedades/EliminarUsoPropiedad',
@@ -89,12 +93,17 @@ var URI_SERVICE = {
     RecuperarContrasena: 'api/Usuarios/RecuperarContrasena',
     ValidarTokenModPass: 'api/Usuarios/ValidarTokenModPass',
     ModificarContrasena: 'api/Usuarios/ModificarContrasena',
+    //*** Administracion ***
 
     //Clientes
     ObtenerClientes: 'api/Clientes/ObtenerClientes',
     CrearCliente: 'api/Clientes/CrearCliente',
     ObtenerCliente: 'api/Clientes/ObtenerCliente',
     ActualizarCliente: 'api/Clientes/ActualizarCliente',
+
+    //Propiedades
+    CrearPropiedad: 'api/Propiedades/CrearPropiedad',
+    EliminarPropiedad: 'api/Propiedades/EliminarPropiedad',
 
     //Equipos
     ObtenerEquipos: 'api/Equipos/ObtenerEquipos',

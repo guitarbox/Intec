@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,14 +15,18 @@ namespace Intec.BL.BE
 
         public void AgregarEquipo(DTO.Equipos Equipo)
         {
+            Equipo.FechaProximaCalibracion = string.IsNullOrEmpty(Equipo.FechaProximaCalibracionString) ? default : DateTime.Parse(Equipo.FechaProximaCalibracionString, new CultureInfo("es-Co"));
+            Equipo.FechaProximoMantenimiento= string.IsNullOrEmpty(Equipo.FechaProximoMantenimientoString) ? default : DateTime.Parse(Equipo.FechaProximoMantenimientoString, new CultureInfo("es-Co"));
+            Equipo.FechaUltimaCalibracion= string.IsNullOrEmpty(Equipo.FechaUltimaCalibracionString) ? default : DateTime.Parse(Equipo.FechaUltimaCalibracionString, new CultureInfo("es-Co"));
+            Equipo.FechaUltimaVerificacionLaboratorio= string.IsNullOrEmpty(Equipo.FechaUltimaVerificacionLaboratorioString) ? default : DateTime.Parse(Equipo.FechaUltimaVerificacionLaboratorioString, new CultureInfo("es-Co"));            
             new DAL.TE.EquiposTE().AgregarEquipo(MapperConfig.Config.MapperEquipos.Map<DAL.Equipos>(Equipo));
         }
 
         //Obtener
 
-        public List<DAL.Equipos> ObtenerEquipos(int IdMarca, int IdTipoEquipo, string filtro)
+        public List<DTO.Equipos> ObtenerEquipos(int IdMarca, int IdTipoEquipo, string filtro)
         {
-            return new DAL.TE.EquiposTE().ObtenerEquipos(IdMarca, IdTipoEquipo, filtro);
+            return MapperConfig.Config.MapperEquiposSimple.Map<List<DTO.Equipos>>( new DAL.TE.EquiposTE().ObtenerEquipos(IdMarca, IdTipoEquipo, filtro));
         }
 
         public DTO.Equipos ObtenerEquipo(int IdEquipo)

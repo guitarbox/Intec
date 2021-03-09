@@ -50,10 +50,10 @@
     function AbrirModalCrearRx() {
         _resetGenericModal();
 
-        $("#genericModalHeader").append('<label>Crear Tipo Equipo</label>');
-        $("#genericModalBody").append('<p>Tipo Equipo</p>');
-        $("#genericModalBody").append('<input id="TipoEquipo" type="text" class="form-control" />');        
-        $("#genericModalFooter").append('<button class="button" id="btnCrearTipoEquipo" return false;">Crear</button>');
+        _appendToHeaderGeneriModal('<label>Crear Tipo Equipo</label>');
+        _appendToBodyGeneriModal('<p>Tipo Equipo</p>');
+        _appendToBodyGeneriModal('<input id="TipoEquipo" type="text" class="form-control" />');        
+        _appendToFooterGeneriModal('<button class="button" id="btnCrearTipoEquipo" return false;">Crear</button>');
         $("#btnCrearTipoEquipo").click(() => {
             if ($("#TipoEquipo").val() != '') {
                 _peticionAjax(URL_SERVICE + URI_SERVICE.CrearTipoEquipo, VerbosREST.POST,

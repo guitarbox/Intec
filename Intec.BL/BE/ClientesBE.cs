@@ -67,9 +67,9 @@ namespace Intec.BL.BE
 
         //Eliminar
 
-        public void EliminarPropiedad(int IdPropiedad)
+        public void EliminarPropiedad(int IdPropiedad, int IdUsuarioElimina)
         {
-            new DAL.TE.ClientesTE().EliminarPropiedad(IdPropiedad);
+            new DAL.TE.ClientesTE().EliminarPropiedad(IdPropiedad, IdUsuarioElimina);
         }
 
         #endregion
