@@ -88,8 +88,8 @@ namespace Intec.WebApi.Controllers
                     new Intec.BL.BE.EquiposBE().TramitarEquipoInspector(int.Parse(Token["idEquipo"].ToString()),
                                                                         int.Parse(Token["idInspector"].ToString()),
                                                                         int.Parse(Token["idUsuarioTramita"].ToString()),
-                                                                        (Token["tramite"].ToString()),
-                                                                        (Token["observaciones"].ToString()));
+                                                                        Token["tramite"].ToString(),
+                                                                        Token["observaciones"].ToString());
                 }
                 catch (Exception ex)
                 {
