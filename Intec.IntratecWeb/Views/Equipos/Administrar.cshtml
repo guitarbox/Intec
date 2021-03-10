@@ -1,0 +1,101 @@
+﻿
+@{
+    ViewBag.Title = "Administrar";
+}
+<script>
+    var equipo = null;
+    $(document).ready(() => {
+        $("#pruebaDatePicker").datetimepicker({
+            format: "D/M/YYYY"
+        });
+        $("#FechaProximaCalibracion").datetimepicker({
+            format: "D/M/YYYY"
+        });
+        $("#FechaProximoMantenimiento").datetimepicker({
+            format: "D/M/YYYY"
+        });
+        _loadSelectTipoEquipo($("#IdTipoEquipo"));
+        _loadSelectMarcas($("#IdMarcaEquipo"));
+        //_loadSelectCiudades($("#IdCiudad"), '');
+
+        //ConsultarEquipo();
+    });
+
+    function ConsultarEquipo() {
+        _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.ObtenerEquipo, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion, idEquipo: window.location.href.split('=')[1] }))
+            .then(response => {
+                equipo = response.data;
+                MostrarEquipo();
+            });
+    }
+
+    function MostrarEquipo() {
+
+    }
+</script>
+<h3 class="text-center" id="title">ADMINISTRAR EQUIPO</h3>
+<div class="card">
+    <div style="display:grid; grid-template-columns: 25% 25% 25% 25%">
+        <div>
+            <h5>IdEquipo</h5>
+            <input id="IdEquipo" class="form-control" disabled />
+            <h5>Area</h5>
+            <input id="Area" class="form-control" />
+            <h5>SerieIDInterno</h5>
+            <input id="SerieIDInterno" class="form-control" />
+            <h5>Tipo Equipo</h5>
+            <select id="IdTipoEquipo" class="form-control"></select>
+            <h5>Marca Equipo</h5>
+            <select id="IdMarcaEquipo" class="form-control"></select>
+        </div>
+        <div>
+            <h5>Modelo</h5>
+            <input id="Modelo" class="form-control" />
+            <h5>RangoMedicion</h5>
+            <input id="RangoMedicion" class="form-control" />
+            <h5>Tolerancia</h5>
+            <input id="Tolerancia" class="form-control" />
+            <h5>Calibrado</h5>
+            <input id="Calibrado" type="checkbox" />
+        </div>
+        <div>
+            <h5>PeriodoCalibracion</h5>
+            <input id="PeriodoCalibracion" class="form-control" />
+            <h5>FechaUltimaCalibracion</h5>
+            <input id="FechaUltimaCalibracionString" class="form-control" disabled />
+            <h5>FechaProximaCalibracion</h5>
+            <input id="FechaProximaCalibracion" class="form-control"/>
+            <h5>PeriodoVerificacion</h5>
+            <input id="PeriodoVerificacion" class="form-control" />
+            <h5>FechaUltimaVerificacionLaboratorio</h5>
+            <input id="FechaUltimaVerificacionLaboratorioString" class="form-control" disabled />
+            <h5>FechaProximoMantenimiento</h5>
+            <input id="FechaProximoMantenimiento" class="form-control" />
+        </div>
+        <div>
+            <h5>FechaCreacion</h5>
+            <input id="FechaCreacion" class="form-control" disabled />
+            <h5>IdUsuarioCreacion</h5>
+            <input id="IdUsuarioCreacion" class="form-control" disabled />
+            <h5>FechaModificacion</h5>
+            <input id="FechaModificacion" class="form-control" disabled />
+            <h5>IdUsuarioModificacion</h5>
+            <input id="IdUsuarioModificacion" class="form-control" disabled />
+            <input type="button" class="button" value="Actualizar" style="width:100%" onclick="Actualizar();" />
+        </div>
+    </div>
+</div>
+<div class="card">
+    <h3>Calibraciones Equipos</h3>
+    <div id="divCalibracionesEquipos"></div>
+    <input type="button" class="button" value="Agregar Calibración" onclick="AbrirAgregarCalibracionesEquipos();" />
+</div>
+<div class="card">
+    <h3>Verificaciones Lab. Equipos</h3>
+    <div id="divVerificacionesLabEquipos"></div>
+    <input type="button" class="button" value="Agregar Verificación Lab. Equipos" onclick="AbrirAgregarVerificacionesLabEquipos();" />
+</div>
+<div class="card">
+    <h3>Trámites Equipo</h3>
+    <div id="divTramitesEquipo"></div>
+</div>
