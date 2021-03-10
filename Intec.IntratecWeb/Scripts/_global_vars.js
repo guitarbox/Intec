@@ -112,6 +112,23 @@ var URI_SERVICE = {
     TramitarEquipoInspector: 'api/Equipos/TramitarEquipoInspector',
     IngresarVerificacionALaboratorio: 'api/Equipos/IngresarVerificacionALaboratorio',
     IngresarACalibracionEquipo: 'api/Equipos/IngresarEquipoACalibracion',
+
+    //Visitas
+
+    ObtenerZonas: 'api/Visitas/ObtenerZonas',
+    ObtenerZona: 'api/Visitas/ObtenerZona',
+    CrearZona: 'api/Visitas/CrearZona',
+    AsignarZonaInspector: 'api/Visitas/AsignarZonaInspector',
+    ReAsignarZonaInspector: 'api/Visitas/ReAsignarZonaInspector',
+    ProgramarVisita: 'api/Visitas/ProgramarVisita',
+    ReasignacionVisita: 'api/Visitas/ReasignacionVisita',
+    AgregarFotoVisita: 'api/Visitas/AgregarFotoVisita',
+    AgregarFormatoVisita: 'api/Visitas/AgregarFormatoVisita',
+    AgregarEquipoVisita: 'api/Visitas/AgregarEquipoVisita',
+    ConsultarVisita: 'api/Visitas/ConsultarVisita',
+    ConsultaVisitas: 'api/Visitas/ConsultarVisitas',
+
+
 };
 
 var _language_options_table =
