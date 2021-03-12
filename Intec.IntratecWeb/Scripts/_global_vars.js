@@ -109,10 +109,11 @@ var URI_SERVICE = {
     ObtenerEquipos: 'api/Equipos/ObtenerEquipos',
     ObtenerEquipo: 'api/Equipos/ObtenerEquipo',
     CrearEquipo: 'api/Equipos/CrearEquipo',
+    ActualizarEquipo: 'api/Equipos/ActualizarEquipo',
     EliminarEquipo: 'api/Equipos/EliminarEquipo',
     TramitarEquipoInspector: 'api/Equipos/TramitarEquipoInspector',
     IngresarVerificacionALaboratorio: 'api/Equipos/IngresarVerificacionALaboratorio',
-    IngresarACalibracionEquipo: 'api/Equipos/IngresarEquipoACalibracion',
+    IngresarACalibracionEquipo: 'api/Equipos/IngresarACalibracionEquipo',
 
     //Visitas
 

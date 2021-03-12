@@ -252,6 +252,7 @@
     <EntitySetMapping Name="Equipos">
       <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.Equipos">
         <MappingFragment StoreEntitySet="Equipos">
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
           <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
           <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
           <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />

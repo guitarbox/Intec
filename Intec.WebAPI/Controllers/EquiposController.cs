@@ -13,6 +13,17 @@ namespace Intec.WebApi.Controllers
     public class EquiposController : DefaultController
     {
         [HttpPost]
+        [Route("api/Equipos/ObtenerEquipo")]
+        public JObject ObtenerEquipo([FromBody]JObject Token)
+        {
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+            if (validToken)
+                SetDataResponse(new Intec.BL.BE.EquiposBE().ObtenerEquipo(Token["idEquipo"].ToObject<int>()));
+            return response;
+        }
+        
+        [HttpPost]
         [Route("api/Equipos/ObtenerEquipos")]
         public JObject ObtenerEquipos([FromBody]JObject Token)
         {
@@ -47,6 +58,31 @@ namespace Intec.WebApi.Controllers
             }
             return response;
         }
+
+        [HttpPost]
+        [Route("api/Equipos/ActualizarEquipo")]
+        public JObject ActualizarEquipo([FromBody] JObject Token) 
+        {
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+            if (validToken)
+            {
+                try
+                {
+                    new Intec.BL.BE.EquiposBE().ActualizarEquipo(Token["equipo"].ToObject<Intec.BL.DTO.Equipos>(), int.Parse(Token["idUsuarioModificacion"].ToString()));
+                }
+                catch (Exception ex)
+                {
+                    error = true;
+                    msgError = ex.Message;
+                }
+
+                SetErrorResponse(error);
+                SetMsgErrorResponse(msgError);
+            }
+            return response;
+        }
+
 
         [HttpPost]
         [Route("api/Equipos/EliminarEquipo")]

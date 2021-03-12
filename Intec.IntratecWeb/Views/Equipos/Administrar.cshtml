@@ -18,7 +18,7 @@
         _loadSelectMarcas($("#IdMarcaEquipo"));
         //_loadSelectCiudades($("#IdCiudad"), '');
 
-        //ConsultarEquipo();
+        ConsultarEquipo();
     });
 
     function ConsultarEquipo() {
@@ -29,9 +29,239 @@
             });
     }
 
-    function MostrarEquipo() {
+    function Actualizar() {        
+        equipo.Area = $("#Area").val();
+        equipo.SerieIDInterno = $("#SerieIDInterno").val();
+        equipo.IdTipoEquipo = $("#IdTipoEquipo").val();
+        equipo.IdMarcaEquipo = $("#IdMarcaEquipo").val();
 
+        equipo.Modelo = $("#Modelo").val();
+        equipo.IdMarcaEquipo = $("#RangoMedicion").val();
+        equipo.IdMarcaEquipo = $("#Tolerancia").val();
+        equipo.Calibrado = $("#Calibrado").is(':checked');
+        equipo.Activo = $("#Activo").is(':checked');
+
+        equipo.PeriodoCalibracion = $("#PeriodoCalibracion").val();
+        equipo.FechaProximaCalibracionString = $("#FechaProximaCalibracion").val();
+        equipo.PeriodoVerificacion = $("#PeriodoVerificacion").val();
+        equipo.FechaProximoMantenimientoString = $("#FechaProximoMantenimiento").val();
+
+        equipo.IdUsuarioModificacion = UsuarioSesion.IdUsuario;
+
+        _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.ActualizarEquipo, VerbosREST.POST, JSON.stringify({
+            sessionToken: UsuarioSesion.tokenSesion,
+            equipo,
+            idUsuarioModificacion: UsuarioSesion.IdUsuario
+        }))
+            .then(response => { ConsultarEquipo(); });
     }
+
+    function MostrarEquipo() {
+        $("#IdEquipo").val(equipo.IdEquipo);
+        $("#Area").val(equipo.Area);
+        $("#SerieIDInterno").val(equipo.SerieIDInterno);
+        $("#IdTipoEquipo").val(equipo.IdTipoEquipo);
+        $("#IdMarcaEquipo").val(equipo.IdMarcaEquipo);
+
+        $("#Modelo").val(equipo.Modelo);
+        $("#RangoMedicion").val(equipo.IdMarcaEquipo);
+        $("#Tolerancia").val(equipo.IdMarcaEquipo);
+        if (equipo.Calibrado)
+            $("#Calibrado").prop('checked', 'checked');
+        if (equipo.Activo)
+            $("#Activo").prop('checked', 'checked');
+
+        $("#PeriodoCalibracion").val(equipo.PeriodoCalibracion);
+        $("#FechaUltimaCalibracionString").val(equipo.FechaUltimaCalibracionString);
+        $("#FechaProximaCalibracion").val(equipo.FechaProximaCalibracionString);
+        $("#PeriodoVerificacion").val(equipo.PeriodoVerificacion);
+        $("#FechaUltimaVerificacionLaboratorioString").val(equipo.FechaUltimaVerificacionLaboratorioString);
+        $("#FechaProximoMantenimiento").val(equipo.FechaProximoMantenimientoString);
+
+        $("#FechaCreacion").val(equipo.FechaCreacion);
+        $("#IdUsuarioCreacion").val(equipo.IdUsuarioCreacion);
+        $("#FechaModificacion").val(equipo.FechaModificacion);
+        $("#IdUsuarioModificacion").val(equipo.IdUsuarioModificacion);
+
+        //CalibracionesEquipos
+        var columnsC = [
+            { data: "Secuencia", title: 'Secuencia' },
+            { data: "FechaCalibracion", title: 'FechaCalibracion' },
+            { data: "Laboratorio", title: 'Laboratorio' },
+            { data: "Observaciones", title: 'Observaciones' },
+            { data: "FechaCreacion", title: 'FechaCreacion' },
+            { data: "IdUsuarioCreacion", title: 'IdUsuarioCreacion' }
+        ];
+
+        $("#divCalibracionesEquipos").empty();
+        $("#divCalibracionesEquipos").append('<table id="tblCalibracionesEquipos"></table>');
+        $('#tblCalibracionesEquipos').DataTable({
+            data: equipo.CalibracionesEquipos,
+            columns: columnsC,
+            language: _language_options_table,
+            //
+            dom: 'Bfrtip',
+            buttons: []
+        });
+
+        //Verificaciones Laboratorio
+        var columnsVL = [
+            { data: "Secuencia", title: 'Secuencia' },
+            { data: "FechaVerificacion", title: 'FechaVerificacion' },
+            { data: "NroCertificado", title: 'NroCertificado' },
+            { data: "Laboratorio", title: 'Laboratorio' },
+            { data: "Observaciones", title: 'Observaciones' },
+            { data: "FechaCreacion", title: 'FechaCreacion' },
+            { data: "IdUsuarioCreacion", title: 'IdUsuarioCreacion' }
+        ];
+
+        $("#divVerificacionesLabEquipos").empty();
+        $("#divVerificacionesLabEquipos").append('<table id="tblVerificacionesLabEquipos"></table>');
+        $('#tblVerificacionesLabEquipos').DataTable({
+            data: equipo.VerificacionesLabEquipos,
+            columns: columnsVL,
+            language: _language_options_table,
+            //
+            dom: 'Bfrtip',
+            buttons: []
+        });
+
+        //TramitesEquipo
+        var columnsT = [
+            { data: "Secuencia", title: 'Secuencia' },
+            { data: "Observaciones", title: 'Observaciones' },
+            { data: "IdInspector", title: 'IdInspector' },
+            { data: "Tramite", title: 'Tramite' },
+            { data: "FechaCreacion", title: 'FechaCreacion' },
+            { data: "IdUsuarioCreacion", title: 'IdUsuarioCreacion' }
+        ];
+
+        $("#divTramitesEquipo").empty();
+        $("#divTramitesEquipo").append('<table id="tblTramitesEquipo"></table>');
+        $('#tblTramitesEquipo').DataTable({
+            data: equipo.TramitesEquipo,
+            columns: columnsT,
+            language: _language_options_table,
+            //
+            dom: 'Bfrtip',
+            buttons: []
+        });
+
+        //Acá se muestra el botón que aplica según el estado
+        let Tramite = '';
+        if (equipo.TramitesEquipo.length == 0) {
+            $("#divBtnTramite").append('<input type="button" class="button" value="Asignar" id="btnTramite" />');
+            Tramite = 'ASIGNACION';
+        }
+        else if (equipo.TramitesEquipo[0].Tramite == 'RECHAZO' || equipo.TramitesEquipo[0].Tramite == 'ACEP_DEVOLUCION') {
+            $("#divBtnTramite").append('<input type="button" class="button" value="Asignar" id="btnTramite" />');
+            Tramite = 'ASIGNACION';
+        }
+        else if (equipo.TramitesEquipo[0].Tramite == 'DEVOLUCION') {
+            $("#divBtnTramite").append('<input type="button" class="button" value="Aceptar Devolución" id="btnTramite" />');
+            Tramite = 'ACEP_DEVOLUCION';
+        }
+
+        $("#btnTramite").click(() => {
+            switch (Tramite) {
+                case "ASIGNACION":
+                    alert('vamos a asignar');
+                    //Cargar los inspectores
+                    //Observaciones
+                    break;                
+                case "ACEP_DEVOLUCION":                    
+                    alert('vamos a aceptar la devolución');
+                    //Observaciones
+                    break;
+            }
+        });
+    }
+
+    function AbrirAgregarVerificacionesLabEquipo() {
+        _resetGenericModal();
+        _appendToHeaderGeneriModal('<label>Agregar Verificación Laboratorio</label>');
+        _appendToHeaderGeneriModal('<h5>Fecha</h5>');
+        _appendToHeaderGeneriModal('<input id="FechaVerificacion" class="form-control" />'); 
+        $("#FechaVerificacion").datetimepicker({
+            format: "D/M/YYYY"
+        });
+        _appendToHeaderGeneriModal('<h5>Nro. Certificado</h5>');
+        _appendToHeaderGeneriModal('<input id="NroCertificado" class="form-control" />');
+        _appendToHeaderGeneriModal('<h5>Laboratorio</h5>');
+        _appendToHeaderGeneriModal('<input id="Laboratorio" class="form-control" />');
+        _appendToHeaderGeneriModal('<h5>Observaciones</h5>');
+        _appendToHeaderGeneriModal('<textarea id="ObservacionesV" class="form-control"></textarea>');  
+        _appendToFooterGeneriModal('<input class="button" id="btnAgregarVerificacion" type="button" value="Agregar" />');
+        $("#btnAgregarVerificacion").click(() => {
+            if ($("#FechaVerificacion").val() != '' && $("#NroCertificado").val() != '' && $("#Laboratorio").val() != '') {
+                _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.IngresarVerificacionALaboratorio, VerbosREST.POST, JSON.stringify({
+                    sessionToken: UsuarioSesion.tokenSesion,
+                    verificacion: {
+                        IdEquipo: equipo.IdEquipo,
+                        FechaVerificacion: $("#FechaVerificacion").val(),
+                        NroCertificado: $("#NroCertificado").val(),
+                        Laboratorio: $("#Laboratorio").val(),
+                        Observaciones: $("#ObservacionesV").val(),
+                        IdUsuarioCreacion: UsuarioSesion.IdUsuario
+                    }
+                }))
+                    .then(response => {
+                        _closeGenericModal();
+                        ConsultarEquipo();
+                    });
+            }
+            else
+                swal({
+                    text: 'Por favor ingresar la Fecha, el Nro. Certificado y el Laboratorio para crear.',
+                    title: swalTitle,
+                    icon: "error"
+                });
+        });
+        _openGenericModal();
+    }
+
+    function AbrirAgregarCalibracionesEquipo() {
+        _resetGenericModal();
+        _appendToHeaderGeneriModal('<label>Agregar Calibración</label>');
+        _appendToHeaderGeneriModal('<h5>Fecha</h5>');
+        _appendToHeaderGeneriModal('<input id="FechaCalibracion" class="form-control" />'); 
+        $("#FechaCalibracion").datetimepicker({
+            format: "D/M/YYYY"
+        });
+        _appendToHeaderGeneriModal('<h5>Laboratorio</h5>');
+        _appendToHeaderGeneriModal('<input id="Laboratorio" class="form-control" />');
+        _appendToHeaderGeneriModal('<h5>Observaciones</h5>');
+        _appendToHeaderGeneriModal('<textarea id="ObservacionesC" class="form-control"></textarea>');  
+        _appendToFooterGeneriModal('<input class="button" id="btnAgregarCalibracion" type="button" value="Agregar" />');
+        $("#btnAgregarCalibracion").click(() => {
+            debugger;
+            if ($("#FechaCalibracion").val() != '' && $("#Laboratorio").val() != '') {
+                _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.IngresarACalibracionEquipo, VerbosREST.POST, JSON.stringify({
+                    sessionToken: UsuarioSesion.tokenSesion,
+                    calibracion: {
+                        IdEquipo: equipo.IdEquipo,
+                        FechaCalibracion: $("#FechaCalibracion").val(),
+                        Laboratorio: $("#Laboratorio").val(),
+                        Observaciones: $("#ObservacionesC").val(),
+                        IdUsuarioCreacion: UsuarioSesion.IdUsuario
+                    }
+                }))
+                    .then(response => {
+                        _closeGenericModal();
+                        ConsultarEquipo();
+                    });
+            }
+            else
+                swal({
+                    text: 'Por favor ingresar la Fecha y el Laboratorio para crear.',
+                    title: swalTitle,
+                    icon: "error"
+                });
+        });
+        _openGenericModal();
+    }
+
+   
 </script>
 <h3 class="text-center" id="title">ADMINISTRAR EQUIPO</h3>
 <div class="card">
@@ -39,9 +269,9 @@
         <div>
             <h5>IdEquipo</h5>
             <input id="IdEquipo" class="form-control" disabled />
-            <h5>Area</h5>
+            <h5>área</h5>
             <input id="Area" class="form-control" />
-            <h5>SerieIDInterno</h5>
+            <h5>Serie ID Interno</h5>
             <input id="SerieIDInterno" class="form-control" />
             <h5>Tipo Equipo</h5>
             <select id="IdTipoEquipo" class="form-control"></select>
@@ -51,35 +281,37 @@
         <div>
             <h5>Modelo</h5>
             <input id="Modelo" class="form-control" />
-            <h5>RangoMedicion</h5>
+            <h5>Rango Medición</h5>
             <input id="RangoMedicion" class="form-control" />
             <h5>Tolerancia</h5>
             <input id="Tolerancia" class="form-control" />
             <h5>Calibrado</h5>
             <input id="Calibrado" type="checkbox" />
+            <h5>Activo</h5>
+            <input id="Activo" type="checkbox" />
         </div>
         <div>
-            <h5>PeriodoCalibracion</h5>
+            <h5>Período Calibración (días)</h5>
             <input id="PeriodoCalibracion" class="form-control" />
-            <h5>FechaUltimaCalibracion</h5>
+            <h5>Fecha Última Calibración</h5>
             <input id="FechaUltimaCalibracionString" class="form-control" disabled />
-            <h5>FechaProximaCalibracion</h5>
+            <h5>Fecha Próxima Calibración</h5>
             <input id="FechaProximaCalibracion" class="form-control"/>
-            <h5>PeriodoVerificacion</h5>
+            <h5>Periodo Verificación</h5>
             <input id="PeriodoVerificacion" class="form-control" />
-            <h5>FechaUltimaVerificacionLaboratorio</h5>
+            <h5>Fecha Última Verificacion Laboratorio</h5>
             <input id="FechaUltimaVerificacionLaboratorioString" class="form-control" disabled />
-            <h5>FechaProximoMantenimiento</h5>
+            <h5>Fecha Próximo Mantenimiento</h5>
             <input id="FechaProximoMantenimiento" class="form-control" />
         </div>
         <div>
-            <h5>FechaCreacion</h5>
+            <h5>Fecha Creación</h5>
             <input id="FechaCreacion" class="form-control" disabled />
-            <h5>IdUsuarioCreacion</h5>
+            <h5>Id Usuario Creación</h5>
             <input id="IdUsuarioCreacion" class="form-control" disabled />
-            <h5>FechaModificacion</h5>
+            <h5>Fecha Modificación</h5>
             <input id="FechaModificacion" class="form-control" disabled />
-            <h5>IdUsuarioModificacion</h5>
+            <h5>Id Usuario Modificación</h5>
             <input id="IdUsuarioModificacion" class="form-control" disabled />
             <input type="button" class="button" value="Actualizar" style="width:100%" onclick="Actualizar();" />
         </div>
@@ -88,14 +320,15 @@
 <div class="card">
     <h3>Calibraciones Equipos</h3>
     <div id="divCalibracionesEquipos"></div>
-    <input type="button" class="button" value="Agregar Calibración" onclick="AbrirAgregarCalibracionesEquipos();" />
+    <input type="button" class="button" value="Agregar Calibración" onclick="AbrirAgregarCalibracionesEquipo();" />
 </div>
 <div class="card">
     <h3>Verificaciones Lab. Equipos</h3>
     <div id="divVerificacionesLabEquipos"></div>
-    <input type="button" class="button" value="Agregar Verificación Lab. Equipos" onclick="AbrirAgregarVerificacionesLabEquipos();" />
+    <input type="button" class="button" value="Agregar Verificación Lab. Equipos" onclick="AbrirAgregarVerificacionesLabEquipo();" />
 </div>
 <div class="card">
     <h3>Trámites Equipo</h3>
     <div id="divTramitesEquipo"></div>
+    <div id="divBtnTramite"></div>
 </div>

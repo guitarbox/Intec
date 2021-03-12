@@ -124,3 +124,5 @@ C:\Users\alan.sierra\OneDrive\Documentos\Alan\Interius\Intec\Test\obj\Debug\Test
 C:\Users\alan.sierra\OneDrive\Documentos\Alan\Interius\Intec\Test\obj\Debug\Test.csproj.CopyComplete
 C:\Users\alan.sierra\OneDrive\Documentos\Alan\Interius\Intec\Test\obj\Debug\Test.exe
 C:\Users\alan.sierra\OneDrive\Documentos\Alan\Interius\Intec\Test\obj\Debug\Test.pdb
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\Test\bin\Debug\Newtonsoft.Json.dll
+D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\Test\bin\Debug\Newtonsoft.Json.xml

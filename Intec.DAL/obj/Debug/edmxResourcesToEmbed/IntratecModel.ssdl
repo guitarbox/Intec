@@ -103,6 +103,7 @@
     <Property Name="FechaModificacion" Type="datetime" />
     <Property Name="IdUsuarioModificacion" Type="int" />
     <Property Name="FechaProximoMantenimiento" Type="datetime" />
+    <Property Name="Activo" Type="bit" Nullable="false" />
   </EntityType>
   <EntityType Name="EquiposVisita">
     <Key>

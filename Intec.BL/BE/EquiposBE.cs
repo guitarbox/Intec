@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AutoMapper;
+using Intec.BL.DTO;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -31,7 +33,9 @@ namespace Intec.BL.BE
 
         public DTO.Equipos ObtenerEquipo(int IdEquipo)
         {
-            return MapperConfig.Config.MapperEquipos.Map<DTO.Equipos>(new DAL.TE.EquiposTE().ObtenerEquipo(IdEquipo));
+            DTO.Equipos equipo = MapperConfig.Config.MapperEquipos.Map<DTO.Equipos>(new DAL.TE.EquiposTE().ObtenerEquipo(IdEquipo));
+            equipo.TramitesEquipo = equipo.TramitesEquipo.OrderByDescending(d => d.FechaCreacion).ToList();
+            return equipo;
         }
 
         //Editar no hay
@@ -56,6 +60,14 @@ namespace Intec.BL.BE
         public void IngresarVerificacionLAB(DTO.VerificacionesLabEquipos Verificacion)
         {
             new DAL.TE.EquiposTE().IngresarVerificacionLAB(MapperConfig.Config.MapperEquipos.Map<DAL.VerificacionesLabEquipos>(Verificacion));
+        }
+
+        public void ActualizarEquipo(Equipos equipos, int IdUsuarioModificacion)
+        {
+            equipos.FechaProximaCalibracion = string.IsNullOrEmpty(equipos.FechaProximaCalibracionString) ? default : DateTime.Parse(equipos.FechaProximaCalibracionString, new CultureInfo("es-Co"));
+            equipos.FechaProximoMantenimiento = string.IsNullOrEmpty(equipos.FechaProximoMantenimientoString) ? default : DateTime.Parse(equipos.FechaProximoMantenimientoString, new CultureInfo("es-Co"));
+            new DAL.TE.EquiposTE().ActualizarEquipo(MapperConfig.Config.MapperEquipos.Map<DAL.Equipos>(equipos), IdUsuarioModificacion);
+
         }
 
         //Ingresar Calibraciones Equipos

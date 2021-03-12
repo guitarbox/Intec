@@ -72,7 +72,7 @@ namespace Intec.DAL.TE
             {
                 if (ctx.UsuariosEquipos.Where(ue => ue.IdEquipo == IdEquipo).FirstOrDefault() == null)
                 {
-                    ctx.Equipos.Remove(ctx.Equipos.Where(e => e.IdEquipo == IdEquipo).FirstOrDefault());
+                    ctx.Equipos.Where(e => e.IdEquipo == IdEquipo).FirstOrDefault().Activo = false;
                     ctx.SaveChanges();
                 }
                 else
@@ -138,7 +138,7 @@ namespace Intec.DAL.TE
             using(var ctx = new DB_A66D31_intratecPrbEntities1())
             {
                 int sec = 0;
-                try { ctx.VerificacionesLabEquipos.Where(v=>v.IdEquipo == Verificacion.IdEquipo).Count(); } catch { }
+                try { sec = ctx.VerificacionesLabEquipos.Where(v=>v.IdEquipo == Verificacion.IdEquipo).Count(); } catch { }
                 sec += 1;
 
                 Verificacion.FechaCreacion = DateTime.Now;
@@ -154,12 +154,36 @@ namespace Intec.DAL.TE
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
                 int sec = 0;
-                try { ctx.CalibracionesEquipos.Where(v => v.IdEquipo == Calibracion.IdEquipo).Count(); } catch { }
+                try { sec = ctx.CalibracionesEquipos.Where(v => v.IdEquipo == Calibracion.IdEquipo).Count(); } catch { }
                 sec += 1;
 
                 Calibracion.FechaCreacion = DateTime.Now;
                 Calibracion.Secuencia = sec;
                 ctx.CalibracionesEquipos.Add(Calibracion);
+                ctx.SaveChanges();
+            }
+        }
+
+        public void ActualizarEquipo(Equipos equipos, int idUsuarioModificacion)
+        {
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                Equipos equipoAModificar = ctx.Equipos.Where(e => e.IdEquipo == equipos.IdEquipo).FirstOrDefault();
+                equipoAModificar.Activo = equipos.Activo;
+                equipoAModificar.Area = equipos.Area;
+                equipoAModificar.Calibrado = equipos.Calibrado;
+                equipoAModificar.FechaProximaCalibracion = equipos.FechaProximaCalibracion;
+                equipoAModificar.FechaProximoMantenimiento = equipos.FechaProximoMantenimiento;
+                equipoAModificar.IdMarcaEquipo = equipos.IdMarcaEquipo;
+                equipoAModificar.IdTipoEquipo = equipos.IdTipoEquipo;
+                equipoAModificar.Modelo = equipos.Modelo;
+                equipoAModificar.PeriodoCalibracion = equipos.PeriodoCalibracion;
+                equipoAModificar.PeriodoVerificacion = equipos.PeriodoVerificacion;
+                equipoAModificar.SerieIDInterno = equipos.SerieIDInterno;
+                equipoAModificar.Tolerancia = equipos.Tolerancia;
+                
+                equipoAModificar.IdUsuarioModificacion = idUsuarioModificacion;
+                equipoAModificar.FechaModificacion = DateTime.Now;
                 ctx.SaveChanges();
             }
         }
