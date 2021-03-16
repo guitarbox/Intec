@@ -81,7 +81,7 @@ namespace Intec.DAL.TE
         }
 
         //4. Tramitar Equipo a Inspector
-        public void TramitarEquipoInspector(int IdEquipo, int IdInspector, int IdUsuarioTramita, string Tramite, string Observaciones)
+        public void TramitarEquipoInspector(int IdEquipo, int? IdInspector, int IdUsuarioTramita, string Tramite, string Observaciones)
         {
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
@@ -93,7 +93,7 @@ namespace Intec.DAL.TE
                 UsuariosEquipos ue;
                 switch (Tramite) {
                     case "ASIGNACION": 
-                        ctx.UsuariosEquipos.Add(new UsuariosEquipos() { IdEquipo = IdEquipo, IdInspector = IdInspector, IdUsuarioAsigna = IdUsuarioTramita, FechaAsignacion = now, Estado = "P" }); 
+                        ctx.UsuariosEquipos.Add(new UsuariosEquipos() { IdEquipo = IdEquipo, IdInspector = IdInspector.Value, IdUsuarioAsigna = IdUsuarioTramita, FechaAsignacion = now, Estado = "P" }); 
                         break;
                     case "ACEP_ASIGNACION":
                         ue = ctx.UsuariosEquipos.Where(e=>e.IdEquipo == IdEquipo && e.IdInspector == IdInspector && e.Estado == "P").FirstOrDefault(); 
@@ -186,6 +186,21 @@ namespace Intec.DAL.TE
                 equipoAModificar.FechaModificacion = DateTime.Now;
                 ctx.SaveChanges();
             }
+        }
+
+        public List<UsuariosEquipos> ObtenerEquiposUsuario(int IdInspector)
+        {
+            List<UsuariosEquipos> res = new List<UsuariosEquipos>();
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                res = ctx.UsuariosEquipos.Where(u => u.IdInspector == IdInspector).ToList();
+                foreach (UsuariosEquipos ue in res)
+                {
+                    ctx.Entry(ue).Reference(r => r.Equipos).Load();
+                    ctx.Entry(ue).Reference(r => r.Usuarios).Load();
+                }
+            }
+            return res;
         }
     }
 }

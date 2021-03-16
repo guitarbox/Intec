@@ -258,7 +258,7 @@
     <Content Include="Views\Clientes\Administracion.cshtml" />
     <Content Include="Views\Clientes\Administrar.cshtml" />
     <Content Include="Views\Equipos\Administracion.cshtml" />
-    <Content Include="Views\Equipos\AceptacionRechazo.cshtml" />
+    <Content Include="Views\Equipos\AcepDevRechazo.cshtml" />
     <Content Include="Views\Equipos\Administrar.cshtml" />
   </ItemGroup>
   <ItemGroup>

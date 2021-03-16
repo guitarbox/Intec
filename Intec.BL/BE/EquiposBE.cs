@@ -50,7 +50,7 @@ namespace Intec.BL.BE
 
         //Tramitar Equipo a Inspector
 
-        public void TramitarEquipoInspector(int IdEquipo, int IdInspector, int IdUsuarioTramita, string Tramite, string Observaciones)
+        public void TramitarEquipoInspector(int IdEquipo, int? IdInspector, int IdUsuarioTramita, string Tramite, string Observaciones)
         {
             new DAL.TE.EquiposTE().TramitarEquipoInspector(IdEquipo, IdInspector, IdUsuarioTramita, Tramite, Observaciones);
         }
@@ -77,6 +77,10 @@ namespace Intec.BL.BE
             new DAL.TE.EquiposTE().IngresarCalibracionEq(MapperConfig.Config.MapperEquipos.Map<DAL.CalibracionesEquipos>(Calibracion));
         }
 
+        public List<DTO.UsuariosEquipos> ObtenerEquiposUsuario(int IdInspector)
+        {
+            return MapperConfig.Config.MapperUsuariosEquipos.Map<List<DTO.UsuariosEquipos>>( new DAL.TE.EquiposTE().ObtenerEquiposUsuario(IdInspector));
+        }
         #endregion
     }
 }

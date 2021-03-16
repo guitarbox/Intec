@@ -121,11 +121,22 @@ namespace Intec.WebApi.Controllers
             {
                 try
                 {
-                    new Intec.BL.BE.EquiposBE().TramitarEquipoInspector(int.Parse(Token["idEquipo"].ToString()),
-                                                                        int.Parse(Token["idInspector"].ToString()),
-                                                                        int.Parse(Token["idUsuarioTramita"].ToString()),
-                                                                        Token["tramite"].ToString(),
-                                                                        Token["observaciones"].ToString());
+                    if (string.IsNullOrEmpty(Token["idInspector"].ToString()))
+                    {
+                        new Intec.BL.BE.EquiposBE().TramitarEquipoInspector(int.Parse(Token["idEquipo"].ToString()),
+                                                                            null,
+                                                                            int.Parse(Token["idUsuarioTramita"].ToString()),
+                                                                            Token["tramite"].ToString(),
+                                                                            Token["observaciones"].ToString());
+                    }
+                    else
+                    {
+                        new Intec.BL.BE.EquiposBE().TramitarEquipoInspector(int.Parse(Token["idEquipo"].ToString()),
+                                                                            int.Parse(Token["idInspector"].ToString()),
+                                                                            int.Parse(Token["idUsuarioTramita"].ToString()),
+                                                                            Token["tramite"].ToString(),
+                                                                            Token["observaciones"].ToString());
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -174,6 +185,30 @@ namespace Intec.WebApi.Controllers
                 try
                 {
                     new Intec.BL.BE.EquiposBE().IngresarCalibracionEq(Token["calibracion"].ToObject<Intec.BL.DTO.CalibracionesEquipos>());
+                }
+                catch (Exception ex)
+                {
+                    error = true;
+                    msgError = ex.Message;
+                }
+
+                SetErrorResponse(error);
+                SetMsgErrorResponse(msgError);
+            }
+            return response;
+        }
+        
+        [HttpPost]
+        [Route("api/Equipos/ObtenerEquiposUsuario")]
+        public JObject ObtenerEquiposUsuario([FromBody]JObject Token)
+        {
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+            if (validToken)
+            {
+                try
+                {
+                    SetDataResponse( new Intec.BL.BE.EquiposBE().ObtenerEquiposUsuario(int.Parse(Token["idInspector"].ToString())));
                 }
                 catch (Exception ex)
                 {

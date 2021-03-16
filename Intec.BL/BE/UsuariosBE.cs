@@ -93,5 +93,10 @@ namespace Intec.BL.BE
         {
             return new DAL.TE.UsuariosTE().ValidarSessionToken(token);
         }
+
+        public List<DTO.Usuarios> GetUsuariosByIdRol(int IdRol)
+        {
+            return MapperConfig.Config.MapperUsuariosSimple.Map<List<DTO.Usuarios>>( new DAL.TE.UsuariosTE().GetUsuariosByIdRol(IdRol));
+        }
     }
 }

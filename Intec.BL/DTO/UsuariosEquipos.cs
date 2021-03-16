@@ -13,5 +13,7 @@ namespace Intec.BL.DTO
         public string Estado { get; set; }
         public int IdUsuarioAsigna { get; set; }
         public System.DateTime FechaAsignacion { get; set; }
+        public Equipos Equipos { get; set; }
+        public Usuarios Usuarios { get; set; }
     }
 }

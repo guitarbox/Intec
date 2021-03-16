@@ -148,7 +148,9 @@
         });
 
         //Acá se muestra el botón que aplica según el estado
+        $("#divBtnTramite").empty();
         let Tramite = '';
+        debugger;
         if (equipo.TramitesEquipo.length == 0) {
             $("#divBtnTramite").append('<input type="button" class="button" value="Asignar" id="btnTramite" />');
             Tramite = 'ASIGNACION';
@@ -165,13 +167,61 @@
         $("#btnTramite").click(() => {
             switch (Tramite) {
                 case "ASIGNACION":
-                    alert('vamos a asignar');
+                    _resetGenericModal();
+                    _appendToHeaderGeneriModal('<label>Asignar Equipo</label>')
+                    _appendToBodyGeneriModal('<h5>Inspector</h5>');
+                    _appendToBodyGeneriModal('<select class="form-control" id="inspector"></select>');
+
                     //Cargar los inspectores
+                    _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.GetUsuariosByIdRol, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion, idRol: 2 }))
+                        .then(response => {
+                            $("#inspector").append('<option value="">Seleccione Inspector...</option>');
+                            response.data.forEach(inspector => {
+                                $("#inspector").append(`<option value="${inspector.IdUsuario}">${inspector.Nombres} ${inspector.Apellidos}</option>`);
+                            });                            
+                        });
                     //Observaciones
+                    _appendToBodyGeneriModal('<h5>Observaciones</h5>');
+                    _appendToBodyGeneriModal('<textarea class="form-control" id="obsAsignacion"></textarea>');
+                    _appendToFooterGeneriModal('<input class="button" id="btnAgregar" value="Agregar" type="button" />');
+                    $("#btnAgregar").click(() => {
+                        _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.TramitarEquipoInspector, VerbosREST.POST, JSON.stringify({
+                            sessionToken: UsuarioSesion.tokenSesion,
+                            idEquipo: equipo.IdEquipo,
+                            idInspector: $("#inspector").val(),
+                            idUsuarioTramita: UsuarioSesion.IdUsuario,
+                            tramite: Tramite,
+                            observaciones: $("#obsAsignacion").val()
+                        }))
+                            .then(response => {
+                                _closeGenericModal();
+                                ConsultarEquipo();
+                            })
+                    });
+                    _openGenericModal();
                     break;                
                 case "ACEP_DEVOLUCION":                    
-                    alert('vamos a aceptar la devolución');
+                    _resetGenericModal();
+                    _appendToHeaderGeneriModal('<label>Aceptar Devolución</label>')                    
                     //Observaciones
+                    _appendToBodyGeneriModal('<h5>Observaciones</h5>');
+                    _appendToBodyGeneriModal('<textarea class="form-control" id="obsAcepDev"></textarea>');
+                    _appendToFooterGeneriModal('<input class="button" id="btnAgregar" value="Agregar" type="button" />');
+                    $("#btnAgregar").click(() => {
+                        _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.TramitarEquipoInspector, VerbosREST.POST, JSON.stringify({
+                            sessionToken: UsuarioSesion.tokenSesion,
+                            idEquipo: equipo.IdEquipo,
+                            idInspector: equipo.TramitesEquipo[0].IdInspector,
+                            idUsuarioTramita: UsuarioSesion.IdUsuario,
+                            tramite: Tramite,
+                            observaciones: $("#obsAcepDev").val()
+                        }))
+                            .then(response => {
+                                _closeGenericModal();
+                                ConsultarEquipo();
+                            })
+                    });
+                    _openGenericModal();
                     break;
             }
         });

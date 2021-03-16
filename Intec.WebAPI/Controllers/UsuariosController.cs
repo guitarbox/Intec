@@ -89,6 +89,32 @@ namespace Intec.WebApi.Controllers
 
             return response;
         }
+        
+        [HttpPost]
+        [Route("api/Usuarios/GetUsuariosByIdRol")]
+        public JObject GetUsuariosByIdRol([FromBody]JObject Token)
+        {
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+
+            if (validToken)
+            {
+                try
+                {
+                    SetDataResponse(new Intec.BL.BE.UsuariosBE().GetUsuariosByIdRol(int.Parse(Token["idRol"].ToString())));
+                }
+                catch (Exception ex)
+                {
+                    error = true;
+                    msgError = ex.Message;
+                }
+
+                SetErrorResponse(error);
+                SetMsgErrorResponse(msgError);
+            }
+
+            return response;
+        }
 
         //Rutas adicionales
         [Route("api/Usuarios/LogIn")]

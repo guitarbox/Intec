@@ -72,7 +72,10 @@ namespace Intec.BL.MapperConfig
                     cfg.CreateMap<DAL.MarcasEquipos, DTO.MarcasEquipos>();
                     cfg.CreateMap<DAL.TiposEquipo, DTO.TiposEquipo>();
                     cfg.CreateMap<DAL.TramitesEquipo, DTO.TramitesEquipo>();
-                    cfg.CreateMap<DAL.UsuariosEquipos, DTO.UsuariosEquipos>();
+                    cfg.CreateMap<DAL.UsuariosEquipos, DTO.UsuariosEquipos>()
+                        .ForMember(dest => dest.Usuarios, opt => opt.Ignore())
+                        .ForMember(dest => dest.Equipos, opt => opt.Ignore())
+                    ;
 
                     cfg.CreateMap<DTO.VerificacionesLabEquipos, DAL.VerificacionesLabEquipos>();
                     cfg.CreateMap<DTO.Equipos, DAL.Equipos>()
@@ -110,6 +113,32 @@ namespace Intec.BL.MapperConfig
 
                     cfg.CreateMap<DAL.MarcasEquipos, DTO.MarcasEquipos>();
                     cfg.CreateMap<DAL.TiposEquipo, DTO.TiposEquipo>();
+
+                });
+
+                return config.CreateMapper();
+            }
+        }
+        
+        public static AutoMapper.IMapper MapperUsuariosEquipos
+        {
+            get
+            {
+                var config = new AutoMapper.MapperConfiguration(cfg => {
+
+                    cfg.CreateMap<DAL.UsuariosEquipos, DTO.UsuariosEquipos>();
+                    cfg.CreateMap<DAL.Usuarios, DTO.Usuarios>()
+                    .ForMember(dest => dest.Roles, opt => opt.Ignore())
+                    .ForMember(dest => dest.TiposIdentificacion, opt => opt.Ignore())
+                    ;
+                    cfg.CreateMap<DAL.Equipos, DTO.Equipos>()
+                    .ForMember(dest => dest.CalibracionesEquipos, opt => opt.Ignore())
+                    .ForMember(dest => dest.MarcasEquipos, opt => opt.Ignore())
+                    .ForMember(dest => dest.TiposEquipo, opt => opt.Ignore())
+                    .ForMember(dest => dest.TramitesEquipo, opt => opt.Ignore())
+                    .ForMember(dest => dest.VerificacionesLabEquipos, opt => opt.Ignore())
+                    .ForMember(dest => dest.UsuariosEquipos, opt => opt.Ignore())
+                    ;
 
                 });
 

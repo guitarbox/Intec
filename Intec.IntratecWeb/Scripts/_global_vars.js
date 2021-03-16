@@ -88,6 +88,7 @@ var URI_SERVICE = {
     ObtenerUsuario: 'api/Usuarios/ObtenerUsuario',
     CrearUsuario: 'api/Usuarios/CrearUsuario',
     ActualizarUsuario: 'api/Usuarios/ActualizarUsuario',
+    GetUsuariosByIdRol: 'api/Usuarios/GetUsuariosByIdRol',
 
     LogIn: 'api/Usuarios/LogIn',
     RecuperarContrasena: 'api/Usuarios/RecuperarContrasena',
@@ -114,6 +115,7 @@ var URI_SERVICE = {
     TramitarEquipoInspector: 'api/Equipos/TramitarEquipoInspector',
     IngresarVerificacionALaboratorio: 'api/Equipos/IngresarVerificacionALaboratorio',
     IngresarACalibracionEquipo: 'api/Equipos/IngresarACalibracionEquipo',
+    ObtenerEquiposUsuario: 'api/Equipos/ObtenerEquiposUsuario',
 
     //Visitas
 

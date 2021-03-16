@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "AceptacionRechazo";
+}
+<script>
+    $(document).ready(() => {
+        _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.ObtenerEquiposUsuario, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion, idInspector: UsuarioSesion.IdUsuario }))
+            .then(response => {
+                debugger;
+            });
+    });
+</script>
+<h3 class="text-center" id="title">ACEPTACIÓN / DEVOLUCIÓN / RECHAZO</h3>
+acá cargo la lista y doy la opción que corresponda
+
+
