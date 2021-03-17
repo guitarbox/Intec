@@ -28,7 +28,13 @@ namespace Intec.BL.BE
 
         public List<DTO.Equipos> ObtenerEquipos(int IdMarca, int IdTipoEquipo, string filtro)
         {
-            return MapperConfig.Config.MapperEquiposSimple.Map<List<DTO.Equipos>>( new DAL.TE.EquiposTE().ObtenerEquipos(IdMarca, IdTipoEquipo, filtro));
+            List<DTO.Equipos> res = new List<Equipos>();
+            res = MapperConfig.Config.MapperEquiposSimple.Map<List<DTO.Equipos>>(new DAL.TE.EquiposTE().ObtenerEquipos(IdMarca, IdTipoEquipo, filtro));
+            foreach(DTO.Equipos equipo in res)
+            {
+                equipo.PendTramiteAdmin = new DAL.TE.EquiposTE().PendTramiteAdmin(equipo.IdEquipo);
+            }
+            return res;
         }
 
         public DTO.Equipos ObtenerEquipo(int IdEquipo)

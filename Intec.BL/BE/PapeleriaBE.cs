@@ -22,7 +22,7 @@ namespace Intec.BL.BE
 
         public List<DTO.Formatos> ConsultarFormatos()
         {
-            return MapperConfig.Config.MapperPapeleria.Map<List<DTO.Formatos>>(new DAL.TE.PapeleriaTE().ConsultarFormatos());
+            return MapperConfig.Config.MapperPapeleriaSimple.Map<List<DTO.Formatos>>(new DAL.TE.PapeleriaTE().ConsultarFormatos());
         }
 
         public DTO.Formatos ConsultarFormato(int IdFormato)

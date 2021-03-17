@@ -134,6 +134,7 @@
     <Compile Include="Controllers\ClientesController.cs" />
     <Compile Include="Controllers\EquiposController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PapeleriaController.cs" />
     <Compile Include="Controllers\SessionController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Global.asax.cs">
@@ -260,6 +261,8 @@
     <Content Include="Views\Equipos\Administracion.cshtml" />
     <Content Include="Views\Equipos\AcepDevRechazo.cshtml" />
     <Content Include="Views\Equipos\Administrar.cshtml" />
+    <Content Include="Views\Papeleria\Administracion.cshtml" />
+    <Content Include="Views\Papeleria\Administrar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Administrar";
+}
+<script>
+    var formato = null;
+
+    $(document).ready(() => {
+        ConsultarFormato();
+    });
+
+    function ConsultarFormato() {
+        _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.ConsultarFormato, VerbosREST.POST,
+            JSON.stringify({
+                sessionToken: UsuarioSesion.tokenSesion,
+                idFormato: window.location.href.split('=')[1]
+            }))
+            .then(response => {
+                formato = response.data;
+                MostrarFormato();
+            });
+    }
+
+    function MostrarFormato() {
+        console.log(formato);
+    }
+</script>
+<h2>Administrar</h2>
+

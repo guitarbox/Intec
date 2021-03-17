@@ -31,7 +31,12 @@
                     { data: "Calibrado", title: 'Calibrado' },
                     {
                         data: null, render: function (data, type, full, meta) {
-                            return '<a onclick="window.location.href = \'../Equipos/Administrar?ie=' + full.IdEquipo + '\';"><span class="fa fa-cog"></span></a>';
+                            return full.PendTramiteAdmin == true ? '<i title="Tiene pendiente aceptar devolución" style="color:red; cursor:pointer" class="fas fa-exclamation-triangle"></i>' : '';
+                        }
+                    },
+                    {
+                        data: null, render: function (data, type, full, meta) {
+                            return '<a style="cursor:pointer" onclick="window.location.href = \'../Equipos/Administrar?ie=' + full.IdEquipo + '\';"><span class="fa fa-cog fa-2x"></span></a>';
                         }
                     }
                 ];

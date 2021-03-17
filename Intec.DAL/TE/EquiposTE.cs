@@ -202,5 +202,19 @@ namespace Intec.DAL.TE
             }
             return res;
         }
+
+        public bool PendTramiteAdmin(int IdEquipo)
+        {
+            bool res = false;
+            using(var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                TramitesEquipo t = ctx.TramitesEquipo.Where(e => e.IdEquipo == IdEquipo).OrderByDescending(d => d.Secuencia).FirstOrDefault();
+                if(t != null)
+                {
+                    res = t.Tramite.Equals("DEVOLUCION");
+                }
+            }
+            return res;
+        }
     }
 }

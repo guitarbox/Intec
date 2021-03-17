@@ -18,5 +18,8 @@ namespace Intec.BL.DTO
         public int IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaModificacion { get; set; }
         public Nullable<int> IdUsuarioModificacion { get; set; }
+        public List<ConsecutivosFormatos> ConsecutivosFormatos { get; set; }
+        
+        public List<TramiteConsecutivoFormato> TramiteConsecutivoFormato { get; set; }
     }
 }

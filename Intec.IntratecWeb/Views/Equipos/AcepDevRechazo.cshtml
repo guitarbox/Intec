@@ -4,13 +4,73 @@
 }
 <script>
     $(document).ready(() => {
-        _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.ObtenerEquiposUsuario, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion, idInspector: UsuarioSesion.IdUsuario }))
-            .then(response => {
-                debugger;
-            });
+        ConsultarEquipos();
     });
+
+    function ConsultarEquipos() {
+        _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.ObtenerEquiposUsuario, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion, idInspector: UsuarioSesion.IdUsuario }))
+        .then(response => {
+            $("#divTblEquipos").empty();
+            $("#divTblEquipos").append('<table style="width:100%" id="tblEquipos"></table>');
+            let columnas = [
+                //{ data: "IdInspector", title: 'Id. Inspector' }, 
+                { data: "Equipos.SerieIDInterno", title: 'Serial Equipo' },
+                { data: "Estado", title: 'Estado' },
+                //{ data: "IdUsuarioAsigna", title: 'IdUsuarioAsigna' }, 
+                { data: "FechaAsignacion", title: 'FechaAsignacion' },
+                {
+                    data: null, render: function (data, type, full, meta) {
+                        let control = '';
+                        control = `<a style="cursor:pointer" onclick="Tramitar(${full.IdEquipo}, '${full.Estado == 'P' ? 'ACEP_ASIGNACION' : full.Estado == 'A' ? 'DEVOLUCION' : ''}');">${full.Estado == 'P' ? 'ACEPTAR' : full.Estado == 'A' ? 'DEVOLVER' : 'DEVUELTO'}</a>`;
+                        if (full.Estado == 'P') control = `${control} / <a style="cursor:pointer" onclick="Tramitar(${full.IdEquipo}, 'RECHAZO');" >RECHAZAR</a>`
+                        return control;
+                    }
+                }
+                //{ data: "Usuarios", title: 'Id. Ciudad' }, 
+            ];
+            $('#tblEquipos').DataTable({
+                data: response.data,
+                columns: columnas,
+                language: _language_options_table,
+                //
+                dom: 'Bfrtip',
+                buttons: [
+                    //{ extend: 'copy', className: 'btn-info' },
+                    //{ extend: 'csv', className: 'btn-info' },
+                    //{ extend: 'excel', className: 'btn-info', title: 'XLS-File' },
+                    //{ extend: 'pdf', className: 'btn-info', title: $('title').text() },
+                    //{ extend: 'print', className: 'btn-info' }
+                ]
+            });
+        });
+    }
+
+    function Tramitar(IdEquipo, Tramite) {
+        if (Tramite != '') {
+            _resetGenericModal();
+            _appendToHeaderGeneriModal(`<label>Trámite: ${Tramite}</label>`)
+            _appendToBodyGeneriModal('<textarea id="obs" class="form-control" placeholder="Observaciones"></textarea>');
+            _appendToFooterGeneriModal('<input type="button" id="btnTramite" value="Tramitar" class="button"/>');
+            $("#btnTramite").click(() => {
+                _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.TramitarEquipoInspector, VerbosREST.POST, JSON.stringify({
+                    sessionToken: UsuarioSesion.tokenSesion,
+                    idEquipo: IdEquipo,
+                    idInspector: UsuarioSesion.IdUsuario,
+                    idUsuarioTramita: UsuarioSesion.IdUsuario,
+                    tramite: Tramite,
+                    observaciones: $("#obs").val()
+                }))
+                    .then(response => {
+                        _closeGenericModal();
+                        ConsultarEquipos();
+                    })
+            });
+            _openGenericModal();
+        }
+    }
 </script>
 <h3 class="text-center" id="title">ACEPTACIÓN / DEVOLUCIÓN / RECHAZO</h3>
-acá cargo la lista y doy la opción que corresponda
-
-
+<div style="padding:0px 10px">
+    <h4>Equipos asignados a mí:</h4>
+    <div id="divTblEquipos"></div>
+</div>

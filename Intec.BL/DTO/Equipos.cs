@@ -38,5 +38,6 @@ namespace Intec.BL.DTO
         public List<VerificacionesLabEquipos> VerificacionesLabEquipos { get; set; }
         public bool Activo { get; set; }
         public List<UsuariosEquipos> UsuariosEquipos { get; set; }
+        public bool PendTramiteAdmin { get; set; }
     }
 }

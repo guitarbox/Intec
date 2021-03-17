@@ -16,6 +16,7 @@ namespace Intec.DAL.TE
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
                 FormatoCrear.FechaCreacion = DateTime.Now;
+                FormatoCrear.Activo = true;
                 ctx.Formatos.Add(FormatoCrear);
                 ctx.SaveChanges();
             }
@@ -63,6 +64,8 @@ namespace Intec.DAL.TE
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
                 res = ctx.Formatos.Where(f => f.IdFormato == IdFormato).FirstOrDefault();
+                res.ConsecutivosFormatos.ToList();
+                res.TramiteConsecutivoFormato.ToList();
             }
 
             return res;
@@ -76,7 +79,7 @@ namespace Intec.DAL.TE
                 Formatos formatoAEliminar = ctx.Formatos.Where(f => f.IdFormato == IdFormato).FirstOrDefault();
                 if (formatoAEliminar.ConsecutivosFormatos.Count == 0)
                 {
-                    ctx.Formatos.Remove(formatoAEliminar);
+                    formatoAEliminar.Activo = false;
                     ctx.SaveChanges();
                 }
                 else

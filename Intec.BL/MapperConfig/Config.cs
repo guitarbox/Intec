@@ -66,6 +66,7 @@ namespace Intec.BL.MapperConfig
                     .ForMember(dest => dest.FechaProximoMantenimientoString, opt => opt.MapFrom(src => src.FechaProximoMantenimiento == null ? "" : src.FechaProximoMantenimiento.Value.ToShortDateString()))
                     .ForMember(dest => dest.FechaUltimaCalibracionString, opt => opt.MapFrom(src => src.FechaUltimaCalibracion == null ? "" : src.FechaUltimaCalibracion.Value.ToShortDateString()))
                     .ForMember(dest => dest.FechaUltimaVerificacionLaboratorioString, opt => opt.MapFrom(src => src.FechaUltimaVerificacionLaboratorio == null ? "" : src.FechaUltimaVerificacionLaboratorio.Value.ToShortDateString()))
+                    .ForMember(dest => dest.PendTramiteAdmin, opt => opt.Ignore())
                     ;
                     cfg.CreateMap<DAL.CalibracionesEquipos, DTO.CalibracionesEquipos>();
                     cfg.CreateMap<DAL.VerificacionesLabEquipos, DTO.VerificacionesLabEquipos>();
@@ -109,6 +110,7 @@ namespace Intec.BL.MapperConfig
                         .ForMember(dest => dest.VerificacionesLabEquipos, opt => opt.Ignore())                        
                         .ForMember(dest => dest.TramitesEquipo, opt => opt.Ignore())
                         .ForMember(dest => dest.UsuariosEquipos, opt => opt.Ignore())
+                        .ForMember(dest => dest.PendTramiteAdmin, opt => opt.Ignore())
                     ;
 
                     cfg.CreateMap<DAL.MarcasEquipos, DTO.MarcasEquipos>();
@@ -138,6 +140,7 @@ namespace Intec.BL.MapperConfig
                     .ForMember(dest => dest.TramitesEquipo, opt => opt.Ignore())
                     .ForMember(dest => dest.VerificacionesLabEquipos, opt => opt.Ignore())
                     .ForMember(dest => dest.UsuariosEquipos, opt => opt.Ignore())
+                    .ForMember(dest => dest.PendTramiteAdmin, opt => opt.Ignore())
                     ;
 
                 });
@@ -150,14 +153,35 @@ namespace Intec.BL.MapperConfig
 
         #region Papeleria
 
+        public static AutoMapper.IMapper MapperPapeleriaSimple
+        {
+            get
+            {
+                var config = new AutoMapper.MapperConfiguration(cfg => {
+                    cfg.CreateMap<DAL.Formatos, DTO.Formatos>()
+                    .ForMember(dest => dest.ConsecutivosFormatos, opt => opt.Ignore())
+                    .ForMember(dest => dest.TramiteConsecutivoFormato, opt => opt.Ignore());
+
+                });
+
+                return config.CreateMapper();
+            }
+        }
+        
         public static AutoMapper.IMapper MapperPapeleria
         {
             get
             {
                 var config = new AutoMapper.MapperConfiguration(cfg => {
 
-                    cfg.CreateMap<DTO.Formatos, DAL.Formatos>();
                     cfg.CreateMap<DAL.Formatos, DTO.Formatos>();
+                    cfg.CreateMap<DAL.ConsecutivosFormatos, DTO.ConsecutivosFormatos>();
+                    cfg.CreateMap<DAL.TramiteConsecutivoFormato, DTO.TramiteConsecutivoFormato>();
+
+
+                    cfg.CreateMap<DTO.Formatos, DAL.Formatos>();
+                    
+                    
 
                 });
 

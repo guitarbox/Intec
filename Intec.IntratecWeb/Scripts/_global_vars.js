@@ -118,7 +118,6 @@ var URI_SERVICE = {
     ObtenerEquiposUsuario: 'api/Equipos/ObtenerEquiposUsuario',
 
     //Visitas
-
     ObtenerZonas: 'api/Visitas/ObtenerZonas',
     ObtenerZona: 'api/Visitas/ObtenerZona',
     CrearZona: 'api/Visitas/CrearZona',
@@ -132,7 +131,10 @@ var URI_SERVICE = {
     ConsultarVisita: 'api/Visitas/ConsultarVisita',
     ConsultaVisitas: 'api/Visitas/ConsultarVisitas',
 
-
+    //Papelería
+    ConsultarFormatos: 'api/Papeleria/ConsultarFormatos',
+    ConsultarFormato: 'api/Papeleria/ConsultarFormato',
+    EliminarFormato: 'api/Papeleria/EliminarFormato'
 };
 
 var _language_options_table =

@@ -10,7 +10,15 @@ textarea {
     max-width: 280px;
 }
 
+a {
+    cursor:pointer;
+    color:#484141
+}
 
+    a:hover {
+        cursor: pointer;
+        color: #C5CF31
+    }
 /* Styles for CleanLayout*/
 .bigContainer {
     height: 100vh;
