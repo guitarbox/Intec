@@ -21,9 +21,276 @@
             });
     }
 
-    function MostrarFormato() {
-        console.log(formato);
+    function MostrarFormato() {        
+        $("#IdFormato").val(formato.IdFormato);
+        $("#NroFormato").val(formato.NroFormato);
+        $("#Formato").val(formato.Formato);
+        $("#Separador").val(formato.Separador);
+        $("#Mascara").val(formato.Mascara);
+        if (formato.Activo == true)
+            $("#Activo").prop('checked', 'checked');
+        $("#FechaCreacion").val(formato.FechaCreacion);
+        $("#IdUsuarioCreacion").val(formato.IdUsuarioCreacion);
+        $("#FechaModificacion").val(formato.FechaModificacion);
+        $("#IdUsuarioModificacion").val(formato.IdUsuarioModificacion);
+
+        //ConsecutivosFormatos
+        let columnsC = [
+            { data: "Consecutivo", title: 'Consecutivo' },
+            { data: "IdInspector", title: 'IdInspector' },
+            { data: "IdEstadoConsecutivoInspector", title: 'IdEstadoConsecutivoInspector' },
+            { data: "IdVisita", title: 'IdVisita' },
+            { data: "FechaCreacion", title: 'FechaCreacion' },
+            { data: "IdUsuarioCreacion", title: 'IdUsuarioCreacion' },
+            { data: "FechaModificacion", title: 'FechaModificacion' },
+            { data: "IdUsuarioModificacion", title: 'IdUsuarioModificacion' }, 
+            {
+                data: null, render: function (data, type, full, meta) {
+                    let control = '';
+                    control += '<a onclick="VerTramiteConsecutivo(' + full.Consecutivo + ');"><span title="Ver Trámite Consecutivo" class="fa fa-eye fa-2x"></span></a>';
+                    if (full.IdEstadoConsecutivoInspector == 'B' || full.IdEstadoConsecutivoInspector == 'R')
+                        control += '<a onclick="AbrirAsignarConsecutivosAInspector(' + full.Consecutivo + ');"><span title="Asignar Consecutivo" class="fa fa-user fa-2x"></span></a>';
+                    if (full.IdEstadoConsecutivoInspector == 'B' || full.IdEstadoConsecutivoInspector == 'R')
+                        control += '<a onclick="AbrirAnularConsecutivos(' + full.Consecutivo + ');"><span title="Anular Consecutivo" class="fa fa-ban fa-2x"></span></a>';
+                    return control;
+                }
+            }
+        ];
+        $("#divConsecutivosFormatos").empty();
+        $("#divConsecutivosFormatos").append('<table id="tblConsecutivosFormatos" style="width:100%"></table>');        
+        $('#tblConsecutivosFormatos').DataTable({
+            data: formato.ConsecutivosFormatos,
+            columns: columnsC,
+            language: _language_options_table,
+            //
+            dom: 'Bfrtip',
+            buttons: []
+        });        
+    }
+
+    function ActualizarFormato() {
+        formato.IdFormato = $("#IdFormato").val();
+        formato.NroFormato = $("#NroFormato").val();
+        formato.Formato = $("#Formato").val();
+        formato.Separador = $("#Separador").val();
+        formato.Mascara = $("#Mascara").val();
+        formato.Activo = $("#Activo").is(':checked');
+
+        if (formato.NroFormato != '' && formato.Formato != '') {
+            _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.ActualizarFormato, VerbosREST.POST, JSON.stringify({
+                sessionToken: UsuarioSesion.tokenSesion,
+                formato,
+                idUsuarioModificacion: UsuarioSesion.IdUsuario
+            }))
+                .then(response => {
+                    _closeGenericModal();
+                    ConsultarFormato();
+                });
+        }
+        else {
+            swal({
+                text: 'Por favor ingrese el Nro del Formato y el Nombre para actualizar.',
+                title: swalTitle,
+                icon: "error"
+            });
+        }
+    }
+
+    function VerTramiteConsecutivo(Consecutivo) {
+        _resetGenericModal();
+        _appendToHeaderGeneriModal(`<label>Trámite Consecutivo ${Consecutivo} del Formato: ${formato.NroFormato}</label>`);
+        _appendToBodyGeneriModal('<table class="table" id="tblTramite"></table>');
+        $("#tblTramite").append(`<tr><td>IdInspector</td><td>Secuencia</td><td>Tramite</td><td>Observaciones</td><td>FechaCreacion</td><td>IdUsuarioCreacion</td></tr>`);
+        _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.ConsultarTramiteConsecutivoFormato, VerbosREST.POST, JSON.stringify({
+            sessionToken: UsuarioSesion.tokenSesion,
+            idFormato: formato.IdFormato,
+            consecutivo: Consecutivo
+        }))
+            .then(response => {
+                response.data.forEach(e => {
+                    $("#tblTramite").append(`<tr><td>${e.Usuarios == null ? '' : e.Usuarios.Nombres} ${e.Usuarios == null ? '' : e.Usuarios.Apellidos}</td><td>${e.Secuencia}</td><td>${e.Tramite}</td><td>${e.Observaciones}</td><td>${e.FechaCreacion}</td><td>${e.IdUsuarioCreacion}</td></tr>`);
+                });
+            });
+        _openGenericModal();
+    }
+
+    function AbrirIngresarConsecutivosABodega() {
+        _resetGenericModal();
+        _appendToHeaderGeneriModal(`<label>Ingresar Consecutivos a Bodega para Formato '${formato.NroFormato}'</label>`);
+        _appendToBodyGeneriModal('<h5>Consecutivo Inicial</h5>');
+        _appendToBodyGeneriModal('<input id="ConsecutivoInicial_IB" type="number" class="form-control" onchange="ValidarConsecutivos();" />');
+        _appendToBodyGeneriModal('<h5>Consecutivo Final</h5>');
+        _appendToBodyGeneriModal('<input id="ConsecutivoFinal_IB" type="number" class="form-control" onchange="ValidarConsecutivos();" />');
+        _appendToFooterGeneriModal('<input id="btnIngrearConsBodega" class="button" type="button" value="Ingresar" />');
+        $("#btnIngrearConsBodega").click(() => {
+            if ($("#ConsecutivoInicial_IB").val() != '' && $("#ConsecutivoFinal_IB").val() != '') {
+                _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.IngresarConsecutivosFormatoBodega, VerbosREST.POST, JSON.stringify({
+                    sessionToken: UsuarioSesion.tokenSesion,
+                    idFormato: formato.IdFormato,
+                    consecutivoInicial: $("#ConsecutivoInicial_IB").val(),
+                    consecutivoFinal: $("#ConsecutivoFinal_IB").val(),
+                    idUsuarioAsigna: UsuarioSesion.IdUsuario
+                }))
+                    .then(response => {
+                        _closeGenericModal();
+                        ConsultarFormato();
+                    });
+            }
+            else {
+                swal({
+                    text: 'Por favor ingrese el Consecutivo Inicial y el final para continuar.',
+                    title: swalTitle,
+                    icon: "error"
+                });
+            }
+        });
+        _openGenericModal();
+    }
+
+    function ValidarConsecutivos() {
+        if ($("#ConsecutivoInicial_IB").val() != '' && $("#ConsecutivoFinal_IB").val() != '') {
+            if ($("#ConsecutivoInicial_IB").val() <= $("#ConsecutivoFinal_IB").val()) {
+
+            }
+            else {
+                swal({
+                    text: 'El consecutivo inicial debe ser menor al final.',
+                    title: swalTitle,
+                    icon: "error"
+                });
+            }
+        }
+        else if ($("#ConsecutivoInicial_IB").val() == '' && $("#ConsecutivoFinal_IB").val() != '') {
+            $("#ConsecutivoInicial_IB").val($("#ConsecutivoFinal_IB").val());
+            $("#ConsecutivoFinal_IB").val('');
+        }
+    }
+
+    function AbrirAsignarConsecutivosAInspector(Consecutivo) {
+        _resetGenericModal();
+        _appendToHeaderGeneriModal(`<label>Asignar Consecutivos del Formato '${formato.NroFormato}'</label>`);
+        _appendToBodyGeneriModal('<h5>Inspector</h5>');
+        _appendToBodyGeneriModal('<select class="form-control" id="inspector"></select>');
+
+        //Cargar los inspectores
+        _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.GetUsuariosByIdRol, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion, idRol: 2 }))
+            .then(response => {
+                $("#inspector").append('<option value="">Seleccione Inspector...</option>');
+                response.data.forEach(inspector => {
+                    $("#inspector").append(`<option value="${inspector.IdUsuario}">${inspector.Nombres} ${inspector.Apellidos}</option>`);
+                });
+            });
+        _appendToBodyGeneriModal('<h5>Consecutivo Inicial</h5>');
+        _appendToBodyGeneriModal(`<input id="ConsecutivoInicial_IB" type="number" class="form-control" onchange="ValidarConsecutivos();" value="${Consecutivo == null ? '' : Consecutivo}" ${Consecutivo == null ? '' : 'disabled'}/>`);
+        _appendToBodyGeneriModal('<h5>Consecutivo Final</h5>');
+        _appendToBodyGeneriModal(`<input id="ConsecutivoFinal_IB" type="number" class="form-control" onchange="ValidarConsecutivos();" value="${Consecutivo == null ? '' : Consecutivo}" ${Consecutivo == null ? '' : 'disabled'}/>`);
+        //_appendToBodyGeneriModal('<h5>Observaciones</h5>');
+        //_appendToBodyGeneriModal(`<textarea id="Observaciones" class="form-control"></textarea>`);
+        _appendToFooterGeneriModal('<input id="btnAsignarConsBodega" class="button" type="button" value="Asignar" />');
+        $("#btnAsignarConsBodega").click(() => {
+            if ($("#ConsecutivoInicial_IB").val() != '' && $("#ConsecutivoFinal_IB").val() != '' && $("#inspector").val() != '') {
+                _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.AsignarRangoConsecutivosFormatoInspector, VerbosREST.POST, JSON.stringify({
+                    sessionToken: UsuarioSesion.tokenSesion,
+                    idFormato: formato.IdFormato,
+                    idInspector: $("#inspector").val(),
+                    consecutivoInicial: $("#ConsecutivoInicial_IB").val(),
+                    consecutivoFinal: $("#ConsecutivoFinal_IB").val(),
+                    idUsuarioAsigna: UsuarioSesion.IdUsuario
+                }))
+                    .then(response => {
+                        _closeGenericModal();
+                        ConsultarFormato();
+                    });
+            }
+            else {
+                swal({
+                    text: 'Por favor ingrese el Consecutivo Inicial y el final, y seleccione el inspector para continuar.',
+                    title: swalTitle,
+                    icon: "error"
+                });
+            }
+
+        });
+        _openGenericModal();
+    }
+
+    function AbrirAnularConsecutivos(Consecutivo) {
+        _resetGenericModal();
+        _appendToHeaderGeneriModal(`<label>Anular Consecutivos del Formato '${formato.NroFormato}'</label>`);
+        _appendToBodyGeneriModal('<h5>Consecutivo Inicial</h5>');
+        _appendToBodyGeneriModal(`<input id="ConsecutivoInicial_IB" type="number" class="form-control" onchange="ValidarConsecutivos();" value="${Consecutivo == null ? '' : Consecutivo}" ${Consecutivo == null ? '' : 'disabled'} />`);
+        _appendToBodyGeneriModal('<h5>Consecutivo Final</h5>');
+        _appendToBodyGeneriModal(`<input id="ConsecutivoFinal_IB" type="number" class="form-control" onchange="ValidarConsecutivos();" value="${Consecutivo == null ? '' : Consecutivo}" ${Consecutivo == null ? '' : 'disabled'} />`);
+        _appendToBodyGeneriModal('<h5>Observaciones</h5>');
+        _appendToBodyGeneriModal(`<textarea id="Observaciones" class="form-control"></textarea>`);
+        _appendToFooterGeneriModal('<input id="btnAnularConsBodega" class="button" type="button" value="Anular" />');
+        $("#btnAnularConsBodega").click(() => {
+            if ($("#ConsecutivoInicial_IB").val() != '' && $("#ConsecutivoFinal_IB").val() != '') {
+                _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.ActualizarEstadoConsecutivo, VerbosREST.POST, JSON.stringify({
+                    sessionToken: UsuarioSesion.tokenSesion,
+                    idFormato: formato.IdFormato,
+                    consecutivoInicial: $("#ConsecutivoInicial_IB").val(),
+                    consecutivoFinal: $("#ConsecutivoFinal_IB").val(),
+                    idEstado: 'X',
+                    idUsuarioActualiza: UsuarioSesion.IdUsuario,
+                    observaciones: $("#Observaciones").val()
+                }))
+                    .then(response => {
+                        _closeGenericModal();
+                        ConsultarFormato();
+                    });
+            }
+            else {
+                swal({
+                    text: 'Por favor ingrese el Consecutivo Inicial y el final para continuar.',
+                    title: swalTitle,
+                    icon: "error"
+                });
+            }
+        });
+        _openGenericModal();
     }
 </script>
-<h2>Administrar</h2>
-
+<h3 class="text-center" id="title">Administrar</h3>
+<div class="card">
+    <div style="display:grid; grid-template-columns: 33% 34% 33%">
+        <div>
+            <h5>IdFormato</h5>
+            <input id="IdFormato" class="form-control" disabled />
+            <h5>NroFormato</h5>
+            <input id="NroFormato" class="form-control" />
+            <h5>Formato</h5>
+            <input id="Formato" class="form-control" />
+        </div>
+        <div>
+            <h5>Separador</h5>
+            <input id="Separador" class="form-control" />
+            <h5>Mascara</h5>
+            <input id="Mascara" class="form-control" type="number"/>
+            <h5>Activo</h5>
+            <input id="Activo" type="checkbox" />
+        </div>
+        <div>
+            <h5>FechaCreacion</h5>
+            <input id="FechaCreacion" class="form-control" disabled/>
+            <h5>IdUsuarioCreacion</h5>
+            <input id="IdUsuarioCreacion" class="form-control" disabled/>
+            <h5>FechaModificacion</h5>
+            <input id="FechaModificacion" class="form-control" disabled/>
+            <h5>IdUsuarioModificacion</h5>
+            <input id="IdUsuarioModificacion" class="form-control" disabled/>
+            <input class="button" type="button" value="Actualizar" onclick="ActualizarFormato();" />
+        </div>
+    </div>
+</div>
+<div class="card">
+    <h3>ConsecutivosFormatos</h3>
+    <div id="divConsecutivosFormatos"> </div>
+    <input class="button" type="button" value="Ingresar Consecutivos a Bodega" onclick="AbrirIngresarConsecutivosABodega();" />
+    <input class="button" type="button" value="Asignar Consecutivos a Inspector" onclick="AbrirAsignarConsecutivosAInspector(null);" />
+    <input class="button" type="button" value="Anular Consecutivos" onclick="AbrirAnularConsecutivos(null);" />
+</div>
+@*<div class="card">
+    <h3>TramiteConsecutivoFormato</h3>
+    <div id="divTramiteConsecutivoFormato"></div>
+</div>*@

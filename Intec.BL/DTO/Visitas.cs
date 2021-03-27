@@ -35,5 +35,6 @@ namespace Intec.BL.DTO
         public virtual Propiedades Propiedades { get; set; }
         public virtual Zonas Zonas { get; set; }
         public virtual Usuarios Usuarios { get; set; }
+        public Nullable<int> IdTipoVisita { get; set; }
     }
 }

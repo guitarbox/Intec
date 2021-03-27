@@ -104,6 +104,7 @@
     <Property Name="IdUsuarioModificacion" Type="int" />
     <Property Name="FechaProximoMantenimiento" Type="datetime" />
     <Property Name="Activo" Type="bit" Nullable="false" />
+    <Property Name="IdTipoVisitaAplica" Type="int" />
   </EntityType>
   <EntityType Name="EquiposVisita">
     <Key>
@@ -386,6 +387,15 @@
     <Property Name="IdUsuarioModificacion" Type="int" />
     <Property Name="Activo" Type="bit" Nullable="false" />
   </EntityType>
+  <EntityType Name="TiposVisita">
+    <Key>
+      <PropertyRef Name="IdTipoVisita" />
+    </Key>
+    <Property Name="IdTipoVisita" Type="int" Nullable="false" />
+    <Property Name="TipoVisita" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+    <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="TramiteConsecutivoFormato">
     <Key>
       <PropertyRef Name="IdFormato" />
@@ -503,13 +513,14 @@
     <Property Name="IdUsuarioCreacion" Type="int" />
     <Property Name="FechaModificacion" Type="datetime" />
     <Property Name="IdUsuarioModificacion" Type="int" />
+    <Property Name="IdTipoVisita" Type="int" />
   </EntityType>
   <EntityType Name="Zonas">
     <Key>
       <PropertyRef Name="IdZona" />
       <PropertyRef Name="IdCiudad" />
     </Key>
-    <Property Name="IdZona" Type="int" Nullable="false" />
+    <Property Name="IdZona" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdCiudad" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="Descripcion" Type="nvarchar" MaxLength="50" />
     <Property Name="pc_ia" Type="nvarchar" MaxLength="50" />
@@ -1112,6 +1123,7 @@
     <EntitySet Name="TiposMovimientoKardex" EntityType="Self.TiposMovimientoKardex" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TiposPersona" EntityType="Self.TiposPersona" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TiposPropiedades" EntityType="Self.TiposPropiedades" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TiposVisita" EntityType="Self.TiposVisita" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TramiteConsecutivoFormato" EntityType="Self.TramiteConsecutivoFormato" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TramitesEquipo" EntityType="Self.TramitesEquipo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UsosPropiedades" EntityType="Self.UsosPropiedades" Schema="dbo" store:Type="Tables" />

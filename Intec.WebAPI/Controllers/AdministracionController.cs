@@ -23,5 +23,17 @@ namespace Intec.WebApi.Controllers
                 SetDataResponse(new Intec.BL.BE.AdministracionBE().ObtenerRoles());
             return response;
         }
+
+        [HttpPost]
+        [Route("api/Administracion/ObtenerTiposVisita")]
+        public JObject ObtenerTiposVisita([FromBody] JObject Token)
+        {
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+
+            if (validToken)
+                SetDataResponse(new Intec.BL.BE.AdministracionBE().ObtenerTiposVisita());
+            return response;
+        }
     }
 }

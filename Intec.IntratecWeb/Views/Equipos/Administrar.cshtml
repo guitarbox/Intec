@@ -17,6 +17,7 @@
         _loadSelectTipoEquipo($("#IdTipoEquipo"));
         _loadSelectMarcas($("#IdMarcaEquipo"));
         //_loadSelectCiudades($("#IdCiudad"), '');
+        _loadSelectTiposVisita($("#IdTipoVisitaAplica"));
 
         ConsultarEquipo();
     });
@@ -47,6 +48,7 @@
         equipo.FechaProximoMantenimientoString = $("#FechaProximoMantenimiento").val();
 
         equipo.IdUsuarioModificacion = UsuarioSesion.IdUsuario;
+        equipo.IdTipoVisitaAplica = $("#IdTipoVisitaAplica").val();
 
         _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.ActualizarEquipo, VerbosREST.POST, JSON.stringify({
             sessionToken: UsuarioSesion.tokenSesion,
@@ -82,6 +84,7 @@
         $("#IdUsuarioCreacion").val(equipo.IdUsuarioCreacion);
         $("#FechaModificacion").val(equipo.FechaModificacion);
         $("#IdUsuarioModificacion").val(equipo.IdUsuarioModificacion);
+        $("#IdTipoVisitaAplica").val(equipo.IdTipoVisitaAplica);
 
         //CalibracionesEquipos
         var columnsC = [
@@ -327,6 +330,8 @@
             <select id="IdTipoEquipo" class="form-control"></select>
             <h5>Marca Equipo</h5>
             <select id="IdMarcaEquipo" class="form-control"></select>
+            <h5>Tipo Visita Aplica</h5>
+            <select id="IdTipoVisitaAplica" class="form-control"></select>
         </div>
         <div>
             <h5>Modelo</h5>
@@ -341,13 +346,13 @@
             <input id="Activo" type="checkbox" />
         </div>
         <div>
-            <h5>Período Calibración (días)</h5>
+            <h5>Período Calibración (meses)</h5>
             <input id="PeriodoCalibracion" class="form-control" />
             <h5>Fecha Última Calibración</h5>
             <input id="FechaUltimaCalibracionString" class="form-control" disabled />
             <h5>Fecha Próxima Calibración</h5>
             <input id="FechaProximaCalibracion" class="form-control"/>
-            <h5>Periodo Verificación</h5>
+            <h5>Período Verificación (meses)</h5>
             <input id="PeriodoVerificacion" class="form-control" />
             <h5>Fecha Última Verificacion Laboratorio</h5>
             <input id="FechaUltimaVerificacionLaboratorioString" class="form-control" disabled />

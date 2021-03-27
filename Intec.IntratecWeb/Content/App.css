@@ -142,7 +142,7 @@ a {
     align-items: center
 }
 
-.menu {
+/*.menu {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -166,8 +166,21 @@ a {
         padding: 0;
         box-sizing: border-box;
         flex: 8;
-    }
-
+    }*/
+.menu-item {
+    cursor: pointer;
+    background-color: #C5CF31;
+    color: white;
+    margin: 5px;
+    border: 2px solid black;
+    border-radius: 50px;
+    width: 150px;
+    height: 130px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 /* table */
 table > thead > tr > th {
     background-color: #484141;

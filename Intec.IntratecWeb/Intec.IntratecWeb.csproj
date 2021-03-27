@@ -263,6 +263,7 @@
     <Content Include="Views\Equipos\Administrar.cshtml" />
     <Content Include="Views\Papeleria\Administracion.cshtml" />
     <Content Include="Views\Papeleria\Administrar.cshtml" />
+    <Content Include="Views\Papeleria\AcepRechAnul.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

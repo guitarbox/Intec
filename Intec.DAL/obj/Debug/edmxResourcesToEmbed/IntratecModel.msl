@@ -252,6 +252,7 @@
     <EntitySetMapping Name="Equipos">
       <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.Equipos">
         <MappingFragment StoreEntitySet="Equipos">
+          <ScalarProperty Name="IdTipoVisitaAplica" ColumnName="IdTipoVisitaAplica" />
           <ScalarProperty Name="Activo" ColumnName="Activo" />
           <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
           <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
@@ -419,6 +420,7 @@
     <EntitySetMapping Name="Visitas">
       <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.Visitas">
         <MappingFragment StoreEntitySet="Visitas">
+          <ScalarProperty Name="IdTipoVisita" ColumnName="IdTipoVisita" />
           <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
           <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
           <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
@@ -582,6 +584,16 @@
           <ScalarProperty Name="Observacion" ColumnName="Observacion" />
           <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
           <ScalarProperty Name="IdLog" ColumnName="IdLog" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TiposVisita">
+      <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.TiposVisita">
+        <MappingFragment StoreEntitySet="TiposVisita">
+          <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+          <ScalarProperty Name="TipoVisita" ColumnName="TipoVisita" />
+          <ScalarProperty Name="IdTipoVisita" ColumnName="IdTipoVisita" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

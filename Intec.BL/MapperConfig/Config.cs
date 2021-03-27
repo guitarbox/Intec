@@ -43,7 +43,9 @@ namespace Intec.BL.MapperConfig
                     cfg.CreateMap<DAL.UsosPropiedades, DTO.UsosPropiedades>();
 
                     cfg.CreateMap<DAL.Roles, DTO.Roles>()
-                    .ForMember(dest => dest.Menus,opt => opt.Ignore());
+                    .ForMember(dest => dest.Menus, opt => opt.Ignore());
+                    cfg.CreateMap<DAL.TiposVisita, DTO.TiposVisita>();
+                    
 
                 });
 
@@ -175,14 +177,41 @@ namespace Intec.BL.MapperConfig
                 var config = new AutoMapper.MapperConfiguration(cfg => {
 
                     cfg.CreateMap<DAL.Formatos, DTO.Formatos>();
-                    cfg.CreateMap<DAL.ConsecutivosFormatos, DTO.ConsecutivosFormatos>();
-                    cfg.CreateMap<DAL.TramiteConsecutivoFormato, DTO.TramiteConsecutivoFormato>();
+                    cfg.CreateMap<DAL.ConsecutivosFormatos, DTO.ConsecutivosFormatos>()
+                    .ForMember(dest => dest.Formatos, opt => opt.Ignore())
+                    ;
+                    cfg.CreateMap<DAL.TramiteConsecutivoFormato, DTO.TramiteConsecutivoFormato>()
+                    .ForMember(dest => dest.Usuarios, opt=>opt.Ignore())
+                    ;
 
 
                     cfg.CreateMap<DTO.Formatos, DAL.Formatos>();
                     
                     
 
+                });
+
+                return config.CreateMapper();
+            }
+        }
+        
+        public static AutoMapper.IMapper MapperTramite_Consecutivo
+        {
+            get
+            {
+                var config = new AutoMapper.MapperConfiguration(cfg => {
+                                        
+                    cfg.CreateMap<DAL.TramiteConsecutivoFormato, DTO.TramiteConsecutivoFormato>();
+                    cfg.CreateMap<DAL.ConsecutivosFormatos, DTO.ConsecutivosFormatos>();
+                    cfg.CreateMap<DAL.Usuarios, DTO.Usuarios>()
+                    .ForMember(dest => dest.Roles, opt=>opt.Ignore())
+                    .ForMember(dest => dest.TiposIdentificacion, opt=>opt.Ignore())
+                    ;
+                    cfg.CreateMap<DAL.Formatos, DTO.Formatos>()
+                    .ForMember(dest => dest.ConsecutivosFormatos, opt=>opt.Ignore())
+                    .ForMember(dest => dest.TramiteConsecutivoFormato, opt=>opt.Ignore())
+                    ;
+                    //cfg.CreateMap<DAL.TramiteConsecutivoFormato, DTO.TramiteConsecutivoFormato>();
                 });
 
                 return config.CreateMapper();

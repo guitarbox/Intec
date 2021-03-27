@@ -2,57 +2,94 @@
 @{
     ViewBag.Title = "Administracion";
 }
-<script>
-    $(document).ready(() => {
-        ConsultarPapeleria();
-    });
+    <script>
+        $(document).ready(() => {
+            ConsultarPapeleria();
+        });
 
-    function ConsultarPapeleria() {
-        _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.ConsultarFormatos, VerbosREST.POST,
-            JSON.stringify({
-                sessionToken: UsuarioSesion.tokenSesion
-            }))
-            .then(response => {
-                var columns = [
-                    { data: "IdFormato", title: 'Id. Formato' },
-                    { data: "NroFormato", title: 'Nro. Formato' },
-                    { data: "Formato", title: 'Formato' },
-                    { data: "Activo", title: 'Activo' },                    
-                    {
-                        data: null, render: function (data, type, full, meta) {
-                            return '<a onclick="window.location.href = \'../Papeleria/Administrar?iF=' + full.IdFormato + '\';"><span title="Administrar Formato" class="fa fa-edit fa-2x"></span></a>';
+        function ConsultarPapeleria() {
+            _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.ConsultarFormatos, VerbosREST.POST,
+                JSON.stringify({
+                    sessionToken: UsuarioSesion.tokenSesion
+                }))
+                .then(response => {
+                    var columns = [
+                        { data: "IdFormato", title: 'Id. Formato' },
+                        { data: "NroFormato", title: 'Nro. Formato' },
+                        { data: "Formato", title: 'Formato' },
+                        { data: "Activo", title: 'Activo' },
+                        {
+                            data: null, render: function (data, type, full, meta) {
+                                return '<a onclick="window.location.href = \'../Papeleria/Administrar?iF=' + full.IdFormato + '\';"><span title="Administrar Formato" class="fa fa-edit fa-2x"></span></a>';
+                            }
+                        },
+                        {
+                            data: null, render: function (data, type, full, meta) {
+                                return '<a  onclick="EliminarRx(\'' + full.IdFormato + '\');"><span title="Inactivar" class="fa fa-trash fa-2x"></span></a>';
+                            }
                         }
-                    },
-                    {
-                        data: null, render: function (data, type, full, meta) {
-                            return '<a  onclick="EliminarRx(\'' + full.IdFormato + '\');"><span title="Inactivar" class="fa fa-trash fa-2x"></span></a>';
-                        }
-                    }
-                ];
+                    ];
 
 
-                $("#divTblFormatos").empty();
-                $("#divTblFormatos").append('<table id="tblFormatos" style="width:100%"></table>');
-                $('#tblFormatos').DataTable({
-                    data: response.data,
-                    columns: columns,
-                    language: _language_options_table,
-                    //
-                    dom: 'Bfrtip',
-                    buttons: []
+                    $("#divTblFormatos").empty();
+                    $("#divTblFormatos").append('<table id="tblFormatos" style="width:100%"></table>');
+                    $('#tblFormatos').DataTable({
+                        data: response.data,
+                        columns: columns,
+                        language: _language_options_table,
+                        //
+                        dom: 'Bfrtip',
+                        buttons: []
+                    });
                 });
-            });
-    }
+        }
 
-    function EliminarRx(IdFormato) {
-        _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.EliminarFormato, VerbosREST.POST,
-            JSON.stringify({
-                sessionToken: UsuarioSesion.tokenSesion,
-                idFormato: IdFormato
-            }))
-            .then(response => { ConsultarPapeleria(); });
-    }
-</script>
+        function EliminarRx(IdFormato) {
+            _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.EliminarFormato, VerbosREST.POST,
+                JSON.stringify({
+                    sessionToken: UsuarioSesion.tokenSesion,
+                    idFormato: IdFormato
+                }))
+                .then(response => { ConsultarPapeleria(); });
+        }
+
+        function AbrirModalCrearRx() {
+            _resetGenericModal();
+            _appendToHeaderGeneriModal('<label>Crear Formato</label>')
+            _appendToBodyGeneriModal('<h5>NroFormato</h5>');
+            _appendToBodyGeneriModal('<input id="NroFormato" class="form-control" />');
+            _appendToBodyGeneriModal('<h5>Nombre Formato</h5>');
+            _appendToBodyGeneriModal('<input id="Formato" class="form-control" />');
+            //Formato
+            //Separador
+            //Mascara
+            _appendToFooterGeneriModal('<input type="button" class="button" value="Crear" id="btnCrearFormato" />');
+            $("#btnCrearFormato").click(() => {
+                if ($("#NroFormato").val() != '' && $("#Formato").val() != '') {
+                    _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.CrearFormato, VerbosREST.POST, JSON.stringify({
+                        sessionToken: UsuarioSesion.tokenSesion,
+                        formato: {
+                            NroFormato: $("#NroFormato").val(),
+                            Formato: $("#Formato").val(),
+                            IdUsuarioCreacion: UsuarioSesion.IdUsuario
+                        }
+                    }))
+                        .then(response => {
+                            _closeGenericModal();
+                            ConsultarPapeleria();
+                        });
+                }
+                else {
+                    swal({
+                        text: 'Por favor ingrese el Nro del Formato y el Nombre para crear.',
+                        title: swalTitle,
+                        icon: "error"
+                    });
+                }
+            });
+            _openGenericModal();
+        }
+    </script>
 <h3 class="text-center" id="title">PAPELERÍA</h3>
 <div style="padding:10px">    
     <div id="divTblFormatos" style="width:100%"></div>

@@ -13,6 +13,11 @@ namespace Intec.BL.BE
         {
             return MapperConfig.Config.MapperAdministracion.Map<List<DTO.Roles>>(new DAL.TE.AdministracionTE().ObtenerRoles());
         }
+
+        public List<DTO.TiposVisita> ObtenerTiposVisita()
+        {
+            return MapperConfig.Config.MapperAdministracion.Map<List<DTO.TiposVisita>>(new DAL.TE.AdministracionTE().ObtenerTiposVisita());
+        }
         #endregion
 
         #region Paises
@@ -405,10 +410,5 @@ namespace Intec.BL.BE
         }
 
         #endregion
-
-
-
-
-
     }
 }

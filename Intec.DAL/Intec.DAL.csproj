@@ -160,6 +160,9 @@
     <Compile Include="TiposPropiedades.cs">
       <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="TiposVisita.cs">
+      <DependentUpon>IntratecModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="TramiteConsecutivoFormato.cs">
       <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>

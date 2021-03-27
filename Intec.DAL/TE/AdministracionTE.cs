@@ -18,6 +18,16 @@ namespace Intec.DAL.TE
             }
             return res;
         }
+
+        public List<TiposVisita> ObtenerTiposVisita()
+        {
+            List<TiposVisita> res = new List<TiposVisita>();
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                res = ctx.TiposVisita.ToList();
+            }
+            return res;
+        }
         #endregion
 
         #region  CRUD Paises
@@ -887,6 +897,5 @@ namespace Intec.DAL.TE
         }
 
         #endregion
-
     }
 }

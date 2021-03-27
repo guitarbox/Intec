@@ -1,0 +1,154 @@
+﻿
+@{
+    ViewBag.Title = "AcepRechAnul";
+}
+<script>
+    $(document).ready(() => {
+        ConsultarConsecutivos();
+    });
+
+    function ConsultarConsecutivos() {
+        _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.ObtenerConsecutivosUsuario, VerbosREST.POST, JSON.stringify({
+            sessionToken: UsuarioSesion.tokenSesion,
+            idUsuario: UsuarioSesion.IdUsuario
+        }))
+            .then(response => {
+                $("#btnAnularCons").hide(); $("#btnRechazarCons").hide(); $("#btnAceptarCons").hide();
+                if (response.data.some(s => s.IdEstadoConsecutivoInspector == 'P')) { $("#btnRechazarCons").show(); $("#btnAceptarCons").show(); }
+                if (response.data.some(s => s.IdEstadoConsecutivoInspector == 'A')) { $("#btnAnularCons").show(); }
+                $("#divTblConsecutivos").empty();
+                $("#divTblConsecutivos").append('<table id="tblConsecutivos"></table>');
+                let columnas = [
+                    { data: "Formatos.NroFormato", title: 'Formato' },
+                    { data: "Consecutivo", title: 'Consecutivo' },
+                    { data: "IdInspector", title: 'IdInspector' },
+                    { data: "IdEstadoConsecutivoInspector", title: 'IdEstadoConsecutivoInspector' },
+                    { data: "IdVisita", title: 'IdVisita' },
+                    { data: "FechaCreacion", title: 'FechaCreacion' },
+                    { data: "IdUsuarioCreacion", title: 'IdUsuarioCreacion' },
+                    { data: "FechaModificacion", title: 'FechaModificacion' },
+                    { data: "IdUsuarioModificacion", title: 'IdUsuarioModificacion' },
+                    {
+                        data: null, render: function (data, type, full, meta) {
+                            let control = '';
+                            //control += '<a onclick="VerTramiteConsecutivo(' + full.Consecutivo + ');"><span title="Ver Trámite Consecutivo" class="fa fa-eye fa-2x"></span></a>';
+                            if (full.IdEstadoConsecutivoInspector == 'P') {
+                                control +=
+                                    '<a onclick="AbrirActualizarEstadoConsecutivo(' + full.IdFormato + ', ' + full.Consecutivo + ', \'A\');"><span title="Aceptar Consecutivo" class="fa fa-check fa-2x"></span></a>'
+                                    + '<a onclick="AbrirActualizarEstadoConsecutivo(' + full.IdFormato + ', ' + full.Consecutivo + ', \'R\');"><span title="Rechazar Consecutivo" class="fa fa-long-arrow-alt-left fa-2x"></span></a>';
+                            }
+                            if (full.IdEstadoConsecutivoInspector == 'A')
+                                control += '<a onclick="AbrirActualizarEstadoConsecutivo(' + full.IdFormato + ', ' + full.Consecutivo + ', \'X\');"><span title="Anular Consecutivo" class="fa fa-ban fa-2x"></span></a>';
+                            return control;
+                        }
+                    }
+                ];
+                $('#tblConsecutivos').DataTable({
+                    data: response.data.filter(f => f.IdEstadoConsecutivoInspector != 'X'),
+                    columns: columnas,
+                    language: _language_options_table,
+                    //
+                    dom: 'Bfrtip',
+                    buttons: []
+                });
+            });
+    }
+
+    function AbrirActualizarEstadoConsecutivo(IdFormato, Consecutivo, IdEstado) {
+        _resetGenericModal();
+        _appendToHeaderGeneriModal(`<label> ${IdEstado == 'A' ? 'Aceptar' : IdEstado == 'R' ? 'Devolver' : 'Anular' } Consecutivos</label>`);
+        _appendToBodyGeneriModal('<h5>Consecutivo Inicial</h5>');
+        _appendToBodyGeneriModal(`<input id="ConsecutivoInicial_IB" type="number" class="form-control" onchange="ValidarConsecutivos();" value="${Consecutivo == null ? '' : Consecutivo}" ${Consecutivo == null ? '' : 'disabled'} />`);
+        _appendToBodyGeneriModal('<h5>Consecutivo Final</h5>');
+        _appendToBodyGeneriModal(`<input id="ConsecutivoFinal_IB" type="number" class="form-control" onchange="ValidarConsecutivos();" value="${Consecutivo == null ? '' : Consecutivo}" ${Consecutivo == null ? '' : 'disabled'} />`);
+        _appendToBodyGeneriModal('<h5>Observaciones</h5>');
+        _appendToBodyGeneriModal(`<textarea id="Observaciones" class="form-control"></textarea>`);
+        _appendToFooterGeneriModal(`<input id="btnActualizarEstado" class="button" type="button" value="${IdEstado == 'A' ? 'Aceptar' : IdEstado == 'R' ? 'Devolver' : 'Anular' }" />`);
+        $("#btnActualizarEstado").click(() => {
+            if ($("#ConsecutivoInicial_IB").val() != '' && $("#ConsecutivoFinal_IB").val() != '') {
+                _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.ActualizarEstadoConsecutivo, VerbosREST.POST, JSON.stringify({
+                    sessionToken: UsuarioSesion.tokenSesion,
+                    idFormato: IdFormato,
+                    consecutivoInicial: $("#ConsecutivoInicial_IB").val(),
+                    consecutivoFinal: $("#ConsecutivoFinal_IB").val(),
+                    idEstado: IdEstado,
+                    idUsuarioActualiza: UsuarioSesion.IdUsuario,
+                    observaciones: $("#Observaciones").val()
+                }))
+                    .then(response => {
+                        _closeGenericModal();
+                        ConsultarConsecutivos();
+                    });
+            }
+            else {
+                swal({
+                    text: 'Por favor ingrese el Consecutivo Inicial y el final para continuar.',
+                    title: swalTitle,
+                    icon: "error"
+                });
+            }
+        });
+        _openGenericModal();
+    }
+
+    function ValidarConsecutivos() {
+        if ($("#ConsecutivoInicial_IB").val() != '' && $("#ConsecutivoFinal_IB").val() != '') {
+            if ($("#ConsecutivoInicial_IB").val() <= $("#ConsecutivoFinal_IB").val()) {
+
+            }
+            else {
+                swal({
+                    text: 'El consecutivo inicial debe ser menor al final.',
+                    title: swalTitle,
+                    icon: "error"
+                });
+            }
+        }
+        else if ($("#ConsecutivoInicial_IB").val() == '' && $("#ConsecutivoFinal_IB").val() != '') {
+            $("#ConsecutivoInicial_IB").val($("#ConsecutivoFinal_IB").val());
+            $("#ConsecutivoFinal_IB").val('');
+        }
+    }
+
+    function ActualizarEstadoConsecutivoTodos(IdEstado) {
+        _resetGenericModal();
+        _appendToHeaderGeneriModal(`<label> ${IdEstado == 'A' ? 'Aceptar' : IdEstado == 'R' ? 'Devolver' : 'Anular'} Todos Consecutivos</label>`);
+        //_appendToBodyGeneriModal('<h5>Consecutivo Inicial</h5>');
+        //_appendToBodyGeneriModal(`<input id="ConsecutivoInicial_IB" type="number" class="form-control" onchange="ValidarConsecutivos();" value="${Consecutivo == null ? '' : Consecutivo}" ${Consecutivo == null ? '' : 'disabled'} />`);
+        //_appendToBodyGeneriModal('<h5>Consecutivo Final</h5>');
+        //_appendToBodyGeneriModal(`<input id="ConsecutivoFinal_IB" type="number" class="form-control" onchange="ValidarConsecutivos();" value="${Consecutivo == null ? '' : Consecutivo}" ${Consecutivo == null ? '' : 'disabled'} />`);
+        _appendToBodyGeneriModal('<h5>Observaciones</h5>');
+        _appendToBodyGeneriModal(`<textarea id="Observaciones" class="form-control"></textarea>`);
+        _appendToFooterGeneriModal(`<input id="btnActualizarEstado" class="button" type="button" value="${IdEstado == 'A' ? 'Aceptar' : IdEstado == 'R' ? 'Devolver' : 'Anular'}" />`);
+        $("#btnActualizarEstado").click(() => {
+            if ($("#Observaciones").val() != '') {
+                _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.ActualizarEstadoConsecutivos, VerbosREST.POST, JSON.stringify({
+                    sessionToken: UsuarioSesion.tokenSesion,
+                    idEstado: IdEstado,
+                    idUsuarioActualiza: UsuarioSesion.IdUsuario,
+                    observaciones: $("#Observaciones").val()
+                }))
+                    .then(response => {
+                        _closeGenericModal();
+                        ConsultarConsecutivos();
+                    });
+            }
+            else {
+                swal({
+                    text: 'Por favor ingrese la observación para continuar.',
+                    title: swalTitle,
+                    icon: "error"
+                });
+            }
+        });
+        _openGenericModal();
+    }
+</script>
+<h3 class="text-center" id="title">Aceptación / Rechazo / Anulación</h3>
+<div style="padding:0px 10px">
+    <h4>Consecutivos asignados a mí:</h4>
+    <div id="divTblConsecutivos"></div>
+    <input id="btnAceptarCons" class="button" type="button" value="Aceptar Consecutivos (Todos)" onclick="ActualizarEstadoConsecutivoTodos('A');" />
+    <input id="btnRechazarCons" class="button" type="button" value="Rechazar Consecutivos (Todos)" onclick="ActualizarEstadoConsecutivoTodos('R');" />
+    <input id="btnAnularCons" class="button" type="button" value="Anular Consecutivos (Todos)" onclick="ActualizarEstadoConsecutivoTodos('X');" />
+</div>

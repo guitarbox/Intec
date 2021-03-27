@@ -85,6 +85,7 @@
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Propiedades_Clientes" />
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Visitas_Clientes" />
         <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.Log" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.TiposVisita" Width="1.5" PointX="5.375" PointY="0.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

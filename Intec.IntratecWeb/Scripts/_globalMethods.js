@@ -257,4 +257,13 @@ function _loadSelectTipoEquipo(element) {
         element.append('<option value="' + d.IdTipoEquipo + '">' + d.TipoEquipo + '</option>');
     });
 }
+
+function _loadSelectTiposVisita(element) {
+    element.empty();
+    element.append('<option value="">Seleccione Tipo Visita...</option>');
+    let resRequest = _peticionAjax(URL_SERVICE + URI_SERVICE.ObtenerTiposVisita, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion }), false);
+    resRequest.data.forEach(d => {
+        element.append('<option value="' + d.IdTipoVisita + '">' + d.TipoVisita + '</option>');
+    });
+}
 /**************************************************************************************************************************/

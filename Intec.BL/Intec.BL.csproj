@@ -83,6 +83,7 @@
     <Compile Include="DTO\TiposMovimientoKardex.cs" />
     <Compile Include="DTO\TiposPersona.cs" />
     <Compile Include="DTO\TiposPropiedades.cs" />
+    <Compile Include="DTO\TiposVisita.cs" />
     <Compile Include="DTO\TramiteConsecutivoFormato.cs" />
     <Compile Include="DTO\TramitesEquipo.cs" />
     <Compile Include="DTO\UsosPropiedades.cs" />

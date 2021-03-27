@@ -18,5 +18,10 @@ namespace Intec.IntratecWeb.Controllers
         {
             return View();
         }
+        
+        public ActionResult AcepRechAnul()
+        {
+            return View();
+        }
     }
 }

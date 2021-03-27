@@ -29,6 +29,7 @@
                     { data: "SerieIDInterno", title: 'Serie ID interno' },
                     { data: "Modelo", title: 'Modelo' },
                     { data: "Calibrado", title: 'Calibrado' },
+                    { data: "IdTipoVisitaAplica", title: 'Tipo Visita Aplica' },
                     {
                         data: null, render: function (data, type, full, meta) {
                             return full.PendTramiteAdmin == true ? '<i title="Tiene pendiente aceptar devolución" style="color:red; cursor:pointer" class="fas fa-exclamation-triangle"></i>' : '';
@@ -76,6 +77,9 @@
         _appendToBodyGeneriModal('<p>Marca Equipo</p>');
         _appendToBodyGeneriModal('<select id="IdMarcaEquipoC" class="form-control"></select>');
         _loadSelectMarcas($("#IdMarcaEquipoC"));
+        _appendToBodyGeneriModal('<p>Tipo Visita Aplica</p>');
+        _appendToBodyGeneriModal('<select id="IdTipoVisitaAplica" class="form-control"></select>');
+        _loadSelectTiposVisita($("#IdTipoVisitaAplica"));
         _appendToBodyGeneriModal('<p>Modelo</p>');
         _appendToBodyGeneriModal('<input type="text" id="Modelo" class="form-control" />');
         _appendToBodyGeneriModal('<p>Rango Medición</p>');
@@ -100,9 +104,9 @@
             format: "D/M/YYYY"
         });
         _appendToBodyGeneriModal('<p>Período de Calibración</p>');
-        _appendToBodyGeneriModal('<input id="PeriodoCalibracion" class="form-control" />');
+        _appendToBodyGeneriModal('<input id="PeriodoCalibracion" class="form-control" placeholder="Valor en Meses"/>');
         _appendToBodyGeneriModal('<p>Período de Verificación</p>');
-        _appendToBodyGeneriModal('<input id="PeriodoVerificacion" class="form-control" />');
+        _appendToBodyGeneriModal('<input id="PeriodoVerificacion" class="form-control" placeholder="Valor en Meses"/>');
         _appendToBodyGeneriModal('<p>Fecha Próximo Mantenimiento</p>');
         _appendToBodyGeneriModal('<input type="text" id="FechaProximoMantenimiento" class="form-control" />');
         $("#FechaProximoMantenimiento").datetimepicker({
@@ -132,7 +136,8 @@
                             PeriodoCalibracion: $("#PeriodoCalibracion").val(),
                             PeriodoVerificacion: $("#PeriodoVerificacion").val(),
                             FechaProximoMantenimientoString: $("#FechaProximoMantenimiento").val(),
-                            IdUsuarioCreacion: UsuarioSesion.IdUsuario
+                            IdUsuarioCreacion: UsuarioSesion.IdUsuario,
+                            IdTipoVisitaAplica: $("#IdTipoVisitaAplica").val()
                         }
                     }))
                     .then(response => {

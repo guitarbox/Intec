@@ -39,5 +39,6 @@ namespace Intec.BL.DTO
         public bool Activo { get; set; }
         public List<UsuariosEquipos> UsuariosEquipos { get; set; }
         public bool PendTramiteAdmin { get; set; }
+        public Nullable<int> IdTipoVisitaAplica { get; set; }
     }
 }

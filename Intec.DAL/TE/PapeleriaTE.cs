@@ -1,6 +1,7 @@
 ﻿using System;
 using System.CodeDom;
 using System.Collections.Generic;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using System.Text;
@@ -31,6 +32,7 @@ namespace Intec.DAL.TE
                 Formatos FormatoModificar = ctx.Formatos.Where(c => c.IdFormato == Formato.IdFormato).FirstOrDefault();
 
                 FormatoModificar.Formato = Formato.Formato;
+                FormatoModificar.Separador  = Formato.Separador;
                 FormatoModificar.Mascara = Formato.Mascara;
                 FormatoModificar.Activo = Formato.Activo;
 
@@ -106,7 +108,7 @@ namespace Intec.DAL.TE
                 
                 for (int i = ConsecutivoInicial; i <= ConsecutivoFinal; i++)
                 {
-                    ConsecutivosFormatos con = ctx.ConsecutivosFormatos.Where(c => c.Consecutivo == i).FirstOrDefault();
+                    ConsecutivosFormatos con = ctx.ConsecutivosFormatos.Where(c =>c.IdFormato == IdFormato && c.Consecutivo == i).FirstOrDefault();
                     con.IdInspector = IdInspector;
                     con.IdEstadoConsecutivoInspector = estadoConsecutivo;
                     con.FechaModificacion = DateTime.Now;
@@ -242,6 +244,53 @@ namespace Intec.DAL.TE
                     else
                         throw new Exception("Consecutivo no asignado aún");
                 }
+            }
+        }
+
+        public List<TramiteConsecutivoFormato> ConsultarTramiteConsecutivoFormato(int IdFormato, int Consecutivo)
+        {
+            List<TramiteConsecutivoFormato> res = new List<TramiteConsecutivoFormato>();
+
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                res = ctx.TramiteConsecutivoFormato.Where(f => f.IdFormato == IdFormato && f.Consecutivo == Consecutivo).ToList();
+                foreach(TramiteConsecutivoFormato t in res)
+                {
+                    ctx.Entry(t).Reference(r => r.Usuarios).Load();
+                }
+            }
+
+            return res;
+        }
+    
+        public List<ConsecutivosFormatos> ObtenerConsecutivosUsuario(int IdUsuario)
+        {
+            List<ConsecutivosFormatos> res = new List<ConsecutivosFormatos>();
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                res = ctx.ConsecutivosFormatos.Where(c => c.IdInspector == IdUsuario).ToList();
+                foreach(ConsecutivosFormatos c in res)
+                {
+                    ctx.Entry(c).Reference(r => r.Formatos).Load();                    
+                }
+            }
+            return res;
+        }
+
+        public void ActualizarEstadoConsecutivosUsuAplica(string idEstado, int idUsuarioActualiza, string observaciones)
+        {
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                List<int> cons = new List<int>();
+                foreach (Formatos formato in ctx.Formatos.ToList()) 
+                {
+                    cons = ctx.ConsecutivosFormatos.Where(c => c.IdFormato == formato.IdFormato && c.IdInspector == idUsuarioActualiza && c.IdEstadoConsecutivoInspector.Equals(idEstado.Equals("A") || idEstado.Equals("R") ? "P" : "A")).Select(f => f.Consecutivo).ToList();
+                    if (cons.Count > 0) 
+                    {
+                        ActualizarEstadoConsecutivo(formato.IdFormato, cons, idEstado, idUsuarioActualiza, observaciones);
+                    }
+                }
+                ctx.SaveChanges();
             }
         }
     }

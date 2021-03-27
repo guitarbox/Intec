@@ -33,7 +33,7 @@ namespace Intec.DAL.TE
                 {
                     UsuarioCrear.FechaCreacion = DateTime.Now;
                     UsuarioCrear.Activo = true;
-                    UsuarioCrear.Password = Convert.ToBase64String(UTF8Encoding.UTF8.GetBytes(UsuarioCrear.Password));
+                    UsuarioCrear.Password = Convert.ToBase64String(UTF8Encoding.UTF8.GetBytes(UsuarioCrear.NumeroIdentificacion));
                     UsuarioCrear.DebeCambiarContrasena = true;
                     ctx.Usuarios.Add(UsuarioCrear);
                     ctx.SaveChanges();

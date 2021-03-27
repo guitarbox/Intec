@@ -16,6 +16,7 @@ var URI_SERVICE = {
     //--- Administracion ---
     //Administracion
     ObtenerRoles: 'api/Administracion/ObtenerRoles',
+    ObtenerTiposVisita: 'api/Administracion/ObtenerTiposVisita',
 
     //Parámetros
     ObtenerParametros: 'api/Parametros/ObtenerParametros',
@@ -134,7 +135,16 @@ var URI_SERVICE = {
     //Papelería
     ConsultarFormatos: 'api/Papeleria/ConsultarFormatos',
     ConsultarFormato: 'api/Papeleria/ConsultarFormato',
-    EliminarFormato: 'api/Papeleria/EliminarFormato'
+    EliminarFormato: 'api/Papeleria/EliminarFormato',
+    CrearFormato: 'api/Papeleria/CrearFormato',
+    ActualizarFormato: 'api/Papeleria/ActualizarFormato',
+    IngresarConsecutivosFormatoBodega: 'api/Papeleria/IngresarConsecutivosFormatoBodega',
+    ActualizarEstadoConsecutivo: 'api/Papeleria/ActualizarEstadoConsecutivo',
+    ActualizarEstadoConsecutivos: 'api/Papeleria/ActualizarEstadoConsecutivos',
+    AsignarRangoConsecutivosFormatoInspector: 'api/Papeleria/AsignarRangoConsecutivosFormatoInspector',
+    ConsultarTramiteConsecutivoFormato: 'api/Papeleria/ConsultarTramiteConsecutivoFormato',
+    ObtenerConsecutivosUsuario: 'api/Papeleria/ObtenerConsecutivosUsuario'
+    
 };
 
 var _language_options_table =

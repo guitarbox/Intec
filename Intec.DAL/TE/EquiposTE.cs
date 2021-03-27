@@ -181,6 +181,7 @@ namespace Intec.DAL.TE
                 equipoAModificar.PeriodoVerificacion = equipos.PeriodoVerificacion;
                 equipoAModificar.SerieIDInterno = equipos.SerieIDInterno;
                 equipoAModificar.Tolerancia = equipos.Tolerancia;
+                equipoAModificar.IdTipoVisitaAplica = equipos.IdTipoVisitaAplica;
                 
                 equipoAModificar.IdUsuarioModificacion = idUsuarioModificacion;
                 equipoAModificar.FechaModificacion = DateTime.Now;

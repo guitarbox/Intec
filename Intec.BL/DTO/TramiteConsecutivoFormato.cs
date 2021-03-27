@@ -16,5 +16,6 @@ namespace Intec.BL.DTO
         public string Observaciones { get; set; }
         public System.DateTime FechaCreacion { get; set; }
         public int IdUsuarioCreacion { get; set; }
+        public Usuarios Usuarios { get; set; }
     }
 }

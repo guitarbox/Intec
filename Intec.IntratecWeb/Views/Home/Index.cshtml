@@ -21,7 +21,7 @@
                 $("#a_atras").show();
                 $("#menus").empty();
                 UsuarioSesion.Roles.Menus.filter(m => m.IdMenuPadre == IdMenu).forEach(m1 => {
-                    $("#menus").append('<div onclick="Abrir(' + m1.IdMenu + ')" style="cursor:pointer; background-color: #C5CF31; color: white; margin:5px; border:2px solid black; border-radius:50px; width:130px;height:130px; display:flex; flex-direction:column; justify-content:center; align-items:center;"><span class="' + m1.Icono + '"></span><br/><p style="font-weight:bold">' + m1.Label + '</p></div>');
+                    $("#menus").append('<div onclick="Abrir(' + m1.IdMenu + ')" class="menu-item"><span class="' + m1.Icono + '"></span><br/><p style="font-weight:bold">' + m1.Label + '</p></div>');
                 });
             }
             else {
