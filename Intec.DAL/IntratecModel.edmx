@@ -207,6 +207,15 @@
           <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
           <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="Laboratorios">
+          <Key>
+            <PropertyRef Name="IdLaboratorio" />
+          </Key>
+          <Property Name="IdLaboratorio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Laboratorio" Type="nvarchar" MaxLength="100" />
+          <Property Name="FechaCreacion" Type="datetime" />
+          <Property Name="IdUsuarioCreacion" Type="int" />
+        </EntityType>
         <EntityType Name="Log">
           <Key>
             <PropertyRef Name="IdLog" />
@@ -1114,6 +1123,7 @@
           <EntitySet Name="FotosVisita" EntityType="Self.FotosVisita" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HistoricoAsignacionZona" EntityType="Self.HistoricoAsignacionZona" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KardexPapeleria" EntityType="Self.KardexPapeleria" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Laboratorios" EntityType="Self.Laboratorios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MarcasEquipos" EntityType="Self.MarcasEquipos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Menus" EntityType="Self.Menus" Schema="dbo" store:Type="Tables" />
@@ -1551,6 +1561,7 @@
           </AssociationSet>
           <EntitySet Name="Log" EntityType="DB_A66D31_intratecPrbModel.Log" />
           <EntitySet Name="TiposVisita" EntityType="DB_A66D31_intratecPrbModel.TiposVisita" />
+          <EntitySet Name="Laboratorios" EntityType="DB_A66D31_intratecPrbModel.Laboratorios" />
           </EntityContainer>
         <EntityType Name="Departamentos">
           <Key>
@@ -2726,6 +2737,15 @@
           <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="Laboratorios">
+          <Key>
+            <PropertyRef Name="IdLaboratorio" />
+          </Key>
+          <Property Name="IdLaboratorio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Laboratorio" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioCreacion" Type="Int32" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3326,6 +3346,16 @@
                 <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
                 <ScalarProperty Name="TipoVisita" ColumnName="TipoVisita" />
                 <ScalarProperty Name="IdTipoVisita" ColumnName="IdTipoVisita" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Laboratorios">
+            <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.Laboratorios">
+              <MappingFragment StoreEntitySet="Laboratorios">
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="Laboratorio" ColumnName="Laboratorio" />
+                <ScalarProperty Name="IdLaboratorio" ColumnName="IdLaboratorio" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

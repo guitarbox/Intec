@@ -897,5 +897,17 @@ namespace Intec.DAL.TE
         }
 
         #endregion
+
+        #region CRUD Laboratorios
+        public List<Laboratorios> ObtenerLaboratorios()
+        {
+            List<Laboratorios> res = new List<Laboratorios>();
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                res = ctx.Laboratorios.ToList();
+            }
+            return res;
+        }
+        #endregion
     }
 }

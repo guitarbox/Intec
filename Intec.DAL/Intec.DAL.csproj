@@ -108,6 +108,9 @@
     <Compile Include="KardexPapeleria.cs">
       <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Laboratorios.cs">
+      <DependentUpon>IntratecModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Log.cs">
       <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>

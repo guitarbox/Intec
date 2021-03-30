@@ -410,5 +410,11 @@ namespace Intec.BL.BE
         }
 
         #endregion
+        #region CRUD Laboratorios
+        public List<DTO.Laboratorios> ObtenerLaboratorios()
+        {
+            return MapperConfig.Config.MapperAdministracion.Map<List<DTO.Laboratorios>>(new DAL.TE.AdministracionTE().ObtenerLaboratorios());
+        }
+        #endregion
     }
 }

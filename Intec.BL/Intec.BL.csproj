@@ -73,6 +73,7 @@
     <Compile Include="DTO\HistoricoAsignacionZona.cs" />
     <Compile Include="DTO\IngresoUsuario.cs" />
     <Compile Include="DTO\KardexPapeleria.cs" />
+    <Compile Include="DTO\Laboratorios.cs" />
     <Compile Include="DTO\MarcasEquipos.cs" />
     <Compile Include="DTO\Menus.cs" />
     <Compile Include="DTO\Parametros.cs" />

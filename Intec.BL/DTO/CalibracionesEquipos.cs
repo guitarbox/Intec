@@ -11,6 +11,7 @@ namespace Intec.BL.DTO
         public int IdEquipo { get; set; }
         public int Secuencia { get; set; }
         public System.DateTime FechaCalibracion { get; set; }
+        public string FechaCalibracionString { get; set; }
         public string Laboratorio { get; set; }
         public string Observaciones { get; set; }
         public System.DateTime FechaCreacion { get; set; }
@@ -18,5 +19,6 @@ namespace Intec.BL.DTO
         public Nullable<System.DateTime> FechaModificacion { get; set; }
         public Nullable<int> IdUsuarioModificacion { get; set; }
         public string Certificado { get; set; }
+        public string CertificadoWebPath { get; set; }
     }
 }

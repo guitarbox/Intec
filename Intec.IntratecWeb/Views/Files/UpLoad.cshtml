@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "UpLoad";
+    Layout = "~/Views/Shared/_CleanLayout.cshtml";
+}
+<script>
+    $(document).ready(() => {
+        debugger;
+        if (window.opener == null)
+            window.location.href = '../Usuarios/Login';
+        else {
+            var status = @Html.Raw(Json.Encode(ViewBag.status));
+            if (status == 'success') {
+                window.opener.continueUpLoad(@Html.Raw(Json.Encode(ViewBag.from)), @Html.Raw(Json.Encode(ViewBag.file)));
+                window.close();
+            }
+        }
+    });
+</script>
+
+@using (Html.BeginForm("UpLoadFile", "Files", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <input class="form-control filestyle" type="file" name="file" id="file" data-classbutton="btn btn-secondary" data-classinput="form-control inline" data-icon="&lt;span class='fa fa-upload mr'&gt;&lt;/span&gt;" />
+    <div>
+        <button class="btn btn-labeled btn-outline-info mb-2" type="submit">
+            <span class="btn-label">
+                <i class="fa fa-file-archive"></i>
+            </span>Agregar
+        </button>
+    </div>
+}

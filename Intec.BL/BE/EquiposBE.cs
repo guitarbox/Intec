@@ -3,6 +3,7 @@ using Intec.BL.DTO;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -80,6 +81,9 @@ namespace Intec.BL.BE
 
         public void IngresarCalibracionEq(DTO.CalibracionesEquipos Calibracion)
         {
+            File.Copy(Calibracion.Certificado, Calibracion.Certificado.Replace(@"tmp\", ""));
+            Calibracion.Certificado = Calibracion.Certificado.Replace(@"tmp\", "");
+            Calibracion.FechaCalibracion = DateTime.Parse(Calibracion.FechaCalibracionString, new CultureInfo("es-Co"));
             new DAL.TE.EquiposTE().IngresarCalibracionEq(MapperConfig.Config.MapperEquipos.Map<DAL.CalibracionesEquipos>(Calibracion));
         }
 

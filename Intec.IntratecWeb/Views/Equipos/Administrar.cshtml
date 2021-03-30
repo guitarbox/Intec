@@ -92,12 +92,18 @@
             { data: "FechaCalibracion", title: 'FechaCalibracion' },
             { data: "Laboratorio", title: 'Laboratorio' },
             { data: "Observaciones", title: 'Observaciones' },
+            //{ data: "CertificadoWebPath", title: 'CertificadoWeb' },
+            {
+                data: null, render: function (data, type, full, meta) {
+                    return `<a onclick="window.open('${full.CertificadoWebPath}','blank_');">${full.CertificadoWebPath}</a>`;
+                }
+            },
             { data: "FechaCreacion", title: 'FechaCreacion' },
             { data: "IdUsuarioCreacion", title: 'IdUsuarioCreacion' }
         ];
 
         $("#divCalibracionesEquipos").empty();
-        $("#divCalibracionesEquipos").append('<table id="tblCalibracionesEquipos"></table>');
+        $("#divCalibracionesEquipos").append('<table id="tblCalibracionesEquipos" style="width:100%"></table>');
         $('#tblCalibracionesEquipos').DataTable({
             data: equipo.CalibracionesEquipos,
             columns: columnsC,
@@ -119,7 +125,7 @@
         ];
 
         $("#divVerificacionesLabEquipos").empty();
-        $("#divVerificacionesLabEquipos").append('<table id="tblVerificacionesLabEquipos"></table>');
+        $("#divVerificacionesLabEquipos").append('<table id="tblVerificacionesLabEquipos" style="width:100%"></table>');
         $('#tblVerificacionesLabEquipos').DataTable({
             data: equipo.VerificacionesLabEquipos,
             columns: columnsVL,
@@ -140,7 +146,7 @@
         ];
 
         $("#divTramitesEquipo").empty();
-        $("#divTramitesEquipo").append('<table id="tblTramitesEquipo"></table>');
+        $("#divTramitesEquipo").append('<table id="tblTramitesEquipo" style="width:100%"></table>');
         $('#tblTramitesEquipo').DataTable({
             data: equipo.TramitesEquipo,
             columns: columnsT,
@@ -156,15 +162,26 @@
         debugger;
         if (equipo.TramitesEquipo.length == 0) {
             $("#divBtnTramite").append('<input type="button" class="button" value="Asignar" id="btnTramite" />');
+            $("#divBtnTramite").append('<input type="button" class="button" value="Enviar a Calibración" id="btnTramiteC" />');
+            Tramite = 'ASIGNACION';
+        }
+        else if (equipo.TramitesEquipo[0].Tramite == 'REC_CALIBRACION') {
+            $("#divBtnTramite").append('<input type="button" class="button" value="Asignar" id="btnTramite" />');
+            $("#divBtnTramite").append('<input type="button" class="button" value="Enviar a Calibración" id="btnTramiteC" />');
             Tramite = 'ASIGNACION';
         }
         else if (equipo.TramitesEquipo[0].Tramite == 'RECHAZO' || equipo.TramitesEquipo[0].Tramite == 'ACEP_DEVOLUCION') {
             $("#divBtnTramite").append('<input type="button" class="button" value="Asignar" id="btnTramite" />');
+            $("#divBtnTramite").append('<input type="button" class="button" value="Enviar a Calibración" id="btnTramiteC" />');
             Tramite = 'ASIGNACION';
         }
         else if (equipo.TramitesEquipo[0].Tramite == 'DEVOLUCION') {
             $("#divBtnTramite").append('<input type="button" class="button" value="Aceptar Devolución" id="btnTramite" />');
             Tramite = 'ACEP_DEVOLUCION';
+        }
+        else if (equipo.TramitesEquipo[0].Tramite == 'ENV_CALIBRACION') {
+            $("#divBtnTramite").append('<input type="button" class="button" value="Recibir de Calibración" id="btnTramite" />');
+            Tramite = 'REC_CALIBRACION';
         }
 
         $("#btnTramite").click(() => {
@@ -226,7 +243,54 @@
                     });
                     _openGenericModal();
                     break;
+                case "REC_CALIBRACION":                    
+                    _resetGenericModal();
+                    _appendToHeaderGeneriModal('<label>Recibit de Calibración</label>')                    
+                    //Observaciones
+                    _appendToBodyGeneriModal('<h5>Observaciones</h5>');
+                    _appendToBodyGeneriModal('<textarea class="form-control" id="obsAcepDev"></textarea>');
+                    _appendToFooterGeneriModal('<input class="button" id="btnAgregar" value="Agregar" type="button" />');
+                    $("#btnAgregar").click(() => {
+                        _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.TramitarEquipoInspector, VerbosREST.POST, JSON.stringify({
+                            sessionToken: UsuarioSesion.tokenSesion,
+                            idEquipo: equipo.IdEquipo,
+                            idInspector: null,
+                            idUsuarioTramita: UsuarioSesion.IdUsuario,
+                            tramite: Tramite,
+                            observaciones: $("#obsAcepDev").val()
+                        }))
+                            .then(response => {
+                                _closeGenericModal();
+                                ConsultarEquipo();
+                            })
+                    });
+                    _openGenericModal();
+                    break;
             }
+        });
+
+        $("#btnTramiteC").click(() => {            
+            _resetGenericModal();
+            _appendToHeaderGeneriModal('<label>Enviar Equipo Calibración</label>')            
+            //Observaciones
+            _appendToBodyGeneriModal('<h5>Observaciones</h5>');
+            _appendToBodyGeneriModal('<textarea class="form-control" id="obsAsignacion"></textarea>');
+            _appendToFooterGeneriModal('<input class="button" id="btnAgregar" value="Agregar" type="button" />');
+            $("#btnAgregar").click(() => {
+                _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.TramitarEquipoInspector, VerbosREST.POST, JSON.stringify({
+                    sessionToken: UsuarioSesion.tokenSesion,
+                    idEquipo: equipo.IdEquipo,
+                    idInspector: null,
+                    idUsuarioTramita: UsuarioSesion.IdUsuario,
+                    tramite: 'ENV_CALIBRACION',
+                    observaciones: $("#obsAsignacion").val()
+                }))
+                    .then(response => {
+                        _closeGenericModal();
+                        ConsultarEquipo();
+                    })
+            });
+            _openGenericModal();
         });
     }
 
@@ -283,20 +347,30 @@
         });
         _appendToHeaderGeneriModal('<h5>Laboratorio</h5>');
         _appendToHeaderGeneriModal('<input id="Laboratorio" class="form-control" />');
+        _appendToHeaderGeneriModal('<h5>Certificado</h5>');
+        _appendToHeaderGeneriModal('<a id="aCertificado"><label id="Certificado" style="cursor:pointer">Subir...</label></a>');
+        $("#aCertificado").click(() => {
+            _peticionAjax_Promise('../Files/SetGlobalVarForFileUpLoad', VerbosREST.POST, JSON.stringify({ From: 'CAL_EQU'}))
+                .then(response => {
+                    window.open('../Files/UpLoad', this.target, 'width=450,height=300');
+                });
+        });
         _appendToHeaderGeneriModal('<h5>Observaciones</h5>');
         _appendToHeaderGeneriModal('<textarea id="ObservacionesC" class="form-control"></textarea>');  
+
         _appendToFooterGeneriModal('<input class="button" id="btnAgregarCalibracion" type="button" value="Agregar" />');
         $("#btnAgregarCalibracion").click(() => {
             debugger;
-            if ($("#FechaCalibracion").val() != '' && $("#Laboratorio").val() != '') {
+            if ($("#FechaCalibracion").val() != '' && $("#Laboratorio").val() != '' && $("#Certificado").text() != 'Subir...') {
                 _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.IngresarACalibracionEquipo, VerbosREST.POST, JSON.stringify({
                     sessionToken: UsuarioSesion.tokenSesion,
                     calibracion: {
                         IdEquipo: equipo.IdEquipo,
-                        FechaCalibracion: $("#FechaCalibracion").val(),
+                        FechaCalibracionString: $("#FechaCalibracion").val(),
                         Laboratorio: $("#Laboratorio").val(),
                         Observaciones: $("#ObservacionesC").val(),
-                        IdUsuarioCreacion: UsuarioSesion.IdUsuario
+                        IdUsuarioCreacion: UsuarioSesion.IdUsuario,
+                        Certificado: $("#Certificado").text()
                     }
                 }))
                     .then(response => {
@@ -306,7 +380,7 @@
             }
             else
                 swal({
-                    text: 'Por favor ingresar la Fecha y el Laboratorio para crear.',
+                    text: 'Por favor ingresar la Fecha, el Laboratorio y el Certificado para crear.',
                     title: swalTitle,
                     icon: "error"
                 });
@@ -314,7 +388,11 @@
         _openGenericModal();
     }
 
-   
+    function continueUpLoad(from, file) {
+        if (from == 'CAL_EQU') {
+            $("#Certificado").text(file);
+        }
+    }
 </script>
 <h3 class="text-center" id="title">ADMINISTRAR EQUIPO</h3>
 <div class="card">

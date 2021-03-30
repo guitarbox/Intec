@@ -133,6 +133,7 @@
     <Compile Include="Controllers\AdministracionController.cs" />
     <Compile Include="Controllers\ClientesController.cs" />
     <Compile Include="Controllers\EquiposController.cs" />
+    <Compile Include="Controllers\FilesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PapeleriaController.cs" />
     <Compile Include="Controllers\SessionController.cs" />
@@ -264,9 +265,13 @@
     <Content Include="Views\Papeleria\Administracion.cshtml" />
     <Content Include="Views\Papeleria\Administrar.cshtml" />
     <Content Include="Views\Papeleria\AcepRechAnul.cshtml" />
+    <Content Include="Views\Administracion\Laboratorios.cshtml" />
+    <Content Include="Views\Files\UpLoad.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="certificadosCalibraciones\" />
+    <Folder Include="tmp\certificadosCalibraciones\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

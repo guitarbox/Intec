@@ -14,6 +14,7 @@
     <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
     <Property Name="FechaModificacion" Type="datetime" />
     <Property Name="IdUsuarioModificacion" Type="int" />
+    <Property Name="Certificado" Type="nvarchar" MaxLength="200" />
   </EntityType>
   <EntityType Name="Ciudades">
     <Key>
@@ -200,6 +201,15 @@
     <Property Name="Observaciones" Type="nvarchar" MaxLength="1000" />
     <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
     <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Laboratorios">
+    <Key>
+      <PropertyRef Name="IdLaboratorio" />
+    </Key>
+    <Property Name="IdLaboratorio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Laboratorio" Type="nvarchar" MaxLength="100" />
+    <Property Name="FechaCreacion" Type="datetime" />
+    <Property Name="IdUsuarioCreacion" Type="int" />
   </EntityType>
   <EntityType Name="Log">
     <Key>
@@ -1108,6 +1118,7 @@
     <EntitySet Name="FotosVisita" EntityType="Self.FotosVisita" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HistoricoAsignacionZona" EntityType="Self.HistoricoAsignacionZona" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="KardexPapeleria" EntityType="Self.KardexPapeleria" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Laboratorios" EntityType="Self.Laboratorios" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="MarcasEquipos" EntityType="Self.MarcasEquipos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Menus" EntityType="Self.Menus" Schema="dbo" store:Type="Tables" />

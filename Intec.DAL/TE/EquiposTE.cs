@@ -115,6 +115,13 @@ namespace Intec.DAL.TE
                         if (ue != null) ctx.UsuariosEquipos.Remove(ue);
                         else throw new Exception("No se puede rechazar la asignación del equipo.");
                         break;
+                    case "ENV_CALIBRACION":
+                        if (ctx.UsuariosEquipos.Where(e => e.IdEquipo == IdEquipo).FirstOrDefault() != null) throw new Exception("No se puede enviar a Calibración el equipo. Está asignado");
+                        break;
+                    case "REC_CALIBRACION":
+                        if (!ctx.TramitesEquipo.Where(t => t.IdEquipo == IdEquipo).OrderByDescending(d => d.Secuencia).FirstOrDefault().Tramite.Equals("ENV_CALIBRACION"))
+                            throw new Exception("No se puede recibir ya que no fue enviada a Calibración.");
+                        break;
                 }
 
                 ctx.TramitesEquipo.Add(new TramitesEquipo()
@@ -204,6 +211,7 @@ namespace Intec.DAL.TE
             return res;
         }
 
+        /*Indica si un equipo está pendiente de trámite por el admin*/
         public bool PendTramiteAdmin(int IdEquipo)
         {
             bool res = false;

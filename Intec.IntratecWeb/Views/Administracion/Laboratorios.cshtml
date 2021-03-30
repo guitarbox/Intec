@@ -1,0 +1,155 @@
+﻿
+@{
+    ViewBag.Title = "Paises";
+}
+<script>
+    $(document).ready(() => {
+        ConsultarPaises();
+    });
+
+    function ConsultarPaises() {
+        _peticionAjax(URL_SERVICE + URI_SERVICE.ObtenerLaboratorios, VerbosREST.POST,
+            JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion }),
+            true, response => {
+
+                var columns = [
+                    { data: "IdLaboratorio", title: 'Id. Laboratorio' },
+                    { data: "Laboratorio", title: 'Laboratorio' },
+                    //{
+                    //    data: null, render: function (data, type, full, meta) {
+                    //        return '<a onclick="window.location.href = \'../Administracion/Departamentos?ip=' + full.IdPais + '\';"><h5>Administrar Departamentos</h5></a>';
+                    //    }
+                    //},
+                    //{
+                    //    data: null, render: function (data, type, full, meta) {
+                    //        return '<a onclick="AbrirModalEditarRx(\'' + full.IdPais + '\');"><span class="fa fa-edit fa-2x"></span></a>';
+                    //    }
+                    //},
+                    //{
+                    //    data: null, render: function (data, type, full, meta) {
+                    //        return '<a onclick="EliminarRx(\'' + full.IdPais + '\');"><span class="fa fa-trash fa-2x"></span></a>';
+                    //    }
+                    //}
+                ];
+
+                $("#divTblLaboratorios").empty();
+                $("#divTblLaboratorios").append('<table id="tblLaboratorios" style="width:100%"></table>');
+                $('#tblLaboratorios').DataTable({
+                    data: response.data,
+                    columns: columns,
+                    language: _language_options_table,
+                    //
+                    dom: 'Bfrtip',
+                    buttons: [
+                        //{ extend: 'copy', className: 'btn-info' },
+                        //{ extend: 'csv', className: 'btn-info' },
+                        //{ extend: 'excel', className: 'btn-info', title: 'XLS-File' },
+                        //{ extend: 'pdf', className: 'btn-info', title: $('title').text() },
+                        //{ extend: 'print', className: 'btn-info' }
+                    ]
+                });
+            });
+    }
+
+    function AbrirModalCrearRx() {
+        _resetGenericModal();
+
+        $("#genericModalHeader").append('<label>Crear País</label>');
+        $("#genericModalBody").append('<p>Id País</p>');
+        $("#genericModalBody").append('<input id="IdPais" type="numeric" class="form-control" />');
+        $("#genericModalBody").append('<p>Código País</p>');
+        $("#genericModalBody").append('<input id="CodigoPais" type="text" class="form-control" />');
+        $("#genericModalBody").append('<p>País</p>');
+        $("#genericModalBody").append('<input id="Pais" type="text" class="form-control" />');
+        $("#genericModalFooter").append('<button class="button" id="btnCrearPais" return false;">Crear</button>');
+        $("#btnCrearPais").click(() => {
+            if ($("#IdPais").val() != '' && $("#CodigoPais").val() != '' && $("#Pais").val() != '') {
+                _peticionAjax(URL_SERVICE + URI_SERVICE.CrearPais, VerbosREST.POST,
+                    JSON.stringify({
+                        sessionToken: UsuarioSesion.tokenSesion,
+                        pais: {
+                            IdPais: $("#IdPais").val(),
+                            CodigoPais: $("#CodigoPais").val(),
+                            Pais: $("#Pais").val(),
+                            IdUsuarioCreacion: UsuarioSesion.IdUsuario,
+                            Activo: true
+                        }
+                    }),
+                    true, response => {
+                        ConsultarPaises();
+                        _closeGenericModal()
+                    });
+            }
+            else {
+                swal({
+                    text: 'Por favor ingresar el IdPais, Código País y el Páís para crear.',
+                    title: swalTitle,
+                    icon: "error"
+                });
+            }
+        });
+        _openGenericModal();
+    }
+
+    function AbrirModalEditarRx(IdPais) {
+        var rx = $('#tblLaboratorios').DataTable().data().filter(f => f.IdPais == IdPais)[0];
+
+        _resetGenericModal();
+
+        $("#genericModalHeader").append('<label>Editar País</label>');
+        $("#genericModalBody").append('<p>Id. País</p>');
+        $("#genericModalBody").append('<input id="IdPais" value="'+rx.IdPais + '" type="number" class="form-control" disabled />');
+        $("#genericModalBody").append('<p>Código País</p>');
+        $("#genericModalBody").append('<input id="CodigoPais" value="'+rx.CodigoPais+'" type="text" class="form-control" />');
+        $("#genericModalBody").append('<p>País</p>');
+        $("#genericModalBody").append('<input id="Pais" value="' + rx.Pais + '" type="text" class="form-control" />');
+        $("#genericModalBody").append('<label>Activo</label><input id="chkActivo" type="checkbox" ' + (rx.Activo == true ? 'checked' : '') + ' />');
+        $("#genericModalFooter").append('<button class="button" id="btnActualizarPais" return false;">Actualizar</button>');
+        $("#btnActualizarPais").click(() => {
+            if ($("#CodigoPais").val() != '' && $("#Pais").val() != '') {
+                _peticionAjax(URL_SERVICE + URI_SERVICE.ActualizarPais, VerbosREST.POST,
+                    JSON.stringify({
+                        sessionToken: UsuarioSesion.tokenSesion,
+                        pais: {
+                            IdPais: $("#IdPais").val(),
+                            CodigoPais: $("#CodigoPais").val(),
+                            Pais: $("#Pais").val(),
+                            IdUsuarioModificacion: UsuarioSesion.IdUsuario,
+                            Activo: $("#chkActivo").is(':checked')
+                        },
+                        idUsuarioModificacion: UsuarioSesion.IdUsuario
+                    }),
+                    true, response => {
+                        ConsultarPaises();
+                        _closeGenericModal();
+                    });
+            }
+            else {
+                swal({
+                    text: 'Por favor ingresar el Código de País y el País para actualizar.',
+                    title: swalTitle,
+                    icon: "error"
+                });
+            }
+        });
+        _openGenericModal();
+    }
+
+    function EliminarRx(IdPais) {
+        _peticionAjax(URL_SERVICE + URI_SERVICE.EliminarPais, VerbosREST.POST,
+            JSON.stringify({
+                sessionToken: UsuarioSesion.tokenSesion,
+                idPais: IdPais,
+                idUsuarioModificacion: UsuarioSesion.IdUsuario
+            }),
+            true, response => {
+                ConsultarPaises();
+            });
+    }
+</script>
+<h3 class="text-center" id="title">LABORATORIOS</h3>
+<div style="padding:10px">
+    <div id="divTblLaboratorios" style="width:100%"></div>
+    <br />
+    <button class="button" onclick="AbrirModalCrearRx(); return false;">Crear Nuevo Laboratorio</button>
+</div> 

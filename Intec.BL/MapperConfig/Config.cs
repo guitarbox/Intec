@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,7 +46,9 @@ namespace Intec.BL.MapperConfig
                     cfg.CreateMap<DAL.Roles, DTO.Roles>()
                     .ForMember(dest => dest.Menus, opt => opt.Ignore());
                     cfg.CreateMap<DAL.TiposVisita, DTO.TiposVisita>();
-                    
+
+                    cfg.CreateMap<DAL.Laboratorios, DTO.Laboratorios>();
+
 
                 });
 
@@ -70,7 +73,11 @@ namespace Intec.BL.MapperConfig
                     .ForMember(dest => dest.FechaUltimaVerificacionLaboratorioString, opt => opt.MapFrom(src => src.FechaUltimaVerificacionLaboratorio == null ? "" : src.FechaUltimaVerificacionLaboratorio.Value.ToShortDateString()))
                     .ForMember(dest => dest.PendTramiteAdmin, opt => opt.Ignore())
                     ;
-                    cfg.CreateMap<DAL.CalibracionesEquipos, DTO.CalibracionesEquipos>();
+                    cfg.CreateMap<DAL.CalibracionesEquipos, DTO.CalibracionesEquipos>()
+                    .ForMember(dest => dest.FechaCalibracionString, opt => opt.MapFrom(src => src.FechaCalibracion.ToString()))
+                    .ForMember(dest => dest.CertificadoWebPath, opt => opt.MapFrom(src => string.IsNullOrEmpty(src.Certificado) ? "" : $"../certificadosCalibraciones/{Path.GetFileName(src.Certificado)}"))
+                    ;
+
                     cfg.CreateMap<DAL.VerificacionesLabEquipos, DTO.VerificacionesLabEquipos>();
                     cfg.CreateMap<DAL.MarcasEquipos, DTO.MarcasEquipos>();
                     cfg.CreateMap<DAL.TiposEquipo, DTO.TiposEquipo>();

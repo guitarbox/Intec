@@ -56,5 +56,10 @@ namespace Intec.IntratecWeb.Controllers
         {
             return View();
         }
+        
+        public ActionResult Laboratorios()
+        {
+            return View();
+        }
     }
 }

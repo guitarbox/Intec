@@ -228,6 +228,7 @@
     </AssociationSet>
     <EntitySet Name="Log" EntityType="DB_A66D31_intratecPrbModel.Log" />
     <EntitySet Name="TiposVisita" EntityType="DB_A66D31_intratecPrbModel.TiposVisita" />
+    <EntitySet Name="Laboratorios" EntityType="DB_A66D31_intratecPrbModel.Laboratorios" />
   </EntityContainer>
   <EntityType Name="Departamentos">
     <Key>
@@ -554,6 +555,7 @@
     <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
     <Property Name="IdUsuarioModificacion" Type="Int32" />
     <NavigationProperty Name="Equipos" Relationship="DB_A66D31_intratecPrbModel.FK_CalibracionesEquipos_Equipos" FromRole="CalibracionesEquipos" ToRole="Equipos" />
+    <Property Name="Certificado" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Equipos">
     <Key>
@@ -1401,5 +1403,14 @@
     <Property Name="TipoVisita" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Laboratorios">
+    <Key>
+      <PropertyRef Name="IdLaboratorio" />
+    </Key>
+    <Property Name="IdLaboratorio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Laboratorio" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
+    <Property Name="IdUsuarioCreacion" Type="Int32" />
   </EntityType>
 </Schema>

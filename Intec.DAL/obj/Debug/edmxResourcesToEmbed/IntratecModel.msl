@@ -237,6 +237,7 @@
     <EntitySetMapping Name="CalibracionesEquipos">
       <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.CalibracionesEquipos">
         <MappingFragment StoreEntitySet="CalibracionesEquipos">
+          <ScalarProperty Name="Certificado" ColumnName="Certificado" />
           <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
           <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
           <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
@@ -594,6 +595,16 @@
           <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
           <ScalarProperty Name="TipoVisita" ColumnName="TipoVisita" />
           <ScalarProperty Name="IdTipoVisita" ColumnName="IdTipoVisita" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Laboratorios">
+      <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.Laboratorios">
+        <MappingFragment StoreEntitySet="Laboratorios">
+          <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+          <ScalarProperty Name="Laboratorio" ColumnName="Laboratorio" />
+          <ScalarProperty Name="IdLaboratorio" ColumnName="IdLaboratorio" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
