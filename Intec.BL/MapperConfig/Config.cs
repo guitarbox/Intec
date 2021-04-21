@@ -44,11 +44,11 @@ namespace Intec.BL.MapperConfig
                     cfg.CreateMap<DAL.UsosPropiedades, DTO.UsosPropiedades>();
 
                     cfg.CreateMap<DAL.Roles, DTO.Roles>()
-                    .ForMember(dest => dest.Menus, opt => opt.Ignore());
+                        .ForMember(dest => dest.Menus, opt => opt.Ignore());
                     cfg.CreateMap<DAL.TiposVisita, DTO.TiposVisita>();
 
+                    cfg.CreateMap<DTO.Laboratorios, DAL.Laboratorios>();
                     cfg.CreateMap<DAL.Laboratorios, DTO.Laboratorios>();
-
 
                 });
 
@@ -245,6 +245,8 @@ namespace Intec.BL.MapperConfig
                         .ForMember(dest => dest.FotosVisita, opt => opt.Ignore())
                         .ForMember(dest => dest.SolicitudesProgramacionVisitas, opt => opt.Ignore())
                         .ForMember(dest => dest.Propiedades, opt => opt.Ignore())                        
+                        .ForMember(dest => dest.Zonas, opt => opt.Ignore())
+                        .ForMember(dest => dest.Usuarios, opt => opt.Ignore())
                     ;
 
                     cfg.CreateMap<DAL.TiposIdentificacion, DTO.TiposIdentificacion>();
@@ -286,21 +288,30 @@ namespace Intec.BL.MapperConfig
             {
                 var config = new AutoMapper.MapperConfiguration(cfg => {
 
-                    cfg.CreateMap<DTO.Zonas, DAL.Zonas>();
                     cfg.CreateMap<DAL.Zonas, DTO.Zonas>();
-
-                    cfg.CreateMap<DTO.Visitas, DAL.Visitas>();
+                    cfg.CreateMap<DAL.Usuarios, DTO.Usuarios>()
+                    .ForMember(dest => dest.Roles, opt => opt.Ignore())
+                    .ForMember(dest => dest.TiposIdentificacion, opt => opt.Ignore())
+                    ;
+                    cfg.CreateMap<DAL.Ciudades, DTO.Ciudades>();
                     cfg.CreateMap<DAL.Visitas, DTO.Visitas>();
-
+                    cfg.CreateMap<DAL.uspConsultarVisitas_Result, DTO.uspConsultarVisitas_Result>();
+                    cfg.CreateMap<DAL.SolicitudesProgramacionVisitas, DTO.SolicitudesProgramacionVisitas>();                    
+                    cfg.CreateMap<DAL.EstadosVisita, DTO.EstadosVisita>();
+                    cfg.CreateMap<DAL.FormatosVisita, DTO.FormatosVisita>();
+                    cfg.CreateMap<DAL.EquiposVisita, DTO.EquiposVisita>();
+                    cfg.CreateMap<DAL.FotosVisita, DTO.FotosVisita>();
+                    cfg.CreateMap<DAL.Propiedades, DTO.Propiedades>();
+                    cfg.CreateMap<DAL.TiposPropiedades, DTO.TiposPropiedades>();
+                    cfg.CreateMap<DAL.UsosPropiedades, DTO.UsosPropiedades>();
+                    cfg.CreateMap<DAL.TiposVisita, DTO.TiposVisita>();
+                    
+                    //DAL
+                    cfg.CreateMap<DTO.SolicitudesProgramacionVisitas, DAL.SolicitudesProgramacionVisitas>();
                     cfg.CreateMap<DTO.FotosVisita, DAL.FotosVisita>();
                     cfg.CreateMap<DTO.FormatosVisita, DAL.FormatosVisita>();
                     cfg.CreateMap<DTO.EquiposVisita, DAL.EquiposVisita>();
-
-                    cfg.CreateMap<DAL.uspConsultarVisitas_Result, DTO.uspConsultarVisitas_Result>();
-
-                    cfg.CreateMap<DAL.SolicitudesProgramacionVisitas, DTO.SolicitudesProgramacionVisitas>();
-                    //DAL
-                    cfg.CreateMap<DTO.SolicitudesProgramacionVisitas, DAL.SolicitudesProgramacionVisitas>();
+                    cfg.CreateMap<DTO.Visitas, DAL.Visitas>(); cfg.CreateMap<DTO.Zonas, DAL.Zonas>();
                 });
 
                 return config.CreateMapper();

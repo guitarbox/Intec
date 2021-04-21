@@ -4,17 +4,20 @@
 }
 <script>
     $(document).ready(() => {
-        ConsultarPaises();
+        ConsultarLaboratorios();
     });
 
-    function ConsultarPaises() {
+    function ConsultarLaboratorios() {
         _peticionAjax(URL_SERVICE + URI_SERVICE.ObtenerLaboratorios, VerbosREST.POST,
             JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion }),
             true, response => {
-
                 var columns = [
                     { data: "IdLaboratorio", title: 'Id. Laboratorio' },
+                    { data: "Nit", title: 'Nit' },
+                    { data: "DV", title: 'DV' },
                     { data: "Laboratorio", title: 'Laboratorio' },
+                    { data: "Direccion", title: 'Dirección' },
+                    { data: "Telefono", title: 'Teléfono' },
                     //{
                     //    data: null, render: function (data, type, full, meta) {
                     //        return '<a onclick="window.location.href = \'../Administracion/Departamentos?ip=' + full.IdPais + '\';"><h5>Administrar Departamentos</h5></a>';
@@ -54,35 +57,41 @@
     function AbrirModalCrearRx() {
         _resetGenericModal();
 
-        $("#genericModalHeader").append('<label>Crear País</label>');
-        $("#genericModalBody").append('<p>Id País</p>');
-        $("#genericModalBody").append('<input id="IdPais" type="numeric" class="form-control" />');
-        $("#genericModalBody").append('<p>Código País</p>');
-        $("#genericModalBody").append('<input id="CodigoPais" type="text" class="form-control" />');
-        $("#genericModalBody").append('<p>País</p>');
-        $("#genericModalBody").append('<input id="Pais" type="text" class="form-control" />');
-        $("#genericModalFooter").append('<button class="button" id="btnCrearPais" return false;">Crear</button>');
-        $("#btnCrearPais").click(() => {
-            if ($("#IdPais").val() != '' && $("#CodigoPais").val() != '' && $("#Pais").val() != '') {
-                _peticionAjax(URL_SERVICE + URI_SERVICE.CrearPais, VerbosREST.POST,
+        $("#genericModalHeader").append('<label>Crear Laboratorio</label>');
+        $("#genericModalBody").append('<p>Laboratorio</p>');
+        $("#genericModalBody").append('<input id="Laboratorio" type="text" class="form-control" />');
+        $("#genericModalBody").append('<p>Nit</p>');
+        $("#genericModalBody").append('<input id="Nit" type="text" class="form-control" />');
+        $("#genericModalBody").append('<p>DV</p>');
+        $("#genericModalBody").append('<input id="DV" type="numeric" class="form-control" />');
+        $("#genericModalBody").append('<p>Dirección</p>');
+        $("#genericModalBody").append('<input id="Direccion" type="text" class="form-control" />');
+        $("#genericModalBody").append('<p>Teléfono</p>');
+        $("#genericModalBody").append('<input id="Telefono" type="text" class="form-control" />');
+
+        $("#genericModalFooter").append('<button class="button" id="btnCrearRx" return false;">Crear</button>');
+        $("#btnCrearRx").click(() => {
+            if ($("#Laboratorio").val() != '' && $("#Nit").val() != '' && $("#DV").val() != '' && $("#Direccion").val() != '' && $("#Telefono").val() != '') {
+                _peticionAjax(URL_SERVICE + URI_SERVICE.CrearLaboratorio, VerbosREST.POST,
                     JSON.stringify({
                         sessionToken: UsuarioSesion.tokenSesion,
-                        pais: {
-                            IdPais: $("#IdPais").val(),
-                            CodigoPais: $("#CodigoPais").val(),
-                            Pais: $("#Pais").val(),
-                            IdUsuarioCreacion: UsuarioSesion.IdUsuario,
-                            Activo: true
+                        laboratorio: {
+                            Laboratorio: $("#Laboratorio").val(),
+                            Nit: $("#Nit").val(),
+                            DV: $("#DV").val(),
+                            Direccion: $("#Direccion").val(),
+                            Telefono: $("#Telefono").val(),
+                            IdUsuarioCreacion: UsuarioSesion.IdUsuario                            
                         }
                     }),
                     true, response => {
-                        ConsultarPaises();
+                        ConsultarLaboratorios();
                         _closeGenericModal()
                     });
             }
             else {
                 swal({
-                    text: 'Por favor ingresar el IdPais, Código País y el Páís para crear.',
+                    text: 'Todos los datos son obligatorios para crear.',
                     title: swalTitle,
                     icon: "error"
                 });
@@ -120,7 +129,7 @@
                         idUsuarioModificacion: UsuarioSesion.IdUsuario
                     }),
                     true, response => {
-                        ConsultarPaises();
+                        ConsultarLaboratorios();
                         _closeGenericModal();
                     });
             }
@@ -143,7 +152,7 @@
                 idUsuarioModificacion: UsuarioSesion.IdUsuario
             }),
             true, response => {
-                ConsultarPaises();
+                ConsultarLaboratorios();
             });
     }
 </script>

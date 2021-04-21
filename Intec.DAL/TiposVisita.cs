@@ -14,9 +14,18 @@ namespace Intec.DAL
     
     public partial class TiposVisita
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public TiposVisita()
+        {
+            this.Visitas = new HashSet<Visitas>();
+        }
+    
         public int IdTipoVisita { get; set; }
         public string TipoVisita { get; set; }
         public System.DateTime FechaCreacion { get; set; }
         public int IdUsuarioCreacion { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Visitas> Visitas { get; set; }
     }
 }

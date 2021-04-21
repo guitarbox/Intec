@@ -31,5 +31,6 @@ namespace Intec.BL.DTO
         public TiposPersona TiposPersona { get; set; }
         public List<Propiedades> Propiedades { get; set; }
         public List<Visitas> Visitas { get; set; }
+        public Nullable<int> IdZona { get; set; }
     }
 }

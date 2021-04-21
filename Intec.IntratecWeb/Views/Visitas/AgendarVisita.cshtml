@@ -1,0 +1,139 @@
+﻿
+@{
+    ViewBag.Title = "Agendar Visita";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script>
+    var nitC_, idProp_, idCliente_, props_;
+
+    $(document).ready(() => {
+        nitC_ = _getUrlVars(window.location.href)["c"];
+        if (nitC_ != undefined) {
+            $("#nitC").val(nitC_);
+            BuscarCliente();
+            idProp_ = _getUrlVars(window.location.href)["p"];
+        }
+        $("#FechaVisita").datetimepicker({
+            format: "D/M/YYYY"
+        });
+        _setToday($("#FechaVisita"));
+        //Cargar los inspectores
+        _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.GetUsuariosByIdRol, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion, idRol: 2 }))
+            .then(response => {
+                $("#Inspector").append('<option value="0">Seleccione Inspector...</option>');
+                response.data.forEach(inspector => {
+                    $("#Inspector").append(`<option value="${inspector.IdUsuario}">${inspector.Nombres} ${inspector.Apellidos}</option>`);
+                });
+            });
+    });
+
+    function BuscarCliente() {
+        nitC_ = $("#nitC").val();
+        _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.ObtenerCliente, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion, idCliente: -1, numeroIdentificacion: nitC_ }))
+            .then(response => {
+                //Mostrar datos básicos
+                idCliente_ = response.data.idCliente;
+                props_ = response.data.Propiedades;
+                $("#NumeroIdentificacionCliente").val(response.data.NumeroIdentificacion);
+                $("#NombreCliente").val(`${response.data.Nombres} ${response.data.Apellidos}`);
+                $("#TelefonoCliente").val(`${response.data.TelefonoCel1}`);
+                $("#EmailCliente").val(`${response.data.Email1}`);
+
+                //Mostrar propiedades
+                $("#tblPropiedades").empty();
+                $("#tblPropiedades").append('<tr><th>Id. Prop.</th><th>Dirección</th><th>Tipo Prop.</th><th>Uso</th><th>Nro. Poliza</th></tr>');
+                response.data.Propiedades.forEach(prop => {
+                    $("#tblPropiedades").append(`<tr style="cursor: pointer;" onclick="SeleccionarProp(${prop.IdPropiedades});"><td>${prop.IdPropiedades}</td><td>${prop.Direccion}</td><td>${prop.TiposPropiedades.TipoPropiedad}</td><td>${prop.UsosPropiedades.Uso}</td><td>${prop.NroPoliza}</td></tr>`);
+                });
+                $("#divSelectProp").show();
+
+                //Seleccionar propiedad
+                if (idProp_ != undefined) {
+                    SeleccionarProp(idProp_);
+                }                
+            });
+    }
+
+    function SeleccionarProp(IdProp) {
+        debugger;
+        idProp_ = IdProp;
+        prop = props_.filter(f => f.IdPropiedades == idProp_)[0];
+        $("#DirProp").val(prop.Direccion);
+        $("#TipoProp").val(prop.TiposPropiedades.TipoPropiedad);
+        $("#UsoProp").val(prop.UsosPropiedades.Uso);
+        $("#NroPoliza").val(prop.NroPoliza);
+        $("#divSelectProp").hide();
+        $("#divSelectedProp").show();
+    }
+
+    function AgendarVisita() {
+        //Acá voy
+    }
+</script>
+<h3 class="text-center" id="title">Agendar Visita</h3>
+<div class="card">
+    <div>
+        <h4>Datos del Cliente</h4>
+        <div style="display:flex;">
+            <div style="margin-right:10px">
+                <p>Núm Identificación Cliente</p>
+                <input id="nitC" class="form-control" onchange="BuscarCliente();" placeholder="Ingrese Nit o Cédula del cliente"/>
+            </div>
+            <div style="margin-right:10px">
+                <p>Cliente</p>
+                <input type="text" id="NombreCliente" class="form-control" disabled />
+            </div>
+            <div style="margin-right:10px">
+                <p>Teléfono</p>
+                <input type="text" id="TelefonoCliente" class="form-control" disabled />
+            </div>
+            <div style="margin-right:10px">
+                <p>Email</p>
+                <input type="text" id="EmailCliente" class="form-control" disabled />
+            </div>
+        </div>
+    </div>
+    <br />
+    <div id="divSelectProp" hidden>
+        <h4>Por favor seleccione una propiedad</h4>
+        <table id="tblPropiedades" class="table" style="width:100%"></table>
+    </div>        
+    <div id="divSelectedProp" hidden>
+        <div style="display:flex; justify-content:space-between">
+            <h4>Propiedad Seleccionada</h4>
+            <a onclick="$('#divSelectedProp').hide(); $('#divSelectProp').show()">Cambiar propiedad</a>
+        </div>
+        <div style="display:flex;">
+            <div style="margin-right:10px">
+                <p>Dirección</p>
+                <input type="text" id="DirProp" class="form-control" disabled />
+            </div>
+            <div style="margin-right:10px">
+                <p>Tipo</p>
+                <input type="text" id="TipoProp" class="form-control" disabled />
+            </div>
+            <div style="margin-right:10px">
+                <p>Uso</p>
+                <input type="text" id="UsoProp" class="form-control" disabled />
+            </div>
+            <div style="margin-right:10px">
+                <p>Nro. Poliza</p>
+                <input type="text" id="NroPoliza" class="form-control" />
+            </div>
+        </div>
+        <br />
+        <h4>Seleccione la fecha de la visita y el inspector</h4>
+        <div style="display:flex;">
+            <div style="margin-right:10px">
+                <p>Fecha Visita</p>
+                <input type="text" id="FechaVisita" class="form-control" />
+            </div>
+            <div style="margin-right:10px">
+                <p>Inspector</p>
+                <select id="Inspector" class="form-control"></select>
+            </div>
+        </div>
+        <br />
+        <input type="button" value="Agendar Visita" class="button" onclick="AgendarVisita();"/>
+    </div>
+</div>

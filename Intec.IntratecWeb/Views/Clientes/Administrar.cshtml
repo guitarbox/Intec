@@ -13,7 +13,7 @@
     });
 
     function ConsultarCliente() {
-        _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.ObtenerCliente, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion, idCliente: window.location.href.split('=')[1] }))
+        _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.ObtenerCliente, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion, idCliente: window.location.href.split('=')[1], numeroIdentificacion: '' }))
             .then(response => {
                 cliente = response.data;
                 MostrarCliente();
@@ -60,6 +60,11 @@
                     data: null, render: function (data, type, full, meta) {
                         return '<a onclick="EliminarPropiedad(' + full.IdPropiedades + ');"><span class="fa fa-trash fa-2x"></span></a>';
                     }
+                },
+                {
+                    data: null, render: function (data, type, full, meta) {
+                        return `<a onclick="window.open('../Visitas/AgendarVisita?c=${cliente.NumeroIdentificacion}&p=${full.IdPropiedades}', this.target);"><span class="fa fa-handshake fa-2x"></span></a>`;
+                    }
                 }
             ];
 
@@ -80,17 +85,27 @@
                 //{ data:'IdSolicitudProgramacion', title:'Id. Sol. Program.'},
                 //{ data:'IdCliente'},
                 { data:'Direccion', title:'Dirección'},
-                { data:'Zonas.Descripcion', title: 'Id. Zona'},
+                //{ data: 'Zonas.Descripcion', title: 'Id. Zona' },
+                {
+                    data: null, title: 'Zona', render: function (data, type, full, meta) {
+                        return full.Zonas == null ? '' : full.Zonas.Descripcion;
+                    }
+                },
                 //{ data: 'IdCiudad', title: ''},
                 { data: 'FechaVisita', title: 'Fecha Visita'}, 
-                { data: 'Usuarios.Nombres', title: 'Inspector'},
+                //{ data: 'Usuarios.Nombres', title: 'Inspector' },
+                {
+                    data: null, title: 'Inspector', render: function (data, type, full, meta) {
+                        return full.Usuarios == null ? '' : full.Usuarios.Nombres;
+                    }
+                },
                 { data: 'ObservacionesVisita', title: 'Observaciones'},
                 { data:'IdEstadoVisitas', title: 'Estado Visita'},
                 //{ data:'IdPropiedad'},
                 //{ data:'OrigenVisita'},
                 {
                     data: null, render: function (data, type, full, meta) {
-                        return '<a onclick="window.location.href = \'../Visitas/Ver?iv=' + full.IdVisita + '\';"><span class="fa fa-eye"></span></a>';
+                        return '<a onclick="window.location.href = \'../Visitas/Ver?iv=' + full.IdVisita + '\';"><span class="fa fa-eye fa-2x"></span></a>';
                     }
                 }
             ];
@@ -135,7 +150,7 @@
             })
         )
         .then(response => {
-            return _peticionAjax_NoLockScreen(URL_SERVICE + URI_SERVICE.ObtenerCliente, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion, idCliente: window.location.href.split('=')[1] }));
+            return _peticionAjax_NoLockScreen(URL_SERVICE + URI_SERVICE.ObtenerCliente, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion, idCliente: window.location.href.split('=')[1], numeroIdentificacion: '' }));
         })
         .then(response => {
             cliente = response.data;
@@ -258,5 +273,5 @@
 <div class="card">
     <h3>Visitas</h3>
     <div id="divVisitas"></div>
-    <input type="button" class="button" value="Programar Visita" />
+    <input type="button" class="button" value="Programar Visita" onclick="window.open('../Visitas/AgendarVisita?c=' + cliente.NumeroIdentificacion, this.target); return false; " />
 </div>

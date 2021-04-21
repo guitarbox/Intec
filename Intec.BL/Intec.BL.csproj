@@ -59,6 +59,7 @@
     <Compile Include="BE\SolicitudesProgramacionVisitasBE.cs" />
     <Compile Include="BE\VisitasBE.cs" />
     <Compile Include="BE\_beDefault.cs" />
+    <Compile Include="DTO\BarrioLocalidad.cs" />
     <Compile Include="DTO\CalibracionesEquipos.cs" />
     <Compile Include="DTO\Ciudades.cs" />
     <Compile Include="DTO\Clientes.cs" />

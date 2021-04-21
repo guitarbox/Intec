@@ -40,7 +40,8 @@ namespace Intec.WebApi.Controllers
             SetValidTokendResponse(validToken);
 
             if (validToken)            
-                SetDataResponse( new Intec.BL.BE.ClientesBE().ConsultaDetalladaClientes(Token["idCliente"].ToObject<int>()));
+                SetDataResponse( new Intec.BL.BE.ClientesBE().ConsultaDetalladaClientes(Token["idCliente"].ToObject<int>(),
+                    Token["numeroIdentificacion"].ToString()));
             return response;
         }
 

@@ -1,4 +1,15 @@
-﻿function _peticionAjax(urlServicio, verb, parametros, async, onContinue) {    
+﻿function _getUrlVars(url) {
+    var vars = [], hash;
+    var hashes = url.slice(url.indexOf('?') + 1).split('&');
+    for (var i = 0; i < hashes.length; i++) {
+        hash = hashes[i].split('=');
+        vars.push(hash[0]);
+        vars[hash[0]] = hash[1];
+    }
+    return vars;
+}
+
+function _peticionAjax(urlServicio, verb, parametros, async, onContinue) {    
     debugger;
     var rta = "";
 
@@ -138,6 +149,13 @@ function _peticionAjax_Promise(urlServicio, verb, parametros) {
     
 }
 
+/********************************************* Generic Date Methods ******************************************************/
+function _setToday(element) {
+    var date = new Date();
+    element.val(`${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`);
+}
+/**************************************************************************************************************************/
+
 /********************************************* Generic Modal Methods ******************************************************/
 function _resetGenericModal() {
     $("#genericModalHeader").empty();
@@ -264,6 +282,24 @@ function _loadSelectTiposVisita(element) {
     let resRequest = _peticionAjax(URL_SERVICE + URI_SERVICE.ObtenerTiposVisita, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion }), false);
     resRequest.data.forEach(d => {
         element.append('<option value="' + d.IdTipoVisita + '">' + d.TipoVisita + '</option>');
+    });
+}
+
+function _loadSelectLaboratorios(element) {
+    element.empty();
+    element.append('<option value="">Seleccione Laboratorio...</option>');
+    let resRequest = _peticionAjax(URL_SERVICE + URI_SERVICE.ObtenerLaboratorios, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion }), false);
+    resRequest.data.forEach(d => {
+        element.append('<option value="' + d.IdLaboratorio + '">' + d.Laboratorio + '</option>');
+    });
+}
+
+function _loadSelectEstadosVisita(element) {
+    element.empty();
+    element.append('<option value="">Seleccione Estado Visita...</option>');
+    let resRequest = _peticionAjax(URL_SERVICE + URI_SERVICE.ObtenerEstadosVisita, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion }), false);
+    resRequest.data.forEach(d => {
+        element.append('<option value="' + d.IdEstadoVisita + '">' + d.EstadoVisita + '</option>');
     });
 }
 /**************************************************************************************************************************/

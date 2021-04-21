@@ -5,6 +5,7 @@
 
 <script>
     $(document).ready(() => {
+        debugger;
         _loadSelectMarcas($("#IdMarca"));
         _loadSelectTipoEquipo($("#IdTipoEquipo"));
         ConsultarEquipos();
@@ -86,6 +87,36 @@
         _appendToBodyGeneriModal('<input type="text" id="RangoMedicion" class="form-control" />');
         _appendToBodyGeneriModal('<p>Tolerancia</p>');
         _appendToBodyGeneriModal('<input type="text" id="Tolerancia" class="form-control" />');
+        _appendToBodyGeneriModal('<p>Fecha Última Verificación Laboratorio</p>');
+        _appendToBodyGeneriModal('<input type="text" id="FechaUltimaVerificacionLaboratorio" class="form-control" />');
+        $("#FechaUltimaVerificacionLaboratorio").datetimepicker({
+            format: "D/M/YYYY"
+        });
+        _appendToBodyGeneriModal('<p>Fecha Próxima Verificación</p>');
+        _appendToBodyGeneriModal('<input type="text" id="FechaProximaVerificacion" class="form-control" />');
+        $("#FechaProximaVerificacion").datetimepicker({
+            format: "D/M/YYYY"
+        });
+        _appendToBodyGeneriModal('<p>Período de Verificación</p>');
+        _appendToBodyGeneriModal('<input id="PeriodoVerificacion" class="form-control" placeholder="Valor en Meses"/>');
+
+        _appendToBodyGeneriModal('<p>Requiere Calibración</p>');
+        _appendToBodyGeneriModal('<input type="checkbox" id="RequiereCalibracion" checked/>');
+        $("#RequiereCalibracion").change(() => {
+            debugger;
+            if (!$("#RequiereCalibracion").is(':checked')) {
+                $("#Calibrado").attr('disabled', 'disabled');
+                $("#FechaUltimaCalibracion").attr('disabled', 'disabled');
+                $("#PeriodoCalibracion").attr('disabled', 'disabled');
+                $("#FechaProximaCalibracion").attr('disabled', 'disabled');
+            }
+            else {
+                $("#Calibrado").removeAttr('disabled');
+                $("#FechaUltimaCalibracion").removeAttr('disabled');
+                $("#PeriodoCalibracion").removeAttr('disabled');
+                $("#FechaProximaCalibracion").removeAttr('disabled');
+            }
+        });
         _appendToBodyGeneriModal('<p>Calibrado</p>');
         _appendToBodyGeneriModal('<input type="checkbox" id="Calibrado" />');
         _appendToBodyGeneriModal('<p>Fecha Última Calibración</p>');
@@ -93,26 +124,19 @@
         $("#FechaUltimaCalibracion").datetimepicker({
             format: "D/M/YYYY"
         });
+        _appendToBodyGeneriModal('<p>Período de Calibración</p>');
+        _appendToBodyGeneriModal('<input id="PeriodoCalibracion" class="form-control" placeholder="Valor en Meses"/>');
         _appendToBodyGeneriModal('<p>Fecha Próxima Calibración</p>');
         _appendToBodyGeneriModal('<input type="text" id="FechaProximaCalibracion" class="form-control" />');
         $("#FechaProximaCalibracion").datetimepicker({
             format: "D/M/YYYY"
         });
-        _appendToBodyGeneriModal('<p>Fecha Última Verificación Laboratorio</p>');
-        _appendToBodyGeneriModal('<input type="text" id="FechaUltimaVerificacionLaboratorio" class="form-control" />');
-        $("#FechaUltimaVerificacionLaboratorio").datetimepicker({
-            format: "D/M/YYYY"
-        });
-        _appendToBodyGeneriModal('<p>Período de Calibración</p>');
-        _appendToBodyGeneriModal('<input id="PeriodoCalibracion" class="form-control" placeholder="Valor en Meses"/>');
-        _appendToBodyGeneriModal('<p>Período de Verificación</p>');
-        _appendToBodyGeneriModal('<input id="PeriodoVerificacion" class="form-control" placeholder="Valor en Meses"/>');
+
         _appendToBodyGeneriModal('<p>Fecha Próximo Mantenimiento</p>');
         _appendToBodyGeneriModal('<input type="text" id="FechaProximoMantenimiento" class="form-control" />');
         $("#FechaProximoMantenimiento").datetimepicker({
             format: "D/M/YYYY"
         });
-        
 
         _appendToFooterGeneriModal('<button class="button" id="btnCrear" return false;">Crear</button>');
         $("#btnCrear").click(() => {
@@ -137,7 +161,9 @@
                             PeriodoVerificacion: $("#PeriodoVerificacion").val(),
                             FechaProximoMantenimientoString: $("#FechaProximoMantenimiento").val(),
                             IdUsuarioCreacion: UsuarioSesion.IdUsuario,
-                            IdTipoVisitaAplica: $("#IdTipoVisitaAplica").val()
+                            IdTipoVisitaAplica: $("#IdTipoVisitaAplica").val(),
+                            FechaProximaVerificacionString: $("#FechaProximaVerificacion").val(),
+                            RequiereCalibracion: $("#RequiereCalibracion").is(':checked')
                         }
                     }))
                     .then(response => {

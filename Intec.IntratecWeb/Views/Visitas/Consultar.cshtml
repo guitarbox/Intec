@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Consultar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script>
+    var visita_;
+
+    $(document).ready(() => {
+        ConsultarVisita();
+    });
+
+    function ConsultarVisita() {
+        _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.ConsultarVisita, VerbosREST.POST,
+            JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion, idVisita: window.location.href.split('=')[1] }))
+            .then(response => {
+                visita_ = response.data;
+                $("#title").text(`Visita # ${visita_.IdVisita }`);
+            })
+    }
+</script>
+<h3 class="text-center" id="title"></h3>
+<div class="card">
+    
+</div>

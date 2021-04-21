@@ -25,12 +25,16 @@ namespace Intec.DAL.TE
         /**
          * 2) 
          */
-        public Clientes ConsultaDetalladaClientes(int IdCliente)
+        public Clientes ConsultaDetalladaClientes(int IdCliente, string NumeroIdentificacion)
         {
             Clientes res = null;
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
-                res = ctx.Clientes.Where(c => c.IdCliente == IdCliente).FirstOrDefault();
+                if(IdCliente != -1)
+                    res = ctx.Clientes.Where(c => c.IdCliente == IdCliente).FirstOrDefault();
+                else if(!string.IsNullOrEmpty(NumeroIdentificacion))
+                    res = ctx.Clientes.Where(c => c.NumeroIdentificacion.Equals(NumeroIdentificacion)).FirstOrDefault();
+
                 if (res != null)
                 {
                     res.Propiedades.ToList();
@@ -107,6 +111,18 @@ namespace Intec.DAL.TE
         /**
          * 5) 
          */
+        public Propiedades ConsultaPropiedad(int IdPropiedades)
+        {
+            Propiedades res = null;
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                res = ctx.Propiedades.Where(c => c.IdPropiedades == IdPropiedades).FirstOrDefault();
+                ctx.Entry(res).Reference(r=>r.TiposPropiedades).Load();
+                ctx.Entry(res).Reference(r=>r.UsosPropiedades).Load();
+            }
+            return res;
+        }
+
         public Propiedades ConsultaDetalladaPropiedad(int IdPropiedades)
         {
             Propiedades res = null;

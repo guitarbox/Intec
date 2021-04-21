@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -284,11 +285,22 @@ namespace Intec.WebApi.Controllers
             bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
             SetValidTokendResponse(validToken);
             if (validToken)
-                SetDataResponse(new Intec.BL.BE.VisitasBE().ConsultaVisitas(DateTime.Parse(Token["fechaInicial"].ToString()),
-                                                                        DateTime.Parse(Token["fechaFinal"].ToString()),
+                SetDataResponse(new Intec.BL.BE.VisitasBE().ConsultaVisitas(DateTime.Parse(Token["fechaInicial"].ToString(), new CultureInfo("es-Co")),
+                                                                        DateTime.Parse(Token["fechaFinal"].ToString(), new CultureInfo("es-Co")),
                                                                         Token["numeroIdentificacionCliente"].ToString(),
                                                                         int.Parse(Token["idInspector"].ToString()),
                                                                         Token["idEstadoVisita"].ToString()));
+            return response;
+        }
+        
+        [HttpPost]
+        [Route("api/Visitas/ObtenerEstadosVisita")]
+        public JObject ObtenerEstadosVisita([FromBody]JObject Token)
+        {
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+            if (validToken)
+                SetDataResponse(new Intec.BL.BE.VisitasBE().ObtenerEstadosVisita());
             return response;
         }
     }

@@ -76,6 +76,15 @@
         $("#PeriodoCalibracion").val(equipo.PeriodoCalibracion);
         $("#FechaUltimaCalibracionString").val(equipo.FechaUltimaCalibracionString);
         $("#FechaProximaCalibracion").val(equipo.FechaProximaCalibracionString);
+        if (equipo.RequiereCalibracion) {
+            $("#RequiereCalibracion").prop('checked', 'checked');
+        }
+        else {
+            $("#PeriodoCalibracion").prop('disabled', 'disabled');
+            $("#FechaUltimaCalibracionString").prop('disabled', 'disabled');
+            $("#FechaProximaCalibracion").prop('disabled', 'disabled');
+        }
+        
         $("#PeriodoVerificacion").val(equipo.PeriodoVerificacion);
         $("#FechaUltimaVerificacionLaboratorioString").val(equipo.FechaUltimaVerificacionLaboratorioString);
         $("#FechaProximoMantenimiento").val(equipo.FechaProximoMantenimientoString);
@@ -90,7 +99,7 @@
         var columnsC = [
             { data: "Secuencia", title: 'Secuencia' },
             { data: "FechaCalibracion", title: 'FechaCalibracion' },
-            { data: "Laboratorio", title: 'Laboratorio' },
+            { data: "IdLaboratorio", title: 'Laboratorio' },
             { data: "Observaciones", title: 'Observaciones' },
             //{ data: "CertificadoWebPath", title: 'CertificadoWeb' },
             {
@@ -118,7 +127,7 @@
             { data: "Secuencia", title: 'Secuencia' },
             { data: "FechaVerificacion", title: 'FechaVerificacion' },
             { data: "NroCertificado", title: 'NroCertificado' },
-            { data: "Laboratorio", title: 'Laboratorio' },
+            { data: "IdLaboratorio", title: 'Laboratorio' },
             { data: "Observaciones", title: 'Observaciones' },
             { data: "FechaCreacion", title: 'FechaCreacion' },
             { data: "IdUsuarioCreacion", title: 'IdUsuarioCreacion' }
@@ -305,7 +314,8 @@
         _appendToHeaderGeneriModal('<h5>Nro. Certificado</h5>');
         _appendToHeaderGeneriModal('<input id="NroCertificado" class="form-control" />');
         _appendToHeaderGeneriModal('<h5>Laboratorio</h5>');
-        _appendToHeaderGeneriModal('<input id="Laboratorio" class="form-control" />');
+        _appendToHeaderGeneriModal('<select id="Laboratorio" class="form-control"> </select>');
+        _loadSelectLaboratorios($('#Laboratorio'));
         _appendToHeaderGeneriModal('<h5>Observaciones</h5>');
         _appendToHeaderGeneriModal('<textarea id="ObservacionesV" class="form-control"></textarea>');  
         _appendToFooterGeneriModal('<input class="button" id="btnAgregarVerificacion" type="button" value="Agregar" />');
@@ -315,9 +325,9 @@
                     sessionToken: UsuarioSesion.tokenSesion,
                     verificacion: {
                         IdEquipo: equipo.IdEquipo,
-                        FechaVerificacion: $("#FechaVerificacion").val(),
+                        FechaVerificacionString: $("#FechaVerificacion").val(),
                         NroCertificado: $("#NroCertificado").val(),
-                        Laboratorio: $("#Laboratorio").val(),
+                        IdLaboratorio: $("#Laboratorio").val(),
                         Observaciones: $("#ObservacionesV").val(),
                         IdUsuarioCreacion: UsuarioSesion.IdUsuario
                     }
@@ -346,7 +356,8 @@
             format: "D/M/YYYY"
         });
         _appendToHeaderGeneriModal('<h5>Laboratorio</h5>');
-        _appendToHeaderGeneriModal('<input id="Laboratorio" class="form-control" />');
+        _appendToHeaderGeneriModal('<select id="Laboratorio" class="form-control"> </select>');
+        _loadSelectLaboratorios($('#Laboratorio'));
         _appendToHeaderGeneriModal('<h5>Certificado</h5>');
         _appendToHeaderGeneriModal('<a id="aCertificado"><label id="Certificado" style="cursor:pointer">Subir...</label></a>');
         $("#aCertificado").click(() => {
@@ -367,7 +378,7 @@
                     calibracion: {
                         IdEquipo: equipo.IdEquipo,
                         FechaCalibracionString: $("#FechaCalibracion").val(),
-                        Laboratorio: $("#Laboratorio").val(),
+                        IdLaboratorio: $("#Laboratorio").val(),
                         Observaciones: $("#ObservacionesC").val(),
                         IdUsuarioCreacion: UsuarioSesion.IdUsuario,
                         Certificado: $("#Certificado").text()
@@ -424,12 +435,14 @@
             <input id="Activo" type="checkbox" />
         </div>
         <div>
+            <h5>Requiere Calibración</h5>
+            <input id="RequiereCalibracion" type="checkbox" />
             <h5>Período Calibración (meses)</h5>
             <input id="PeriodoCalibracion" class="form-control" />
             <h5>Fecha Última Calibración</h5>
             <input id="FechaUltimaCalibracionString" class="form-control" disabled />
             <h5>Fecha Próxima Calibración</h5>
-            <input id="FechaProximaCalibracion" class="form-control"/>
+            <input id="FechaProximaCalibracion" class="form-control" />
             <h5>Período Verificación (meses)</h5>
             <input id="PeriodoVerificacion" class="form-control" />
             <h5>Fecha Última Verificacion Laboratorio</h5>

@@ -8,7 +8,7 @@
     <Property Name="IdEquipo" Type="int" Nullable="false" />
     <Property Name="Secuencia" Type="int" Nullable="false" />
     <Property Name="FechaCalibracion" Type="datetime" Nullable="false" />
-    <Property Name="Laboratorio" Type="nchar" MaxLength="10" />
+    <Property Name="IdLaboratorio" Type="int" Nullable="false" />
     <Property Name="Observaciones" Type="nvarchar" MaxLength="1000" />
     <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
     <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
@@ -106,6 +106,8 @@
     <Property Name="FechaProximoMantenimiento" Type="datetime" />
     <Property Name="Activo" Type="bit" Nullable="false" />
     <Property Name="IdTipoVisitaAplica" Type="int" />
+    <Property Name="RequiereCalibracion" Type="bit" Nullable="false" />
+    <Property Name="FechaProximaVerificacion" Type="datetime" />
   </EntityType>
   <EntityType Name="EquiposVisita">
     <Key>
@@ -207,9 +209,13 @@
       <PropertyRef Name="IdLaboratorio" />
     </Key>
     <Property Name="IdLaboratorio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Laboratorio" Type="nvarchar" MaxLength="100" />
-    <Property Name="FechaCreacion" Type="datetime" />
-    <Property Name="IdUsuarioCreacion" Type="int" />
+    <Property Name="Nit" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="DV" Type="int" Nullable="false" />
+    <Property Name="Laboratorio" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Direccion" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Telefono" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+    <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Log">
     <Key>
@@ -294,6 +300,7 @@
     <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
     <Property Name="FechaModificacion" Type="datetime" />
     <Property Name="IdUsuarioModificacion" Type="int" />
+    <Property Name="NroPoliza" Type="nvarchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="Roles">
     <Key>
@@ -496,7 +503,7 @@
     <Property Name="Secuencia" Type="int" Nullable="false" />
     <Property Name="FechaVerificacion" Type="datetime" Nullable="false" />
     <Property Name="NroCertificado" Type="nvarchar" MaxLength="50" Nullable="false" />
-    <Property Name="Laboratorio" Type="nchar" MaxLength="10" />
+    <Property Name="IdLaboratorio" Type="int" Nullable="false" />
     <Property Name="Observaciones" Type="nvarchar" MaxLength="1000" />
     <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
     <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
@@ -1039,6 +1046,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Visitas_TiposVisita">
+    <End Role="TiposVisita" Type="Self.TiposVisita" Multiplicity="0..1" />
+    <End Role="Visitas" Type="Self.Visitas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TiposVisita">
+        <PropertyRef Name="IdTipoVisita" />
+      </Principal>
+      <Dependent Role="Visitas">
+        <PropertyRef Name="IdTipoVisita" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Visitas_Usuarios">
     <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
     <End Role="Visitas" Type="Self.Visitas" Multiplicity="*" />
@@ -1305,6 +1324,10 @@
     </AssociationSet>
     <AssociationSet Name="FK_Visitas_SolicitudesProgramacionVisitas" Association="Self.FK_Visitas_SolicitudesProgramacionVisitas">
       <End Role="SolicitudesProgramacionVisitas" EntitySet="SolicitudesProgramacionVisitas" />
+      <End Role="Visitas" EntitySet="Visitas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Visitas_TiposVisita" Association="Self.FK_Visitas_TiposVisita">
+      <End Role="TiposVisita" EntitySet="TiposVisita" />
       <End Role="Visitas" EntitySet="Visitas" />
     </AssociationSet>
     <AssociationSet Name="FK_Visitas_Usuarios" Association="Self.FK_Visitas_Usuarios">

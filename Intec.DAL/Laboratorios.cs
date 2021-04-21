@@ -16,7 +16,11 @@ namespace Intec.DAL
     {
         public int IdLaboratorio { get; set; }
         public string Laboratorio { get; set; }
-        public Nullable<System.DateTime> FechaCreacion { get; set; }
-        public Nullable<int> IdUsuarioCreacion { get; set; }
+        public System.DateTime FechaCreacion { get; set; }
+        public int IdUsuarioCreacion { get; set; }
+        public string Nit { get; set; }
+        public int DV { get; set; }
+        public string Direccion { get; set; }
+        public string Telefono { get; set; }
     }
 }

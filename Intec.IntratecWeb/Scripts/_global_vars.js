@@ -9,8 +9,8 @@ var VerbosREST = {
     DELETE: 'DELETE',
 }
 
-//var URL_SERVICE = 'http://localhost:63440/';
-var URL_SERVICE = 'http://servicios.intecsas.com.co/';
+var URL_SERVICE = 'http://localhost:63440/';
+//var URL_SERVICE = 'http://servicios.intecsas.com.co/';
 
 var URI_SERVICE = {
     //--- Administracion ---
@@ -23,6 +23,7 @@ var URI_SERVICE = {
 
     //Laboratorios
     ObtenerLaboratorios: 'api/Laboratorios/ObtenerLaboratorios',
+    CrearLaboratorio: 'api/Laboratorios/CrearLaboratorio',
 
     //Paises
     ObtenerPaises: 'api/Paises/ObtenerPaises',
@@ -134,6 +135,7 @@ var URI_SERVICE = {
     AgregarEquipoVisita: 'api/Visitas/AgregarEquipoVisita',
     ConsultarVisita: 'api/Visitas/ConsultarVisita',
     ConsultaVisitas: 'api/Visitas/ConsultarVisitas',
+    ObtenerEstadosVisita: 'api/Visitas/ObtenerEstadosVisita',
 
     //Papelería
     ConsultarFormatos: 'api/Papeleria/ConsultarFormatos',

@@ -22,5 +22,8 @@ namespace Intec.BL.DTO
         public Nullable<int> IdUsuarioModificacion { get; set; }
         public TiposPropiedades TiposPropiedades { get; set; }
         public UsosPropiedades UsosPropiedades { get; set; }
+        public string NroPoliza { get; set; }
+        public Nullable<int> IdZona { get; set; }
+        public string IdCiudad { get; set; }
     }
 }

@@ -25,9 +25,9 @@ namespace Intec.BL.BE
             return MapperConfig.Config.MapperClientes.Map<List<DTO.uspConsultaGralCliente_Result>>( new DAL.TE.ClientesTE().ConsultaGralClientes(NumeroIdentificacion, Nombres, Direccion, NroTelefonico, TieneVisitaProgramada));
         }
 
-        public DTO.Clientes ConsultaDetalladaClientes(int IdCliente)
+        public DTO.Clientes ConsultaDetalladaClientes(int IdCliente, string NumeroIdentificacion)
         {
-            return MapperConfig.Config.MapperClientes.Map<DTO.Clientes>(new DAL.TE.ClientesTE().ConsultaDetalladaClientes(IdCliente));
+            return MapperConfig.Config.MapperClientes.Map<DTO.Clientes>(new DAL.TE.ClientesTE().ConsultaDetalladaClientes(IdCliente, NumeroIdentificacion));
         }
 
         //Editar

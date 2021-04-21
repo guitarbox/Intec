@@ -29,5 +29,9 @@ namespace Intec.DAL
         public Nullable<int> IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaModificacion { get; set; }
         public Nullable<int> IdUsuarioModificacion { get; set; }
+        public Nullable<int> IdTipoVisita { get; set; }
+        public string NombreCliente { get; set; }
+        public string Inspector { get; set; }
+        public string TipoVisita { get; set; }
     }
 }

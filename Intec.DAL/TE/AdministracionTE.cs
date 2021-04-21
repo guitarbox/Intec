@@ -908,6 +908,16 @@ namespace Intec.DAL.TE
             }
             return res;
         }
+
+        public void CrearLaboratorio(Laboratorios laboratorios)
+        {
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                laboratorios.FechaCreacion = DateTime.Now;
+                ctx.Laboratorios.Add(laboratorios);
+                ctx.SaveChanges();
+            }
+        }
         #endregion
     }
 }

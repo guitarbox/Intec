@@ -40,5 +40,8 @@ namespace Intec.BL.DTO
         public List<UsuariosEquipos> UsuariosEquipos { get; set; }
         public bool PendTramiteAdmin { get; set; }
         public Nullable<int> IdTipoVisitaAplica { get; set; }
+        public bool RequiereCalibracion { get; set; }
+        public Nullable<System.DateTime> FechaProximaVerificacion { get; set; }
+        public string FechaProximaVerificacionString { get; set; }
     }
 }

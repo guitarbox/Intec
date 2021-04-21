@@ -5,6 +5,19 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="DB_A66D31_intratecPrbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BarrioLocalidad">
+          <Key>
+            <PropertyRef Name="IdBarrioLocalidad" />
+          </Key>
+          <Property Name="IdBarrioLocalidad" Type="int" Nullable="false" />
+          <Property Name="BarrioLocalidad" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
+          <Property Name="FechaModificacion" Type="datetime" />
+          <Property Name="IdUsuarioModificacion" Type="int" />
+          <Property Name="IdCiudad" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdZona" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="CalibracionesEquipos">
           <Key>
             <PropertyRef Name="IdEquipo" />
@@ -13,7 +26,7 @@
           <Property Name="IdEquipo" Type="int" Nullable="false" />
           <Property Name="Secuencia" Type="int" Nullable="false" />
           <Property Name="FechaCalibracion" Type="datetime" Nullable="false" />
-          <Property Name="Laboratorio" Type="nchar" MaxLength="10" />
+          <Property Name="IdLaboratorio" Type="int" Nullable="false" />
           <Property Name="Observaciones" Type="nvarchar" MaxLength="1000" />
           <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
           <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
@@ -57,6 +70,7 @@
           <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
           <Property Name="FechaModificacion" Type="datetime" />
           <Property Name="IdUsuarioModificacion" Type="int" />
+          <Property Name="IdZona" Type="int" />
         </EntityType>
         <EntityType Name="ConsecutivosFormatos">
           <Key>
@@ -111,6 +125,8 @@
           <Property Name="FechaProximoMantenimiento" Type="datetime" />
           <Property Name="Activo" Type="bit" Nullable="false" />
           <Property Name="IdTipoVisitaAplica" Type="int" />
+          <Property Name="RequiereCalibracion" Type="bit" Nullable="false" />
+          <Property Name="FechaProximaVerificacion" Type="datetime" />
         </EntityType>
         <EntityType Name="EquiposVisita">
           <Key>
@@ -212,9 +228,13 @@
             <PropertyRef Name="IdLaboratorio" />
           </Key>
           <Property Name="IdLaboratorio" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Laboratorio" Type="nvarchar" MaxLength="100" />
-          <Property Name="FechaCreacion" Type="datetime" />
-          <Property Name="IdUsuarioCreacion" Type="int" />
+          <Property Name="Nit" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DV" Type="int" Nullable="false" />
+          <Property Name="Laboratorio" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Direccion" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Telefono" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Log">
           <Key>
@@ -299,6 +319,9 @@
           <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
           <Property Name="FechaModificacion" Type="datetime" />
           <Property Name="IdUsuarioModificacion" Type="int" />
+          <Property Name="NroPoliza" Type="nvarchar" MaxLength="100" />
+          <Property Name="IdZona" Type="int" />
+          <Property Name="IdCiudad" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -501,7 +524,7 @@
           <Property Name="Secuencia" Type="int" Nullable="false" />
           <Property Name="FechaVerificacion" Type="datetime" Nullable="false" />
           <Property Name="NroCertificado" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Laboratorio" Type="nchar" MaxLength="10" />
+          <Property Name="IdLaboratorio" Type="int" Nullable="false" />
           <Property Name="Observaciones" Type="nvarchar" MaxLength="1000" />
           <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
           <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
@@ -1044,6 +1067,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Visitas_TiposVisita">
+          <End Role="TiposVisita" Type="Self.TiposVisita" Multiplicity="0..1" />
+          <End Role="Visitas" Type="Self.Visitas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposVisita">
+              <PropertyRef Name="IdTipoVisita" />
+            </Principal>
+            <Dependent Role="Visitas">
+              <PropertyRef Name="IdTipoVisita" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Visitas_Usuarios">
           <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
           <End Role="Visitas" Type="Self.Visitas" Multiplicity="*" />
@@ -1109,6 +1144,7 @@
           <Parameter Name="IdEstadoVisita" Type="nvarchar" Mode="In" />
         </Function>
         <EntityContainer Name="DB_A66D31_intratecPrbModelStoreContainer">
+          <EntitySet Name="BarrioLocalidad" EntityType="Self.BarrioLocalidad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CalibracionesEquipos" EntityType="Self.CalibracionesEquipos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ciudades" EntityType="Self.Ciudades" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
@@ -1312,6 +1348,10 @@
             <End Role="SolicitudesProgramacionVisitas" EntitySet="SolicitudesProgramacionVisitas" />
             <End Role="Visitas" EntitySet="Visitas" />
           </AssociationSet>
+          <AssociationSet Name="FK_Visitas_TiposVisita" Association="Self.FK_Visitas_TiposVisita">
+            <End Role="TiposVisita" EntitySet="TiposVisita" />
+            <End Role="Visitas" EntitySet="Visitas" />
+          </AssociationSet>
           <AssociationSet Name="FK_Visitas_Usuarios" Association="Self.FK_Visitas_Usuarios">
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Visitas" EntitySet="Visitas" />
@@ -1383,16 +1423,10 @@
             <End Role="EstadosConsecutivosInspector" EntitySet="EstadosConsecutivosInspector" />
             <End Role="ConsecutivosFormatos" EntitySet="ConsecutivosFormatos" />
           </AssociationSet>
-          <EntitySet Name="CalibracionesEquipos" EntityType="DB_A66D31_intratecPrbModel.CalibracionesEquipos" />
           <EntitySet Name="Equipos" EntityType="DB_A66D31_intratecPrbModel.Equipos" />
           <EntitySet Name="MarcasEquipos" EntityType="DB_A66D31_intratecPrbModel.MarcasEquipos" />
           <EntitySet Name="TiposEquipo" EntityType="DB_A66D31_intratecPrbModel.TiposEquipo" />
           <EntitySet Name="TramitesEquipo" EntityType="DB_A66D31_intratecPrbModel.TramitesEquipo" />
-          <EntitySet Name="VerificacionesLabEquipos" EntityType="DB_A66D31_intratecPrbModel.VerificacionesLabEquipos" />
-          <AssociationSet Name="FK_CalibracionesEquipos_Equipos" Association="DB_A66D31_intratecPrbModel.FK_CalibracionesEquipos_Equipos">
-            <End Role="Equipos" EntitySet="Equipos" />
-            <End Role="CalibracionesEquipos" EntitySet="CalibracionesEquipos" />
-          </AssociationSet>
           <AssociationSet Name="FK_Equipos_MarcasEquipos" Association="DB_A66D31_intratecPrbModel.FK_Equipos_MarcasEquipos">
             <End Role="MarcasEquipos" EntitySet="MarcasEquipos" />
             <End Role="Equipos" EntitySet="Equipos" />
@@ -1404,10 +1438,6 @@
           <AssociationSet Name="FK_TramitesEquipo_Equipos" Association="DB_A66D31_intratecPrbModel.FK_TramitesEquipo_Equipos">
             <End Role="Equipos" EntitySet="Equipos" />
             <End Role="TramitesEquipo" EntitySet="TramitesEquipo" />
-          </AssociationSet>
-          <AssociationSet Name="FK_VerificacionesLabEquipos_Equipos" Association="DB_A66D31_intratecPrbModel.FK_VerificacionesLabEquipos_Equipos">
-            <End Role="Equipos" EntitySet="Equipos" />
-            <End Role="VerificacionesLabEquipos" EntitySet="VerificacionesLabEquipos" />
           </AssociationSet>
           <EntitySet Name="KardexPapeleria" EntityType="DB_A66D31_intratecPrbModel.KardexPapeleria" />
           <EntitySet Name="TiposMovimientoKardex" EntityType="DB_A66D31_intratecPrbModel.TiposMovimientoKardex" />
@@ -1509,23 +1539,11 @@
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Zonas" EntitySet="Zonas" />
           </AssociationSet>
-          <FunctionImport Name="uspConsultarVisitas" ReturnType="Collection(DB_A66D31_intratecPrbModel.uspConsultarVisitas_Result)">
-            <Parameter Name="FechaInicial" Mode="In" Type="DateTime" />
-            <Parameter Name="FechaFinal" Mode="In" Type="DateTime" />
-            <Parameter Name="NumeroIdentificacionCliente" Mode="In" Type="String" />
-            <Parameter Name="IdInspector" Mode="In" Type="Int32" />
-            <Parameter Name="IdEstadoVisita" Mode="In" Type="String" />
-          </FunctionImport>
           <EntitySet Name="Parametros" EntityType="DB_A66D31_intratecPrbModel.Parametros" />
           <EntitySet Name="Ciudades" EntityType="DB_A66D31_intratecPrbModel.Ciudades" />
-          <EntitySet Name="Clientes" EntityType="DB_A66D31_intratecPrbModel.Clientes" />
           <AssociationSet Name="FK_Ciudades_Departamentos" Association="DB_A66D31_intratecPrbModel.FK_Ciudades_Departamentos">
             <End Role="Departamentos" EntitySet="Departamentos" />
             <End Role="Ciudades" EntitySet="Ciudades" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Clientes_Ciudades" Association="DB_A66D31_intratecPrbModel.FK_Clientes_Ciudades">
-            <End Role="Ciudades" EntitySet="Ciudades" />
-            <End Role="Clientes" EntitySet="Clientes" />
           </AssociationSet>
           <AssociationSet Name="FK_SolicitudesProgramacionVisitas_Ciudades" Association="DB_A66D31_intratecPrbModel.FK_SolicitudesProgramacionVisitas_Ciudades">
             <End Role="Ciudades" EntitySet="Ciudades" />
@@ -1543,6 +1561,35 @@
             <End Role="Ciudades" EntitySet="Ciudades" />
             <End Role="Zonas" EntitySet="Zonas" />
           </AssociationSet>
+          <EntitySet Name="Log" EntityType="DB_A66D31_intratecPrbModel.Log" />
+          <EntitySet Name="TiposVisita" EntityType="DB_A66D31_intratecPrbModel.TiposVisita" />
+          <EntitySet Name="Laboratorios" EntityType="DB_A66D31_intratecPrbModel.Laboratorios" />
+          <EntitySet Name="CalibracionesEquipos" EntityType="DB_A66D31_intratecPrbModel.CalibracionesEquipos" />
+          <AssociationSet Name="FK_CalibracionesEquipos_Equipos" Association="DB_A66D31_intratecPrbModel.FK_CalibracionesEquipos_Equipos">
+            <End Role="Equipos" EntitySet="Equipos" />
+            <End Role="CalibracionesEquipos" EntitySet="CalibracionesEquipos" />
+          </AssociationSet>
+          <EntitySet Name="VerificacionesLabEquipos" EntityType="DB_A66D31_intratecPrbModel.VerificacionesLabEquipos" />
+          <AssociationSet Name="FK_VerificacionesLabEquipos_Equipos" Association="DB_A66D31_intratecPrbModel.FK_VerificacionesLabEquipos_Equipos">
+            <End Role="Equipos" EntitySet="Equipos" />
+            <End Role="VerificacionesLabEquipos" EntitySet="VerificacionesLabEquipos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Visitas_TiposVisita" Association="DB_A66D31_intratecPrbModel.FK_Visitas_TiposVisita">
+            <End Role="TiposVisita" EntitySet="TiposVisita" />
+            <End Role="Visitas" EntitySet="Visitas" />
+          </AssociationSet>
+          <FunctionImport Name="uspConsultarVisitas" ReturnType="Collection(DB_A66D31_intratecPrbModel.uspConsultarVisitas_Result)">
+            <Parameter Name="FechaInicial" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaFinal" Mode="In" Type="DateTime" />
+            <Parameter Name="NumeroIdentificacionCliente" Mode="In" Type="String" />
+            <Parameter Name="IdInspector" Mode="In" Type="Int32" />
+            <Parameter Name="IdEstadoVisita" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="Clientes" EntityType="DB_A66D31_intratecPrbModel.Clientes" />
+          <AssociationSet Name="FK_Clientes_Ciudades" Association="DB_A66D31_intratecPrbModel.FK_Clientes_Ciudades">
+            <End Role="Ciudades" EntitySet="Ciudades" />
+            <End Role="Clientes" EntitySet="Clientes" />
+          </AssociationSet>
           <AssociationSet Name="FK_Clientes_TiposDocumento" Association="DB_A66D31_intratecPrbModel.FK_Clientes_TiposDocumento">
             <End Role="TiposIdentificacion" EntitySet="TiposIdentificacion" />
             <End Role="Clientes" EntitySet="Clientes" />
@@ -1559,9 +1606,7 @@
             <End Role="Clientes" EntitySet="Clientes" />
             <End Role="Visitas" EntitySet="Visitas" />
           </AssociationSet>
-          <EntitySet Name="Log" EntityType="DB_A66D31_intratecPrbModel.Log" />
-          <EntitySet Name="TiposVisita" EntityType="DB_A66D31_intratecPrbModel.TiposVisita" />
-          <EntitySet Name="Laboratorios" EntityType="DB_A66D31_intratecPrbModel.Laboratorios" />
+          <EntitySet Name="BarrioLocalidad" EntityType="DB_A66D31_intratecPrbModel.BarrioLocalidad" />
           </EntityContainer>
         <EntityType Name="Departamentos">
           <Key>
@@ -1778,6 +1823,9 @@
           <NavigationProperty Name="UsosPropiedades" Relationship="DB_A66D31_intratecPrbModel.FK_Propiedades_UsosPropiedades" FromRole="Propiedades" ToRole="UsosPropiedades" />
           <NavigationProperty Name="Visitas" Relationship="DB_A66D31_intratecPrbModel.FK_Visitas_Propiedades" FromRole="Propiedades" ToRole="Visitas" />
           <NavigationProperty Name="Clientes" Relationship="DB_A66D31_intratecPrbModel.FK_Propiedades_Clientes" FromRole="Propiedades" ToRole="Clientes" />
+          <Property Name="NroPoliza" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IdZona" Type="Int32" />
+          <Property Name="IdCiudad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_Propiedades_TiposPropiedades">
           <End Type="DB_A66D31_intratecPrbModel.TiposPropiedades" Role="TiposPropiedades" Multiplicity="1" />
@@ -1873,23 +1921,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="CalibracionesEquipos">
-          <Key>
-            <PropertyRef Name="IdEquipo" />
-            <PropertyRef Name="Secuencia" />
-          </Key>
-          <Property Name="IdEquipo" Type="Int32" Nullable="false" />
-          <Property Name="Secuencia" Type="Int32" Nullable="false" />
-          <Property Name="FechaCalibracion" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Laboratorio" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Observaciones" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
-          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioModificacion" Type="Int32" />
-          <NavigationProperty Name="Equipos" Relationship="DB_A66D31_intratecPrbModel.FK_CalibracionesEquipos_Equipos" FromRole="CalibracionesEquipos" ToRole="Equipos" />
-          <Property Name="Certificado" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="Equipos">
           <Key>
             <PropertyRef Name="IdEquipo" />
@@ -1909,11 +1940,9 @@
           <Property Name="PeriodoCalibracion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PeriodoVerificacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="FechaProximoMantenimiento" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="CalibracionesEquipos" Relationship="DB_A66D31_intratecPrbModel.FK_CalibracionesEquipos_Equipos" FromRole="Equipos" ToRole="CalibracionesEquipos" />
           <NavigationProperty Name="MarcasEquipos" Relationship="DB_A66D31_intratecPrbModel.FK_Equipos_MarcasEquipos" FromRole="Equipos" ToRole="MarcasEquipos" />
           <NavigationProperty Name="TiposEquipo" Relationship="DB_A66D31_intratecPrbModel.FK_Equipos_TiposEquipo" FromRole="Equipos" ToRole="TiposEquipo" />
           <NavigationProperty Name="TramitesEquipo" Relationship="DB_A66D31_intratecPrbModel.FK_TramitesEquipo_Equipos" FromRole="Equipos" ToRole="TramitesEquipo" />
-          <NavigationProperty Name="VerificacionesLabEquipos" Relationship="DB_A66D31_intratecPrbModel.FK_VerificacionesLabEquipos_Equipos" FromRole="Equipos" ToRole="VerificacionesLabEquipos" />
           <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
           <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
@@ -1922,6 +1951,10 @@
           <NavigationProperty Name="EquiposVisita" Relationship="DB_A66D31_intratecPrbModel.FK_EquiposVisita_Equipos" FromRole="Equipos" ToRole="EquiposVisita" />
           <Property Name="Activo" Type="Boolean" Nullable="false" />
           <Property Name="IdTipoVisitaAplica" Type="Int32" />
+          <NavigationProperty Name="CalibracionesEquipos" Relationship="DB_A66D31_intratecPrbModel.FK_CalibracionesEquipos_Equipos" FromRole="Equipos" ToRole="CalibracionesEquipos" />
+          <NavigationProperty Name="VerificacionesLabEquipos" Relationship="DB_A66D31_intratecPrbModel.FK_VerificacionesLabEquipos_Equipos" FromRole="Equipos" ToRole="VerificacionesLabEquipos" />
+          <Property Name="RequiereCalibracion" Type="Boolean" Nullable="false" />
+          <Property Name="FechaProximaVerificacion" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="MarcasEquipos">
           <Key>
@@ -1964,35 +1997,6 @@
           <NavigationProperty Name="Equipos" Relationship="DB_A66D31_intratecPrbModel.FK_TramitesEquipo_Equipos" FromRole="TramitesEquipo" ToRole="Equipos" />
           <NavigationProperty Name="Usuarios" Relationship="DB_A66D31_intratecPrbModel.FK_TramitesEquipo_Usuarios" FromRole="TramitesEquipo" ToRole="Usuarios" />
         </EntityType>
-        <EntityType Name="VerificacionesLabEquipos">
-          <Key>
-            <PropertyRef Name="IdEquipo" />
-            <PropertyRef Name="Secuencia" />
-          </Key>
-          <Property Name="IdEquipo" Type="Int32" Nullable="false" />
-          <Property Name="Secuencia" Type="Int32" Nullable="false" />
-          <Property Name="FechaVerificacion" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="NroCertificado" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Laboratorio" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Observaciones" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
-          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioModificacion" Type="Int32" />
-          <NavigationProperty Name="Equipos" Relationship="DB_A66D31_intratecPrbModel.FK_VerificacionesLabEquipos_Equipos" FromRole="VerificacionesLabEquipos" ToRole="Equipos" />
-        </EntityType>
-        <Association Name="FK_CalibracionesEquipos_Equipos">
-          <End Type="DB_A66D31_intratecPrbModel.Equipos" Role="Equipos" Multiplicity="1" />
-          <End Type="DB_A66D31_intratecPrbModel.CalibracionesEquipos" Role="CalibracionesEquipos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Equipos">
-              <PropertyRef Name="IdEquipo" />
-            </Principal>
-            <Dependent Role="CalibracionesEquipos">
-              <PropertyRef Name="IdEquipo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Equipos_MarcasEquipos">
           <End Type="DB_A66D31_intratecPrbModel.MarcasEquipos" Role="MarcasEquipos" Multiplicity="1" />
           <End Type="DB_A66D31_intratecPrbModel.Equipos" Role="Equipos" Multiplicity="*" />
@@ -2025,18 +2029,6 @@
               <PropertyRef Name="IdEquipo" />
             </Principal>
             <Dependent Role="TramitesEquipo">
-              <PropertyRef Name="IdEquipo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_VerificacionesLabEquipos_Equipos">
-          <End Type="DB_A66D31_intratecPrbModel.Equipos" Role="Equipos" Multiplicity="1" />
-          <End Type="DB_A66D31_intratecPrbModel.VerificacionesLabEquipos" Role="VerificacionesLabEquipos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Equipos">
-              <PropertyRef Name="IdEquipo" />
-            </Principal>
-            <Dependent Role="VerificacionesLabEquipos">
               <PropertyRef Name="IdEquipo" />
             </Dependent>
           </ReferentialConstraint>
@@ -2194,8 +2186,9 @@
           <NavigationProperty Name="Zonas" Relationship="DB_A66D31_intratecPrbModel.FK_Visitas_Zonas" FromRole="Visitas" ToRole="Zonas" />
           <NavigationProperty Name="Usuarios" Relationship="DB_A66D31_intratecPrbModel.FK_Visitas_Usuarios" FromRole="Visitas" ToRole="Usuarios" />
           <NavigationProperty Name="Ciudades" Relationship="DB_A66D31_intratecPrbModel.FK_Visitas_Ciudades" FromRole="Visitas" ToRole="Ciudades" />
-          <NavigationProperty Name="Clientes" Relationship="DB_A66D31_intratecPrbModel.FK_Visitas_Clientes" FromRole="Visitas" ToRole="Clientes" />
           <Property Name="IdTipoVisita" Type="Int32" />
+          <NavigationProperty Name="TiposVisita" Relationship="DB_A66D31_intratecPrbModel.FK_Visitas_TiposVisita" FromRole="Visitas" ToRole="TiposVisita" />
+          <NavigationProperty Name="Clientes" Relationship="DB_A66D31_intratecPrbModel.FK_Visitas_Clientes" FromRole="Visitas" ToRole="Clientes" />
         </EntityType>
         <Association Name="FK_FormatosVisita_ConsecutivosFormatos">
           <End Type="DB_A66D31_intratecPrbModel.ConsecutivosFormatos" Role="ConsecutivosFormatos" Multiplicity="1" />
@@ -2523,24 +2516,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="uspConsultarVisitas_Result">
-          <Property Type="Int32" Name="IdVisita" Nullable="false" />
-          <Property Type="Int32" Name="IdSolicitudProgramacion" Nullable="true" />
-          <Property Type="Int32" Name="IdCliente" Nullable="false" />
-          <Property Type="Int32" Name="IdPropiedad" Nullable="false" />
-          <Property Type="String" Name="Direccion" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="IdZona" Nullable="false" />
-          <Property Type="String" Name="IdCiudad" Nullable="false" MaxLength="50" />
-          <Property Type="DateTime" Name="FechaVisita" Nullable="false" Precision="23" />
-          <Property Type="Int32" Name="IdInspector" Nullable="true" />
-          <Property Type="String" Name="ObservacionesVisita" Nullable="true" MaxLength="1000" />
-          <Property Type="String" Name="IdEstadoVisitas" Nullable="false" MaxLength="1" />
-          <Property Type="String" Name="OrigenVisita" Nullable="false" MaxLength="100" />
-          <Property Type="DateTime" Name="FechaCreacion" Nullable="false" Precision="23" />
-          <Property Type="Int32" Name="IdUsuarioCreacion" Nullable="true" />
-          <Property Type="DateTime" Name="FechaModificacion" Nullable="true" Precision="23" />
-          <Property Type="Int32" Name="IdUsuarioModificacion" Nullable="true" />
-        </ComplexType>
         <EntityType Name="Parametros">
           <Key>
             <PropertyRef Name="IdParametro" />
@@ -2564,40 +2539,10 @@
           <Property Name="IdUsuarioModificacion" Type="Int32" />
           <Property Name="Activo" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Departamentos" Relationship="DB_A66D31_intratecPrbModel.FK_Ciudades_Departamentos" FromRole="Ciudades" ToRole="Departamentos" />
-          <NavigationProperty Name="Clientes" Relationship="DB_A66D31_intratecPrbModel.FK_Clientes_Ciudades" FromRole="Ciudades" ToRole="Clientes" />
           <NavigationProperty Name="SolicitudesProgramacionVisitas" Relationship="DB_A66D31_intratecPrbModel.FK_SolicitudesProgramacionVisitas_Ciudades" FromRole="Ciudades" ToRole="SolicitudesProgramacionVisitas" />
           <NavigationProperty Name="Usuarios" Relationship="DB_A66D31_intratecPrbModel.FK_Usuarios_Ciudades" FromRole="Ciudades" ToRole="Usuarios" />
-          <NavigationProperty Name="Visitas" Relationship="DB_A66D31_intratecPrbModel.FK_Visitas_Ciudades" FromRole="Ciudades" ToRole="Visitas" />
           <NavigationProperty Name="Zonas" Relationship="DB_A66D31_intratecPrbModel.FK_Zonas_Ciudades" FromRole="Ciudades" ToRole="Zonas" />
-        </EntityType>
-        <EntityType Name="Clientes">
-          <Key>
-            <PropertyRef Name="IdCliente" />
-          </Key>
-          <Property Name="IdCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NumeroIdentificacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IdTipoIdentificacion" Type="Int32" Nullable="false" />
-          <Property Name="Nombres" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="TelefonoFijo" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="TelefonoCel1" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="TelefonoCel2" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
-          <Property Name="Direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IdCiudad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IdUso" Type="Int32" />
-          <Property Name="Foto" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-          <Property Name="Email1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Email2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IdTipoPersona" Type="Int32" Nullable="false" />
-          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
-          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioModificacion" Type="Int32" />
-          <NavigationProperty Name="Ciudades" Relationship="DB_A66D31_intratecPrbModel.FK_Clientes_Ciudades" FromRole="Clientes" ToRole="Ciudades" />
-          <NavigationProperty Name="TiposIdentificacion" Relationship="DB_A66D31_intratecPrbModel.FK_Clientes_TiposDocumento" FromRole="Clientes" ToRole="TiposIdentificacion" />
-          <NavigationProperty Name="TiposPersona" Relationship="DB_A66D31_intratecPrbModel.FK_Clientes_TiposPersona" FromRole="Clientes" ToRole="TiposPersona" />
-          <NavigationProperty Name="Propiedades" Relationship="DB_A66D31_intratecPrbModel.FK_Propiedades_Clientes" FromRole="Clientes" ToRole="Propiedades" />
-          <NavigationProperty Name="Visitas" Relationship="DB_A66D31_intratecPrbModel.FK_Visitas_Clientes" FromRole="Clientes" ToRole="Visitas" />
+          <NavigationProperty Name="Clientes" Relationship="DB_A66D31_intratecPrbModel.FK_Clientes_Ciudades" FromRole="Ciudades" ToRole="Clientes" />
         </EntityType>
         <Association Name="FK_Ciudades_Departamentos">
           <End Type="DB_A66D31_intratecPrbModel.Departamentos" Role="Departamentos" Multiplicity="1" />
@@ -2608,18 +2553,6 @@
             </Principal>
             <Dependent Role="Ciudades">
               <PropertyRef Name="IdDepartamento" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Clientes_Ciudades">
-          <End Type="DB_A66D31_intratecPrbModel.Ciudades" Role="Ciudades" Multiplicity="0..1" />
-          <End Type="DB_A66D31_intratecPrbModel.Clientes" Role="Clientes" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Ciudades">
-              <PropertyRef Name="IdCiudad" />
-            </Principal>
-            <Dependent Role="Clientes">
-              <PropertyRef Name="IdCiudad" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2667,6 +2600,172 @@
               <PropertyRef Name="IdCiudad" />
             </Principal>
             <Dependent Role="Zonas">
+              <PropertyRef Name="IdCiudad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="IdLog" />
+          </Key>
+          <Property Name="IdLog" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" />
+          <Property Name="Observacion" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="FechaLog" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="TiposVisita">
+          <Key>
+            <PropertyRef Name="IdTipoVisita" />
+          </Key>
+          <Property Name="IdTipoVisita" Type="Int32" Nullable="false" />
+          <Property Name="TipoVisita" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Visitas" Relationship="DB_A66D31_intratecPrbModel.FK_Visitas_TiposVisita" FromRole="TiposVisita" ToRole="Visitas" />
+        </EntityType>
+        <EntityType Name="Laboratorios">
+          <Key>
+            <PropertyRef Name="IdLaboratorio" />
+          </Key>
+          <Property Name="IdLaboratorio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Laboratorio" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
+          <Property Name="Nit" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DV" Type="Int32" Nullable="false" />
+          <Property Name="Direccion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Telefono" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="CalibracionesEquipos">
+          <Key>
+            <PropertyRef Name="IdEquipo" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEquipo" Type="Int32" Nullable="false" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="FechaCalibracion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdLaboratorio" Type="Int32" Nullable="false" />
+          <Property Name="Observaciones" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioModificacion" Type="Int32" />
+          <Property Name="Certificado" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Equipos" Relationship="DB_A66D31_intratecPrbModel.FK_CalibracionesEquipos_Equipos" FromRole="CalibracionesEquipos" ToRole="Equipos" />
+        </EntityType>
+        <Association Name="FK_CalibracionesEquipos_Equipos">
+          <End Type="DB_A66D31_intratecPrbModel.Equipos" Role="Equipos" Multiplicity="1" />
+          <End Type="DB_A66D31_intratecPrbModel.CalibracionesEquipos" Role="CalibracionesEquipos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipos">
+              <PropertyRef Name="IdEquipo" />
+            </Principal>
+            <Dependent Role="CalibracionesEquipos">
+              <PropertyRef Name="IdEquipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="VerificacionesLabEquipos">
+          <Key>
+            <PropertyRef Name="IdEquipo" />
+            <PropertyRef Name="Secuencia" />
+          </Key>
+          <Property Name="IdEquipo" Type="Int32" Nullable="false" />
+          <Property Name="Secuencia" Type="Int32" Nullable="false" />
+          <Property Name="FechaVerificacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="NroCertificado" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IdLaboratorio" Type="Int32" Nullable="false" />
+          <Property Name="Observaciones" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioModificacion" Type="Int32" />
+          <NavigationProperty Name="Equipos" Relationship="DB_A66D31_intratecPrbModel.FK_VerificacionesLabEquipos_Equipos" FromRole="VerificacionesLabEquipos" ToRole="Equipos" />
+        </EntityType>
+        <Association Name="FK_VerificacionesLabEquipos_Equipos">
+          <End Type="DB_A66D31_intratecPrbModel.Equipos" Role="Equipos" Multiplicity="1" />
+          <End Type="DB_A66D31_intratecPrbModel.VerificacionesLabEquipos" Role="VerificacionesLabEquipos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipos">
+              <PropertyRef Name="IdEquipo" />
+            </Principal>
+            <Dependent Role="VerificacionesLabEquipos">
+              <PropertyRef Name="IdEquipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Visitas_TiposVisita">
+          <End Type="DB_A66D31_intratecPrbModel.TiposVisita" Role="TiposVisita" Multiplicity="0..1" />
+          <End Type="DB_A66D31_intratecPrbModel.Visitas" Role="Visitas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposVisita">
+              <PropertyRef Name="IdTipoVisita" />
+            </Principal>
+            <Dependent Role="Visitas">
+              <PropertyRef Name="IdTipoVisita" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="uspConsultarVisitas_Result">
+          <Property Type="Int32" Name="IdVisita" Nullable="false" />
+          <Property Type="Int32" Name="IdSolicitudProgramacion" Nullable="true" />
+          <Property Type="Int32" Name="IdCliente" Nullable="false" />
+          <Property Type="Int32" Name="IdPropiedad" Nullable="false" />
+          <Property Type="String" Name="Direccion" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="IdZona" Nullable="false" />
+          <Property Type="String" Name="IdCiudad" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="FechaVisita" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="IdInspector" Nullable="true" />
+          <Property Type="String" Name="ObservacionesVisita" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="IdEstadoVisitas" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="OrigenVisita" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="FechaCreacion" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="IdUsuarioCreacion" Nullable="true" />
+          <Property Type="DateTime" Name="FechaModificacion" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="IdUsuarioModificacion" Nullable="true" />
+          <Property Type="Int32" Name="IdTipoVisita" Nullable="true" />
+          <Property Type="String" Name="NombreCliente" Nullable="true" MaxLength="301" />
+          <Property Type="String" Name="Inspector" Nullable="true" MaxLength="201" />
+          <Property Type="String" Name="TipoVisita" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="IdCliente" />
+          </Key>
+          <Property Name="IdCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NumeroIdentificacion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IdTipoIdentificacion" Type="Int32" Nullable="false" />
+          <Property Name="Nombres" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TelefonoFijo" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="TelefonoCel1" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="TelefonoCel2" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Direccion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IdCiudad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IdUso" Type="Int32" />
+          <Property Name="Foto" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Email1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IdTipoPersona" Type="Int32" Nullable="false" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioModificacion" Type="Int32" />
+          <NavigationProperty Name="Ciudades" Relationship="DB_A66D31_intratecPrbModel.FK_Clientes_Ciudades" FromRole="Clientes" ToRole="Ciudades" />
+          <NavigationProperty Name="TiposIdentificacion" Relationship="DB_A66D31_intratecPrbModel.FK_Clientes_TiposDocumento" FromRole="Clientes" ToRole="TiposIdentificacion" />
+          <NavigationProperty Name="TiposPersona" Relationship="DB_A66D31_intratecPrbModel.FK_Clientes_TiposPersona" FromRole="Clientes" ToRole="TiposPersona" />
+          <NavigationProperty Name="Propiedades" Relationship="DB_A66D31_intratecPrbModel.FK_Propiedades_Clientes" FromRole="Clientes" ToRole="Propiedades" />
+          <NavigationProperty Name="Visitas" Relationship="DB_A66D31_intratecPrbModel.FK_Visitas_Clientes" FromRole="Clientes" ToRole="Visitas" />
+          <Property Name="IdZona" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_Clientes_Ciudades">
+          <End Type="DB_A66D31_intratecPrbModel.Ciudades" Role="Ciudades" Multiplicity="0..1" />
+          <End Type="DB_A66D31_intratecPrbModel.Clientes" Role="Clientes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ciudades">
+              <PropertyRef Name="IdCiudad" />
+            </Principal>
+            <Dependent Role="Clientes">
               <PropertyRef Name="IdCiudad" />
             </Dependent>
           </ReferentialConstraint>
@@ -2719,32 +2818,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="Log">
+        <EntityType Name="BarrioLocalidad">
           <Key>
-            <PropertyRef Name="IdLog" />
+            <PropertyRef Name="IdBarrioLocalidad" />
           </Key>
-          <Property Name="IdLog" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IdUsuario" Type="Int32" Nullable="false" />
-          <Property Name="Observacion" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <Property Name="FechaLog" Type="DateTime" Nullable="false" Precision="3" />
-        </EntityType>
-        <EntityType Name="TiposVisita">
-          <Key>
-            <PropertyRef Name="IdTipoVisita" />
-          </Key>
-          <Property Name="IdTipoVisita" Type="Int32" Nullable="false" />
-          <Property Name="TipoVisita" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IdBarrioLocalidad" Type="Int32" Nullable="false" />
+          <Property Name="BarrioLocalidad1" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Laboratorios">
-          <Key>
-            <PropertyRef Name="IdLaboratorio" />
-          </Key>
-          <Property Name="IdLaboratorio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Laboratorio" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="FechaCreacion" Type="DateTime" Precision="3" />
-          <Property Name="IdUsuarioCreacion" Type="Int32" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioModificacion" Type="Int32" />
+          <Property Name="IdCiudad" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IdZona" Type="Int32" Nullable="false" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -2929,6 +3014,9 @@
           <EntitySetMapping Name="Propiedades">
             <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.Propiedades">
               <MappingFragment StoreEntitySet="Propiedades">
+                <ScalarProperty Name="IdCiudad" ColumnName="IdCiudad" />
+                <ScalarProperty Name="IdZona" ColumnName="IdZona" />
+                <ScalarProperty Name="NroPoliza" ColumnName="NroPoliza" />
                 <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
                 <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
                 <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
@@ -2985,25 +3073,11 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="CalibracionesEquipos">
-            <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.CalibracionesEquipos">
-              <MappingFragment StoreEntitySet="CalibracionesEquipos">
-                <ScalarProperty Name="Certificado" ColumnName="Certificado" />
-                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
-                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
-                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
-                <ScalarProperty Name="Laboratorio" ColumnName="Laboratorio" />
-                <ScalarProperty Name="FechaCalibracion" ColumnName="FechaCalibracion" />
-                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
-                <ScalarProperty Name="IdEquipo" ColumnName="IdEquipo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Equipos">
             <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.Equipos">
               <MappingFragment StoreEntitySet="Equipos">
+                <ScalarProperty Name="FechaProximaVerificacion" ColumnName="FechaProximaVerificacion" />
+                <ScalarProperty Name="RequiereCalibracion" ColumnName="RequiereCalibracion" />
                 <ScalarProperty Name="IdTipoVisitaAplica" ColumnName="IdTipoVisitaAplica" />
                 <ScalarProperty Name="Activo" ColumnName="Activo" />
                 <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
@@ -3062,22 +3136,6 @@
                 <ScalarProperty Name="Tramite" ColumnName="Tramite" />
                 <ScalarProperty Name="IdInspector" ColumnName="IdInspector" />
                 <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
-                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
-                <ScalarProperty Name="IdEquipo" ColumnName="IdEquipo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="VerificacionesLabEquipos">
-            <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.VerificacionesLabEquipos">
-              <MappingFragment StoreEntitySet="VerificacionesLabEquipos">
-                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
-                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
-                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
-                <ScalarProperty Name="Laboratorio" ColumnName="Laboratorio" />
-                <ScalarProperty Name="NroCertificado" ColumnName="NroCertificado" />
-                <ScalarProperty Name="FechaVerificacion" ColumnName="FechaVerificacion" />
                 <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
                 <ScalarProperty Name="IdEquipo" ColumnName="IdEquipo" />
               </MappingFragment>
@@ -3257,28 +3315,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="uspConsultarVisitas" FunctionName="DB_A66D31_intratecPrbModel.Store.uspConsultarVisitas">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="DB_A66D31_intratecPrbModel.uspConsultarVisitas_Result">
-                <ScalarProperty Name="IdVisita" ColumnName="IdVisita" />
-                <ScalarProperty Name="IdSolicitudProgramacion" ColumnName="IdSolicitudProgramacion" />
-                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
-                <ScalarProperty Name="IdPropiedad" ColumnName="IdPropiedad" />
-                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
-                <ScalarProperty Name="IdZona" ColumnName="IdZona" />
-                <ScalarProperty Name="IdCiudad" ColumnName="IdCiudad" />
-                <ScalarProperty Name="FechaVisita" ColumnName="FechaVisita" />
-                <ScalarProperty Name="IdInspector" ColumnName="IdInspector" />
-                <ScalarProperty Name="ObservacionesVisita" ColumnName="ObservacionesVisita" />
-                <ScalarProperty Name="IdEstadoVisitas" ColumnName="IdEstadoVisitas" />
-                <ScalarProperty Name="OrigenVisita" ColumnName="OrigenVisita" />
-                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
-                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="Parametros">
             <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.Parametros">
               <MappingFragment StoreEntitySet="Parametros">
@@ -3301,31 +3337,6 @@
                 <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
                 <ScalarProperty Name="IdDepartamento" ColumnName="IdDepartamento" />
                 <ScalarProperty Name="IdCiudad" ColumnName="IdCiudad" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Clientes">
-            <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.Clientes">
-              <MappingFragment StoreEntitySet="Clientes">
-                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
-                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
-                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-                <ScalarProperty Name="IdTipoPersona" ColumnName="IdTipoPersona" />
-                <ScalarProperty Name="Email2" ColumnName="Email2" />
-                <ScalarProperty Name="Email1" ColumnName="Email1" />
-                <ScalarProperty Name="Foto" ColumnName="Foto" />
-                <ScalarProperty Name="IdUso" ColumnName="IdUso" />
-                <ScalarProperty Name="IdCiudad" ColumnName="IdCiudad" />
-                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
-                <ScalarProperty Name="TelefonoCel2" ColumnName="TelefonoCel2" />
-                <ScalarProperty Name="TelefonoCel1" ColumnName="TelefonoCel1" />
-                <ScalarProperty Name="TelefonoFijo" ColumnName="TelefonoFijo" />
-                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
-                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
-                <ScalarProperty Name="IdTipoIdentificacion" ColumnName="IdTipoIdentificacion" />
-                <ScalarProperty Name="NumeroIdentificacion" ColumnName="NumeroIdentificacion" />
-                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -3352,10 +3363,112 @@
           <EntitySetMapping Name="Laboratorios">
             <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.Laboratorios">
               <MappingFragment StoreEntitySet="Laboratorios">
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="DV" ColumnName="DV" />
+                <ScalarProperty Name="Nit" ColumnName="Nit" />
                 <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
                 <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
                 <ScalarProperty Name="Laboratorio" ColumnName="Laboratorio" />
                 <ScalarProperty Name="IdLaboratorio" ColumnName="IdLaboratorio" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CalibracionesEquipos">
+            <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.CalibracionesEquipos">
+              <MappingFragment StoreEntitySet="CalibracionesEquipos">
+                <ScalarProperty Name="Certificado" ColumnName="Certificado" />
+                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="IdLaboratorio" ColumnName="IdLaboratorio" />
+                <ScalarProperty Name="FechaCalibracion" ColumnName="FechaCalibracion" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdEquipo" ColumnName="IdEquipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="VerificacionesLabEquipos">
+            <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.VerificacionesLabEquipos">
+              <MappingFragment StoreEntitySet="VerificacionesLabEquipos">
+                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="IdLaboratorio" ColumnName="IdLaboratorio" />
+                <ScalarProperty Name="NroCertificado" ColumnName="NroCertificado" />
+                <ScalarProperty Name="FechaVerificacion" ColumnName="FechaVerificacion" />
+                <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
+                <ScalarProperty Name="IdEquipo" ColumnName="IdEquipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="uspConsultarVisitas" FunctionName="DB_A66D31_intratecPrbModel.Store.uspConsultarVisitas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB_A66D31_intratecPrbModel.uspConsultarVisitas_Result">
+                <ScalarProperty Name="IdVisita" ColumnName="IdVisita" />
+                <ScalarProperty Name="IdSolicitudProgramacion" ColumnName="IdSolicitudProgramacion" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="IdPropiedad" ColumnName="IdPropiedad" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="IdZona" ColumnName="IdZona" />
+                <ScalarProperty Name="IdCiudad" ColumnName="IdCiudad" />
+                <ScalarProperty Name="FechaVisita" ColumnName="FechaVisita" />
+                <ScalarProperty Name="IdInspector" ColumnName="IdInspector" />
+                <ScalarProperty Name="ObservacionesVisita" ColumnName="ObservacionesVisita" />
+                <ScalarProperty Name="IdEstadoVisitas" ColumnName="IdEstadoVisitas" />
+                <ScalarProperty Name="OrigenVisita" ColumnName="OrigenVisita" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+                <ScalarProperty Name="IdTipoVisita" ColumnName="IdTipoVisita" />
+                <ScalarProperty Name="NombreCliente" ColumnName="NombreCliente" />
+                <ScalarProperty Name="Inspector" ColumnName="Inspector" />
+                <ScalarProperty Name="TipoVisita" ColumnName="TipoVisita" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Clientes">
+            <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.Clientes">
+              <MappingFragment StoreEntitySet="Clientes">
+                <ScalarProperty Name="IdZona" ColumnName="IdZona" />
+                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="IdTipoPersona" ColumnName="IdTipoPersona" />
+                <ScalarProperty Name="Email2" ColumnName="Email2" />
+                <ScalarProperty Name="Email1" ColumnName="Email1" />
+                <ScalarProperty Name="Foto" ColumnName="Foto" />
+                <ScalarProperty Name="IdUso" ColumnName="IdUso" />
+                <ScalarProperty Name="IdCiudad" ColumnName="IdCiudad" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="TelefonoCel2" ColumnName="TelefonoCel2" />
+                <ScalarProperty Name="TelefonoCel1" ColumnName="TelefonoCel1" />
+                <ScalarProperty Name="TelefonoFijo" ColumnName="TelefonoFijo" />
+                <ScalarProperty Name="Apellidos" ColumnName="Apellidos" />
+                <ScalarProperty Name="Nombres" ColumnName="Nombres" />
+                <ScalarProperty Name="IdTipoIdentificacion" ColumnName="IdTipoIdentificacion" />
+                <ScalarProperty Name="NumeroIdentificacion" ColumnName="NumeroIdentificacion" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BarrioLocalidad">
+            <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.BarrioLocalidad">
+              <MappingFragment StoreEntitySet="BarrioLocalidad">
+                <ScalarProperty Name="IdZona" ColumnName="IdZona" />
+                <ScalarProperty Name="IdCiudad" ColumnName="IdCiudad" />
+                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="BarrioLocalidad1" ColumnName="BarrioLocalidad" />
+                <ScalarProperty Name="IdBarrioLocalidad" ColumnName="IdBarrioLocalidad" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

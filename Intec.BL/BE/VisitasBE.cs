@@ -73,12 +73,19 @@ namespace Intec.BL.BE
 
         public DTO.Visitas ConsultarVisita(int IdVisita)
         {
-            return MapperConfig.Config.MapperVisitas.Map<DTO.Visitas>(new DAL.TE.VisitasTE().ConsultarVisita(IdVisita));
+            DAL.Visitas visita = new DAL.TE.VisitasTE().ConsultarVisita(IdVisita);
+            visita.Propiedades = new DAL.TE.ClientesTE().ConsultaPropiedad(visita.IdPropiedad);
+            return MapperConfig.Config.MapperVisitas.Map<DTO.Visitas>(visita);
         }
 
         public List<DTO.uspConsultarVisitas_Result> ConsultaVisitas(DateTime FechaInicial, DateTime FechaFinal, string NumeroIdentificacionCliente, int IdInspector, string IdEstadoVisita)
         {
             return MapperConfig.Config.MapperVisitas.Map<List<DTO.uspConsultarVisitas_Result>>(new DAL.TE.VisitasTE().ConsultaVisitas(FechaInicial, FechaFinal, NumeroIdentificacionCliente, IdInspector, IdEstadoVisita));
+        }
+
+        public List<DTO.EstadosVisita> ObtenerEstadosVisita()
+        {
+            return MapperConfig.Config.MapperVisitas.Map<List<DTO.EstadosVisita>>(new DAL.TE.VisitasTE().ObtenerEstadosVisita());
         }
 
         #endregion

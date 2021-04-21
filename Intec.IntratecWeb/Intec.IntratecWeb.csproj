@@ -138,6 +138,7 @@
     <Compile Include="Controllers\PapeleriaController.cs" />
     <Compile Include="Controllers\SessionController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
+    <Compile Include="Controllers\VisitasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -267,6 +268,10 @@
     <Content Include="Views\Papeleria\AcepRechAnul.cshtml" />
     <Content Include="Views\Administracion\Laboratorios.cshtml" />
     <Content Include="Views\Files\UpLoad.cshtml" />
+    <Content Include="Views\Visitas\AdminZonas.cshtml" />
+    <Content Include="Views\Visitas\Consulta.cshtml" />
+    <Content Include="Views\Visitas\Consultar.cshtml" />
+    <Content Include="Views\Visitas\AgendarVisita.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

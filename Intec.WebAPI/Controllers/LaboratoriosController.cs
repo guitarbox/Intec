@@ -23,5 +23,17 @@ namespace Intec.WebApi.Controllers
                 SetDataResponse(new Intec.BL.BE.AdministracionBE().ObtenerLaboratorios());
             return response;
         }
+        
+        [HttpPost]
+        [Route("api/Laboratorios/CrearLaboratorio")]
+        public JObject CrearLaboratorio([FromBody] JObject Token)
+        {
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+
+            if (validToken)
+                new Intec.BL.BE.AdministracionBE().CrearLaboratorio(Token["laboratorio"].ToObject<BL.DTO.Laboratorios>());
+            return response;
+        }
     }
 }

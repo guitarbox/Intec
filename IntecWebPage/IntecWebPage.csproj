@@ -242,6 +242,7 @@
     <Content Include="Content\sweetalert\sweet-alert-animations.less" />
     <Content Include="Content\bootstrap\variables.less" />
     <Content Include="Content\bootstrap\mixins.less" />
+    <Content Include="Docs\TRATAMIENTO DE PQRA.pdf" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\google-map.js" />
     <Content Include="Scripts\jquery-3.2.1.min.js" />

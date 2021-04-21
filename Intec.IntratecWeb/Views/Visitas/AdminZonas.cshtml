@@ -1,0 +1,123 @@
+﻿
+@{
+    ViewBag.Title = "AdminZonas";
+}
+<script>
+    $(document).ready(() => {
+        ConsultarZonas();
+    });
+
+    function ConsultarZonas() {
+        _peticionAjax(URL_SERVICE + URI_SERVICE.ObtenerZonas, VerbosREST.POST,
+            JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion }),
+            true, response => {
+                var columns = [
+                    { data: "IdZona", title: 'Id. Zona' },
+                    {
+                        data: null, title: 'Ciudad', render: function (data, type, full, meta) {
+                            if (full.Ciudades != null)
+                                return '<p>' + full.Ciudades.Ciudad + '</p>';
+                            else return '';
+                        }
+                    },
+                    { data: "Descripcion", title: 'Descripción' },
+                    {
+                        data: null, title: 'Inspector', render: function (data, type, full, meta) {
+                            if (full.Usuarios != null)
+                                return '<p>' + full.Usuarios.Nombres + '</p>';
+                            else return '';
+                        } },                    
+                    //{
+                    //    data: null, render: function (data, type, full, meta) {
+                    //        return '<a onclick="window.location.href = \'../Administracion/Departamentos?ip=' + full.IdPais + '\';"><h5>Administrar Departamentos</h5></a>';
+                    //    }
+                    //},
+                    //{
+                    //    data: null, render: function (data, type, full, meta) {
+                    //        return '<a onclick="AbrirModalEditarRx(\'' + full.IdPais + '\');"><span class="fa fa-edit fa-2x"></span></a>';
+                    //    }
+                    //},
+                    //{
+                    //    data: null, render: function (data, type, full, meta) {
+                    //        return '<a onclick="EliminarRx(\'' + full.IdPais + '\');"><span class="fa fa-trash fa-2x"></span></a>';
+                    //    }
+                    //}
+                ];
+
+                $("#divTblZonas").empty();
+                $("#divTblZonas").append('<table id="tblZonas" style="width:100%"></table>');
+                $('#tblZonas').DataTable({
+                    data: response.data,
+                    columns: columns,
+                    language: _language_options_table,
+                    //
+                    dom: 'Bfrtip',
+                    buttons: [
+                        //{ extend: 'copy', className: 'btn-info' },
+                        //{ extend: 'csv', className: 'btn-info' },
+                        //{ extend: 'excel', className: 'btn-info', title: 'XLS-File' },
+                        //{ extend: 'pdf', className: 'btn-info', title: $('title').text() },
+                        //{ extend: 'print', className: 'btn-info' }
+                    ]
+                });
+            });
+    }
+
+    function AbrirModalCrearRx() {
+        _resetGenericModal();
+
+        $("#genericModalHeader").append('<label>Crear Zona</label>');
+        $("#genericModalBody").append('<p>Departamento</p>');
+        $("#genericModalBody").append('<select id="IdDepartamento" class="form-control"></select>');
+        _loadSelectDepartamentos($("#IdDepartamento"), '57');
+        $("#IdDepartamento").change(() => { _loadSelectCiudades($("#IdCiudad"), $("#IdDepartamento").val()); });
+        $("#genericModalBody").append('<p>Ciudad</p>');
+        $("#genericModalBody").append('<select id="IdCiudad" class="form-control"></select>');
+        $("#genericModalBody").append('<p>Descripción</p>');
+        $("#genericModalBody").append('<input id="Descripcion" type="text" class="form-control" />');
+        $("#genericModalBody").append('<p>Inspector</p>');
+        $("#genericModalBody").append('<select id="IdInspector" class="form-control"></select>');
+        //Cargar los inspectores
+        _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.GetUsuariosByIdRol, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion, idRol: 2 }))
+            .then(response => {
+                $("#IdInspector").append('<option value="">Seleccione Inspector...</option>');
+                response.data.forEach(inspector => {
+                    $("#IdInspector").append(`<option value="${inspector.IdUsuario}">${inspector.Nombres} ${inspector.Apellidos}</option>`);
+                });
+            });
+
+        $("#genericModalFooter").append('<button class="button" id="btnCrearRx" return false;">Crear</button>');
+        $("#btnCrearRx").click(() => {
+            if ($("#IdCiudad").val() != '' && $("#Descripcion").val() != '') {
+                _peticionAjax(URL_SERVICE + URI_SERVICE.CrearZona, VerbosREST.POST,
+                    JSON.stringify({
+                        sessionToken: UsuarioSesion.tokenSesion,
+                        zona: {
+                            IdCiudad: $("#IdCiudad").val(),
+                            Descripcion: $("#Descripcion").val(),
+                            IdInspector: $("#IdInspector").val() == '' ? null : $("#IdInspector").val(),
+                            IdUsuarioCreacion: UsuarioSesion.IdUsuario
+                        }
+                    }),
+                    true, response => {
+                        ConsultarZonas();
+                        _closeGenericModal()
+                    });
+            }
+            else {
+                swal({
+                    text: 'Ciudad y Descripción son obligatorios para crear.',
+                    title: swalTitle,
+                    icon: "error"
+                });
+            }
+        });
+        _openGenericModal();
+    }
+</script>
+<h3 class="text-center" id="title">ZONAS</h3>
+<div style="padding:10px">
+    <div id="divTblZonas" style="width:100%"></div>
+    <br />
+    <button class="button" onclick="AbrirModalCrearRx(); return false;">Crear Nueva Zona</button>
+</div> 

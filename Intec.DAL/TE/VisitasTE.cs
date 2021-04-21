@@ -18,6 +18,11 @@ namespace Intec.DAL.TE
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
                 res = ctx.Zonas.ToList();
+                foreach(Zonas z in res)
+                {
+                    ctx.Entry(z).Reference(r => r.Ciudades).Load();
+                    ctx.Entry(z).Reference(r => r.Usuarios).Load();
+                }
             }
             return res;
         }
@@ -226,12 +231,12 @@ namespace Intec.DAL.TE
                     visita.FormatosVisita.ToList();
                     if (visita.IdSolicitudProgramacion != null)
                         ctx.Entry(visita).Reference(r => r.SolicitudesProgramacionVisitas).Load();
-                    ctx.Entry(visita).Reference(r => r.Clientes).Load();
-                    ctx.Entry(visita).Reference(r => r.Propiedades).Load();
+                    ctx.Entry(visita).Reference(r => r.Clientes).Load();                    
                     ctx.Entry(visita).Reference(r => r.Zonas).Load();
                     ctx.Entry(visita).Reference(r => r.Ciudades).Load();
                     ctx.Entry(visita).Reference(r => r.Usuarios).Load();
-                    ctx.Entry(visita).Reference(r => r.EstadosVisita).Load();
+                    ctx.Entry(visita).Reference(r => r.EstadosVisita).Load();                    
+                    ctx.Entry(visita).Reference(r => r.TiposVisita).Load();                    
                 }
                 else
                     throw new Exception($"No existe visita con ID {IdVisita}");
@@ -247,6 +252,16 @@ namespace Intec.DAL.TE
             {
                 FechaFinal = FechaFinal.AddDays(1);
                 res = ctx.uspConsultarVisitas(FechaInicial, FechaFinal, NumeroIdentificacionCliente, IdInspector, IdEstadoVisita).ToList();
+            }
+            return res;
+        }
+    
+        public List<EstadosVisita> ObtenerEstadosVisita()
+        {
+            List<EstadosVisita> res = new List<EstadosVisita>();
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                res = ctx.EstadosVisita.ToList();
             }
             return res;
         }

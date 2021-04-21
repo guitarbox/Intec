@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Intec.BL.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -410,10 +411,16 @@ namespace Intec.BL.BE
         }
 
         #endregion
-        #region CRUD Laboratorios
+
+        #region Laboratorios
         public List<DTO.Laboratorios> ObtenerLaboratorios()
         {
             return MapperConfig.Config.MapperAdministracion.Map<List<DTO.Laboratorios>>(new DAL.TE.AdministracionTE().ObtenerLaboratorios());
+        }
+
+        public void CrearLaboratorio(Laboratorios laboratorios)
+        {
+            new DAL.TE.AdministracionTE().CrearLaboratorio(MapperConfig.Config.MapperAdministracion.Map<DAL.Laboratorios>(laboratorios));
         }
         #endregion
     }

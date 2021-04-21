@@ -17,7 +17,7 @@ namespace Intec.DAL
         public int IdEquipo { get; set; }
         public int Secuencia { get; set; }
         public System.DateTime FechaCalibracion { get; set; }
-        public string Laboratorio { get; set; }
+        public int IdLaboratorio { get; set; }
         public string Observaciones { get; set; }
         public System.DateTime FechaCreacion { get; set; }
         public int IdUsuarioCreacion { get; set; }

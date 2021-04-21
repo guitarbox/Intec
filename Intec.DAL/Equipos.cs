@@ -17,11 +17,11 @@ namespace Intec.DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Equipos()
         {
-            this.CalibracionesEquipos = new HashSet<CalibracionesEquipos>();
             this.TramitesEquipo = new HashSet<TramitesEquipo>();
-            this.VerificacionesLabEquipos = new HashSet<VerificacionesLabEquipos>();
             this.UsuariosEquipos = new HashSet<UsuariosEquipos>();
             this.EquiposVisita = new HashSet<EquiposVisita>();
+            this.CalibracionesEquipos = new HashSet<CalibracionesEquipos>();
+            this.VerificacionesLabEquipos = new HashSet<VerificacionesLabEquipos>();
         }
     
         public int IdEquipo { get; set; }
@@ -45,18 +45,20 @@ namespace Intec.DAL
         public Nullable<int> IdUsuarioModificacion { get; set; }
         public bool Activo { get; set; }
         public Nullable<int> IdTipoVisitaAplica { get; set; }
+        public bool RequiereCalibracion { get; set; }
+        public Nullable<System.DateTime> FechaProximaVerificacion { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CalibracionesEquipos> CalibracionesEquipos { get; set; }
         public virtual MarcasEquipos MarcasEquipos { get; set; }
         public virtual TiposEquipo TiposEquipo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TramitesEquipo> TramitesEquipo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<VerificacionesLabEquipos> VerificacionesLabEquipos { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UsuariosEquipos> UsuariosEquipos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EquiposVisita> EquiposVisita { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CalibracionesEquipos> CalibracionesEquipos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<VerificacionesLabEquipos> VerificacionesLabEquipos { get; set; }
     }
 }

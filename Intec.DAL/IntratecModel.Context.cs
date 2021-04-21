@@ -41,12 +41,10 @@ namespace Intec.DAL
         public virtual DbSet<EstadosConsecutivosInspector> EstadosConsecutivosInspector { get; set; }
         public virtual DbSet<ConsecutivosFormatos> ConsecutivosFormatos { get; set; }
         public virtual DbSet<Formatos> Formatos { get; set; }
-        public virtual DbSet<CalibracionesEquipos> CalibracionesEquipos { get; set; }
         public virtual DbSet<Equipos> Equipos { get; set; }
         public virtual DbSet<MarcasEquipos> MarcasEquipos { get; set; }
         public virtual DbSet<TiposEquipo> TiposEquipo { get; set; }
         public virtual DbSet<TramitesEquipo> TramitesEquipo { get; set; }
-        public virtual DbSet<VerificacionesLabEquipos> VerificacionesLabEquipos { get; set; }
         public virtual DbSet<KardexPapeleria> KardexPapeleria { get; set; }
         public virtual DbSet<TiposMovimientoKardex> TiposMovimientoKardex { get; set; }
         public virtual DbSet<UsuariosEquipos> UsuariosEquipos { get; set; }
@@ -61,10 +59,13 @@ namespace Intec.DAL
         public virtual DbSet<Usuarios> Usuarios { get; set; }
         public virtual DbSet<Parametros> Parametros { get; set; }
         public virtual DbSet<Ciudades> Ciudades { get; set; }
-        public virtual DbSet<Clientes> Clientes { get; set; }
         public virtual DbSet<Log> Log { get; set; }
         public virtual DbSet<TiposVisita> TiposVisita { get; set; }
         public virtual DbSet<Laboratorios> Laboratorios { get; set; }
+        public virtual DbSet<CalibracionesEquipos> CalibracionesEquipos { get; set; }
+        public virtual DbSet<VerificacionesLabEquipos> VerificacionesLabEquipos { get; set; }
+        public virtual DbSet<Clientes> Clientes { get; set; }
+        public virtual DbSet<BarrioLocalidad> BarrioLocalidad { get; set; }
     
         public virtual ObjectResult<uspConsultaGralCliente_Result> uspConsultaGralCliente(string numeroIdentificacion, string nombres, string direccion, string nroTelefonico, Nullable<bool> tieneVisitaProgramada)
         {

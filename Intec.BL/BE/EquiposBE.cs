@@ -22,6 +22,15 @@ namespace Intec.BL.BE
             Equipo.FechaProximoMantenimiento= string.IsNullOrEmpty(Equipo.FechaProximoMantenimientoString) ? default : DateTime.Parse(Equipo.FechaProximoMantenimientoString, new CultureInfo("es-Co"));
             Equipo.FechaUltimaCalibracion= string.IsNullOrEmpty(Equipo.FechaUltimaCalibracionString) ? default : DateTime.Parse(Equipo.FechaUltimaCalibracionString, new CultureInfo("es-Co"));
             Equipo.FechaUltimaVerificacionLaboratorio= string.IsNullOrEmpty(Equipo.FechaUltimaVerificacionLaboratorioString) ? default : DateTime.Parse(Equipo.FechaUltimaVerificacionLaboratorioString, new CultureInfo("es-Co"));            
+            Equipo.FechaProximaVerificacion = string.IsNullOrEmpty(Equipo.FechaProximaVerificacionString) ? default : DateTime.Parse(Equipo.FechaProximaVerificacionString, new CultureInfo("es-Co"));
+
+            if (!Equipo.RequiereCalibracion)
+            {
+                Equipo.Calibrado = false;
+                Equipo.FechaUltimaCalibracion = default;
+                Equipo.PeriodoCalibracion = string.Empty;
+                Equipo.FechaProximaCalibracion = default;
+            }
             new DAL.TE.EquiposTE().AgregarEquipo(MapperConfig.Config.MapperEquipos.Map<DAL.Equipos>(Equipo));
         }
 
@@ -66,6 +75,7 @@ namespace Intec.BL.BE
 
         public void IngresarVerificacionLAB(DTO.VerificacionesLabEquipos Verificacion)
         {
+            Verificacion.FechaVerificacion = DateTime.Parse(Verificacion.FechaVerificacionString, new CultureInfo("es-Co"));
             new DAL.TE.EquiposTE().IngresarVerificacionLAB(MapperConfig.Config.MapperEquipos.Map<DAL.VerificacionesLabEquipos>(Verificacion));
         }
 

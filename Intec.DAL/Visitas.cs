@@ -52,6 +52,7 @@ namespace Intec.DAL
         public virtual Zonas Zonas { get; set; }
         public virtual Usuarios Usuarios { get; set; }
         public virtual Ciudades Ciudades { get; set; }
+        public virtual TiposVisita TiposVisita { get; set; }
         public virtual Clientes Clientes { get; set; }
     }
 }

@@ -40,6 +40,7 @@ namespace Intec.DAL
         public int IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaModificacion { get; set; }
         public Nullable<int> IdUsuarioModificacion { get; set; }
+        public Nullable<int> IdZona { get; set; }
     
         public virtual Ciudades Ciudades { get; set; }
         public virtual TiposIdentificacion TiposIdentificacion { get; set; }

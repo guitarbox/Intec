@@ -192,6 +192,16 @@ table > tbody > tr > td {
     padding: 10px;
 }
 
+.table > tr > th {
+    background-color: #484141;
+    color: white;
+    padding:10px;
+}
+.table > tr > td {
+    background-color: white; /*#C5CF31;*/
+    padding: 10px;
+}
+
 /*Botones*/
 .button {
     margin-top: 5px;
