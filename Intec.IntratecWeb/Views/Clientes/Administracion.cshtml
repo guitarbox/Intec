@@ -88,6 +88,11 @@
             $("#Departamento").change(() => { _loadSelectCiudades($("#IdCiudad"), $("#Departamento").val()) });
             _appendToBodyGeneriModal('<p>Ciudad</p>');
             _appendToBodyGeneriModal('<select id="IdCiudad" class="form-control"><option>Seleccione Departamento...</option></select>');
+            $("#IdCiudad").change(() => { _loadSelectZona($("#IdZona"), $("#IdCiudad").val()) });
+
+            _appendToBodyGeneriModal('<p>Zona</p>');
+            _appendToBodyGeneriModal('<select id="IdZona" class="form-control"><option>Seleccione Ciudad...</option></select>');
+
             _appendToBodyGeneriModal('<p>Email 1</p>');
             _appendToBodyGeneriModal('<input type="email" id="Email1" class="form-control" />');
             _appendToBodyGeneriModal('<p>Email 2</p>');
@@ -113,6 +118,7 @@
                                 TelefonoCel2: $('#TelefonoCel2').val(),
                                 Direccion: $('#Direccion').val(),
                                 IdCiudad: $('#IdCiudad').val(),
+                                IdZona: $('#IdZona').val(),
                                 //IdUso: $('#IdUso').val(),
                                 //Foto: $('#Foto').val(),
                                 Email1: $('#Email1').val(),

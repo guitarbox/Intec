@@ -18,6 +18,7 @@ namespace Intec.BL.DTO
         public string TelefonoCel2 { get; set; }
         public string Direccion { get; set; }
         public string IdCiudad { get; set; }
+        public string IdZona { get; set; }
         public int IdUso { get; set; }
         public string Foto { get; set; }
         public string Email1 { get; set; }

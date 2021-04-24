@@ -194,6 +194,16 @@ function _loadSelectTiposIdentificacion(element) {
     });
 }
 
+function _loadSelectZona(element, idCiudad) {
+    element.empty();
+    element.append('<option value="">Seleccione...</option>');
+    let resRequest = _peticionAjax(URL_SERVICE + URI_SERVICE.ObtenerZonas, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion, idCiudad }), false);
+    resRequest.data.forEach(d => {
+        element.append('<option value="' + d.IdZona + '">' + d.Descripcion + '</option>');
+    });
+}
+
+
 function _loadSelectTiposPersona(element) {
     element.empty();
     element.append('<option value="">Seleccione...</option>');
