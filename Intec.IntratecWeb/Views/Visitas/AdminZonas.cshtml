@@ -8,7 +8,7 @@
     });
 
     function ConsultarZonas() {
-        _peticionAjax(URL_SERVICE + URI_SERVICE.ObtenerZonas, VerbosREST.POST,
+        _peticionAjax(URL_SERVICE + URI_SERVICE.ObtenerZonasAll, VerbosREST.POST,
             JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion }),
             true, response => {
                 var columns = [

@@ -18,9 +18,14 @@ namespace Intec.BL.BE
 
         //Obtener
 
-        public List<DTO.Zonas> ObtenerZonas()
+        public List<DTO.Zonas> ObtenerZonas(string idCiudad)
         {
-            return MapperConfig.Config.MapperVisitas.Map<List<DTO.Zonas>>(new DAL.TE.VisitasTE().ObtenerZonas());
+            return MapperConfig.Config.MapperVisitas.Map<List<DTO.Zonas>>(new DAL.TE.VisitasTE().ObtenerZonas(idCiudad));
+        }
+
+        public List<DTO.Zonas> ObtenerZonasAll()
+        {
+            return MapperConfig.Config.MapperVisitas.Map<List<DTO.Zonas>>(new DAL.TE.VisitasTE().ObtenerZonasAll());
         }
 
         public DTO.Zonas ObtenerZona(int IdZona)

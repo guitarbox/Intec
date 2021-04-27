@@ -178,6 +178,8 @@
     <EntitySetMapping Name="Propiedades">
       <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.Propiedades">
         <MappingFragment StoreEntitySet="Propiedades">
+          <ScalarProperty Name="IdCiudad" ColumnName="IdCiudad" />
+          <ScalarProperty Name="IdZona" ColumnName="IdZona" />
           <ScalarProperty Name="NroPoliza" ColumnName="NroPoliza" />
           <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
           <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
@@ -597,6 +599,7 @@
     <EntitySetMapping Name="Clientes">
       <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.Clientes">
         <MappingFragment StoreEntitySet="Clientes">
+          <ScalarProperty Name="IdZona" ColumnName="IdZona" />
           <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
           <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
           <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
@@ -616,6 +619,20 @@
           <ScalarProperty Name="IdTipoIdentificacion" ColumnName="IdTipoIdentificacion" />
           <ScalarProperty Name="NumeroIdentificacion" ColumnName="NumeroIdentificacion" />
           <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BarrioLocalidad">
+      <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.BarrioLocalidad">
+        <MappingFragment StoreEntitySet="BarrioLocalidad">
+          <ScalarProperty Name="IdZona" ColumnName="IdZona" />
+          <ScalarProperty Name="IdCiudad" ColumnName="IdCiudad" />
+          <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+          <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+          <ScalarProperty Name="BarrioLocalidad1" ColumnName="BarrioLocalidad" />
+          <ScalarProperty Name="IdBarrioLocalidad" ColumnName="IdBarrioLocalidad" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

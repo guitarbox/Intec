@@ -83,6 +83,7 @@ namespace Intec.DAL.TE
                     clienteAModificar.Email1 = Cliente.Email1;
                     clienteAModificar.Email2 = Cliente.Email2;
                     clienteAModificar.IdTipoPersona = Cliente.IdTipoPersona;
+                    clienteAModificar.IdZona = Cliente.IdZona;
 
                     clienteAModificar.FechaModificacion = DateTime.Now;
                     clienteAModificar.IdUsuarioModificacion = IdUsuarioModificacion;

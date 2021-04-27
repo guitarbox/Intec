@@ -8,6 +8,11 @@
         _loadSelectTiposIdentificacion($("#TiposIdentificacion"));
         _loadSelectTiposPersona($("#TiposPersona"));
         _loadSelectCiudades($("#IdCiudad"), '');
+        $("#IdCiudad").change(() => {
+            _loadSelectZona($("#IdZona"), $("#IdCiudad").val());
+            if (cliente.IdZona != null)
+                $("#IdZona").val(cliente.IdZona);
+        });
 
         ConsultarCliente();
     });
@@ -33,6 +38,8 @@
             $("#TelefonoCel2").val(cliente.TelefonoCel2);
             $("#Direccion").val(cliente.Direccion);
             $("#IdCiudad").val(cliente.IdCiudad);
+            _loadSelectZona($("#IdZona"), cliente.IdCiudad);
+            $("#IdZona").val(cliente.IdZona);
             $("#IdUso").val(cliente.IdUso);
 
             $("#Foto").val(cliente.Foto);
@@ -134,7 +141,7 @@
         cliente.TelefonoCel2 = $("#TelefonoCel2").val();
         cliente.Direccion = $("#Direccion").val();
         cliente.IdCiudad = $("#IdCiudad").val();
-        //cliente.IdUso = $("#IdUso").val();
+        cliente.IdZona = $("#IdZona").val();
 
         //cliente.Foto = $("#Foto").val();
         cliente.Email1 = $("#Email1").val();
@@ -240,6 +247,8 @@
             <input id="Direccion" class="form-control" />
             <h5>Ciudad</h5>
             <select id="IdCiudad" class="form-control"></select>
+            <h5>Zona</h5>
+            <select id="IdZona" class="form-control"><option value="">Seleccione Ciudad...</option></select>
             @*<h5>Uso</h5>
         <input id="IdUso" class="form-control" />*@
             @*<h5>Foto</h5>

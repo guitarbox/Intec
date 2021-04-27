@@ -233,6 +233,7 @@
       <End Role="Clientes" EntitySet="Clientes" />
       <End Role="Visitas" EntitySet="Visitas" />
     </AssociationSet>
+    <EntitySet Name="BarrioLocalidad" EntityType="DB_A66D31_intratecPrbModel.BarrioLocalidad" />
   </EntityContainer>
   <EntityType Name="Departamentos">
     <Key>
@@ -450,6 +451,8 @@
     <NavigationProperty Name="Visitas" Relationship="DB_A66D31_intratecPrbModel.FK_Visitas_Propiedades" FromRole="Propiedades" ToRole="Visitas" />
     <NavigationProperty Name="Clientes" Relationship="DB_A66D31_intratecPrbModel.FK_Propiedades_Clientes" FromRole="Propiedades" ToRole="Clientes" />
     <Property Name="NroPoliza" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="IdZona" Type="Int32" />
+    <Property Name="IdCiudad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <Association Name="FK_Propiedades_TiposPropiedades">
     <End Type="DB_A66D31_intratecPrbModel.TiposPropiedades" Role="TiposPropiedades" Multiplicity="1" />
@@ -1380,6 +1383,7 @@
     <NavigationProperty Name="TiposPersona" Relationship="DB_A66D31_intratecPrbModel.FK_Clientes_TiposPersona" FromRole="Clientes" ToRole="TiposPersona" />
     <NavigationProperty Name="Propiedades" Relationship="DB_A66D31_intratecPrbModel.FK_Propiedades_Clientes" FromRole="Clientes" ToRole="Propiedades" />
     <NavigationProperty Name="Visitas" Relationship="DB_A66D31_intratecPrbModel.FK_Visitas_Clientes" FromRole="Clientes" ToRole="Visitas" />
+    <Property Name="IdZona" Type="Int32" />
   </EntityType>
   <Association Name="FK_Clientes_Ciudades">
     <End Type="DB_A66D31_intratecPrbModel.Ciudades" Role="Ciudades" Multiplicity="0..1" />
@@ -1441,4 +1445,17 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="BarrioLocalidad">
+    <Key>
+      <PropertyRef Name="IdBarrioLocalidad" />
+    </Key>
+    <Property Name="IdBarrioLocalidad" Type="Int32" Nullable="false" />
+    <Property Name="BarrioLocalidad1" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
+    <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+    <Property Name="IdUsuarioModificacion" Type="Int32" />
+    <Property Name="IdCiudad" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IdZona" Type="Int32" Nullable="false" />
+  </EntityType>
 </Schema>

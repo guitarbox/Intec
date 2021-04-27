@@ -18,7 +18,7 @@ namespace Intec.BL.DTO
         public string TelefonoCel2 { get; set; }
         public string Direccion { get; set; }
         public string IdCiudad { get; set; }
-        public string IdZona { get; set; }
+        public int? IdZona { get; set; }
         public int IdUso { get; set; }
         public string Foto { get; set; }
         public string Email1 { get; set; }
@@ -31,7 +31,6 @@ namespace Intec.BL.DTO
         public TiposIdentificacion TiposIdentificacion { get; set; }
         public TiposPersona TiposPersona { get; set; }
         public List<Propiedades> Propiedades { get; set; }
-        public List<Visitas> Visitas { get; set; }
-        public Nullable<int> IdZona { get; set; }
+        public List<Visitas> Visitas { get; set; }        
     }
 }

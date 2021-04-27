@@ -12,12 +12,27 @@ namespace Intec.DAL.TE
     {
         ////**************************************************** ZONAS => Todo lo que tenga que ver con zonas
         //CRUD ZONAS
-        public List<Zonas> ObtenerZonas()
+        public List<Zonas> ObtenerZonasAll()
         {
             List<Zonas> res = new List<Zonas>();
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
                 res = ctx.Zonas.ToList();
+                foreach(Zonas z in res)
+                {
+                    ctx.Entry(z).Reference(r => r.Ciudades).Load();
+                    ctx.Entry(z).Reference(r => r.Usuarios).Load();
+                }
+            }
+            return res;
+        }
+        
+        public List<Zonas> ObtenerZonas(string idCiudad)
+        {
+            List<Zonas> res = new List<Zonas>();
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                res = ctx.Zonas.Where(z=>z.IdCiudad.Equals(idCiudad)).ToList();
                 foreach(Zonas z in res)
                 {
                     ctx.Entry(z).Reference(r => r.Ciudades).Load();

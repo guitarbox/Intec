@@ -123,6 +123,7 @@ var URI_SERVICE = {
     ObtenerEquiposUsuario: 'api/Equipos/ObtenerEquiposUsuario',
 
     //Visitas
+    ObtenerZonasAll: 'api/Visitas/ObtenerZonasAll',
     ObtenerZonas: 'api/Visitas/ObtenerZonas',
     ObtenerZona: 'api/Visitas/ObtenerZona',
     CrearZona: 'api/Visitas/CrearZona',

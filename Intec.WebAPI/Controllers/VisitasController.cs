@@ -22,7 +22,18 @@ namespace Intec.WebApi.Controllers
             bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
             SetValidTokendResponse(validToken);
             if (validToken)
-                SetDataResponse(new Intec.BL.BE.VisitasBE().ObtenerZonas());
+                SetDataResponse(new Intec.BL.BE.VisitasBE().ObtenerZonas(Token["idCiudad"].ToString()));
+            return response;
+        }
+        
+        [HttpPost]
+        [Route("api/Visitas/ObtenerZonasAll")]
+        public JObject ObtenerZonasAll([FromBody]JObject Token)
+        {
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+            if (validToken)
+                SetDataResponse(new Intec.BL.BE.VisitasBE().ObtenerZonasAll());
             return response;
         }
 
