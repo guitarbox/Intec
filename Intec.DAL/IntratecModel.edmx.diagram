@@ -77,6 +77,9 @@
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Clientes_TiposPersona" />
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Propiedades_Clientes" />
         <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.BarrioLocalidad" Width="1.5" PointX="5.375" PointY="13.75" />
+        <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.CertificadosCompetencias" Width="1.5" PointX="12.75" PointY="21" />
+        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_CertificadosCompetencias_Usuarios" />
+        <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.FranjasHorarioVisitas" Width="1.5" PointX="7.375" PointY="13.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

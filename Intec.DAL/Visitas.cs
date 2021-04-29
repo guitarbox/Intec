@@ -39,6 +39,7 @@ namespace Intec.DAL
         public Nullable<System.DateTime> FechaModificacion { get; set; }
         public Nullable<int> IdUsuarioModificacion { get; set; }
         public Nullable<int> IdTipoVisita { get; set; }
+        public Nullable<int> IdFranja { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EquiposVisita> EquiposVisita { get; set; }

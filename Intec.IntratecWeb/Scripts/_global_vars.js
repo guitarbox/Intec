@@ -94,6 +94,7 @@ var URI_SERVICE = {
     CrearUsuario: 'api/Usuarios/CrearUsuario',
     ActualizarUsuario: 'api/Usuarios/ActualizarUsuario',
     GetUsuariosByIdRol: 'api/Usuarios/GetUsuariosByIdRol',
+    AgregarCertificadoCompetencias: 'api/Usuarios/AgregarCertificadoCompetencias'
 
     LogIn: 'api/Usuarios/LogIn',
     RecuperarContrasena: 'api/Usuarios/RecuperarContrasena',

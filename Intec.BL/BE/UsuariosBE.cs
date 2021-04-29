@@ -98,5 +98,11 @@ namespace Intec.BL.BE
         {
             return MapperConfig.Config.MapperUsuariosSimple.Map<List<DTO.Usuarios>>( new DAL.TE.UsuariosTE().GetUsuariosByIdRol(IdRol));
         }
+
+
+        public void AgregarCertificadoCompetencias(DTO.CertificadosCompetencias CertificadoAgregar)
+        {
+            new DAL.TE.UsuariosTE().AgregarCertificadoCompetencias(MapperConfig.Config.MapperUsuarios.Map<DAL.CertificadosCompetencias>(CertificadoAgregar));
+        }
     }
 }

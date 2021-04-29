@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'D:\Documentos\Proyectos Interius\!ntec\sw\AppWebMVC\IntecSolution\Intec.DAL\IntratecModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\alan.sierra\OneDrive\Documentos\Alan\Interius\Intec\Intec.DAL\IntratecModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

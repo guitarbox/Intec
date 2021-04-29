@@ -34,6 +34,21 @@
           <Property Name="IdUsuarioModificacion" Type="int" />
           <Property Name="Certificado" Type="nvarchar" MaxLength="200" />
         </EntityType>
+        <EntityType Name="CertificadosCompetencias">
+          <Key>
+            <PropertyRef Name="IdCertificadosCompetencia" />
+          </Key>
+          <Property Name="IdCertificadosCompetencia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
+          <Property Name="FechaModificacion" Type="datetime" />
+          <Property Name="IdUsuarioModificacion" Type="int" />
+          <Property Name="UbicacionArchivo" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="FechaVencimiento" Type="datetime" Nullable="false" />
+          <Property Name="Observaciones" Type="nvarchar" MaxLength="500" />
+          <Property Name="IdInspector" Type="int" Nullable="false" />
+          <Property Name="FechaExpedicion" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="Ciudades">
           <Key>
             <PropertyRef Name="IdCiudad" />
@@ -191,6 +206,16 @@
           <Property Name="IdVisita" Type="int" Nullable="false" />
           <Property Name="Secuencia" Type="int" Nullable="false" />
           <Property Name="Path" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FranjasHorarioVisitas">
+          <Key>
+            <PropertyRef Name="IdFranja" />
+          </Key>
+          <Property Name="IdFranja" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HoraInicioFranja" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="HoraFinFranja" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="HistoricoAsignacionZona">
           <Key>
@@ -552,6 +577,7 @@
           <Property Name="FechaModificacion" Type="datetime" />
           <Property Name="IdUsuarioModificacion" Type="int" />
           <Property Name="IdTipoVisita" Type="int" />
+          <Property Name="IdFranja" Type="int" />
         </EntityType>
         <EntityType Name="Zonas">
           <Key>
@@ -580,6 +606,18 @@
             </Principal>
             <Dependent Role="CalibracionesEquipos">
               <PropertyRef Name="IdEquipo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CertificadosCompetencias_Usuarios">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="CertificadosCompetencias" Type="Self.CertificadosCompetencias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="CertificadosCompetencias">
+              <PropertyRef Name="IdInspector" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1146,6 +1184,7 @@
         <EntityContainer Name="DB_A66D31_intratecPrbModelStoreContainer">
           <EntitySet Name="BarrioLocalidad" EntityType="Self.BarrioLocalidad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CalibracionesEquipos" EntityType="Self.CalibracionesEquipos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CertificadosCompetencias" EntityType="Self.CertificadosCompetencias" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Ciudades" EntityType="Self.Ciudades" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ConsecutivosFormatos" EntityType="Self.ConsecutivosFormatos" Schema="dbo" store:Type="Tables" />
@@ -1157,6 +1196,7 @@
           <EntitySet Name="Formatos" EntityType="Self.Formatos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FormatosVisita" EntityType="Self.FormatosVisita" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FotosVisita" EntityType="Self.FotosVisita" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FranjasHorarioVisitas" EntityType="Self.FranjasHorarioVisitas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HistoricoAsignacionZona" EntityType="Self.HistoricoAsignacionZona" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="KardexPapeleria" EntityType="Self.KardexPapeleria" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Laboratorios" EntityType="Self.Laboratorios" Schema="dbo" store:Type="Tables" />
@@ -1187,6 +1227,10 @@
           <AssociationSet Name="FK_CalibracionesEquipos_Equipos" Association="Self.FK_CalibracionesEquipos_Equipos">
             <End Role="Equipos" EntitySet="Equipos" />
             <End Role="CalibracionesEquipos" EntitySet="CalibracionesEquipos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CertificadosCompetencias_Usuarios" Association="Self.FK_CertificadosCompetencias_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="CertificadosCompetencias" EntitySet="CertificadosCompetencias" />
           </AssociationSet>
           <AssociationSet Name="FK_Ciudades_Departamentos" Association="Self.FK_Ciudades_Departamentos">
             <End Role="Departamentos" EntitySet="Departamentos" />
@@ -1607,6 +1651,12 @@
             <End Role="Visitas" EntitySet="Visitas" />
           </AssociationSet>
           <EntitySet Name="BarrioLocalidad" EntityType="DB_A66D31_intratecPrbModel.BarrioLocalidad" />
+          <EntitySet Name="CertificadosCompetencias" EntityType="DB_A66D31_intratecPrbModel.CertificadosCompetencias" />
+          <AssociationSet Name="FK_CertificadosCompetencias_Usuarios" Association="DB_A66D31_intratecPrbModel.FK_CertificadosCompetencias_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="CertificadosCompetencias" EntitySet="CertificadosCompetencias" />
+          </AssociationSet>
+          <EntitySet Name="FranjasHorarioVisitas" EntityType="DB_A66D31_intratecPrbModel.FranjasHorarioVisitas" />
           </EntityContainer>
         <EntityType Name="Departamentos">
           <Key>
@@ -2189,6 +2239,7 @@
           <Property Name="IdTipoVisita" Type="Int32" />
           <NavigationProperty Name="TiposVisita" Relationship="DB_A66D31_intratecPrbModel.FK_Visitas_TiposVisita" FromRole="Visitas" ToRole="TiposVisita" />
           <NavigationProperty Name="Clientes" Relationship="DB_A66D31_intratecPrbModel.FK_Visitas_Clientes" FromRole="Visitas" ToRole="Clientes" />
+          <Property Name="IdFranja" Type="Int32" />
         </EntityType>
         <Association Name="FK_FormatosVisita_ConsecutivosFormatos">
           <End Type="DB_A66D31_intratecPrbModel.ConsecutivosFormatos" Role="ConsecutivosFormatos" Multiplicity="1" />
@@ -2407,6 +2458,7 @@
           <Property Name="horaTokenSesion" Type="DateTime" Precision="3" />
           <Property Name="FechaNacimiento" Type="DateTime" Precision="0" />
           <NavigationProperty Name="Ciudades" Relationship="DB_A66D31_intratecPrbModel.FK_Usuarios_Ciudades" FromRole="Usuarios" ToRole="Ciudades" />
+          <NavigationProperty Name="CertificadosCompetencias" Relationship="DB_A66D31_intratecPrbModel.FK_CertificadosCompetencias_Usuarios" FromRole="Usuarios" ToRole="CertificadosCompetencias" />
         </EntityType>
         <Association Name="FK_ConsecutivosInspectores_Usuarios">
           <End Type="DB_A66D31_intratecPrbModel.Usuarios" Role="Usuarios" Multiplicity="0..1" />
@@ -2831,6 +2883,44 @@
           <Property Name="IdCiudad" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="IdZona" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="CertificadosCompetencias">
+          <Key>
+            <PropertyRef Name="IdCertificadosCompetencia" />
+          </Key>
+          <Property Name="IdCertificadosCompetencia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioModificacion" Type="Int32" />
+          <Property Name="UbicacionArchivo" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="FechaVencimiento" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Observaciones" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IdInspector" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Usuarios" Relationship="DB_A66D31_intratecPrbModel.FK_CertificadosCompetencias_Usuarios" FromRole="CertificadosCompetencias" ToRole="Usuarios" />
+          <Property Name="FechaExpedicion" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <Association Name="FK_CertificadosCompetencias_Usuarios">
+          <End Type="DB_A66D31_intratecPrbModel.Usuarios" Role="Usuarios" Multiplicity="1" />
+          <End Type="DB_A66D31_intratecPrbModel.CertificadosCompetencias" Role="CertificadosCompetencias" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="CertificadosCompetencias">
+              <PropertyRef Name="IdInspector" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="FranjasHorarioVisitas">
+          <Key>
+            <PropertyRef Name="IdFranja" />
+          </Key>
+          <Property Name="IdFranja" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HoraInicioFranja" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HoraFinFranja" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3230,6 +3320,7 @@
           <EntitySetMapping Name="Visitas">
             <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.Visitas">
               <MappingFragment StoreEntitySet="Visitas">
+                <ScalarProperty Name="IdFranja" ColumnName="IdFranja" />
                 <ScalarProperty Name="IdTipoVisita" ColumnName="IdTipoVisita" />
                 <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
                 <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
@@ -3469,6 +3560,33 @@
                 <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
                 <ScalarProperty Name="BarrioLocalidad1" ColumnName="BarrioLocalidad" />
                 <ScalarProperty Name="IdBarrioLocalidad" ColumnName="IdBarrioLocalidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CertificadosCompetencias">
+            <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.CertificadosCompetencias">
+              <MappingFragment StoreEntitySet="CertificadosCompetencias">
+                <ScalarProperty Name="FechaExpedicion" ColumnName="FechaExpedicion" />
+                <ScalarProperty Name="IdInspector" ColumnName="IdInspector" />
+                <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+                <ScalarProperty Name="FechaVencimiento" ColumnName="FechaVencimiento" />
+                <ScalarProperty Name="UbicacionArchivo" ColumnName="UbicacionArchivo" />
+                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="IdCertificadosCompetencia" ColumnName="IdCertificadosCompetencia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FranjasHorarioVisitas">
+            <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.FranjasHorarioVisitas">
+              <MappingFragment StoreEntitySet="FranjasHorarioVisitas">
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="HoraFinFranja" ColumnName="HoraFinFranja" />
+                <ScalarProperty Name="HoraInicioFranja" ColumnName="HoraInicioFranja" />
+                <ScalarProperty Name="IdFranja" ColumnName="IdFranja" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -228,5 +228,24 @@ namespace Intec.DAL.TE
             }
             return res;
         }
+
+        public void AgregarCertificadoCompetencias(CertificadosCompetencias CertificadoAgregar)
+        {
+            CertificadosCompetencias res = null;
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                res = ctx.CertificadosCompetencias.Where(c => c.FechaExpedicion == CertificadoAgregar.FechaExpedicion).FirstOrDefault();
+                if(res != null)
+                {
+                    CertificadoAgregar.FechaCreacion = DateTime.Now;
+                    ctx.CertificadosCompetencias.Add(CertificadoAgregar);
+                    ctx.SaveChanges();
+                }
+                else
+                {
+                    throw new Exception($"Ya existe un certificado con fecha de expedición: {CertificadoAgregar.FechaExpedicion}");
+                }
+            }
+        }
     }
 }

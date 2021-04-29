@@ -56,6 +56,9 @@
     <Compile Include="CalibracionesEquipos.cs">
       <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="CertificadosCompetencias.cs">
+      <DependentUpon>IntratecModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Ciudades.cs">
       <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
@@ -88,6 +91,9 @@
       <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
     <Compile Include="FotosVisita.cs">
+      <DependentUpon>IntratecModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FranjasHorarioVisitas.cs">
       <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
     <Compile Include="HistoricoAsignacionZona.cs">
