@@ -21,7 +21,7 @@
             }),
 
             true, response => {
-
+                console.log(response);
                 var columns = [
                     { data: "IdEquipo", title: 'Id. Equipo' },
                     { data: "TiposEquipo.TipoEquipo", title: 'Tipo Equipo' },
@@ -33,7 +33,15 @@
                     { data: "IdTipoVisitaAplica", title: 'Tipo Visita Aplica' },
                     {
                         data: null, render: function (data, type, full, meta) {
-                            return full.PendTramiteAdmin == true ? '<i title="Tiene pendiente aceptar devolución" style="color:red; cursor:pointer" class="fas fa-exclamation-triangle"></i>' : '';
+                            let res = '';
+                            res += full.PendTramiteAdmin == true ? '<i title="Tiene pendiente aceptar devolución" style="color:red; cursor:pointer" class="fas fa-exclamation-triangle"></i><br/>' : '';
+                            res += full.DiasParaProxCalibracion == null ? '' :
+                                full.DiasParaProxCalibracion > 10 ? '' : `<img style="cursor:pointer" width="20" height="20" title="Pendiente Calibración" src="../images/calibration.png" /><label style="margin-left:2px; color:${full.DiasParaProxCalibracion < 0 ? 'red' : 'black'}">${Math.abs(full.DiasParaProxCalibracion)}</label><br/>`;
+                            res += full.DiasParaProxMantenimiento == null ? '' :
+                                full.DiasParaProxMantenimiento > 10 ? '' : `<img style="cursor:pointer" width="20" height="20" title="Pendiente Mantenimiento" src="../images/maintenance.png" /><label style="margin-left:2px; color:${full.DiasParaProxMantenimiento < 0 ? 'red' : 'black'}">${Math.abs(full.DiasParaProxMantenimiento)}</label><br/>`;
+                            res += full.DiasParaProxVerificacion == null ? '' :
+                                full.DiasParaProxVerificacion > 10 ? '' : `<img style="cursor:pointer" width="20" height="20" title="Pendiente Verificación" src="../images/checked.png" /><label style="margin-left:2px; color:${full.DiasParaProxVerificacion < 0 ? 'red' : 'black'}">${Math.abs(full.DiasParaProxVerificacion)}</label><br/>`;
+                            return res;
                         }
                     },
                     {

@@ -15,6 +15,7 @@ namespace Intec.BL.DTO
         public int IdZona { get; set; }
         public string IdCiudad { get; set; }
         public System.DateTime FechaVisita { get; set; }
+        public string FechaVisitaString { get; set; }
         public Nullable<int> IdInspector { get; set; }
         public string ObservacionesVisita { get; set; }
         public string IdEstadoVisitas { get; set; }

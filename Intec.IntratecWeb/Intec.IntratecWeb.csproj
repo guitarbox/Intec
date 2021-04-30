@@ -173,6 +173,7 @@
     <Content Include="Global.asax" />
     <Content Include="images\logo.png" />
     <Content Include="images\logo2.png" />
+    <Content Include="images\maintenance.png" />
     <Content Include="Scripts\App.js" />
     <Content Include="Scripts\App\Usuarios.js" />
     <Content Include="Scripts\blockUI.js" />

@@ -61,7 +61,9 @@
                 { data: "TiposPropiedades.TipoPropiedad", title: 'Tipo Propiedad' },
                 { data: "UsosPropiedades.Uso", title: 'Uso' },
                 { data: "Telefono", title: 'Teléfono' },
-                //{ data: "Foto",  },
+                { data: "NroPoliza", title:'NroPoliza' },
+                { data: "IdZona", title:'IdZona' },
+                { data: "IdCiudad", title:'IdCiudad' },
                 { data: "Observaciones", title: 'Observaciones' },
                 {
                     data: null, render: function (data, type, full, meta) {
@@ -179,6 +181,18 @@
         _appendToBodyGeneriModal('<h5>Tipo Propiedad</h5>');
         _appendToBodyGeneriModal('<select id="IdTipoPropiedadCP" class="form-control"></select>');
         _loadSelectTiposPropiedad($("#IdTipoPropiedadCP"));
+        _appendToBodyGeneriModal('<p>Departamento</p>');
+        _appendToBodyGeneriModal('<select id="IdDepartamentoCP" class="form-control"></select>');
+        _loadSelectDepartamentos($("#IdDepartamentoCP"), '57');
+        $("#IdDepartamentoCP").change(() => { _loadSelectCiudades($("#IdCiudadCP"), $("#IdDepartamentoCP").val()) });
+        _appendToBodyGeneriModal('<p>Ciudad</p>');
+        _appendToBodyGeneriModal('<select id="IdCiudadCP" class="form-control"><option>Seleccione Departamento...</option></select>');
+        $("#IdCiudadCP").change(() => { _loadSelectZona($("#IdZonaCP"), $("#IdCiudadCP").val()) });
+
+        _appendToBodyGeneriModal('<p>Zona</p>');
+        _appendToBodyGeneriModal('<select id="IdZonaCP" class="form-control"><option>Seleccione Ciudad...</option></select>');
+        _appendToBodyGeneriModal('<h5>Nro. Póliza</h5>');
+        _appendToBodyGeneriModal('<input id="NroPolizaCP" class="form-control" type="text" />');
         //Foto 
         _appendToBodyGeneriModal('<h5>Observaciones</h5>');
         _appendToBodyGeneriModal('<textarea id="ObservacionesCP" class="form-control"></textarea>');
@@ -196,7 +210,10 @@
                         //Foto: $("#").val(),
                         Observaciones: $("#ObservacionesCP").val(),
                         IdTipoPropiedad: $("#IdTipoPropiedadCP").val(),
-                        IdUsuarioCreacion: UsuarioSesion.IdUsuario
+                        IdUsuarioCreacion: UsuarioSesion.IdUsuario,
+                        IdCiudad: $("#IdCiudadCP").val(),
+                        IdZona: $("#IdZonaCP").val(),
+                        NroPoliza: $("#NroPolizaCP").val()
                     }
                 })).then(response => { debugger; _closeGenericModal(); ConsultarCliente(); })
             }

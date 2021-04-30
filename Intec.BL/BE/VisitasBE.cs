@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -53,6 +54,7 @@ namespace Intec.BL.BE
 
         public void ProgramarVisita(DTO.Visitas Visita)
         {
+            Visita.FechaVisita = DateTime.Parse(Visita.FechaVisitaString, new CultureInfo("es-Co"));
             new DAL.TE.VisitasTE().ProgramarVisita(MapperConfig.Config.MapperVisitas.Map<DAL.Visitas>(Visita));
         }
         

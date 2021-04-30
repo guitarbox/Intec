@@ -17,14 +17,16 @@
             format: "D/M/YYYY"
         });
         _setToday($("#FechaVisita"));
+
         //Cargar los inspectores
-        _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.GetUsuariosByIdRol, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion, idRol: 2 }))
+        _peticionAjax_NoLockScreen(URL_SERVICE + URI_SERVICE.GetUsuariosByIdRol, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion, idRol: 2 }))
             .then(response => {
                 $("#Inspector").append('<option value="0">Seleccione Inspector...</option>');
                 response.data.forEach(inspector => {
                     $("#Inspector").append(`<option value="${inspector.IdUsuario}">${inspector.Nombres} ${inspector.Apellidos}</option>`);
                 });
             });
+
     });
 
     function BuscarCliente() {
@@ -32,7 +34,7 @@
         _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.ObtenerCliente, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion, idCliente: -1, numeroIdentificacion: nitC_ }))
             .then(response => {
                 //Mostrar datos básicos
-                idCliente_ = response.data.idCliente;
+                idCliente_ = response.data.IdCliente;
                 props_ = response.data.Propiedades;
                 $("#NumeroIdentificacionCliente").val(response.data.NumeroIdentificacion);
                 $("#NombreCliente").val(`${response.data.Nombres} ${response.data.Apellidos}`);
@@ -50,7 +52,7 @@
                 //Seleccionar propiedad
                 if (idProp_ != undefined) {
                     SeleccionarProp(idProp_);
-                }                
+                }
             });
     }
 
@@ -62,12 +64,54 @@
         $("#TipoProp").val(prop.TiposPropiedades.TipoPropiedad);
         $("#UsoProp").val(prop.UsosPropiedades.Uso);
         $("#NroPoliza").val(prop.NroPoliza);
+        _loadSelectCiudades($("#IdCiudad"), '');
+        $("#IdCiudad").val(prop.IdCiudad);
+        _loadSelectZona($("#IdZona"), $("#IdCiudad").val())
+        if (prop.IdZona != null) {
+            $("#IdZona").val(prop.IdZona);
+            let response = _peticionAjax(URL_SERVICE + URI_SERVICE.ObtenerZona, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion, idZona: prop.IdZona }), false, '');
+            debugger;
+            $("#Inspector").val(response.data.IdInspector);
+        }
+
+
         $("#divSelectProp").hide();
         $("#divSelectedProp").show();
     }
 
     function AgendarVisita() {
-        //Acá voy
+        let prop = props_.filter(f => f.IdPropiedades == idProp_)[0];
+        _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.ProgramarVisita, VerbosREST.POST, JSON.stringify({
+            sessionToken: UsuarioSesion.tokenSesion,
+            visita: {
+                IdCliente: idCliente_,
+                Direccion: prop.Direccion,
+                IdZona: prop.IdZona,
+                IdCiudad: prop.IdCiudad,
+                FechaVisitaString: $("#FechaVisita").val(),
+                IdInspector: $("#Inspector").val(),
+                ObservacionesVisita: $("#ObservacionesVisita").val(),
+                IdEstadoVisitas: 'P',
+                IdPropiedad: idProp_,
+                OrigenVisita: $("#OrigenVisita").val(),
+                IdUsuarioCreacion: UsuarioSesion.IdUsuario
+            }
+        }))
+            .then(response => {
+                try {
+                    window.opener.ConsultarCliente();
+                } catch { }
+
+                swal({
+                    text: 'Visita Programada',
+                    title: swalTitle,
+                    icon: 'success'
+                })
+                    .then(response => {
+                        window.close();
+                    });
+            });
+
     }
 </script>
 <h3 class="text-center" id="title">Agendar Visita</h3>
@@ -120,6 +164,14 @@
                 <p>Nro. Poliza</p>
                 <input type="text" id="NroPoliza" class="form-control" />
             </div>
+            <div style="margin-right:10px">
+                <p>Ciudad</p>
+                <select type="text" id="IdCiudad" class="form-control" disabled></select>
+            </div>
+            <div style="margin-right:10px">
+                <p>Zona</p>
+                <select type="text" id="IdZona" class="form-control" disabled></select>
+            </div>
         </div>
         <br />
         <h4>Seleccione la fecha de la visita y el inspector</h4>
@@ -134,6 +186,22 @@
             </div>
         </div>
         <br />
-        <input type="button" value="Agendar Visita" class="button" onclick="AgendarVisita();"/>
+        <h4>Otros datos</h4>
+        <div style="display:flex;">
+            <div style="margin-right:10px">
+                <p>Observaciones</p>
+                <textarea type="text" id="Observaciones" class="form-control" cols="200"></textarea>
+            </div>
+            <div style="margin-right:10px">
+                <p>Origen Visita</p>
+                <select id="OrigenVisita" class="form-control">
+                    <option value="Sitio Web">Sitio Web</option>
+                    <option value="Teléfono">Teléfono</option>
+                    <option value="Correo">Correo</option>
+                </select>
+            </div>
+        </div>
+        <br />
+        <input type="button" value="Agendar Visita" class="button" onclick="AgendarVisita();" />
     </div>
 </div>

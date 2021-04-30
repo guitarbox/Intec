@@ -21,12 +21,14 @@ namespace Intec.BL.DTO
         public string FechaUltimaCalibracionString { get; set; }
         public Nullable<System.DateTime> FechaProximaCalibracion { get; set; }
         public string FechaProximaCalibracionString { get; set; }
+        public int? DiasParaProxCalibracion { get; set; }
         public Nullable<System.DateTime> FechaUltimaVerificacionLaboratorio { get; set; }
         public string FechaUltimaVerificacionLaboratorioString { get; set; }
         public string PeriodoCalibracion { get; set; }
         public string PeriodoVerificacion { get; set; }
         public Nullable<System.DateTime> FechaProximoMantenimiento { get; set; }
         public string FechaProximoMantenimientoString { get; set; }
+        public int? DiasParaProxMantenimiento { get; set; }
         public System.DateTime FechaCreacion { get; set; }
         public int IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaModificacion { get; set; }
@@ -43,5 +45,6 @@ namespace Intec.BL.DTO
         public bool RequiereCalibracion { get; set; }
         public Nullable<System.DateTime> FechaProximaVerificacion { get; set; }
         public string FechaProximaVerificacionString { get; set; }
+        public int? DiasParaProxVerificacion { get; set; }
     }
 }

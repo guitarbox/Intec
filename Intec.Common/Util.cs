@@ -12,5 +12,16 @@ namespace Intec.Common
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(Object);
         }
+
+        /**
+         * Returns number of days to a specific date
+         **/
+        static public int? DaysToDate(DateTime? Date)
+        {
+            if (Date == null)
+                return null;
+            else
+                return (DateTime.Now - Date.Value).Days;
+        }
     }
 }

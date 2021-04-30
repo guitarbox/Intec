@@ -118,12 +118,15 @@ namespace Intec.DAL.TE
                         ctx.SaveChanges();
 
                         HistoricoAsignacionZona hist = ctx.HistoricoAsignacionZona.Where(h => h.IdZona == IdZona && h.IdCiudad.Equals(IdCiudad) && h.FechaFin == null).FirstOrDefault();
-                        hist.FechaFin = now;
-                        hist.FechaModificacion = now;
-                        hist.IdUsuarioModificacion = IdUsuarioReAsigna;
-                        ctx.SaveChanges();
+                        if (hist != null)
+                        {
+                            hist.FechaFin = now;
+                            hist.FechaModificacion = now;
+                            hist.IdUsuarioModificacion = IdUsuarioReAsigna;
+                            ctx.SaveChanges();
+                        }
 
-                        int sec = hist.Secuencia + 1;
+                        int sec = (hist != null ? hist.Secuencia : 0) + 1;
 
                         ctx.HistoricoAsignacionZona.Add(new HistoricoAsignacionZona()
                         {

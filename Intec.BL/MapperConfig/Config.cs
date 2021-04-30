@@ -69,6 +69,12 @@ namespace Intec.BL.MapperConfig
                     cfg.CreateMap<DAL.Equipos, DTO.Equipos>()
                     .ForMember(dest => dest.FechaProximaCalibracionString, opt => opt.MapFrom(src => src.FechaProximaCalibracion == null ? "" : src.FechaProximaCalibracion.Value.ToShortDateString()))
                     .ForMember(dest => dest.FechaProximoMantenimientoString, opt => opt.MapFrom(src => src.FechaProximoMantenimiento == null ? "" : src.FechaProximoMantenimiento.Value.ToShortDateString()))
+                    .ForMember(dest => dest.FechaProximaVerificacionString, opt => opt.MapFrom(src => src.FechaProximaVerificacion == null ? "" : src.FechaProximaVerificacion.Value.ToShortDateString()))
+
+                    .ForMember(dest => dest.DiasParaProxCalibracion, opt => opt.MapFrom(src => Common.Util.DaysToDate(src.FechaProximaCalibracion)))
+                    .ForMember(dest => dest.DiasParaProxMantenimiento, opt => opt.MapFrom(src => Common.Util.DaysToDate(src.FechaProximoMantenimiento)))
+                    .ForMember(dest => dest.DiasParaProxVerificacion, opt => opt.MapFrom(src => Common.Util.DaysToDate(src.FechaProximaVerificacion)))
+
                     .ForMember(dest => dest.FechaUltimaCalibracionString, opt => opt.MapFrom(src => src.FechaUltimaCalibracion == null ? "" : src.FechaUltimaCalibracion.Value.ToShortDateString()))
                     .ForMember(dest => dest.FechaUltimaVerificacionLaboratorioString, opt => opt.MapFrom(src => src.FechaUltimaVerificacionLaboratorio == null ? "" : src.FechaUltimaVerificacionLaboratorio.Value.ToShortDateString()))
                     .ForMember(dest => dest.PendTramiteAdmin, opt => opt.Ignore())
@@ -115,11 +121,17 @@ namespace Intec.BL.MapperConfig
                 var config = new AutoMapper.MapperConfiguration(cfg => {
 
                     cfg.CreateMap<DAL.Equipos, DTO.Equipos>()
+                        .ForMember(dest => dest.FechaProximaCalibracionString, opt => opt.MapFrom(src => src.FechaProximaCalibracion == null ? "" : src.FechaProximaCalibracion.Value.ToShortDateString()))
+                        .ForMember(dest => dest.FechaProximoMantenimientoString, opt => opt.MapFrom(src => src.FechaProximoMantenimiento == null ? "" : src.FechaProximoMantenimiento.Value.ToShortDateString()))
+                        .ForMember(dest => dest.FechaProximaVerificacionString, opt => opt.MapFrom(src => src.FechaProximaVerificacion == null ? "" : src.FechaProximaVerificacion.Value.ToShortDateString()))
                         .ForMember(dest => dest.CalibracionesEquipos, opt => opt.Ignore())
                         .ForMember(dest => dest.VerificacionesLabEquipos, opt => opt.Ignore())                        
                         .ForMember(dest => dest.TramitesEquipo, opt => opt.Ignore())
                         .ForMember(dest => dest.UsuariosEquipos, opt => opt.Ignore())
                         .ForMember(dest => dest.PendTramiteAdmin, opt => opt.Ignore())
+                        .ForMember(dest => dest.DiasParaProxCalibracion, opt => opt.MapFrom(src => Common.Util.DaysToDate(src.FechaProximaCalibracion)))
+                        .ForMember(dest => dest.DiasParaProxMantenimiento, opt => opt.MapFrom(src => Common.Util.DaysToDate(src.FechaProximoMantenimiento)))
+                        .ForMember(dest => dest.DiasParaProxVerificacion, opt => opt.MapFrom(src => Common.Util.DaysToDate(src.FechaProximaVerificacion)))
                     ;
 
                     cfg.CreateMap<DAL.MarcasEquipos, DTO.MarcasEquipos>();
@@ -143,6 +155,9 @@ namespace Intec.BL.MapperConfig
                     .ForMember(dest => dest.TiposIdentificacion, opt => opt.Ignore())
                     ;
                     cfg.CreateMap<DAL.Equipos, DTO.Equipos>()
+                    .ForMember(dest => dest.FechaProximaCalibracionString, opt => opt.MapFrom(src => src.FechaProximaCalibracion == null ? "" : src.FechaProximaCalibracion.Value.ToShortDateString()))
+                    .ForMember(dest => dest.FechaProximoMantenimientoString, opt => opt.MapFrom(src => src.FechaProximoMantenimiento == null ? "" : src.FechaProximoMantenimiento.Value.ToShortDateString()))
+                    .ForMember(dest => dest.FechaProximaVerificacionString, opt => opt.MapFrom(src => src.FechaProximaVerificacion == null ? "" : src.FechaProximaVerificacion.Value.ToShortDateString()))
                     .ForMember(dest => dest.CalibracionesEquipos, opt => opt.Ignore())
                     .ForMember(dest => dest.MarcasEquipos, opt => opt.Ignore())
                     .ForMember(dest => dest.TiposEquipo, opt => opt.Ignore())
@@ -150,6 +165,10 @@ namespace Intec.BL.MapperConfig
                     .ForMember(dest => dest.VerificacionesLabEquipos, opt => opt.Ignore())
                     .ForMember(dest => dest.UsuariosEquipos, opt => opt.Ignore())
                     .ForMember(dest => dest.PendTramiteAdmin, opt => opt.Ignore())
+                    .ForMember(dest => dest.DiasParaProxCalibracion, opt => opt.MapFrom(src => Common.Util.DaysToDate(src.FechaProximaCalibracion)))
+                    .ForMember(dest => dest.DiasParaProxMantenimiento, opt => opt.MapFrom(src => Common.Util.DaysToDate(src.FechaProximoMantenimiento)))
+                    .ForMember(dest => dest.DiasParaProxVerificacion, opt => opt.MapFrom(src => Common.Util.DaysToDate(src.FechaProximaVerificacion)))
+
                     ;
 
                 });
@@ -288,7 +307,10 @@ namespace Intec.BL.MapperConfig
             {
                 var config = new AutoMapper.MapperConfiguration(cfg => {
 
-                    cfg.CreateMap<DAL.Zonas, DTO.Zonas>();
+                    cfg.CreateMap<DAL.Zonas, DTO.Zonas>()
+                    .ForMember(dest => dest.Ciudades, opt => opt.Ignore())
+                    //.ForMember(dest => dest.Usuarios, opt => opt.Ignore())
+                    ;
                     cfg.CreateMap<DAL.Usuarios, DTO.Usuarios>()
                     .ForMember(dest => dest.Roles, opt => opt.Ignore())
                     .ForMember(dest => dest.TiposIdentificacion, opt => opt.Ignore())

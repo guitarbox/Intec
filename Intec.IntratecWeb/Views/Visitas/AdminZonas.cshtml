@@ -10,9 +10,10 @@
     function ConsultarZonas() {
         _peticionAjax(URL_SERVICE + URI_SERVICE.ObtenerZonasAll, VerbosREST.POST,
             JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion }),
-            true, response => {
+            true, response => {                
                 var columns = [
                     { data: "IdZona", title: 'Id. Zona' },
+                    { data: "IdCiudad", title: 'IdCiudad' },
                     {
                         data: null, title: 'Ciudad', render: function (data, type, full, meta) {
                             if (full.Ciudades != null)
@@ -24,9 +25,10 @@
                     {
                         data: null, title: 'Inspector', render: function (data, type, full, meta) {
                             if (full.Usuarios != null)
-                                return '<p>' + full.Usuarios.Nombres + '</p>';
-                            else return '';
-                        } },                    
+                                return `<a onclick="ReAsignarInspectorZona(${full.IdZona},'${full.IdCiudad}', ${full.IdInspector});">${full.Usuarios.Nombres} ${full.Usuarios.Apellidos}</a>`;
+                            else return `<a onclick="AsignarInspectorZona(${full.IdZona},'${full.IdCiudad}');">Asignar Inspector</a>`;
+                        }
+                    },                    
                     //{
                     //    data: null, render: function (data, type, full, meta) {
                     //        return '<a onclick="window.location.href = \'../Administracion/Departamentos?ip=' + full.IdPais + '\';"><h5>Administrar Departamentos</h5></a>';
@@ -107,6 +109,93 @@
             else {
                 swal({
                     text: 'Ciudad y Descripción son obligatorios para crear.',
+                    title: swalTitle,
+                    icon: "error"
+                });
+            }
+        });
+        _openGenericModal();
+    }
+
+    function AsignarInspectorZona(IdZona, IdCiudad) {
+        _resetGenericModal();
+
+        $("#genericModalHeader").append('<label>Asignar Inspector a Zona</label>');
+        $("#genericModalBody").append('<p>Inspector</p>');
+        $("#genericModalBody").append('<select id="IdInspector" class="form-control"></select>');
+        //Cargar los inspectores
+        _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.GetUsuariosByIdRol, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion, idRol: 2 }))
+            .then(response => {
+                $("#IdInspector").append('<option value="">Seleccione Inspector...</option>');
+                response.data.forEach(inspector => {
+                    $("#IdInspector").append(`<option value="${inspector.IdUsuario}">${inspector.Nombres} ${inspector.Apellidos}</option>`);
+                });
+            });
+
+        $("#genericModalFooter").append('<button class="button" id="btnAsignar" return false;">Asignar</button>');
+        
+        $("#btnAsignar").click(() => {
+            if ($("#IdInspector").val() != '' ) {
+                _peticionAjax(URL_SERVICE + URI_SERVICE.AsignarZonaInspector, VerbosREST.POST,
+                    JSON.stringify({
+                        sessionToken: UsuarioSesion.tokenSesion,
+                        idZona: IdZona,
+                        idCiudad: IdCiudad,
+                        idInspector: $("#IdInspector").val(),
+                        idUsuarioAsigna: UsuarioSesion.IdUsuario
+                    }),
+                    true, response => {
+                        ConsultarZonas();
+                        _closeGenericModal()
+                    });
+            }
+            else {
+                swal({
+                    text: 'Inspector es obligatorios para asignar.',
+                    title: swalTitle,
+                    icon: "error"
+                });
+            }
+        });
+        _openGenericModal();
+    }
+
+    function ReAsignarInspectorZona(IdZona, IdCiudad, IdInspector) {        
+        _resetGenericModal();
+
+        $("#genericModalHeader").append('<label>Asignar Inspector a Zona</label>');
+        $("#genericModalBody").append('<p>Inspector</p>');
+        $("#genericModalBody").append('<select id="IdInspector" class="form-control"></select>');
+        //Cargar los inspectores
+        _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.GetUsuariosByIdRol, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion, idRol: 2 }))
+            .then(response => {
+                $("#IdInspector").append('<option value="">Seleccione Inspector...</option>');
+                response.data.forEach(inspector => {
+                    $("#IdInspector").append(`<option value="${inspector.IdUsuario}">${inspector.Nombres} ${inspector.Apellidos}</option>`);
+                    $("#IdInspector").val(IdInspector);
+                });
+            });
+
+        $("#genericModalFooter").append('<button class="button" id="btnAsignar" return false;">Asignar</button>');
+        
+        $("#btnAsignar").click(() => {
+            if ($("#IdInspector").val() != '' ) {
+                _peticionAjax(URL_SERVICE + URI_SERVICE.ReAsignarZonaInspector, VerbosREST.POST,
+                    JSON.stringify({
+                        sessionToken: UsuarioSesion.tokenSesion,
+                        idZona: IdZona,
+                        idCiudad: IdCiudad,
+                        idNvoInspector: $("#IdInspector").val(),
+                        idUsuarioReAsigna: UsuarioSesion.IdUsuario
+                    }),
+                    true, response => {
+                        ConsultarZonas();
+                        _closeGenericModal()
+                    });
+            }
+            else {
+                swal({
+                    text: 'Inspector es obligatorios para reasignar.',
                     title: swalTitle,
                     icon: "error"
                 });
