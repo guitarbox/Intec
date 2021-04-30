@@ -636,5 +636,21 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="CertificadosCompetencias">
+      <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.CertificadosCompetencias">
+        <MappingFragment StoreEntitySet="CertificadosCompetencias">
+          <ScalarProperty Name="FechaExpedicion" ColumnName="FechaExpedicion" />
+          <ScalarProperty Name="IdInspector" ColumnName="IdInspector" />
+          <ScalarProperty Name="Observaciones" ColumnName="Observaciones" />
+          <ScalarProperty Name="FechaVencimiento" ColumnName="FechaVencimiento" />
+          <ScalarProperty Name="UbicacionArchivo" ColumnName="UbicacionArchivo" />
+          <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+          <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+          <ScalarProperty Name="IdCertificadosCompetencia" ColumnName="IdCertificadosCompetencia" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

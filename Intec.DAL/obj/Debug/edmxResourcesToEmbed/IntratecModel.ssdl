@@ -29,6 +29,21 @@
     <Property Name="IdUsuarioModificacion" Type="int" />
     <Property Name="Certificado" Type="nvarchar" MaxLength="200" />
   </EntityType>
+  <EntityType Name="CertificadosCompetencias">
+    <Key>
+      <PropertyRef Name="IdCertificadosCompetencia" />
+    </Key>
+    <Property Name="IdCertificadosCompetencia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+    <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
+    <Property Name="FechaModificacion" Type="datetime" />
+    <Property Name="IdUsuarioModificacion" Type="int" />
+    <Property Name="UbicacionArchivo" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="FechaVencimiento" Type="datetime" Nullable="false" />
+    <Property Name="Observaciones" Type="nvarchar" MaxLength="500" />
+    <Property Name="IdInspector" Type="int" Nullable="false" />
+    <Property Name="FechaExpedicion" Type="datetime" Nullable="false" />
+  </EntityType>
   <EntityType Name="Ciudades">
     <Key>
       <PropertyRef Name="IdCiudad" />
@@ -575,6 +590,18 @@
       </Principal>
       <Dependent Role="CalibracionesEquipos">
         <PropertyRef Name="IdEquipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CertificadosCompetencias_Usuarios">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+    <End Role="CertificadosCompetencias" Type="Self.CertificadosCompetencias" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="CertificadosCompetencias">
+        <PropertyRef Name="IdInspector" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1141,6 +1168,7 @@
   <EntityContainer Name="DB_A66D31_intratecPrbModelStoreContainer">
     <EntitySet Name="BarrioLocalidad" EntityType="Self.BarrioLocalidad" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CalibracionesEquipos" EntityType="Self.CalibracionesEquipos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CertificadosCompetencias" EntityType="Self.CertificadosCompetencias" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Ciudades" EntityType="Self.Ciudades" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ConsecutivosFormatos" EntityType="Self.ConsecutivosFormatos" Schema="dbo" store:Type="Tables" />
@@ -1182,6 +1210,10 @@
     <AssociationSet Name="FK_CalibracionesEquipos_Equipos" Association="Self.FK_CalibracionesEquipos_Equipos">
       <End Role="Equipos" EntitySet="Equipos" />
       <End Role="CalibracionesEquipos" EntitySet="CalibracionesEquipos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CertificadosCompetencias_Usuarios" Association="Self.FK_CertificadosCompetencias_Usuarios">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="CertificadosCompetencias" EntitySet="CertificadosCompetencias" />
     </AssociationSet>
     <AssociationSet Name="FK_Ciudades_Departamentos" Association="Self.FK_Ciudades_Departamentos">
       <End Role="Departamentos" EntitySet="Departamentos" />

@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -62,6 +63,7 @@
     <Compile Include="DTO\BarrioLocalidad.cs" />
     <Compile Include="DTO\CalibracionesEquipos.cs" />
     <Compile Include="DTO\Ciudades.cs" />
+    <Compile Include="DTO\CertificadosCompetencias.cs" />
     <Compile Include="DTO\Clientes.cs" />
     <Compile Include="DTO\ConsecutivosFormatos.cs" />
     <Compile Include="DTO\Equipos.cs" />

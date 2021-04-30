@@ -234,6 +234,11 @@
       <End Role="Visitas" EntitySet="Visitas" />
     </AssociationSet>
     <EntitySet Name="BarrioLocalidad" EntityType="DB_A66D31_intratecPrbModel.BarrioLocalidad" />
+    <EntitySet Name="CertificadosCompetencias" EntityType="DB_A66D31_intratecPrbModel.CertificadosCompetencias" />
+    <AssociationSet Name="FK_CertificadosCompetencias_Usuarios" Association="DB_A66D31_intratecPrbModel.FK_CertificadosCompetencias_Usuarios">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="CertificadosCompetencias" EntitySet="CertificadosCompetencias" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Departamentos">
     <Key>
@@ -1034,6 +1039,7 @@
     <Property Name="horaTokenSesion" Type="DateTime" Precision="3" />
     <Property Name="FechaNacimiento" Type="DateTime" Precision="0" />
     <NavigationProperty Name="Ciudades" Relationship="DB_A66D31_intratecPrbModel.FK_Usuarios_Ciudades" FromRole="Usuarios" ToRole="Ciudades" />
+    <NavigationProperty Name="CertificadosCompetencias" Relationship="DB_A66D31_intratecPrbModel.FK_CertificadosCompetencias_Usuarios" FromRole="Usuarios" ToRole="CertificadosCompetencias" />
   </EntityType>
   <Association Name="FK_ConsecutivosInspectores_Usuarios">
     <End Type="DB_A66D31_intratecPrbModel.Usuarios" Role="Usuarios" Multiplicity="0..1" />
@@ -1458,4 +1464,32 @@
     <Property Name="IdCiudad" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="IdZona" Type="Int32" Nullable="false" />
   </EntityType>
+  <EntityType Name="CertificadosCompetencias">
+    <Key>
+      <PropertyRef Name="IdCertificadosCompetencia" />
+    </Key>
+    <Property Name="IdCertificadosCompetencia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
+    <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+    <Property Name="IdUsuarioModificacion" Type="Int32" />
+    <Property Name="UbicacionArchivo" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="FechaVencimiento" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Observaciones" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="IdInspector" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Usuarios" Relationship="DB_A66D31_intratecPrbModel.FK_CertificadosCompetencias_Usuarios" FromRole="CertificadosCompetencias" ToRole="Usuarios" />
+    <Property Name="FechaExpedicion" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <Association Name="FK_CertificadosCompetencias_Usuarios">
+    <End Type="DB_A66D31_intratecPrbModel.Usuarios" Role="Usuarios" Multiplicity="1" />
+    <End Type="DB_A66D31_intratecPrbModel.CertificadosCompetencias" Role="CertificadosCompetencias" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="IdUsuario" />
+      </Principal>
+      <Dependent Role="CertificadosCompetencias">
+        <PropertyRef Name="IdInspector" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

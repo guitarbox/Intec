@@ -66,6 +66,8 @@ namespace Intec.DAL
         public virtual DbSet<VerificacionesLabEquipos> VerificacionesLabEquipos { get; set; }
         public virtual DbSet<Clientes> Clientes { get; set; }
         public virtual DbSet<BarrioLocalidad> BarrioLocalidad { get; set; }
+        public virtual DbSet<CertificadosCompetencias> CertificadosCompetencias { get; set; }
+        public virtual DbSet<FranjasHorarioVisitas> FranjasHorarioVisitas { get; set; }
     
         public virtual ObjectResult<uspConsultaGralCliente_Result> uspConsultaGralCliente(string numeroIdentificacion, string nombres, string direccion, string nroTelefonico, Nullable<bool> tieneVisitaProgramada)
         {

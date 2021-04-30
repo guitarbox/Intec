@@ -24,6 +24,7 @@ namespace Intec.DAL
             this.UsuariosEquipos = new HashSet<UsuariosEquipos>();
             this.Visitas = new HashSet<Visitas>();
             this.Zonas = new HashSet<Zonas>();
+            this.CertificadosCompetencias = new HashSet<CertificadosCompetencias>();
         }
     
         public int IdUsuario { get; set; }
@@ -69,5 +70,7 @@ namespace Intec.DAL
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Zonas> Zonas { get; set; }
         public virtual Ciudades Ciudades { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CertificadosCompetencias> CertificadosCompetencias { get; set; }
     }
 }

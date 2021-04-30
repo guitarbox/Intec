@@ -144,5 +144,31 @@ namespace Intec.WebApi.Controllers
         {
             return new Intec.BL.BE.UsuariosBE().ActualizarContrasena(Token["token"].ToString(), Token["NuevaContrasena"].ToString());
         }
+
+        [HttpPost]
+        [Route("api/Usuarios/AgregarCertificadoCompetencias")]
+        public JObject AgregarCertificadoCompetencias([FromBody]JObject Token)
+        {
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+
+            if (validToken)
+            {
+                try
+                {
+                    new Intec.BL.BE.UsuariosBE().AgregarCertificadoCompetencias(Token["CertificadoAgregar"].ToObject<Intec.BL.DTO.CertificadosCompetencias>());
+                }
+                catch (Exception ex)
+                {
+                    error = true;
+                    msgError = ex.Message;
+                }
+
+                SetErrorResponse(error);
+                SetMsgErrorResponse(msgError);
+            }
+            return response;
+        }
+
     }
 }
