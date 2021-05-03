@@ -7,6 +7,16 @@
     var nitC_, idProp_, idCliente_, props_;
 
     $(document).ready(() => {
+        _loadSelectTiposVisita($("#IdTipoVisita"), false);
+        _loadSelectFranjasHorario($("#IdFranja"));
+        _loadSelectCiudades($("#IdCiudad"), '');
+        $("#IdCiudad").change(() => {
+            _loadSelectZona($("#IdZona"), $("#IdCiudad").val())
+        });
+        $("#IdZona").change(() => {
+            let response = _peticionAjax(URL_SERVICE + URI_SERVICE.ObtenerZona, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion, idZona: $("#IdZona").val() }), false, '');
+            $("#Inspector").val(response.data.IdInspector);
+        });
         nitC_ = _getUrlVars(window.location.href)["c"];
         if (nitC_ != undefined) {
             $("#nitC").val(nitC_);
@@ -26,7 +36,7 @@
                     $("#Inspector").append(`<option value="${inspector.IdUsuario}">${inspector.Nombres} ${inspector.Apellidos}</option>`);
                 });
             });
-
+        
     });
 
     function BuscarCliente() {
@@ -63,54 +73,74 @@
         $("#DirProp").val(prop.Direccion);
         $("#TipoProp").val(prop.TiposPropiedades.TipoPropiedad);
         $("#UsoProp").val(prop.UsosPropiedades.Uso);
-        $("#NroPoliza").val(prop.NroPoliza);
-        _loadSelectCiudades($("#IdCiudad"), '');
-        $("#IdCiudad").val(prop.IdCiudad);
-        _loadSelectZona($("#IdZona"), $("#IdCiudad").val())
+        $("#NroPoliza").val(prop.NroPoliza);        
+        if (prop.IdCiudad != null) {
+            $("#IdCiudad").val(prop.IdCiudad);
+            $("#IdCiudad").prop('disabled', 'disabled');
+            $("#IdCiudad").change();
+        }
+        else
+            $("#IdCiudad").removeAttr('disabled');
+        
         if (prop.IdZona != null) {
             $("#IdZona").val(prop.IdZona);
-            let response = _peticionAjax(URL_SERVICE + URI_SERVICE.ObtenerZona, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion, idZona: prop.IdZona }), false, '');
-            debugger;
-            $("#Inspector").val(response.data.IdInspector);
+            $("#IdZona").prop('disabled', 'disabled');
+            $("#IdZona").change();
         }
-
+        else {
+            $("#IdZona").removeAttr('disabled');
+        }
 
         $("#divSelectProp").hide();
         $("#divSelectedProp").show();
     }
 
     function AgendarVisita() {
-        let prop = props_.filter(f => f.IdPropiedades == idProp_)[0];
-        _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.ProgramarVisita, VerbosREST.POST, JSON.stringify({
-            sessionToken: UsuarioSesion.tokenSesion,
-            visita: {
+        let prop = props_.filter(f => f.IdPropiedades == idProp_)[0];        
+        if ($("#Inspector").val() != '0' && $("#IdTipoVisita").val() != '' && $("#IdFranja").val() != '' && $("#NroPoliza").val() != '' && $("#IdZona").val() != '0' && $("#IdCiudad").val() != '') {
+            debugger;
+            let v = {
                 IdCliente: idCliente_,
                 Direccion: prop.Direccion,
-                IdZona: prop.IdZona,
-                IdCiudad: prop.IdCiudad,
+                IdZona: $("#IdZona").val(),
+                IdCiudad: $("#IdCiudad").val(),
                 FechaVisitaString: $("#FechaVisita").val(),
                 IdInspector: $("#Inspector").val(),
-                ObservacionesVisita: $("#ObservacionesVisita").val(),
+                ObservacionesVisita: $("#Observaciones").val(),
                 IdEstadoVisitas: 'P',
                 IdPropiedad: idProp_,
                 OrigenVisita: $("#OrigenVisita").val(),
+                IdFranja: $("#IdFranja").val(),
+                IdTipoVisita: $("#IdTipoVisita").val(),
                 IdUsuarioCreacion: UsuarioSesion.IdUsuario
-            }
-        }))
-            .then(response => {
-                try {
-                    window.opener.ConsultarCliente();
-                } catch { }
+            };
+            _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.ProgramarVisita, VerbosREST.POST, JSON.stringify({
+                sessionToken: UsuarioSesion.tokenSesion,
+                visita: v,
+                nroPoliza: $("#NroPoliza").val()
+            }))
+                .then(response => {
+                    try {
+                        window.opener.ConsultarCliente();
+                    } catch { }
 
-                swal({
-                    text: 'Visita Programada',
-                    title: swalTitle,
-                    icon: 'success'
-                })
-                    .then(response => {
-                        window.close();
-                    });
-            });
+                    swal({
+                        text: 'Visita Programada',
+                        title: swalTitle,
+                        icon: 'success'
+                    })
+                        .then(response => {
+                            window.close();
+                        });
+                });
+        }
+        else {
+            swal({
+                text: 'Ciudad, Zona, Nro. Póliza de la propiedad, Inspector, Franja de Horario y Tipo de Visita son obligatorios',
+                title: swalTitle,
+                icon: 'error'
+            })
+        }
 
     }
 </script>
@@ -145,7 +175,7 @@
     <div id="divSelectedProp" hidden>
         <div style="display:flex; justify-content:space-between">
             <h4>Propiedad Seleccionada</h4>
-            <a onclick="$('#divSelectedProp').hide(); $('#divSelectProp').show()">Cambiar propiedad</a>
+            <input type="button" onclick="$('#divSelectedProp').hide(); $('#divSelectProp').show()" value="Cambiar propiedad" class="button"/>
         </div>
         <div style="display:flex;">
             <div style="margin-right:10px">
@@ -170,7 +200,7 @@
             </div>
             <div style="margin-right:10px">
                 <p>Zona</p>
-                <select type="text" id="IdZona" class="form-control" disabled></select>
+                <select type="text" id="IdZona" class="form-control" disabled><option>Seleccione Ciudad...</option></select>
             </div>
         </div>
         <br />
@@ -189,16 +219,32 @@
         <h4>Otros datos</h4>
         <div style="display:flex;">
             <div style="margin-right:10px">
-                <p>Observaciones</p>
-                <textarea type="text" id="Observaciones" class="form-control" cols="200"></textarea>
-            </div>
-            <div style="margin-right:10px">
                 <p>Origen Visita</p>
                 <select id="OrigenVisita" class="form-control">
                     <option value="Sitio Web">Sitio Web</option>
                     <option value="Teléfono">Teléfono</option>
                     <option value="Correo">Correo</option>
                 </select>
+            </div>
+            <div style="margin-right:10px">
+                <p>Tipo Visita</p>
+                <select id="IdTipoVisita" class="form-control">
+                    @*<option value="Sitio Web">Sitio Web</option>
+                <option value="Teléfono">Teléfono</option>
+                <option value="Correo">Correo</option>*@
+                </select>
+            </div>
+            <div style="margin-right:10px">
+                <p>Franja de Horario</p>
+                <select id="IdFranja" class="form-control">
+                    @*<option value="Sitio Web">Sitio Web</option>
+                <option value="Teléfono">Teléfono</option>
+                <option value="Correo">Correo</option>*@
+                </select>
+            </div>
+            <div style="margin-right:10px">
+                <p>Observaciones</p>
+                <textarea type="text" id="Observaciones" class="form-control" cols="200"></textarea>
             </div>
         </div>
         <br />

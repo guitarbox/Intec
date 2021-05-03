@@ -1622,13 +1622,6 @@
             <End Role="TiposVisita" EntitySet="TiposVisita" />
             <End Role="Visitas" EntitySet="Visitas" />
           </AssociationSet>
-          <FunctionImport Name="uspConsultarVisitas" ReturnType="Collection(DB_A66D31_intratecPrbModel.uspConsultarVisitas_Result)">
-            <Parameter Name="FechaInicial" Mode="In" Type="DateTime" />
-            <Parameter Name="FechaFinal" Mode="In" Type="DateTime" />
-            <Parameter Name="NumeroIdentificacionCliente" Mode="In" Type="String" />
-            <Parameter Name="IdInspector" Mode="In" Type="Int32" />
-            <Parameter Name="IdEstadoVisita" Mode="In" Type="String" />
-          </FunctionImport>
           <EntitySet Name="Clientes" EntityType="DB_A66D31_intratecPrbModel.Clientes" />
           <AssociationSet Name="FK_Clientes_Ciudades" Association="DB_A66D31_intratecPrbModel.FK_Clientes_Ciudades">
             <End Role="Ciudades" EntitySet="Ciudades" />
@@ -1657,6 +1650,13 @@
             <End Role="CertificadosCompetencias" EntitySet="CertificadosCompetencias" />
           </AssociationSet>
           <EntitySet Name="FranjasHorarioVisitas" EntityType="DB_A66D31_intratecPrbModel.FranjasHorarioVisitas" />
+          <FunctionImport Name="uspConsultarVisitas" ReturnType="Collection(DB_A66D31_intratecPrbModel.uspConsultarVisitas_Result)">
+            <Parameter Name="FechaInicial" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaFinal" Mode="In" Type="DateTime" />
+            <Parameter Name="NumeroIdentificacionCliente" Mode="In" Type="String" />
+            <Parameter Name="IdInspector" Mode="In" Type="Int32" />
+            <Parameter Name="IdEstadoVisita" Mode="In" Type="String" />
+          </FunctionImport>
           </EntityContainer>
         <EntityType Name="Departamentos">
           <Key>
@@ -2758,28 +2758,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <ComplexType Name="uspConsultarVisitas_Result">
-          <Property Type="Int32" Name="IdVisita" Nullable="false" />
-          <Property Type="Int32" Name="IdSolicitudProgramacion" Nullable="true" />
-          <Property Type="Int32" Name="IdCliente" Nullable="false" />
-          <Property Type="Int32" Name="IdPropiedad" Nullable="false" />
-          <Property Type="String" Name="Direccion" Nullable="false" MaxLength="50" />
-          <Property Type="Int32" Name="IdZona" Nullable="false" />
-          <Property Type="String" Name="IdCiudad" Nullable="false" MaxLength="50" />
-          <Property Type="DateTime" Name="FechaVisita" Nullable="false" Precision="23" />
-          <Property Type="Int32" Name="IdInspector" Nullable="true" />
-          <Property Type="String" Name="ObservacionesVisita" Nullable="true" MaxLength="1000" />
-          <Property Type="String" Name="IdEstadoVisitas" Nullable="false" MaxLength="1" />
-          <Property Type="String" Name="OrigenVisita" Nullable="false" MaxLength="100" />
-          <Property Type="DateTime" Name="FechaCreacion" Nullable="false" Precision="23" />
-          <Property Type="Int32" Name="IdUsuarioCreacion" Nullable="true" />
-          <Property Type="DateTime" Name="FechaModificacion" Nullable="true" Precision="23" />
-          <Property Type="Int32" Name="IdUsuarioModificacion" Nullable="true" />
-          <Property Type="Int32" Name="IdTipoVisita" Nullable="true" />
-          <Property Type="String" Name="NombreCliente" Nullable="true" MaxLength="301" />
-          <Property Type="String" Name="Inspector" Nullable="true" MaxLength="201" />
-          <Property Type="String" Name="TipoVisita" Nullable="true" MaxLength="100" />
-        </ComplexType>
         <EntityType Name="Clientes">
           <Key>
             <PropertyRef Name="IdCliente" />
@@ -2921,6 +2899,33 @@
           <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
         </EntityType>
+        <ComplexType Name="uspConsultarVisitas_Result">
+          <Property Type="Int32" Name="IdVisita" Nullable="false" />
+          <Property Type="Int32" Name="IdSolicitudProgramacion" Nullable="true" />
+          <Property Type="Int32" Name="IdCliente" Nullable="false" />
+          <Property Type="Int32" Name="IdPropiedad" Nullable="false" />
+          <Property Type="String" Name="Direccion" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="IdZona" Nullable="false" />
+          <Property Type="String" Name="IdCiudad" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="FechaVisita" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="IdInspector" Nullable="true" />
+          <Property Type="String" Name="ObservacionesVisita" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="IdEstadoVisitas" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="OrigenVisita" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="FechaCreacion" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="IdUsuarioCreacion" Nullable="true" />
+          <Property Type="DateTime" Name="FechaModificacion" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="IdUsuarioModificacion" Nullable="true" />
+          <Property Type="Int32" Name="IdTipoVisita" Nullable="true" />
+          <Property Type="Int32" Name="IdFranja" Nullable="true" />
+          <Property Type="String" Name="NombreCliente" Nullable="true" MaxLength="301" />
+          <Property Type="String" Name="Inspector" Nullable="true" MaxLength="201" />
+          <Property Type="String" Name="TipoVisita" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Ciudad" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="HoraInicioFranja" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="HoraFinFranja" Nullable="true" MaxLength="50" />
+        </ComplexType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3497,32 +3502,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="uspConsultarVisitas" FunctionName="DB_A66D31_intratecPrbModel.Store.uspConsultarVisitas">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="DB_A66D31_intratecPrbModel.uspConsultarVisitas_Result">
-                <ScalarProperty Name="IdVisita" ColumnName="IdVisita" />
-                <ScalarProperty Name="IdSolicitudProgramacion" ColumnName="IdSolicitudProgramacion" />
-                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
-                <ScalarProperty Name="IdPropiedad" ColumnName="IdPropiedad" />
-                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
-                <ScalarProperty Name="IdZona" ColumnName="IdZona" />
-                <ScalarProperty Name="IdCiudad" ColumnName="IdCiudad" />
-                <ScalarProperty Name="FechaVisita" ColumnName="FechaVisita" />
-                <ScalarProperty Name="IdInspector" ColumnName="IdInspector" />
-                <ScalarProperty Name="ObservacionesVisita" ColumnName="ObservacionesVisita" />
-                <ScalarProperty Name="IdEstadoVisitas" ColumnName="IdEstadoVisitas" />
-                <ScalarProperty Name="OrigenVisita" ColumnName="OrigenVisita" />
-                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
-                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
-                <ScalarProperty Name="IdTipoVisita" ColumnName="IdTipoVisita" />
-                <ScalarProperty Name="NombreCliente" ColumnName="NombreCliente" />
-                <ScalarProperty Name="Inspector" ColumnName="Inspector" />
-                <ScalarProperty Name="TipoVisita" ColumnName="TipoVisita" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="Clientes">
             <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.Clientes">
               <MappingFragment StoreEntitySet="Clientes">
@@ -3590,6 +3569,37 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="uspConsultarVisitas" FunctionName="DB_A66D31_intratecPrbModel.Store.uspConsultarVisitas">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB_A66D31_intratecPrbModel.uspConsultarVisitas_Result">
+                <ScalarProperty Name="IdVisita" ColumnName="IdVisita" />
+                <ScalarProperty Name="IdSolicitudProgramacion" ColumnName="IdSolicitudProgramacion" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="IdPropiedad" ColumnName="IdPropiedad" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="IdZona" ColumnName="IdZona" />
+                <ScalarProperty Name="IdCiudad" ColumnName="IdCiudad" />
+                <ScalarProperty Name="FechaVisita" ColumnName="FechaVisita" />
+                <ScalarProperty Name="IdInspector" ColumnName="IdInspector" />
+                <ScalarProperty Name="ObservacionesVisita" ColumnName="ObservacionesVisita" />
+                <ScalarProperty Name="IdEstadoVisitas" ColumnName="IdEstadoVisitas" />
+                <ScalarProperty Name="OrigenVisita" ColumnName="OrigenVisita" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+                <ScalarProperty Name="IdTipoVisita" ColumnName="IdTipoVisita" />
+                <ScalarProperty Name="IdFranja" ColumnName="IdFranja" />
+                <ScalarProperty Name="NombreCliente" ColumnName="NombreCliente" />
+                <ScalarProperty Name="Inspector" ColumnName="Inspector" />
+                <ScalarProperty Name="TipoVisita" ColumnName="TipoVisita" />
+                <ScalarProperty Name="Ciudad" ColumnName="Ciudad" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="HoraInicioFranja" ColumnName="HoraInicioFranja" />
+                <ScalarProperty Name="HoraFinFranja" ColumnName="HoraFinFranja" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

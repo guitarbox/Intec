@@ -35,5 +35,17 @@ namespace Intec.WebApi.Controllers
                 SetDataResponse(new Intec.BL.BE.AdministracionBE().ObtenerTiposVisita());
             return response;
         }
+        
+        [HttpPost]
+        [Route("api/Administracion/ObtenerFranjasHorario")]
+        public JObject ObtenerFranjasHorario([FromBody] JObject Token)
+        {
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+
+            if (validToken)
+                SetDataResponse(new Intec.BL.BE.AdministracionBE().ObtenerFranjasHorario());
+            return response;
+        }
     }
 }

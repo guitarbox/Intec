@@ -17,6 +17,7 @@ var URI_SERVICE = {
     //Administracion
     ObtenerRoles: 'api/Administracion/ObtenerRoles',
     ObtenerTiposVisita: 'api/Administracion/ObtenerTiposVisita',
+    ObtenerFranjasHorario: 'api/Administracion/ObtenerFranjasHorario',
 
     //Parámetros
     ObtenerParametros: 'api/Parametros/ObtenerParametros',
@@ -94,7 +95,7 @@ var URI_SERVICE = {
     CrearUsuario: 'api/Usuarios/CrearUsuario',
     ActualizarUsuario: 'api/Usuarios/ActualizarUsuario',
     GetUsuariosByIdRol: 'api/Usuarios/GetUsuariosByIdRol',
-    AgregarCertificadoCompetencias: 'api/Usuarios/AgregarCertificadoCompetencias'
+    AgregarCertificadoCompetencias: 'api/Usuarios/AgregarCertificadoCompetencias',
 
     LogIn: 'api/Usuarios/LogIn',
     RecuperarContrasena: 'api/Usuarios/RecuperarContrasena',

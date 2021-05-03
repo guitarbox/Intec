@@ -27,5 +27,11 @@ namespace Intec.BL.DTO
         public string NombreCliente { get; set; }
         public string Inspector { get; set; }
         public string TipoVisita { get; set; }
+        public string Ciudad { get; set; }
+        public string Descripcion { get; set; }
+        public string HoraInicioFranja{ get; set; }
+        public string HoraFinFranja{ get; set; }
+
+
     }
 }

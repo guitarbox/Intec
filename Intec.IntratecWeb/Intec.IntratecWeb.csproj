@@ -273,6 +273,7 @@
     <Content Include="Views\Visitas\Consulta.cshtml" />
     <Content Include="Views\Visitas\Consultar.cshtml" />
     <Content Include="Views\Visitas\AgendarVisita.cshtml" />
+    <Content Include="Views\Visitas\MisVisitas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -147,7 +147,7 @@ namespace Intec.WebApi.Controllers
             {
                 try
                 {
-                    new Intec.BL.BE.VisitasBE().ProgramarVisita(Token["visita"].ToObject<Intec.BL.DTO.Visitas>());
+                    new Intec.BL.BE.VisitasBE().ProgramarVisita(Token["visita"].ToObject<Intec.BL.DTO.Visitas>(), Token["nroPoliza"].ToString());
                 }
                 catch (Exception ex)
                 {

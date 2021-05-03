@@ -73,6 +73,7 @@
     <Compile Include="DTO\Formatos.cs" />
     <Compile Include="DTO\FormatosVisita.cs" />
     <Compile Include="DTO\FotosVisita.cs" />
+    <Compile Include="DTO\FranjasHorarioVisitas.cs" />
     <Compile Include="DTO\HistoricoAsignacionZona.cs" />
     <Compile Include="DTO\IngresoUsuario.cs" />
     <Compile Include="DTO\KardexPapeleria.cs" />

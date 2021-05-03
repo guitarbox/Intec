@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "MisVisitas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script>
+    var idVisitaSelected_;
+    $(document).ready(() => {
+        _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.ConsultaVisitas, VerbosREST.POST, JSON.stringify({
+            sessionToken: UsuarioSesion.tokenSesion,
+            fechaInicial: _getToday(), fechaFinal: _getToday(), numeroIdentificacionCliente: '', idInspector: UsuarioSesion.IdUsuario, idEstadoVisita: ''
+        }))
+            .then(response => {
+                console.log(response);
+                response.data.forEach(visita => {
+                    $("#content").append(
+                        `
+                            <div class="card" style="background-color:#C5CF31; color:white; cursor:pointer" onclick="MenuEjecutarVisita(${visita.IdVisita});">
+                                <h4>#Visita: ${visita.IdVisita}</h4>
+                                <p>Cliente: ${visita.NombreCliente}</p>
+                                <p>Dirección: ${visita.Direccion}
+                                <p>Ciudad: ${visita.Ciudad}
+                                <p>Zona: ${visita.Descripcion}
+                                <p>Franja: ${visita.HoraInicioFranja} - ${visita.HoraFinFranja}
+                                <p>Tipo Visita: ${visita.TipoVisita}
+                                <p>Observaciones: ${visita.ObservacionesVisita}
+                            </div>
+                        `
+                    );
+                });
+            });
+    });
+
+    function MenuEjecutarVisita(IdVisita) {
+        idVisitaSelected_ = IdVisita;
+        _resetGenericModal();
+        _appendToBodyGeneriModal(`<div style="background-color:#C5CF31; color:white; padding:10px; cursor:pointer">Ejecutar</div><br/>`);
+        _appendToBodyGeneriModal(`<div style="background-color:#CE2931; color:white; padding:10px; cursor:pointer">Cancelar</div>`);
+        _appendToBodyGeneriModal(``);
+        _openGenericModal();
+    }
+</script>
+<h3 class="text-center" id="title">Mis Visitas Hoy</h3>
+<div id="content" style="padding:10px"></div>

@@ -154,6 +154,11 @@ function _setToday(element) {
     var date = new Date();
     element.val(`${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`);
 }
+
+function _getToday() {
+    var date = new Date();
+    return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+}
 /**************************************************************************************************************************/
 
 /********************************************* Generic Modal Methods ******************************************************/
@@ -196,7 +201,7 @@ function _loadSelectTiposIdentificacion(element) {
 
 function _loadSelectZona(element, idCiudad) {
     element.empty();
-    element.append('<option value="">Seleccione...</option>');
+    element.append('<option value="0">Seleccione...</option>');
     let resRequest = _peticionAjax(URL_SERVICE + URI_SERVICE.ObtenerZonas, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion, idCiudad }), false);
     resRequest.data.forEach(d => {
         element.append('<option value="' + d.IdZona + '">' + d.Descripcion + '</option>');
@@ -309,6 +314,31 @@ function _loadSelectEstadosVisita(element) {
     let resRequest = _peticionAjax(URL_SERVICE + URI_SERVICE.ObtenerEstadosVisita, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion }), false);
     resRequest.data.forEach(d => {
         element.append('<option value="' + d.IdEstadoVisita + '">' + d.EstadoVisita + '</option>');
+    });
+}
+
+function _loadSelectTiposVisita(element, mostrarAmbos) {
+    element.empty();
+    element.append('<option value="">Seleccione Tipo Visita...</option>');
+    let resRequest = _peticionAjax(URL_SERVICE + URI_SERVICE.ObtenerTiposVisita, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion }), false);
+    if (mostrarAmbos == true) {
+        resRequest.data.forEach(d => {
+            element.append('<option value="' + d.IdTipoVisita + '">' + d.TipoVisita + '</option>');
+        });
+    }
+    else {
+        resRequest.data.filter(f=>f.IdTipoVisita != 3).forEach(d => {
+            element.append('<option value="' + d.IdTipoVisita + '">' + d.TipoVisita + '</option>');
+        });
+    }
+}
+
+function _loadSelectFranjasHorario(element) {
+    element.empty();
+    element.append('<option value="">Seleccione Franja...</option>');
+    let resRequest = _peticionAjax(URL_SERVICE + URI_SERVICE.ObtenerFranjasHorario, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion }), false);
+    resRequest.data.forEach(d => {
+        element.append(`<option value="${d.IdFranja}">${d.HoraInicioFranja} ${d.HoraFinFranja}</option>`);
     });
 }
 /**************************************************************************************************************************/

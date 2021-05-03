@@ -87,7 +87,8 @@
         
         $("#PeriodoVerificacion").val(equipo.PeriodoVerificacion);
         $("#FechaUltimaVerificacionLaboratorioString").val(equipo.FechaUltimaVerificacionLaboratorioString);
-        $("#FechaProximoMantenimiento").val(equipo.FechaProximoMantenimientoString);
+        $("#FechaProximaVerificacionString").val(equipo.FechaProximaVerificacionString);
+        $("#FechaProximoMantenimientoString").val(equipo.FechaProximoMantenimientoString);
 
         $("#FechaCreacion").val(equipo.FechaCreacion);
         $("#IdUsuarioCreacion").val(equipo.IdUsuarioCreacion);
@@ -433,6 +434,8 @@
             <input id="Calibrado" type="checkbox" />
             <h5>Activo</h5>
             <input id="Activo" type="checkbox" />
+            <h5>Fecha Próximo Mantenimiento</h5>
+            <input id="FechaProximoMantenimiento" class="form-control" />
         </div>
         <div>
             <h5>Requiere Calibración</h5>
@@ -447,8 +450,8 @@
             <input id="PeriodoVerificacion" class="form-control" />
             <h5>Fecha Última Verificacion Laboratorio</h5>
             <input id="FechaUltimaVerificacionLaboratorioString" class="form-control" disabled />
-            <h5>Fecha Próximo Mantenimiento</h5>
-            <input id="FechaProximoMantenimiento" class="form-control" />
+            <h5>Fecha Próxima Verificación</h5>
+            <input id="FechaProximaVerificacionString" class="form-control" />
         </div>
         <div>
             <h5>Fecha Creación</h5>

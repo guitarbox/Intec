@@ -52,8 +52,14 @@ namespace Intec.BL.BE
 
         #region Visitas
 
-        public void ProgramarVisita(DTO.Visitas Visita)
+        public void ProgramarVisita(DTO.Visitas Visita, string NroPoliza)
         {
+            //Se actualizan los datos de la propiedad
+            DAL.Propiedades prop = new DAL.TE.ClientesTE().ConsultaPropiedad(Visita.IdPropiedad);
+            prop.NroPoliza = string.IsNullOrEmpty(prop.NroPoliza) ? NroPoliza : !prop.NroPoliza.Equals(NroPoliza) ? NroPoliza : prop.NroPoliza;
+
+            new DAL.TE.ClientesTE().EditarPropiedad(prop, Visita.IdUsuarioCreacion.Value);
+
             Visita.FechaVisita = DateTime.Parse(Visita.FechaVisitaString, new CultureInfo("es-Co"));
             new DAL.TE.VisitasTE().ProgramarVisita(MapperConfig.Config.MapperVisitas.Map<DAL.Visitas>(Visita));
         }

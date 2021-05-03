@@ -202,6 +202,16 @@
     <Property Name="Secuencia" Type="int" Nullable="false" />
     <Property Name="Path" Type="nvarchar" MaxLength="200" Nullable="false" />
   </EntityType>
+  <EntityType Name="FranjasHorarioVisitas">
+    <Key>
+      <PropertyRef Name="IdFranja" />
+    </Key>
+    <Property Name="IdFranja" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HoraInicioFranja" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="HoraFinFranja" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+    <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
+  </EntityType>
   <EntityType Name="HistoricoAsignacionZona">
     <Key>
       <PropertyRef Name="IdZona" />
@@ -562,6 +572,7 @@
     <Property Name="FechaModificacion" Type="datetime" />
     <Property Name="IdUsuarioModificacion" Type="int" />
     <Property Name="IdTipoVisita" Type="int" />
+    <Property Name="IdFranja" Type="int" />
   </EntityType>
   <EntityType Name="Zonas">
     <Key>
@@ -1180,6 +1191,7 @@
     <EntitySet Name="Formatos" EntityType="Self.Formatos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FormatosVisita" EntityType="Self.FormatosVisita" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="FotosVisita" EntityType="Self.FotosVisita" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FranjasHorarioVisitas" EntityType="Self.FranjasHorarioVisitas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="HistoricoAsignacionZona" EntityType="Self.HistoricoAsignacionZona" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="KardexPapeleria" EntityType="Self.KardexPapeleria" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Laboratorios" EntityType="Self.Laboratorios" Schema="dbo" store:Type="Tables" />

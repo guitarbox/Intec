@@ -151,6 +151,12 @@ namespace Intec.DAL.TE
                 Verificacion.FechaCreacion = DateTime.Now;
                 Verificacion.Secuencia = sec;
                 ctx.VerificacionesLabEquipos.Add(Verificacion);
+
+                Equipos eq = ctx.Equipos.Where(e => e.IdEquipo == Verificacion.IdEquipo).FirstOrDefault();
+                if(eq != null)
+                {
+                    eq.FechaProximaVerificacion = Verificacion.FechaVerificacion.AddMonths(int.Parse(eq.PeriodoVerificacion));
+                }
                 ctx.SaveChanges();
             }
         }
@@ -167,6 +173,13 @@ namespace Intec.DAL.TE
                 Calibracion.FechaCreacion = DateTime.Now;
                 Calibracion.Secuencia = sec;
                 ctx.CalibracionesEquipos.Add(Calibracion);
+
+                Equipos eq = ctx.Equipos.Where(e => e.IdEquipo == Calibracion.IdEquipo).FirstOrDefault();
+                if (eq != null)
+                {
+                    eq.FechaProximaCalibracion = Calibracion.FechaCalibracion.AddMonths(int.Parse(eq.PeriodoCalibracion));
+                }
+
                 ctx.SaveChanges();
             }
         }

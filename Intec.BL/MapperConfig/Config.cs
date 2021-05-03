@@ -50,6 +50,9 @@ namespace Intec.BL.MapperConfig
                     cfg.CreateMap<DTO.Laboratorios, DAL.Laboratorios>();
                     cfg.CreateMap<DAL.Laboratorios, DTO.Laboratorios>();
 
+                    //cfg.CreateMap<DTO.FranjasHorarioVisitas, DAL.FranjasHorarioVisitas>();
+                    cfg.CreateMap<DAL.FranjasHorarioVisitas, DTO.FranjasHorarioVisitas>();
+
                 });
 
                 return config.CreateMapper();
@@ -266,6 +269,8 @@ namespace Intec.BL.MapperConfig
                         .ForMember(dest => dest.Propiedades, opt => opt.Ignore())                        
                         .ForMember(dest => dest.Zonas, opt => opt.Ignore())
                         .ForMember(dest => dest.Usuarios, opt => opt.Ignore())
+                        .ForMember(dest => dest.TiposVisita, opt => opt.Ignore())
+                        .ForMember(dest => dest.Clientes, opt => opt.Ignore())
                     ;
 
                     cfg.CreateMap<DAL.TiposIdentificacion, DTO.TiposIdentificacion>();

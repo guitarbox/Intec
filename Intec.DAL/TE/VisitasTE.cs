@@ -157,6 +157,11 @@ namespace Intec.DAL.TE
         {
             using(var ctx = new DB_A66D31_intratecPrbEntities1())
             {
+                if (ctx.Visitas.Where(v => v.IdCliente == Visita.IdCliente && v.IdPropiedad == Visita.IdPropiedad && v.FechaVisita == Visita.FechaVisita && v.IdFranja == Visita.IdFranja).FirstOrDefault() != null)
+                    throw new Exception($"Ya se tiene programada una visita para esta propiedad en esa misma franja");
+                if (ctx.Visitas.Where(v => v.IdInspector == Visita.IdInspector && v.FechaVisita == Visita.FechaVisita && v.IdFranja == Visita.IdFranja).Count() > 1)
+                    throw new Exception("Inspector no disponible en la franja seleccionada");
+
                 Visita.FechaCreacion = DateTime.Now;
                 ctx.Visitas.Add(Visita);
                 ctx.SaveChanges();

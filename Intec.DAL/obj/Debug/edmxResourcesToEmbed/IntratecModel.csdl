@@ -205,13 +205,6 @@
       <End Role="TiposVisita" EntitySet="TiposVisita" />
       <End Role="Visitas" EntitySet="Visitas" />
     </AssociationSet>
-    <FunctionImport Name="uspConsultarVisitas" ReturnType="Collection(DB_A66D31_intratecPrbModel.uspConsultarVisitas_Result)">
-      <Parameter Name="FechaInicial" Mode="In" Type="DateTime" />
-      <Parameter Name="FechaFinal" Mode="In" Type="DateTime" />
-      <Parameter Name="NumeroIdentificacionCliente" Mode="In" Type="String" />
-      <Parameter Name="IdInspector" Mode="In" Type="Int32" />
-      <Parameter Name="IdEstadoVisita" Mode="In" Type="String" />
-    </FunctionImport>
     <EntitySet Name="Clientes" EntityType="DB_A66D31_intratecPrbModel.Clientes" />
     <AssociationSet Name="FK_Clientes_Ciudades" Association="DB_A66D31_intratecPrbModel.FK_Clientes_Ciudades">
       <End Role="Ciudades" EntitySet="Ciudades" />
@@ -239,6 +232,14 @@
       <End Role="Usuarios" EntitySet="Usuarios" />
       <End Role="CertificadosCompetencias" EntitySet="CertificadosCompetencias" />
     </AssociationSet>
+    <EntitySet Name="FranjasHorarioVisitas" EntityType="DB_A66D31_intratecPrbModel.FranjasHorarioVisitas" />
+    <FunctionImport Name="uspConsultarVisitas" ReturnType="Collection(DB_A66D31_intratecPrbModel.uspConsultarVisitas_Result)">
+      <Parameter Name="FechaInicial" Mode="In" Type="DateTime" />
+      <Parameter Name="FechaFinal" Mode="In" Type="DateTime" />
+      <Parameter Name="NumeroIdentificacionCliente" Mode="In" Type="String" />
+      <Parameter Name="IdInspector" Mode="In" Type="Int32" />
+      <Parameter Name="IdEstadoVisita" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="Departamentos">
     <Key>
@@ -821,6 +822,7 @@
     <Property Name="IdTipoVisita" Type="Int32" />
     <NavigationProperty Name="TiposVisita" Relationship="DB_A66D31_intratecPrbModel.FK_Visitas_TiposVisita" FromRole="Visitas" ToRole="TiposVisita" />
     <NavigationProperty Name="Clientes" Relationship="DB_A66D31_intratecPrbModel.FK_Visitas_Clientes" FromRole="Visitas" ToRole="Clientes" />
+    <Property Name="IdFranja" Type="Int32" />
   </EntityType>
   <Association Name="FK_FormatosVisita_ConsecutivosFormatos">
     <End Type="DB_A66D31_intratecPrbModel.ConsecutivosFormatos" Role="ConsecutivosFormatos" Multiplicity="1" />
@@ -1339,28 +1341,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <ComplexType Name="uspConsultarVisitas_Result">
-    <Property Type="Int32" Name="IdVisita" Nullable="false" />
-    <Property Type="Int32" Name="IdSolicitudProgramacion" Nullable="true" />
-    <Property Type="Int32" Name="IdCliente" Nullable="false" />
-    <Property Type="Int32" Name="IdPropiedad" Nullable="false" />
-    <Property Type="String" Name="Direccion" Nullable="false" MaxLength="50" />
-    <Property Type="Int32" Name="IdZona" Nullable="false" />
-    <Property Type="String" Name="IdCiudad" Nullable="false" MaxLength="50" />
-    <Property Type="DateTime" Name="FechaVisita" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="IdInspector" Nullable="true" />
-    <Property Type="String" Name="ObservacionesVisita" Nullable="true" MaxLength="1000" />
-    <Property Type="String" Name="IdEstadoVisitas" Nullable="false" MaxLength="1" />
-    <Property Type="String" Name="OrigenVisita" Nullable="false" MaxLength="100" />
-    <Property Type="DateTime" Name="FechaCreacion" Nullable="false" Precision="23" />
-    <Property Type="Int32" Name="IdUsuarioCreacion" Nullable="true" />
-    <Property Type="DateTime" Name="FechaModificacion" Nullable="true" Precision="23" />
-    <Property Type="Int32" Name="IdUsuarioModificacion" Nullable="true" />
-    <Property Type="Int32" Name="IdTipoVisita" Nullable="true" />
-    <Property Type="String" Name="NombreCliente" Nullable="true" MaxLength="301" />
-    <Property Type="String" Name="Inspector" Nullable="true" MaxLength="201" />
-    <Property Type="String" Name="TipoVisita" Nullable="true" MaxLength="100" />
-  </ComplexType>
   <EntityType Name="Clientes">
     <Key>
       <PropertyRef Name="IdCliente" />
@@ -1492,4 +1472,41 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="FranjasHorarioVisitas">
+    <Key>
+      <PropertyRef Name="IdFranja" />
+    </Key>
+    <Property Name="IdFranja" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HoraInicioFranja" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="HoraFinFranja" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
+  </EntityType>
+  <ComplexType Name="uspConsultarVisitas_Result">
+    <Property Type="Int32" Name="IdVisita" Nullable="false" />
+    <Property Type="Int32" Name="IdSolicitudProgramacion" Nullable="true" />
+    <Property Type="Int32" Name="IdCliente" Nullable="false" />
+    <Property Type="Int32" Name="IdPropiedad" Nullable="false" />
+    <Property Type="String" Name="Direccion" Nullable="false" MaxLength="50" />
+    <Property Type="Int32" Name="IdZona" Nullable="false" />
+    <Property Type="String" Name="IdCiudad" Nullable="false" MaxLength="50" />
+    <Property Type="DateTime" Name="FechaVisita" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="IdInspector" Nullable="true" />
+    <Property Type="String" Name="ObservacionesVisita" Nullable="true" MaxLength="1000" />
+    <Property Type="String" Name="IdEstadoVisitas" Nullable="false" MaxLength="1" />
+    <Property Type="String" Name="OrigenVisita" Nullable="false" MaxLength="100" />
+    <Property Type="DateTime" Name="FechaCreacion" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="IdUsuarioCreacion" Nullable="true" />
+    <Property Type="DateTime" Name="FechaModificacion" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="IdUsuarioModificacion" Nullable="true" />
+    <Property Type="Int32" Name="IdTipoVisita" Nullable="true" />
+    <Property Type="Int32" Name="IdFranja" Nullable="true" />
+    <Property Type="String" Name="NombreCliente" Nullable="true" MaxLength="301" />
+    <Property Type="String" Name="Inspector" Nullable="true" MaxLength="201" />
+    <Property Type="String" Name="TipoVisita" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Ciudad" Nullable="true" MaxLength="100" />
+    <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="HoraInicioFranja" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="HoraFinFranja" Nullable="true" MaxLength="50" />
+  </ComplexType>
 </Schema>

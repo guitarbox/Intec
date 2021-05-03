@@ -21,7 +21,7 @@ namespace Intec.Common
             if (Date == null)
                 return null;
             else
-                return (DateTime.Now - Date.Value).Days;
+                return (Date.Value - DateTime.Now).Days;
         }
     }
 }

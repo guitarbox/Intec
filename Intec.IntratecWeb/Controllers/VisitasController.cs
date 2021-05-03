@@ -28,6 +28,11 @@ namespace Intec.IntratecWeb.Controllers
         {
             return View();
         }
+        
+        public ActionResult MisVisitas()
+        {
+            return View();
+        }
 
     }
 }

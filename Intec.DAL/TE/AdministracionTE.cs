@@ -28,6 +28,16 @@ namespace Intec.DAL.TE
             }
             return res;
         }
+        
+        public List<FranjasHorarioVisitas> ObtenerFranjasHorario()
+        {
+            List<FranjasHorarioVisitas> res = new List<FranjasHorarioVisitas>();
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                res = ctx.FranjasHorarioVisitas.ToList();
+            }
+            return res;
+        }
         #endregion
 
         #region  CRUD Paises
