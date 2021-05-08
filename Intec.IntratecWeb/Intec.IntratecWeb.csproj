@@ -274,11 +274,14 @@
     <Content Include="Views\Visitas\Consultar.cshtml" />
     <Content Include="Views\Visitas\AgendarVisita.cshtml" />
     <Content Include="Views\Visitas\MisVisitas.cshtml" />
+    <Content Include="Views\Visitas\ConsultaInspector.cshtml" />
+    <Content Include="Views\Visitas\EjecutarVisita.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="certificadosCalibraciones\" />
     <Folder Include="tmp\certificadosCalibraciones\" />
+    <Folder Include="tmp\fotosVisita\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

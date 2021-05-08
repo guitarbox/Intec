@@ -24,6 +24,11 @@ namespace Intec.BL.BE
         {
             return MapperConfig.Config.MapperAdministracion.Map<List<DTO.FranjasHorarioVisitas>>(new DAL.TE.AdministracionTE().ObtenerFranjasHorario());
         }
+
+        public List<DTO.TiposFoto> ObtenerTiposFoto()
+        {
+            return MapperConfig.Config.MapperAdministracion.Map<List<DTO.TiposFoto>>(new DAL.TE.AdministracionTE().ObtenerTiposFoto());
+        }
         #endregion
 
         #region Paises

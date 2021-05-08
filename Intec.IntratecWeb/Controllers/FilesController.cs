@@ -24,7 +24,12 @@ namespace Intec.IntratecWeb.Controllers
                 string filename = $"certCalEqu_{DateTime.Now.Ticks}{Path.GetExtension(file.FileName)}";
                 ubicacion = Path.Combine(Server.MapPath("~/tmp/certificadosCalibraciones"), filename);
                 file.SaveAs(ubicacion);
-                //ubicacion = $"../certificadosCalibraciones/{filename}";
+            }
+            else if (Session["GlobalVarForFileUpLoad"].ToString().Equals("FOT_VIS"))
+            {
+                string filename = $"fotVis_{DateTime.Now.Ticks}{Path.GetExtension(file.FileName)}";
+                ubicacion = Path.Combine(Server.MapPath("~/tmp/fotosVisita"), filename);
+                file.SaveAs(ubicacion);
             }
             ViewBag.status = "success";
             ViewBag.from = Session["GlobalVarForFileUpLoad"].ToString();

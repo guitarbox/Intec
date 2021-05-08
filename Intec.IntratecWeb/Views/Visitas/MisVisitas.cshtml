@@ -4,18 +4,26 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script>
-    var idVisitaSelected_;
+    var idVisitaSelected_, visitas_;
     $(document).ready(() => {
+        ConsultarMisVisitas();
+    });
+
+    function ConsultarMisVisitas() {
         _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.ConsultaVisitas, VerbosREST.POST, JSON.stringify({
             sessionToken: UsuarioSesion.tokenSesion,
             fechaInicial: _getToday(), fechaFinal: _getToday(), numeroIdentificacionCliente: '', idInspector: UsuarioSesion.IdUsuario, idEstadoVisita: ''
         }))
             .then(response => {
-                console.log(response);
-                response.data.forEach(visita => {
-                    $("#content").append(
-                        `
-                            <div class="card" style="background-color:#C5CF31; color:white; cursor:pointer" onclick="MenuEjecutarVisita(${visita.IdVisita});">
+                visitas_ = response.data;
+                $("#content").empty();
+                if (response.data.length == 0)
+                    $("#content").append('<div style="display:flex;justify-content:center"><h2>No tiene visitas asignadas para hoy.</h2></div>');
+                else {
+                    response.data.forEach(visita => {
+                        $("#content").append(
+                            `
+                            <div class="card" style="background-color:${ visita.IdEstadoVisitas == 'X' ? '#CE2931' : visita.IdEstadoVisitas == 'E' ? '#808080' : '#C5CF31'}; color:white; cursor:pointer" onclick="MenuEjecutarVisita(${visita.IdVisita});">
                                 <h4>#Visita: ${visita.IdVisita}</h4>
                                 <p>Cliente: ${visita.NombreCliente}</p>
                                 <p>Dirección: ${visita.Direccion}
@@ -23,21 +31,58 @@
                                 <p>Zona: ${visita.Descripcion}
                                 <p>Franja: ${visita.HoraInicioFranja} - ${visita.HoraFinFranja}
                                 <p>Tipo Visita: ${visita.TipoVisita}
-                                <p>Observaciones: ${visita.ObservacionesVisita}
+                                <p>${visita.IdEstadoVisitas == 'X' ? 'Observaciones Cancelación' : 'Observaciones'}: ${visita.IdEstadoVisitas == 'X' ? visita.ObservacionesCancelacion : visita.ObservacionesVisita}
                             </div>
-                        `
-                    );
-                });
+                            `
+                        );
+                    });
+                }
+                $("#content").append('<div style="display:flex;justify-content:center"><a href="../Visitas/ConsultaInspector">Otras Visitas</a></div>');
             });
-    });
+    }
 
     function MenuEjecutarVisita(IdVisita) {
         idVisitaSelected_ = IdVisita;
-        _resetGenericModal();
-        _appendToBodyGeneriModal(`<div style="background-color:#C5CF31; color:white; padding:10px; cursor:pointer">Ejecutar</div><br/>`);
-        _appendToBodyGeneriModal(`<div style="background-color:#CE2931; color:white; padding:10px; cursor:pointer">Cancelar</div>`);
-        _appendToBodyGeneriModal(``);
-        _openGenericModal();
+        if (visitas_.filter(v => v.IdVisita == IdVisita)[0].IdEstadoVisitas != 'X') {
+            _resetGenericModal();
+            _appendToBodyGeneriModal(`<div style="background-color:#C5CF31; color:white; padding:10px; cursor:pointer" id="btnEjecutarVisita">Ejecutar</div>`);
+            _appendToBodyGeneriModal(`<br/>`);
+            _appendToBodyGeneriModal(`<div style="background-color:#CE2931; color:white; padding:10px; cursor:pointer" id="btnCancelarVisitaModal">Cancelar</div>`);
+
+            $("#btnEjecutarVisita").click(() => {
+                window.location.href = `../Visitas/EjecutarVisita?iv=${IdVisita}`;
+            });
+
+            $("#btnCancelarVisitaModal").click(() => {
+                _resetGenericModal();
+                _appendToHeaderGeneriModal('Cancelar Visita');
+                _appendToBodyGeneriModal(`<textarea id="obsCancelarVisita" class="form-control" placeholder="¿Por qué se cancela esta visita?"></textarea>`);
+                _appendToBodyGeneriModal(`<input class="buttonRed" type="button" id="btnCancelarVisita" value="Cancelar" />`);
+
+                $("#btnCancelarVisita").click(() => {
+                    _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.CancelarVisita, VerbosREST.POST, JSON.stringify({
+                        sessionToken: UsuarioSesion.tokenSesion,
+                        idVisita: idVisitaSelected_,
+                        observacionCancelacion: $("#obsCancelarVisita").val(),
+                        idUsuarioCancelacion: UsuarioSesion.IdUsuario
+                    }))
+                        .then(response => {
+                            ConsultarMisVisitas();
+                            _closeGenericModal();
+                        });
+                });
+                _openGenericModal();
+            });
+
+            _openGenericModal();
+        }
+        else {
+            swal({
+                text: 'Visita Cancelada',
+                title: swalTitle,
+                icon: 'warning'
+            });
+        }
     }
 </script>
 <h3 class="text-center" id="title">Mis Visitas Hoy</h3>

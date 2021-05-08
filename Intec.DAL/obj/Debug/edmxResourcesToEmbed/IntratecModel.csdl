@@ -240,6 +240,7 @@
       <Parameter Name="IdInspector" Mode="In" Type="Int32" />
       <Parameter Name="IdEstadoVisita" Mode="In" Type="String" />
     </FunctionImport>
+    <EntitySet Name="TiposFoto" EntityType="DB_A66D31_intratecPrbModel.TiposFoto" />
   </EntityContainer>
   <EntityType Name="Departamentos">
     <Key>
@@ -772,6 +773,7 @@
     <Property Name="Secuencia" Type="Int32" Nullable="false" />
     <Property Name="Path" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Visitas" Relationship="DB_A66D31_intratecPrbModel.FK_FotosVisita_Visitas" FromRole="FotosVisita" ToRole="Visitas" />
+    <Property Name="IdTipoFoto" Type="Int32" />
   </EntityType>
   <EntityType Name="TramiteConsecutivoFormato">
     <Key>
@@ -823,6 +825,8 @@
     <NavigationProperty Name="TiposVisita" Relationship="DB_A66D31_intratecPrbModel.FK_Visitas_TiposVisita" FromRole="Visitas" ToRole="TiposVisita" />
     <NavigationProperty Name="Clientes" Relationship="DB_A66D31_intratecPrbModel.FK_Visitas_Clientes" FromRole="Visitas" ToRole="Clientes" />
     <Property Name="IdFranja" Type="Int32" />
+    <Property Name="ObservacionesInspector" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <Property Name="ObservacionesCancelacion" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
   </EntityType>
   <Association Name="FK_FormatosVisita_ConsecutivosFormatos">
     <End Type="DB_A66D31_intratecPrbModel.ConsecutivosFormatos" Role="ConsecutivosFormatos" Multiplicity="1" />
@@ -1501,6 +1505,8 @@
     <Property Type="Int32" Name="IdUsuarioModificacion" Nullable="true" />
     <Property Type="Int32" Name="IdTipoVisita" Nullable="true" />
     <Property Type="Int32" Name="IdFranja" Nullable="true" />
+    <Property Type="String" Name="ObservacionesInspector" Nullable="true" MaxLength="1000" />
+    <Property Type="String" Name="ObservacionesCancelacion" Nullable="true" MaxLength="1000" />
     <Property Type="String" Name="NombreCliente" Nullable="true" MaxLength="301" />
     <Property Type="String" Name="Inspector" Nullable="true" MaxLength="201" />
     <Property Type="String" Name="TipoVisita" Nullable="true" MaxLength="100" />
@@ -1509,4 +1515,15 @@
     <Property Type="String" Name="HoraInicioFranja" Nullable="true" MaxLength="50" />
     <Property Type="String" Name="HoraFinFranja" Nullable="true" MaxLength="50" />
   </ComplexType>
+  <EntityType Name="TiposFoto">
+    <Key>
+      <PropertyRef Name="IdTipoFoto" />
+    </Key>
+    <Property Name="IdTipoFoto" Type="Int32" Nullable="false" />
+    <Property Name="TipoFoto" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
+    <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+    <Property Name="IdUsuarioModificacion" Type="Int32" />
+  </EntityType>
 </Schema>

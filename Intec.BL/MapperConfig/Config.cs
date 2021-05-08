@@ -52,6 +52,8 @@ namespace Intec.BL.MapperConfig
 
                     //cfg.CreateMap<DTO.FranjasHorarioVisitas, DAL.FranjasHorarioVisitas>();
                     cfg.CreateMap<DAL.FranjasHorarioVisitas, DTO.FranjasHorarioVisitas>();
+                    
+                    cfg.CreateMap<DAL.TiposFoto, DTO.TiposFoto>();
 
                 });
 
@@ -324,6 +326,12 @@ namespace Intec.BL.MapperConfig
                     cfg.CreateMap<DAL.Visitas, DTO.Visitas>();
                     cfg.CreateMap<DAL.uspConsultarVisitas_Result, DTO.uspConsultarVisitas_Result>();
                     cfg.CreateMap<DAL.SolicitudesProgramacionVisitas, DTO.SolicitudesProgramacionVisitas>();                    
+                    cfg.CreateMap<DAL.Clientes, DTO.Clientes>()
+                        .ForMember(dest => dest.TiposIdentificacion, opt => opt.Ignore())
+                        .ForMember(dest => dest.TiposPersona, opt => opt.Ignore())
+                        .ForMember(dest => dest.Propiedades, opt => opt.Ignore())
+                        .ForMember(dest => dest.Visitas, opt => opt.Ignore())
+                    ;
                     cfg.CreateMap<DAL.EstadosVisita, DTO.EstadosVisita>();
                     cfg.CreateMap<DAL.FormatosVisita, DTO.FormatosVisita>();
                     cfg.CreateMap<DAL.EquiposVisita, DTO.EquiposVisita>();
@@ -332,6 +340,7 @@ namespace Intec.BL.MapperConfig
                     cfg.CreateMap<DAL.TiposPropiedades, DTO.TiposPropiedades>();
                     cfg.CreateMap<DAL.UsosPropiedades, DTO.UsosPropiedades>();
                     cfg.CreateMap<DAL.TiposVisita, DTO.TiposVisita>();
+                    cfg.CreateMap<DAL.Zonas, DTO.Zonas>();
                     
                     //DAL
                     cfg.CreateMap<DTO.SolicitudesProgramacionVisitas, DAL.SolicitudesProgramacionVisitas>();

@@ -371,6 +371,7 @@
     <EntitySetMapping Name="FotosVisita">
       <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.FotosVisita">
         <MappingFragment StoreEntitySet="FotosVisita">
+          <ScalarProperty Name="IdTipoFoto" ColumnName="IdTipoFoto" />
           <ScalarProperty Name="Path" ColumnName="Path" />
           <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
           <ScalarProperty Name="IdVisita" ColumnName="IdVisita" />
@@ -394,6 +395,8 @@
     <EntitySetMapping Name="Visitas">
       <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.Visitas">
         <MappingFragment StoreEntitySet="Visitas">
+          <ScalarProperty Name="ObservacionesCancelacion" ColumnName="ObservacionesCancelacion" />
+          <ScalarProperty Name="ObservacionesInspector" ColumnName="ObservacionesInspector" />
           <ScalarProperty Name="IdFranja" ColumnName="IdFranja" />
           <ScalarProperty Name="IdTipoVisita" ColumnName="IdTipoVisita" />
           <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
@@ -659,6 +662,8 @@
           <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
           <ScalarProperty Name="IdTipoVisita" ColumnName="IdTipoVisita" />
           <ScalarProperty Name="IdFranja" ColumnName="IdFranja" />
+          <ScalarProperty Name="ObservacionesInspector" ColumnName="ObservacionesInspector" />
+          <ScalarProperty Name="ObservacionesCancelacion" ColumnName="ObservacionesCancelacion" />
           <ScalarProperty Name="NombreCliente" ColumnName="NombreCliente" />
           <ScalarProperty Name="Inspector" ColumnName="Inspector" />
           <ScalarProperty Name="TipoVisita" ColumnName="TipoVisita" />
@@ -669,5 +674,17 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <EntitySetMapping Name="TiposFoto">
+      <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.TiposFoto">
+        <MappingFragment StoreEntitySet="TiposFoto">
+          <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+          <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+          <ScalarProperty Name="TipoFoto" ColumnName="TipoFoto" />
+          <ScalarProperty Name="IdTipoFoto" ColumnName="IdTipoFoto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

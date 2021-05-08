@@ -33,6 +33,16 @@ namespace Intec.IntratecWeb.Controllers
         {
             return View();
         }
+        
+        public ActionResult ConsultaInspector()
+        {
+            return View();
+        }
+        
+        public ActionResult EjecutarVisita()
+        {
+            return View();
+        }
 
     }
 }

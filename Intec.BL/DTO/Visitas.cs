@@ -40,5 +40,7 @@ namespace Intec.BL.DTO
         public Usuarios Usuarios { get; set; }
         public TiposVisita TiposVisita { get; set; }
         public Clientes Clientes { get; set; }
+        public string ObservacionesInspector { get; set; }
+        public string ObservacionesCancelacion { get; set; }
     }
 }

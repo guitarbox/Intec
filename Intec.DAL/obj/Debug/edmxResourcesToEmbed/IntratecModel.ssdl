@@ -201,6 +201,7 @@
     <Property Name="IdVisita" Type="int" Nullable="false" />
     <Property Name="Secuencia" Type="int" Nullable="false" />
     <Property Name="Path" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="IdTipoFoto" Type="int" />
   </EntityType>
   <EntityType Name="FranjasHorarioVisitas">
     <Key>
@@ -399,6 +400,17 @@
     <Property Name="IdUsuarioModificacion" Type="int" />
     <Property Name="Activo" Type="bit" Nullable="false" />
   </EntityType>
+  <EntityType Name="TiposFoto">
+    <Key>
+      <PropertyRef Name="IdTipoFoto" />
+    </Key>
+    <Property Name="IdTipoFoto" Type="int" Nullable="false" />
+    <Property Name="TipoFoto" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+    <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
+    <Property Name="FechaModificacion" Type="datetime" />
+    <Property Name="IdUsuarioModificacion" Type="int" />
+  </EntityType>
   <EntityType Name="TiposIdentificacion">
     <Key>
       <PropertyRef Name="IdTipoIdentificacion" />
@@ -573,6 +585,8 @@
     <Property Name="IdUsuarioModificacion" Type="int" />
     <Property Name="IdTipoVisita" Type="int" />
     <Property Name="IdFranja" Type="int" />
+    <Property Name="ObservacionesInspector" Type="nvarchar" MaxLength="1000" />
+    <Property Name="ObservacionesCancelacion" Type="nvarchar" MaxLength="1000" />
   </EntityType>
   <EntityType Name="Zonas">
     <Key>
@@ -1206,6 +1220,7 @@
     <EntitySet Name="SolicitudContactenos" EntityType="Self.SolicitudContactenos" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SolicitudesProgramacionVisitas" EntityType="Self.SolicitudesProgramacionVisitas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TiposEquipo" EntityType="Self.TiposEquipo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TiposFoto" EntityType="Self.TiposFoto" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TiposIdentificacion" EntityType="Self.TiposIdentificacion" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TiposMovimientoKardex" EntityType="Self.TiposMovimientoKardex" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="TiposPersona" EntityType="Self.TiposPersona" Schema="dbo" store:Type="Tables" />

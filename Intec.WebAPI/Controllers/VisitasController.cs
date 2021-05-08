@@ -229,7 +229,8 @@ namespace Intec.WebApi.Controllers
                 try
                 {
                     new Intec.BL.BE.VisitasBE().AgregarFormatoVisita((Token["formato"].ToObject<Intec.BL.DTO.FormatosVisita>()),
-                                                                        int.Parse(Token["idVisita"].ToString()));
+                                                                        int.Parse(Token["idVisita"].ToString()),
+                                                                        int.Parse(Token["idInspector"].ToString()));
                 }
                 catch (Exception ex)
                 {
@@ -312,6 +313,54 @@ namespace Intec.WebApi.Controllers
             SetValidTokendResponse(validToken);
             if (validToken)
                 SetDataResponse(new Intec.BL.BE.VisitasBE().ObtenerEstadosVisita());
+            return response;
+        }
+        
+        [HttpPost]
+        [Route("api/Visitas/EjecutarVisita")]
+        public JObject EjecutarVisita([FromBody]JObject Token)
+        {
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+            if (validToken)
+            {
+                try
+                {
+                    new Intec.BL.BE.VisitasBE().EjecutarVisita(Token["idVisita"].ToObject<int>(), Token["idInspector"].ToObject<int>());
+                }
+                catch (Exception ex)
+                {
+                    error = true;
+                    msgError = ex.Message;
+                }
+
+                SetErrorResponse(error);
+                SetMsgErrorResponse(msgError);
+            }
+            return response;
+        }
+        
+        [HttpPost]
+        [Route("api/Visitas/CancelarVisita")]
+        public JObject CancelarVisita([FromBody]JObject Token)
+        {
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+            if (validToken)
+            {
+                try
+                {
+                    new Intec.BL.BE.VisitasBE().CancelarVisita(Token["idVisita"].ToObject<int>(), Token["observacionCancelacion"].ToString(), Token["idUsuarioCancelacion"].ToObject<int>());
+                }
+                catch (Exception ex)
+                {
+                    error = true;
+                    msgError = ex.Message;
+                }
+
+                SetErrorResponse(error);
+                SetMsgErrorResponse(msgError);
+            }
             return response;
         }
     }

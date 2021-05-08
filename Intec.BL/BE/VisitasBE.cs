@@ -63,7 +63,7 @@ namespace Intec.BL.BE
             Visita.FechaVisita = DateTime.Parse(Visita.FechaVisitaString, new CultureInfo("es-Co"));
             new DAL.TE.VisitasTE().ProgramarVisita(MapperConfig.Config.MapperVisitas.Map<DAL.Visitas>(Visita));
         }
-        
+
         public void ReasignacionVisita(int IdVisita, int IdInspector)
         {
             new DAL.TE.VisitasTE().ReasignacionVisita(IdVisita, IdInspector);
@@ -73,10 +73,10 @@ namespace Intec.BL.BE
         {
             new DAL.TE.VisitasTE().AgregarFotoVisita(MapperConfig.Config.MapperVisitas.Map<DAL.FotosVisita>(Foto), IdVisita);
         }
-        
-        public void AgregarFormatoVisita(DTO.FormatosVisita Formato, int IdVisita)
+
+        public void AgregarFormatoVisita(DTO.FormatosVisita Formato, int IdVisita, int IdInspector)
         {
-            new DAL.TE.VisitasTE().AgregarFormatoVisita(MapperConfig.Config.MapperVisitas.Map<DAL.FormatosVisita>(Formato), IdVisita);
+            new DAL.TE.VisitasTE().AgregarFormatoVisita(MapperConfig.Config.MapperVisitas.Map<DAL.FormatosVisita>(Formato), IdVisita, IdInspector);
         }
 
         public void AgregarEquipoVisita(DTO.EquiposVisita Equipo, int IdVisita)
@@ -88,7 +88,13 @@ namespace Intec.BL.BE
         {
             DAL.Visitas visita = new DAL.TE.VisitasTE().ConsultarVisita(IdVisita);
             visita.Propiedades = new DAL.TE.ClientesTE().ConsultaPropiedad(visita.IdPropiedad);
-            return MapperConfig.Config.MapperVisitas.Map<DTO.Visitas>(visita);
+            DTO.Visitas vRet = new DTO.Visitas();
+            vRet = MapperConfig.Config.MapperVisitas.Map<DTO.Visitas>(visita);
+            foreach (DTO.FormatosVisita f in vRet.FormatosVisita)
+            {
+                f.Formatos = MapperConfig.Config.MapperPapeleriaSimple.Map<DTO.Formatos>(new DAL.TE.PapeleriaTE().ConsultarFormato(f.IdFormato));
+            }
+            return vRet;
         }
 
         public List<DTO.uspConsultarVisitas_Result> ConsultaVisitas(DateTime FechaInicial, DateTime FechaFinal, string NumeroIdentificacionCliente, int IdInspector, string IdEstadoVisita)
@@ -99,6 +105,16 @@ namespace Intec.BL.BE
         public List<DTO.EstadosVisita> ObtenerEstadosVisita()
         {
             return MapperConfig.Config.MapperVisitas.Map<List<DTO.EstadosVisita>>(new DAL.TE.VisitasTE().ObtenerEstadosVisita());
+        }
+
+        public void CancelarVisita(int IdVisita, string ObservacionCancelacion, int IdUsuarioCancelacion)
+        {
+            new DAL.TE.VisitasTE().CancelarVisita(IdVisita, ObservacionCancelacion, IdUsuarioCancelacion);
+        }
+        
+        public void EjecutarVisita(int IdVisita, int IdInspector)
+        {
+            new DAL.TE.VisitasTE().EjecutarVisita(IdVisita, IdInspector);
         }
 
         #endregion

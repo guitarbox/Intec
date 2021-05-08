@@ -31,6 +31,8 @@ namespace Intec.DAL
         public Nullable<int> IdUsuarioModificacion { get; set; }
         public Nullable<int> IdTipoVisita { get; set; }
         public Nullable<int> IdFranja { get; set; }
+        public string ObservacionesInspector { get; set; }
+        public string ObservacionesCancelacion { get; set; }
         public string NombreCliente { get; set; }
         public string Inspector { get; set; }
         public string TipoVisita { get; set; }

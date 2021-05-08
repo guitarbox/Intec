@@ -47,5 +47,17 @@ namespace Intec.WebApi.Controllers
                 SetDataResponse(new Intec.BL.BE.AdministracionBE().ObtenerFranjasHorario());
             return response;
         }
+        
+        [HttpPost]
+        [Route("api/Administracion/ObtenerTiposFoto")]
+        public JObject ObtenerTiposFoto([FromBody] JObject Token)
+        {
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+
+            if (validToken)
+                SetDataResponse(new Intec.BL.BE.AdministracionBE().ObtenerTiposFoto());
+            return response;
+        }
     }
 }

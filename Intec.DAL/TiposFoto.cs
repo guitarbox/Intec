@@ -12,13 +12,13 @@ namespace Intec.DAL
     using System;
     using System.Collections.Generic;
     
-    public partial class FotosVisita
+    public partial class TiposFoto
     {
-        public int IdVisita { get; set; }
-        public int Secuencia { get; set; }
-        public string Path { get; set; }
-        public Nullable<int> IdTipoFoto { get; set; }
-    
-        public virtual Visitas Visitas { get; set; }
+        public int IdTipoFoto { get; set; }
+        public string TipoFoto { get; set; }
+        public System.DateTime FechaCreacion { get; set; }
+        public int IdUsuarioCreacion { get; set; }
+        public Nullable<System.DateTime> FechaModificacion { get; set; }
+        public Nullable<int> IdUsuarioModificacion { get; set; }
     }
 }

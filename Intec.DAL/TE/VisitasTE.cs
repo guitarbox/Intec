@@ -49,6 +49,7 @@ namespace Intec.DAL.TE
             {
                 res = ctx.Zonas.Where(z=>z.IdZona == IdZona).FirstOrDefault();
                 ctx.Entry(res).Reference(z => z.Usuarios).Load();
+                ctx.Entry(res).Reference(z => z.Ciudades).Load();
             }
             return res;
         }
@@ -207,16 +208,27 @@ namespace Intec.DAL.TE
         }
 
         //Agregar FormatosVisita
-        public void AgregarFormatoVisita(FormatosVisita Formato, int IdVisita)
+        public void AgregarFormatoVisita(FormatosVisita Formato, int IdVisita, int IdInspector)
         {
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
                 Visitas visita = ctx.Visitas.Where(v => v.IdVisita == IdVisita).FirstOrDefault();
                 if (visita != null)
                 {
-                    Formato.Secuencia = ctx.FormatosVisita.Where(fv => fv.IdVisita == Formato.IdVisita).Count() + 1;
-                    visita.FormatosVisita.Add(Formato);
-                    ctx.SaveChanges();
+                    ConsecutivosFormatos cons = ctx.ConsecutivosFormatos.Where(c => c.IdFormato == Formato.IdFormato && c.Consecutivo == Formato.Consecutivo && c.IdInspector == IdInspector).FirstOrDefault();
+                    if (cons != null)
+                    {
+                        if (cons.IdVisita == null)
+                        {
+                            Formato.Secuencia = ctx.FormatosVisita.Where(fv => fv.IdVisita == Formato.IdVisita).Count() + 1;
+                            visita.FormatosVisita.Add(Formato);
+                            ctx.SaveChanges();
+                        }
+                        else
+                            throw new Exception("El consecutivo ya fue usado en otra visita");
+                    }
+                    else
+                        throw new Exception("Usted no tiene asignado este consecutivo");
                 }
                 else
                     throw new Exception("No se encontró la visita");
@@ -287,6 +299,45 @@ namespace Intec.DAL.TE
                 res = ctx.EstadosVisita.ToList();
             }
             return res;
+        }
+
+        public void CancelarVisita(int IdVisita, string ObservacionCancelacion, int IdUsuarioCancelacion)
+        {
+            using(var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                Visitas visita = ctx.Visitas.Where(v => v.IdVisita == IdVisita).FirstOrDefault();
+                if(visita != null)
+                {
+                    if (visita.IdEstadoVisitas.Equals("P"))
+                    {
+                        visita.ObservacionesCancelacion = ObservacionCancelacion;
+                        visita.FechaModificacion = DateTime.Now;
+                        visita.IdUsuarioModificacion = IdUsuarioCancelacion;
+                        visita.IdEstadoVisitas = "X";
+                        ctx.SaveChanges();
+                    }
+                    else
+                        throw new Exception("No se puede cancelar la visita");
+                }
+            }
+        }
+        
+        public void EjecutarVisita(int IdVisita, int IdInspector)
+        {
+            using(var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                Visitas visita = ctx.Visitas.Where(v => v.IdVisita == IdVisita).FirstOrDefault();
+                if(visita != null)
+                {
+                    if (visita.IdEstadoVisitas.Equals("P"))
+                    {
+                        visita.IdEstadoVisitas = "E";
+                        visita.FechaModificacion = DateTime.Now;
+                        visita.IdUsuarioModificacion = IdInspector;
+                        ctx.SaveChanges();
+                    }
+                }
+            }
         }
     }
 }

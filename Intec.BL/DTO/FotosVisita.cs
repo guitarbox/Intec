@@ -11,5 +11,6 @@ namespace Intec.BL.DTO
         public int IdVisita { get; set; }
         public int Secuencia { get; set; }
         public string Path { get; set; }
+        public Nullable<int> IdTipoFoto { get; set; }
     }
 }

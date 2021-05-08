@@ -31,7 +31,8 @@ namespace Intec.BL.DTO
         public string Descripcion { get; set; }
         public string HoraInicioFranja{ get; set; }
         public string HoraFinFranja{ get; set; }
-
+        public string ObservacionesInspector { get; set; }
+        public string ObservacionesCancelacion { get; set; }
 
     }
 }

@@ -160,6 +160,9 @@
     <Compile Include="TiposEquipo.cs">
       <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="TiposFoto.cs">
+      <DependentUpon>IntratecModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="TiposIdentificacion.cs">
       <DependentUpon>IntratecModel.tt</DependentUpon>
     </Compile>

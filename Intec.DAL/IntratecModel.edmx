@@ -206,6 +206,7 @@
           <Property Name="IdVisita" Type="int" Nullable="false" />
           <Property Name="Secuencia" Type="int" Nullable="false" />
           <Property Name="Path" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="IdTipoFoto" Type="int" />
         </EntityType>
         <EntityType Name="FranjasHorarioVisitas">
           <Key>
@@ -404,6 +405,17 @@
           <Property Name="IdUsuarioModificacion" Type="int" />
           <Property Name="Activo" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="TiposFoto">
+          <Key>
+            <PropertyRef Name="IdTipoFoto" />
+          </Key>
+          <Property Name="IdTipoFoto" Type="int" Nullable="false" />
+          <Property Name="TipoFoto" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="FechaCreacion" Type="datetime" Nullable="false" />
+          <Property Name="IdUsuarioCreacion" Type="int" Nullable="false" />
+          <Property Name="FechaModificacion" Type="datetime" />
+          <Property Name="IdUsuarioModificacion" Type="int" />
+        </EntityType>
         <EntityType Name="TiposIdentificacion">
           <Key>
             <PropertyRef Name="IdTipoIdentificacion" />
@@ -578,6 +590,8 @@
           <Property Name="IdUsuarioModificacion" Type="int" />
           <Property Name="IdTipoVisita" Type="int" />
           <Property Name="IdFranja" Type="int" />
+          <Property Name="ObservacionesInspector" Type="nvarchar" MaxLength="1000" />
+          <Property Name="ObservacionesCancelacion" Type="nvarchar" MaxLength="1000" />
         </EntityType>
         <EntityType Name="Zonas">
           <Key>
@@ -1211,6 +1225,7 @@
           <EntitySet Name="SolicitudContactenos" EntityType="Self.SolicitudContactenos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SolicitudesProgramacionVisitas" EntityType="Self.SolicitudesProgramacionVisitas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TiposEquipo" EntityType="Self.TiposEquipo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TiposFoto" EntityType="Self.TiposFoto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TiposIdentificacion" EntityType="Self.TiposIdentificacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TiposMovimientoKardex" EntityType="Self.TiposMovimientoKardex" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TiposPersona" EntityType="Self.TiposPersona" Schema="dbo" store:Type="Tables" />
@@ -1657,6 +1672,7 @@
             <Parameter Name="IdInspector" Mode="In" Type="Int32" />
             <Parameter Name="IdEstadoVisita" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="TiposFoto" EntityType="DB_A66D31_intratecPrbModel.TiposFoto" />
           </EntityContainer>
         <EntityType Name="Departamentos">
           <Key>
@@ -2189,6 +2205,7 @@
           <Property Name="Secuencia" Type="Int32" Nullable="false" />
           <Property Name="Path" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Visitas" Relationship="DB_A66D31_intratecPrbModel.FK_FotosVisita_Visitas" FromRole="FotosVisita" ToRole="Visitas" />
+          <Property Name="IdTipoFoto" Type="Int32" />
         </EntityType>
         <EntityType Name="TramiteConsecutivoFormato">
           <Key>
@@ -2240,6 +2257,8 @@
           <NavigationProperty Name="TiposVisita" Relationship="DB_A66D31_intratecPrbModel.FK_Visitas_TiposVisita" FromRole="Visitas" ToRole="TiposVisita" />
           <NavigationProperty Name="Clientes" Relationship="DB_A66D31_intratecPrbModel.FK_Visitas_Clientes" FromRole="Visitas" ToRole="Clientes" />
           <Property Name="IdFranja" Type="Int32" />
+          <Property Name="ObservacionesInspector" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="ObservacionesCancelacion" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_FormatosVisita_ConsecutivosFormatos">
           <End Type="DB_A66D31_intratecPrbModel.ConsecutivosFormatos" Role="ConsecutivosFormatos" Multiplicity="1" />
@@ -2918,6 +2937,8 @@
           <Property Type="Int32" Name="IdUsuarioModificacion" Nullable="true" />
           <Property Type="Int32" Name="IdTipoVisita" Nullable="true" />
           <Property Type="Int32" Name="IdFranja" Nullable="true" />
+          <Property Type="String" Name="ObservacionesInspector" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="ObservacionesCancelacion" Nullable="true" MaxLength="1000" />
           <Property Type="String" Name="NombreCliente" Nullable="true" MaxLength="301" />
           <Property Type="String" Name="Inspector" Nullable="true" MaxLength="201" />
           <Property Type="String" Name="TipoVisita" Nullable="true" MaxLength="100" />
@@ -2926,6 +2947,17 @@
           <Property Type="String" Name="HoraInicioFranja" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="HoraFinFranja" Nullable="true" MaxLength="50" />
         </ComplexType>
+        <EntityType Name="TiposFoto">
+          <Key>
+            <PropertyRef Name="IdTipoFoto" />
+          </Key>
+          <Property Name="IdTipoFoto" Type="Int32" Nullable="false" />
+          <Property Name="TipoFoto" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
+          <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+          <Property Name="IdUsuarioModificacion" Type="Int32" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3302,6 +3334,7 @@
           <EntitySetMapping Name="FotosVisita">
             <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.FotosVisita">
               <MappingFragment StoreEntitySet="FotosVisita">
+                <ScalarProperty Name="IdTipoFoto" ColumnName="IdTipoFoto" />
                 <ScalarProperty Name="Path" ColumnName="Path" />
                 <ScalarProperty Name="Secuencia" ColumnName="Secuencia" />
                 <ScalarProperty Name="IdVisita" ColumnName="IdVisita" />
@@ -3325,6 +3358,8 @@
           <EntitySetMapping Name="Visitas">
             <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.Visitas">
               <MappingFragment StoreEntitySet="Visitas">
+                <ScalarProperty Name="ObservacionesCancelacion" ColumnName="ObservacionesCancelacion" />
+                <ScalarProperty Name="ObservacionesInspector" ColumnName="ObservacionesInspector" />
                 <ScalarProperty Name="IdFranja" ColumnName="IdFranja" />
                 <ScalarProperty Name="IdTipoVisita" ColumnName="IdTipoVisita" />
                 <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
@@ -3590,6 +3625,8 @@
                 <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
                 <ScalarProperty Name="IdTipoVisita" ColumnName="IdTipoVisita" />
                 <ScalarProperty Name="IdFranja" ColumnName="IdFranja" />
+                <ScalarProperty Name="ObservacionesInspector" ColumnName="ObservacionesInspector" />
+                <ScalarProperty Name="ObservacionesCancelacion" ColumnName="ObservacionesCancelacion" />
                 <ScalarProperty Name="NombreCliente" ColumnName="NombreCliente" />
                 <ScalarProperty Name="Inspector" ColumnName="Inspector" />
                 <ScalarProperty Name="TipoVisita" ColumnName="TipoVisita" />
@@ -3600,6 +3637,18 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="TiposFoto">
+            <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.TiposFoto">
+              <MappingFragment StoreEntitySet="TiposFoto">
+                <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+                <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+                <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+                <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+                <ScalarProperty Name="TipoFoto" ColumnName="TipoFoto" />
+                <ScalarProperty Name="IdTipoFoto" ColumnName="IdTipoFoto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -212,6 +212,15 @@ table > tbody > tr > td {
     border-radius: 5px;
     color: white
 }
+.buttonRed {
+    margin-top: 5px;
+    /*width: 80%;*/
+    height: 50px;
+    background-color: #CE2931;
+    border: 1px solid white;
+    border-radius: 5px;
+    color: white
+}
 
     .button:hover {
         margin-top: 5px;

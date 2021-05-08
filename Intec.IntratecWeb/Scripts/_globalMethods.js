@@ -208,7 +208,6 @@ function _loadSelectZona(element, idCiudad) {
     });
 }
 
-
 function _loadSelectTiposPersona(element) {
     element.empty();
     element.append('<option value="">Seleccione...</option>');
@@ -339,6 +338,24 @@ function _loadSelectFranjasHorario(element) {
     let resRequest = _peticionAjax(URL_SERVICE + URI_SERVICE.ObtenerFranjasHorario, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion }), false);
     resRequest.data.forEach(d => {
         element.append(`<option value="${d.IdFranja}">${d.HoraInicioFranja} ${d.HoraFinFranja}</option>`);
+    });
+}
+
+function _loadSelectTiposFoto(element) {
+    element.empty();
+    element.append('<option value="">Seleccione Tipo Foto...</option>');
+    let resRequest = _peticionAjax(URL_SERVICE + URI_SERVICE.ObtenerTiposFoto, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion }), false);
+    resRequest.data.forEach(d => {
+        element.append(`<option value="${d.IdTipoFoto}">${d.TipoFoto}</option>`);
+    });
+}
+
+function _loadSelectFormato(element) {
+    element.empty();
+    element.append('<option value="">Seleccione Formato...</option>');
+    let resRequest = _peticionAjax(URL_SERVICE + URI_SERVICE.ConsultarFormatos, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion }), false);
+    resRequest.data.forEach(d => {
+        element.append(`<option value="${d.IdFormato}">${d.NroFormato}</option>`);
     });
 }
 /**************************************************************************************************************************/

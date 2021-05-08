@@ -12,5 +12,6 @@ namespace Intec.BL.DTO
         public int Secuencia { get; set; }
         public int IdFormato { get; set; }
         public int Consecutivo { get; set; }
+        public Formatos Formatos { get; set; }
     }
 }

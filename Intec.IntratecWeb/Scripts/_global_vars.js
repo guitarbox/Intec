@@ -18,6 +18,7 @@ var URI_SERVICE = {
     ObtenerRoles: 'api/Administracion/ObtenerRoles',
     ObtenerTiposVisita: 'api/Administracion/ObtenerTiposVisita',
     ObtenerFranjasHorario: 'api/Administracion/ObtenerFranjasHorario',
+    ObtenerTiposFoto: 'api/Administracion/ObtenerTiposFoto',
 
     //Parámetros
     ObtenerParametros: 'api/Parametros/ObtenerParametros',
@@ -139,6 +140,8 @@ var URI_SERVICE = {
     ConsultarVisita: 'api/Visitas/ConsultarVisita',
     ConsultaVisitas: 'api/Visitas/ConsultarVisitas',
     ObtenerEstadosVisita: 'api/Visitas/ObtenerEstadosVisita',
+    CancelarVisita: 'api/Visitas/CancelarVisita',
+    EjecutarVisita: 'api/Visitas/EjecutarVisita',
 
     //Papelería
     ConsultarFormatos: 'api/Papeleria/ConsultarFormatos',

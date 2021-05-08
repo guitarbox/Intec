@@ -84,6 +84,7 @@
     <Compile Include="DTO\Propiedades.cs" />
     <Compile Include="DTO\Roles.cs" />
     <Compile Include="DTO\TiposEquipo.cs" />
+    <Compile Include="DTO\TiposFoto.cs" />
     <Compile Include="DTO\TiposIdentificacion.cs" />
     <Compile Include="DTO\TiposMovimientoKardex.cs" />
     <Compile Include="DTO\TiposPersona.cs" />
