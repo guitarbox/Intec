@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
-namespace Intec.BL.DTO
+namespace Intec.IntratecWeb.Models
 {
     public class Equipos
     {
@@ -33,19 +32,18 @@ namespace Intec.BL.DTO
         public int IdUsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaModificacion { get; set; }
         public Nullable<int> IdUsuarioModificacion { get; set; }
-        public List<CalibracionesEquipos> CalibracionesEquipos { get; set; }
-        public MarcasEquipos MarcasEquipos { get; set; }
-        public TiposEquipo TiposEquipo { get; set; }
-        public List<TramitesEquipo> TramitesEquipo { get; set; }
-        public List<VerificacionesLabEquipos> VerificacionesLabEquipos { get; set; }
+        //public List<CalibracionesEquipos> CalibracionesEquipos { get; set; }
+        //public MarcasEquipos MarcasEquipos { get; set; }
+        //public TiposEquipo TiposEquipo { get; set; }
+        //public List<TramitesEquipo> TramitesEquipo { get; set; }
+        //public List<VerificacionesLabEquipos> VerificacionesLabEquipos { get; set; }
         public bool Activo { get; set; }
-        public List<UsuariosEquipos> UsuariosEquipos { get; set; }
+        //public List<UsuariosEquipos> UsuariosEquipos { get; set; }
         public bool PendTramiteAdmin { get; set; }
         public Nullable<int> IdTipoVisitaAplica { get; set; }
         public bool RequiereCalibracion { get; set; }
         public Nullable<System.DateTime> FechaProximaVerificacion { get; set; }
         public string FechaProximaVerificacionString { get; set; }
         public int? DiasParaProxVerificacion { get; set; }
-        public TiposVisita TiposVisita { get; set; }
     }
 }

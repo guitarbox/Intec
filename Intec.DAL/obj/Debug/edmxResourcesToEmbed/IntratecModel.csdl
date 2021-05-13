@@ -233,6 +233,7 @@
       <End Role="CertificadosCompetencias" EntitySet="CertificadosCompetencias" />
     </AssociationSet>
     <EntitySet Name="FranjasHorarioVisitas" EntityType="DB_A66D31_intratecPrbModel.FranjasHorarioVisitas" />
+    <EntitySet Name="TiposFoto" EntityType="DB_A66D31_intratecPrbModel.TiposFoto" />
     <FunctionImport Name="uspConsultarVisitas" ReturnType="Collection(DB_A66D31_intratecPrbModel.uspConsultarVisitas_Result)">
       <Parameter Name="FechaInicial" Mode="In" Type="DateTime" />
       <Parameter Name="FechaFinal" Mode="In" Type="DateTime" />
@@ -240,7 +241,18 @@
       <Parameter Name="IdInspector" Mode="In" Type="Int32" />
       <Parameter Name="IdEstadoVisita" Mode="In" Type="String" />
     </FunctionImport>
-    <EntitySet Name="TiposFoto" EntityType="DB_A66D31_intratecPrbModel.TiposFoto" />
+    <AssociationSet Name="FK_Equipos_TiposVisita" Association="DB_A66D31_intratecPrbModel.FK_Equipos_TiposVisita">
+      <End Role="TiposVisita" EntitySet="TiposVisita" />
+      <End Role="Equipos" EntitySet="Equipos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CalibracionesEquipos_Laboratorios" Association="DB_A66D31_intratecPrbModel.FK_CalibracionesEquipos_Laboratorios">
+      <End Role="Laboratorios" EntitySet="Laboratorios" />
+      <End Role="CalibracionesEquipos" EntitySet="CalibracionesEquipos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VerificacionesLabEquipos_Laboratorios" Association="DB_A66D31_intratecPrbModel.FK_VerificacionesLabEquipos_Laboratorios">
+      <End Role="Laboratorios" EntitySet="Laboratorios" />
+      <End Role="VerificacionesLabEquipos" EntitySet="VerificacionesLabEquipos" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Departamentos">
     <Key>
@@ -589,6 +601,7 @@
     <NavigationProperty Name="VerificacionesLabEquipos" Relationship="DB_A66D31_intratecPrbModel.FK_VerificacionesLabEquipos_Equipos" FromRole="Equipos" ToRole="VerificacionesLabEquipos" />
     <Property Name="RequiereCalibracion" Type="Boolean" Nullable="false" />
     <Property Name="FechaProximaVerificacion" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="TiposVisita" Relationship="DB_A66D31_intratecPrbModel.FK_Equipos_TiposVisita" FromRole="Equipos" ToRole="TiposVisita" />
   </EntityType>
   <EntityType Name="MarcasEquipos">
     <Key>
@@ -1261,6 +1274,7 @@
     <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Visitas" Relationship="DB_A66D31_intratecPrbModel.FK_Visitas_TiposVisita" FromRole="TiposVisita" ToRole="Visitas" />
+    <NavigationProperty Name="Equipos" Relationship="DB_A66D31_intratecPrbModel.FK_Equipos_TiposVisita" FromRole="TiposVisita" ToRole="Equipos" />
   </EntityType>
   <EntityType Name="Laboratorios">
     <Key>
@@ -1274,6 +1288,8 @@
     <Property Name="DV" Type="Int32" Nullable="false" />
     <Property Name="Direccion" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="Telefono" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="CalibracionesEquipos" Relationship="DB_A66D31_intratecPrbModel.FK_CalibracionesEquipos_Laboratorios" FromRole="Laboratorios" ToRole="CalibracionesEquipos" />
+    <NavigationProperty Name="VerificacionesLabEquipos" Relationship="DB_A66D31_intratecPrbModel.FK_VerificacionesLabEquipos_Laboratorios" FromRole="Laboratorios" ToRole="VerificacionesLabEquipos" />
   </EntityType>
   <EntityType Name="CalibracionesEquipos">
     <Key>
@@ -1291,6 +1307,7 @@
     <Property Name="IdUsuarioModificacion" Type="Int32" />
     <Property Name="Certificado" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Equipos" Relationship="DB_A66D31_intratecPrbModel.FK_CalibracionesEquipos_Equipos" FromRole="CalibracionesEquipos" ToRole="Equipos" />
+    <NavigationProperty Name="Laboratorios" Relationship="DB_A66D31_intratecPrbModel.FK_CalibracionesEquipos_Laboratorios" FromRole="CalibracionesEquipos" ToRole="Laboratorios" />
   </EntityType>
   <Association Name="FK_CalibracionesEquipos_Equipos">
     <End Type="DB_A66D31_intratecPrbModel.Equipos" Role="Equipos" Multiplicity="1" />
@@ -1320,6 +1337,7 @@
     <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
     <Property Name="IdUsuarioModificacion" Type="Int32" />
     <NavigationProperty Name="Equipos" Relationship="DB_A66D31_intratecPrbModel.FK_VerificacionesLabEquipos_Equipos" FromRole="VerificacionesLabEquipos" ToRole="Equipos" />
+    <NavigationProperty Name="Laboratorios" Relationship="DB_A66D31_intratecPrbModel.FK_VerificacionesLabEquipos_Laboratorios" FromRole="VerificacionesLabEquipos" ToRole="Laboratorios" />
   </EntityType>
   <Association Name="FK_VerificacionesLabEquipos_Equipos">
     <End Type="DB_A66D31_intratecPrbModel.Equipos" Role="Equipos" Multiplicity="1" />
@@ -1486,6 +1504,17 @@
     <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
   </EntityType>
+  <EntityType Name="TiposFoto">
+    <Key>
+      <PropertyRef Name="IdTipoFoto" />
+    </Key>
+    <Property Name="IdTipoFoto" Type="Int32" Nullable="false" />
+    <Property Name="TipoFoto" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
+    <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
+    <Property Name="IdUsuarioModificacion" Type="Int32" />
+  </EntityType>
   <ComplexType Name="uspConsultarVisitas_Result">
     <Property Type="Int32" Name="IdVisita" Nullable="false" />
     <Property Type="Int32" Name="IdSolicitudProgramacion" Nullable="true" />
@@ -1514,16 +1543,42 @@
     <Property Type="String" Name="Descripcion" Nullable="true" MaxLength="50" />
     <Property Type="String" Name="HoraInicioFranja" Nullable="true" MaxLength="50" />
     <Property Type="String" Name="HoraFinFranja" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="EstadoVisita" Nullable="true" MaxLength="50" />
   </ComplexType>
-  <EntityType Name="TiposFoto">
-    <Key>
-      <PropertyRef Name="IdTipoFoto" />
-    </Key>
-    <Property Name="IdTipoFoto" Type="Int32" Nullable="false" />
-    <Property Name="TipoFoto" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
-    <Property Name="FechaCreacion" Type="DateTime" Nullable="false" Precision="3" />
-    <Property Name="IdUsuarioCreacion" Type="Int32" Nullable="false" />
-    <Property Name="FechaModificacion" Type="DateTime" Precision="3" />
-    <Property Name="IdUsuarioModificacion" Type="Int32" />
-  </EntityType>
+  <Association Name="FK_Equipos_TiposVisita">
+    <End Type="DB_A66D31_intratecPrbModel.TiposVisita" Role="TiposVisita" Multiplicity="0..1" />
+    <End Type="DB_A66D31_intratecPrbModel.Equipos" Role="Equipos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TiposVisita">
+        <PropertyRef Name="IdTipoVisita" />
+      </Principal>
+      <Dependent Role="Equipos">
+        <PropertyRef Name="IdTipoVisitaAplica" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CalibracionesEquipos_Laboratorios">
+    <End Type="DB_A66D31_intratecPrbModel.Laboratorios" Role="Laboratorios" Multiplicity="1" />
+    <End Type="DB_A66D31_intratecPrbModel.CalibracionesEquipos" Role="CalibracionesEquipos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Laboratorios">
+        <PropertyRef Name="IdLaboratorio" />
+      </Principal>
+      <Dependent Role="CalibracionesEquipos">
+        <PropertyRef Name="IdLaboratorio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VerificacionesLabEquipos_Laboratorios">
+    <End Type="DB_A66D31_intratecPrbModel.Laboratorios" Role="Laboratorios" Multiplicity="1" />
+    <End Type="DB_A66D31_intratecPrbModel.VerificacionesLabEquipos" Role="VerificacionesLabEquipos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Laboratorios">
+        <PropertyRef Name="IdLaboratorio" />
+      </Principal>
+      <Dependent Role="VerificacionesLabEquipos">
+        <PropertyRef Name="IdLaboratorio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

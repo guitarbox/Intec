@@ -191,7 +191,7 @@ namespace Intec.DAL.TE
         }
 
         //Agregar FotosVisita
-        public void AgregarFotoVisita(FotosVisita Foto, int IdVisita)
+        public void AgregarFotoVisita(FotosVisita Foto, int IdVisita, int IdInspector)
         {
             using (var ctx = new DB_A66D31_intratecPrbEntities1())
             {
@@ -222,6 +222,7 @@ namespace Intec.DAL.TE
                         {
                             Formato.Secuencia = ctx.FormatosVisita.Where(fv => fv.IdVisita == Formato.IdVisita).Count() + 1;
                             visita.FormatosVisita.Add(Formato);
+                            cons.IdVisita = IdVisita.ToString();
                             ctx.SaveChanges();
                         }
                         else
@@ -272,6 +273,7 @@ namespace Intec.DAL.TE
                     ctx.Entry(visita).Reference(r => r.Usuarios).Load();
                     ctx.Entry(visita).Reference(r => r.EstadosVisita).Load();                    
                     ctx.Entry(visita).Reference(r => r.TiposVisita).Load();                    
+                    
                 }
                 else
                     throw new Exception($"No existe visita con ID {IdVisita}");
@@ -334,6 +336,25 @@ namespace Intec.DAL.TE
                         visita.IdEstadoVisitas = "E";
                         visita.FechaModificacion = DateTime.Now;
                         visita.IdUsuarioModificacion = IdInspector;
+                        ctx.SaveChanges();
+                    }
+                }
+            }
+        }
+
+        public void FinalizarVisita(int IdVisita, string Observacion, int IdInspector)
+        {
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                Visitas visita = ctx.Visitas.Where(v => v.IdVisita == IdVisita).FirstOrDefault();
+                if (visita != null)
+                {
+                    if (visita.IdEstadoVisitas.Equals("E"))
+                    {
+                        visita.IdEstadoVisitas = "F";
+                        visita.FechaModificacion = DateTime.Now;
+                        visita.IdUsuarioModificacion = IdInspector;
+                        visita.ObservacionesInspector = Observacion;
                         ctx.SaveChanges();
                     }
                 }

@@ -150,6 +150,11 @@ function _peticionAjax_Promise(urlServicio, verb, parametros) {
 }
 
 /********************************************* Generic Date Methods ******************************************************/
+function _setFirstDayOfMonth(element) {
+    var date = new Date();
+    element.val(`1/${date.getMonth() + 1}/${date.getFullYear()}`);
+}
+
 function _setToday(element) {
     var date = new Date();
     element.val(`${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`);

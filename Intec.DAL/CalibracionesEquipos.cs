@@ -26,5 +26,6 @@ namespace Intec.DAL
         public string Certificado { get; set; }
     
         public virtual Equipos Equipos { get; set; }
+        public virtual Laboratorios Laboratorios { get; set; }
     }
 }

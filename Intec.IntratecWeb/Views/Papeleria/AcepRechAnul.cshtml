@@ -17,7 +17,7 @@
                 if (response.data.some(s => s.IdEstadoConsecutivoInspector == 'P')) { $("#btnRechazarCons").show(); $("#btnAceptarCons").show(); }
                 if (response.data.some(s => s.IdEstadoConsecutivoInspector == 'A')) { $("#btnAnularCons").show(); }
                 $("#divTblConsecutivos").empty();
-                $("#divTblConsecutivos").append('<table id="tblConsecutivos"></table>');
+                $("#divTblConsecutivos").append('<table style="width:100%" id="tblConsecutivos" class="tableMobile tableMobilePI"></table>');
                 let columnas = [
                     { data: "Formatos.NroFormato", title: 'Formato' },
                     { data: "Consecutivo", title: 'Consecutivo' },

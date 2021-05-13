@@ -69,9 +69,9 @@ namespace Intec.BL.BE
             new DAL.TE.VisitasTE().ReasignacionVisita(IdVisita, IdInspector);
         }
 
-        public void AgregarFotoVisita(DTO.FotosVisita Foto, int IdVisita)
+        public void AgregarFotoVisita(DTO.FotosVisita Foto, int IdVisita, int IdInspector)
         {
-            new DAL.TE.VisitasTE().AgregarFotoVisita(MapperConfig.Config.MapperVisitas.Map<DAL.FotosVisita>(Foto), IdVisita);
+            new DAL.TE.VisitasTE().AgregarFotoVisita(MapperConfig.Config.MapperVisitas.Map<DAL.FotosVisita>(Foto), IdVisita, IdInspector);
         }
 
         public void AgregarFormatoVisita(DTO.FormatosVisita Formato, int IdVisita, int IdInspector)
@@ -87,12 +87,18 @@ namespace Intec.BL.BE
         public DTO.Visitas ConsultarVisita(int IdVisita)
         {
             DAL.Visitas visita = new DAL.TE.VisitasTE().ConsultarVisita(IdVisita);
+            visita.Zonas.Usuarios = new DAL.TE.UsuariosTE().ConsultarUsuario(visita.Zonas.IdInspector.Value);
             visita.Propiedades = new DAL.TE.ClientesTE().ConsultaPropiedad(visita.IdPropiedad);
-            DTO.Visitas vRet = new DTO.Visitas();
-            vRet = MapperConfig.Config.MapperVisitas.Map<DTO.Visitas>(visita);
+            
+            DTO.Visitas vRet = MapperConfig.Config.MapperVisitas.Map<DTO.Visitas>(visita);
+            
             foreach (DTO.FormatosVisita f in vRet.FormatosVisita)
             {
                 f.Formatos = MapperConfig.Config.MapperPapeleriaSimple.Map<DTO.Formatos>(new DAL.TE.PapeleriaTE().ConsultarFormato(f.IdFormato));
+            }
+            foreach(DTO.FotosVisita f in vRet.FotosVisita) 
+            {
+                f.TiposFoto = MapperConfig.Config.MapperAdministracion.Map<DTO.TiposFoto>(new DAL.TE.AdministracionTE().ObtenerTipoFoto(f.IdTipoFoto.Value));
             }
             return vRet;
         }
@@ -115,6 +121,11 @@ namespace Intec.BL.BE
         public void EjecutarVisita(int IdVisita, int IdInspector)
         {
             new DAL.TE.VisitasTE().EjecutarVisita(IdVisita, IdInspector);
+        }
+
+        public void FinalizarVisita(int IdVisita, string Observacion, int IdInspector)
+        {
+            new DAL.TE.VisitasTE().FinalizarVisita(IdVisita, Observacion, IdInspector);
         }
 
         #endregion

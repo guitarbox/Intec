@@ -20,5 +20,6 @@ namespace Intec.BL.DTO
         public Nullable<int> IdUsuarioModificacion { get; set; }
         public string Certificado { get; set; }
         public string CertificadoWebPath { get; set; }
+        public Laboratorios Laboratorios { get; set; }
     }
 }

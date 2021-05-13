@@ -8,22 +8,20 @@
         $("#fechaInicial").datetimepicker({
             format: "D/M/YYYY"
         });
-        _setToday($("#fechaInicial"));
+        _setFirstDayOfMonth($("#fechaInicial"));
         $("#fechaFinal").datetimepicker({
             format: "D/M/YYYY"
         });
         _setToday($("#fechaFinal"));
+
+        $("#FechaPrueba").datetimepicker({
+            format: "D/M/YYYY"
+        });
+        _setToday($("#FechaPrueba"));
+
         _loadSelectEstadosVisita($("#idEstadoVisita"));
 
-        //Cargar los inspectores
-        _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.GetUsuariosByIdRol, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion, idRol: 2 }))
-        .then(response => {
-            $("#idInspector").append('<option value="0">Seleccione Inspector...</option>');
-            response.data.forEach(inspector => {
-                $("#idInspector").append(`<option value="${inspector.IdUsuario}">${inspector.Nombres} ${inspector.Apellidos}</option>`);
-            });
-            ConsultarVisitas();
-        });
+        ConsultarVisitas();
     });
 
     function ConsultarVisitas() {
@@ -33,26 +31,38 @@
                 fechaInicial: $("#fechaInicial").val(),
                 fechaFinal: $("#fechaFinal").val(),
                 numeroIdentificacionCliente: $("#numeroIdentificacionCliente").val(),
-                idInspector: $("#idInspector").val(),
+                idInspector: UsuarioSesion.IdUsuario,
                 idEstadoVisita: $("#idEstadoVisita").val()
             }),
             true, response => {
+                //$("#divTblVisitas").empty();
+                //$("#divTblVisitas").append('<table class="table" id="tblVisitas" style="width:100%"></table>');
+                //if (response.data.length > 0) {
+                //    $("#tblVisitas").append('<tr><th>Id. Visita</th><th>Nombre Cliente</th><th></th></tr>');
+                //    response.data.forEach(visita => {
+                //        $("#tblVisitas").append('<tr><th>Id. Visita</th><th>Nombre Cliente</th><th></th></tr>');
+                //    });
+                //}
+                //else {
+                //    $("#tblVisitas").append('<tr><td><p>No hay nada para mostrar</p></td></tr>');
+                //}
+
                 var columns = [
-                    { data: "IdVisita", title: 'Id. Visita' },
+                    //{ data: "IdVisita", title: 'Id. Visita' },
                     { data: "NombreCliente", title: 'Cliente' },
                     { data: "Direccion", title: 'Direccion' },
                     { data: "FechaVisita", title: 'FechaVisita' },
-                    { data: "Inspector", title: 'Inspector' },
+                    //{ data: "Inspector", title: 'Inspector' },
                     { data: "TipoVisita", title: 'TipoVisita' },
                     {
-                        data: null, title: 'Ciudad', render: function (data, type, full, meta) {
+                        data: null, title: '', render: function (data, type, full, meta) {
                             return `<a href="../Visitas/Consultar?iv=${full.IdVisita}" target="blank_"><i class="fas fa-eye fa-2x"></i></a>`;
                         }
                     }
                 ];
                 console.log(response.data);
                 $("#divTblVisitas").empty();
-                $("#divTblVisitas").append('<table id="tblVisitas" style="width:100%"></table>');
+                $("#divTblVisitas").append('<table id="tblVisitas" style="width:100%" class="tableMobile tableMobileVI"></table>');
                 $('#tblVisitas').DataTable({
                     data: response.data,
                     columns: columns,
@@ -123,12 +133,11 @@
     }
 </script>
 <h3 class="text-center" id="title">VISITAS</h3>
-<div style="padding:10px">
-    <div name="filtros" style="width:100%; display:flex; justify-content:space-around;" class="card">
+<div style="padding:10px; position: relative">
+    <div name="filtros" style="width:100%; display:flex; justify-content:space-around; flex-wrap:wrap" class="card">
         <input placeholder="Fecha Inicial" id="fechaInicial" class="form-control" type="text" />
         <input placeholder="Fecha Final" id="fechaFinal" class="form-control" type="text" />
         <input placeholder="Número Identificación" id="numeroIdentificacionCliente" class="form-control" type="text" />
-        <select id="idInspector" class="form-control"></select>
         <select id="idEstadoVisita" class="form-control"></select>
         <span style="margin-left:2px; cursor:pointer" class="fa fa-search fa-2x" onclick="ConsultarVisitas();"></span>
     </div>

@@ -153,6 +153,7 @@ namespace Intec.DAL.TE
                 PropiedadModificar.Foto = propiedad.Foto;
                 PropiedadModificar.Observaciones = propiedad.Observaciones;
                 PropiedadModificar.IdTipoPropiedad = propiedad.IdTipoPropiedad;
+                PropiedadModificar.NroPoliza = propiedad.NroPoliza;
 
                 PropiedadModificar.FechaModificacion = DateTime.Now;
                 PropiedadModificar.IdUsuarioModificacion = IdUsuarioModificacion;

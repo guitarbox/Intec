@@ -202,7 +202,8 @@ namespace Intec.WebApi.Controllers
                 try
                 {
                     new Intec.BL.BE.VisitasBE().AgregarFotoVisita((Token["foto"].ToObject<Intec.BL.DTO.FotosVisita>()),
-                                                                        int.Parse(Token["idVisita"].ToString()));
+                                                                        int.Parse(Token["idVisita"].ToString()),
+                                                                        int.Parse(Token["idInspector"].ToString()));
                 }
                 catch (Exception ex)
                 {
@@ -351,6 +352,30 @@ namespace Intec.WebApi.Controllers
                 try
                 {
                     new Intec.BL.BE.VisitasBE().CancelarVisita(Token["idVisita"].ToObject<int>(), Token["observacionCancelacion"].ToString(), Token["idUsuarioCancelacion"].ToObject<int>());
+                }
+                catch (Exception ex)
+                {
+                    error = true;
+                    msgError = ex.Message;
+                }
+
+                SetErrorResponse(error);
+                SetMsgErrorResponse(msgError);
+            }
+            return response;
+        }
+        
+        [HttpPost]
+        [Route("api/Visitas/FinalizarVisita")]
+        public JObject FinalizarVisita([FromBody]JObject Token)
+        {
+            bool validToken = ValidateSessionToken(Token["sessionToken"].ToString());
+            SetValidTokendResponse(validToken);
+            if (validToken)
+            {
+                try
+                {
+                    new Intec.BL.BE.VisitasBE().FinalizarVisita(Token["idVisita"].ToObject<int>(), Token["observacion"].ToString(), Token["idInspector"].ToObject<int>());
                 }
                 catch (Exception ex)
                 {

@@ -33,6 +33,7 @@ namespace Intec.BL.DTO
         public string HoraFinFranja{ get; set; }
         public string ObservacionesInspector { get; set; }
         public string ObservacionesCancelacion { get; set; }
+        public string EstadoVisita { get; set; }
 
     }
 }

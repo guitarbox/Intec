@@ -11,7 +11,7 @@
         else {
             var status = @Html.Raw(Json.Encode(ViewBag.status));
             if (status == 'success') {
-                window.opener.continueUpLoad(@Html.Raw(Json.Encode(ViewBag.from)), @Html.Raw(Json.Encode(ViewBag.file)));
+                window.opener.continueUpLoad(@Html.Raw(Json.Encode(ViewBag.from)), @Html.Raw(Json.Encode(ViewBag.file)), @Html.Raw(Json.Encode(ViewBag.webPath)));
                 window.close();
             }
         }

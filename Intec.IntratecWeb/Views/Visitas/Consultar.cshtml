@@ -4,22 +4,86 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script>
-    var visita_;
+    var idVisita_, visita_;
 
     $(document).ready(() => {
+        idVisita_ = _getUrlVars(window.location.href)["iv"];
         ConsultarVisita();
     });
 
     function ConsultarVisita() {
-        _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.ConsultarVisita, VerbosREST.POST,
-            JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion, idVisita: window.location.href.split('=')[1] }))
+        _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.ConsultarVisita, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion, idVisita: idVisita_ }))
             .then(response => {
                 visita_ = response.data;
-                $("#title").text(`Visita # ${visita_.IdVisita }`);
-            })
+                $("#title").text(`Visita #${visita_.IdVisita}`);
+
+                MostrarInfoGeneral();
+                MostrarFormatos();
+                MostrarFotos();
+            });
     }
+
+    function MostrarInfoGeneral() {
+        console.log(visita_);
+        $("#divInfoGeneral").empty();
+        $("#divInfoGeneral").append(
+            `<div>
+            <h4>Cliente:</h4> ${visita_.Clientes.Nombres} ${visita_.Clientes.Apellidos}<br/>
+            <h4>Número Identificación:</h4> ${visita_.Clientes.NumeroIdentificacion}</div><br/>
+            <div><h4>Nro. Póliza:</h4> ${visita_.Propiedades.NroPoliza}<br/>
+            <h4>Dirección:</h4> ${visita_.Propiedades.Direccion}</div><br/>
+            <div><h4>Tipo Propiedad:</h4> ${visita_.Propiedades.TiposPropiedades.TipoPropiedad}<br/>
+            <h4>Uso Propiedad:</h4> ${visita_.Propiedades.UsosPropiedades.Uso}</div><br/>
+            <div><h4>Tipo Visita:</h4> ${visita_.TiposVisita.TipoVisita}<br/>
+            <h4>Estado Visita:</h4> <strong>${visita_.EstadosVisita.EstadoVisita.toUpperCase()}</strong></div>
+            `
+        );
+        $("#Observaciones").val(visita_.ObservacionesInspector);
+    }
+
+    function MostrarFormatos() {
+        $("#tblFormatosUsados").empty();
+
+        if (visita_.FormatosVisita.length > 0) {
+            $("#tblFormatosUsados").append(`<tr><th>Secuencia</th><th>Formato</th><th>Consecutivo</td></tr>`);
+            visita_.FormatosVisita.forEach(formato => {
+                $("#tblFormatosUsados").append(`<tr><td>${formato.Secuencia}</td><td>${formato.Formatos.NroFormato}</td><td>${formato.Consecutivo}</td></tr>`);
+            });
+        }
+        else {
+            $("#tblFormatosUsados").append('<tr><td>No ha ingresado formatos aún</td></tr>');
+        }
+    }
+
+    function MostrarFotos() {
+        $("#tblFotosTomadas").empty();
+        if (visita_.FotosVisita.length > 0) {
+            $("#tblFotosTomadas").append(`<tr><th>Secuencia</th><th>Tipo Foto</th><th>Path</th></tr>`);
+            visita_.FotosVisita.forEach(foto => {
+                $("#tblFotosTomadas").append(`<tr><td>${foto.Secuencia}</td><td>${foto.TiposFoto.TipoFoto}</td><td><a onclick="window.open('${foto.WebPath}', this.target);">${foto.WebPath}</a></td></tr>`);
+            });
+        }
+        else {
+            $("#tblFotosTomadas").append('<tr><td>No ha ingresado fotos aún</td></tr>');
+        }
+    }
+
 </script>
 <h3 class="text-center" id="title"></h3>
-<div class="card">
-    
+<div class="card text-center">
+    <h3>Información General</h3>
+    <div id="divInfoGeneral" class="containerO text-center"></div>
+</div>
+<div style="display:flex; justify-content:center; flex-direction:column; align-items:center" class="card">
+    <h4>Formatos Usados</h4>
+    <table id="tblFormatosUsados" class="table table-bordered"></table>    
+</div>
+<div style="display:flex; justify-content:center; flex-direction:column; align-items:center" class="card">
+    <h4>Fotos Tomadas</h4>
+    <table id="tblFotosTomadas" class="table table-bordered"></table>
+</div>
+<div style="display:flex; justify-content:center; flex-direction:column; align-items:center" class="card">
+    <h4>Complementarios</h4>
+    <p>Observaciones</p>
+    <textarea id="Observaciones" class="form-control" placeholder="Observaciones del inspector para la visita" disabled></textarea>
 </div>

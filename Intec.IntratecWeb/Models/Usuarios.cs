@@ -34,5 +34,6 @@ namespace Intec.IntratecWeb.Models
         public DateTime? FechaNacimiento { get; set; }
         public Roles Roles { get; set; }
         public TiposIdentificacion TiposIdentificacion { get; set; }
+        public List<UsuariosEquipos> UsuariosEquipos { get; set; }
     }
 }

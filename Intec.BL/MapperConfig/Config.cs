@@ -84,6 +84,7 @@ namespace Intec.BL.MapperConfig
                     .ForMember(dest => dest.FechaUltimaVerificacionLaboratorioString, opt => opt.MapFrom(src => src.FechaUltimaVerificacionLaboratorio == null ? "" : src.FechaUltimaVerificacionLaboratorio.Value.ToShortDateString()))
                     .ForMember(dest => dest.PendTramiteAdmin, opt => opt.Ignore())
                     ;
+
                     cfg.CreateMap<DAL.CalibracionesEquipos, DTO.CalibracionesEquipos>()
                     .ForMember(dest => dest.FechaCalibracionString, opt => opt.MapFrom(src => src.FechaCalibracion.ToString()))
                     .ForMember(dest => dest.CertificadoWebPath, opt => opt.MapFrom(src => string.IsNullOrEmpty(src.Certificado) ? "" : $"../certificadosCalibraciones/{Path.GetFileName(src.Certificado)}"))
@@ -97,7 +98,8 @@ namespace Intec.BL.MapperConfig
                         .ForMember(dest => dest.Usuarios, opt => opt.Ignore())
                         .ForMember(dest => dest.Equipos, opt => opt.Ignore())
                     ;
-
+                    cfg.CreateMap<DAL.Laboratorios, DTO.Laboratorios>();
+                    cfg.CreateMap<DAL.TiposVisita, DTO.TiposVisita>();
                     cfg.CreateMap<DTO.VerificacionesLabEquipos, DAL.VerificacionesLabEquipos>();
                     cfg.CreateMap<DTO.Equipos, DAL.Equipos>()
                         .ForMember(dest=> dest.CalibracionesEquipos, opt => opt.Ignore())
@@ -112,6 +114,7 @@ namespace Intec.BL.MapperConfig
                     cfg.CreateMap<DTO.MarcasEquipos, DAL.MarcasEquipos>();
                     cfg.CreateMap<DTO.TiposEquipo, DAL.TiposEquipo>();
                     cfg.CreateMap<DTO.TramitesEquipo, DAL.TramitesEquipo>();
+                    
 
                 });
 
@@ -141,6 +144,7 @@ namespace Intec.BL.MapperConfig
 
                     cfg.CreateMap<DAL.MarcasEquipos, DTO.MarcasEquipos>();
                     cfg.CreateMap<DAL.TiposEquipo, DTO.TiposEquipo>();
+                    cfg.CreateMap<DAL.TiposVisita, DTO.TiposVisita>();
 
                 });
 
@@ -158,6 +162,7 @@ namespace Intec.BL.MapperConfig
                     cfg.CreateMap<DAL.Usuarios, DTO.Usuarios>()
                     .ForMember(dest => dest.Roles, opt => opt.Ignore())
                     .ForMember(dest => dest.TiposIdentificacion, opt => opt.Ignore())
+                    .ForMember(dest => dest.UsuariosEquipos, opt => opt.Ignore())
                     ;
                     cfg.CreateMap<DAL.Equipos, DTO.Equipos>()
                     .ForMember(dest => dest.FechaProximaCalibracionString, opt => opt.MapFrom(src => src.FechaProximaCalibracion == null ? "" : src.FechaProximaCalibracion.Value.ToShortDateString()))
@@ -173,7 +178,7 @@ namespace Intec.BL.MapperConfig
                     .ForMember(dest => dest.DiasParaProxCalibracion, opt => opt.MapFrom(src => Common.Util.DaysToDate(src.FechaProximaCalibracion)))
                     .ForMember(dest => dest.DiasParaProxMantenimiento, opt => opt.MapFrom(src => Common.Util.DaysToDate(src.FechaProximoMantenimiento)))
                     .ForMember(dest => dest.DiasParaProxVerificacion, opt => opt.MapFrom(src => Common.Util.DaysToDate(src.FechaProximaVerificacion)))
-
+                    .ForMember(dest => dest.TiposVisita, opt => opt.Ignore());
                     ;
 
                 });
@@ -237,6 +242,7 @@ namespace Intec.BL.MapperConfig
                     cfg.CreateMap<DAL.Usuarios, DTO.Usuarios>()
                     .ForMember(dest => dest.Roles, opt=>opt.Ignore())
                     .ForMember(dest => dest.TiposIdentificacion, opt=>opt.Ignore())
+                    .ForMember(dest => dest.UsuariosEquipos, opt=>opt.Ignore())
                     ;
                     cfg.CreateMap<DAL.Formatos, DTO.Formatos>()
                     .ForMember(dest => dest.ConsecutivosFormatos, opt=>opt.Ignore())
@@ -283,6 +289,7 @@ namespace Intec.BL.MapperConfig
                     cfg.CreateMap<DAL.Usuarios, DTO.Usuarios>()
                     .ForMember(dest => dest.TiposIdentificacion ,opt => opt.Ignore())
                     .ForMember(dest => dest.Roles,opt => opt.Ignore())
+                    .ForMember(dest => dest.UsuariosEquipos,opt => opt.Ignore())
                     ;
 
                     cfg.CreateMap<DTO.Clientes, DAL.Clientes>()
@@ -315,12 +322,13 @@ namespace Intec.BL.MapperConfig
                 var config = new AutoMapper.MapperConfiguration(cfg => {
 
                     cfg.CreateMap<DAL.Zonas, DTO.Zonas>()
-                    .ForMember(dest => dest.Ciudades, opt => opt.Ignore())
-                    //.ForMember(dest => dest.Usuarios, opt => opt.Ignore())
+                        .ForMember(dest => dest.Ciudades, opt => opt.Ignore())
+                        //.ForMember(dest => dest.Usuarios, opt => opt.Ignore())
                     ;
                     cfg.CreateMap<DAL.Usuarios, DTO.Usuarios>()
-                    .ForMember(dest => dest.Roles, opt => opt.Ignore())
-                    .ForMember(dest => dest.TiposIdentificacion, opt => opt.Ignore())
+                        .ForMember(dest => dest.Roles, opt => opt.Ignore())
+                        .ForMember(dest => dest.TiposIdentificacion, opt => opt.Ignore())
+                        .ForMember(dest => dest.UsuariosEquipos, opt => opt.Ignore())
                     ;
                     cfg.CreateMap<DAL.Ciudades, DTO.Ciudades>();
                     cfg.CreateMap<DAL.Visitas, DTO.Visitas>();
@@ -335,7 +343,10 @@ namespace Intec.BL.MapperConfig
                     cfg.CreateMap<DAL.EstadosVisita, DTO.EstadosVisita>();
                     cfg.CreateMap<DAL.FormatosVisita, DTO.FormatosVisita>();
                     cfg.CreateMap<DAL.EquiposVisita, DTO.EquiposVisita>();
-                    cfg.CreateMap<DAL.FotosVisita, DTO.FotosVisita>();
+                    cfg.CreateMap<DAL.FotosVisita, DTO.FotosVisita>()
+                        .ForMember(dest => dest.TiposFoto, opt => opt.Ignore())
+                        .ForMember(dest => dest.WebPath, opt => opt.MapFrom(src=>!string.IsNullOrEmpty(src.Path) ? $"../tmp/fotosVisita/{Path.GetFileName(src.Path)}" : string.Empty))
+                    ;
                     cfg.CreateMap<DAL.Propiedades, DTO.Propiedades>();
                     cfg.CreateMap<DAL.TiposPropiedades, DTO.TiposPropiedades>();
                     cfg.CreateMap<DAL.UsosPropiedades, DTO.UsosPropiedades>();
@@ -388,6 +399,10 @@ namespace Intec.BL.MapperConfig
                     cfg.CreateMap<DAL.Roles, DTO.Roles>();
                     cfg.CreateMap<DAL.Menus, DTO.Menus>();
                     cfg.CreateMap<DAL.TiposIdentificacion, DTO.TiposIdentificacion>();
+                    cfg.CreateMap<DAL.UsuariosEquipos, DTO.UsuariosEquipos>()
+                    .ForMember(dest => dest.Usuarios, opt => opt.Ignore())
+                    .ForMember(dest => dest.Equipos, opt => opt.Ignore())
+                    ;
 
                     //DAL
                     cfg.CreateMap<DTO.Usuarios, DAL.Usuarios>()
@@ -416,6 +431,7 @@ namespace Intec.BL.MapperConfig
                     cfg.CreateMap<DAL.Usuarios, DTO.Usuarios>()
                     .ForMember(dest => dest.Roles, opt => opt.Ignore())
                     .ForMember(dest => dest.TiposIdentificacion, opt => opt.Ignore())
+                    .ForMember(dest => dest.UsuariosEquipos, opt => opt.Ignore())
                     ;
                 });
 

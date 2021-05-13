@@ -6,10 +6,11 @@ var VerbosREST = {
     POST: 'POST',
     GET: 'GET',
     PUT: 'PUT',
-    DELETE: 'DELETE',
+    DELETE: 'DELETE', 
 }
 
 var URL_SERVICE = 'http://localhost:63440/';
+//var URL_SERVICE = 'http://prbservicios.intecsas.com.co/';
 //var URL_SERVICE = 'http://servicios.intecsas.com.co/';
 
 var URI_SERVICE = {
@@ -142,6 +143,7 @@ var URI_SERVICE = {
     ObtenerEstadosVisita: 'api/Visitas/ObtenerEstadosVisita',
     CancelarVisita: 'api/Visitas/CancelarVisita',
     EjecutarVisita: 'api/Visitas/EjecutarVisita',
+    FinalizarVisita: 'api/Visitas/FinalizarVisita',
 
     //Papelería
     ConsultarFormatos: 'api/Papeleria/ConsultarFormatos',

@@ -35,14 +35,8 @@
         Abrir(UsuarioSesion.Roles.Menus.filter(m => m.IdMenu == IdMenuPadreSelected)[0].IdMenuPadre);   
     }
 </script>
-<div style="display:flex; flex-direction:column; justify-content:center; align-items:center; height:95vh">
-    <div id="menus" style="display:flex; flex-direction:row; flex-wrap:wrap; justify-content:space-around; align-items:center; width:80%">
-        @*<div style="border:1px solid black; width:100px;height:100px; display:flex; justify-content:center; align-items:center;"><a href="#">Descripcion</a></div>
-            <div style="border:1px solid black; width:100px;height:100px; display:flex; justify-content:center; align-items:center;"><a href="#">Descripcion</a></div>
-            <div style="border:1px solid black; width:100px;height:100px; display:flex; justify-content:center; align-items:center;"><a href="#">Descripcion</a></div>
-            <div style="border:1px solid black; width:100px;height:100px; display:flex; justify-content:center; align-items:center;"><a href="#">Descripcion</a></div>
-            <div style="border:1px solid black; width:100px;height:100px; display:flex; justify-content:center; align-items:center;"><a href="#">Descripcion</a></div>
-            <div style="border:1px solid black; width:100px;height:100px; display:flex; justify-content:center; align-items:center;"><a href="#">Descripcion</a></div>*@
+<div class="containerMenu">
+    <div id="menus" class="containerMenuInt">
     </div>
     <a style="color:#8090B5;" id="a_atras" onclick="Atras();"><i class="fas fa-long-arrow-alt-left fa-2x"></i></a>
 </div>

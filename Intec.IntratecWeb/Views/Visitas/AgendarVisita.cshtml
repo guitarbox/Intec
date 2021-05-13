@@ -145,26 +145,24 @@
     }
 </script>
 <h3 class="text-center" id="title">Agendar Visita</h3>
-<div class="card">
-    <div>
-        <h4>Datos del Cliente</h4>
-        <div style="display:flex;">
-            <div style="margin-right:10px">
-                <p>Núm Identificación Cliente</p>
-                <input id="nitC" class="form-control" onchange="BuscarCliente();" placeholder="Ingrese Nit o Cédula del cliente"/>
-            </div>
-            <div style="margin-right:10px">
-                <p>Cliente</p>
-                <input type="text" id="NombreCliente" class="form-control" disabled />
-            </div>
-            <div style="margin-right:10px">
-                <p>Teléfono</p>
-                <input type="text" id="TelefonoCliente" class="form-control" disabled />
-            </div>
-            <div style="margin-right:10px">
-                <p>Email</p>
-                <input type="text" id="EmailCliente" class="form-control" disabled />
-            </div>
+<div class="card">    
+    <h4>Datos del Cliente</h4>
+    <div class="containerO">
+        <div style="margin-right:10px">
+            <p>Núm Identificación Cliente</p>
+            <input id="nitC" class="form-control" onchange="BuscarCliente();" placeholder="Ingrese Nit o Cédula del cliente"/>
+        </div>
+        <div style="margin-right:10px">
+            <p>Cliente</p>
+            <input type="text" id="NombreCliente" class="form-control" disabled />
+        </div>
+        <div style="margin-right:10px">
+            <p>Teléfono</p>
+            <input type="text" id="TelefonoCliente" class="form-control" disabled />
+        </div>
+        <div style="margin-right:10px">
+            <p>Email</p>
+            <input type="text" id="EmailCliente" class="form-control" disabled />
         </div>
     </div>
     <br />
@@ -177,7 +175,7 @@
             <h4>Propiedad Seleccionada</h4>
             <input type="button" onclick="$('#divSelectedProp').hide(); $('#divSelectProp').show()" value="Cambiar propiedad" class="button"/>
         </div>
-        <div style="display:flex;">
+        <div class="containerO">
             <div style="margin-right:10px">
                 <p>Dirección</p>
                 <input type="text" id="DirProp" class="form-control" disabled />
@@ -205,8 +203,8 @@
         </div>
         <br />
         <h4>Seleccione la fecha de la visita y el inspector</h4>
-        <div style="display:flex;">
-            <div style="margin-right:10px">
+        <div class="containerO">
+            <div style="margin-right: 10px; position: relative">
                 <p>Fecha Visita</p>
                 <input type="text" id="FechaVisita" class="form-control" />
             </div>
@@ -217,7 +215,7 @@
         </div>
         <br />
         <h4>Otros datos</h4>
-        <div style="display:flex;">
+        <div class="containerO">
             <div style="margin-right:10px">
                 <p>Origen Visita</p>
                 <select id="OrigenVisita" class="form-control">

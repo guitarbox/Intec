@@ -641,6 +641,18 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="TiposFoto">
+      <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.TiposFoto">
+        <MappingFragment StoreEntitySet="TiposFoto">
+          <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
+          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
+          <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
+          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
+          <ScalarProperty Name="TipoFoto" ColumnName="TipoFoto" />
+          <ScalarProperty Name="IdTipoFoto" ColumnName="IdTipoFoto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="uspConsultarVisitas" FunctionName="DB_A66D31_intratecPrbModel.Store.uspConsultarVisitas">
       <ResultMapping>
         <ComplexTypeMapping TypeName="DB_A66D31_intratecPrbModel.uspConsultarVisitas_Result">
@@ -671,20 +683,9 @@
           <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
           <ScalarProperty Name="HoraInicioFranja" ColumnName="HoraInicioFranja" />
           <ScalarProperty Name="HoraFinFranja" ColumnName="HoraFinFranja" />
+          <ScalarProperty Name="EstadoVisita" ColumnName="EstadoVisita" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <EntitySetMapping Name="TiposFoto">
-      <EntityTypeMapping TypeName="DB_A66D31_intratecPrbModel.TiposFoto">
-        <MappingFragment StoreEntitySet="TiposFoto">
-          <ScalarProperty Name="IdUsuarioModificacion" ColumnName="IdUsuarioModificacion" />
-          <ScalarProperty Name="FechaModificacion" ColumnName="FechaModificacion" />
-          <ScalarProperty Name="IdUsuarioCreacion" ColumnName="IdUsuarioCreacion" />
-          <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
-          <ScalarProperty Name="TipoFoto" ColumnName="TipoFoto" />
-          <ScalarProperty Name="IdTipoFoto" ColumnName="IdTipoFoto" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

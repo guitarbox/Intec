@@ -44,6 +44,16 @@
                     { data: "Inspector", title: 'Inspector' },
                     { data: "TipoVisita", title: 'TipoVisita' },
                     {
+                        data: null, title: 'Estado', render: function (data, type, full, meta) {
+                            if (full.EstadoVisita == 'Programada') {
+                            return `<a onclick="MenuEjecutarVisita(${full.IdVisita});">${full.EstadoVisita}</a>`;
+                            }
+                            else {
+                                return full.EstadoVisita;
+                            }
+                        }
+                    },
+                    {
                         data: null, title: 'Ciudad', render: function (data, type, full, meta) {
                             return `<a href="../Visitas/Consultar?iv=${full.IdVisita}" target="blank_"><i class="fas fa-eye fa-2x"></i></a>`;
                         }
@@ -120,10 +130,39 @@
         });
         _openGenericModal();
     }
+
+    function MenuEjecutarVisita(IdVisita) {        
+        _resetGenericModal();
+        _appendToBodyGeneriModal(`<div style="background-color:#CE2931; color:white; padding:10px; cursor:pointer" id="btnCancelarVisitaModal">Cancelar</div>`);
+
+        $("#btnCancelarVisitaModal").click(() => {
+            _resetGenericModal();
+            _appendToHeaderGeneriModal('Cancelar Visita');
+            _appendToBodyGeneriModal(`<textarea id="obsCancelarVisita" class="form-control" placeholder="¿Por qué se cancela esta visita?"></textarea>`);
+            _appendToBodyGeneriModal(`<input class="buttonRed" type="button" id="btnCancelarVisita" value="Cancelar" />`);
+
+            $("#btnCancelarVisita").click(() => {
+                _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.CancelarVisita, VerbosREST.POST, JSON.stringify({
+                    sessionToken: UsuarioSesion.tokenSesion,
+                    idVisita: IdVisita,
+                    observacionCancelacion: $("#obsCancelarVisita").val(),
+                    idUsuarioCancelacion: UsuarioSesion.IdUsuario
+                }))
+                    .then(response => {
+                        ConsultarVisitas();
+                        _closeGenericModal();
+                    });
+            });
+            _openGenericModal();
+        });
+
+        _openGenericModal();
+    }
+
 </script>
 <h3 class="text-center" id="title">VISITAS</h3>
 <div style="padding:10px">
-    <div name="filtros" style="width:100%; display:flex; justify-content:space-around;" class="card">
+    <div name="filtros" style="width: 100%; display: flex; justify-content: space-around; position: relative" class="card">
         <input placeholder="Fecha Inicial" id="fechaInicial" class="form-control" type="text" />
         <input placeholder="Fecha Final" id="fechaFinal" class="form-control" type="text" />
         <input placeholder="Número Identificación" id="numeroIdentificacionCliente" class="form-control" type="text" />

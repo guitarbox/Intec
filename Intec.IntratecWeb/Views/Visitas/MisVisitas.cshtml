@@ -9,6 +9,17 @@
         ConsultarMisVisitas();
     });
 
+    function GetColorByEstadoVisita(IdEstadoVisita) {
+        let color = '';
+        switch (IdEstadoVisita) {
+            case 'X': color = '#CE2931'; break;
+            case 'E': color = '#808080'; break;
+            case 'F': color = '#267C4E'; break;
+            default: color = '#C6BE45'; break;
+        }
+        return color;
+    }
+
     function ConsultarMisVisitas() {
         _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.ConsultaVisitas, VerbosREST.POST, JSON.stringify({
             sessionToken: UsuarioSesion.tokenSesion,
@@ -23,7 +34,7 @@
                     response.data.forEach(visita => {
                         $("#content").append(
                             `
-                            <div class="card" style="background-color:${ visita.IdEstadoVisitas == 'X' ? '#CE2931' : visita.IdEstadoVisitas == 'E' ? '#808080' : '#C5CF31'}; color:white; cursor:pointer" onclick="MenuEjecutarVisita(${visita.IdVisita});">
+                            <div class="card" style="background-color:${GetColorByEstadoVisita(visita.IdEstadoVisitas)}; color:white; };  cursor:pointer" onclick="MenuEjecutarVisita(${visita.IdVisita});">
                                 <h4>#Visita: ${visita.IdVisita}</h4>
                                 <p>Cliente: ${visita.NombreCliente}</p>
                                 <p>Dirección: ${visita.Direccion}
@@ -31,7 +42,7 @@
                                 <p>Zona: ${visita.Descripcion}
                                 <p>Franja: ${visita.HoraInicioFranja} - ${visita.HoraFinFranja}
                                 <p>Tipo Visita: ${visita.TipoVisita}
-                                <p>${visita.IdEstadoVisitas == 'X' ? 'Observaciones Cancelación' : 'Observaciones'}: ${visita.IdEstadoVisitas == 'X' ? visita.ObservacionesCancelacion : visita.ObservacionesVisita}
+                                <p>${visita.IdEstadoVisitas == 'X' ? 'Observaciones Cancelación' : 'Observaciones Visita'}: ${visita.IdEstadoVisitas == 'X' ? visita.ObservacionesCancelacion : visita.ObservacionesVisita}
                             </div>
                             `
                         );
@@ -84,6 +95,7 @@
             });
         }
     }
+
 </script>
 <h3 class="text-center" id="title">Mis Visitas Hoy</h3>
 <div id="content" style="padding:10px"></div>

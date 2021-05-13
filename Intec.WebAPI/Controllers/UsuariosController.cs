@@ -119,9 +119,22 @@ namespace Intec.WebApi.Controllers
         //Rutas adicionales
         [Route("api/Usuarios/LogIn")]
         [HttpPost]
-        public Intec.BL.DTO.Usuarios LogIn([FromBody] JObject Token)
+        public JObject LogIn([FromBody] JObject Token)
         {
-            return new Intec.BL.BE.UsuariosBE().IniciarSesion(Token["NumeroIdentificacion"].ToString(), Token["Password"].ToString());
+            try
+            {
+                SetDataResponse(new Intec.BL.BE.UsuariosBE().IniciarSesion(Token["NumeroIdentificacion"].ToString(), Token["Password"].ToString()));
+            }
+            catch (Exception ex)
+            {
+                error = true;
+                msgError = ex.Message;
+            }
+
+            SetErrorResponse(error);
+            SetMsgErrorResponse(msgError);        
+
+            return response;
         }
 
         [Route("api/Usuarios/RecuperarContrasena")]

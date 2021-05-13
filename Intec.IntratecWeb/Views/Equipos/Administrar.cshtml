@@ -5,9 +5,6 @@
 <script>
     var equipo = null;
     $(document).ready(() => {
-        $("#pruebaDatePicker").datetimepicker({
-            format: "D/M/YYYY"
-        });
         $("#FechaProximaCalibracion").datetimepicker({
             format: "D/M/YYYY"
         });
@@ -100,7 +97,7 @@
         var columnsC = [
             { data: "Secuencia", title: 'Secuencia' },
             { data: "FechaCalibracion", title: 'FechaCalibracion' },
-            { data: "IdLaboratorio", title: 'Laboratorio' },
+            { data: "Laboratorios.Laboratorio", title: 'Laboratorio' },
             { data: "Observaciones", title: 'Observaciones' },
             //{ data: "CertificadoWebPath", title: 'CertificadoWeb' },
             {
@@ -128,7 +125,7 @@
             { data: "Secuencia", title: 'Secuencia' },
             { data: "FechaVerificacion", title: 'FechaVerificacion' },
             { data: "NroCertificado", title: 'NroCertificado' },
-            { data: "IdLaboratorio", title: 'Laboratorio' },
+            { data: "Laboratorios.Laboratorio", title: 'Laboratorio' },
             { data: "Observaciones", title: 'Observaciones' },
             { data: "FechaCreacion", title: 'FechaCreacion' },
             { data: "IdUsuarioCreacion", title: 'IdUsuarioCreacion' }
@@ -408,7 +405,7 @@
 </script>
 <h3 class="text-center" id="title">ADMINISTRAR EQUIPO</h3>
 <div class="card">
-    <div style="display:grid; grid-template-columns: 25% 25% 25% 25%">
+    <div style="display: grid; grid-template-columns: 25% 25% 25% 25%; position: relative">
         <div>
             <h5>IdEquipo</h5>
             <input id="IdEquipo" class="form-control" disabled />

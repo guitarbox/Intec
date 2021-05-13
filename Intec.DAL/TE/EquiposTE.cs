@@ -23,6 +23,7 @@ namespace Intec.DAL.TE
                 {
                     ctx.Entry(e).Reference(r => r.MarcasEquipos).Load();
                     ctx.Entry(e).Reference(r => r.TiposEquipo).Load();
+                    ctx.Entry(e).Reference(r => r.TiposVisita).Load();
                 }
             }
             return res;
@@ -36,10 +37,19 @@ namespace Intec.DAL.TE
             {
                 res = ctx.Equipos.Where(e => e.IdEquipo == IdEquipo).FirstOrDefault();
                 res.CalibracionesEquipos.ToList();
+                foreach(CalibracionesEquipos cal in res.CalibracionesEquipos)
+                {
+                    ctx.Entry(cal).Reference(r => r.Laboratorios).Load();
+                }
                 res.TramitesEquipo.ToList();
                 res.VerificacionesLabEquipos.ToList();
+                foreach (VerificacionesLabEquipos ver in res.VerificacionesLabEquipos)
+                {
+                    ctx.Entry(ver).Reference(r => r.Laboratorios).Load();
+                }
                 ctx.Entry(res).Reference(r => r.MarcasEquipos).Load();
                 ctx.Entry(res).Reference(r => r.TiposEquipo).Load();
+                ctx.Entry(res).Reference(r => r.TiposVisita).Load();
                 res.UsuariosEquipos.ToList();
             }
             return res;

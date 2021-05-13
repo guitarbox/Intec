@@ -11,7 +11,7 @@
         _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.ObtenerEquiposUsuario, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion, idInspector: UsuarioSesion.IdUsuario }))
         .then(response => {
             $("#divTblEquipos").empty();
-            $("#divTblEquipos").append('<table style="width:100%" id="tblEquipos"></table>');
+            $("#divTblEquipos").append('<table style="width:100%" id="tblEquipos" class="tableMobile tableMobileEI"></table>');
             let columnas = [
                 //{ data: "IdInspector", title: 'Id. Inspector' }, 
                 { data: "Equipos.SerieIDInterno", title: 'Serial Equipo' },

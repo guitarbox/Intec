@@ -74,7 +74,12 @@ namespace Intec.DAL.TE
                     ctx.Entry(res).Reference(u=>u.Roles).Load();
                     res.Roles.Menus.ToList();
                     ctx.Entry(res).Reference(u=>u.TiposIdentificacion).Load();
-                    ctx.Entry(res).Reference(u=>u.Ciudades).Load();                    
+                    ctx.Entry(res).Reference(u=>u.Ciudades).Load();
+                    res.UsuariosEquipos.ToList();
+                }
+                else
+                {
+                    throw new Exception("Usuario y/o Contraseña incorrecto(s)");
                 }
             }
             return res;

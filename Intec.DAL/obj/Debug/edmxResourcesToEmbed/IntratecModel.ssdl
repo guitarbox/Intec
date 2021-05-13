@@ -618,6 +618,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_CalibracionesEquipos_Laboratorios">
+    <End Role="Laboratorios" Type="Self.Laboratorios" Multiplicity="1" />
+    <End Role="CalibracionesEquipos" Type="Self.CalibracionesEquipos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Laboratorios">
+        <PropertyRef Name="IdLaboratorio" />
+      </Principal>
+      <Dependent Role="CalibracionesEquipos">
+        <PropertyRef Name="IdLaboratorio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_CertificadosCompetencias_Usuarios">
     <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
     <End Role="CertificadosCompetencias" Type="Self.CertificadosCompetencias" Multiplicity="*" />
@@ -747,6 +759,18 @@
       </Principal>
       <Dependent Role="Equipos">
         <PropertyRef Name="IdTipoEquipo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Equipos_TiposVisita">
+    <End Role="TiposVisita" Type="Self.TiposVisita" Multiplicity="0..1" />
+    <End Role="Equipos" Type="Self.Equipos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TiposVisita">
+        <PropertyRef Name="IdTipoVisita" />
+      </Principal>
+      <Dependent Role="Equipos">
+        <PropertyRef Name="IdTipoVisitaAplica" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -1054,6 +1078,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_VerificacionesLabEquipos_Laboratorios">
+    <End Role="Laboratorios" Type="Self.Laboratorios" Multiplicity="1" />
+    <End Role="VerificacionesLabEquipos" Type="Self.VerificacionesLabEquipos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Laboratorios">
+        <PropertyRef Name="IdLaboratorio" />
+      </Principal>
+      <Dependent Role="VerificacionesLabEquipos">
+        <PropertyRef Name="IdLaboratorio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Visitas_Ciudades">
     <End Role="Ciudades" Type="Self.Ciudades" Multiplicity="1" />
     <End Role="Visitas" Type="Self.Visitas" Multiplicity="*" />
@@ -1238,6 +1274,10 @@
       <End Role="Equipos" EntitySet="Equipos" />
       <End Role="CalibracionesEquipos" EntitySet="CalibracionesEquipos" />
     </AssociationSet>
+    <AssociationSet Name="FK_CalibracionesEquipos_Laboratorios" Association="Self.FK_CalibracionesEquipos_Laboratorios">
+      <End Role="Laboratorios" EntitySet="Laboratorios" />
+      <End Role="CalibracionesEquipos" EntitySet="CalibracionesEquipos" />
+    </AssociationSet>
     <AssociationSet Name="FK_CertificadosCompetencias_Usuarios" Association="Self.FK_CertificadosCompetencias_Usuarios">
       <End Role="Usuarios" EntitySet="Usuarios" />
       <End Role="CertificadosCompetencias" EntitySet="CertificadosCompetencias" />
@@ -1280,6 +1320,10 @@
     </AssociationSet>
     <AssociationSet Name="FK_Equipos_TiposEquipo" Association="Self.FK_Equipos_TiposEquipo">
       <End Role="TiposEquipo" EntitySet="TiposEquipo" />
+      <End Role="Equipos" EntitySet="Equipos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Equipos_TiposVisita" Association="Self.FK_Equipos_TiposVisita">
+      <End Role="TiposVisita" EntitySet="TiposVisita" />
       <End Role="Equipos" EntitySet="Equipos" />
     </AssociationSet>
     <AssociationSet Name="FK_EquiposVisita_Equipos" Association="Self.FK_EquiposVisita_Equipos">
@@ -1380,6 +1424,10 @@
     </AssociationSet>
     <AssociationSet Name="FK_VerificacionesLabEquipos_Equipos" Association="Self.FK_VerificacionesLabEquipos_Equipos">
       <End Role="Equipos" EntitySet="Equipos" />
+      <End Role="VerificacionesLabEquipos" EntitySet="VerificacionesLabEquipos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VerificacionesLabEquipos_Laboratorios" Association="Self.FK_VerificacionesLabEquipos_Laboratorios">
+      <End Role="Laboratorios" EntitySet="Laboratorios" />
       <End Role="VerificacionesLabEquipos" EntitySet="VerificacionesLabEquipos" />
     </AssociationSet>
     <AssociationSet Name="FK_Visitas_Ciudades" Association="Self.FK_Visitas_Ciudades">

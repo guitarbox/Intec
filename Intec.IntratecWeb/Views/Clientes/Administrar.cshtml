@@ -114,7 +114,7 @@
                 //{ data:'OrigenVisita'},
                 {
                     data: null, render: function (data, type, full, meta) {
-                        return '<a onclick="window.location.href = \'../Visitas/Ver?iv=' + full.IdVisita + '\';"><span class="fa fa-eye fa-2x"></span></a>';
+                        return `<a onclick="window.open('../Visitas/Consultar?iv=${full.IdVisita}', this.target);"><span class="fa fa-eye fa-2x"></span></a>`;
                     }
                 }
             ];

@@ -18,6 +18,7 @@ namespace Intec.DAL
         public TiposVisita()
         {
             this.Visitas = new HashSet<Visitas>();
+            this.Equipos = new HashSet<Equipos>();
         }
     
         public int IdTipoVisita { get; set; }
@@ -27,5 +28,7 @@ namespace Intec.DAL
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Visitas> Visitas { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Equipos> Equipos { get; set; }
     }
 }

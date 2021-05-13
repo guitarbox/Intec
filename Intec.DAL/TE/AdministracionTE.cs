@@ -48,6 +48,16 @@ namespace Intec.DAL.TE
             }
             return res;
         }
+        
+        public TiposFoto ObtenerTipoFoto(int IdTipoFoto)
+        {
+            TiposFoto res = new TiposFoto();
+            using (var ctx = new DB_A66D31_intratecPrbEntities1())
+            {
+                res = ctx.TiposFoto.Where(t=>t.IdTipoFoto == IdTipoFoto).FirstOrDefault();
+            }
+            return res;
+        }
         #endregion
 
         #region  CRUD Paises

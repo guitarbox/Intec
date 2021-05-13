@@ -10,23 +10,34 @@
         idVisita_ = _getUrlVars(window.location.href)["iv"];
 
         _loadSelectFormato($("#Formato"));
-        _loadSelectTiposFoto($("#TipoFoto"));        
+        _loadSelectTiposFoto($("#TipoFoto"));
 
         //Acá se actualiza el estado de la visita
         _peticionAjax_NoLockScreen(URL_SERVICE + URI_SERVICE.EjecutarVisita, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion, idVisita: idVisita_, idInspector: UsuarioSesion.IdUsuario }));
-        
+
         //Acá buscaré la Visita full
+        ConsultarVisita();
+    });
+
+    function ConsultarVisita() {
         _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.ConsultarVisita, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion, idVisita: idVisita_ }))
             .then(response => {
-                visita_ = response.data;          
+                visita_ = response.data;
                 $("#title").text(`Visita #${visita_.IdVisita}`);
 
                 MostrarInfoGeneral();
                 MostrarFormatos();
                 MostrarFotos();
-            });
 
-    });
+                if (visita_.IdEstadoVisitas == 'F') {
+                    $("#divFormatos").hide();
+                    $("#divFotos").hide();
+                    $("#btnFinalizar").hide();
+                    $("#Observaciones").prop('disabled', 'disabled');
+                    $("#divInfoGeneral").append('<br/><h3><strong>VISITA FINALIZADA</strong></h3>');
+                }
+            });
+    }
 
     function MostrarInfoGeneral() {
         console.log(visita_);
@@ -35,12 +46,14 @@
             `
             <label>Cliente: ${visita_.Clientes.Nombres} ${visita_.Clientes.Apellidos}</label><br/>
             <label>Número Identificación: ${visita_.Clientes.NumeroIdentificacion}</label><br/>
+            <label>Nro. Póliza: ${visita_.Propiedades.NroPoliza}</label><br/>
             <label>Dirección: ${visita_.Propiedades.Direccion}</label><br/>
             <label>Tipo Propiedad: ${visita_.Propiedades.TiposPropiedades.TipoPropiedad}</label><br/>
             <label>Uso Propiedad: ${visita_.Propiedades.UsosPropiedades.Uso}</label><br/>
             <label>Tipo Visita: ${visita_.TiposVisita.TipoVisita}</label>
             `
         );
+        $("#Observaciones").val(visita_.ObservacionesInspector);
     }
 
     function MostrarFormatos() {
@@ -74,6 +87,8 @@
                 _peticionAjax_NoLockScreen(URL_SERVICE + URI_SERVICE.AgregarFormatoVisita, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion, formato: formatoVisita, idVisita: idVisita_, idInspector: UsuarioSesion.IdUsuario }))
                     .then(response => {
                         visita_.FormatosVisita.push(formatoVisita);
+                        $("#Formato").val('');
+                        $("#ConsecutivoFormato").val('');
                         MostrarFormatos();
                     });
             }
@@ -101,19 +116,22 @@
             });
     }
 
-    function continueUpLoad(from, file) {
+    function continueUpLoad(from, file, webPath) {
         if (from == 'FOT_VIS') {
-            visita_.FotosVisita.push(
-                {
-                    IdVisita: idVisita_, Secuencia: visita_.FotosVisita.length + 1, Path: file, IdTipoFoto: $("#TipoFoto").val(),
-                    TiposFoto: {
-                        IdTipoFoto: $("#TipoFoto").val(),
-                        TipoFoto: $("#TipoFoto option:selected").text()
-                    }
+            let fotoVisita = {
+                IdVisita: idVisita_, Secuencia: visita_.FotosVisita.length + 1, Path: file, WebPath: webPath,
+                IdTipoFoto: $("#TipoFoto").val(),
+                TiposFoto: {
+                    IdTipoFoto: $("#TipoFoto").val(),
+                    TipoFoto: $("#TipoFoto option:selected").text()
                 }
-            );
-            $("#TipoFoto").val('')
-            MostrarFotos();
+            };
+            _peticionAjax_NoLockScreen(URL_SERVICE + URI_SERVICE.AgregarFotoVisita, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion, foto: fotoVisita, idVisita: idVisita_, idInspector: UsuarioSesion.IdUsuario }))
+                .then(response => {
+                    visita_.FotosVisita.push(fotoVisita);
+                    $("#TipoFoto").val('')
+                    MostrarFotos();
+                });
         }
     }
 
@@ -122,36 +140,48 @@
         if (visita_.FotosVisita.length > 0) {
             $("#tblFotosTomadas").append(`<tr><th>Secuencia</th><th>Tipo Foto</th><th>Path</th></tr>`);
             visita_.FotosVisita.forEach(foto => {
-                $("#tblFotosTomadas").append(`<tr><td>${foto.Secuencia}</td><td>${foto.TiposFoto.TipoFoto}</td><td>${foto.Path}</td></tr>`);
+                $("#tblFotosTomadas").append(`<tr><td>${foto.Secuencia}</td><td>${foto.TiposFoto.TipoFoto}</td><td><a onclick="window.open('${foto.WebPath}', this.target);">${foto.WebPath}</a></td></tr>`);
             });
         }
         else {
             $("#tblFotosTomadas").append('<tr><td>No ha ingresado fotos aún</td></tr>');
         }
     }
+
+    function FinalizarVisita() {
+        _peticionAjax_Promise(URL_SERVICE + URI_SERVICE.FinalizarVisita, VerbosREST.POST, JSON.stringify({ sessionToken: UsuarioSesion.tokenSesion, idVisita: idVisita_, observacion: $("#Observaciones").val() , idInspector: UsuarioSesion.IdUsuario }))
+            .then(response => {
+                ConsultarVisita();
+            });
+    }
 </script>
 <h3 class="text-center" id="title"></h3>
 <div class="card">
-    <h4>Información General</h4>
-    <div id="divInfoGeneral"></div>
+    <h4 class="text-center">Información General</h4>
+    <div id="divInfoGeneral" class="text-center"></div>
 </div>
 <div style="display:flex; justify-content:center; flex-direction:column; align-items:center" class="card">
     <h4>Formatos Usados</h4>
     <table id="tblFormatosUsados" class="table table-bordered"></table>
-    <p>Formato</p>
-    <select id="Formato" class="form-control"><option value="">Seleccione Formato</option></select>
-    <p>Consecutivo</p>
-    <input id="ConsecutivoFormato" class="form-control" type="number" />
-    <input class="button" value="Ingresar Consecutivo" type="button" onclick="AgregarFormatoVisita();"/>
+    <div id="divFormatos">
+        <p>Formato</p>
+        <select id="Formato" class="form-control"><option value="">Seleccione Formato</option></select>
+        <p>Consecutivo</p>
+        <input id="ConsecutivoFormato" class="form-control" type="number" />
+        <input class="button" value="Ingresar Consecutivo" type="button" onclick="AgregarFormatoVisita();" />
+    </div>
 </div>
 <div style="display:flex; justify-content:center; flex-direction:column; align-items:center" class="card">
     <h4>Fotos Tomadas</h4>
     <table id="tblFotosTomadas" class="table table-bordered"></table>
-    <p>Tipo Foto</p>
-    <select id="TipoFoto" class="form-control" onchange="AbrirSubirFoto();"></select>
+    <div id="divFotos">
+        <p>Tipo Foto</p>
+        <select id="TipoFoto" class="form-control" onchange="AbrirSubirFoto();"></select>
+    </div>
 </div>
 <div style="display:flex; justify-content:center; flex-direction:column; align-items:center" class="card">
     <h4>Complementarios</h4>
     <p>Observaciones</p>
     <textarea id="Observaciones" class="form-control" placeholder="Observaciones del inspector para la visita"></textarea>
+    <input id="btnFinalizar" class="button" value="Finalizar Visita" type="button" onclick="FinalizarVisita();" />
 </div>

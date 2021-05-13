@@ -81,6 +81,9 @@
         <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_CertificadosCompetencias_Usuarios" />
         <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.FranjasHorarioVisitas" Width="1.5" PointX="7.375" PointY="13.75" />
         <EntityTypeShape EntityType="DB_A66D31_intratecPrbModel.TiposFoto" Width="1.5" PointX="7.375" PointY="16.75" />
+        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_Equipos_TiposVisita" />
+        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_CalibracionesEquipos_Laboratorios" />
+        <AssociationConnector Association="DB_A66D31_intratecPrbModel.FK_VerificacionesLabEquipos_Laboratorios" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

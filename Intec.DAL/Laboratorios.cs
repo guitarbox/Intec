@@ -14,6 +14,13 @@ namespace Intec.DAL
     
     public partial class Laboratorios
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Laboratorios()
+        {
+            this.CalibracionesEquipos = new HashSet<CalibracionesEquipos>();
+            this.VerificacionesLabEquipos = new HashSet<VerificacionesLabEquipos>();
+        }
+    
         public int IdLaboratorio { get; set; }
         public string Laboratorio { get; set; }
         public System.DateTime FechaCreacion { get; set; }
@@ -22,5 +29,10 @@ namespace Intec.DAL
         public int DV { get; set; }
         public string Direccion { get; set; }
         public string Telefono { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CalibracionesEquipos> CalibracionesEquipos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<VerificacionesLabEquipos> VerificacionesLabEquipos { get; set; }
     }
 }

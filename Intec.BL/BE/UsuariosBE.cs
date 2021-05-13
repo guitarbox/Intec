@@ -71,7 +71,9 @@ namespace Intec.BL.BE
 
         public DTO.Usuarios IniciarSesion(string NumeroIdentificacion, string Pass)
         {
-            return MapperConfig.Config.MapperUsuarios.Map<DTO.Usuarios>(new DAL.TE.UsuariosTE().IniciarSesion(NumeroIdentificacion, Pass));
+            DTO.Usuarios res = MapperConfig.Config.MapperUsuarios.Map<DTO.Usuarios>(new DAL.TE.UsuariosTE().IniciarSesion(NumeroIdentificacion, Pass));
+            res.UsuariosEquipos.ForEach(ue => ue.Equipos = MapperConfig.Config.MapperEquiposSimple.Map<DTO.Equipos>(new DAL.TE.EquiposTE().ObtenerEquipo(ue.IdEquipo)));
+            return res;
         }
 
         public void ActualizarContrasena(int IdUsuario, string Contrasena)

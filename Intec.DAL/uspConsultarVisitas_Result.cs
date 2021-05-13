@@ -40,5 +40,6 @@ namespace Intec.DAL
         public string Descripcion { get; set; }
         public string HoraInicioFranja { get; set; }
         public string HoraFinFranja { get; set; }
+        public string EstadoVisita { get; set; }
     }
 }

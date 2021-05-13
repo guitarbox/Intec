@@ -60,5 +60,6 @@ namespace Intec.DAL
         public virtual ICollection<CalibracionesEquipos> CalibracionesEquipos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<VerificacionesLabEquipos> VerificacionesLabEquipos { get; set; }
+        public virtual TiposVisita TiposVisita { get; set; }
     }
 }

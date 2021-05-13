@@ -118,7 +118,7 @@ a {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    width:100%;    
+    width:100%;
 }
 
 /*.content {
@@ -255,4 +255,169 @@ table > tbody > tr > td {
     height: 50px;
     border-radius: 5px;
     border: 1px solid #8090B5;
+}
+
+.containerMenu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 95vh
+}
+
+.containerMenuInt {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    width: 80%
+}
+
+.containerO {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content:space-around;
+    align-items:center;
+}
+
+.form-control {
+    width: 300px
+}
+
+@media only screen and (max-width: 600px) {
+    .containerO {
+        display: flex;
+        flex-direction: column;
+        justify-content:center;
+        align-items:center
+    }
+
+    .form-control{
+        width:300px
+    }
+
+    .containerMenu {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 95vh
+    }
+
+    .containerMenuInt {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        align-items: center;
+        width: 80%
+    }
+
+    /*General Para las tablas*/    
+    .tableMobile th {
+        display: block;
+    }
+    .tableMobile td {
+        display: block;
+    }.tableMobile tr {
+        display: block;
+    }
+     
+    .tableMobile thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    .tableMobile tr {
+        border: 1px solid #ccc;
+    }
+
+    .tableMobile td {
+        /*Behave  like a "row" */
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%;
+    }
+
+    .tableMobile td:before {
+        /*Now like a table header*/ 
+        position: absolute;
+        /*Top /left values mimic padding*/ 
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+    }
+
+    /*Label de las tabla VisitasInspector*/
+    .tableMobileVI td:nth-of-type(1):before {
+        content: "Cliente";
+    }
+
+    .tableMobileVI td:nth-of-type(2):before {
+        content: "Dirección";
+    }
+
+    .tableMobileVI td:nth-of-type(3):before {
+        content: "Fecha Visita";
+    }
+
+    .tableMobileVI td:nth-of-type(4):before {
+        content: "Tipo Visita";
+    }
+    
+    /*Label de las tabla EquiposInspector*/
+    .tableMobileEI td:nth-of-type(1):before {
+        content: "Serial Equipo";
+    }
+
+    .tableMobileEI td:nth-of-type(2):before {
+        content: "Estado";
+    }
+
+    .tableMobileEI td:nth-of-type(3):before {
+        content: "Fecha Asignación";
+    } 
+    
+    /*Label de las tabla PapeleríaInspector*/
+    .tableMobilePI td:nth-of-type(1):before {
+        content: "Formato";
+    }
+
+    .tableMobilePI td:nth-of-type(2):before {
+        content: "Consecutivo";
+    }
+
+    .tableMobilePI td:nth-of-type(3):before {
+        content: "Inspector";
+    }
+
+    .tableMobilePI td:nth-of-type(4):before {
+        content: "Estado Consecutivo";
+    }
+
+    .tableMobilePI td:nth-of-type(5):before {
+        content: "Visita";
+    }
+
+    .tableMobilePI td:nth-of-type(6):before {
+        content: "Fecha Asignación";
+    }
+
+    .tableMobilePI td:nth-of-type(7):before {
+        content: "Usuario Asignación";
+    }
+
+    .tableMobilePI td:nth-of-type(8):before {
+        content: "Fecha Modificación";
+    }
+
+    .tableMobilePI td:nth-of-type(9):before {
+        content: "Usuario Modificación";
+    }
 }

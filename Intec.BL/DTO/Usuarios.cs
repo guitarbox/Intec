@@ -39,5 +39,6 @@ namespace Intec.BL.DTO
 
         public DTO.Roles Roles { get; set; }
         public DTO.TiposIdentificacion TiposIdentificacion { get; set; }
+        public List<DTO.UsuariosEquipos> UsuariosEquipos { get; set; }
     }
 }
